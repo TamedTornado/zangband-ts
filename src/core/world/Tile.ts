@@ -5,14 +5,31 @@ import terrainData from '../../data/terrain/terrain.json';
 
 const TERRAIN: Record<string, TerrainDef> = terrainData;
 
-// Aliases for terrain keys with index suffixes (TODO: fix in data extraction)
+// Aliases for terrain keys - maps FeatureType names to actual terrain keys
 const TERRAIN_ALIASES: Record<string, string> = {
+  // Basic terrain
   floor: 'open_floor',
   granite_wall: 'granite_wall_48',
   permanent_wall: 'permanent_wall_60',
   magma_vein: 'magma_vein_50',
   quartz_vein: 'quartz_vein_51',
   pillar: 'pillar_33',
+  // DungeonGenerator FeatureTypes
+  wall_extra: 'granite_wall_48',
+  wall_inner: 'granite_wall_48',
+  wall_outer: 'granite_wall_48',
+  wall_solid: 'permanent_wall_60',
+  up_stairs: 'up_staircase',
+  down_stairs: 'down_staircase',
+  secret_door: 'door',
+  closed_door: 'door',
+  rubble: 'pile_of_rubble',
+  magma: 'magma_vein_50',
+  quartz: 'quartz_vein_51',
+  shallow_water: 'shallow_water',
+  deep_water: 'deep_water',
+  shallow_lava: 'shallow_lava',
+  deep_lava: 'deep_lava',
 };
 
 function resolveTerrain(key: string): TerrainDef {

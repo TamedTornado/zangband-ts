@@ -172,6 +172,27 @@ export class ItemGeneration {
   }
 
   /**
+   * Get an item definition by key
+   */
+  getItemDef(key: string): ItemDef | undefined {
+    return this.items[key];
+  }
+
+  /**
+   * Get an ego item definition by key
+   */
+  getEgoItemDef(key: string): EgoItemDef | undefined {
+    return this.egoItems[key];
+  }
+
+  /**
+   * Get an artifact definition by key
+   */
+  getArtifactDef(key: string): ArtifactDef | undefined {
+    return this.artifacts[key];
+  }
+
+  /**
    * Calculate a level-dependent bonus
    *
    * This is the m_bonus function from Zangband.

@@ -27,12 +27,24 @@ const KEY_MAP: Record<string, Direction> = {
 };
 
 export function useKeyboard() {
-  const { movePlayer } = useGame();
+  const { movePlayer, goDownStairs, goUpStairs } = useGame();
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       // Ignore if typing in an input
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      // Handle stair navigation
+      if (e.key === '>' || (e.key === '.' && e.shiftKey)) {
+        e.preventDefault();
+        goDownStairs();
+        return;
+      }
+      if (e.key === '<' || (e.key === ',' && e.shiftKey)) {
+        e.preventDefault();
+        goUpStairs();
         return;
       }
 
@@ -45,5 +57,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [movePlayer]);
+  }, [movePlayer, goDownStairs, goUpStairs]);
 }

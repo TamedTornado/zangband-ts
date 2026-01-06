@@ -425,25 +425,27 @@ const defaultBindings: Record<string, GameAction> = {
 - Smooth open/close transitions
 
 ### 4.7 Implementation Order
-1. [ ] Set up React with Vite (replace current main.ts)
-2. [ ] GameViewport component wrapping rot.js
-3. [ ] Basic layout: viewport + StatsPanel + MessageWindow
-4. [ ] Keyboard input system (useKeyboard hook)
-5. [ ] Player input blocking (async/await game loop)
-6. [ ] Remembered tile rendering (show old terrain, not current monsters)
-7. [ ] StatsPanel with HP/MP bars, stat icons
-8. [ ] MessageWindow + MessageHistory
-9. [ ] Autobar (quick-use buttons)
-10. [ ] InventoryModal + EquipmentModal
-11. [ ] CharacterModal with all tabs (Info, Flags, Mutations, Virtues, Notes)
-12. [ ] SpellbookModal
-13. [ ] TargetingOverlay
-14. [ ] RecallPanel (monster/item memory)
-15. [ ] KnowledgeModal (discovered things)
-16. [ ] StoreModal
-17. [ ] PetsModal
-18. [ ] Minimap
-19. [ ] Tooltips and polish
+1. [x] Set up React with Vite (replace current main.ts)
+2. [x] GameViewport component wrapping rot.js
+3. [x] Basic layout: viewport + StatsPanel + MessageLog
+4. [x] Keyboard input system (useKeyboard hook)
+5. [x] useROTDisplay hook (responsive canvas sizing)
+6. [x] Camera system (center/scroll modes, coordinate conversion)
+7. [ ] Player input blocking (async/await game loop)
+8. [ ] Remembered tile rendering (show old terrain, not current monsters)
+9. [ ] StatsPanel with HP/MP bars, stat icons
+10. [ ] MessageWindow + MessageHistory (scrollable)
+11. [ ] Autobar (quick-use buttons)
+12. [ ] InventoryModal + EquipmentModal
+13. [ ] CharacterModal with all tabs (Info, Flags, Mutations, Virtues, Notes)
+14. [ ] SpellbookModal
+15. [ ] TargetingOverlay
+16. [ ] RecallPanel (monster/item memory)
+17. [ ] KnowledgeModal (discovered things)
+18. [ ] StoreModal
+19. [ ] PetsModal
+20. [ ] Minimap
+21. [ ] Tooltips and polish
 
 ---
 

@@ -177,6 +177,7 @@
     "color": "U",
     "flags": [
       "BLOCK",
+      "DOOR",
       "ICKY",
       "OBJECT",
       "MARK"

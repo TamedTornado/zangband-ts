@@ -1,0 +1,171 @@
+/**
+ * Item Spawner
+ *
+ * Handles spawning items into the dungeon level.
+ * Uses ItemGeneration for item creation and places
+ * items on valid floor tiles.
+ */
+
+import { RNG } from 'rot-js';
+import { Item } from '@/core/entities/Item';
+import type { Level } from '@/core/world/Level';
+import type { Position } from '@/core/types';
+import type { ItemGeneration, GeneratedItem } from './ItemGeneration';
+
+let itemIdCounter = 0;
+
+function generateItemId(): string {
+  return `item_${++itemIdCounter}`;
+}
+
+/**
+ * Get the item type category from tval
+ */
+function getItemTypeFromTval(tval: number): string {
+  // Weapon types
+  if (tval >= 16 && tval <= 23) return 'weapon';
+  // Armor types
+  if (tval >= 30 && tval <= 38) return 'armor';
+  // Jewelry
+  if (tval === 40) return 'amulet';
+  if (tval === 45) return 'ring';
+  // Light
+  if (tval === 39) return 'light';
+  // Potions
+  if (tval === 75) return 'potion';
+  // Scrolls
+  if (tval === 70) return 'scroll';
+  // Food
+  if (tval === 80) return 'food';
+  // Gold
+  if (tval === 100) return 'gold';
+  // Default
+  return 'misc';
+}
+
+export class ItemSpawner {
+  private itemGen: ItemGeneration;
+  private rng: typeof RNG;
+
+  constructor(itemGen: ItemGeneration, rng: typeof RNG = RNG) {
+    this.itemGen = itemGen;
+    this.rng = rng;
+  }
+
+  /**
+   * Spawn a specific item by key at a position
+   */
+  spawnItem(level: Level, pos: Position, itemKey: string): Item | null {
+    const itemDef = this.itemGen.getItemDef(itemKey);
+    if (!itemDef) return null;
+
+    // Check position is valid (walkable, unlike monsters can stack)
+    if (!level.isWalkable(pos)) {
+      return null;
+    }
+
+    // Create a simple generated item from the definition
+    const generated: GeneratedItem = {
+      baseItem: itemDef,
+      toHit: itemDef.toHit,
+      toDam: itemDef.toDam,
+      toAc: itemDef.toAc,
+      pval: itemDef.pval,
+      flags: [...itemDef.flags],
+      cost: itemDef.cost,
+    };
+
+    const item = this.createItem(generated, pos);
+    level.addItem(item);
+
+    return item;
+  }
+
+  /**
+   * Spawn a random depth-appropriate item at a position
+   */
+  spawnRandomItem(level: Level, pos: Position, depth: number, deltaLevel: number = 0): Item | null {
+    // Check position is valid
+    if (!level.isWalkable(pos)) {
+      return null;
+    }
+
+    const generated = this.itemGen.generateItem(depth, deltaLevel);
+    if (!generated) return null;
+
+    const item = this.createItem(generated, pos);
+    level.addItem(item);
+
+    return item;
+  }
+
+  /**
+   * Spawn multiple items throughout the level
+   */
+  spawnItemsForLevel(level: Level, depth: number, count: number): number {
+    let spawned = 0;
+    let attempts = 0;
+    const maxAttempts = count * 100;
+
+    while (spawned < count && attempts < maxAttempts) {
+      attempts++;
+
+      // Find a random floor position
+      const pos = this.findRandomFloorPosition(level);
+      if (!pos) continue;
+
+      const item = this.spawnRandomItem(level, pos, depth);
+      if (item) {
+        spawned++;
+      }
+    }
+
+    return spawned;
+  }
+
+  /**
+   * Find a random walkable position
+   */
+  private findRandomFloorPosition(level: Level): Position | null {
+    const maxAttempts = 1000;
+
+    for (let i = 0; i < maxAttempts; i++) {
+      const x = this.rng.getUniformInt(1, level.width - 2);
+      const y = this.rng.getUniformInt(1, level.height - 2);
+      const pos = { x, y };
+
+      if (level.isWalkable(pos)) {
+        return pos;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Create an Item instance from generated item data
+   */
+  private createItem(generated: GeneratedItem, pos: Position): Item {
+    const baseItem = generated.baseItem;
+    const egoName = generated.egoItem?.name ?? '';
+    const artifactName = generated.artifact?.name;
+
+    // Build display name
+    let name = baseItem.name;
+    if (artifactName) {
+      name = artifactName;
+    } else if (egoName) {
+      name = `${baseItem.name} ${egoName}`;
+    }
+
+    return new Item({
+      id: generateItemId(),
+      position: pos,
+      symbol: baseItem.symbol,
+      color: baseItem.color,
+      name,
+      itemType: getItemTypeFromTval(baseItem.tval),
+      generated,
+    });
+  }
+}
