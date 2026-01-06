@@ -315,9 +315,6 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 - [x] 25 room types (simple, overlapping, crossed, nested, vaults, caves, crypts, etc.)
 - [x] Tunnel generation for room connectivity
 - [x] Feature placement (stairs, doors)
-- [ ] Monster placement (depth-appropriate, out-of-depth rare)
-- [ ] Item placement (floor drops, room treasures)
-- [ ] Town level layout
 
 ---
 
@@ -463,24 +460,29 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] Town/dungeon placement rules
 - [ ] Wilderness travel
 
-### 5.3 Special Levels
+### 5.3 Level Population
+- [ ] Monster placement (depth-appropriate, out-of-depth rare)
+- [ ] Item placement (floor drops, room treasures)
+- [ ] Town level layout
+
+### 5.4 Special Levels
 - [ ] Quest levels (Thieves' Hideout, etc.)
 - [ ] Unique lairs
 - [ ] Special room vaults
 
-### 5.4 Final Systems
+### 5.5 Final Systems
 - [ ] Save/load to localStorage (+ export/import file)
 - [ ] Character dump generation
 - [ ] High score tracking
 - [ ] In-game help / monster memory / item memory
 
-### 5.5 Testing & Balance
+### 5.6 Testing & Balance
 - [ ] Verify monster stats match original
 - [ ] Verify damage formulas produce expected ranges
 - [ ] Playtest through midgame
 - [ ] Playtest to endgame / winning
 
-### 5.6 Seed System & Reproducibility
+### 5.7 Seed System & Reproducibility
 - [ ] Create centralized RNG manager with seedable rot.js RNG
 - [ ] Seed display on UI (short hash for sharing)
 - [ ] Seed input on new game (paste friend's seed)
