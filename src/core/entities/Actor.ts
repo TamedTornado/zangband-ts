@@ -46,4 +46,12 @@ export class Actor extends Entity {
   spendEnergy(amount: number): void {
     this._energy -= amount;
   }
+
+  takeDamage(amount: number): void {
+    this.hp -= amount;
+  }
+
+  heal(amount: number): void {
+    this.hp += amount;
+  }
 }
