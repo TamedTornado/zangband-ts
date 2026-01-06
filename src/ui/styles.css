@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #111;
+  color: #ccc;
+  font-family: monospace;
+  min-height: 100vh;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.game-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.viewport-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.side-panel {
+  width: 200px;
+  background: #1a1a1a;
+  border-left: 1px solid #333;
+  padding: 8px;
+  overflow-y: auto;
+}
+
+.stats-panel h3 {
+  margin: 0 0 8px 0;
+  color: #fff;
+  font-size: 14px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+.stat-label {
+  color: #888;
+}
+
+.stat-value {
+  color: #fff;
+}
+
+.hp-bar, .mp-bar {
+  height: 16px;
+  background: #333;
+  border-radius: 2px;
+  margin: 4px 0;
+  overflow: hidden;
+}
+
+.hp-bar .fill {
+  height: 100%;
+  background: #a00;
+  transition: width 0.2s;
+}
+
+.mp-bar .fill {
+  height: 100%;
+  background: #00a;
+  transition: width 0.2s;
+}
+
+.bar-text {
+  position: relative;
+  top: -16px;
+  text-align: center;
+  font-size: 11px;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.message-log {
+  height: 120px;
+  background: #0a0a0a;
+  border-top: 1px solid #333;
+  padding: 8px;
+  overflow-y: auto;
+  font-size: 12px;
+}
+
+.message-log .message {
+  margin: 2px 0;
+}
+
+.message-log .message.combat {
+  color: #f88;
+}
+
+.message-log .message.info {
+  color: #8cf;
+}
+
+.message-log .message.danger {
+  color: #f44;
+}
