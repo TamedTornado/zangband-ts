@@ -43,7 +43,3 @@ export interface RaceDef {
 }
 
 export type RaceRecord = Record<string, RaceDef>;
-
-export function loadRaces(json: RaceRecord): RaceRecord {
-  return json;
-}

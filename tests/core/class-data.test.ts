@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { type ClassDef, type ClassRecord, loadClasses } from '@/core/data/classes';
+import { type ClassRecord } from '@/core/data/classes';
 import classesJson from '@/data/classes/classes.json';
 
-const classes: ClassRecord = loadClasses(classesJson as ClassRecord);
+const classes = classesJson as ClassRecord;
 
 describe('classes data', () => {
   it('should have all 11 classes', () => {

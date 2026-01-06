@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { type RaceDef, type ClassDef, type RaceRecord, loadRaces } from '@/core/data/races';
+import { type RaceRecord } from '@/core/data/races';
 import racesJson from '@/data/races/races.json';
 
-const races: RaceRecord = loadRaces(racesJson as RaceRecord);
+const races = racesJson as RaceRecord;
 
 describe('races data', () => {
   it('should have all 31 races', () => {

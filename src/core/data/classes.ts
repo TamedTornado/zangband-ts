@@ -31,7 +31,3 @@ export interface ClassDef {
 }
 
 export type ClassRecord = Record<string, ClassDef>;
-
-export function loadClasses(json: ClassRecord): ClassRecord {
-  return json;
-}
