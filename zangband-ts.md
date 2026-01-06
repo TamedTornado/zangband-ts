@@ -431,13 +431,13 @@ const defaultBindings: Record<string, GameAction> = {
 4. [x] Keyboard input system (useKeyboard hook)
 5. [x] useROTDisplay hook (responsive canvas sizing)
 6. [x] Camera system (center/scroll modes, coordinate conversion)
-7. [ ] Player input blocking (async/await game loop)
-8. [ ] Remembered tile rendering (show old terrain, not current monsters)
-9. [ ] StatsPanel with HP/MP bars, stat icons
-10. [ ] MessageWindow + MessageHistory (scrollable)
+7. [x] Game FSM with PlayingState/DeadState (proper game over handling)
+8. [x] Remembered tile rendering (explored tiles dimmed)
+9. [x] StatsPanel with HP/MP display
+10. [x] MessageLog (scrollable)
 11. [ ] Autobar (quick-use buttons)
-12. [ ] InventoryModal + EquipmentModal
-13. [ ] CharacterModal with all tabs (Info, Flags, Mutations, Virtues, Notes)
+12. [x] InventoryModal + EquipmentModal
+13. [x] CharacterModal with Info tab (Flags/Mutations/Virtues/Notes are stubs)
 14. [ ] SpellbookModal
 15. [ ] TargetingOverlay
 16. [ ] RecallPanel (monster/item memory)
@@ -447,83 +447,75 @@ const defaultBindings: Record<string, GameAction> = {
 20. [ ] Minimap
 21. [ ] Tooltips and polish
 
-### 4.8 Command Implementation (see docs/commands.md for full list)
+### 4.8 Command Implementation
 
-**Currently Implemented:**
+**Movement & Exploration (DONE)**
 - [x] Movement (hjklyubn, arrows, numpad)
+- [x] Running (Shift+direction) - stops at walls/intersections/monsters/items
 - [x] Stairs (`<` / `>`)
 - [x] Melee attack (bump into monster)
+- [x] Open door (bump to open)
+
+**Items - Core (DONE)**
 - [x] Pick up item (`g`)
-- [x] Show inventory (`i`) - message log only
-- [x] Show equipment (`e`) - message log only
+- [x] Inventory modal (`i`) with a-z selection
+- [x] Equipment modal (`e`) with slot display
+- [x] Wield/wear item (`w`)
+- [x] Take off equipment (`t`)
+- [x] Drop item (`d`)
 
-**Phase 1: Core UI System**
-- [ ] Modal dialog system for inventory/equipment/character screens
-- [ ] Scrollable list component for long menus
-- [ ] Item selection component (a-z letter selection)
-- [ ] ESC key to close modals
+**Items - Consumables (DONE)**
+- [x] Eat food (`E`)
+- [x] Quaff potion (`q`)
+- [x] Read scroll (`r`)
 
-**Phase 2: Inventory & Equipment UI**
-- [ ] Modal inventory screen with item details
-- [ ] Modal equipment screen with slot display
-- [ ] Wield/wear item (`w`) with slot selection
-- [ ] Take off equipment (`t`)
-- [ ] Drop item (`d`)
-- [ ] Destroy item (`k`)
-- [ ] Inspect item (`I`) - show full item stats
+**Rest System (DONE)**
+- [x] Rest command (`R`) with prompt
+- [x] Rest for N turns
+- [x] Rest until HP restored (`*`)
+- [x] Rest until fully recovered (`&`)
+- [x] Interrupt rest on monster detection/damage
 
-**Phase 3: Item Usage**
-- [ ] Eat food (`E`)
-- [ ] Quaff potion (`q`)
-- [ ] Read scroll (`r`)
+**Character Info (DONE)**
+- [x] Character screen (`C`) - Info tab with stats, depth, turn
+
+**Items - Magical Devices (TODO)**
 - [ ] Aim wand (`a`)
 - [ ] Zap rod (`z`)
 - [ ] Use staff (`u`)
+
+**Items - Ranged (TODO)**
 - [ ] Throw item (`v`)
 - [ ] Fire missile (`f`)
 
-**Phase 4: Rest System**
-- [ ] Rest command (`R`) with prompt
-- [ ] Rest for N turns
-- [ ] Rest until HP restored (`*`)
-- [ ] Rest until fully recovered (`&`)
-- [ ] Interrupt rest on monster detection
-
-**Phase 5: Running**
-- [ ] Implement run mode (shift+direction)
-- [ ] Run until wall/intersection/monster
-- [ ] Disturb on interesting features
-
-**Phase 6: Door & Trap Interaction**
-- [ ] Open door explicitly (`o`) - currently auto-open on bump
+**Door & Trap Interaction (TODO)**
 - [ ] Close door (`c`)
 - [ ] Disarm trap (`D`)
 - [ ] Search mode toggle (`S`)
-- [ ] Stay in place / search (`.` or `5`)
 - [ ] Tunnel (`T`)
+- [ ] Destroy item (`k`)
 
-**Phase 7: Look & Target**
+**Look & Target (TODO)**
 - [ ] Look command (`l`/`x`) - cursor mode
 - [ ] Target command (`*`)
 - [ ] Identify symbol (`/`)
 
-**Phase 8: Information Screens**
-- [ ] Character screen (`C`) - stats, skills, history
+**Information Screens (TODO)**
 - [ ] Full dungeon map (`M`)
 - [ ] Message history (`Ctrl+P`)
 - [ ] Knowledge menu (`~`)
 
-**Phase 9: Magic System Commands**
+**Magic System (TODO)**
 - [ ] Spell casting (`m`)
 - [ ] Browse spellbook (`b`)
 - [ ] Learn spells (`G`)
 
-**Phase 10: Save/Load**
+**Save/Load (TODO)**
 - [ ] Save game (`Ctrl+S`) to localStorage/IndexedDB
 - [ ] Save and quit (`Ctrl+X`)
 - [ ] Load game on startup
 
-**Phase 11: Advanced Features**
+**Advanced Features (TODO)**
 - [ ] Inscriptions (`{`, `}`)
 - [ ] Macros (`@`)
 - [ ] Options menu (`=`)
