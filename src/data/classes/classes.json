@@ -1,0 +1,112 @@
+{
+  "warrior": {
+    "index": 0,
+    "name": "Warrior",
+    "stats": { "str": 5, "int": -2, "wis": -2, "dex": 2, "con": 2, "chr": -1 },
+    "skills": { "disarm": 25, "device": 18, "save": 18, "stealth": 1, "search": 14, "searchFreq": 2, "melee": 25, "ranged": 17 },
+    "xSkills": { "disarm": 12, "device": 7, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 100, "ranged": 55 },
+    "hitDie": 9, "expMod": 0,
+    "petUpkeepDiv": 20,
+    "heavySense": true
+  },
+  "mage": {
+    "index": 1,
+    "name": "Mage",
+    "stats": { "str": -5, "int": 3, "wis": 0, "dex": 1, "con": -2, "chr": 1 },
+    "skills": { "disarm": 30, "device": 36, "save": 30, "stealth": 2, "search": 16, "searchFreq": 20, "melee": 10, "ranged": 10 },
+    "xSkills": { "disarm": 7, "device": 13, "save": 12, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 25, "ranged": 14 },
+    "hitDie": 0, "expMod": 30,
+    "petUpkeepDiv": 15,
+    "heavySense": false
+  },
+  "priest": {
+    "index": 2,
+    "name": "Priest",
+    "stats": { "str": -1, "int": -3, "wis": 3, "dex": -1, "con": 0, "chr": 2 },
+    "skills": { "disarm": 25, "device": 30, "save": 32, "stealth": 2, "search": 16, "searchFreq": 8, "melee": 16, "ranged": 7 },
+    "xSkills": { "disarm": 7, "device": 10, "save": 17, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 50, "ranged": 18 },
+    "hitDie": 2, "expMod": 20,
+    "petUpkeepDiv": 20,
+    "heavySense": false
+  },
+  "rogue": {
+    "index": 3,
+    "name": "Rogue",
+    "stats": { "str": 2, "int": 1, "wis": -2, "dex": 3, "con": 1, "chr": -1 },
+    "skills": { "disarm": 45, "device": 32, "save": 28, "stealth": 5, "search": 32, "searchFreq": 24, "melee": 15, "ranged": 20 },
+    "xSkills": { "disarm": 15, "device": 10, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 70, "ranged": 40 },
+    "hitDie": 6, "expMod": 25,
+    "petUpkeepDiv": 20,
+    "heavySense": true
+  },
+  "ranger": {
+    "index": 4,
+    "name": "Ranger",
+    "stats": { "str": 2, "int": 2, "wis": 0, "dex": 1, "con": 1, "chr": 1 },
+    "skills": { "disarm": 30, "device": 32, "save": 28, "stealth": 3, "search": 24, "searchFreq": 16, "melee": 15, "ranged": 20 },
+    "xSkills": { "disarm": 8, "device": 10, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 65, "ranged": 63 },
+    "hitDie": 4, "expMod": 30,
+    "petUpkeepDiv": 20,
+    "heavySense": true
+  },
+  "paladin": {
+    "index": 5,
+    "name": "Paladin",
+    "stats": { "str": 3, "int": -3, "wis": 1, "dex": 0, "con": 2, "chr": 2 },
+    "skills": { "disarm": 20, "device": 24, "save": 26, "stealth": 1, "search": 12, "searchFreq": 2, "melee": 19, "ranged": 10 },
+    "xSkills": { "disarm": 7, "device": 10, "save": 15, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 76, "ranged": 14 },
+    "hitDie": 6, "expMod": 35,
+    "petUpkeepDiv": 20,
+    "heavySense": true
+  },
+  "warrior_mage": {
+    "index": 6,
+    "name": "Warrior-Mage",
+    "stats": { "str": 2, "int": 2, "wis": 0, "dex": 1, "con": 0, "chr": 1 },
+    "skills": { "disarm": 30, "device": 30, "save": 28, "stealth": 2, "search": 18, "searchFreq": 16, "melee": 20, "ranged": 20 },
+    "xSkills": { "disarm": 7, "device": 10, "save": 12, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 75, "ranged": 50 },
+    "hitDie": 4, "expMod": 50,
+    "petUpkeepDiv": 20,
+    "heavySense": false
+  },
+  "chaos_warrior": {
+    "index": 7,
+    "name": "Chaos-Warrior",
+    "stats": { "str": 2, "int": 1, "wis": 0, "dex": 1, "con": 2, "chr": -2 },
+    "skills": { "disarm": 20, "device": 25, "save": 25, "stealth": 1, "search": 14, "searchFreq": 12, "melee": 23, "ranged": 7 },
+    "xSkills": { "disarm": 7, "device": 11, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 90, "ranged": 40 },
+    "hitDie": 6, "expMod": 35,
+    "petUpkeepDiv": 20,
+    "heavySense": true
+  },
+  "monk": {
+    "index": 8,
+    "name": "Monk",
+    "stats": { "str": 2, "int": -1, "wis": 1, "dex": 3, "con": 2, "chr": 1 },
+    "skills": { "disarm": 45, "device": 32, "save": 28, "stealth": 5, "search": 16, "searchFreq": 24, "melee": 12, "ranged": 14 },
+    "xSkills": { "disarm": 15, "device": 11, "save": 15, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 30, "ranged": 25 },
+    "hitDie": 6, "expMod": 40,
+    "petUpkeepDiv": 20,
+    "heavySense": false
+  },
+  "mindcrafter": {
+    "index": 9,
+    "name": "Mindcrafter",
+    "stats": { "str": -1, "int": 0, "wis": 3, "dex": -1, "con": -1, "chr": 2 },
+    "skills": { "disarm": 30, "device": 30, "save": 30, "stealth": 3, "search": 22, "searchFreq": 16, "melee": 15, "ranged": 15 },
+    "xSkills": { "disarm": 10, "device": 10, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 30, "ranged": 20 },
+    "hitDie": 2, "expMod": 25,
+    "petUpkeepDiv": 20,
+    "heavySense": false
+  },
+  "high_mage": {
+    "index": 10,
+    "name": "High-Mage",
+    "stats": { "str": -5, "int": 4, "wis": 0, "dex": 0, "con": -2, "chr": 1 },
+    "skills": { "disarm": 30, "device": 36, "save": 30, "stealth": 2, "search": 16, "searchFreq": 20, "melee": 10, "ranged": 10 },
+    "xSkills": { "disarm": 7, "device": 13, "save": 12, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 15, "ranged": 10 },
+    "hitDie": 0, "expMod": 30,
+    "petUpkeepDiv": 12,
+    "heavySense": false
+  }
+}
