@@ -1,8 +1,22 @@
 import { GameProvider } from './context/GameContext';
+import { ModalProvider, useModal } from './context/ModalContext';
 import { GameViewport } from './components/GameViewport';
 import { StatsPanel } from './components/StatsPanel';
 import { MessageLog } from './components/MessageLog';
+import { InventoryModal, EquipmentModal, CharacterModal } from './components/modals';
 import { useKeyboard } from './hooks/useKeyboard';
+
+function ModalContainer() {
+  const { activeModal } = useModal();
+
+  return (
+    <>
+      {activeModal === 'inventory' && <InventoryModal />}
+      {activeModal === 'equipment' && <EquipmentModal />}
+      {activeModal === 'character' && <CharacterModal />}
+    </>
+  );
+}
 
 function GameLayout() {
   useKeyboard();
@@ -18,6 +32,7 @@ function GameLayout() {
         </div>
       </div>
       <MessageLog />
+      <ModalContainer />
     </>
   );
 }
@@ -25,7 +40,9 @@ function GameLayout() {
 export function App() {
   return (
     <GameProvider>
-      <GameLayout />
+      <ModalProvider>
+        <GameLayout />
+      </ModalProvider>
     </GameProvider>
   );
 }

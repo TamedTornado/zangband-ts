@@ -114,3 +114,304 @@ body {
 .message-log .message.danger {
   color: #f44;
 }
+
+/* Modal styles - inspired by Zangband TCL/TK window look */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-window {
+  background: #1a1a1a;
+  border: 2px solid #444;
+  border-radius: 4px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #252525;
+  border-bottom: 1px solid #444;
+}
+
+.modal-title {
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.modal-close:hover {
+  color: #fff;
+}
+
+.modal-content {
+  padding: 12px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-footer {
+  padding: 8px 12px;
+  background: #252525;
+  border-top: 1px solid #444;
+}
+
+.modal-hints {
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: #888;
+}
+
+/* Item list */
+.item-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-list-empty {
+  color: #666;
+  font-style: italic;
+  padding: 8px 0;
+}
+
+.item-row {
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.item-row:hover {
+  background: #333;
+}
+
+.item-display {
+  font-size: 13px;
+}
+
+/* Item colors by type (tval) - matching Zangband default_tval_to_attr */
+.tval-20, .tval-21, .tval-22, .tval-23 { color: #ccc; } /* weapons */
+.tval-19 { color: #fa0; } /* bows */
+.tval-30, .tval-31, .tval-32, .tval-33, .tval-34, .tval-35, .tval-36, .tval-37, .tval-38 { color: #aaa; } /* armor */
+.tval-39 { color: #ff0; } /* lights */
+.tval-40, .tval-45 { color: #f0f; } /* jewelry */
+.tval-70, .tval-75, .tval-77, .tval-80 { color: #0ff; } /* potions/scrolls */
+.tval-65, .tval-66, .tval-67 { color: #0f0; } /* wands/staves/rods */
+
+/* Equipment modal */
+.equipment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.equipment-row {
+  display: flex;
+  gap: 8px;
+  padding: 4px 8px;
+  font-size: 13px;
+}
+
+.equipment-row:hover {
+  background: #333;
+}
+
+.slot-letter {
+  color: #888;
+  width: 20px;
+}
+
+.slot-label {
+  color: #8cf;
+  width: 80px;
+}
+
+.slot-item {
+  color: #ccc;
+  flex: 1;
+}
+
+.slot-item.empty {
+  color: #555;
+}
+
+.equipment-summary {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #333;
+}
+
+/* Character modal */
+.char-tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.char-tab {
+  background: #252525;
+  border: 1px solid #444;
+  border-bottom: none;
+  color: #888;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.char-tab:hover {
+  background: #333;
+  color: #ccc;
+}
+
+.char-tab.active {
+  background: #1a1a1a;
+  color: #fff;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: -1px;
+}
+
+.char-tab-content {
+  border-top: 1px solid #444;
+  padding-top: 12px;
+  min-height: 400px;
+}
+
+.char-info h4, .char-flags h4 {
+  color: #8cf;
+  margin: 0 0 8px 0;
+  font-size: 12px;
+}
+
+.char-header, .char-stats, .char-combat, .char-misc {
+  margin-bottom: 8px;
+}
+
+.char-divider {
+  border-top: 1px solid #333;
+  margin: 12px 0;
+}
+
+.char-row {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.char-label {
+  color: #888;
+  width: 60px;
+}
+
+.char-value {
+  color: #fff;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px 16px;
+}
+
+.stat-item {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.stat-name {
+  color: #888;
+}
+
+.stat-val {
+  color: #fff;
+}
+
+/* Flags tab */
+.flags-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 16px;
+  margin-bottom: 16px;
+}
+
+.flag-item {
+  font-size: 12px;
+  color: #0f0;
+}
+
+.flag-item.dim {
+  color: #555;
+}
+
+/* Virtues tab */
+.virtues-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 16px;
+}
+
+.virtue-item {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.virtue-name {
+  color: #888;
+}
+
+.virtue-val {
+  color: #fff;
+}
+
+.virtue-val.dim {
+  color: #555;
+}
+
+/* Notes tab */
+.notes-input {
+  width: 100%;
+  background: #111;
+  border: 1px solid #444;
+  color: #ccc;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 8px;
+  resize: vertical;
+}
+
+.notes-input:focus {
+  outline: none;
+  border-color: #666;
+}
+
+/* Mutations/empty states */
+.empty-text {
+  color: #555;
+  font-style: italic;
+}

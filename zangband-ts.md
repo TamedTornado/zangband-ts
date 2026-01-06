@@ -447,6 +447,89 @@ const defaultBindings: Record<string, GameAction> = {
 20. [ ] Minimap
 21. [ ] Tooltips and polish
 
+### 4.8 Command Implementation (see docs/commands.md for full list)
+
+**Currently Implemented:**
+- [x] Movement (hjklyubn, arrows, numpad)
+- [x] Stairs (`<` / `>`)
+- [x] Melee attack (bump into monster)
+- [x] Pick up item (`g`)
+- [x] Show inventory (`i`) - message log only
+- [x] Show equipment (`e`) - message log only
+
+**Phase 1: Core UI System**
+- [ ] Modal dialog system for inventory/equipment/character screens
+- [ ] Scrollable list component for long menus
+- [ ] Item selection component (a-z letter selection)
+- [ ] ESC key to close modals
+
+**Phase 2: Inventory & Equipment UI**
+- [ ] Modal inventory screen with item details
+- [ ] Modal equipment screen with slot display
+- [ ] Wield/wear item (`w`) with slot selection
+- [ ] Take off equipment (`t`)
+- [ ] Drop item (`d`)
+- [ ] Destroy item (`k`)
+- [ ] Inspect item (`I`) - show full item stats
+
+**Phase 3: Item Usage**
+- [ ] Eat food (`E`)
+- [ ] Quaff potion (`q`)
+- [ ] Read scroll (`r`)
+- [ ] Aim wand (`a`)
+- [ ] Zap rod (`z`)
+- [ ] Use staff (`u`)
+- [ ] Throw item (`v`)
+- [ ] Fire missile (`f`)
+
+**Phase 4: Rest System**
+- [ ] Rest command (`R`) with prompt
+- [ ] Rest for N turns
+- [ ] Rest until HP restored (`*`)
+- [ ] Rest until fully recovered (`&`)
+- [ ] Interrupt rest on monster detection
+
+**Phase 5: Running**
+- [ ] Implement run mode (shift+direction)
+- [ ] Run until wall/intersection/monster
+- [ ] Disturb on interesting features
+
+**Phase 6: Door & Trap Interaction**
+- [ ] Open door explicitly (`o`) - currently auto-open on bump
+- [ ] Close door (`c`)
+- [ ] Disarm trap (`D`)
+- [ ] Search mode toggle (`S`)
+- [ ] Stay in place / search (`.` or `5`)
+- [ ] Tunnel (`T`)
+
+**Phase 7: Look & Target**
+- [ ] Look command (`l`/`x`) - cursor mode
+- [ ] Target command (`*`)
+- [ ] Identify symbol (`/`)
+
+**Phase 8: Information Screens**
+- [ ] Character screen (`C`) - stats, skills, history
+- [ ] Full dungeon map (`M`)
+- [ ] Message history (`Ctrl+P`)
+- [ ] Knowledge menu (`~`)
+
+**Phase 9: Magic System Commands**
+- [ ] Spell casting (`m`)
+- [ ] Browse spellbook (`b`)
+- [ ] Learn spells (`G`)
+
+**Phase 10: Save/Load**
+- [ ] Save game (`Ctrl+S`) to localStorage/IndexedDB
+- [ ] Save and quit (`Ctrl+X`)
+- [ ] Load game on startup
+
+**Phase 11: Advanced Features**
+- [ ] Inscriptions (`{`, `}`)
+- [ ] Macros (`@`)
+- [ ] Options menu (`=`)
+- [ ] Artifact activation (`A`)
+- [ ] Racial/mutation powers (`p`, `U`)
+
 ---
 
 ## Phase 5: Content & Polish

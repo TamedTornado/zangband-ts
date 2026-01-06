@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Direction } from '@/core/types';
 import { useGame } from '../context/GameContext';
+import { useModal } from '../context/ModalContext';
 
 const KEY_MAP: Record<string, Direction> = {
   ArrowUp: Direction.North,
@@ -27,12 +28,35 @@ const KEY_MAP: Record<string, Direction> = {
 };
 
 export function useKeyboard() {
-  const { movePlayer, goDownStairs, goUpStairs, pickupItem, showInventory, showEquipment } = useGame();
+  const { movePlayer, goDownStairs, goUpStairs, pickupItem } = useGame();
+  const { activeModal, toggleModal } = useModal();
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       // Ignore if typing in an input
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      // If a modal is open, let the modal handle keys (except toggle keys)
+      if (activeModal) {
+        // Allow toggling modals off with same key
+        if (e.key === 'i' && activeModal === 'inventory') {
+          e.preventDefault();
+          toggleModal('inventory');
+          return;
+        }
+        if (e.key === 'e' && activeModal === 'equipment') {
+          e.preventDefault();
+          toggleModal('equipment');
+          return;
+        }
+        if (e.key === 'C' && activeModal === 'character') {
+          e.preventDefault();
+          toggleModal('character');
+          return;
+        }
+        // Other keys handled by modal's own handlers
         return;
       }
 
@@ -55,17 +79,24 @@ export function useKeyboard() {
         return;
       }
 
-      // Inventory
+      // Inventory modal
       if (e.key === 'i') {
         e.preventDefault();
-        showInventory();
+        toggleModal('inventory');
         return;
       }
 
-      // Equipment
+      // Equipment modal
       if (e.key === 'e') {
         e.preventDefault();
-        showEquipment();
+        toggleModal('equipment');
+        return;
+      }
+
+      // Character screen (shift+C)
+      if (e.key === 'C') {
+        e.preventDefault();
+        toggleModal('character');
         return;
       }
 
@@ -78,5 +109,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [movePlayer, goDownStairs, goUpStairs, pickupItem, showInventory, showEquipment]);
+  }, [movePlayer, goDownStairs, goUpStairs, pickupItem, activeModal, toggleModal]);
 }
