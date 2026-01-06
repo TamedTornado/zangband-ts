@@ -237,34 +237,37 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 
 ## Phase 2: Core Engine
 
-### 2.1 Basic Entity System
+**Parallelization:**
+- Wave 1: 2.1 + 2.2 (independent, can parallelize)
+- Wave 2: 2.3 + 2.4 + 2.5 (each depends on Wave 1, can parallelize with each other)
+
+### 2.1 Basic Entity System ⟨Wave 1⟩
 - [ ] `Entity` base class (id, position, symbol, color)
 - [ ] `Actor` extends Entity (hp, energy, can take turns)
 - [ ] `Player` extends Actor (stats, inventory, spells known)
 - [ ] `Monster` extends Actor (AI reference, native abilities)
 - [ ] `Item` extends Entity (item type, properties, flags)
 
-### 2.2 World Representation
+### 2.2 World Representation ⟨Wave 1⟩
 - [ ] `Tile` class (terrain type, flags, occupant, items)
 - [ ] `Level` class (2D tile grid, entity list, level metadata)
 - [ ] `GameWorld` class (current level, player ref, global state)
 - [ ] Serialization: `toJSON()` / `fromJSON()` for save/load
 
-### 2.3 Turn System
+### 2.3 Turn System ⟨Wave 2, needs 2.1⟩
 - [ ] Integrate rot.js Scheduler (speed-based)
 - [ ] Energy system matching Zangband (110 = normal speed)
 - [ ] Actor turn resolution
 - [ ] Player input blocking (async/await for player turn)
 
-### 2.4 Dungeon Generation
+### 2.4 Dungeon Generation ⟨Wave 2, needs 2.2⟩
 - [ ] Room + corridor generator (rot.js Digger or Uniform)
 - [ ] Feature placement (stairs, doors, traps)
 - [ ] Monster placement (depth-appropriate, out-of-depth rare)
 - [ ] Item placement (floor drops, room treasures)
 - [ ] Town level (static layout? procedural?)
-- [ ] Wilderness (if implementing - may defer)
 
-### 2.5 FOV & Memory
+### 2.5 FOV & Memory ⟨Wave 2, needs 2.2⟩
 - [ ] Integrate rot.js FOV (PreciseShadowcasting)
 - [ ] "Remembered" tile state (show old terrain, not current monsters)
 - [ ] Light sources, infravision
