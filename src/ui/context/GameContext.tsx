@@ -128,6 +128,9 @@ function createInitialState(): GameState {
     scheduler.add(monster);
   }
 
+  const monsterCount = level.getMonsters().length;
+  const itemCount = level.getAllItems().length;
+
   return {
     player,
     level,
@@ -136,7 +139,7 @@ function createInitialState(): GameState {
     turn: 0,
     messages: [
       { id: 0, text: 'Welcome to Zangband!', type: 'info', turn: 0 },
-      { id: 1, text: `You enter dungeon level ${depth}.`, type: 'info', turn: 0 },
+      { id: 1, text: `You enter dungeon level ${depth}. (${monsterCount} monsters, ${itemCount} items)`, type: 'info', turn: 0 },
     ],
     upStairs: dungeon.upStairs,
     downStairs: dungeon.downStairs,
