@@ -11,6 +11,7 @@
  */
 
 import { RNG } from 'rot-js';
+import { Item } from '@/core/entities/Item';
 import type { ItemDef } from '@/core/data/items';
 import type { EgoItemDef } from '@/core/data/ego-items';
 import type { ArtifactDef } from '@/core/data/artifacts';
@@ -861,5 +862,51 @@ export class ItemGeneration {
     const u2 = this.rng.getUniform();
     const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
     return Math.round(mean + z * stdDev);
+  }
+
+  /**
+   * Get item type category from tval
+   */
+  private getItemTypeFromTval(tval: number): string {
+    if (tval >= TV_SHOT && tval <= TV_SWORD) return 'weapon';
+    if (tval >= TV_BOOTS && tval <= TV_DRAG_ARMOR) return 'armor';
+    if (tval === TV_AMULET) return 'amulet';
+    if (tval === TV_RING) return 'ring';
+    if (tval === TV_LITE) return 'light';
+    if (tval === 75) return 'potion';
+    if (tval === 70) return 'scroll';
+    if (tval === 80) return 'food';
+    return 'misc';
+  }
+
+  /**
+   * Create an Item entity from an item key (for starting equipment, etc.)
+   */
+  createItemByKey(itemKey: string): Item | null {
+    const itemDef = this.items[itemKey];
+    if (!itemDef) return null;
+
+    const generated: GeneratedItem = {
+      baseItem: itemDef,
+      toHit: itemDef.toHit,
+      toDam: itemDef.toDam,
+      toAc: itemDef.toAc,
+      pval: itemDef.pval,
+      flags: [...itemDef.flags],
+      cost: itemDef.cost,
+    };
+
+    // Clean up display name (remove & prefix and ~ suffix)
+    const name = itemDef.name.replace(/^& /, '').replace(/~$/, '');
+
+    return new Item({
+      id: `item_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
+      position: { x: 0, y: 0 },
+      symbol: itemDef.symbol,
+      color: itemDef.color,
+      name,
+      itemType: this.getItemTypeFromTval(itemDef.tval),
+      generated,
+    });
   }
 }

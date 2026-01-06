@@ -27,7 +27,7 @@ const KEY_MAP: Record<string, Direction> = {
 };
 
 export function useKeyboard() {
-  const { movePlayer, goDownStairs, goUpStairs } = useGame();
+  const { movePlayer, goDownStairs, goUpStairs, pickupItem } = useGame();
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -48,6 +48,13 @@ export function useKeyboard() {
         return;
       }
 
+      // Pickup item
+      if (e.key === 'g' || e.key === ',') {
+        e.preventDefault();
+        pickupItem();
+        return;
+      }
+
       const dir = KEY_MAP[e.key];
       if (dir !== undefined) {
         e.preventDefault();
@@ -57,5 +64,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [movePlayer, goDownStairs, goUpStairs]);
+  }, [movePlayer, goDownStairs, goUpStairs, pickupItem]);
 }

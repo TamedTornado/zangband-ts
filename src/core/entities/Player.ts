@@ -1,6 +1,7 @@
 import { Actor } from './Actor';
 import type { Item } from './Item';
 import type { Level } from '../world/Level';
+import type { ItemGeneration } from '../systems/ItemGeneration';
 import { type Position, type Direction, movePosition } from '../types';
 
 export interface Stats {
@@ -198,5 +199,17 @@ export class Player extends Actor {
     }
     this.position = newPos;
     return true;
+  }
+
+  /**
+   * Equip starting items from a list of item keys
+   */
+  equipStartingItems(itemGen: ItemGeneration, itemKeys: string[]): void {
+    for (const key of itemKeys) {
+      const item = itemGen.createItemByKey(key);
+      if (item) {
+        this.equip(item);
+      }
+    }
   }
 }

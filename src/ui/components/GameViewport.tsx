@@ -3,6 +3,7 @@ import { useROTDisplay } from '../hooks/useROTDisplay';
 import { useGame } from '../context/GameContext';
 import { Camera } from '@/core/systems/Camera';
 import { FOVSystem } from '@/core/systems/FOV';
+import { VIEW_RADIUS } from '@/core/constants';
 
 // Map single-character color codes to hex colors
 const COLOR_MAP: Record<string, string> = {
@@ -59,8 +60,6 @@ function dimColor(hexColor: string): string {
 
   return `#${dimR.toString(16).padStart(2, '0')}${dimG.toString(16).padStart(2, '0')}${dimB.toString(16).padStart(2, '0')}`;
 }
-
-const VIEW_RADIUS = 20; // Player's view distance
 
 export function GameViewport() {
   const { ref, display, gridWidth, gridHeight } = useROTDisplay({ fontSize: 16 });
