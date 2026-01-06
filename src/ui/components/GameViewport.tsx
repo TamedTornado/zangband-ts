@@ -7,7 +7,7 @@ import { VIEW_RADIUS } from '@/core/constants';
 
 // Map single-character color codes to hex colors
 const COLOR_MAP: Record<string, string> = {
-  d: '#000',    // Dark (black)
+  d: '#666',    // Dark (dark gray, not black - needs to be visible)
   w: '#fff',    // White
   s: '#888',    // Slate
   o: '#f80',    // Orange

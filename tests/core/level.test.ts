@@ -24,8 +24,11 @@ const createTestItem = (id: string, x: number, y: number): Item => {
     position: { x, y },
     symbol: '!',
     color: 'r',
-    name: 'Test Potion',
     itemType: 'potion',
+    generated: {
+      baseItem: { name: 'Test', tval: 75, sval: 1 } as any,
+      toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], cost: 0,
+    },
   });
 };
 

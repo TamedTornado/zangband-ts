@@ -147,23 +147,12 @@ export class ItemSpawner {
    */
   private createItem(generated: GeneratedItem, pos: Position): Item {
     const baseItem = generated.baseItem;
-    const egoName = generated.egoItem?.name ?? '';
-    const artifactName = generated.artifact?.name;
-
-    // Build display name
-    let name = baseItem.name;
-    if (artifactName) {
-      name = artifactName;
-    } else if (egoName) {
-      name = `${baseItem.name} ${egoName}`;
-    }
 
     return new Item({
       id: generateItemId(),
       position: pos,
       symbol: baseItem.symbol,
       color: baseItem.color,
-      name,
       itemType: getItemTypeFromTval(baseItem.tval),
       generated,
     });

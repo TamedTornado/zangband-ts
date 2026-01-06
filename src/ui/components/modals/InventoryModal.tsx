@@ -75,8 +75,9 @@ export function InventoryModal() {
     // Format item display like TCL/TK: "a) Short Sword (1d6) (+2,+3)"
     let display = `${letter}) ${item.name}`;
 
-    // Add damage for weapons
-    if (item.damage && item.damage !== '0d0') {
+    // Add damage for weapons only (tval 16-23 are weapons)
+    const isWeapon = item.tval >= 16 && item.tval <= 23;
+    if (isWeapon && item.damage && item.damage !== '0d0') {
       display += ` (${item.damage})`;
       if (item.toHit !== 0 || item.toDam !== 0) {
         display += ` (${item.toHit >= 0 ? '+' : ''}${item.toHit},${item.toDam >= 0 ? '+' : ''}${item.toDam})`;

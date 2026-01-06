@@ -1,26 +1,39 @@
 import { Entity, type EntityConfig } from './Entity';
 import type { GeneratedItem } from '../systems/ItemGeneration';
-import { TV_FOOD, TV_POTION, TV_SCROLL } from '../data/tval';
+import { TV_FOOD, TV_POTION, TV_SCROLL, buildItemDisplayName } from '../data/tval';
 
 export interface ItemConfig extends EntityConfig {
-  name: string;
   itemType: string;
   quantity?: number;
   generated?: GeneratedItem;
 }
 
 export class Item extends Entity {
-  readonly name: string;
   readonly itemType: string;
   quantity: number;
   readonly generated: GeneratedItem | undefined;
 
   constructor(config: ItemConfig) {
     super(config);
-    this.name = config.name;
     this.itemType = config.itemType;
     this.quantity = config.quantity ?? 1;
     this.generated = config.generated;
+  }
+
+  /** Display name computed from tval and base name */
+  get name(): string {
+    if (!this.generated) return 'unknown item';
+    const base = this.generated.baseItem;
+    // Artifacts have their own names
+    if (this.generated.artifact?.name) {
+      return this.generated.artifact.name;
+    }
+    // Build name from tval + base name + ego
+    let name = buildItemDisplayName(base.name, base.tval);
+    if (this.generated.egoItem?.name) {
+      name = `${name} ${this.generated.egoItem.name}`;
+    }
+    return name;
   }
 
   /** Get the item's base key if from generation */

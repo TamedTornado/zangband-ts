@@ -157,8 +157,11 @@ describe('Item', () => {
       position: { x: 3, y: 4 },
       symbol: '!',
       color: '#00f',
-      name: 'Potion of Healing',
       itemType: 'potion',
+      generated: {
+        baseItem: { name: 'Healing', tval: 75, sval: 1 } as any,
+        toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], cost: 0,
+      },
     });
 
     expect(item.id).toBe('item-1');
@@ -173,9 +176,12 @@ describe('Item', () => {
       position: { x: 3, y: 4 },
       symbol: '!',
       color: '#00f',
-      name: 'Potion of Healing',
       itemType: 'potion',
       quantity: 5,
+      generated: {
+        baseItem: { name: 'Healing', tval: 75, sval: 1 } as any,
+        toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], cost: 0,
+      },
     });
 
     expect(item.quantity).toBe(5);
@@ -187,8 +193,11 @@ describe('Item', () => {
       position: { x: 3, y: 4 },
       symbol: '!',
       color: '#00f',
-      name: 'Potion of Healing',
       itemType: 'potion',
+      generated: {
+        baseItem: { name: 'Healing', tval: 75, sval: 1 } as any,
+        toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], cost: 0,
+      },
     });
 
     expect(item.quantity).toBe(1);

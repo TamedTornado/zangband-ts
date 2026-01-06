@@ -64,3 +64,31 @@ export function isArmorTval(tval: number): boolean {
 export function isConsumableTval(tval: number): boolean {
   return tval === TV_FOOD || tval === TV_POTION || tval === TV_SCROLL;
 }
+
+/**
+ * Build proper display name for an item based on its tval
+ * e.g., "Heroism" -> "Potion of Heroism"
+ */
+export function buildItemDisplayName(baseName: string, tval: number): string {
+  // Clean the base name (remove & prefix and ~ suffix from raw data)
+  const name = baseName.replace(/^& /, '').replace(/~$/, '');
+
+  switch (tval) {
+    case TV_POTION:
+      return `Potion of ${name}`;
+    case TV_SCROLL:
+      return `Scroll of ${name}`;
+    case TV_RING:
+      return `Ring of ${name}`;
+    case TV_AMULET:
+      return `Amulet of ${name}`;
+    case TV_WAND:
+      return `Wand of ${name}`;
+    case TV_STAFF:
+      return `Staff of ${name}`;
+    case TV_ROD:
+      return `Rod of ${name}`;
+    default:
+      return name;
+  }
+}

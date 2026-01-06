@@ -92,7 +92,6 @@ function createTestWeapon(): Item {
     position: { x: 0, y: 0 },
     symbol: '|',
     color: 'w',
-    name: 'Test Sword',
     itemType: 'weapon',
     generated: {
       baseItem,
@@ -132,7 +131,6 @@ function createTestArmor(): Item {
     position: { x: 0, y: 0 },
     symbol: '[',
     color: 's',
-    name: 'Test Armor',
     itemType: 'armor',
     generated: {
       baseItem,
@@ -217,12 +215,17 @@ describe('Player equipment', () => {
       position: { x: 0, y: 0 },
       symbol: '|',
       color: 'w',
-      name: 'Better Sword',
       itemType: 'weapon',
       generated: {
-        ...weapon1.generated!,
+        baseItem: {
+          ...weapon1.generated!.baseItem,
+          name: 'Better Sword',
+        },
         toHit: 5,
         toDam: 4,
+        toAc: 0,
+        pval: 0,
+        flags: [],
       },
     });
 

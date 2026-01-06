@@ -896,15 +896,11 @@ export class ItemGeneration {
       cost: itemDef.cost,
     };
 
-    // Clean up display name (remove & prefix and ~ suffix)
-    const name = itemDef.name.replace(/^& /, '').replace(/~$/, '');
-
     return new Item({
       id: `item_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
       position: { x: 0, y: 0 },
       symbol: itemDef.symbol,
       color: itemDef.color,
-      name,
       itemType: this.getItemTypeFromTval(itemDef.tval),
       generated,
     });
