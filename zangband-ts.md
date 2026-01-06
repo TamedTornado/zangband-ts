@@ -24,7 +24,8 @@ Port ZangbandTK to a modern TypeScript codebase, targeting browser-first with ro
 | Layer | Technology | Notes |
 |-------|------------|-------|
 | Language | TypeScript 5.x | Strict mode enabled |
-| Display | rot.js | FOV, pathfinding, map gen, display |
+| UI Framework | React | Components for all UI chrome |
+| Game Display | rot.js | Dungeon viewport, FOV, pathfinding |
 | Build | Vite | Fast dev server, good TS support |
 | Testing | Vitest | Compatible with Vite, fast |
 | Data Format | JSON | With JSON schemas for validation |
@@ -95,27 +96,36 @@ zangband-ts/
 │   │       ├── experience.json  # XP table
 │   │       └── config.json      # Game constants
 │   │
-│   ├── ui/                      # rot.js display layer
-│   │   ├── Display.ts           # Main rot.js display wrapper
-│   │   ├── screens/
-│   │   │   ├── Screen.ts        # Base screen interface
-│   │   │   ├── GameScreen.ts    # Main dungeon view
-│   │   │   ├── InventoryScreen.ts
-│   │   │   ├── CharacterScreen.ts
-│   │   │   ├── SpellScreen.ts
-│   │   │   ├── TargetingScreen.ts
-│   │   │   ├── MenuScreen.ts
-│   │   │   └── ...
-│   │   ├── panels/
-│   │   │   ├── StatsPanel.ts    # HP/MP/etc sidebar
-│   │   │   ├── MessageLog.ts
-│   │   │   └── MinimapPanel.ts
-│   │   ├── rendering/
-│   │   │   ├── TileRenderer.ts
-│   │   │   └── EntityRenderer.ts
-│   │   └── InputHandler.ts      # Keyboard mapping
+│   ├── ui/                      # React + rot.js hybrid (matches ZangbandTK)
+│   │   ├── App.tsx              # Root layout
+│   │   ├── components/
+│   │   │   ├── GameViewport.tsx # rot.js canvas wrapper
+│   │   │   ├── Autobar.tsx      # Quick-use buttons
+│   │   │   ├── StatsPanel.tsx   # HP/MP/stats with bars
+│   │   │   ├── MessageWindow.tsx # Current messages
+│   │   │   ├── MessageHistory.tsx # Scrollable log
+│   │   │   ├── RecallPanel.tsx  # Monster/item memory
+│   │   │   ├── Minimap.tsx      # Dungeon minimap
+│   │   │   ├── Tooltip.tsx      # Hover tooltips
+│   │   │   └── modals/
+│   │   │       ├── Modal.tsx
+│   │   │       ├── InventoryModal.tsx
+│   │   │       ├── EquipmentModal.tsx
+│   │   │       ├── CharacterModal.tsx  # Info/Flags/Mutations/Virtues/Notes tabs
+│   │   │       ├── SpellbookModal.tsx
+│   │   │       ├── KnowledgeModal.tsx
+│   │   │       ├── PetsModal.tsx
+│   │   │       ├── StoreModal.tsx
+│   │   │       ├── ChoiceModal.tsx
+│   │   │       └── TargetingOverlay.tsx
+│   │   ├── hooks/
+│   │   │   ├── useGameState.ts
+│   │   │   ├── useKeyboard.ts
+│   │   │   └── useTooltip.ts
+│   │   └── context/
+│   │       └── GameContext.tsx
 │   │
-│   ├── App.ts                   # Entry point, screen stack management
+│   ├── main.tsx                 # Entry point, renders React app
 │   └── index.html
 │
 ├── tools/                       # Data extraction utilities
@@ -160,15 +170,21 @@ Reference C codebase is at `../zangband`. Key data files:
 - `lib/edit/f_info.txt` - Terrain definitions
 - `src/spells*.c` - Spell definitions (in code, not data files)
 
-### 1.3 Data Extraction Scripts
-- [ ] Write parser for monster definitions → JSON
-- [ ] Write parser for item definitions → JSON  
-- [ ] Write parser for spell definitions → JSON
-- [ ] Write parser for race/class data → JSON
-- [ ] Extract terrain definitions
-- [ ] Validate extracted data against schemas
+### 1.3 Data Extraction [DONE]
+- [x] Write parser for monster definitions → JSON
+- [x] Write parser for item definitions → JSON
+- [x] Write parser for artifact definitions → JSON
+- [x] Write parser for ego item definitions → JSON
+- [x] Extract terrain definitions → JSON
+- [x] Extract race/class data → JSON (via C stub + #include)
+- [x] Extract spell names and magic_info table → JSON
 
-### 1.4 Define Core Type System
+### 1.4 Data Rationalization [TODO]
+- [ ] Merge spell definitions with class requirements (no separate ordinal arrays)
+- [ ] Derive formulas for magic_info where possible (~50% is hand-tuned, rest follows patterns)
+- [ ] Extract wilderness system (w_info.txt terrain types, procedural generation params, town/dungeon placement rules)
+
+### 1.5 Define Core Type System
 ```typescript
 // Example types to define in src/core/data/types.ts
 
@@ -195,10 +211,14 @@ interface SpellDef {
   id: string;
   name: string;
   realm: SpellRealm;
-  level: number;
-  manaCost: number;
-  failBase: number;
-  experience: number;
+  index: number;  // position in realm (0-31)
+  // Per-class requirements embedded, not in separate ordinal array
+  classes: Record<string, {
+    level: number;
+    mana: number;
+    fail: number;
+    exp: number;
+  }>;
   effects: SpellEffect[];
   description: string;
 }
@@ -294,55 +314,130 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 
 ---
 
-## Phase 4: UI Layer
+## Phase 4: UI Layer (React + rot.js Hybrid)
 
-### 4.1 Display Foundation
-- [ ] Replace hacky main.ts render loop with proper renderer (current proof-of-life is throwaway)
-- [ ] rot.js Display setup (sizing, font)
-- [ ] Viewport management (scrolling dungeon view)
-- [ ] Color scheme matching Zangband aesthetic
+### 4.1 Architecture Overview
 
-### 4.2 Screen Stack Architecture
-```typescript
-// Simple screen management
-interface Screen {
-  enter(): void;
-  exit(): void;
-  render(display: ROT.Display): void;
-  handleInput(key: string): Screen | null;  // return new screen or null to stay
-}
+Hybrid approach inspired by ZangbandTK: modern clickable UI with full keyboard support.
 
-class App {
-  private screenStack: Screen[] = [];
-  
-  pushScreen(screen: Screen): void { ... }
-  popScreen(): void { ... }
-  // Input goes to top of stack
-}
+```
+┌─────────────────────────────────────────────────────────────┐
+│  React App                                                  │
+│  ┌──────────────┬────────────────────────┬───────────────┐  │
+│  │ StatsPanel   │  GameViewport          │ SidePanel     │  │
+│  │ (React)      │  (rot.js canvas)       │ (React)       │  │
+│  │              │                        │               │  │
+│  │ HP/MP bars   │  @ . . # # . .        │ Minimap?      │  │
+│  │ Stats        │  . . k . . . .        │ Equipment     │  │
+│  │ Buffs        │  . . . . $ . .        │ Quick slots   │  │
+│  │              │                        │               │  │
+│  ├──────────────┴────────────────────────┴───────────────┤  │
+│  │ MessageLog (React) - scrollable, clickable links      │  │
+│  └───────────────────────────────────────────────────────┘  │
+│  Modal overlays: Inventory, Character, Spells, etc.         │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### 4.3 Main Game Screen
-- [ ] Dungeon viewport rendering
-- [ ] Stats panel (HP, MP, stats, status effects)
-- [ ] Message log (bottom)
-- [ ] Position/depth indicator
+### 4.2 Core Principles
+- **Keyboard-first, mouse-friendly**: Every action has a hotkey, but also clickable
+- **No mode confusion**: Clear visual state for targeting, inventory, etc.
+- **Responsive panels**: Resize gracefully, hide on small screens if needed
+- **Tooltips everywhere**: Hover on anything for details
 
-### 4.4 Subscreen Implementation
-- [ ] Inventory (view, wield, drop, use)
-- [ ] Equipment (current gear, swap slots)
-- [ ] Character sheet (stats, resists, abilities)
-- [ ] Spell selection (by realm/book)
-- [ ] Targeting (for directional/aimed spells)
-- [ ] Look/examine mode
-- [ ] Store interface
-- [ ] Help screens
+### 4.3 React Component Structure (matching ZangbandTK)
+```
+src/ui/
+├── App.tsx                     # Root layout, game state subscription
+├── components/
+│   ├── GameViewport.tsx        # rot.js canvas wrapper, click→tile
+│   ├── Autobar.tsx             # Quick buttons: food, potions, scrolls, rods, wands, staves, books
+│   ├── StatsPanel.tsx          # HP/MP/stats with bars, stat icons
+│   ├── MessageWindow.tsx       # Current turn messages
+│   ├── MessageHistory.tsx      # Scrollable full message log
+│   ├── RecallPanel.tsx         # Monster/item memory with icons
+│   ├── Minimap.tsx             # Dungeon/world minimap
+│   ├── Tooltip.tsx             # Context-aware hover tooltips
+│   └── modals/
+│       ├── Modal.tsx           # Base modal with keyboard trap
+│       ├── InventoryModal.tsx  # Item list, use/drop/equip actions
+│       ├── EquipmentModal.tsx  # Equipped gear, swap slots
+│       ├── CharacterModal.tsx  # Tabs: Info, Flags, Mutations, Virtues, Notes
+│       ├── CharInfoTab.tsx     # Stats, experience, gold, depth
+│       ├── CharFlagsTab.tsx    # Resistances/abilities grid
+│       ├── MutationsTab.tsx    # Character mutations
+│       ├── VirtuesTab.tsx      # Virtue scores
+│       ├── NotesTab.tsx        # Player notes
+│       ├── SpellbookModal.tsx  # Spell selection by realm/book
+│       ├── KnowledgeModal.tsx  # Discovered monsters/items/artifacts
+│       ├── PetsModal.tsx       # Pet/summon management
+│       ├── StoreModal.tsx      # Buy/sell interface
+│       ├── ChoiceModal.tsx     # Generic selection dialog
+│       ├── TargetingOverlay.tsx # Overlays viewport for targeting
+│       └── TipsModal.tsx       # Gameplay tips/help
+├── hooks/
+│   ├── useGameState.ts         # Subscribe to game world changes
+│   ├── useKeyboard.ts          # Global keyboard handler
+│   └── useTooltip.ts           # Tooltip positioning logic
+└── context/
+    └── GameContext.tsx         # Provides game instance to tree
+```
 
-### 4.5 Input Handling
-- [ ] Keybinding system (roguelike-keys, vi-keys, configurable)
-- [ ] Movement (8-direction + wait)
-- [ ] Run mode (shift+direction or similar)
-- [ ] All command keys (i, e, m, c, etc.)
-- [ ] Repeat last command
+### 4.4 Input System
+```typescript
+// Unified input: keyboard and clicks produce the same Actions
+type GameAction =
+  | { type: 'move'; direction: Direction }
+  | { type: 'interact'; target: Position }  // click or 'g'et/open
+  | { type: 'openInventory' }
+  | { type: 'openSpells' }
+  | { type: 'useItem'; slot: number }
+  | { type: 'cast'; spellId: string }
+  | { type: 'target'; position: Position }
+  | { type: 'cancel' }
+  // ...
+
+// Keyboard bindings configurable, stored in localStorage
+const defaultBindings: Record<string, GameAction> = {
+  'k': { type: 'move', direction: Direction.North },
+  'ArrowUp': { type: 'move', direction: Direction.North },
+  'i': { type: 'openInventory' },
+  'm': { type: 'openSpells' },
+  'Escape': { type: 'cancel' },
+  // ...
+};
+```
+
+### 4.5 Viewport Interaction
+- **Click tile**: Select/target that tile
+- **Right-click**: Context menu (look, attack, interact)
+- **Hover**: Tooltip shows monster/item info
+- **Drag**: Possible scroll for large viewports? Or click minimap
+- **Keyboard targeting**: Tab cycles targets, Enter confirms
+
+### 4.6 Modal System
+- Modals are React portals, rendered above viewport
+- Keyboard trapped within modal (Tab cycles, Escape closes)
+- Can stack (Inventory → Item details → Confirm drop)
+- Smooth open/close transitions
+
+### 4.7 Implementation Order
+1. [ ] Set up React with Vite (replace current main.ts)
+2. [ ] GameViewport component wrapping rot.js
+3. [ ] Basic layout: viewport + StatsPanel + MessageWindow
+4. [ ] Keyboard input system (useKeyboard hook)
+5. [ ] StatsPanel with HP/MP bars, stat icons
+6. [ ] MessageWindow + MessageHistory
+7. [ ] Autobar (quick-use buttons)
+8. [ ] InventoryModal + EquipmentModal
+9. [ ] CharacterModal with all tabs (Info, Flags, Mutations, Virtues, Notes)
+10. [ ] SpellbookModal
+11. [ ] TargetingOverlay
+12. [ ] RecallPanel (monster/item memory)
+13. [ ] KnowledgeModal (discovered things)
+14. [ ] StoreModal
+15. [ ] PetsModal
+16. [ ] Minimap
+17. [ ] Tooltips and polish
 
 ---
 
