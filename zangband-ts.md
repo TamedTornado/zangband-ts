@@ -479,6 +479,14 @@ const defaultBindings: Record<string, GameAction> = {
 **Character Info (DONE)**
 - [x] Character screen (`C`) - Info tab with stats, depth, turn
 
+**Data-Driven Effects System (TODO)**
+- [ ] Design unified effect schema (heals, damage, buffs, teleport, detection, etc.)
+- [ ] Add `useEffects` to ItemDef for consumables (potions, scrolls, food)
+- [ ] Add `useEffects` to ItemDef for devices (wands, rods, staves)
+- [ ] Create ItemEffects executor that reads from data
+- [ ] Remove hardcoded name-based effect logic from PlayingState
+- [ ] Same system will be used for spell effects
+
 **Items - Magical Devices (TODO)**
 - [ ] Aim wand (`a`)
 - [ ] Zap rod (`z`)
