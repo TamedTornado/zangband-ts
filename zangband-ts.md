@@ -179,8 +179,8 @@ Reference C codebase is at `../zangband`. Key data files:
 - [x] Extract race/class data → JSON (via C stub + #include)
 - [x] Extract spell names and magic_info table → JSON
 
-### 1.4 Data Rationalization [TODO]
-- [ ] Merge spell definitions with class requirements (no separate ordinal arrays)
+### 1.4 Data Rationalization [IN PROGRESS]
+- [x] Merge spell definitions with class requirements (no separate ordinal arrays)
 - [ ] Derive formulas for magic_info where possible (~50% is hand-tuned, rest follows patterns)
 - [ ] Extract wilderness system (w_info.txt terrain types, procedural generation params, town/dungeon placement rules)
 

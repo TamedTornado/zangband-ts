@@ -1,10 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { type SpellRecord, type MagicRecord } from '@/core/data/spells';
+import { type SpellRecord } from '@/core/data/spells';
 import spellsJson from '@/data/spells/spells.json';
-import magicJson from '@/data/spells/magic.json';
 
 const spells = spellsJson as SpellRecord;
-const magic = magicJson as unknown as MagicRecord;
 
 describe('spells data', () => {
   it('should have all 7 realms', () => {
@@ -78,42 +76,42 @@ describe('spells data', () => {
   });
 });
 
-describe('magic data (class spell requirements)', () => {
-  it('should have all 11 classes', () => {
-    expect(Object.keys(magic).length).toBe(11);
+describe('spell class requirements (merged from magic_info)', () => {
+  it('should have 11 classes per spell', () => {
+    expect(Object.keys(spells.life[0].classes).length).toBe(11);
   });
 
-  it('should have class magic properties', () => {
-    expect(magic['mage'].spellStat).toBe('int');
-    expect(magic['mage'].spellFirst).toBe(1);
-    expect(magic['priest'].spellStat).toBe('wis');
-    expect(magic['warrior'].spellFirst).toBe(99); // Warriors can't cast
-  });
-
-  it('should have 7 realms per class with 32 spells each', () => {
-    expect(magic['mage'].realms.life.length).toBe(32);
-    expect(magic['mage'].realms.sorcery.length).toBe(32);
-    expect(magic['priest'].realms.death.length).toBe(32);
+  it('should have all class keys', () => {
+    const classKeys = Object.keys(spells.life[0].classes);
+    expect(classKeys).toContain('warrior');
+    expect(classKeys).toContain('mage');
+    expect(classKeys).toContain('priest');
+    expect(classKeys).toContain('high_mage');
   });
 
   // Spot-checks against tables.c:2245+ to verify extraction
   it('should match Mage Life spell 0 from tables.c:2539', () => {
-    // { 1, 1, 30, 4 } = [level, mana, fail, exp]
-    expect(magic['mage'].realms.life[0]).toEqual([1, 1, 30, 4]);
+    // { 1, 1, 30, 4 } = level, mana, fail, exp
+    expect(spells.life[0].classes['mage']).toEqual({ level: 1, mana: 1, fail: 30, exp: 4 });
   });
 
   it('should match Mage Sorcery spell 0 from tables.c:2579', () => {
     // { 1, 1, 23, 4 }
-    expect(magic['mage'].realms.sorcery[0]).toEqual([1, 1, 23, 4]);
+    expect(spells.sorcery[0].classes['mage']).toEqual({ level: 1, mana: 1, fail: 23, exp: 4 });
   });
 
   it('should match Priest Life spell 0 (native realm)', () => {
     // Priest gets Life spells at level 1
-    expect(magic['priest'].realms.life[0][0]).toBe(1); // level
+    expect(spells.life[0].classes['priest'].level).toBe(1);
   });
 
   it('should show Warrior cannot cast (level 99)', () => {
-    expect(magic['warrior'].realms.life[0][0]).toBe(99);
-    expect(magic['warrior'].realms.sorcery[0][0]).toBe(99);
+    expect(spells.life[0].classes['warrior'].level).toBe(99);
+    expect(spells.sorcery[0].classes['warrior'].level).toBe(99);
+  });
+
+  it('should show High-Mage has lower requirements than Mage', () => {
+    // High-Mage typically has lower fail rates
+    expect(spells.life[0].classes['high_mage'].fail).toBeLessThan(spells.life[0].classes['mage'].fail);
   });
 });
