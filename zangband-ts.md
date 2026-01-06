@@ -238,37 +238,32 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 ## Phase 2: Core Engine
 
 **Parallelization:**
-- Wave 1: 2.1 + 2.2 (independent, can parallelize)
-- Wave 2: 2.3 + 2.4 + 2.5 (each depends on Wave 1, can parallelize with each other)
+- Wave 1: 2.1 + 2.2 (independent, can parallelize) [DONE]
+- Wave 2: 2.3 + 2.5 (each depends on Wave 1) [DONE]
+- 2.4 Dungeon Generation moved to Phase 5 (extraction from C reference)
 
-### 2.1 Basic Entity System ⟨Wave 1⟩
-- [ ] `Entity` base class (id, position, symbol, color)
-- [ ] `Actor` extends Entity (hp, energy, can take turns)
-- [ ] `Player` extends Actor (stats, inventory, spells known)
-- [ ] `Monster` extends Actor (AI reference, native abilities)
-- [ ] `Item` extends Entity (item type, properties, flags)
+### 2.1 Basic Entity System ⟨Wave 1⟩ [DONE]
+- [x] `Entity` base class (id, position, symbol, color)
+- [x] `Actor` extends Entity (hp, energy, speed, takeDamage, heal)
+- [x] `Player` extends Actor (stats, inventory, spells known, tryMove)
+- [x] `Monster` extends Actor (definitionKey, isAwake)
+- [x] `Item` extends Entity (name, itemType, quantity)
 
-### 2.2 World Representation ⟨Wave 1⟩
-- [ ] `Tile` class (terrain type, flags, occupant, items)
-- [ ] `Level` class (2D tile grid, entity list, level metadata)
-- [ ] `GameWorld` class (current level, player ref, global state)
+### 2.2 World Representation ⟨Wave 1⟩ [DONE]
+- [x] `Tile` class (TerrainDef reference, occupant, items, explored)
+- [x] `Level` class (2D tile grid, terrain from JSON)
+- [x] `GameWorld` class (current level, player ref, turn counter)
 - [ ] Serialization: `toJSON()` / `fromJSON()` for save/load
 
-### 2.3 Turn System ⟨Wave 2, needs 2.1⟩
-- [ ] Integrate rot.js Scheduler (speed-based)
-- [ ] Energy system matching Zangband (110 = normal speed)
-- [ ] Actor turn resolution
+### 2.3 Turn System ⟨Wave 2⟩ [DONE]
+- [x] `Scheduler` class (energy-based turn order)
+- [x] Energy system matching Zangband (110 = normal speed)
+- [x] Actor turn resolution (highest energy first)
 - [ ] Player input blocking (async/await for player turn)
 
-### 2.4 Dungeon Generation ⟨Wave 2, needs 2.2⟩
-- [ ] Room + corridor generator (rot.js Digger or Uniform)
-- [ ] Feature placement (stairs, doors, traps)
-- [ ] Monster placement (depth-appropriate, out-of-depth rare)
-- [ ] Item placement (floor drops, room treasures)
-- [ ] Town level (static layout? procedural?)
-
-### 2.5 FOV & Memory ⟨Wave 2, needs 2.2⟩
-- [ ] Integrate rot.js FOV (PreciseShadowcasting)
+### 2.5 FOV & Memory ⟨Wave 2⟩ [DONE]
+- [x] Integrate rot.js FOV (PreciseShadowcasting)
+- [x] Compute visible tiles, mark explored
 - [ ] "Remembered" tile state (show old terrain, not current monsters)
 - [ ] Light sources, infravision
 
@@ -450,23 +445,31 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] All spells across all realms
 - [ ] All races and classes
 
-### 5.2 Wilderness & Overworld
+### 5.2 Dungeon Generation (extract from C reference)
+- [ ] Extract room/corridor generation algorithm from `generate.c`
+- [ ] Extract vault definitions
+- [ ] Feature placement (stairs, doors, traps)
+- [ ] Monster placement (depth-appropriate, out-of-depth rare)
+- [ ] Item placement (floor drops, room treasures)
+- [ ] Town level layout
+
+### 5.3 Wilderness & Overworld
 - [ ] Extract wilderness system (w_info.txt terrain types, procedural generation params)
 - [ ] Town/dungeon placement rules
 - [ ] Wilderness travel
 
-### 5.3 Special Levels
+### 5.4 Special Levels
 - [ ] Quest levels (Thieves' Hideout, etc.)
 - [ ] Unique lairs
 - [ ] Special room vaults
 
-### 5.4 Final Systems
+### 5.5 Final Systems
 - [ ] Save/load to localStorage (+ export/import file)
 - [ ] Character dump generation
 - [ ] High score tracking
 - [ ] In-game help / monster memory / item memory
 
-### 5.5 Testing & Balance
+### 5.6 Testing & Balance
 - [ ] Verify monster stats match original
 - [ ] Verify damage formulas produce expected ranges
 - [ ] Playtest through midgame
