@@ -15,6 +15,10 @@ export const BASE_SPEED = 110;
 
 // View/FOV
 export const VIEW_RADIUS = 20;
+export const VISION_RADIUS = 10;
+
+// Regeneration
+export const HP_REGEN_RATE = 10; // Regen 1 HP every N turns
 
 // Inventory
 export const MAX_INVENTORY_SLOTS = 23;

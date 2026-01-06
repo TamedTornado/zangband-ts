@@ -67,8 +67,8 @@ export function InventoryModal() {
 
   // Build indexed items with optional filtering
   const indexedItems: IndexedItem[] = inventory
-    .map((item, index) => ({ item, originalIndex: index }))
-    .filter(({ item }) => !config.filter || config.filter(item));
+    .map((item: Item, index: number) => ({ item, originalIndex: index }))
+    .filter(({ item }: { item: Item }) => !config.filter || config.filter(item));
 
   const renderItem = (indexed: IndexedItem, _index: number, letter: string) => {
     const item = indexed.item;

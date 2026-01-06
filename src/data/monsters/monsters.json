@@ -1,22 +1,4 @@
 {
-  "player": {
-    "key": "player",
-    "index": 0,
-    "name": "Player",
-    "symbol": "@",
-    "color": "w",
-    "speed": 110,
-    "hp": "1d1",
-    "vision": 20,
-    "ac": 0,
-    "alertness": 0,
-    "depth": 0,
-    "rarity": 1,
-    "exp": 0,
-    "attacks": [],
-    "flags": [],
-    "description": ""
-  },
   "filthy_street_urchin": {
     "key": "filthy_street_urchin",
     "index": 1,

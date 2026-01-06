@@ -49,7 +49,7 @@ export function CharacterModal() {
       </div>
 
       <div className="char-tab-content">
-        {activeTab === 'info' && <InfoTab player={player} depth={state.depth} />}
+        {activeTab === 'info' && <InfoTab player={player} depth={state.depth} turn={state.turn} />}
         {activeTab === 'flags' && <FlagsTab player={player} />}
         {activeTab === 'mutations' && <MutationsTab />}
         {activeTab === 'virtues' && <VirtuesTab />}
@@ -62,12 +62,13 @@ export function CharacterModal() {
 interface TabProps {
   player: ReturnType<typeof useGame>['state']['player'];
   depth?: number;
+  turn?: number;
 }
 
 /**
  * Info tab - basic character info
  */
-function InfoTab({ player, depth }: TabProps) {
+function InfoTab({ player, depth, turn }: TabProps) {
   const stats = player.stats;
 
   return (
@@ -156,7 +157,7 @@ function InfoTab({ player, depth }: TabProps) {
         </div>
         <div className="char-row">
           <span className="char-label">Turn:</span>
-          <span className="char-value">{/* TODO: Add turn count */}0</span>
+          <span className="char-value">{turn ?? 0}</span>
         </div>
       </div>
     </div>
