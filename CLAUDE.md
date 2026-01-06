@@ -10,7 +10,7 @@ Reference C codebase is at `../zangband`. See `zangband-ts.md` for the full proj
 
 ## Development Rules
 
-- **Test-first**: Write tests before implementation (TDD)
+- **TDD**: Tests define the contract FIRST, then write code to make them pass. No exceptions.
 - **GitHub**: Use GitHub for version control (master branch)
 - **Data-driven**: Game content lives in JSON, not code
 - **Separation of concerns**: Core game logic (`src/core/`) has zero UI dependencies
@@ -46,8 +46,16 @@ tests/
 
 ## Tech Stack
 
-- TypeScript 5.x (strict mode)
+- TypeScript 5.x (strict mode, erasableSyntaxOnly - no enums)
 - Vite (build)
 - Vitest (testing)
 - rot.js (display, FOV, pathfinding)
 - JSON (game data with schemas)
+
+## Imports
+
+Use `@/` path alias for imports:
+```typescript
+import { Player } from '@/core/entities/Player';
+import { type Position, Direction } from '@/core/types';
+```
