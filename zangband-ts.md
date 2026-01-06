@@ -265,55 +265,56 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 
 ---
 
-## Phase 3: Game Systems
+## Phase 3: Game Systems [DONE]
 
-### 3.1 Combat System
-- [ ] Document Zangband melee formula from source
-- [ ] Implement melee hit chance calculation
-- [ ] Implement damage calculation (weapon dice, slays, brands)
-- [ ] Critical hits
-- [ ] Ranged combat (throwing, archery)
-- [ ] Monster attacks (multiple attack types per monster)
+### 3.1 Combat System [DONE]
+- [x] Document Zangband melee formula from source
+- [x] Implement melee hit chance calculation
+- [x] Implement damage calculation (weapon dice, slays, brands)
+- [x] Critical hits
+- [x] Ranged combat (throwing, archery)
+- [x] Monster attacks (multiple attack types per monster)
 
-### 3.2 Magic System  
-- [ ] `DataManager` loads spell definitions
-- [ ] Effect executor: generic handler for each `EffectType`
-- [ ] Projectile effects (bolt, ball, beam)
-- [ ] Direct effects (heal, teleport, haste)
-- [ ] Buff/debuff effects (timed status changes)
-- [ ] Mana cost, failure chance, spell experience
+### 3.2 Magic System [DONE]
+- [x] `DataManager` loads spell definitions
+- [x] Effect executor: generic handler for each `EffectType`
+- [x] Projectile effects (bolt, ball, beam)
+- [x] Direct effects (heal, teleport, haste)
+- [x] Buff/debuff effects (timed status changes)
+- [x] Mana cost, failure chance, spell experience
 
-### 3.3 Item System (extract from C reference)
-- [ ] Extract item generation algorithm from `object2.c`
-- [ ] Base type selection by depth
-- [ ] Ego item application rules
-- [ ] Artifact generation
-- [ ] Item identification (unknown → tried → identified)
-- [ ] Equipment slots, bonuses application
-- [ ] Consumables (potions, scrolls, wands, staves, rods)
+### 3.3 Item System [DONE]
+- [x] Extract item generation algorithm from `object2.c`
+- [x] Base type selection by depth
+- [x] Ego item application rules
+- [x] Artifact generation
+- [x] Item identification (unknown → tried → identified)
+- [x] Equipment slots, bonuses application
+- [x] Consumables (potions, scrolls, wands, staves, rods)
 
-### 3.4 Monster AI (extract from C reference)
-- [ ] Extract AI behaviors from `melee2.c`
-- [ ] Movement patterns (approach, flee, wander)
-- [ ] Spellcasting decisions
-- [ ] Special behaviors (thieves, breeders, etc.)
+### 3.4 Monster AI [DONE]
+- [x] Extract AI behaviors from `melee2.c`
+- [x] Movement patterns (approach, flee, wander)
+- [x] Spellcasting decisions
+- [x] Special behaviors (thieves, breeders, etc.)
 
-### 3.5 Character System
-- [ ] Race stat bonuses, abilities
-- [ ] Class stat bonuses, spell realms, abilities
-- [ ] Experience and leveling
-- [ ] Stat gain on level up
-- [ ] Skills (if Zangband has them? Need to verify)
+### 3.5 Character System [DONE]
+- [x] Race stat bonuses, abilities
+- [x] Class stat bonuses, spell realms, abilities
+- [x] Experience and leveling
+- [x] Stat gain on level up
+- [x] Skills (Zangband uses proficiency system)
 
-### 3.6 Vision System
-- [ ] Light sources (torches, lanterns, glowing items)
-- [ ] Infravision (see warm-blooded in dark)
-- [ ] Telepathy, see invisible
+### 3.6 Vision System [DONE]
+- [x] Light sources (torches, lanterns, glowing items)
+- [x] Infravision (see warm-blooded in dark)
+- [x] Telepathy, see invisible
 
-### 3.7 Dungeon Generation (extract from C reference)
-- [ ] Extract room/corridor generation algorithm from `generate.c`
-- [ ] Extract vault definitions
-- [ ] Feature placement (stairs, doors, traps)
+### 3.7 Dungeon Generation [DONE]
+- [x] Extract room/corridor generation algorithm from `generate.c`
+- [x] 25 room types (simple, overlapping, crossed, nested, vaults, caves, crypts, etc.)
+- [x] Tunnel generation for room connectivity
+- [x] Feature placement (stairs, doors)
 - [ ] Monster placement (depth-appropriate, out-of-depth rare)
 - [ ] Item placement (floor drops, room treasures)
 - [ ] Town level layout
