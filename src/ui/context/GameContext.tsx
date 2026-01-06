@@ -63,6 +63,8 @@ interface GameContextValue {
   goDownStairs: () => void;
   goUpStairs: () => void;
   pickupItem: () => void;
+  showInventory: () => void;
+  showEquipment: () => void;
 }
 
 const GameContext = createContext<GameContextValue | null>(null);
@@ -391,6 +393,84 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }));
   }, [state]);
 
+  const showInventory = useCallback(() => {
+    const { player, turn } = state;
+    const inventory = player.inventory;
+
+    setState(prev => {
+      const newMessages = [...prev.messages.slice(-90)];
+
+      if (inventory.length === 0) {
+        newMessages.push({
+          id: messageIdRef.current++,
+          text: 'Your pack is empty.',
+          type: 'info' as const,
+          turn,
+        });
+      } else {
+        newMessages.push({
+          id: messageIdRef.current++,
+          text: '--- Inventory ---',
+          type: 'info' as const,
+          turn,
+        });
+        for (let i = 0; i < inventory.length; i++) {
+          const letter = String.fromCharCode(97 + i); // a, b, c...
+          newMessages.push({
+            id: messageIdRef.current++,
+            text: `${letter}) ${inventory[i].name}`,
+            type: 'normal' as const,
+            turn,
+          });
+        }
+      }
+
+      return { ...prev, messages: newMessages };
+    });
+  }, [state]);
+
+  const showEquipment = useCallback(() => {
+    const { player, turn } = state;
+
+    setState(prev => {
+      const newMessages = [...prev.messages.slice(-90)];
+      newMessages.push({
+        id: messageIdRef.current++,
+        text: '--- Equipment ---',
+        type: 'info' as const,
+        turn,
+      });
+
+      const slots: Array<{ slot: string; label: string }> = [
+        { slot: 'weapon', label: 'Weapon' },
+        { slot: 'bow', label: 'Bow' },
+        { slot: 'armor', label: 'Armor' },
+        { slot: 'cloak', label: 'Cloak' },
+        { slot: 'shield', label: 'Shield' },
+        { slot: 'helmet', label: 'Helmet' },
+        { slot: 'gloves', label: 'Gloves' },
+        { slot: 'boots', label: 'Boots' },
+        { slot: 'amulet', label: 'Amulet' },
+        { slot: 'ring1', label: 'Ring (L)' },
+        { slot: 'ring2', label: 'Ring (R)' },
+        { slot: 'light', label: 'Light' },
+      ];
+
+      for (const { slot, label } of slots) {
+        const item = player.getEquipped(slot as import('@/core/entities/Player').EquipmentSlot);
+        const itemName = item ? item.name : '(empty)';
+        newMessages.push({
+          id: messageIdRef.current++,
+          text: `${label}: ${itemName}`,
+          type: 'normal' as const,
+          turn,
+        });
+      }
+
+      return { ...prev, messages: newMessages };
+    });
+  }, [state]);
+
   const value: GameContextValue = {
     state,
     movePlayer,
@@ -398,6 +478,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
     goDownStairs,
     goUpStairs,
     pickupItem,
+    showInventory,
+    showEquipment,
   };
 
   return (

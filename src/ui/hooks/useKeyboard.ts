@@ -27,7 +27,7 @@ const KEY_MAP: Record<string, Direction> = {
 };
 
 export function useKeyboard() {
-  const { movePlayer, goDownStairs, goUpStairs, pickupItem } = useGame();
+  const { movePlayer, goDownStairs, goUpStairs, pickupItem, showInventory, showEquipment } = useGame();
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -49,9 +49,23 @@ export function useKeyboard() {
       }
 
       // Pickup item
-      if (e.key === 'g' || e.key === ',') {
+      if (e.key === 'g') {
         e.preventDefault();
         pickupItem();
+        return;
+      }
+
+      // Inventory
+      if (e.key === 'i') {
+        e.preventDefault();
+        showInventory();
+        return;
+      }
+
+      // Equipment
+      if (e.key === 'e') {
+        e.preventDefault();
+        showEquipment();
         return;
       }
 
@@ -64,5 +78,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [movePlayer, goDownStairs, goUpStairs, pickupItem]);
+  }, [movePlayer, goDownStairs, goUpStairs, pickupItem, showInventory, showEquipment]);
 }
