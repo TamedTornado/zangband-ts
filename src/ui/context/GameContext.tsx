@@ -3,8 +3,8 @@ import { Player } from '@/core/entities/Player';
 import { Level } from '@/core/world/Level';
 import { Direction } from '@/core/types';
 
-const WIDTH = 80;
-const HEIGHT = 25;
+const WIDTH = 198;
+const HEIGHT = 66;
 
 interface Message {
   id: number;
@@ -43,7 +43,7 @@ function createInitialState(): GameState {
 
   const player = new Player({
     id: 'player',
-    position: { x: 40, y: 12 },
+    position: { x: Math.floor(WIDTH / 2), y: Math.floor(HEIGHT / 2) },
     maxHp: 100,
     speed: 110,
     stats: { str: 16, int: 12, wis: 10, dex: 14, con: 15, chr: 8 },

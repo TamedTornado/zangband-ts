@@ -19,8 +19,10 @@
     "vitest": "^4.0.16"
   },
   "dependencies": {
+    "ms": "^2.1.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "rot-js": "^2.2.1"
+    "rot-js": "^2.2.1",
+    "use-resize-observer": "^9.1.0"
   }
 }
