@@ -179,10 +179,8 @@ Reference C codebase is at `../zangband`. Key data files:
 - [x] Extract race/class data → JSON (via C stub + #include)
 - [x] Extract spell names and magic_info table → JSON
 
-### 1.4 Data Rationalization [IN PROGRESS]
+### 1.4 Data Rationalization [DONE]
 - [x] Merge spell definitions with class requirements (no separate ordinal arrays)
-- [ ] Derive formulas for magic_info where possible (~50% is hand-tuned, rest follows patterns)
-- [ ] Extract wilderness system (w_info.txt terrain types, procedural generation params, town/dungeon placement rules)
 
 ### 1.5 Define Core Type System
 ```typescript
@@ -449,18 +447,23 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] All spells across all realms
 - [ ] All races and classes
 
-### 5.2 Special Levels
+### 5.2 Wilderness & Overworld
+- [ ] Extract wilderness system (w_info.txt terrain types, procedural generation params)
+- [ ] Town/dungeon placement rules
+- [ ] Wilderness travel
+
+### 5.3 Special Levels
 - [ ] Quest levels (Thieves' Hideout, etc.)
 - [ ] Unique lairs
 - [ ] Special room vaults
 
-### 5.3 Final Systems
+### 5.4 Final Systems
 - [ ] Save/load to localStorage (+ export/import file)
 - [ ] Character dump generation
 - [ ] High score tracking
 - [ ] In-game help / monster memory / item memory
 
-### 5.4 Testing & Balance
+### 5.5 Testing & Balance
 - [ ] Verify monster stats match original
 - [ ] Verify damage formulas produce expected ranges
 - [ ] Playtest through midgame
