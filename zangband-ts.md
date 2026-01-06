@@ -283,19 +283,20 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 - [ ] Buff/debuff effects (timed status changes)
 - [ ] Mana cost, failure chance, spell experience
 
-### 3.3 Item System
-- [ ] Item generation (base type + ego type + artifact)
+### 3.3 Item System (extract from C reference)
+- [ ] Extract item generation algorithm from `object2.c`
+- [ ] Base type selection by depth
+- [ ] Ego item application rules
+- [ ] Artifact generation
 - [ ] Item identification (unknown → tried → identified)
 - [ ] Equipment slots, bonuses application
 - [ ] Consumables (potions, scrolls, wands, staves, rods)
-- [ ] Pseudo-ID, sensing
 
-### 3.4 Monster AI
-- [ ] Basic AI: approach and melee
-- [ ] Spellcasting AI (when to cast, spell selection)
-- [ ] Fleeing behavior (low HP)
-- [ ] Group AI (friends, escorts)
-- [ ] Special behaviors (thieves steal, breeders multiply)
+### 3.4 Monster AI (extract from C reference)
+- [ ] Extract AI behaviors from `melee2.c`
+- [ ] Movement patterns (approach, flee, wander)
+- [ ] Spellcasting decisions
+- [ ] Special behaviors (thieves, breeders, etc.)
 
 ### 3.5 Character System
 - [ ] Race stat bonuses, abilities
@@ -308,6 +309,14 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 - [ ] Light sources (torches, lanterns, glowing items)
 - [ ] Infravision (see warm-blooded in dark)
 - [ ] Telepathy, see invisible
+
+### 3.7 Dungeon Generation (extract from C reference)
+- [ ] Extract room/corridor generation algorithm from `generate.c`
+- [ ] Extract vault definitions
+- [ ] Feature placement (stairs, doors, traps)
+- [ ] Monster placement (depth-appropriate, out-of-depth rare)
+- [ ] Item placement (floor drops, room treasures)
+- [ ] Town level layout
 
 ---
 
@@ -448,31 +457,23 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] All spells across all realms
 - [ ] All races and classes
 
-### 5.2 Dungeon Generation (extract from C reference)
-- [ ] Extract room/corridor generation algorithm from `generate.c`
-- [ ] Extract vault definitions
-- [ ] Feature placement (stairs, doors, traps)
-- [ ] Monster placement (depth-appropriate, out-of-depth rare)
-- [ ] Item placement (floor drops, room treasures)
-- [ ] Town level layout
-
-### 5.3 Wilderness & Overworld
+### 5.2 Wilderness & Overworld
 - [ ] Extract wilderness system (w_info.txt terrain types, procedural generation params)
 - [ ] Town/dungeon placement rules
 - [ ] Wilderness travel
 
-### 5.4 Special Levels
+### 5.3 Special Levels
 - [ ] Quest levels (Thieves' Hideout, etc.)
 - [ ] Unique lairs
 - [ ] Special room vaults
 
-### 5.5 Final Systems
+### 5.4 Final Systems
 - [ ] Save/load to localStorage (+ export/import file)
 - [ ] Character dump generation
 - [ ] High score tracking
 - [ ] In-game help / monster memory / item memory
 
-### 5.6 Testing & Balance
+### 5.5 Testing & Balance
 - [ ] Verify monster stats match original
 - [ ] Verify damage formulas produce expected ranges
 - [ ] Playtest through midgame
