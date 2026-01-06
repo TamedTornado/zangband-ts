@@ -12,12 +12,18 @@ import { parseEgoItems } from '../src/core/data/ego-items';
 const ZANGBAND_PATH = '../zangband';
 const OUTPUT_PATH = './src/data';
 
-function extract(name: string, parser: (text: string) => unknown[], inputPath: string, outputPath: string): void {
+function extract(
+  name: string,
+  parser: (text: string) => Record<string, unknown>,
+  inputPath: string,
+  outputPath: string
+): void {
   console.log('Extracting ' + name + '...');
   const text = readFileSync(inputPath, 'utf-8');
   const data = parser(text);
+  const count = Object.keys(data).length;
   writeFileSync(outputPath, JSON.stringify(data, null, 2));
-  console.log('  Wrote ' + data.length + ' entries to ' + outputPath);
+  console.log('  Wrote ' + count + ' entries to ' + outputPath);
 }
 
 // Ensure output directories exist

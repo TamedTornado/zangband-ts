@@ -1,5 +1,8 @@
+import { toSlug } from './slug';
+
 export interface ArtifactDef {
-  id: number;
+  key: string;
+  index: number;
   name: string;
   tval: number;
   sval: number;
@@ -16,10 +19,32 @@ export interface ArtifactDef {
   flags: string[];
 }
 
-function createEmptyArtifact(): ArtifactDef {
+export type ArtifactRecord = Record<string, ArtifactDef>;
+
+interface RawArtifact {
+  index: number;
+  name: string;
+  slug: string;
+  tval: number;
+  sval: number;
+  pval: number;
+  depth: number;
+  rarity: number;
+  weight: number;
+  cost: number;
+  baseAc: number;
+  damage: string;
+  toHit: number;
+  toDam: number;
+  toAc: number;
+  flags: string[];
+}
+
+function createEmptyRaw(index: number, name: string): RawArtifact {
   return {
-    id: 0,
-    name: '',
+    index,
+    name,
+    slug: toSlug(name),
     tval: 0,
     sval: 0,
     pval: 0,
@@ -36,10 +61,10 @@ function createEmptyArtifact(): ArtifactDef {
   };
 }
 
-export function parseArtifacts(text: string): ArtifactDef[] {
+export function parseArtifacts(text: string): ArtifactRecord {
   const lines = text.split('\n');
-  const artifacts: ArtifactDef[] = [];
-  let current: ArtifactDef | null = null;
+  const entries: RawArtifact[] = [];
+  let current: RawArtifact | null = null;
 
   for (const line of lines) {
     const trimmed = line.trim();
@@ -57,12 +82,11 @@ export function parseArtifacts(text: string): ArtifactDef[] {
     switch (prefix) {
       case 'N': {
         if (current) {
-          artifacts.push(current);
+          entries.push(current);
         }
-        const [idStr, ...nameParts] = value.split(':');
-        current = createEmptyArtifact();
-        current.id = parseInt(idStr ?? '0', 10);
-        current.name = nameParts.join(':');
+        const [indexStr, ...nameParts] = value.split(':');
+        const name = nameParts.join(':');
+        current = createEmptyRaw(parseInt(indexStr ?? '0', 10), name);
         break;
       }
       case 'I': {
@@ -109,7 +133,43 @@ export function parseArtifacts(text: string): ArtifactDef[] {
   }
 
   if (current) {
-    artifacts.push(current);
+    entries.push(current);
+  }
+
+  // Detect collisions
+  const slugCounts = new Map<string, number>();
+  for (const entry of entries) {
+    slugCounts.set(entry.slug, (slugCounts.get(entry.slug) ?? 0) + 1);
+  }
+
+  // Build record with collision-aware keys
+  const artifacts: ArtifactRecord = {};
+  for (const entry of entries) {
+    const hasCollision = (slugCounts.get(entry.slug) ?? 0) > 1;
+    const key = hasCollision ? `${entry.slug}_${entry.index}` : entry.slug;
+
+    if (artifacts[key]) {
+      throw new Error(`Duplicate artifact key: ${key}`);
+    }
+
+    artifacts[key] = {
+      key,
+      index: entry.index,
+      name: entry.name,
+      tval: entry.tval,
+      sval: entry.sval,
+      pval: entry.pval,
+      depth: entry.depth,
+      rarity: entry.rarity,
+      weight: entry.weight,
+      cost: entry.cost,
+      baseAc: entry.baseAc,
+      damage: entry.damage,
+      toHit: entry.toHit,
+      toDam: entry.toDam,
+      toAc: entry.toAc,
+      flags: entry.flags,
+    };
   }
 
   return artifacts;

@@ -1,10 +1,13 @@
+import { toSlug } from './slug';
+
 export interface Allocation {
   depth: number;
   rarity: number;
 }
 
 export interface ItemDef {
-  id: number;
+  key: string;
+  index: number;
   name: string;
   symbol: string;
   color: string;
@@ -24,10 +27,35 @@ export interface ItemDef {
   flags: string[];
 }
 
-function createEmptyItem(): ItemDef {
+export type ItemRecord = Record<string, ItemDef>;
+
+interface RawItem {
+  index: number;
+  name: string;
+  slug: string;
+  symbol: string;
+  color: string;
+  tval: number;
+  sval: number;
+  pval: number;
+  depth: number;
+  rarity: number;
+  weight: number;
+  cost: number;
+  allocation: Allocation[];
+  baseAc: number;
+  damage: string;
+  toHit: number;
+  toDam: number;
+  toAc: number;
+  flags: string[];
+}
+
+function createEmptyRaw(index: number, name: string): RawItem {
   return {
-    id: 0,
-    name: '',
+    index,
+    name,
+    slug: toSlug(name),
     symbol: '?',
     color: 'w',
     tval: 0,
@@ -47,10 +75,10 @@ function createEmptyItem(): ItemDef {
   };
 }
 
-export function parseItems(text: string): ItemDef[] {
+export function parseItems(text: string): ItemRecord {
   const lines = text.split('\n');
-  const items: ItemDef[] = [];
-  let current: ItemDef | null = null;
+  const entries: RawItem[] = [];
+  let current: RawItem | null = null;
 
   for (const line of lines) {
     const trimmed = line.trim();
@@ -68,12 +96,11 @@ export function parseItems(text: string): ItemDef[] {
     switch (prefix) {
       case 'N': {
         if (current) {
-          items.push(current);
+          entries.push(current);
         }
-        const [idStr, ...nameParts] = value.split(':');
-        current = createEmptyItem();
-        current.id = parseInt(idStr ?? '0', 10);
-        current.name = nameParts.join(':');
+        const [indexStr, ...nameParts] = value.split(':');
+        const name = nameParts.join(':');
+        current = createEmptyRaw(parseInt(indexStr ?? '0', 10), name);
         break;
       }
       case 'G': {
@@ -139,12 +166,50 @@ export function parseItems(text: string): ItemDef[] {
         }
         break;
       }
-      // L: lines (Lua scripts) are skipped
     }
   }
 
   if (current) {
-    items.push(current);
+    entries.push(current);
+  }
+
+  // Detect collisions
+  const slugCounts = new Map<string, number>();
+  for (const entry of entries) {
+    slugCounts.set(entry.slug, (slugCounts.get(entry.slug) ?? 0) + 1);
+  }
+
+  // Build record with collision-aware keys
+  const items: ItemRecord = {};
+  for (const entry of entries) {
+    const hasCollision = (slugCounts.get(entry.slug) ?? 0) > 1;
+    const key = hasCollision ? `${entry.slug}_${entry.index}` : entry.slug;
+
+    if (items[key]) {
+      throw new Error(`Duplicate item key: ${key}`);
+    }
+
+    items[key] = {
+      key,
+      index: entry.index,
+      name: entry.name,
+      symbol: entry.symbol,
+      color: entry.color,
+      tval: entry.tval,
+      sval: entry.sval,
+      pval: entry.pval,
+      depth: entry.depth,
+      rarity: entry.rarity,
+      weight: entry.weight,
+      cost: entry.cost,
+      allocation: entry.allocation,
+      baseAc: entry.baseAc,
+      damage: entry.damage,
+      toHit: entry.toHit,
+      toDam: entry.toDam,
+      toAc: entry.toAc,
+      flags: entry.flags,
+    };
   }
 
   return items;

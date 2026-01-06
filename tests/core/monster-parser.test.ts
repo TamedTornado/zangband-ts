@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseMonsters, type MonsterDef } from '@/core/data/monsters';
+import { parseMonsters, type MonsterDef, type MonsterRecord } from '@/core/data/monsters';
 
 const SAMPLE_MONSTERS = `
 # Comment
@@ -31,26 +31,29 @@ D:A skinny little furball with sharp claws and a menacing look.
 `;
 
 describe('parseMonsters', () => {
-  it('should parse monster entries from text', () => {
-    const monsters: MonsterDef[] = parseMonsters(SAMPLE_MONSTERS);
-    expect(monsters.length).toBe(3);
+  it('should return a record keyed by slug', () => {
+    const monsters: MonsterRecord = parseMonsters(SAMPLE_MONSTERS);
+    expect(monsters['player']).toBeDefined();
+    expect(monsters['filthy_street_urchin']).toBeDefined();
+    expect(monsters['scrawny_cat']).toBeDefined();
   });
 
-  it('should parse monster id and name', () => {
-    const monsters = parseMonsters(SAMPLE_MONSTERS);
-    expect(monsters[1]?.id).toBe(1);
-    expect(monsters[1]?.name).toBe('Filthy street urchin');
+  it('should parse monster key, index and name', () => {
+    const monsters: MonsterRecord = parseMonsters(SAMPLE_MONSTERS);
+    expect(monsters['filthy_street_urchin']?.key).toBe('filthy_street_urchin');
+    expect(monsters['filthy_street_urchin']?.index).toBe(1);
+    expect(monsters['filthy_street_urchin']?.name).toBe('Filthy street urchin');
   });
 
   it('should parse graphics', () => {
-    const monsters = parseMonsters(SAMPLE_MONSTERS);
-    expect(monsters[1]?.symbol).toBe('t');
-    expect(monsters[1]?.color).toBe('D');
+    const monsters: MonsterRecord = parseMonsters(SAMPLE_MONSTERS);
+    expect(monsters['filthy_street_urchin']?.symbol).toBe('t');
+    expect(monsters['filthy_street_urchin']?.color).toBe('D');
   });
 
   it('should parse info line (speed, hp, vision, ac, alertness)', () => {
-    const monsters = parseMonsters(SAMPLE_MONSTERS);
-    const urchin = monsters[1];
+    const monsters: MonsterRecord = parseMonsters(SAMPLE_MONSTERS);
+    const urchin: MonsterDef | undefined = monsters['filthy_street_urchin'];
     expect(urchin?.speed).toBe(110);
     expect(urchin?.hp).toBe('1d4');
     expect(urchin?.vision).toBe(4);
@@ -59,35 +62,52 @@ describe('parseMonsters', () => {
   });
 
   it('should parse world line (depth, rarity, exp)', () => {
-    const monsters = parseMonsters(SAMPLE_MONSTERS);
-    const urchin = monsters[1];
+    const monsters: MonsterRecord = parseMonsters(SAMPLE_MONSTERS);
+    const urchin: MonsterDef | undefined = monsters['filthy_street_urchin'];
     expect(urchin?.depth).toBe(0);
     expect(urchin?.rarity).toBe(2);
     expect(urchin?.exp).toBe(0);
   });
 
   it('should parse attacks', () => {
-    const monsters = parseMonsters(SAMPLE_MONSTERS);
-    const urchin = monsters[1];
+    const monsters: MonsterRecord = parseMonsters(SAMPLE_MONSTERS);
+    const urchin: MonsterDef | undefined = monsters['filthy_street_urchin'];
     expect(urchin?.attacks.length).toBe(2);
     expect(urchin?.attacks[0]).toEqual({ method: 'BEG', effect: undefined, damage: undefined });
     expect(urchin?.attacks[1]).toEqual({ method: 'TOUCH', effect: 'EAT_GOLD', damage: undefined });
 
-    const cat = monsters[2];
+    const cat: MonsterDef | undefined = monsters['scrawny_cat'];
     expect(cat?.attacks[0]).toEqual({ method: 'CLAW', effect: 'HURT', damage: '1d1' });
   });
 
   it('should parse flags', () => {
-    const monsters = parseMonsters(SAMPLE_MONSTERS);
-    const urchin = monsters[1];
+    const monsters: MonsterRecord = parseMonsters(SAMPLE_MONSTERS);
+    const urchin: MonsterDef | undefined = monsters['filthy_street_urchin'];
     expect(urchin?.flags).toContain('MALE');
     expect(urchin?.flags).toContain('EVIL');
     expect(urchin?.flags).toContain('FRIENDS');
   });
 
   it('should parse description', () => {
-    const monsters = parseMonsters(SAMPLE_MONSTERS);
-    expect(monsters[1]?.description).toBe('He looks squalid and thoroughly revolting.');
-    expect(monsters[2]?.description).toBe('A skinny little furball with sharp claws and a menacing look.');
+    const monsters: MonsterRecord = parseMonsters(SAMPLE_MONSTERS);
+    expect(monsters['filthy_street_urchin']?.description).toBe('He looks squalid and thoroughly revolting.');
+    expect(monsters['scrawny_cat']?.description).toBe('A skinny little furball with sharp claws and a menacing look.');
+  });
+
+  it('should add index suffix only for colliding names', () => {
+    const withCollisions = `
+N:43:Novice warrior
+G:p:U
+
+N:110:Novice warrior
+G:p:U
+
+N:1:Goblin
+G:g:g
+`;
+    const monsters: MonsterRecord = parseMonsters(withCollisions);
+    expect(monsters['novice_warrior_43']).toBeDefined();
+    expect(monsters['novice_warrior_110']).toBeDefined();
+    expect(monsters['goblin']).toBeDefined(); // no suffix - unique
   });
 });

@@ -1,6 +1,7 @@
-[
-  {
-    "id": 4,
+{
+  "of_resist_acid_4": {
+    "key": "of_resist_acid_4",
+    "index": 4,
     "name": "of Resist Acid",
     "slot": 30,
     "rating": 16,
@@ -17,8 +18,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 5,
+  "of_resist_lightning_5": {
+    "key": "of_resist_lightning_5",
+    "index": 5,
     "name": "of Resist Lightning",
     "slot": 30,
     "rating": 10,
@@ -35,8 +37,9 @@
       "IGNORE_ELEC"
     ]
   },
-  {
-    "id": 6,
+  "of_resist_fire_6": {
+    "key": "of_resist_fire_6",
+    "index": 6,
     "name": "of Resist Fire",
     "slot": 30,
     "rating": 14,
@@ -53,8 +56,9 @@
       "IGNORE_FIRE"
     ]
   },
-  {
-    "id": 7,
+  "of_resist_cold_7": {
+    "key": "of_resist_cold_7",
+    "index": 7,
     "name": "of Resist Cold",
     "slot": 30,
     "rating": 12,
@@ -71,8 +75,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 8,
+  "of_resistance_8": {
+    "key": "of_resistance_8",
+    "index": 8,
     "name": "of Resistance",
     "slot": 30,
     "rating": 20,
@@ -95,8 +100,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 9,
+  "of_elvenkind": {
+    "key": "of_elvenkind",
+    "index": 9,
     "name": "of Elvenkind",
     "slot": 30,
     "rating": 25,
@@ -120,8 +126,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 11,
+  "of_permanence": {
+    "key": "of_permanence",
+    "index": 11,
     "name": "of Permanence",
     "slot": 30,
     "rating": 30,
@@ -151,8 +158,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 12,
+  "of_everburning": {
+    "key": "of_everburning",
+    "index": 12,
     "name": "of Everburning",
     "slot": 29,
     "rating": 10,
@@ -168,8 +176,9 @@
       "LITE"
     ]
   },
-  {
-    "id": 13,
+  "of_warmth": {
+    "key": "of_warmth",
+    "index": 13,
     "name": "of Warmth",
     "slot": 29,
     "rating": 13,
@@ -185,8 +194,9 @@
       "RES_COLD"
     ]
   },
-  {
-    "id": 14,
+  "of_vision": {
+    "key": "of_vision",
+    "index": 14,
     "name": "of Vision",
     "slot": 29,
     "rating": 15,
@@ -204,8 +214,9 @@
       "SENSE"
     ]
   },
-  {
-    "id": 15,
+  "of_radiance": {
+    "key": "of_radiance",
+    "index": 15,
     "name": "of Radiance",
     "slot": 29,
     "rating": 13,
@@ -222,8 +233,9 @@
       "CHR"
     ]
   },
-  {
-    "id": 16,
+  "of_resist_acid_16": {
+    "key": "of_resist_acid_16",
+    "index": 16,
     "name": "of Resist Acid",
     "slot": 32,
     "rating": 16,
@@ -240,8 +252,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 17,
+  "of_resist_lightning_17": {
+    "key": "of_resist_lightning_17",
+    "index": 17,
     "name": "of Resist Lightning",
     "slot": 32,
     "rating": 10,
@@ -258,8 +271,9 @@
       "IGNORE_ELEC"
     ]
   },
-  {
-    "id": 18,
+  "of_resist_fire_18": {
+    "key": "of_resist_fire_18",
+    "index": 18,
     "name": "of Resist Fire",
     "slot": 32,
     "rating": 14,
@@ -276,8 +290,9 @@
       "IGNORE_FIRE"
     ]
   },
-  {
-    "id": 19,
+  "of_resist_cold_19": {
+    "key": "of_resist_cold_19",
+    "index": 19,
     "name": "of Resist Cold",
     "slot": 32,
     "rating": 12,
@@ -294,8 +309,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 20,
+  "of_resistance_20": {
+    "key": "of_resistance_20",
+    "index": 20,
     "name": "of Resistance",
     "slot": 32,
     "rating": 20,
@@ -318,8 +334,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 21,
+  "of_reflection": {
+    "key": "of_reflection",
+    "index": 21,
     "name": "of Reflection",
     "slot": 32,
     "rating": 20,
@@ -339,8 +356,9 @@
       "IGNORE_FIRE"
     ]
   },
-  {
-    "id": 24,
+  "of_intelligence": {
+    "key": "of_intelligence",
+    "index": 24,
     "name": "of Intelligence",
     "slot": 33,
     "rating": 13,
@@ -357,8 +375,9 @@
       "SUST_INT"
     ]
   },
-  {
-    "id": 25,
+  "of_wisdom": {
+    "key": "of_wisdom",
+    "index": 25,
     "name": "of Wisdom",
     "slot": 33,
     "rating": 13,
@@ -375,8 +394,9 @@
       "SUST_WIS"
     ]
   },
-  {
-    "id": 26,
+  "of_beauty": {
+    "key": "of_beauty",
+    "index": 26,
     "name": "of Beauty",
     "slot": 33,
     "rating": 8,
@@ -393,8 +413,9 @@
       "SUST_CHR"
     ]
   },
-  {
-    "id": 27,
+  "of_the_magi": {
+    "key": "of_the_magi",
+    "index": 27,
     "name": "of the Magi",
     "slot": 21,
     "rating": 15,
@@ -412,8 +433,9 @@
       "SP"
     ]
   },
-  {
-    "id": 28,
+  "of_might": {
+    "key": "of_might",
+    "index": 28,
     "name": "of Might",
     "slot": 21,
     "rating": 19,
@@ -435,8 +457,9 @@
       "FREE_ACT"
     ]
   },
-  {
-    "id": 29,
+  "of_lordliness": {
+    "key": "of_lordliness",
+    "index": 29,
     "name": "of Lordliness",
     "slot": 21,
     "rating": 17,
@@ -455,8 +478,9 @@
       "SUST_CHR"
     ]
   },
-  {
-    "id": 30,
+  "of_seeing": {
+    "key": "of_seeing",
+    "index": 30,
     "name": "of Seeing",
     "slot": 33,
     "rating": 8,
@@ -474,8 +498,9 @@
       "SEE_INVIS"
     ]
   },
-  {
-    "id": 31,
+  "of_infravision": {
+    "key": "of_infravision",
+    "index": 31,
     "name": "of Infravision",
     "slot": 33,
     "rating": 11,
@@ -492,8 +517,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 32,
+  "of_light": {
+    "key": "of_light",
+    "index": 32,
     "name": "of Light",
     "slot": 33,
     "rating": 6,
@@ -510,8 +536,9 @@
       "RES_LITE"
     ]
   },
-  {
-    "id": 33,
+  "of_telepathy": {
+    "key": "of_telepathy",
+    "index": 33,
     "name": "of Telepathy",
     "slot": 21,
     "rating": 20,
@@ -527,8 +554,9 @@
       "TELEPATHY"
     ]
   },
-  {
-    "id": 34,
+  "of_regeneration": {
+    "key": "of_regeneration",
+    "index": 34,
     "name": "of Regeneration",
     "slot": 21,
     "rating": 10,
@@ -544,8 +572,9 @@
       "REGEN"
     ]
   },
-  {
-    "id": 35,
+  "of_teleportation": {
+    "key": "of_teleportation",
+    "index": 35,
     "name": "of Teleportation",
     "slot": 33,
     "rating": 0,
@@ -561,8 +590,9 @@
       "TELEPORT"
     ]
   },
-  {
-    "id": 36,
+  "of_stupidity": {
+    "key": "of_stupidity",
+    "index": 36,
     "name": "of Stupidity",
     "slot": 33,
     "rating": 0,
@@ -578,8 +608,9 @@
       "INT"
     ]
   },
-  {
-    "id": 37,
+  "of_naivety": {
+    "key": "of_naivety",
+    "index": 37,
     "name": "of Naivety",
     "slot": 33,
     "rating": 0,
@@ -595,8 +626,9 @@
       "WIS"
     ]
   },
-  {
-    "id": 38,
+  "of_ugliness": {
+    "key": "of_ugliness",
+    "index": 38,
     "name": "of Ugliness",
     "slot": 33,
     "rating": 0,
@@ -612,8 +644,9 @@
       "CHR"
     ]
   },
-  {
-    "id": 39,
+  "of_sickliness": {
+    "key": "of_sickliness",
+    "index": 39,
     "name": "of Sickliness",
     "slot": 33,
     "rating": 0,
@@ -631,8 +664,9 @@
       "CON"
     ]
   },
-  {
-    "id": 40,
+  "of_protection": {
+    "key": "of_protection",
+    "index": 40,
     "name": "of Protection",
     "slot": 31,
     "rating": 10,
@@ -651,8 +685,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 41,
+  "of_stealth_41": {
+    "key": "of_stealth_41",
+    "index": 41,
     "name": "of Stealth",
     "slot": 31,
     "rating": 10,
@@ -668,8 +703,9 @@
       "STEALTH"
     ]
   },
-  {
-    "id": 42,
+  "of_aman": {
+    "key": "of_aman",
+    "index": 42,
     "name": "of Aman",
     "slot": 31,
     "rating": 20,
@@ -689,8 +725,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 43,
+  "of_immolation": {
+    "key": "of_immolation",
+    "index": 43,
     "name": "of Immolation",
     "slot": 31,
     "rating": 16,
@@ -709,8 +746,9 @@
       "RES_FIRE"
     ]
   },
-  {
-    "id": 44,
+  "of_enveloping": {
+    "key": "of_enveloping",
+    "index": 44,
     "name": "of Enveloping",
     "slot": 31,
     "rating": 0,
@@ -726,8 +764,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 45,
+  "of_vulnerability": {
+    "key": "of_vulnerability",
+    "index": 45,
     "name": "of Vulnerability",
     "slot": 31,
     "rating": 0,
@@ -743,8 +782,9 @@
       "AGGRAVATE"
     ]
   },
-  {
-    "id": 46,
+  "of_irritation": {
+    "key": "of_irritation",
+    "index": 46,
     "name": "of Irritation",
     "slot": 31,
     "rating": 0,
@@ -761,8 +801,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 47,
+  "of_electricity": {
+    "key": "of_electricity",
+    "index": 47,
     "name": "of Electricity",
     "slot": 31,
     "rating": 16,
@@ -781,8 +822,9 @@
       "RES_ELEC"
     ]
   },
-  {
-    "id": 48,
+  "of_free_action_48": {
+    "key": "of_free_action_48",
+    "index": 48,
     "name": "of Free Action",
     "slot": 34,
     "rating": 11,
@@ -798,8 +840,9 @@
       "FREE_ACT"
     ]
   },
-  {
-    "id": 49,
+  "of_slaying_49": {
+    "key": "of_slaying_49",
+    "index": 49,
     "name": "of Slaying",
     "slot": 34,
     "rating": 17,
@@ -815,8 +858,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 50,
+  "of_agility": {
+    "key": "of_agility",
+    "index": 50,
     "name": "of Agility",
     "slot": 34,
     "rating": 14,
@@ -833,8 +877,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 51,
+  "of_power": {
+    "key": "of_power",
+    "index": 51,
     "name": "of Power",
     "slot": 34,
     "rating": 22,
@@ -852,8 +897,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 52,
+  "ghoul_touch": {
+    "key": "ghoul_touch",
+    "index": 52,
     "name": "(Ghoul Touch)",
     "slot": 34,
     "rating": 22,
@@ -870,8 +916,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 54,
+  "of_weakness": {
+    "key": "of_weakness",
+    "index": 54,
     "name": "of Weakness",
     "slot": 34,
     "rating": 0,
@@ -887,8 +934,9 @@
       "STR"
     ]
   },
-  {
-    "id": 55,
+  "of_clumsiness": {
+    "key": "of_clumsiness",
+    "index": 55,
     "name": "of Clumsiness",
     "slot": 34,
     "rating": 0,
@@ -904,8 +952,9 @@
       "DEX"
     ]
   },
-  {
-    "id": 56,
+  "of_levitation": {
+    "key": "of_levitation",
+    "index": 56,
     "name": "of Levitation",
     "slot": 35,
     "rating": 7,
@@ -921,8 +970,9 @@
       "FEATHER"
     ]
   },
-  {
-    "id": 57,
+  "of_stealth_57": {
+    "key": "of_stealth_57",
+    "index": 57,
     "name": "of Stealth",
     "slot": 35,
     "rating": 16,
@@ -938,8 +988,9 @@
       "STEALTH"
     ]
   },
-  {
-    "id": 58,
+  "of_free_action_58": {
+    "key": "of_free_action_58",
+    "index": 58,
     "name": "of Free Action",
     "slot": 35,
     "rating": 15,
@@ -955,8 +1006,9 @@
       "FREE_ACT"
     ]
   },
-  {
-    "id": 59,
+  "of_speed": {
+    "key": "of_speed",
+    "index": 59,
     "name": "of Speed",
     "slot": 35,
     "rating": 25,
@@ -973,8 +1025,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 61,
+  "of_noise": {
+    "key": "of_noise",
+    "index": 61,
     "name": "of Noise",
     "slot": 35,
     "rating": 0,
@@ -990,8 +1043,9 @@
       "AGGRAVATE"
     ]
   },
-  {
-    "id": 62,
+  "of_slowness": {
+    "key": "of_slowness",
+    "index": 62,
     "name": "of Slowness",
     "slot": 35,
     "rating": 0,
@@ -1007,8 +1061,9 @@
       "SPEED"
     ]
   },
-  {
-    "id": 63,
+  "of_annoyance": {
+    "key": "of_annoyance",
+    "index": 63,
     "name": "of Annoyance",
     "slot": 35,
     "rating": 0,
@@ -1025,8 +1080,9 @@
       "AGGRAVATE"
     ]
   },
-  {
-    "id": 64,
+  "holy_avenger": {
+    "key": "holy_avenger",
+    "index": 64,
     "name": "(Holy Avenger)",
     "slot": 24,
     "rating": 30,
@@ -1048,8 +1104,9 @@
       "RES_FEAR"
     ]
   },
-  {
-    "id": 65,
+  "defender": {
+    "key": "defender",
+    "index": 65,
     "name": "(Defender)",
     "slot": 24,
     "rating": 25,
@@ -1077,8 +1134,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 66,
+  "blessed": {
+    "key": "blessed",
+    "index": 66,
     "name": "(Blessed)",
     "slot": 24,
     "rating": 20,
@@ -1095,8 +1153,9 @@
       "BLESSED"
     ]
   },
-  {
-    "id": 68,
+  "of_westernesse": {
+    "key": "of_westernesse",
+    "index": 68,
     "name": "of Westernesse",
     "slot": 24,
     "rating": 20,
@@ -1119,8 +1178,9 @@
       "SEE_INVIS"
     ]
   },
-  {
-    "id": 69,
+  "of_extra_attacks": {
+    "key": "of_extra_attacks",
+    "index": 69,
     "name": "of Extra Attacks",
     "slot": 24,
     "rating": 20,
@@ -1136,8 +1196,9 @@
       "BLOWS"
     ]
   },
-  {
-    "id": 70,
+  "of_slaying_70": {
+    "key": "of_slaying_70",
+    "index": 70,
     "name": "of Slaying",
     "slot": 24,
     "rating": 15,
@@ -1151,8 +1212,9 @@
     "pval": 0,
     "flags": []
   },
-  {
-    "id": 72,
+  "of_melting": {
+    "key": "of_melting",
+    "index": 72,
     "name": "of Melting",
     "slot": 24,
     "rating": 15,
@@ -1170,8 +1232,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 73,
+  "of_shocking_73": {
+    "key": "of_shocking_73",
+    "index": 73,
     "name": "of Shocking",
     "slot": 24,
     "rating": 20,
@@ -1189,8 +1252,9 @@
       "IGNORE_ELEC"
     ]
   },
-  {
-    "id": 74,
+  "of_burning": {
+    "key": "of_burning",
+    "index": 74,
     "name": "of Burning",
     "slot": 24,
     "rating": 20,
@@ -1209,8 +1273,9 @@
       "LITE"
     ]
   },
-  {
-    "id": 75,
+  "of_freezing": {
+    "key": "of_freezing",
+    "index": 75,
     "name": "of Freezing",
     "slot": 24,
     "rating": 15,
@@ -1228,8 +1293,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 76,
+  "of_venom": {
+    "key": "of_venom",
+    "index": 76,
     "name": "of Venom",
     "slot": 24,
     "rating": 20,
@@ -1246,8 +1312,9 @@
       "RES_POIS"
     ]
   },
-  {
-    "id": 77,
+  "chaotic": {
+    "key": "chaotic",
+    "index": 77,
     "name": "(Chaotic)",
     "slot": 24,
     "rating": 28,
@@ -1268,8 +1335,9 @@
       "IGNORE_FIRE"
     ]
   },
-  {
-    "id": 78,
+  "of_sharpness": {
+    "key": "of_sharpness",
+    "index": 78,
     "name": "of Sharpness",
     "slot": 24,
     "rating": 20,
@@ -1286,8 +1354,9 @@
       "TUNNEL"
     ]
   },
-  {
-    "id": 79,
+  "of_earthquakes": {
+    "key": "of_earthquakes",
+    "index": 79,
     "name": "of Earthquakes",
     "slot": 24,
     "rating": 20,
@@ -1304,8 +1373,9 @@
       "IMPACT"
     ]
   },
-  {
-    "id": 80,
+  "of_slay_animal_80": {
+    "key": "of_slay_animal_80",
+    "index": 80,
     "name": "of Slay Animal",
     "slot": 24,
     "rating": 18,
@@ -1321,8 +1391,9 @@
       "SLAY_ANIMAL"
     ]
   },
-  {
-    "id": 81,
+  "of_slay_evil_81": {
+    "key": "of_slay_evil_81",
+    "index": 81,
     "name": "of Slay Evil",
     "slot": 24,
     "rating": 18,
@@ -1338,8 +1409,9 @@
       "SLAY_EVIL"
     ]
   },
-  {
-    "id": 82,
+  "of_slay_undead_82": {
+    "key": "of_slay_undead_82",
+    "index": 82,
     "name": "of Slay Undead",
     "slot": 24,
     "rating": 18,
@@ -1356,8 +1428,9 @@
       "HOLD_LIFE"
     ]
   },
-  {
-    "id": 83,
+  "of_slay_demon_83": {
+    "key": "of_slay_demon_83",
+    "index": 83,
     "name": "of Slay Demon",
     "slot": 24,
     "rating": 14,
@@ -1373,8 +1446,9 @@
       "SLAY_DEMON"
     ]
   },
-  {
-    "id": 84,
+  "of_slay_orc_84": {
+    "key": "of_slay_orc_84",
+    "index": 84,
     "name": "of Slay Orc",
     "slot": 24,
     "rating": 10,
@@ -1390,8 +1464,9 @@
       "SLAY_ORC"
     ]
   },
-  {
-    "id": 85,
+  "of_slay_troll_85": {
+    "key": "of_slay_troll_85",
+    "index": 85,
     "name": "of Slay Troll",
     "slot": 24,
     "rating": 10,
@@ -1407,8 +1482,9 @@
       "SLAY_TROLL"
     ]
   },
-  {
-    "id": 86,
+  "of_slay_giant_86": {
+    "key": "of_slay_giant_86",
+    "index": 86,
     "name": "of Slay Giant",
     "slot": 24,
     "rating": 14,
@@ -1424,8 +1500,9 @@
       "SLAY_GIANT"
     ]
   },
-  {
-    "id": 87,
+  "of_slay_dragon_87": {
+    "key": "of_slay_dragon_87",
+    "index": 87,
     "name": "of Slay Dragon",
     "slot": 24,
     "rating": 18,
@@ -1441,8 +1518,9 @@
       "SLAY_DRAGON"
     ]
   },
-  {
-    "id": 88,
+  "of_slay_animal_88": {
+    "key": "of_slay_animal_88",
+    "index": 88,
     "name": "of *Slay* Animal",
     "slot": 24,
     "rating": 20,
@@ -1460,8 +1538,9 @@
       "REGEN"
     ]
   },
-  {
-    "id": 89,
+  "of_slay_evil_89": {
+    "key": "of_slay_evil_89",
+    "index": 89,
     "name": "of *Slay* Evil",
     "slot": 24,
     "rating": 20,
@@ -1480,8 +1559,9 @@
       "RES_FEAR"
     ]
   },
-  {
-    "id": 90,
+  "of_slay_undead_90": {
+    "key": "of_slay_undead_90",
+    "index": 90,
     "name": "of *Slay* Undead",
     "slot": 24,
     "rating": 24,
@@ -1500,8 +1580,9 @@
       "RES_NETHER"
     ]
   },
-  {
-    "id": 91,
+  "of_slay_demon_91": {
+    "key": "of_slay_demon_91",
+    "index": 91,
     "name": "of *Slay* Demon",
     "slot": 24,
     "rating": 16,
@@ -1518,8 +1599,9 @@
       "SLAY_DEMON"
     ]
   },
-  {
-    "id": 92,
+  "of_slay_orc_92": {
+    "key": "of_slay_orc_92",
+    "index": 92,
     "name": "of *Slay* Orc",
     "slot": 24,
     "rating": 14,
@@ -1536,8 +1618,9 @@
       "SLAY_ORC"
     ]
   },
-  {
-    "id": 93,
+  "of_slay_troll_93": {
+    "key": "of_slay_troll_93",
+    "index": 93,
     "name": "of *Slay* Troll",
     "slot": 24,
     "rating": 14,
@@ -1554,8 +1637,9 @@
       "SLAY_TROLL"
     ]
   },
-  {
-    "id": 94,
+  "of_slay_giant_94": {
+    "key": "of_slay_giant_94",
+    "index": 94,
     "name": "of *Slay* Giant",
     "slot": 24,
     "rating": 16,
@@ -1572,8 +1656,9 @@
       "SLAY_GIANT"
     ]
   },
-  {
-    "id": 95,
+  "of_slay_dragon_95": {
+    "key": "of_slay_dragon_95",
+    "index": 95,
     "name": "of *Slay* Dragon",
     "slot": 24,
     "rating": 24,
@@ -1591,8 +1676,9 @@
       "KILL_DRAGON"
     ]
   },
-  {
-    "id": 96,
+  "vampiric": {
+    "key": "vampiric",
+    "index": 96,
     "name": "(Vampiric)",
     "slot": 24,
     "rating": 25,
@@ -1609,8 +1695,9 @@
       "HOLD_LIFE"
     ]
   },
-  {
-    "id": 98,
+  "trump_weapon": {
+    "key": "trump_weapon",
+    "index": 98,
     "name": "(Trump Weapon)",
     "slot": 24,
     "rating": 22,
@@ -1633,8 +1720,9 @@
       "ACTIVATE"
     ]
   },
-  {
-    "id": 99,
+  "pattern_weapon": {
+    "key": "pattern_weapon",
+    "index": 99,
     "name": "(Pattern Weapon)",
     "slot": 24,
     "rating": 26,
@@ -1656,8 +1744,9 @@
       "SEE_INVIS"
     ]
   },
-  {
-    "id": 100,
+  "of_digging": {
+    "key": "of_digging",
+    "index": 100,
     "name": "of Digging",
     "slot": 22,
     "rating": 4,
@@ -1678,8 +1767,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 102,
+  "of_morgul": {
+    "key": "of_morgul",
+    "index": 102,
     "name": "of Morgul",
     "slot": 24,
     "rating": 0,
@@ -1698,8 +1788,9 @@
       "CURSED"
     ]
   },
-  {
-    "id": 104,
+  "of_accuracy": {
+    "key": "of_accuracy",
+    "index": 104,
     "name": "of Accuracy",
     "slot": 25,
     "rating": 10,
@@ -1713,8 +1804,9 @@
     "pval": 0,
     "flags": []
   },
-  {
-    "id": 105,
+  "of_velocity": {
+    "key": "of_velocity",
+    "index": 105,
     "name": "of Velocity",
     "slot": 25,
     "rating": 10,
@@ -1728,8 +1820,9 @@
     "pval": 0,
     "flags": []
   },
-  {
-    "id": 108,
+  "of_extra_might": {
+    "key": "of_extra_might",
+    "index": 108,
     "name": "of Extra Might",
     "slot": 25,
     "rating": 20,
@@ -1745,8 +1838,9 @@
       "XTRA_MIGHT"
     ]
   },
-  {
-    "id": 109,
+  "of_extra_shots": {
+    "key": "of_extra_shots",
+    "index": 109,
     "name": "of Extra Shots",
     "slot": 25,
     "rating": 20,
@@ -1762,8 +1856,9 @@
       "XTRA_SHOTS"
     ]
   },
-  {
-    "id": 112,
+  "of_hurt_animal": {
+    "key": "of_hurt_animal",
+    "index": 112,
     "name": "of Hurt Animal",
     "slot": 23,
     "rating": 10,
@@ -1779,8 +1874,9 @@
       "SLAY_ANIMAL"
     ]
   },
-  {
-    "id": 113,
+  "of_hurt_evil": {
+    "key": "of_hurt_evil",
+    "index": 113,
     "name": "of Hurt Evil",
     "slot": 23,
     "rating": 10,
@@ -1796,8 +1892,9 @@
       "SLAY_EVIL"
     ]
   },
-  {
-    "id": 117,
+  "of_returning": {
+    "key": "of_returning",
+    "index": 117,
     "name": "of Returning",
     "slot": 23,
     "rating": 5,
@@ -1813,8 +1910,9 @@
       "RETURN"
     ]
   },
-  {
-    "id": 118,
+  "of_explosion": {
+    "key": "of_explosion",
+    "index": 118,
     "name": "of Explosion",
     "slot": 23,
     "rating": 10,
@@ -1830,8 +1928,9 @@
       "EXPLODE"
     ]
   },
-  {
-    "id": 119,
+  "of_hurt_dragon": {
+    "key": "of_hurt_dragon",
+    "index": 119,
     "name": "of Hurt Dragon",
     "slot": 23,
     "rating": 10,
@@ -1847,8 +1946,9 @@
       "SLAY_DRAGON"
     ]
   },
-  {
-    "id": 120,
+  "of_slaying_120": {
+    "key": "of_slaying_120",
+    "index": 120,
     "name": "of Slaying",
     "slot": 23,
     "rating": 15,
@@ -1862,8 +1962,9 @@
     "pval": 0,
     "flags": []
   },
-  {
-    "id": 121,
+  "of_shocking_121": {
+    "key": "of_shocking_121",
+    "index": 121,
     "name": "of Shocking",
     "slot": 23,
     "rating": 10,
@@ -1880,8 +1981,9 @@
       "IGNORE_ELEC"
     ]
   },
-  {
-    "id": 122,
+  "of_flame": {
+    "key": "of_flame",
+    "index": 122,
     "name": "of Flame",
     "slot": 23,
     "rating": 10,
@@ -1898,8 +2000,9 @@
       "IGNORE_FIRE"
     ]
   },
-  {
-    "id": 123,
+  "of_frost": {
+    "key": "of_frost",
+    "index": 123,
     "name": "of Frost",
     "slot": 23,
     "rating": 10,
@@ -1916,8 +2019,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 124,
+  "of_wounding": {
+    "key": "of_wounding",
+    "index": 124,
     "name": "of Wounding",
     "slot": 23,
     "rating": 5,
@@ -1931,8 +2035,9 @@
     "pval": 0,
     "flags": []
   },
-  {
-    "id": 125,
+  "of_backbiting": {
+    "key": "of_backbiting",
+    "index": 125,
     "name": "of Backbiting",
     "slot": 23,
     "rating": 0,
@@ -1946,8 +2051,9 @@
     "pval": 0,
     "flags": []
   },
-  {
-    "id": 126,
+  "shattered": {
+    "key": "shattered",
+    "index": 126,
     "name": "(Shattered)",
     "slot": 0,
     "rating": 0,
@@ -1961,8 +2067,9 @@
     "pval": 0,
     "flags": []
   },
-  {
-    "id": 127,
+  "blasted": {
+    "key": "blasted",
+    "index": 127,
     "name": "(Blasted)",
     "slot": 0,
     "rating": 0,
@@ -1976,4 +2083,4 @@
     "pval": 0,
     "flags": []
   }
-]
+}

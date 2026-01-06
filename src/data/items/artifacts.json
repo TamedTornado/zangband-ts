@@ -1,6 +1,7 @@
-[
-  {
-    "id": 1,
+{
+  "of_galadriel": {
+    "key": "of_galadriel",
+    "index": 1,
     "name": "of Galadriel",
     "tval": 39,
     "sval": 4,
@@ -21,8 +22,9 @@
       "LITE"
     ]
   },
-  {
-    "id": 2,
+  "of_elendil": {
+    "key": "of_elendil",
+    "index": 2,
     "name": "of Elendil",
     "tval": 39,
     "sval": 5,
@@ -45,8 +47,9 @@
       "LITE"
     ]
   },
-  {
-    "id": 3,
+  "of_judgement": {
+    "key": "of_judgement",
+    "index": 3,
     "name": "of Judgement",
     "tval": 39,
     "sval": 6,
@@ -73,8 +76,9 @@
       "LITE"
     ]
   },
-  {
-    "id": 4,
+  "of_carlammas": {
+    "key": "of_carlammas",
+    "index": 4,
     "name": "of Carlammas",
     "tval": 40,
     "sval": 10,
@@ -96,8 +100,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 5,
+  "of_ingwe": {
+    "key": "of_ingwe",
+    "index": 5,
     "name": "of Ingwe",
     "tval": 40,
     "sval": 11,
@@ -125,8 +130,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 6,
+  "of_the_dwarves_6": {
+    "key": "of_the_dwarves_6",
+    "index": 6,
     "name": "of the Dwarves",
     "tval": 40,
     "sval": 12,
@@ -152,8 +158,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 7,
+  "of_sawall_7": {
+    "key": "of_sawall_7",
+    "index": 7,
     "name": "of Sawall",
     "tval": 39,
     "sval": 3,
@@ -175,8 +182,9 @@
       "LITE"
     ]
   },
-  {
-    "id": 8,
+  "frakir": {
+    "key": "frakir",
+    "index": 8,
     "name": "'Frakir'",
     "tval": 45,
     "sval": 32,
@@ -206,8 +214,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 9,
+  "of_tulkas": {
+    "key": "of_tulkas",
+    "index": 9,
     "name": "of Tulkas",
     "tval": 45,
     "sval": 33,
@@ -231,8 +240,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 10,
+  "of_power_narya": {
+    "key": "of_power_narya",
+    "index": 10,
     "name": "of Power (Narya)",
     "tval": 45,
     "sval": 34,
@@ -266,8 +276,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 11,
+  "of_power_nenya": {
+    "key": "of_power_nenya",
+    "index": 11,
     "name": "of Power (Nenya)",
     "tval": 45,
     "sval": 35,
@@ -303,8 +314,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 12,
+  "of_power_vilya": {
+    "key": "of_power_vilya",
+    "index": 12,
     "name": "of Power (Vilya)",
     "tval": 45,
     "sval": 36,
@@ -342,8 +354,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 13,
+  "of_power_the_one_ring": {
+    "key": "of_power_the_one_ring",
+    "index": 13,
     "name": "of Power (The One Ring)",
     "tval": 45,
     "sval": 37,
@@ -388,8 +401,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 14,
+  "of_elemental_mastery": {
+    "key": "of_elemental_mastery",
+    "index": 14,
     "name": "of Elemental Mastery",
     "tval": 45,
     "sval": 50,
@@ -420,8 +434,9 @@
       "ACTIVATE"
     ]
   },
-  {
-    "id": 16,
+  "razorback": {
+    "key": "razorback",
+    "index": 16,
     "name": "'Razorback'",
     "tval": 38,
     "sval": 6,
@@ -450,8 +465,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 17,
+  "bladeturner": {
+    "key": "bladeturner",
+    "index": 17,
     "name": "'Bladeturner'",
     "tval": 38,
     "sval": 30,
@@ -492,8 +508,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 18,
+  "of_the_thaumaturgist": {
+    "key": "of_the_thaumaturgist",
+    "index": 18,
     "name": "of the Thaumaturgist",
     "tval": 36,
     "sval": 2,
@@ -518,8 +535,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 19,
+  "soulkeeper": {
+    "key": "soulkeeper",
+    "index": 19,
     "name": "'Soulkeeper'",
     "tval": 37,
     "sval": 30,
@@ -547,8 +565,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 20,
+  "of_isildur": {
+    "key": "of_isildur",
+    "index": 20,
     "name": "of Isildur",
     "tval": 37,
     "sval": 15,
@@ -574,8 +593,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 21,
+  "of_the_rohirrim": {
+    "key": "of_the_rohirrim",
+    "index": 21,
     "name": "of the Rohirrim",
     "tval": 37,
     "sval": 9,
@@ -602,8 +622,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 22,
+  "of_the_crusader": {
+    "key": "of_the_crusader",
+    "index": 22,
     "name": "of the Crusader",
     "tval": 37,
     "sval": 20,
@@ -636,8 +657,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 23,
+  "of_julian": {
+    "key": "of_julian",
+    "index": 23,
     "name": "of Julian",
     "tval": 37,
     "sval": 3,
@@ -665,8 +687,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 24,
+  "of_command": {
+    "key": "of_command",
+    "index": 24,
     "name": "of Command",
     "tval": 37,
     "sval": 4,
@@ -691,8 +714,9 @@
       "RES_COLD"
     ]
   },
-  {
-    "id": 25,
+  "of_caspanion": {
+    "key": "of_caspanion",
+    "index": 25,
     "name": "of Caspanion",
     "tval": 37,
     "sval": 6,
@@ -718,8 +742,9 @@
       "ACTIVATE"
     ]
   },
-  {
-    "id": 26,
+  "nemovebla": {
+    "key": "nemovebla",
+    "index": 26,
     "name": "'Nemovebla'",
     "tval": 37,
     "sval": 3,
@@ -744,8 +769,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 27,
+  "tenyos_despair": {
+    "key": "tenyos_despair",
+    "index": 27,
     "name": "'Tenyo's Despair'",
     "tval": 36,
     "sval": 16,
@@ -777,8 +803,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 28,
+  "thalkettoth": {
+    "key": "thalkettoth",
+    "index": 28,
     "name": "'Thalkettoth'",
     "tval": 36,
     "sval": 11,
@@ -800,8 +827,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 29,
+  "of_melman": {
+    "key": "of_melman",
+    "index": 29,
     "name": "of Melman",
     "tval": 36,
     "sval": 12,
@@ -824,8 +852,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 30,
+  "of_thorin": {
+    "key": "of_thorin",
+    "index": 30,
     "name": "of Thorin",
     "tval": 34,
     "sval": 3,
@@ -850,8 +879,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 31,
+  "of_celegorm": {
+    "key": "of_celegorm",
+    "index": 31,
     "name": "of Celegorm",
     "tval": 34,
     "sval": 4,
@@ -875,8 +905,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 32,
+  "of_anarion": {
+    "key": "of_anarion",
+    "index": 32,
     "name": "of Anarion",
     "tval": 34,
     "sval": 5,
@@ -904,8 +935,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 33,
+  "of_sawall_33": {
+    "key": "of_sawall_33",
+    "index": 33,
     "name": "of Sawall",
     "tval": 32,
     "sval": 2,
@@ -930,8 +962,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 34,
+  "of_chaos": {
+    "key": "of_chaos",
+    "index": 34,
     "name": "of Chaos",
     "tval": 33,
     "sval": 50,
@@ -974,8 +1007,9 @@
       "QUESTITEM"
     ]
   },
-  {
-    "id": 35,
+  "of_beruthiel": {
+    "key": "of_beruthiel",
+    "index": 35,
     "name": "of Beruthiel",
     "tval": 33,
     "sval": 10,
@@ -1001,8 +1035,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 36,
+  "of_thranduil": {
+    "key": "of_thranduil",
+    "index": 36,
     "name": "of Thranduil",
     "tval": 32,
     "sval": 2,
@@ -1025,8 +1060,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 37,
+  "of_thengel": {
+    "key": "of_thengel",
+    "index": 37,
     "name": "of Thengel",
     "tval": 32,
     "sval": 3,
@@ -1047,8 +1083,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 38,
+  "of_hammerhand": {
+    "key": "of_hammerhand",
+    "index": 38,
     "name": "of Hammerhand",
     "tval": 32,
     "sval": 6,
@@ -1072,8 +1109,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 39,
+  "of_dorlomin": {
+    "key": "of_dorlomin",
+    "index": 39,
     "name": "of Dor-Lomin",
     "tval": 32,
     "sval": 7,
@@ -1105,8 +1143,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 40,
+  "holhenneth": {
+    "key": "holhenneth",
+    "index": 40,
     "name": "'Holhenneth'",
     "tval": 32,
     "sval": 5,
@@ -1131,8 +1170,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 41,
+  "terror_mask": {
+    "key": "terror_mask",
+    "index": 41,
     "name": "'Terror Mask'",
     "tval": 32,
     "sval": 5,
@@ -1166,8 +1206,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 42,
+  "of_amber": {
+    "key": "of_amber",
+    "index": 42,
     "name": "of Amber",
     "tval": 33,
     "sval": 11,
@@ -1201,8 +1242,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 43,
+  "of_keri_the_humble": {
+    "key": "of_keri_the_humble",
+    "index": 43,
     "name": "of Keri the Humble",
     "tval": 36,
     "sval": 1,
@@ -1227,8 +1269,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 44,
+  "colluin": {
+    "key": "colluin",
+    "index": 44,
     "name": "'Colluin'",
     "tval": 35,
     "sval": 1,
@@ -1252,8 +1295,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 45,
+  "thiefs_shadow": {
+    "key": "thiefs_shadow",
+    "index": 45,
     "name": "'Thief's Shadow'",
     "tval": 35,
     "sval": 1,
@@ -1276,8 +1320,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 46,
+  "of_the_alchemist": {
+    "key": "of_the_alchemist",
+    "index": 46,
     "name": "of the Alchemist",
     "tval": 35,
     "sval": 1,
@@ -1303,8 +1348,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 47,
+  "of_thorongil": {
+    "key": "of_thorongil",
+    "index": 47,
     "name": "of Thorongil",
     "tval": 35,
     "sval": 1,
@@ -1325,8 +1371,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 48,
+  "colannon": {
+    "key": "colannon",
+    "index": 48,
     "name": "'Colannon'",
     "tval": 35,
     "sval": 1,
@@ -1347,8 +1394,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 49,
+  "of_luthien": {
+    "key": "of_luthien",
+    "index": 49,
     "name": "of Luthien",
     "tval": 35,
     "sval": 6,
@@ -1378,8 +1426,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 50,
+  "of_tuor": {
+    "key": "of_tuor",
+    "index": 50,
     "name": "of Tuor",
     "tval": 35,
     "sval": 6,
@@ -1401,8 +1450,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 52,
+  "of_the_ogre": {
+    "key": "of_the_ogre",
+    "index": 52,
     "name": "of the Ogre",
     "tval": 31,
     "sval": 1,
@@ -1424,8 +1474,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 53,
+  "cammithrim": {
+    "key": "cammithrim",
+    "index": 53,
     "name": "'Cammithrim'",
     "tval": 31,
     "sval": 1,
@@ -1448,8 +1499,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 54,
+  "paurhach": {
+    "key": "paurhach",
+    "index": 54,
     "name": "'Paurhach'",
     "tval": 31,
     "sval": 2,
@@ -1469,8 +1521,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 55,
+  "of_corwin": {
+    "key": "of_corwin",
+    "index": 55,
     "name": "of Corwin",
     "tval": 31,
     "sval": 2,
@@ -1493,8 +1546,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 56,
+  "pauraegen": {
+    "key": "pauraegen",
+    "index": 56,
     "name": "'Pauraegen'",
     "tval": 31,
     "sval": 2,
@@ -1514,8 +1568,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 57,
+  "paurnen": {
+    "key": "paurnen",
+    "index": 57,
     "name": "'Paurnen'",
     "tval": 31,
     "sval": 2,
@@ -1535,8 +1590,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 58,
+  "of_thanos": {
+    "key": "of_thanos",
+    "index": 58,
     "name": "of Thanos",
     "tval": 31,
     "sval": 2,
@@ -1572,8 +1628,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 59,
+  "of_fingolfin": {
+    "key": "of_fingolfin",
+    "index": 59,
     "name": "of Fingolfin",
     "tval": 31,
     "sval": 5,
@@ -1597,8 +1654,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 60,
+  "of_feanor": {
+    "key": "of_feanor",
+    "index": 60,
     "name": "of Feanor",
     "tval": 30,
     "sval": 3,
@@ -1619,8 +1677,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 61,
+  "of_flora": {
+    "key": "of_flora",
+    "index": 61,
     "name": "of Flora",
     "tval": 30,
     "sval": 2,
@@ -1647,8 +1706,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 62,
+  "of_thror": {
+    "key": "of_thror",
+    "index": 62,
     "name": "of Thror",
     "tval": 30,
     "sval": 6,
@@ -1670,8 +1730,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 63,
+  "of_bleys": {
+    "key": "of_bleys",
+    "index": 63,
     "name": "of Bleys",
     "tval": 30,
     "sval": 2,
@@ -1694,8 +1755,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 64,
+  "of_maedhros": {
+    "key": "of_maedhros",
+    "index": 64,
     "name": "of Maedhros",
     "tval": 23,
     "sval": 5,
@@ -1722,8 +1784,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 65,
+  "of_caine": {
+    "key": "of_caine",
+    "index": 65,
     "name": "of Caine",
     "tval": 23,
     "sval": 4,
@@ -1755,8 +1818,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 66,
+  "narthanc": {
+    "key": "narthanc",
+    "index": 66,
     "name": "'Narthanc'",
     "tval": 23,
     "sval": 4,
@@ -1781,8 +1845,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 67,
+  "nimthanc": {
+    "key": "nimthanc",
+    "index": 67,
     "name": "'Nimthanc'",
     "tval": 23,
     "sval": 4,
@@ -1806,8 +1871,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 68,
+  "dethanc": {
+    "key": "dethanc",
+    "index": 68,
     "name": "'Dethanc'",
     "tval": 23,
     "sval": 4,
@@ -1831,8 +1897,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 69,
+  "of_rilia": {
+    "key": "of_rilia",
+    "index": 69,
     "name": "of Rilia",
     "tval": 23,
     "sval": 4,
@@ -1858,8 +1925,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 70,
+  "of_fiona": {
+    "key": "of_fiona",
+    "index": 70,
     "name": "of Fiona",
     "tval": 23,
     "sval": 4,
@@ -1890,8 +1958,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 71,
+  "calris": {
+    "key": "calris",
+    "index": 71,
     "name": "'Calris'",
     "tval": 23,
     "sval": 21,
@@ -1920,8 +1989,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 72,
+  "grayswandir": {
+    "key": "grayswandir",
+    "index": 72,
     "name": "'Grayswandir'",
     "tval": 23,
     "sval": 11,
@@ -1961,8 +2031,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 73,
+  "glamdring": {
+    "key": "glamdring",
+    "index": 73,
     "name": "'Glamdring'",
     "tval": 23,
     "sval": 16,
@@ -1989,8 +2060,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 74,
+  "nothung": {
+    "key": "nothung",
+    "index": 74,
     "name": "'Nothung'",
     "tval": 23,
     "sval": 16,
@@ -2019,8 +2091,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 75,
+  "orcrist": {
+    "key": "orcrist",
+    "index": 75,
     "name": "'Orcrist'",
     "tval": 23,
     "sval": 16,
@@ -2046,8 +2119,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 76,
+  "gurthang": {
+    "key": "gurthang",
+    "index": 76,
     "name": "'Gurthang'",
     "tval": 23,
     "sval": 25,
@@ -2073,8 +2147,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 77,
+  "zarcuthra": {
+    "key": "zarcuthra",
+    "index": 77,
     "name": "'Zarcuthra'",
     "tval": 23,
     "sval": 25,
@@ -2114,8 +2189,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 78,
+  "twilight": {
+    "key": "twilight",
+    "index": 78,
     "name": "'Twilight'",
     "tval": 23,
     "sval": 25,
@@ -2145,8 +2221,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 79,
+  "gondricam": {
+    "key": "gondricam",
+    "index": 79,
     "name": "'Gondricam'",
     "tval": 23,
     "sval": 12,
@@ -2175,8 +2252,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 80,
+  "crisdurian": {
+    "key": "crisdurian",
+    "index": 80,
     "name": "'Crisdurian'",
     "tval": 23,
     "sval": 28,
@@ -2204,8 +2282,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 81,
+  "of_groo": {
+    "key": "of_groo",
+    "index": 81,
     "name": "of Groo",
     "tval": 23,
     "sval": 20,
@@ -2229,8 +2308,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 82,
+  "ringil": {
+    "key": "ringil",
+    "index": 82,
     "name": "'Ringil'",
     "tval": 23,
     "sval": 17,
@@ -2263,8 +2343,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 83,
+  "anduril": {
+    "key": "anduril",
+    "index": 83,
     "name": "'Anduril'",
     "tval": 23,
     "sval": 17,
@@ -2295,8 +2376,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 84,
+  "werewindle": {
+    "key": "werewindle",
+    "index": 84,
     "name": "'Werewindle'",
     "tval": 23,
     "sval": 17,
@@ -2340,8 +2422,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 85,
+  "chainsword": {
+    "key": "chainsword",
+    "index": 85,
     "name": "'Chainsword'",
     "tval": 23,
     "sval": 16,
@@ -2368,8 +2451,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 86,
+  "forasgil": {
+    "key": "forasgil",
+    "index": 86,
     "name": "'Forasgil'",
     "tval": 23,
     "sval": 7,
@@ -2393,8 +2477,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 87,
+  "careth_asdriag": {
+    "key": "careth_asdriag",
+    "index": 87,
     "name": "'Careth Asdriag'",
     "tval": 23,
     "sval": 11,
@@ -2419,8 +2504,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 88,
+  "sting": {
+    "key": "sting",
+    "index": 88,
     "name": "'Sting'",
     "tval": 23,
     "sval": 8,
@@ -2450,8 +2536,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 89,
+  "soulsword": {
+    "key": "soulsword",
+    "index": 89,
     "name": "'Soulsword'",
     "tval": 23,
     "sval": 18,
@@ -2484,8 +2571,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 90,
+  "of_merlin": {
+    "key": "of_merlin",
+    "index": 90,
     "name": "of Merlin",
     "tval": 23,
     "sval": 10,
@@ -2510,8 +2598,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 91,
+  "doomcaller": {
+    "key": "doomcaller",
+    "index": 91,
     "name": "'Doomcaller'",
     "tval": 23,
     "sval": 30,
@@ -2551,8 +2640,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 92,
+  "vorpal_blade": {
+    "key": "vorpal_blade",
+    "index": 92,
     "name": "'Vorpal Blade'",
     "tval": 23,
     "sval": 17,
@@ -2580,8 +2670,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 93,
+  "of_theoden": {
+    "key": "of_theoden",
+    "index": 93,
     "name": "of Theoden",
     "tval": 22,
     "sval": 10,
@@ -2607,8 +2698,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 94,
+  "of_pain": {
+    "key": "of_pain",
+    "index": 94,
     "name": "of Pain",
     "tval": 22,
     "sval": 13,
@@ -2627,8 +2719,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 95,
+  "osondir": {
+    "key": "osondir",
+    "index": 95,
     "name": "'Osondir'",
     "tval": 22,
     "sval": 15,
@@ -2657,8 +2750,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 96,
+  "tiliarc": {
+    "key": "tiliarc",
+    "index": 96,
     "name": "'Til-i-arc'",
     "tval": 22,
     "sval": 8,
@@ -2689,8 +2783,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 97,
+  "runespear": {
+    "key": "runespear",
+    "index": 97,
     "name": "'Runespear'",
     "tval": 22,
     "sval": 2,
@@ -2727,8 +2822,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 98,
+  "of_destiny": {
+    "key": "of_destiny",
+    "index": 98,
     "name": "of Destiny",
     "tval": 22,
     "sval": 2,
@@ -2769,8 +2865,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 99,
+  "of_hagen": {
+    "key": "of_hagen",
+    "index": 99,
     "name": "of Hagen",
     "tval": 22,
     "sval": 2,
@@ -2798,8 +2895,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 100,
+  "soulsucker": {
+    "key": "soulsucker",
+    "index": 100,
     "name": "'Soulsucker'",
     "tval": 22,
     "sval": 2,
@@ -2828,8 +2926,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 101,
+  "of_durin": {
+    "key": "of_durin",
+    "index": 101,
     "name": "of Durin",
     "tval": 22,
     "sval": 25,
@@ -2860,8 +2959,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 102,
+  "of_eonwe": {
+    "key": "of_eonwe",
+    "index": 102,
     "name": "of Eonwe",
     "tval": 22,
     "sval": 25,
@@ -2896,8 +2996,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 103,
+  "of_balli_stonehand": {
+    "key": "of_balli_stonehand",
+    "index": 103,
     "name": "of Balli Stonehand",
     "tval": 22,
     "sval": 22,
@@ -2932,8 +3033,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 104,
+  "lotharang": {
+    "key": "lotharang",
+    "index": 104,
     "name": "'Lotharang'",
     "tval": 22,
     "sval": 22,
@@ -2958,8 +3060,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 105,
+  "of_the_dwarves_105": {
+    "key": "of_the_dwarves_105",
+    "index": 105,
     "name": "of the Dwarves",
     "tval": 22,
     "sval": 28,
@@ -2988,8 +3091,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 106,
+  "barukkheled": {
+    "key": "barukkheled",
+    "index": 106,
     "name": "'Barukkheled'",
     "tval": 22,
     "sval": 11,
@@ -3015,8 +3119,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 107,
+  "of_wrath": {
+    "key": "of_wrath",
+    "index": 107,
     "name": "of Wrath",
     "tval": 22,
     "sval": 5,
@@ -3045,8 +3150,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 108,
+  "of_ulmo": {
+    "key": "of_ulmo",
+    "index": 108,
     "name": "of Ulmo",
     "tval": 22,
     "sval": 5,
@@ -3078,8 +3184,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 109,
+  "avavir": {
+    "key": "avavir",
+    "index": 109,
     "name": "'Avavir'",
     "tval": 22,
     "sval": 17,
@@ -3110,8 +3217,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 110,
+  "of_the_dawn": {
+    "key": "of_the_dawn",
+    "index": 110,
     "name": "of the Dawn",
     "tval": 23,
     "sval": 17,
@@ -3147,8 +3255,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 111,
+  "grond": {
+    "key": "grond",
+    "index": 111,
     "name": "'Grond'",
     "tval": 21,
     "sval": 50,
@@ -3184,8 +3293,9 @@
       "QUESTITEM"
     ]
   },
-  {
-    "id": 112,
+  "totila": {
+    "key": "totila",
+    "index": 112,
     "name": "'Totila'",
     "tval": 21,
     "sval": 13,
@@ -3211,8 +3321,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 113,
+  "thunderfist": {
+    "key": "thunderfist",
+    "index": 113,
     "name": "'Thunderfist'",
     "tval": 21,
     "sval": 18,
@@ -3242,8 +3353,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 114,
+  "whirlwind": {
+    "key": "whirlwind",
+    "index": 114,
     "name": "'Whirlwind'",
     "tval": 21,
     "sval": 6,
@@ -3276,8 +3388,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 115,
+  "firestar": {
+    "key": "firestar",
+    "index": 115,
     "name": "'Firestar'",
     "tval": 21,
     "sval": 12,
@@ -3300,8 +3413,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 116,
+  "of_energy": {
+    "key": "of_energy",
+    "index": 116,
     "name": "of Energy",
     "tval": 22,
     "sval": 17,
@@ -3326,8 +3440,9 @@
       "ACTIVATE"
     ]
   },
-  {
-    "id": 117,
+  "of_aule": {
+    "key": "of_aule",
+    "index": 117,
     "name": "of Aule",
     "tval": 21,
     "sval": 8,
@@ -3360,8 +3475,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 118,
+  "narivagil": {
+    "key": "narivagil",
+    "index": 118,
     "name": "'Nar-i-vagil'",
     "tval": 21,
     "sval": 3,
@@ -3386,8 +3502,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 119,
+  "of_the_wandering_wizard": {
+    "key": "of_the_wandering_wizard",
+    "index": 119,
     "name": "of the Wandering Wizard",
     "tval": 21,
     "sval": 3,
@@ -3414,8 +3531,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 120,
+  "of_gandalf": {
+    "key": "of_gandalf",
+    "index": 120,
     "name": "of Gandalf",
     "tval": 21,
     "sval": 3,
@@ -3450,8 +3568,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 121,
+  "deathwreaker": {
+    "key": "deathwreaker",
+    "index": 121,
     "name": "'Deathwreaker'",
     "tval": 21,
     "sval": 20,
@@ -3488,8 +3607,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 122,
+  "turmil": {
+    "key": "turmil",
+    "index": 122,
     "name": "'Turmil'",
     "tval": 22,
     "sval": 12,
@@ -3519,8 +3639,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 123,
+  "catapult": {
+    "key": "catapult",
+    "index": 123,
     "name": "'Catapult'",
     "tval": 19,
     "sval": 2,
@@ -3544,8 +3665,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 124,
+  "belthronding": {
+    "key": "belthronding",
+    "index": 124,
     "name": "'Belthronding'",
     "tval": 19,
     "sval": 13,
@@ -3569,8 +3691,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 125,
+  "of_bard": {
+    "key": "of_bard",
+    "index": 125,
     "name": "of Bard",
     "tval": 19,
     "sval": 13,
@@ -3593,8 +3716,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 126,
+  "of_brand": {
+    "key": "of_brand",
+    "index": 126,
     "name": "of Brand",
     "tval": 19,
     "sval": 23,
@@ -3617,8 +3741,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 127,
+  "of_marksmanship": {
+    "key": "of_marksmanship",
+    "index": 127,
     "name": "of Marksmanship",
     "tval": 19,
     "sval": 12,
@@ -3647,8 +3772,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 128,
+  "soulless_one": {
+    "key": "soulless_one",
+    "index": 128,
     "name": "'Soulless One'",
     "tval": 35,
     "sval": 1,
@@ -3674,8 +3800,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 129,
+  "luck_blade": {
+    "key": "luck_blade",
+    "index": 129,
     "name": "'Luck Blade'",
     "tval": 23,
     "sval": 17,
@@ -3698,8 +3825,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 130,
+  "stormbringer": {
+    "key": "stormbringer",
+    "index": 130,
     "name": "'Stormbringer'",
     "tval": 23,
     "sval": 30,
@@ -3730,4 +3858,4 @@
       "QUESTITEM"
     ]
   }
-]
+}

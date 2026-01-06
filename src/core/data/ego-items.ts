@@ -1,5 +1,8 @@
+import { toSlug } from './slug';
+
 export interface EgoItemDef {
-  id: number;
+  key: string;
+  index: number;
   name: string;
   slot: number;
   rating: number;
@@ -14,10 +17,30 @@ export interface EgoItemDef {
   flags: string[];
 }
 
-function createEmptyEgoItem(): EgoItemDef {
+export type EgoItemRecord = Record<string, EgoItemDef>;
+
+interface RawEgoItem {
+  index: number;
+  name: string;
+  slug: string;
+  slot: number;
+  rating: number;
+  depth: number;
+  rarity: number;
+  weight: number;
+  cost: number;
+  maxToHit: number;
+  maxToDam: number;
+  maxToAc: number;
+  pval: number;
+  flags: string[];
+}
+
+function createEmptyRaw(index: number, name: string): RawEgoItem {
   return {
-    id: 0,
-    name: '',
+    index,
+    name,
+    slug: toSlug(name),
     slot: 0,
     rating: 0,
     depth: 0,
@@ -32,10 +55,10 @@ function createEmptyEgoItem(): EgoItemDef {
   };
 }
 
-export function parseEgoItems(text: string): EgoItemDef[] {
+export function parseEgoItems(text: string): EgoItemRecord {
   const lines = text.split('\n');
-  const egoItems: EgoItemDef[] = [];
-  let current: EgoItemDef | null = null;
+  const entries: RawEgoItem[] = [];
+  let current: RawEgoItem | null = null;
 
   for (const line of lines) {
     const trimmed = line.trim();
@@ -53,12 +76,11 @@ export function parseEgoItems(text: string): EgoItemDef[] {
     switch (prefix) {
       case 'N': {
         if (current) {
-          egoItems.push(current);
+          entries.push(current);
         }
-        const [idStr, ...nameParts] = value.split(':');
-        current = createEmptyEgoItem();
-        current.id = parseInt(idStr ?? '0', 10);
-        current.name = nameParts.join(':');
+        const [indexStr, ...nameParts] = value.split(':');
+        const name = nameParts.join(':');
+        current = createEmptyRaw(parseInt(indexStr ?? '0', 10), name);
         break;
       }
       case 'X': {
@@ -103,7 +125,41 @@ export function parseEgoItems(text: string): EgoItemDef[] {
   }
 
   if (current) {
-    egoItems.push(current);
+    entries.push(current);
+  }
+
+  // Detect collisions
+  const slugCounts = new Map<string, number>();
+  for (const entry of entries) {
+    slugCounts.set(entry.slug, (slugCounts.get(entry.slug) ?? 0) + 1);
+  }
+
+  // Build record with collision-aware keys
+  const egoItems: EgoItemRecord = {};
+  for (const entry of entries) {
+    const hasCollision = (slugCounts.get(entry.slug) ?? 0) > 1;
+    const key = hasCollision ? `${entry.slug}_${entry.index}` : entry.slug;
+
+    if (egoItems[key]) {
+      throw new Error(`Duplicate ego item key: ${key}`);
+    }
+
+    egoItems[key] = {
+      key,
+      index: entry.index,
+      name: entry.name,
+      slot: entry.slot,
+      rating: entry.rating,
+      depth: entry.depth,
+      rarity: entry.rarity,
+      weight: entry.weight,
+      cost: entry.cost,
+      maxToHit: entry.maxToHit,
+      maxToDam: entry.maxToDam,
+      maxToAc: entry.maxToAc,
+      pval: entry.pval,
+      flags: entry.flags,
+    };
   }
 
   return egoItems;

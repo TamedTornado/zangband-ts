@@ -1,6 +1,7 @@
-[
-  {
-    "id": 0,
+{
+  "something": {
+    "key": "something",
+    "index": 0,
     "name": "something",
     "symbol": "&",
     "color": "w",
@@ -19,8 +20,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 1,
+  "blindness_1": {
+    "key": "blindness_1",
+    "index": 1,
     "name": "Blindness",
     "symbol": ",",
     "color": "d",
@@ -46,8 +48,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 2,
+  "paranoia": {
+    "key": "paranoia",
+    "index": 2,
     "name": "Paranoia",
     "symbol": ",",
     "color": "d",
@@ -73,8 +76,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 3,
+  "confusion": {
+    "key": "confusion",
+    "index": 3,
     "name": "Confusion",
     "symbol": ",",
     "color": "d",
@@ -100,8 +104,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 4,
+  "hallucination": {
+    "key": "hallucination",
+    "index": 4,
     "name": "Hallucination",
     "symbol": ",",
     "color": "d",
@@ -127,8 +132,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 5,
+  "cure_poison": {
+    "key": "cure_poison",
+    "index": 5,
     "name": "Cure Poison",
     "symbol": ",",
     "color": "d",
@@ -154,8 +160,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 6,
+  "cure_blindness": {
+    "key": "cure_blindness",
+    "index": 6,
     "name": "Cure Blindness",
     "symbol": ",",
     "color": "d",
@@ -181,8 +188,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 7,
+  "cure_paranoia": {
+    "key": "cure_paranoia",
+    "index": 7,
     "name": "Cure Paranoia",
     "symbol": ",",
     "color": "d",
@@ -208,8 +216,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 8,
+  "cure_confusion": {
+    "key": "cure_confusion",
+    "index": 8,
     "name": "Cure Confusion",
     "symbol": ",",
     "color": "d",
@@ -235,8 +244,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 9,
+  "weakness_9": {
+    "key": "weakness_9",
+    "index": 9,
     "name": "Weakness",
     "symbol": ",",
     "color": "d",
@@ -262,8 +272,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 10,
+  "unhealth": {
+    "key": "unhealth",
+    "index": 10,
     "name": "Unhealth",
     "symbol": ",",
     "color": "d",
@@ -289,8 +300,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 11,
+  "restore_constitution_11": {
+    "key": "restore_constitution_11",
+    "index": 11,
     "name": "Restore Constitution",
     "symbol": ",",
     "color": "d",
@@ -316,8 +328,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 12,
+  "restoring": {
+    "key": "restoring",
+    "index": 12,
     "name": "Restoring",
     "symbol": ",",
     "color": "d",
@@ -351,8 +364,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 13,
+  "stupidity_13": {
+    "key": "stupidity_13",
+    "index": 13,
     "name": "Stupidity",
     "symbol": ",",
     "color": "d",
@@ -378,8 +392,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 14,
+  "naivety_14": {
+    "key": "naivety_14",
+    "index": 14,
     "name": "Naivety",
     "symbol": ",",
     "color": "d",
@@ -405,8 +420,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 15,
+  "poison_15": {
+    "key": "poison_15",
+    "index": 15,
     "name": "Poison",
     "symbol": ",",
     "color": "d",
@@ -432,8 +448,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 16,
+  "sickness": {
+    "key": "sickness",
+    "index": 16,
     "name": "Sickness",
     "symbol": ",",
     "color": "d",
@@ -459,8 +476,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 17,
+  "paralysis": {
+    "key": "paralysis",
+    "index": 17,
     "name": "Paralysis",
     "symbol": ",",
     "color": "d",
@@ -486,8 +504,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 18,
+  "restore_strength_18": {
+    "key": "restore_strength_18",
+    "index": 18,
     "name": "Restore Strength",
     "symbol": ",",
     "color": "d",
@@ -513,8 +532,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 19,
+  "disease": {
+    "key": "disease",
+    "index": 19,
     "name": "Disease",
     "symbol": ",",
     "color": "d",
@@ -540,8 +560,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 20,
+  "cure_serious_wounds_20": {
+    "key": "cure_serious_wounds_20",
+    "index": 20,
     "name": "Cure Serious Wounds",
     "symbol": ",",
     "color": "d",
@@ -567,8 +588,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 21,
+  "ration_of_food": {
+    "key": "ration_of_food",
+    "index": 21,
     "name": "& Ration~ of Food",
     "symbol": ",",
     "color": "U",
@@ -602,8 +624,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 22,
+  "hard_biscuit": {
+    "key": "hard_biscuit",
+    "index": 22,
     "name": "& Hard Biscuit~",
     "symbol": ",",
     "color": "U",
@@ -629,8 +652,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 23,
+  "strip_of_venison": {
+    "key": "strip_of_venison",
+    "index": 23,
     "name": "& Strip~ of Venison",
     "symbol": ",",
     "color": "u",
@@ -656,8 +680,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 24,
+  "slime_mold": {
+    "key": "slime_mold",
+    "index": 24,
     "name": "& Slime Mold~",
     "symbol": ",",
     "color": "g",
@@ -683,8 +708,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 25,
+  "piece_of_elvish_waybread": {
+    "key": "piece_of_elvish_waybread",
+    "index": 25,
     "name": "& Piece~ of Elvish Waybread",
     "symbol": ",",
     "color": "B",
@@ -722,8 +748,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 26,
+  "pint_of_fine_ale": {
+    "key": "pint_of_fine_ale",
+    "index": 26,
     "name": "& Pint~ of Fine Ale",
     "symbol": ",",
     "color": "y",
@@ -749,8 +776,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 27,
+  "pint_of_fine_wine": {
+    "key": "pint_of_fine_wine",
+    "index": 27,
     "name": "& Pint~ of Fine Wine",
     "symbol": ",",
     "color": "r",
@@ -776,8 +804,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 28,
+  "mattock": {
+    "key": "mattock",
+    "index": 28,
     "name": "& Mattock~",
     "symbol": "\\",
     "color": "D",
@@ -808,8 +837,9 @@
       "TUNNEL"
     ]
   },
-  {
-    "id": 29,
+  "nodachi": {
+    "key": "nodachi",
+    "index": 29,
     "name": "& No-dachi~",
     "symbol": "|",
     "color": "W",
@@ -839,8 +869,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 30,
+  "broken_dagger": {
+    "key": "broken_dagger",
+    "index": 30,
     "name": "& Broken Dagger~",
     "symbol": "|",
     "color": "D",
@@ -866,8 +897,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 31,
+  "bastard_sword": {
+    "key": "bastard_sword",
+    "index": 31,
     "name": "& Bastard Sword~",
     "symbol": "|",
     "color": "W",
@@ -893,8 +925,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 32,
+  "scimitar": {
+    "key": "scimitar",
+    "index": 32,
     "name": "& Scimitar~",
     "symbol": "|",
     "color": "W",
@@ -920,8 +953,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 33,
+  "tulwar": {
+    "key": "tulwar",
+    "index": 33,
     "name": "& Tulwar~",
     "symbol": "|",
     "color": "W",
@@ -947,8 +981,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 34,
+  "broad_sword": {
+    "key": "broad_sword",
+    "index": 34,
     "name": "& Broad Sword~",
     "symbol": "|",
     "color": "W",
@@ -978,8 +1013,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 35,
+  "short_sword": {
+    "key": "short_sword",
+    "index": 35,
     "name": "& Short Sword~",
     "symbol": "|",
     "color": "W",
@@ -1005,8 +1041,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 36,
+  "blade_of_chaos": {
+    "key": "blade_of_chaos",
+    "index": 36,
     "name": "& Blade~ of Chaos",
     "symbol": "|",
     "color": "v",
@@ -1033,8 +1070,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 37,
+  "twohanded_sword": {
+    "key": "twohanded_sword",
+    "index": 37,
     "name": "& Two-Handed Sword~",
     "symbol": "|",
     "color": "W",
@@ -1068,8 +1106,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 38,
+  "main_gauche": {
+    "key": "main_gauche",
+    "index": 38,
     "name": "& Main Gauche~",
     "symbol": "|",
     "color": "W",
@@ -1095,8 +1134,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 39,
+  "cutlass": {
+    "key": "cutlass",
+    "index": 39,
     "name": "& Cutlass~",
     "symbol": "|",
     "color": "W",
@@ -1122,8 +1162,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 40,
+  "executioners_sword": {
+    "key": "executioners_sword",
+    "index": 40,
     "name": "& Executioner's Sword~",
     "symbol": "|",
     "color": "r",
@@ -1153,8 +1194,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 41,
+  "katana": {
+    "key": "katana",
+    "index": 41,
     "name": "& Katana~",
     "symbol": "|",
     "color": "W",
@@ -1180,8 +1222,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 42,
+  "long_sword": {
+    "key": "long_sword",
+    "index": 42,
     "name": "& Long Sword~",
     "symbol": "|",
     "color": "W",
@@ -1211,8 +1254,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 43,
+  "dagger": {
+    "key": "dagger",
+    "index": 43,
     "name": "& Dagger~",
     "symbol": "|",
     "color": "W",
@@ -1243,8 +1287,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 44,
+  "rapier": {
+    "key": "rapier",
+    "index": 44,
     "name": "& Rapier~",
     "symbol": "|",
     "color": "W",
@@ -1270,8 +1315,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 45,
+  "sabre": {
+    "key": "sabre",
+    "index": 45,
     "name": "& Sabre~",
     "symbol": "|",
     "color": "W",
@@ -1297,8 +1343,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 46,
+  "small_sword": {
+    "key": "small_sword",
+    "index": 46,
     "name": "& Small Sword~",
     "symbol": "|",
     "color": "W",
@@ -1324,8 +1371,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 47,
+  "broken_sword": {
+    "key": "broken_sword",
+    "index": 47,
     "name": "& Broken Sword~",
     "symbol": "|",
     "color": "D",
@@ -1351,8 +1399,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 48,
+  "ballandchain": {
+    "key": "ballandchain",
+    "index": 48,
     "name": "& Ball-and-Chain~",
     "symbol": "\\",
     "color": "D",
@@ -1378,8 +1427,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 49,
+  "whip": {
+    "key": "whip",
+    "index": 49,
     "name": "& Whip~",
     "symbol": "\\",
     "color": "D",
@@ -1405,8 +1455,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 50,
+  "flail": {
+    "key": "flail",
+    "index": 50,
     "name": "& Flail~",
     "symbol": "\\",
     "color": "D",
@@ -1436,8 +1487,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 51,
+  "twohanded_flail": {
+    "key": "twohanded_flail",
+    "index": 51,
     "name": "& Two-Handed Flail~",
     "symbol": "\\",
     "color": "y",
@@ -1467,8 +1519,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 52,
+  "morning_star": {
+    "key": "morning_star",
+    "index": 52,
     "name": "& Morning Star~",
     "symbol": "\\",
     "color": "D",
@@ -1494,8 +1547,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 53,
+  "mace": {
+    "key": "mace",
+    "index": 53,
     "name": "& Mace~",
     "symbol": "\\",
     "color": "D",
@@ -1521,8 +1575,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 54,
+  "quarterstaff": {
+    "key": "quarterstaff",
+    "index": 54,
     "name": "& Quarterstaff~",
     "symbol": "\\",
     "color": "U",
@@ -1552,8 +1607,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 55,
+  "war_hammer": {
+    "key": "war_hammer",
+    "index": 55,
     "name": "& War Hammer~",
     "symbol": "\\",
     "color": "D",
@@ -1579,8 +1635,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 56,
+  "leadfilled_mace": {
+    "key": "leadfilled_mace",
+    "index": 56,
     "name": "& Lead-Filled Mace~",
     "symbol": "\\",
     "color": "D",
@@ -1606,8 +1663,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 57,
+  "mace_of_disruption": {
+    "key": "mace_of_disruption",
+    "index": 57,
     "name": "& Mace~ of Disruption",
     "symbol": "\\",
     "color": "v",
@@ -1634,8 +1692,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 58,
+  "lucerne_hammer": {
+    "key": "lucerne_hammer",
+    "index": 58,
     "name": "& Lucerne Hammer~",
     "symbol": "/",
     "color": "B",
@@ -1661,8 +1720,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 59,
+  "beaked_axe": {
+    "key": "beaked_axe",
+    "index": 59,
     "name": "& Beaked Axe~",
     "symbol": "/",
     "color": "s",
@@ -1688,8 +1748,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 60,
+  "glaive": {
+    "key": "glaive",
+    "index": 60,
     "name": "& Glaive~",
     "symbol": "/",
     "color": "s",
@@ -1715,8 +1776,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 61,
+  "halberd": {
+    "key": "halberd",
+    "index": 61,
     "name": "& Halberd~",
     "symbol": "/",
     "color": "s",
@@ -1742,8 +1804,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 62,
+  "awlpike": {
+    "key": "awlpike",
+    "index": 62,
     "name": "& Awl-Pike~",
     "symbol": "/",
     "color": "s",
@@ -1769,8 +1832,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 63,
+  "pike": {
+    "key": "pike",
+    "index": 63,
     "name": "& Pike~",
     "symbol": "/",
     "color": "s",
@@ -1796,8 +1860,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 64,
+  "spear": {
+    "key": "spear",
+    "index": 64,
     "name": "& Spear~",
     "symbol": "/",
     "color": "s",
@@ -1827,8 +1892,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 65,
+  "trident": {
+    "key": "trident",
+    "index": 65,
     "name": "& Trident~",
     "symbol": "/",
     "color": "y",
@@ -1854,8 +1920,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 66,
+  "lance": {
+    "key": "lance",
+    "index": 66,
     "name": "& Lance~",
     "symbol": "/",
     "color": "s",
@@ -1885,8 +1952,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 67,
+  "great_axe": {
+    "key": "great_axe",
+    "index": 67,
     "name": "& Great Axe~",
     "symbol": "/",
     "color": "s",
@@ -1916,8 +1984,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 68,
+  "battle_axe": {
+    "key": "battle_axe",
+    "index": 68,
     "name": "& Battle Axe~",
     "symbol": "/",
     "color": "s",
@@ -1943,8 +2012,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 69,
+  "lochaber_axe": {
+    "key": "lochaber_axe",
+    "index": 69,
     "name": "& Lochaber Axe~",
     "symbol": "/",
     "color": "D",
@@ -1974,8 +2044,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 70,
+  "broad_axe": {
+    "key": "broad_axe",
+    "index": 70,
     "name": "& Broad Axe~",
     "symbol": "/",
     "color": "s",
@@ -2001,8 +2072,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 71,
+  "scythe": {
+    "key": "scythe",
+    "index": 71,
     "name": "& Scythe~",
     "symbol": "/",
     "color": "s",
@@ -2032,8 +2104,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 72,
+  "scythe_of_slicing": {
+    "key": "scythe_of_slicing",
+    "index": 72,
     "name": "& Scythe~ of Slicing",
     "symbol": "/",
     "color": "r",
@@ -2063,8 +2136,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 73,
+  "short_bow": {
+    "key": "short_bow",
+    "index": 73,
     "name": "& Short Bow~",
     "symbol": "}",
     "color": "U",
@@ -2094,8 +2168,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 74,
+  "long_bow": {
+    "key": "long_bow",
+    "index": 74,
     "name": "& Long Bow~",
     "symbol": "}",
     "color": "U",
@@ -2125,8 +2200,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 75,
+  "light_crossbow": {
+    "key": "light_crossbow",
+    "index": 75,
     "name": "& Light Crossbow~",
     "symbol": "}",
     "color": "s",
@@ -2156,8 +2232,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 76,
+  "heavy_crossbow": {
+    "key": "heavy_crossbow",
+    "index": 76,
     "name": "& Heavy Crossbow~",
     "symbol": "}",
     "color": "s",
@@ -2187,8 +2264,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 77,
+  "sling": {
+    "key": "sling",
+    "index": 77,
     "name": "& Sling~",
     "symbol": "}",
     "color": "u",
@@ -2218,8 +2296,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 78,
+  "arrow": {
+    "key": "arrow",
+    "index": 78,
     "name": "& Arrow~",
     "symbol": "{",
     "color": "U",
@@ -2253,8 +2332,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 79,
+  "seeker_arrow": {
+    "key": "seeker_arrow",
+    "index": 79,
     "name": "& Seeker Arrow~",
     "symbol": "{",
     "color": "G",
@@ -2292,8 +2372,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 80,
+  "bolt": {
+    "key": "bolt",
+    "index": 80,
     "name": "& Bolt~",
     "symbol": "{",
     "color": "s",
@@ -2327,8 +2408,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 81,
+  "seeker_bolt": {
+    "key": "seeker_bolt",
+    "index": 81,
     "name": "& Seeker Bolt~",
     "symbol": "{",
     "color": "B",
@@ -2362,8 +2444,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 82,
+  "rounded_pebble": {
+    "key": "rounded_pebble",
+    "index": 82,
     "name": "& Rounded Pebble~",
     "symbol": "{",
     "color": "s",
@@ -2393,8 +2476,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 83,
+  "iron_shot": {
+    "key": "iron_shot",
+    "index": 83,
     "name": "& Iron Shot~",
     "symbol": "{",
     "color": "s",
@@ -2424,8 +2508,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 84,
+  "shovel": {
+    "key": "shovel",
+    "index": 84,
     "name": "& Shovel~",
     "symbol": "\\",
     "color": "s",
@@ -2452,8 +2537,9 @@
       "TUNNEL"
     ]
   },
-  {
-    "id": 85,
+  "gnomish_shovel": {
+    "key": "gnomish_shovel",
+    "index": 85,
     "name": "& Gnomish Shovel~",
     "symbol": "\\",
     "color": "G",
@@ -2480,8 +2566,9 @@
       "TUNNEL"
     ]
   },
-  {
-    "id": 86,
+  "dwarven_shovel": {
+    "key": "dwarven_shovel",
+    "index": 86,
     "name": "& Dwarven Shovel~",
     "symbol": "\\",
     "color": "B",
@@ -2508,8 +2595,9 @@
       "TUNNEL"
     ]
   },
-  {
-    "id": 87,
+  "pick": {
+    "key": "pick",
+    "index": 87,
     "name": "& Pick~",
     "symbol": "\\",
     "color": "s",
@@ -2536,8 +2624,9 @@
       "TUNNEL"
     ]
   },
-  {
-    "id": 88,
+  "orcish_pick": {
+    "key": "orcish_pick",
+    "index": 88,
     "name": "& Orcish Pick~",
     "symbol": "\\",
     "color": "g",
@@ -2564,8 +2653,9 @@
       "TUNNEL"
     ]
   },
-  {
-    "id": 89,
+  "dwarven_pick": {
+    "key": "dwarven_pick",
+    "index": 89,
     "name": "& Dwarven Pick~",
     "symbol": "\\",
     "color": "b",
@@ -2592,8 +2682,9 @@
       "TUNNEL"
     ]
   },
-  {
-    "id": 90,
+  "elven_cloak": {
+    "key": "elven_cloak",
+    "index": 90,
     "name": "& Elven Cloak~",
     "symbol": "(",
     "color": "G",
@@ -2628,8 +2719,9 @@
       "SENSE"
     ]
   },
-  {
-    "id": 91,
+  "pair_of_soft_leather_boots": {
+    "key": "pair_of_soft_leather_boots",
+    "index": 91,
     "name": "& Pair~ of Soft Leather Boots",
     "symbol": "]",
     "color": "U",
@@ -2653,8 +2745,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 92,
+  "pair_of_hard_leather_boots": {
+    "key": "pair_of_hard_leather_boots",
+    "index": 92,
     "name": "& Pair~ of Hard Leather Boots",
     "symbol": "]",
     "color": "U",
@@ -2682,8 +2775,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 93,
+  "pair_of_metal_shod_boots": {
+    "key": "pair_of_metal_shod_boots",
+    "index": 93,
     "name": "& Pair~ of Metal Shod Boots",
     "symbol": "]",
     "color": "s",
@@ -2715,8 +2809,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 94,
+  "hard_leather_cap": {
+    "key": "hard_leather_cap",
+    "index": 94,
     "name": "& Hard Leather Cap~",
     "symbol": "]",
     "color": "u",
@@ -2740,8 +2835,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 95,
+  "metal_cap": {
+    "key": "metal_cap",
+    "index": 95,
     "name": "& Metal Cap~",
     "symbol": "]",
     "color": "s",
@@ -2765,8 +2861,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 96,
+  "iron_helm": {
+    "key": "iron_helm",
+    "index": 96,
     "name": "& Iron Helm~",
     "symbol": "]",
     "color": "s",
@@ -2790,8 +2887,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 97,
+  "steel_helm": {
+    "key": "steel_helm",
+    "index": 97,
     "name": "& Steel Helm~",
     "symbol": "]",
     "color": "W",
@@ -2815,8 +2913,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 98,
+  "iron_crown": {
+    "key": "iron_crown",
+    "index": 98,
     "name": "& Iron Crown~",
     "symbol": "]",
     "color": "s",
@@ -2840,8 +2939,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 99,
+  "golden_crown": {
+    "key": "golden_crown",
+    "index": 99,
     "name": "& Golden Crown~",
     "symbol": "]",
     "color": "y",
@@ -2867,8 +2967,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 100,
+  "jewel_encrusted_crown": {
+    "key": "jewel_encrusted_crown",
+    "index": 100,
     "name": "& Jewel Encrusted Crown~",
     "symbol": "]",
     "color": "v",
@@ -2894,8 +2995,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 101,
+  "robe": {
+    "key": "robe",
+    "index": 101,
     "name": "& Robe~",
     "symbol": "(",
     "color": "b",
@@ -2923,8 +3025,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 102,
+  "filthy_rag": {
+    "key": "filthy_rag",
+    "index": 102,
     "name": "& Filthy Rag~",
     "symbol": "(",
     "color": "D",
@@ -2948,8 +3051,9 @@
     "toAc": -1,
     "flags": []
   },
-  {
-    "id": 103,
+  "soft_leather_armour": {
+    "key": "soft_leather_armour",
+    "index": 103,
     "name": "Soft Leather Armour~",
     "symbol": "(",
     "color": "U",
@@ -2973,8 +3077,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 104,
+  "soft_studded_leather": {
+    "key": "soft_studded_leather",
+    "index": 104,
     "name": "Soft Studded Leather~",
     "symbol": "(",
     "color": "U",
@@ -2998,8 +3103,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 105,
+  "hard_leather_armour": {
+    "key": "hard_leather_armour",
+    "index": 105,
     "name": "Hard Leather Armour~",
     "symbol": "(",
     "color": "U",
@@ -3023,8 +3129,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 106,
+  "hard_studded_leather": {
+    "key": "hard_studded_leather",
+    "index": 106,
     "name": "Hard Studded Leather~",
     "symbol": "(",
     "color": "U",
@@ -3048,8 +3155,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 107,
+  "leather_scale_mail": {
+    "key": "leather_scale_mail",
+    "index": 107,
     "name": "Leather Scale Mail~",
     "symbol": "(",
     "color": "U",
@@ -3073,8 +3181,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 108,
+  "metal_scale_mail": {
+    "key": "metal_scale_mail",
+    "index": 108,
     "name": "Metal Scale Mail~",
     "symbol": "[",
     "color": "s",
@@ -3098,8 +3207,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 109,
+  "chain_mail": {
+    "key": "chain_mail",
+    "index": 109,
     "name": "Chain Mail~",
     "symbol": "[",
     "color": "s",
@@ -3123,8 +3233,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 110,
+  "rusty_chain_mail": {
+    "key": "rusty_chain_mail",
+    "index": 110,
     "name": "Rusty Chain Mail~",
     "symbol": "[",
     "color": "r",
@@ -3148,8 +3259,9 @@
     "toAc": -8,
     "flags": []
   },
-  {
-    "id": 111,
+  "augmented_chain_mail": {
+    "key": "augmented_chain_mail",
+    "index": 111,
     "name": "Augmented Chain Mail~",
     "symbol": "[",
     "color": "s",
@@ -3173,8 +3285,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 112,
+  "bar_chain_mail": {
+    "key": "bar_chain_mail",
+    "index": 112,
     "name": "Bar Chain Mail~",
     "symbol": "[",
     "color": "s",
@@ -3198,8 +3311,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 113,
+  "metal_brigandine_armour": {
+    "key": "metal_brigandine_armour",
+    "index": 113,
     "name": "Metal Brigandine Armour~",
     "symbol": "[",
     "color": "s",
@@ -3223,8 +3337,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 114,
+  "partial_plate_armour": {
+    "key": "partial_plate_armour",
+    "index": 114,
     "name": "Partial Plate Armour~",
     "symbol": "[",
     "color": "W",
@@ -3248,8 +3363,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 115,
+  "metal_lamellar_armour": {
+    "key": "metal_lamellar_armour",
+    "index": 115,
     "name": "Metal Lamellar Armour~",
     "symbol": "[",
     "color": "W",
@@ -3273,8 +3389,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 116,
+  "full_plate_armour": {
+    "key": "full_plate_armour",
+    "index": 116,
     "name": "Full Plate Armour~",
     "symbol": "[",
     "color": "W",
@@ -3298,8 +3415,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 117,
+  "ribbed_plate_armour": {
+    "key": "ribbed_plate_armour",
+    "index": 117,
     "name": "Ribbed Plate Armour~",
     "symbol": "[",
     "color": "W",
@@ -3323,8 +3441,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 118,
+  "adamantite_plate_mail": {
+    "key": "adamantite_plate_mail",
+    "index": 118,
     "name": "Adamantite Plate Mail~",
     "symbol": "[",
     "color": "G",
@@ -3350,8 +3469,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 119,
+  "mithril_plate_mail": {
+    "key": "mithril_plate_mail",
+    "index": 119,
     "name": "Mithril Plate Mail~",
     "symbol": "[",
     "color": "B",
@@ -3377,8 +3497,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 120,
+  "mithril_chain_mail": {
+    "key": "mithril_chain_mail",
+    "index": 120,
     "name": "Mithril Chain Mail~",
     "symbol": "[",
     "color": "B",
@@ -3404,8 +3525,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 121,
+  "double_chain_mail": {
+    "key": "double_chain_mail",
+    "index": 121,
     "name": "Double Chain Mail~",
     "symbol": "[",
     "color": "s",
@@ -3429,8 +3551,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 122,
+  "shield_of_deflection": {
+    "key": "shield_of_deflection",
+    "index": 122,
     "name": "& Shield~ of Deflection",
     "symbol": "[",
     "color": "B",
@@ -3456,8 +3579,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 123,
+  "cloak": {
+    "key": "cloak",
+    "index": 123,
     "name": "& Cloak~",
     "symbol": "(",
     "color": "g",
@@ -3485,8 +3609,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 124,
+  "shadow_cloak": {
+    "key": "shadow_cloak",
+    "index": 124,
     "name": "& Shadow Cloak~",
     "symbol": "(",
     "color": "D",
@@ -3513,8 +3638,9 @@
       "RES_LITE"
     ]
   },
-  {
-    "id": 125,
+  "set_of_leather_gloves": {
+    "key": "set_of_leather_gloves",
+    "index": 125,
     "name": "& Set~ of Leather Gloves",
     "symbol": "]",
     "color": "U",
@@ -3538,8 +3664,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 126,
+  "set_of_gauntlets": {
+    "key": "set_of_gauntlets",
+    "index": 126,
     "name": "& Set~ of Gauntlets",
     "symbol": "]",
     "color": "U",
@@ -3567,8 +3694,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 127,
+  "set_of_cesti": {
+    "key": "set_of_cesti",
+    "index": 127,
     "name": "& Set~ of Cesti",
     "symbol": "]",
     "color": "W",
@@ -3592,8 +3720,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 128,
+  "small_leather_shield": {
+    "key": "small_leather_shield",
+    "index": 128,
     "name": "& Small Leather Shield~",
     "symbol": ")",
     "color": "U",
@@ -3617,8 +3746,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 129,
+  "large_leather_shield": {
+    "key": "large_leather_shield",
+    "index": 129,
     "name": "& Large Leather Shield~",
     "symbol": ")",
     "color": "U",
@@ -3646,8 +3776,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 130,
+  "small_metal_shield": {
+    "key": "small_metal_shield",
+    "index": 130,
     "name": "& Small Metal Shield~",
     "symbol": ")",
     "color": "s",
@@ -3675,8 +3806,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 131,
+  "large_metal_shield": {
+    "key": "large_metal_shield",
+    "index": 131,
     "name": "& Large Metal Shield~",
     "symbol": ")",
     "color": "s",
@@ -3704,8 +3836,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 132,
+  "strength_132": {
+    "key": "strength_132",
+    "index": 132,
     "name": "Strength",
     "symbol": "=",
     "color": "d",
@@ -3732,8 +3865,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 133,
+  "dexterity_133": {
+    "key": "dexterity_133",
+    "index": 133,
     "name": "Dexterity",
     "symbol": "=",
     "color": "d",
@@ -3760,8 +3894,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 134,
+  "constitution_134": {
+    "key": "constitution_134",
+    "index": 134,
     "name": "Constitution",
     "symbol": "=",
     "color": "d",
@@ -3788,8 +3923,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 135,
+  "intelligence_135": {
+    "key": "intelligence_135",
+    "index": 135,
     "name": "Intelligence",
     "symbol": "=",
     "color": "d",
@@ -3816,8 +3952,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 136,
+  "speed_136": {
+    "key": "speed_136",
+    "index": 136,
     "name": "Speed",
     "symbol": "=",
     "color": "d",
@@ -3844,8 +3981,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 137,
+  "sensing_137": {
+    "key": "sensing_137",
+    "index": 137,
     "name": "Sensing",
     "symbol": "=",
     "color": "d",
@@ -3872,8 +4010,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 138,
+  "teleportation_138": {
+    "key": "teleportation_138",
+    "index": 138,
     "name": "Teleportation",
     "symbol": "=",
     "color": "d",
@@ -3901,8 +4040,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 139,
+  "slow_digestion_139": {
+    "key": "slow_digestion_139",
+    "index": 139,
     "name": "Slow Digestion",
     "symbol": "=",
     "color": "d",
@@ -3929,8 +4069,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 140,
+  "resist_fire": {
+    "key": "resist_fire",
+    "index": 140,
     "name": "Resist Fire",
     "symbol": "=",
     "color": "d",
@@ -3958,8 +4099,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 141,
+  "resist_cold_141": {
+    "key": "resist_cold_141",
+    "index": 141,
     "name": "Resist Cold",
     "symbol": "=",
     "color": "d",
@@ -3987,8 +4129,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 142,
+  "levitation": {
+    "key": "levitation",
+    "index": 142,
     "name": "Levitation",
     "symbol": "=",
     "color": "d",
@@ -4015,8 +4158,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 143,
+  "poison_resistance": {
+    "key": "poison_resistance",
+    "index": 143,
     "name": "Poison Resistance",
     "symbol": "=",
     "color": "d",
@@ -4047,8 +4191,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 144,
+  "free_action": {
+    "key": "free_action",
+    "index": 144,
     "name": "Free Action",
     "symbol": "=",
     "color": "d",
@@ -4075,8 +4220,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 145,
+  "weakness_145": {
+    "key": "weakness_145",
+    "index": 145,
     "name": "Weakness",
     "symbol": "=",
     "color": "d",
@@ -4104,8 +4250,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 146,
+  "flames": {
+    "key": "flames",
+    "index": 146,
     "name": "Flames",
     "symbol": "=",
     "color": "d",
@@ -4133,8 +4280,9 @@
       "ACTIVATE"
     ]
   },
-  {
-    "id": 147,
+  "acid": {
+    "key": "acid",
+    "index": 147,
     "name": "Acid",
     "symbol": "=",
     "color": "d",
@@ -4162,8 +4310,9 @@
       "ACTIVATE"
     ]
   },
-  {
-    "id": 148,
+  "ice_148": {
+    "key": "ice_148",
+    "index": 148,
     "name": "Ice",
     "symbol": "=",
     "color": "d",
@@ -4191,8 +4340,9 @@
       "ACTIVATE"
     ]
   },
-  {
-    "id": 149,
+  "woe": {
+    "key": "woe",
+    "index": 149,
     "name": "Woe",
     "symbol": "=",
     "color": "d",
@@ -4222,8 +4372,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 150,
+  "stupidity_150": {
+    "key": "stupidity_150",
+    "index": 150,
     "name": "Stupidity",
     "symbol": "=",
     "color": "d",
@@ -4251,8 +4402,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 151,
+  "combat": {
+    "key": "combat",
+    "index": 151,
     "name": "Combat",
     "symbol": "=",
     "color": "d",
@@ -4276,8 +4428,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 152,
+  "skill": {
+    "key": "skill",
+    "index": 152,
     "name": "Skill",
     "symbol": "=",
     "color": "d",
@@ -4301,8 +4454,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 153,
+  "protection": {
+    "key": "protection",
+    "index": 153,
     "name": "Protection",
     "symbol": "=",
     "color": "d",
@@ -4326,8 +4480,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 154,
+  "aggravate_monster_154": {
+    "key": "aggravate_monster_154",
+    "index": 154,
     "name": "Aggravate Monster",
     "symbol": "=",
     "color": "d",
@@ -4355,8 +4510,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 155,
+  "see_invisible": {
+    "key": "see_invisible",
+    "index": 155,
     "name": "See Invisible",
     "symbol": "=",
     "color": "d",
@@ -4387,8 +4543,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 156,
+  "sustain_strength": {
+    "key": "sustain_strength",
+    "index": 156,
     "name": "Sustain Strength",
     "symbol": "=",
     "color": "d",
@@ -4419,8 +4576,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 157,
+  "sustain_intelligence": {
+    "key": "sustain_intelligence",
+    "index": 157,
     "name": "Sustain Intelligence",
     "symbol": "=",
     "color": "d",
@@ -4451,8 +4609,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 158,
+  "sustain_wisdom": {
+    "key": "sustain_wisdom",
+    "index": 158,
     "name": "Sustain Wisdom",
     "symbol": "=",
     "color": "d",
@@ -4483,8 +4642,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 159,
+  "sustain_constitution": {
+    "key": "sustain_constitution",
+    "index": 159,
     "name": "Sustain Constitution",
     "symbol": "=",
     "color": "d",
@@ -4515,8 +4675,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 160,
+  "sustain_dexterity": {
+    "key": "sustain_dexterity",
+    "index": 160,
     "name": "Sustain Dexterity",
     "symbol": "=",
     "color": "d",
@@ -4547,8 +4708,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 161,
+  "sustain_charisma": {
+    "key": "sustain_charisma",
+    "index": 161,
     "name": "Sustain Charisma",
     "symbol": "=",
     "color": "d",
@@ -4579,8 +4741,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 162,
+  "slaying": {
+    "key": "slaying",
+    "index": 162,
     "name": "Slaying",
     "symbol": "=",
     "color": "d",
@@ -4606,8 +4769,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 163,
+  "brilliance": {
+    "key": "brilliance",
+    "index": 163,
     "name": "Brilliance",
     "symbol": "\"",
     "color": "d",
@@ -4639,8 +4803,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 164,
+  "charisma_164": {
+    "key": "charisma_164",
+    "index": 164,
     "name": "Charisma",
     "symbol": "\"",
     "color": "d",
@@ -4667,8 +4832,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 165,
+  "sensing_165": {
+    "key": "sensing_165",
+    "index": 165,
     "name": "Sensing",
     "symbol": "\"",
     "color": "d",
@@ -4695,8 +4861,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 166,
+  "teleportation_166": {
+    "key": "teleportation_166",
+    "index": 166,
     "name": "Teleportation",
     "symbol": "\"",
     "color": "d",
@@ -4724,8 +4891,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 167,
+  "slow_digestion_167": {
+    "key": "slow_digestion_167",
+    "index": 167,
     "name": "Slow Digestion",
     "symbol": "\"",
     "color": "d",
@@ -4752,8 +4920,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 168,
+  "resist_acid": {
+    "key": "resist_acid",
+    "index": 168,
     "name": "Resist Acid",
     "symbol": "\"",
     "color": "d",
@@ -4781,8 +4950,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 169,
+  "berserk_strength_169": {
+    "key": "berserk_strength_169",
+    "index": 169,
     "name": "Berserk Strength",
     "symbol": "\"",
     "color": "d",
@@ -4808,8 +4978,9 @@
       "AGGRAVATE"
     ]
   },
-  {
-    "id": 170,
+  "double_ring_mail": {
+    "key": "double_ring_mail",
+    "index": 170,
     "name": "Double Ring Mail~",
     "symbol": "[",
     "color": "s",
@@ -4833,8 +5004,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 171,
+  "the_magi_171": {
+    "key": "the_magi_171",
+    "index": 171,
     "name": "the Magi",
     "symbol": "\"",
     "color": "d",
@@ -4870,8 +5042,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 172,
+  "destruction_172": {
+    "key": "destruction_172",
+    "index": 172,
     "name": "Destruction",
     "symbol": "\"",
     "color": "d",
@@ -4909,8 +5082,9 @@
       "HIDE_TYPE"
     ]
   },
-  {
-    "id": 173,
+  "enchant_weapon_skill": {
+    "key": "enchant_weapon_skill",
+    "index": 173,
     "name": "Enchant Weapon Skill",
     "symbol": "?",
     "color": "d",
@@ -4936,8 +5110,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 174,
+  "enchant_weapon_deadliness": {
+    "key": "enchant_weapon_deadliness",
+    "index": 174,
     "name": "Enchant Weapon Deadliness",
     "symbol": "?",
     "color": "d",
@@ -4963,8 +5138,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 175,
+  "enchant_armor_175": {
+    "key": "enchant_armor_175",
+    "index": 175,
     "name": "Enchant Armor",
     "symbol": "?",
     "color": "d",
@@ -4990,8 +5166,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 176,
+  "identify_176": {
+    "key": "identify_176",
+    "index": 176,
     "name": "Identify",
     "symbol": "?",
     "color": "d",
@@ -5029,8 +5206,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 177,
+  "identify_177": {
+    "key": "identify_177",
+    "index": 177,
     "name": "*Identify*",
     "symbol": "?",
     "color": "d",
@@ -5064,8 +5242,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 178,
+  "rumour": {
+    "key": "rumour",
+    "index": 178,
     "name": "Rumour",
     "symbol": "?",
     "color": "d",
@@ -5091,8 +5270,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 179,
+  "logrus": {
+    "key": "logrus",
+    "index": 179,
     "name": "Logrus",
     "symbol": "?",
     "color": "d",
@@ -5122,8 +5302,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 180,
+  "remove_curse_180": {
+    "key": "remove_curse_180",
+    "index": 180,
     "name": "Remove Curse",
     "symbol": "?",
     "color": "d",
@@ -5157,8 +5338,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 181,
+  "light_181": {
+    "key": "light_181",
+    "index": 181,
     "name": "Light",
     "symbol": "?",
     "color": "d",
@@ -5188,8 +5370,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 182,
+  "fire": {
+    "key": "fire",
+    "index": 182,
     "name": "Fire",
     "symbol": "?",
     "color": "d",
@@ -5216,8 +5399,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 183,
+  "ice_183": {
+    "key": "ice_183",
+    "index": 183,
     "name": "Ice",
     "symbol": "?",
     "color": "d",
@@ -5244,8 +5428,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 184,
+  "summon_monster": {
+    "key": "summon_monster",
+    "index": 184,
     "name": "Summon Monster",
     "symbol": "?",
     "color": "d",
@@ -5271,8 +5456,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 185,
+  "phase_door": {
+    "key": "phase_door",
+    "index": 185,
     "name": "Phase Door",
     "symbol": "?",
     "color": "d",
@@ -5298,8 +5484,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 186,
+  "teleportation_186": {
+    "key": "teleportation_186",
+    "index": 186,
     "name": "Teleportation",
     "symbol": "?",
     "color": "d",
@@ -5325,8 +5512,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 187,
+  "teleport_level": {
+    "key": "teleport_level",
+    "index": 187,
     "name": "Teleport Level",
     "symbol": "?",
     "color": "d",
@@ -5352,8 +5540,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 188,
+  "monster_confusion": {
+    "key": "monster_confusion",
+    "index": 188,
     "name": "Monster Confusion",
     "symbol": "?",
     "color": "d",
@@ -5379,8 +5568,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 189,
+  "magic_mapping": {
+    "key": "magic_mapping",
+    "index": 189,
     "name": "Magic Mapping",
     "symbol": "?",
     "color": "d",
@@ -5406,8 +5596,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 190,
+  "rune_of_protection": {
+    "key": "rune_of_protection",
+    "index": 190,
     "name": "Rune of Protection",
     "symbol": "?",
     "color": "d",
@@ -5437,8 +5628,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 191,
+  "remove_curse_191": {
+    "key": "remove_curse_191",
+    "index": 191,
     "name": "*Remove Curse*",
     "symbol": "?",
     "color": "d",
@@ -5468,8 +5660,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 192,
+  "treasure_detection": {
+    "key": "treasure_detection",
+    "index": 192,
     "name": "Treasure Detection",
     "symbol": "?",
     "color": "d",
@@ -5495,8 +5688,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 193,
+  "object_detection": {
+    "key": "object_detection",
+    "index": 193,
     "name": "Object Detection",
     "symbol": "?",
     "color": "d",
@@ -5522,8 +5716,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 194,
+  "trap_detection": {
+    "key": "trap_detection",
+    "index": 194,
     "name": "Trap Detection",
     "symbol": "?",
     "color": "d",
@@ -5549,8 +5744,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 195,
+  "sheaf_arrow": {
+    "key": "sheaf_arrow",
+    "index": 195,
     "name": "& Sheaf Arrow~",
     "symbol": "{",
     "color": "o",
@@ -5584,8 +5780,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 196,
+  "mithril_shot": {
+    "key": "mithril_shot",
+    "index": 196,
     "name": "& Mithril Shot~",
     "symbol": "{",
     "color": "B",
@@ -5615,8 +5812,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 197,
+  "doorstair_location_197": {
+    "key": "doorstair_location_197",
+    "index": 197,
     "name": "Door/Stair Location",
     "symbol": "?",
     "color": "d",
@@ -5642,8 +5840,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 198,
+  "acquirement_198": {
+    "key": "acquirement_198",
+    "index": 198,
     "name": "Acquirement",
     "symbol": "?",
     "color": "d",
@@ -5669,8 +5868,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 199,
+  "acquirement_199": {
+    "key": "acquirement_199",
+    "index": 199,
     "name": "*Acquirement*",
     "symbol": "?",
     "color": "d",
@@ -5696,8 +5896,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 200,
+  "mass_genocide": {
+    "key": "mass_genocide",
+    "index": 200,
     "name": "Mass Genocide",
     "symbol": "?",
     "color": "d",
@@ -5727,8 +5928,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 201,
+  "detect_invisible_201": {
+    "key": "detect_invisible_201",
+    "index": 201,
     "name": "Detect Invisible",
     "symbol": "?",
     "color": "d",
@@ -5754,8 +5956,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 202,
+  "aggravate_monster_202": {
+    "key": "aggravate_monster_202",
+    "index": 202,
     "name": "Aggravate Monster",
     "symbol": "?",
     "color": "d",
@@ -5781,8 +5984,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 203,
+  "trap_creation": {
+    "key": "trap_creation",
+    "index": 203,
     "name": "Trap Creation",
     "symbol": "?",
     "color": "d",
@@ -5812,8 +6016,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 204,
+  "trapdoor_destruction_204": {
+    "key": "trapdoor_destruction_204",
+    "index": 204,
     "name": "Trap/Door Destruction",
     "symbol": "?",
     "color": "d",
@@ -5843,8 +6048,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 205,
+  "artifact_creation": {
+    "key": "artifact_creation",
+    "index": 205,
     "name": "Artifact Creation",
     "symbol": "?",
     "color": "d",
@@ -5870,8 +6076,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 206,
+  "recharging": {
+    "key": "recharging",
+    "index": 206,
     "name": "Recharging",
     "symbol": "?",
     "color": "d",
@@ -5897,8 +6104,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 207,
+  "genocide_207": {
+    "key": "genocide_207",
+    "index": 207,
     "name": "Genocide",
     "symbol": "?",
     "color": "d",
@@ -5924,8 +6132,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 208,
+  "darkness_208": {
+    "key": "darkness_208",
+    "index": 208,
     "name": "Darkness",
     "symbol": "?",
     "color": "d",
@@ -5951,8 +6160,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 209,
+  "protection_from_evil_209": {
+    "key": "protection_from_evil_209",
+    "index": 209,
     "name": "Protection from Evil",
     "symbol": "?",
     "color": "d",
@@ -5978,8 +6188,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 210,
+  "satisfy_hunger": {
+    "key": "satisfy_hunger",
+    "index": 210,
     "name": "Satisfy Hunger",
     "symbol": "?",
     "color": "d",
@@ -6017,8 +6228,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 211,
+  "dispel_undead": {
+    "key": "dispel_undead",
+    "index": 211,
     "name": "Dispel Undead",
     "symbol": "?",
     "color": "d",
@@ -6044,8 +6256,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 212,
+  "enchant_weapon": {
+    "key": "enchant_weapon",
+    "index": 212,
     "name": "*Enchant Weapon*",
     "symbol": "?",
     "color": "d",
@@ -6075,8 +6288,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 213,
+  "curse_weapon": {
+    "key": "curse_weapon",
+    "index": 213,
     "name": "Curse Weapon",
     "symbol": "?",
     "color": "d",
@@ -6102,8 +6316,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 214,
+  "enchant_armor_214": {
+    "key": "enchant_armor_214",
+    "index": 214,
     "name": "*Enchant Armor*",
     "symbol": "?",
     "color": "d",
@@ -6137,8 +6352,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 215,
+  "curse_armor": {
+    "key": "curse_armor",
+    "index": 215,
     "name": "Curse Armor",
     "symbol": "?",
     "color": "d",
@@ -6164,8 +6380,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 216,
+  "summon_undead": {
+    "key": "summon_undead",
+    "index": 216,
     "name": "Summon Undead",
     "symbol": "?",
     "color": "d",
@@ -6191,8 +6408,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 217,
+  "blessing": {
+    "key": "blessing",
+    "index": 217,
     "name": "Blessing",
     "symbol": "?",
     "color": "d",
@@ -6218,8 +6436,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 218,
+  "holy_chant": {
+    "key": "holy_chant",
+    "index": 218,
     "name": "Holy Chant",
     "symbol": "?",
     "color": "d",
@@ -6245,8 +6464,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 219,
+  "holy_prayer": {
+    "key": "holy_prayer",
+    "index": 219,
     "name": "Holy Prayer",
     "symbol": "?",
     "color": "d",
@@ -6272,8 +6492,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 220,
+  "word_of_recall": {
+    "key": "word_of_recall",
+    "index": 220,
     "name": "Word of Recall",
     "symbol": "?",
     "color": "d",
@@ -6303,8 +6524,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 221,
+  "destruction_221": {
+    "key": "destruction_221",
+    "index": 221,
     "name": "*Destruction*",
     "symbol": "?",
     "color": "d",
@@ -6330,8 +6552,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 222,
+  "slime_mold_juice": {
+    "key": "slime_mold_juice",
+    "index": 222,
     "name": "Slime Mold Juice",
     "symbol": "!",
     "color": "d",
@@ -6357,8 +6580,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 223,
+  "apple_juice": {
+    "key": "apple_juice",
+    "index": 223,
     "name": "Apple Juice",
     "symbol": "!",
     "color": "d",
@@ -6384,8 +6608,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 224,
+  "water": {
+    "key": "water",
+    "index": 224,
     "name": "Water",
     "symbol": "!",
     "color": "d",
@@ -6411,8 +6636,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 225,
+  "strength_225": {
+    "key": "strength_225",
+    "index": 225,
     "name": "Strength",
     "symbol": "!",
     "color": "d",
@@ -6450,8 +6676,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 226,
+  "weakness_226": {
+    "key": "weakness_226",
+    "index": 226,
     "name": "Weakness",
     "symbol": "!",
     "color": "d",
@@ -6477,8 +6704,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 227,
+  "restore_strength_227": {
+    "key": "restore_strength_227",
+    "index": 227,
     "name": "Restore Strength",
     "symbol": "!",
     "color": "d",
@@ -6504,8 +6732,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 228,
+  "intelligence_228": {
+    "key": "intelligence_228",
+    "index": 228,
     "name": "Intelligence",
     "symbol": "!",
     "color": "d",
@@ -6543,8 +6772,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 229,
+  "stupidity_229": {
+    "key": "stupidity_229",
+    "index": 229,
     "name": "Stupidity",
     "symbol": "!",
     "color": "d",
@@ -6570,8 +6800,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 230,
+  "restore_intelligence": {
+    "key": "restore_intelligence",
+    "index": 230,
     "name": "Restore Intelligence",
     "symbol": "!",
     "color": "d",
@@ -6597,8 +6828,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 231,
+  "wisdom": {
+    "key": "wisdom",
+    "index": 231,
     "name": "Wisdom",
     "symbol": "!",
     "color": "d",
@@ -6636,8 +6868,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 232,
+  "naivety_232": {
+    "key": "naivety_232",
+    "index": 232,
     "name": "Naivety",
     "symbol": "!",
     "color": "d",
@@ -6663,8 +6896,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 233,
+  "restore_wisdom": {
+    "key": "restore_wisdom",
+    "index": 233,
     "name": "Restore Wisdom",
     "symbol": "!",
     "color": "d",
@@ -6690,8 +6924,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 234,
+  "charisma_234": {
+    "key": "charisma_234",
+    "index": 234,
     "name": "Charisma",
     "symbol": "!",
     "color": "d",
@@ -6729,8 +6964,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 235,
+  "ugliness": {
+    "key": "ugliness",
+    "index": 235,
     "name": "Ugliness",
     "symbol": "!",
     "color": "d",
@@ -6756,8 +6992,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 236,
+  "restore_charisma": {
+    "key": "restore_charisma",
+    "index": 236,
     "name": "Restore Charisma",
     "symbol": "!",
     "color": "d",
@@ -6783,8 +7020,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 237,
+  "curing_237": {
+    "key": "curing_237",
+    "index": 237,
     "name": "Curing",
     "symbol": "!",
     "color": "d",
@@ -6810,8 +7048,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 238,
+  "invulnerability": {
+    "key": "invulnerability",
+    "index": 238,
     "name": "Invulnerability",
     "symbol": "!",
     "color": "d",
@@ -6837,8 +7076,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 239,
+  "new_life": {
+    "key": "new_life",
+    "index": 239,
     "name": "New Life",
     "symbol": "!",
     "color": "d",
@@ -6872,8 +7112,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 240,
+  "cure_serious_wounds_240": {
+    "key": "cure_serious_wounds_240",
+    "index": 240,
     "name": "Cure Serious Wounds",
     "symbol": "!",
     "color": "d",
@@ -6907,8 +7148,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 241,
+  "cure_critical_wounds": {
+    "key": "cure_critical_wounds",
+    "index": 241,
     "name": "Cure Critical Wounds",
     "symbol": "!",
     "color": "d",
@@ -6938,8 +7180,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 242,
+  "healing_242": {
+    "key": "healing_242",
+    "index": 242,
     "name": "Healing",
     "symbol": "!",
     "color": "d",
@@ -6977,8 +7220,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 243,
+  "constitution_243": {
+    "key": "constitution_243",
+    "index": 243,
     "name": "Constitution",
     "symbol": "!",
     "color": "d",
@@ -7016,8 +7260,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 244,
+  "experience": {
+    "key": "experience",
+    "index": 244,
     "name": "Experience",
     "symbol": "!",
     "color": "d",
@@ -7043,8 +7288,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 245,
+  "sleep": {
+    "key": "sleep",
+    "index": 245,
     "name": "Sleep",
     "symbol": "!",
     "color": "d",
@@ -7070,8 +7316,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 246,
+  "blindness_246": {
+    "key": "blindness_246",
+    "index": 246,
     "name": "Blindness",
     "symbol": "!",
     "color": "d",
@@ -7097,8 +7344,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 247,
+  "booze": {
+    "key": "booze",
+    "index": 247,
     "name": "Booze",
     "symbol": "!",
     "color": "d",
@@ -7124,8 +7372,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 248,
+  "poison_248": {
+    "key": "poison_248",
+    "index": 248,
     "name": "Poison",
     "symbol": "!",
     "color": "d",
@@ -7151,8 +7400,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 249,
+  "speed_249": {
+    "key": "speed_249",
+    "index": 249,
     "name": "Speed",
     "symbol": "!",
     "color": "d",
@@ -7182,8 +7432,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 250,
+  "slowness_250": {
+    "key": "slowness_250",
+    "index": 250,
     "name": "Slowness",
     "symbol": "!",
     "color": "d",
@@ -7209,8 +7460,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 251,
+  "dexterity_251": {
+    "key": "dexterity_251",
+    "index": 251,
     "name": "Dexterity",
     "symbol": "!",
     "color": "d",
@@ -7248,8 +7500,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 252,
+  "restore_dexterity": {
+    "key": "restore_dexterity",
+    "index": 252,
     "name": "Restore Dexterity",
     "symbol": "!",
     "color": "d",
@@ -7275,8 +7528,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 253,
+  "restore_constitution_253": {
+    "key": "restore_constitution_253",
+    "index": 253,
     "name": "Restore Constitution",
     "symbol": "!",
     "color": "d",
@@ -7302,8 +7556,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 254,
+  "lose_memories": {
+    "key": "lose_memories",
+    "index": 254,
     "name": "Lose Memories",
     "symbol": "!",
     "color": "d",
@@ -7329,8 +7584,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 255,
+  "salt_water": {
+    "key": "salt_water",
+    "index": 255,
     "name": "Salt Water",
     "symbol": "!",
     "color": "d",
@@ -7356,8 +7612,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 256,
+  "enlightenment_256": {
+    "key": "enlightenment_256",
+    "index": 256,
     "name": "Enlightenment",
     "symbol": "!",
     "color": "d",
@@ -7391,8 +7648,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 257,
+  "heroism": {
+    "key": "heroism",
+    "index": 257,
     "name": "Heroism",
     "symbol": "!",
     "color": "d",
@@ -7418,8 +7676,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 258,
+  "berserk_strength_258": {
+    "key": "berserk_strength_258",
+    "index": 258,
     "name": "Berserk Strength",
     "symbol": "!",
     "color": "d",
@@ -7445,8 +7704,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 259,
+  "boldness": {
+    "key": "boldness",
+    "index": 259,
     "name": "Boldness",
     "symbol": "!",
     "color": "d",
@@ -7472,8 +7732,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 260,
+  "restore_life_levels": {
+    "key": "restore_life_levels",
+    "index": 260,
     "name": "Restore Life Levels",
     "symbol": "!",
     "color": "d",
@@ -7511,8 +7772,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 261,
+  "resist_heat": {
+    "key": "resist_heat",
+    "index": 261,
     "name": "Resist Heat",
     "symbol": "!",
     "color": "d",
@@ -7546,8 +7808,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 262,
+  "resist_cold_262": {
+    "key": "resist_cold_262",
+    "index": 262,
     "name": "Resist Cold",
     "symbol": "!",
     "color": "d",
@@ -7581,8 +7844,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 263,
+  "detect_invisible_263": {
+    "key": "detect_invisible_263",
+    "index": 263,
     "name": "Detect Invisible",
     "symbol": "!",
     "color": "d",
@@ -7608,8 +7872,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 264,
+  "slow_poison": {
+    "key": "slow_poison",
+    "index": 264,
     "name": "Slow Poison",
     "symbol": "!",
     "color": "d",
@@ -7635,8 +7900,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 265,
+  "neutralize_poison": {
+    "key": "neutralize_poison",
+    "index": 265,
     "name": "Neutralize Poison",
     "symbol": "!",
     "color": "d",
@@ -7662,8 +7928,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 266,
+  "restore_mana": {
+    "key": "restore_mana",
+    "index": 266,
     "name": "Restore Mana",
     "symbol": "!",
     "color": "d",
@@ -7689,8 +7956,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 267,
+  "infravision": {
+    "key": "infravision",
+    "index": 267,
     "name": "Infra-vision",
     "symbol": "!",
     "color": "d",
@@ -7716,8 +7984,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 268,
+  "resistance_268": {
+    "key": "resistance_268",
+    "index": 268,
     "name": "Resistance",
     "symbol": "!",
     "color": "d",
@@ -7755,8 +8024,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 269,
+  "light_269": {
+    "key": "light_269",
+    "index": 269,
     "name": "Light",
     "symbol": "-",
     "color": "d",
@@ -7780,8 +8050,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 270,
+  "tame_monster": {
+    "key": "tame_monster",
+    "index": 270,
     "name": "Tame Monster",
     "symbol": "-",
     "color": "d",
@@ -7805,8 +8076,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 271,
+  "frost_bolts_271": {
+    "key": "frost_bolts_271",
+    "index": 271,
     "name": "Frost Bolts",
     "symbol": "-",
     "color": "d",
@@ -7838,8 +8110,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 272,
+  "fire_bolts_272": {
+    "key": "fire_bolts_272",
+    "index": 272,
     "name": "Fire Bolts",
     "symbol": "-",
     "color": "d",
@@ -7871,8 +8144,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 273,
+  "stone_to_mud": {
+    "key": "stone_to_mud",
+    "index": 273,
     "name": "Stone to Mud",
     "symbol": "-",
     "color": "d",
@@ -7900,8 +8174,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 274,
+  "polymorph_274": {
+    "key": "polymorph_274",
+    "index": 274,
     "name": "Polymorph",
     "symbol": "-",
     "color": "d",
@@ -7925,8 +8200,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 275,
+  "heal_monster": {
+    "key": "heal_monster",
+    "index": 275,
     "name": "Heal Monster",
     "symbol": "-",
     "color": "d",
@@ -7950,8 +8226,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 276,
+  "haste_monster": {
+    "key": "haste_monster",
+    "index": 276,
     "name": "Haste Monster",
     "symbol": "-",
     "color": "d",
@@ -7975,8 +8252,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 277,
+  "slow_monster_277": {
+    "key": "slow_monster_277",
+    "index": 277,
     "name": "Slow Monster",
     "symbol": "-",
     "color": "d",
@@ -8000,8 +8278,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 278,
+  "confuse_monster": {
+    "key": "confuse_monster",
+    "index": 278,
     "name": "Confuse Monster",
     "symbol": "-",
     "color": "d",
@@ -8025,8 +8304,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 279,
+  "sleep_monster_279": {
+    "key": "sleep_monster_279",
+    "index": 279,
     "name": "Sleep Monster",
     "symbol": "-",
     "color": "d",
@@ -8050,8 +8330,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 280,
+  "drain_life_280": {
+    "key": "drain_life_280",
+    "index": 280,
     "name": "Drain Life",
     "symbol": "-",
     "color": "d",
@@ -8075,8 +8356,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 281,
+  "trapdoor_destruction_281": {
+    "key": "trapdoor_destruction_281",
+    "index": 281,
     "name": "Trap/Door Destruction",
     "symbol": "-",
     "color": "d",
@@ -8100,8 +8382,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 282,
+  "magic_missile": {
+    "key": "magic_missile",
+    "index": 282,
     "name": "Magic Missile",
     "symbol": "-",
     "color": "d",
@@ -8125,8 +8408,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 283,
+  "clone_monster": {
+    "key": "clone_monster",
+    "index": 283,
     "name": "Clone Monster",
     "symbol": "-",
     "color": "d",
@@ -8154,8 +8438,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 284,
+  "scare_monster": {
+    "key": "scare_monster",
+    "index": 284,
     "name": "Scare Monster",
     "symbol": "-",
     "color": "d",
@@ -8179,8 +8464,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 285,
+  "teleport_other_285": {
+    "key": "teleport_other_285",
+    "index": 285,
     "name": "Teleport Other",
     "symbol": "-",
     "color": "d",
@@ -8204,8 +8490,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 286,
+  "disarming_286": {
+    "key": "disarming_286",
+    "index": 286,
     "name": "Disarming",
     "symbol": "-",
     "color": "d",
@@ -8229,8 +8516,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 287,
+  "lightning_balls_287": {
+    "key": "lightning_balls_287",
+    "index": 287,
     "name": "Lightning Balls",
     "symbol": "-",
     "color": "d",
@@ -8260,8 +8548,9 @@
       "IGNORE_ELEC"
     ]
   },
-  {
-    "id": 288,
+  "cold_balls_288": {
+    "key": "cold_balls_288",
+    "index": 288,
     "name": "Cold Balls",
     "symbol": "-",
     "color": "d",
@@ -8291,8 +8580,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 289,
+  "fire_balls_289": {
+    "key": "fire_balls_289",
+    "index": 289,
     "name": "Fire Balls",
     "symbol": "-",
     "color": "d",
@@ -8322,8 +8612,9 @@
       "IGNORE_FIRE"
     ]
   },
-  {
-    "id": 290,
+  "stinking_cloud": {
+    "key": "stinking_cloud",
+    "index": 290,
     "name": "Stinking Cloud",
     "symbol": "-",
     "color": "d",
@@ -8347,8 +8638,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 291,
+  "acid_balls_291": {
+    "key": "acid_balls_291",
+    "index": 291,
     "name": "Acid Balls",
     "symbol": "-",
     "color": "d",
@@ -8378,8 +8670,9 @@
       "IGNORE_ACID"
     ]
   },
-  {
-    "id": 292,
+  "wonder": {
+    "key": "wonder",
+    "index": 292,
     "name": "Wonder",
     "symbol": "-",
     "color": "d",
@@ -8408,8 +8701,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 293,
+  "flight_arrow": {
+    "key": "flight_arrow",
+    "index": 293,
     "name": "& Flight Arrow~",
     "symbol": "{",
     "color": "y",
@@ -8439,8 +8733,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 294,
+  "acid_bolts_294": {
+    "key": "acid_bolts_294",
+    "index": 294,
     "name": "Acid Bolts",
     "symbol": "-",
     "color": "d",
@@ -8472,8 +8767,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 295,
+  "dragons_flame": {
+    "key": "dragons_flame",
+    "index": 295,
     "name": "Dragon's Flame",
     "symbol": "-",
     "color": "d",
@@ -8506,8 +8802,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 296,
+  "dragons_frost": {
+    "key": "dragons_frost",
+    "index": 296,
     "name": "Dragon's Frost",
     "symbol": "-",
     "color": "d",
@@ -8540,8 +8837,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 297,
+  "dragons_breath": {
+    "key": "dragons_breath",
+    "index": 297,
     "name": "Dragon's Breath",
     "symbol": "-",
     "color": "d",
@@ -8574,8 +8872,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 298,
+  "annihilation": {
+    "key": "annihilation",
+    "index": 298,
     "name": "Annihilation",
     "symbol": "-",
     "color": "d",
@@ -8604,8 +8903,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 299,
+  "rockets": {
+    "key": "rockets",
+    "index": 299,
     "name": "Rockets",
     "symbol": "-",
     "color": "d",
@@ -8634,8 +8934,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 300,
+  "trap_location_300": {
+    "key": "trap_location_300",
+    "index": 300,
     "name": "Trap Location",
     "symbol": "_",
     "color": "d",
@@ -8659,8 +8960,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 301,
+  "treasure_location": {
+    "key": "treasure_location",
+    "index": 301,
     "name": "Treasure Location",
     "symbol": "_",
     "color": "d",
@@ -8684,8 +8986,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 302,
+  "object_location": {
+    "key": "object_location",
+    "index": 302,
     "name": "Object Location",
     "symbol": "_",
     "color": "d",
@@ -8709,8 +9012,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 303,
+  "teleportation_303": {
+    "key": "teleportation_303",
+    "index": 303,
     "name": "Teleportation",
     "symbol": "_",
     "color": "d",
@@ -8734,8 +9038,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 304,
+  "earthquakes": {
+    "key": "earthquakes",
+    "index": 304,
     "name": "Earthquakes",
     "symbol": "_",
     "color": "d",
@@ -8759,8 +9064,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 305,
+  "summoning": {
+    "key": "summoning",
+    "index": 305,
     "name": "Summoning",
     "symbol": "_",
     "color": "d",
@@ -8788,8 +9094,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 306,
+  "light_306": {
+    "key": "light_306",
+    "index": 306,
     "name": "Light",
     "symbol": "_",
     "color": "d",
@@ -8813,8 +9120,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 307,
+  "destruction_307": {
+    "key": "destruction_307",
+    "index": 307,
     "name": "*Destruction*",
     "symbol": "_",
     "color": "d",
@@ -8842,8 +9150,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 308,
+  "starlight": {
+    "key": "starlight",
+    "index": 308,
     "name": "Starlight",
     "symbol": "_",
     "color": "d",
@@ -8867,8 +9176,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 309,
+  "haste_monsters": {
+    "key": "haste_monsters",
+    "index": 309,
     "name": "Haste Monsters",
     "symbol": "_",
     "color": "d",
@@ -8892,8 +9202,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 310,
+  "slow_monsters": {
+    "key": "slow_monsters",
+    "index": 310,
     "name": "Slow Monsters",
     "symbol": "_",
     "color": "d",
@@ -8917,8 +9228,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 311,
+  "sleep_monsters": {
+    "key": "sleep_monsters",
+    "index": 311,
     "name": "Sleep Monsters",
     "symbol": "_",
     "color": "d",
@@ -8942,8 +9254,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 312,
+  "cure_light_wounds_312": {
+    "key": "cure_light_wounds_312",
+    "index": 312,
     "name": "Cure Light Wounds",
     "symbol": "_",
     "color": "d",
@@ -8967,8 +9280,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 313,
+  "detect_invisible_313": {
+    "key": "detect_invisible_313",
+    "index": 313,
     "name": "Detect Invisible",
     "symbol": "_",
     "color": "d",
@@ -8992,8 +9306,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 314,
+  "speed_314": {
+    "key": "speed_314",
+    "index": 314,
     "name": "Speed",
     "symbol": "_",
     "color": "d",
@@ -9017,8 +9332,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 315,
+  "slowness_315": {
+    "key": "slowness_315",
+    "index": 315,
     "name": "Slowness",
     "symbol": "_",
     "color": "d",
@@ -9042,8 +9358,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 316,
+  "doorstair_location_316": {
+    "key": "doorstair_location_316",
+    "index": 316,
     "name": "Door/Stair Location",
     "symbol": "_",
     "color": "d",
@@ -9067,8 +9384,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 317,
+  "remove_curse_317": {
+    "key": "remove_curse_317",
+    "index": 317,
     "name": "Remove Curse",
     "symbol": "_",
     "color": "d",
@@ -9092,8 +9410,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 318,
+  "detect_evil": {
+    "key": "detect_evil",
+    "index": 318,
     "name": "Detect Evil",
     "symbol": "_",
     "color": "d",
@@ -9117,8 +9436,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 319,
+  "curing_319": {
+    "key": "curing_319",
+    "index": 319,
     "name": "Curing",
     "symbol": "_",
     "color": "d",
@@ -9142,8 +9462,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 320,
+  "dispel_evil": {
+    "key": "dispel_evil",
+    "index": 320,
     "name": "Dispel Evil",
     "symbol": "_",
     "color": "d",
@@ -9167,8 +9488,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 321,
+  "probing_321": {
+    "key": "probing_321",
+    "index": 321,
     "name": "Probing",
     "symbol": "_",
     "color": "d",
@@ -9192,8 +9514,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 322,
+  "darkness_322": {
+    "key": "darkness_322",
+    "index": 322,
     "name": "Darkness",
     "symbol": "_",
     "color": "d",
@@ -9217,8 +9540,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 323,
+  "genocide_323": {
+    "key": "genocide_323",
+    "index": 323,
     "name": "Genocide",
     "symbol": "_",
     "color": "d",
@@ -9242,8 +9566,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 324,
+  "power": {
+    "key": "power",
+    "index": 324,
     "name": "Power",
     "symbol": "_",
     "color": "d",
@@ -9267,8 +9592,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 325,
+  "the_magi_325": {
+    "key": "the_magi_325",
+    "index": 325,
     "name": "the Magi",
     "symbol": "_",
     "color": "d",
@@ -9292,8 +9618,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 326,
+  "perception_326": {
+    "key": "perception_326",
+    "index": 326,
     "name": "Perception",
     "symbol": "_",
     "color": "d",
@@ -9325,8 +9652,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 327,
+  "holiness": {
+    "key": "holiness",
+    "index": 327,
     "name": "Holiness",
     "symbol": "_",
     "color": "d",
@@ -9350,8 +9678,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 328,
+  "enlightenment_328": {
+    "key": "enlightenment_328",
+    "index": 328,
     "name": "Enlightenment",
     "symbol": "_",
     "color": "d",
@@ -9375,8 +9704,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 329,
+  "healing_329": {
+    "key": "healing_329",
+    "index": 329,
     "name": "Healing",
     "symbol": "_",
     "color": "d",
@@ -9400,8 +9730,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 330,
+  "book_of_common_prayer": {
+    "key": "book_of_common_prayer",
+    "index": 330,
     "name": "[Book of Common Prayer]",
     "symbol": "?",
     "color": "W",
@@ -9427,8 +9758,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 331,
+  "high_mass": {
+    "key": "high_mass",
+    "index": 331,
     "name": "[High Mass]",
     "symbol": "?",
     "color": "W",
@@ -9454,8 +9786,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 332,
+  "book_of_the_unicorn": {
+    "key": "book_of_the_unicorn",
+    "index": 332,
     "name": "[Book of the Unicorn]",
     "symbol": "?",
     "color": "w",
@@ -9485,8 +9818,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 333,
+  "blessings_of_the_grail": {
+    "key": "blessings_of_the_grail",
+    "index": 333,
     "name": "[Blessings of the Grail]",
     "symbol": "?",
     "color": "w",
@@ -9516,8 +9850,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 334,
+  "beginners_handbook": {
+    "key": "beginners_handbook",
+    "index": 334,
     "name": "[Beginner's Handbook]",
     "symbol": "?",
     "color": "B",
@@ -9543,8 +9878,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 335,
+  "master_sorcerers_handbook": {
+    "key": "master_sorcerers_handbook",
+    "index": 335,
     "name": "[Master Sorcerer's Handbook]",
     "symbol": "?",
     "color": "B",
@@ -9570,8 +9906,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 336,
+  "pattern_sorcery": {
+    "key": "pattern_sorcery",
+    "index": 336,
     "name": "[Pattern Sorcery]",
     "symbol": "?",
     "color": "b",
@@ -9601,8 +9938,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 337,
+  "grimoire_of_power": {
+    "key": "grimoire_of_power",
+    "index": 337,
     "name": "[Grimoire of Power]",
     "symbol": "?",
     "color": "b",
@@ -9632,8 +9970,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 338,
+  "small_wooden_chest": {
+    "key": "small_wooden_chest",
+    "index": 338,
     "name": "& Small wooden chest~",
     "symbol": "&",
     "color": "o",
@@ -9657,8 +9996,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 339,
+  "large_wooden_chest": {
+    "key": "large_wooden_chest",
+    "index": 339,
     "name": "& Large wooden chest~",
     "symbol": "&",
     "color": "U",
@@ -9682,8 +10022,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 340,
+  "small_iron_chest": {
+    "key": "small_iron_chest",
+    "index": 340,
     "name": "& Small iron chest~",
     "symbol": "&",
     "color": "D",
@@ -9707,8 +10048,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 341,
+  "large_iron_chest": {
+    "key": "large_iron_chest",
+    "index": 341,
     "name": "& Large iron chest~",
     "symbol": "&",
     "color": "s",
@@ -9732,8 +10074,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 342,
+  "small_steel_chest": {
+    "key": "small_steel_chest",
+    "index": 342,
     "name": "& Small steel chest~",
     "symbol": "&",
     "color": "s",
@@ -9757,8 +10100,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 343,
+  "large_steel_chest": {
+    "key": "large_steel_chest",
+    "index": 343,
     "name": "& Large steel chest~",
     "symbol": "&",
     "color": "W",
@@ -9782,8 +10126,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 344,
+  "ruined_chest": {
+    "key": "ruined_chest",
+    "index": 344,
     "name": "& Ruined chest~",
     "symbol": "&",
     "color": "u",
@@ -9811,8 +10156,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 345,
+  "iron_spike": {
+    "key": "iron_spike",
+    "index": 345,
     "name": "& Iron Spike~",
     "symbol": "~",
     "color": "W",
@@ -9838,8 +10184,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 346,
+  "wooden_torch": {
+    "key": "wooden_torch",
+    "index": 346,
     "name": "& Wooden Torch~",
     "symbol": "~",
     "color": "u",
@@ -9869,8 +10216,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 347,
+  "brass_lantern": {
+    "key": "brass_lantern",
+    "index": 347,
     "name": "& Brass Lantern~",
     "symbol": "~",
     "color": "U",
@@ -9905,8 +10253,9 @@
       "IGNORE_FIRE"
     ]
   },
-  {
-    "id": 348,
+  "flask_of_oil": {
+    "key": "flask_of_oil",
+    "index": 348,
     "name": "& Flask~ of oil",
     "symbol": "!",
     "color": "y",
@@ -9940,8 +10289,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 349,
+  "empty_bottle": {
+    "key": "empty_bottle",
+    "index": 349,
     "name": "& Empty Bottle~",
     "symbol": "!",
     "color": "w",
@@ -9967,8 +10317,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 350,
+  "havoc": {
+    "key": "havoc",
+    "index": 350,
     "name": "Havoc",
     "symbol": "-",
     "color": "d",
@@ -9998,8 +10349,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 351,
+  "doorstair_location_351": {
+    "key": "doorstair_location_351",
+    "index": 351,
     "name": "Door/Stair Location",
     "symbol": "-",
     "color": "d",
@@ -10025,8 +10377,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 352,
+  "trap_location_352": {
+    "key": "trap_location_352",
+    "index": 352,
     "name": "Trap Location",
     "symbol": "-",
     "color": "d",
@@ -10052,8 +10405,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 353,
+  "probing_353": {
+    "key": "probing_353",
+    "index": 353,
     "name": "Probing",
     "symbol": "-",
     "color": "d",
@@ -10079,8 +10433,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 354,
+  "recall": {
+    "key": "recall",
+    "index": 354,
     "name": "Recall",
     "symbol": "-",
     "color": "d",
@@ -10110,8 +10465,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 355,
+  "illumination": {
+    "key": "illumination",
+    "index": 355,
     "name": "Illumination",
     "symbol": "-",
     "color": "d",
@@ -10137,8 +10493,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 356,
+  "light_356": {
+    "key": "light_356",
+    "index": 356,
     "name": "Light",
     "symbol": "-",
     "color": "d",
@@ -10168,8 +10525,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 357,
+  "lightning_bolts": {
+    "key": "lightning_bolts",
+    "index": 357,
     "name": "Lightning Bolts",
     "symbol": "-",
     "color": "d",
@@ -10199,8 +10557,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 358,
+  "frost_bolts_358": {
+    "key": "frost_bolts_358",
+    "index": 358,
     "name": "Frost Bolts",
     "symbol": "-",
     "color": "d",
@@ -10230,8 +10589,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 359,
+  "fire_bolts_359": {
+    "key": "fire_bolts_359",
+    "index": 359,
     "name": "Fire Bolts",
     "symbol": "-",
     "color": "d",
@@ -10261,8 +10621,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 360,
+  "polymorph_360": {
+    "key": "polymorph_360",
+    "index": 360,
     "name": "Polymorph",
     "symbol": "-",
     "color": "d",
@@ -10288,8 +10649,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 361,
+  "slow_monster_361": {
+    "key": "slow_monster_361",
+    "index": 361,
     "name": "Slow Monster",
     "symbol": "-",
     "color": "d",
@@ -10315,8 +10677,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 362,
+  "sleep_monster_362": {
+    "key": "sleep_monster_362",
+    "index": 362,
     "name": "Sleep Monster",
     "symbol": "-",
     "color": "d",
@@ -10342,8 +10705,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 363,
+  "drain_life_363": {
+    "key": "drain_life_363",
+    "index": 363,
     "name": "Drain Life",
     "symbol": "-",
     "color": "d",
@@ -10373,8 +10737,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 364,
+  "teleport_other_364": {
+    "key": "teleport_other_364",
+    "index": 364,
     "name": "Teleport Other",
     "symbol": "-",
     "color": "d",
@@ -10404,8 +10769,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 365,
+  "disarming_365": {
+    "key": "disarming_365",
+    "index": 365,
     "name": "Disarming",
     "symbol": "-",
     "color": "d",
@@ -10435,8 +10801,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 366,
+  "lightning_balls_366": {
+    "key": "lightning_balls_366",
+    "index": 366,
     "name": "Lightning Balls",
     "symbol": "-",
     "color": "d",
@@ -10466,8 +10833,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 367,
+  "cold_balls_367": {
+    "key": "cold_balls_367",
+    "index": 367,
     "name": "Cold Balls",
     "symbol": "-",
     "color": "d",
@@ -10497,8 +10865,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 368,
+  "fire_balls_368": {
+    "key": "fire_balls_368",
+    "index": 368,
     "name": "Fire Balls",
     "symbol": "-",
     "color": "d",
@@ -10528,8 +10897,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 369,
+  "acid_balls_369": {
+    "key": "acid_balls_369",
+    "index": 369,
     "name": "Acid Balls",
     "symbol": "-",
     "color": "d",
@@ -10559,8 +10929,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 370,
+  "acid_bolts_370": {
+    "key": "acid_bolts_370",
+    "index": 370,
     "name": "Acid Bolts",
     "symbol": "-",
     "color": "d",
@@ -10590,8 +10961,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 371,
+  "enlightenment_371": {
+    "key": "enlightenment_371",
+    "index": 371,
     "name": "Enlightenment",
     "symbol": "-",
     "color": "d",
@@ -10621,8 +10993,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 372,
+  "perception_372": {
+    "key": "perception_372",
+    "index": 372,
     "name": "Perception",
     "symbol": "-",
     "color": "d",
@@ -10652,8 +11025,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 373,
+  "curing_373": {
+    "key": "curing_373",
+    "index": 373,
     "name": "Curing",
     "symbol": "-",
     "color": "d",
@@ -10683,8 +11057,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 374,
+  "healing_374": {
+    "key": "healing_374",
+    "index": 374,
     "name": "Healing",
     "symbol": "-",
     "color": "d",
@@ -10714,8 +11089,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 375,
+  "detection": {
+    "key": "detection",
+    "index": 375,
     "name": "Detection",
     "symbol": "-",
     "color": "d",
@@ -10745,8 +11121,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 376,
+  "restoration": {
+    "key": "restoration",
+    "index": 376,
     "name": "Restoration",
     "symbol": "-",
     "color": "d",
@@ -10776,8 +11153,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 377,
+  "speed_377": {
+    "key": "speed_377",
+    "index": 377,
     "name": "Speed",
     "symbol": "-",
     "color": "d",
@@ -10807,8 +11185,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 378,
+  "pesticide": {
+    "key": "pesticide",
+    "index": 378,
     "name": "Pesticide",
     "symbol": "-",
     "color": "d",
@@ -10834,8 +11213,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 379,
+  "call_of_the_wild": {
+    "key": "call_of_the_wild",
+    "index": 379,
     "name": "[Call of the Wild]",
     "symbol": "?",
     "color": "G",
@@ -10861,8 +11241,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 380,
+  "nature_mastery": {
+    "key": "nature_mastery",
+    "index": 380,
     "name": "[Nature Mastery]",
     "symbol": "?",
     "color": "G",
@@ -10888,8 +11269,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 381,
+  "natures_gifts": {
+    "key": "natures_gifts",
+    "index": 381,
     "name": "[Nature's Gifts]",
     "symbol": "?",
     "color": "g",
@@ -10919,8 +11301,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 382,
+  "natures_wrath": {
+    "key": "natures_wrath",
+    "index": 382,
     "name": "[Nature's Wrath]",
     "symbol": "?",
     "color": "g",
@@ -10950,8 +11333,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 383,
+  "sign_of_chaos": {
+    "key": "sign_of_chaos",
+    "index": 383,
     "name": "[Sign of Chaos]",
     "symbol": "?",
     "color": "R",
@@ -10977,8 +11361,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 384,
+  "chaos_mastery": {
+    "key": "chaos_mastery",
+    "index": 384,
     "name": "[Chaos Mastery]",
     "symbol": "?",
     "color": "R",
@@ -11004,8 +11389,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 385,
+  "chaos_channels": {
+    "key": "chaos_channels",
+    "index": 385,
     "name": "[Chaos Channels]",
     "symbol": "?",
     "color": "r",
@@ -11035,8 +11421,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 386,
+  "armageddon_tome": {
+    "key": "armageddon_tome",
+    "index": 386,
     "name": "[Armageddon Tome]",
     "symbol": "?",
     "color": "r",
@@ -11066,8 +11453,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 387,
+  "black_prayers": {
+    "key": "black_prayers",
+    "index": 387,
     "name": "[Black Prayers]",
     "symbol": "?",
     "color": "D",
@@ -11093,8 +11481,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 388,
+  "black_mass": {
+    "key": "black_mass",
+    "index": 388,
     "name": "[Black Mass]",
     "symbol": "?",
     "color": "D",
@@ -11120,8 +11509,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 389,
+  "shard_of_pottery": {
+    "key": "shard_of_pottery",
+    "index": 389,
     "name": "& Shard~ of Pottery",
     "symbol": "~",
     "color": "r",
@@ -11147,8 +11537,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 390,
+  "broken_stick": {
+    "key": "broken_stick",
+    "index": 390,
     "name": "& Broken Stick~",
     "symbol": "~",
     "color": "r",
@@ -11174,8 +11565,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 391,
+  "broken_skull": {
+    "key": "broken_skull",
+    "index": 391,
     "name": "& Broken Skull~",
     "symbol": "~",
     "color": "w",
@@ -11201,8 +11593,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 392,
+  "broken_bone": {
+    "key": "broken_bone",
+    "index": 392,
     "name": "& Broken Bone~",
     "symbol": "~",
     "color": "w",
@@ -11228,8 +11621,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 393,
+  "canine_skeleton": {
+    "key": "canine_skeleton",
+    "index": 393,
     "name": "& Canine Skeleton~",
     "symbol": "~",
     "color": "w",
@@ -11255,8 +11649,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 394,
+  "rodent_skeleton": {
+    "key": "rodent_skeleton",
+    "index": 394,
     "name": "& Rodent Skeleton~",
     "symbol": "~",
     "color": "w",
@@ -11282,8 +11677,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 395,
+  "human_skeleton": {
+    "key": "human_skeleton",
+    "index": 395,
     "name": "& Human Skeleton~",
     "symbol": "~",
     "color": "w",
@@ -11309,8 +11705,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 396,
+  "dwarf_skeleton": {
+    "key": "dwarf_skeleton",
+    "index": 396,
     "name": "& Dwarf Skeleton~",
     "symbol": "~",
     "color": "w",
@@ -11336,8 +11733,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 397,
+  "elf_skeleton": {
+    "key": "elf_skeleton",
+    "index": 397,
     "name": "& Elf Skeleton~",
     "symbol": "~",
     "color": "w",
@@ -11363,8 +11761,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 398,
+  "gnome_skeleton": {
+    "key": "gnome_skeleton",
+    "index": 398,
     "name": "& Gnome Skeleton~",
     "symbol": "~",
     "color": "w",
@@ -11390,8 +11789,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 399,
+  "great_hammer": {
+    "key": "great_hammer",
+    "index": 399,
     "name": "& Great Hammer~",
     "symbol": "\\",
     "color": "D",
@@ -11421,8 +11821,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 400,
+  "black_dragon_scale_mail": {
+    "key": "black_dragon_scale_mail",
+    "index": 400,
     "name": "Black Dragon Scale Mail~",
     "symbol": "[",
     "color": "s",
@@ -11453,8 +11854,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 401,
+  "blue_dragon_scale_mail": {
+    "key": "blue_dragon_scale_mail",
+    "index": 401,
     "name": "Blue Dragon Scale Mail~",
     "symbol": "[",
     "color": "b",
@@ -11485,8 +11887,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 402,
+  "white_dragon_scale_mail": {
+    "key": "white_dragon_scale_mail",
+    "index": 402,
     "name": "White Dragon Scale Mail~",
     "symbol": "[",
     "color": "w",
@@ -11517,8 +11920,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 403,
+  "red_dragon_scale_mail": {
+    "key": "red_dragon_scale_mail",
+    "index": 403,
     "name": "Red Dragon Scale Mail~",
     "symbol": "[",
     "color": "r",
@@ -11549,8 +11953,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 404,
+  "green_dragon_scale_mail": {
+    "key": "green_dragon_scale_mail",
+    "index": 404,
     "name": "Green Dragon Scale Mail~",
     "symbol": "[",
     "color": "g",
@@ -11581,8 +11986,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 405,
+  "multihued_dragon_scale_mail": {
+    "key": "multihued_dragon_scale_mail",
+    "index": 405,
     "name": "Multi-Hued Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
@@ -11617,8 +12023,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 406,
+  "pseudo_dragon_scale_mail": {
+    "key": "pseudo_dragon_scale_mail",
+    "index": 406,
     "name": "Pseudo Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
@@ -11650,8 +12057,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 407,
+  "law_dragon_scale_mail": {
+    "key": "law_dragon_scale_mail",
+    "index": 407,
     "name": "Law Dragon Scale Mail~",
     "symbol": "[",
     "color": "B",
@@ -11683,8 +12091,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 408,
+  "bronze_dragon_scale_mail": {
+    "key": "bronze_dragon_scale_mail",
+    "index": 408,
     "name": "Bronze Dragon Scale Mail~",
     "symbol": "[",
     "color": "U",
@@ -11715,8 +12124,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 409,
+  "gold_dragon_scale_mail": {
+    "key": "gold_dragon_scale_mail",
+    "index": 409,
     "name": "Gold Dragon Scale Mail~",
     "symbol": "[",
     "color": "y",
@@ -11747,8 +12157,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 410,
+  "chaos_dragon_scale_mail": {
+    "key": "chaos_dragon_scale_mail",
+    "index": 410,
     "name": "Chaos Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
@@ -11780,8 +12191,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 411,
+  "balance_dragon_scale_mail": {
+    "key": "balance_dragon_scale_mail",
+    "index": 411,
     "name": "Balance Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
@@ -11815,8 +12227,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 412,
+  "power_dragon_scale_mail": {
+    "key": "power_dragon_scale_mail",
+    "index": 412,
     "name": "Power Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
@@ -11860,8 +12273,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 413,
+  "dragon_helm": {
+    "key": "dragon_helm",
+    "index": 413,
     "name": "& Dragon Helm~",
     "symbol": "]",
     "color": "G",
@@ -11894,8 +12308,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 414,
+  "dragon_shield": {
+    "key": "dragon_shield",
+    "index": 414,
     "name": "& Dragon Shield~",
     "symbol": "[",
     "color": "G",
@@ -11928,8 +12343,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 415,
+  "death": {
+    "key": "death",
+    "index": 415,
     "name": "Death",
     "symbol": "!",
     "color": "d",
@@ -11955,8 +12371,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 416,
+  "ruination": {
+    "key": "ruination",
+    "index": 416,
     "name": "Ruination",
     "symbol": "!",
     "color": "d",
@@ -11982,8 +12399,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 417,
+  "detonations": {
+    "key": "detonations",
+    "index": 417,
     "name": "Detonations",
     "symbol": "!",
     "color": "d",
@@ -12009,8 +12427,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 418,
+  "augmentation": {
+    "key": "augmentation",
+    "index": 418,
     "name": "Augmentation",
     "symbol": "!",
     "color": "d",
@@ -12036,8 +12455,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 419,
+  "healing_419": {
+    "key": "healing_419",
+    "index": 419,
     "name": "*Healing*",
     "symbol": "!",
     "color": "d",
@@ -12075,8 +12495,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 420,
+  "life": {
+    "key": "life",
+    "index": 420,
     "name": "Life",
     "symbol": "!",
     "color": "d",
@@ -12106,8 +12527,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 421,
+  "self_knowledge": {
+    "key": "self_knowledge",
+    "index": 421,
     "name": "Self Knowledge",
     "symbol": "!",
     "color": "d",
@@ -12137,8 +12559,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 422,
+  "enlightenment_422": {
+    "key": "enlightenment_422",
+    "index": 422,
     "name": "*Enlightenment*",
     "symbol": "!",
     "color": "d",
@@ -12164,8 +12587,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 423,
+  "black_channels": {
+    "key": "black_channels",
+    "index": 423,
     "name": "[Black Channels]",
     "symbol": "?",
     "color": "v",
@@ -12195,8 +12619,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 424,
+  "necronomicon": {
+    "key": "necronomicon",
+    "index": 424,
     "name": "[Necronomicon]",
     "symbol": "?",
     "color": "v",
@@ -12226,8 +12651,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 425,
+  "fear_resistance": {
+    "key": "fear_resistance",
+    "index": 425,
     "name": "Fear Resistance",
     "symbol": "=",
     "color": "d",
@@ -12254,8 +12680,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 426,
+  "light_and_darkness_resistance": {
+    "key": "light_and_darkness_resistance",
+    "index": 426,
     "name": "Light and Darkness Resistance",
     "symbol": "=",
     "color": "d",
@@ -12283,8 +12710,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 427,
+  "nether_resistance": {
+    "key": "nether_resistance",
+    "index": 427,
     "name": "Nether Resistance",
     "symbol": "=",
     "color": "d",
@@ -12312,8 +12740,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 428,
+  "nexus_resistance": {
+    "key": "nexus_resistance",
+    "index": 428,
     "name": "Nexus Resistance",
     "symbol": "=",
     "color": "d",
@@ -12340,8 +12769,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 429,
+  "sound_resistance": {
+    "key": "sound_resistance",
+    "index": 429,
     "name": "Sound Resistance",
     "symbol": "=",
     "color": "d",
@@ -12368,8 +12798,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 430,
+  "confusion_resistance": {
+    "key": "confusion_resistance",
+    "index": 430,
     "name": "Confusion Resistance",
     "symbol": "=",
     "color": "d",
@@ -12396,8 +12827,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 431,
+  "shard_resistance": {
+    "key": "shard_resistance",
+    "index": 431,
     "name": "Shard Resistance",
     "symbol": "=",
     "color": "d",
@@ -12424,8 +12856,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 432,
+  "disenchantment_resistance": {
+    "key": "disenchantment_resistance",
+    "index": 432,
     "name": "Disenchantment Resistance",
     "symbol": "=",
     "color": "d",
@@ -12452,8 +12885,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 433,
+  "chaos_resistance": {
+    "key": "chaos_resistance",
+    "index": 433,
     "name": "Chaos Resistance",
     "symbol": "=",
     "color": "d",
@@ -12481,8 +12915,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 434,
+  "blindness_resistance": {
+    "key": "blindness_resistance",
+    "index": 434,
     "name": "Blindness Resistance",
     "symbol": "=",
     "color": "d",
@@ -12509,8 +12944,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 435,
+  "lordly_protection": {
+    "key": "lordly_protection",
+    "index": 435,
     "name": "Lordly Protection",
     "symbol": "=",
     "color": "d",
@@ -12539,8 +12975,9 @@
       "FREE_ACT"
     ]
   },
-  {
-    "id": 436,
+  "extra_attacks": {
+    "key": "extra_attacks",
+    "index": 436,
     "name": "Extra Attacks",
     "symbol": "=",
     "color": "d",
@@ -12570,8 +13007,9 @@
       "BLOWS"
     ]
   },
-  {
-    "id": 437,
+  "cure_light_wounds_437": {
+    "key": "cure_light_wounds_437",
+    "index": 437,
     "name": "Cure Light Wounds",
     "symbol": "!",
     "color": "d",
@@ -12601,8 +13039,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 438,
+  "clumsiness": {
+    "key": "clumsiness",
+    "index": 438,
     "name": "Clumsiness",
     "symbol": "!",
     "color": "d",
@@ -12628,8 +13067,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 439,
+  "sickliness": {
+    "key": "sickliness",
+    "index": 439,
     "name": "Sickliness",
     "symbol": "!",
     "color": "d",
@@ -12655,8 +13095,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 480,
+  "copper_480": {
+    "key": "copper_480",
+    "index": 480,
     "name": "copper",
     "symbol": "$",
     "color": "u",
@@ -12675,8 +13116,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 481,
+  "copper_481": {
+    "key": "copper_481",
+    "index": 481,
     "name": "copper",
     "symbol": "$",
     "color": "u",
@@ -12695,8 +13137,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 482,
+  "copper_482": {
+    "key": "copper_482",
+    "index": 482,
     "name": "copper",
     "symbol": "$",
     "color": "u",
@@ -12715,8 +13158,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 483,
+  "silver_483": {
+    "key": "silver_483",
+    "index": 483,
     "name": "silver",
     "symbol": "$",
     "color": "s",
@@ -12735,8 +13179,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 484,
+  "silver_484": {
+    "key": "silver_484",
+    "index": 484,
     "name": "silver",
     "symbol": "$",
     "color": "s",
@@ -12755,8 +13200,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 485,
+  "silver_485": {
+    "key": "silver_485",
+    "index": 485,
     "name": "silver",
     "symbol": "$",
     "color": "s",
@@ -12775,8 +13221,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 486,
+  "garnets_486": {
+    "key": "garnets_486",
+    "index": 486,
     "name": "garnets",
     "symbol": "$",
     "color": "r",
@@ -12795,8 +13242,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 487,
+  "garnets_487": {
+    "key": "garnets_487",
+    "index": 487,
     "name": "garnets",
     "symbol": "$",
     "color": "r",
@@ -12815,8 +13263,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 488,
+  "gold_488": {
+    "key": "gold_488",
+    "index": 488,
     "name": "gold",
     "symbol": "$",
     "color": "y",
@@ -12835,8 +13284,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 489,
+  "gold_489": {
+    "key": "gold_489",
+    "index": 489,
     "name": "gold",
     "symbol": "$",
     "color": "y",
@@ -12855,8 +13305,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 490,
+  "gold_490": {
+    "key": "gold_490",
+    "index": 490,
     "name": "gold",
     "symbol": "$",
     "color": "y",
@@ -12875,8 +13326,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 491,
+  "opals": {
+    "key": "opals",
+    "index": 491,
     "name": "opals",
     "symbol": "$",
     "color": "W",
@@ -12895,8 +13347,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 492,
+  "sapphires": {
+    "key": "sapphires",
+    "index": 492,
     "name": "sapphires",
     "symbol": "$",
     "color": "b",
@@ -12915,8 +13368,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 493,
+  "rubies": {
+    "key": "rubies",
+    "index": 493,
     "name": "rubies",
     "symbol": "$",
     "color": "r",
@@ -12935,8 +13389,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 494,
+  "diamonds": {
+    "key": "diamonds",
+    "index": 494,
     "name": "diamonds",
     "symbol": "$",
     "color": "w",
@@ -12955,8 +13410,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 495,
+  "emeralds": {
+    "key": "emeralds",
+    "index": 495,
     "name": "emeralds",
     "symbol": "$",
     "color": "g",
@@ -12975,8 +13431,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 496,
+  "mithril": {
+    "key": "mithril",
+    "index": 496,
     "name": "mithril",
     "symbol": "$",
     "color": "B",
@@ -12995,8 +13452,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 497,
+  "adamantite": {
+    "key": "adamantite",
+    "index": 497,
     "name": "adamantite",
     "symbol": "$",
     "color": "G",
@@ -13015,8 +13473,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 498,
+  "mighty_hammer": {
+    "key": "mighty_hammer",
+    "index": 498,
     "name": "& Mighty Hammer~",
     "symbol": "\\",
     "color": "D",
@@ -13038,8 +13497,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 499,
+  "massive_iron_crown": {
+    "key": "massive_iron_crown",
+    "index": 499,
     "name": "& Massive Iron Crown~",
     "symbol": "]",
     "color": "D",
@@ -13060,8 +13520,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 500,
+  "phial": {
+    "key": "phial",
+    "index": 500,
     "name": "& Phial~",
     "symbol": "!",
     "color": "y",
@@ -13083,8 +13544,9 @@
       "LITE"
     ]
   },
-  {
-    "id": 501,
+  "star": {
+    "key": "star",
+    "index": 501,
     "name": "& Star~",
     "symbol": "*",
     "color": "y",
@@ -13106,8 +13568,9 @@
       "LITE"
     ]
   },
-  {
-    "id": 502,
+  "jewel": {
+    "key": "jewel",
+    "index": 502,
     "name": "& Jewel~",
     "symbol": "*",
     "color": "R",
@@ -13129,8 +13592,9 @@
       "LITE"
     ]
   },
-  {
-    "id": 503,
+  "amulet_503": {
+    "key": "amulet_503",
+    "index": 503,
     "name": "& Amulet~",
     "symbol": "\"",
     "color": "d",
@@ -13151,8 +13615,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 504,
+  "amulet_504": {
+    "key": "amulet_504",
+    "index": 504,
     "name": "& Amulet~",
     "symbol": "\"",
     "color": "d",
@@ -13173,8 +13638,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 505,
+  "necklace": {
+    "key": "necklace",
+    "index": 505,
     "name": "& Necklace~",
     "symbol": "\"",
     "color": "d",
@@ -13195,8 +13661,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 506,
+  "ring_506": {
+    "key": "ring_506",
+    "index": 506,
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
@@ -13217,8 +13684,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 507,
+  "ring_507": {
+    "key": "ring_507",
+    "index": 507,
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
@@ -13239,8 +13707,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 508,
+  "ring_508": {
+    "key": "ring_508",
+    "index": 508,
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
@@ -13261,8 +13730,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 509,
+  "ring_509": {
+    "key": "ring_509",
+    "index": 509,
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
@@ -13283,8 +13753,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 510,
+  "ring_510": {
+    "key": "ring_510",
+    "index": 510,
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
@@ -13305,8 +13776,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 511,
+  "ring_511": {
+    "key": "ring_511",
+    "index": 511,
     "name": "& Ring~",
     "symbol": "=",
     "color": "y",
@@ -13327,8 +13799,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 512,
+  "conjurings_tricks": {
+    "key": "conjurings_tricks",
+    "index": 512,
     "name": "[Conjurings & Tricks]",
     "symbol": "?",
     "color": "U",
@@ -13354,8 +13827,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 513,
+  "deck_of_many_things": {
+    "key": "deck_of_many_things",
+    "index": 513,
     "name": "[Deck of Many Things]",
     "symbol": "?",
     "color": "U",
@@ -13381,8 +13855,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 514,
+  "trumps_of_doom": {
+    "key": "trumps_of_doom",
+    "index": 514,
     "name": "[Trumps of Doom]",
     "symbol": "?",
     "color": "o",
@@ -13412,8 +13887,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 515,
+  "five_aces": {
+    "key": "five_aces",
+    "index": 515,
     "name": "[Five Aces]",
     "symbol": "?",
     "color": "o",
@@ -13443,8 +13919,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 516,
+  "cantrips_for_beginners": {
+    "key": "cantrips_for_beginners",
+    "index": 516,
     "name": "[Cantrips for Beginners]",
     "symbol": "?",
     "color": "s",
@@ -13470,8 +13947,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 517,
+  "minor_arcana": {
+    "key": "minor_arcana",
+    "index": 517,
     "name": "[Minor Arcana]",
     "symbol": "?",
     "color": "s",
@@ -13497,8 +13975,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 518,
+  "major_arcana": {
+    "key": "major_arcana",
+    "index": 518,
     "name": "[Major Arcana]",
     "symbol": "?",
     "color": "s",
@@ -13524,8 +14003,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 519,
+  "manual_of_mastery": {
+    "key": "manual_of_mastery",
+    "index": 519,
     "name": "[Manual of Mastery]",
     "symbol": "?",
     "color": "s",
@@ -13551,8 +14031,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 520,
+  "reflection": {
+    "key": "reflection",
+    "index": 520,
     "name": "Reflection",
     "symbol": "\"",
     "color": "d",
@@ -13583,8 +14064,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 521,
+  "antimagic": {
+    "key": "antimagic",
+    "index": 521,
     "name": "Anti-Magic",
     "symbol": "\"",
     "color": "d",
@@ -13614,8 +14096,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 522,
+  "antiteleportation": {
+    "key": "antiteleportation",
+    "index": 522,
     "name": "Anti-Teleportation",
     "symbol": "\"",
     "color": "d",
@@ -13645,8 +14128,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 523,
+  "resistance_523": {
+    "key": "resistance_523",
+    "index": 523,
     "name": "Resistance",
     "symbol": "\"",
     "color": "d",
@@ -13679,8 +14163,9 @@
       "IGNORE_COLD"
     ]
   },
-  {
-    "id": 524,
+  "zweihander": {
+    "key": "zweihander",
+    "index": 524,
     "name": "& Zweihander~",
     "symbol": "|",
     "color": "w",
@@ -13710,8 +14195,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 525,
+  "tanto": {
+    "key": "tanto",
+    "index": 525,
     "name": "& Tanto~",
     "symbol": "|",
     "color": "W",
@@ -13737,8 +14223,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 526,
+  "splint_mail": {
+    "key": "splint_mail",
+    "index": 526,
     "name": "& Splint Mail~",
     "symbol": "[",
     "color": "D",
@@ -13762,8 +14249,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 527,
+  "domaru": {
+    "key": "domaru",
+    "index": 527,
     "name": "& Do-maru~",
     "symbol": "[",
     "color": "s",
@@ -13787,8 +14275,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 528,
+  "trifurcate_spear": {
+    "key": "trifurcate_spear",
+    "index": 528,
     "name": "& Trifurcate Spear~",
     "symbol": "/",
     "color": "o",
@@ -13814,8 +14303,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 529,
+  "three_piece_rod": {
+    "key": "three_piece_rod",
+    "index": 529,
     "name": "& Three Piece Rod~",
     "symbol": "\\",
     "color": "u",
@@ -13841,8 +14331,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 530,
+  "oyoroi": {
+    "key": "oyoroi",
+    "index": 530,
     "name": "& O-yoroi~",
     "symbol": "[",
     "color": "D",
@@ -13866,8 +14357,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 531,
+  "fur_cloak": {
+    "key": "fur_cloak",
+    "index": 531,
     "name": "& Fur Cloak~",
     "symbol": "(",
     "color": "W",
@@ -13895,8 +14387,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 532,
+  "lajatang": {
+    "key": "lajatang",
+    "index": 532,
     "name": "& Lajatang~",
     "symbol": "/",
     "color": "s",
@@ -13922,8 +14415,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 533,
+  "hatchet": {
+    "key": "hatchet",
+    "index": 533,
     "name": "& Hatchet~",
     "symbol": "/",
     "color": "s",
@@ -13949,8 +14443,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 535,
+  "rhino_hide_armour": {
+    "key": "rhino_hide_armour",
+    "index": 535,
     "name": "& Rhino Hide Armour~",
     "symbol": "(",
     "color": "s",
@@ -13974,8 +14469,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 536,
+  "leather_jacket": {
+    "key": "leather_jacket",
+    "index": 536,
     "name": "& Leather Jacket~",
     "symbol": "(",
     "color": "U",
@@ -13999,8 +14495,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 537,
+  "sickle": {
+    "key": "sickle",
+    "index": 537,
     "name": "& Sickle~",
     "symbol": "/",
     "color": "s",
@@ -14026,8 +14523,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 538,
+  "tetsubo": {
+    "key": "tetsubo",
+    "index": 538,
     "name": "& Tetsubo~",
     "symbol": "\\",
     "color": "u",
@@ -14053,8 +14551,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 539,
+  "nunchaku": {
+    "key": "nunchaku",
+    "index": 539,
     "name": "& Nunchaku~",
     "symbol": "\\",
     "color": "u",
@@ -14080,8 +14579,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 540,
+  "bo_staff": {
+    "key": "bo_staff",
+    "index": 540,
     "name": "& Bo Staff~",
     "symbol": "\\",
     "color": "U",
@@ -14107,8 +14607,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 541,
+  "jo_staff": {
+    "key": "jo_staff",
+    "index": 541,
     "name": "& Jo Staff~",
     "symbol": "\\",
     "color": "U",
@@ -14134,8 +14635,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 542,
+  "club": {
+    "key": "club",
+    "index": 542,
     "name": "& Club~",
     "symbol": "\\",
     "color": "u",
@@ -14161,8 +14663,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 543,
+  "broad_spear": {
+    "key": "broad_spear",
+    "index": 543,
     "name": "& Broad Spear~",
     "symbol": "/",
     "color": "w",
@@ -14188,8 +14691,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 544,
+  "khopesh": {
+    "key": "khopesh",
+    "index": 544,
     "name": "& Khopesh~",
     "symbol": "|",
     "color": "W",
@@ -14215,8 +14719,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 545,
+  "flamberge": {
+    "key": "flamberge",
+    "index": 545,
     "name": "& Flamberge~",
     "symbol": "|",
     "color": "W",
@@ -14246,8 +14751,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 546,
+  "claymore": {
+    "key": "claymore",
+    "index": 546,
     "name": "& Claymore~",
     "symbol": "|",
     "color": "W",
@@ -14273,8 +14779,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 547,
+  "espadon": {
+    "key": "espadon",
+    "index": 547,
     "name": "& Espadon~",
     "symbol": "|",
     "color": "W",
@@ -14300,8 +14807,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 548,
+  "great_scimitar": {
+    "key": "great_scimitar",
+    "index": 548,
     "name": "& Great Scimitar~",
     "symbol": "|",
     "color": "W",
@@ -14331,8 +14839,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 549,
+  "wakizashi": {
+    "key": "wakizashi",
+    "index": 549,
     "name": "& Wakizashi~",
     "symbol": "|",
     "color": "W",
@@ -14358,8 +14867,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 550,
+  "naginata": {
+    "key": "naginata",
+    "index": 550,
     "name": "& Naginata~",
     "symbol": "/",
     "color": "s",
@@ -14385,8 +14895,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 551,
+  "fauchard": {
+    "key": "fauchard",
+    "index": 551,
     "name": "& Fauchard~",
     "symbol": "/",
     "color": "s",
@@ -14412,8 +14923,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 552,
+  "guisarme": {
+    "key": "guisarme",
+    "index": 552,
     "name": "& Guisarme~",
     "symbol": "/",
     "color": "s",
@@ -14439,8 +14951,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 553,
+  "heavy_lance": {
+    "key": "heavy_lance",
+    "index": 553,
     "name": "& Heavy Lance~",
     "symbol": "/",
     "color": "s",
@@ -14470,8 +14983,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 554,
+  "basillard": {
+    "key": "basillard",
+    "index": 554,
     "name": "& Basillard~",
     "symbol": "|",
     "color": "w",
@@ -14497,8 +15011,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 555,
+  "ninjato": {
+    "key": "ninjato",
+    "index": 555,
     "name": "& Ninjato~",
     "symbol": "|",
     "color": "s",
@@ -14524,8 +15039,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 556,
+  "ring_mail": {
+    "key": "ring_mail",
+    "index": 556,
     "name": "& Ring Mail~",
     "symbol": "[",
     "color": "s",
@@ -14549,8 +15065,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 557,
+  "cord_armour": {
+    "key": "cord_armour",
+    "index": 557,
     "name": "& Cord Armour~",
     "symbol": "(",
     "color": "y",
@@ -14574,8 +15091,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 558,
+  "paper_armour": {
+    "key": "paper_armour",
+    "index": 558,
     "name": "& Paper Armour~",
     "symbol": "(",
     "color": "w",
@@ -14599,8 +15117,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 559,
+  "padded_armour": {
+    "key": "padded_armour",
+    "index": 559,
     "name": "& Padded Armour~",
     "symbol": "(",
     "color": "y",
@@ -14624,8 +15143,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 560,
+  "kabuto": {
+    "key": "kabuto",
+    "index": 560,
     "name": "& Kabuto~",
     "symbol": "]",
     "color": "D",
@@ -14649,8 +15169,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 561,
+  "stone_and_hide_armour": {
+    "key": "stone_and_hide_armour",
+    "index": 561,
     "name": "& Stone and Hide Armour~",
     "symbol": "(",
     "color": "U",
@@ -14674,8 +15195,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 562,
+  "jingasa": {
+    "key": "jingasa",
+    "index": 562,
     "name": "& Jingasa~",
     "symbol": "]",
     "color": "s",
@@ -14699,8 +15221,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 563,
+  "haramakido": {
+    "key": "haramakido",
+    "index": 563,
     "name": "& Haramakido~",
     "symbol": "[",
     "color": "D",
@@ -14724,8 +15247,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 564,
+  "incandescent_globe": {
+    "key": "incandescent_globe",
+    "index": 564,
     "name": "& Incandescent Globe~",
     "symbol": "!",
     "color": "y",
@@ -14746,8 +15270,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 565,
+  "diamond_edge": {
+    "key": "diamond_edge",
+    "index": 565,
     "name": "& Diamond Edge~",
     "symbol": "|",
     "color": "w",
@@ -14774,8 +15299,9 @@
       "VORPAL"
     ]
   },
-  {
-    "id": 566,
+  "mundanity": {
+    "key": "mundanity",
+    "index": 566,
     "name": "Mundanity",
     "symbol": "?",
     "color": "d",
@@ -14805,8 +15331,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 567,
+  "magical_figurine_of": {
+    "key": "magical_figurine_of",
+    "index": 567,
     "name": "& Magical Figurine~ of #",
     "symbol": "`",
     "color": "g",
@@ -14840,8 +15367,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 568,
+  "wooden_statue_of": {
+    "key": "wooden_statue_of",
+    "index": 568,
     "name": "& Wooden Statue~ of #",
     "symbol": "`",
     "color": "u",
@@ -14865,8 +15393,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 569,
+  "clay_statue_of": {
+    "key": "clay_statue_of",
+    "index": 569,
     "name": "& Clay Statue~ of #",
     "symbol": "`",
     "color": "U",
@@ -14890,8 +15419,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 570,
+  "stone_statue_of": {
+    "key": "stone_statue_of",
+    "index": 570,
     "name": "& Stone Statue~ of #",
     "symbol": "`",
     "color": "s",
@@ -14915,8 +15445,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 571,
+  "iron_statue_of": {
+    "key": "iron_statue_of",
+    "index": 571,
     "name": "& Iron Statue~ of #",
     "symbol": "`",
     "color": "D",
@@ -14940,8 +15471,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 572,
+  "copper_statue_of": {
+    "key": "copper_statue_of",
+    "index": 572,
     "name": "& Copper Statue~ of #",
     "symbol": "`",
     "color": "o",
@@ -14965,8 +15497,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 573,
+  "silver_statue_of": {
+    "key": "silver_statue_of",
+    "index": 573,
     "name": "& Silver Statue~ of #",
     "symbol": "`",
     "color": "W",
@@ -14990,8 +15523,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 574,
+  "golden_statue_of": {
+    "key": "golden_statue_of",
+    "index": 574,
     "name": "& Golden Statue~ of #",
     "symbol": "`",
     "color": "y",
@@ -15015,8 +15549,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 575,
+  "ivory_statue_of": {
+    "key": "ivory_statue_of",
+    "index": 575,
     "name": "& Ivory Statue~ of #",
     "symbol": "`",
     "color": "w",
@@ -15040,8 +15575,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 576,
+  "mithril_statue_of": {
+    "key": "mithril_statue_of",
+    "index": 576,
     "name": "& Mithril Statue~ of #",
     "symbol": "`",
     "color": "B",
@@ -15065,8 +15601,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 577,
+  "ornate_statue_of": {
+    "key": "ornate_statue_of",
+    "index": 577,
     "name": "& Ornate Statue~ of #",
     "symbol": "`",
     "color": "v",
@@ -15090,8 +15627,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 580,
+  "tshirt": {
+    "key": "tshirt",
+    "index": 580,
     "name": "& T-shirt~",
     "symbol": "~",
     "color": "w",
@@ -15110,8 +15648,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 581,
+  "steel_bolt": {
+    "key": "steel_bolt",
+    "index": 581,
     "name": "& Steel Bolt~",
     "symbol": "{",
     "color": "W",
@@ -15141,8 +15680,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 582,
+  "ring_582": {
+    "key": "ring_582",
+    "index": 582,
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
@@ -15163,8 +15703,9 @@
       "INSTA_ART"
     ]
   },
-  {
-    "id": 583,
+  "resist_fire_and_cold": {
+    "key": "resist_fire_and_cold",
+    "index": 583,
     "name": "Resist Fire and Cold",
     "symbol": "=",
     "color": "d",
@@ -15194,8 +15735,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 584,
+  "the_cat": {
+    "key": "the_cat",
+    "index": 584,
     "name": "the Cat",
     "symbol": "=",
     "color": "d",
@@ -15222,8 +15764,9 @@
       "INFRA"
     ]
   },
-  {
-    "id": 585,
+  "fate": {
+    "key": "fate",
+    "index": 585,
     "name": "Fate",
     "symbol": "=",
     "color": "d",
@@ -15253,8 +15796,9 @@
       "STRANGE_LUCK"
     ]
   },
-  {
-    "id": 586,
+  "wizardry": {
+    "key": "wizardry",
+    "index": 586,
     "name": "Wizardry",
     "symbol": "=",
     "color": "d",
@@ -15280,8 +15824,9 @@
       "SP"
     ]
   },
-  {
-    "id": 587,
+  "protection_from_evil_587": {
+    "key": "protection_from_evil_587",
+    "index": 587,
     "name": "Protection from Evil",
     "symbol": "\"",
     "color": "d",
@@ -15308,8 +15853,9 @@
       "EASY_KNOW"
     ]
   },
-  {
-    "id": 588,
+  "protection_from_undead": {
+    "key": "protection_from_undead",
+    "index": 588,
     "name": "Protection from Undead",
     "symbol": "\"",
     "color": "d",
@@ -15336,8 +15882,9 @@
       "WIS"
     ]
   },
-  {
-    "id": 589,
+  "luck": {
+    "key": "luck",
+    "index": 589,
     "name": "Luck",
     "symbol": "\"",
     "color": "d",
@@ -15363,8 +15910,9 @@
       "LUCK_10"
     ]
   },
-  {
-    "id": 590,
+  "elfblade": {
+    "key": "elfblade",
+    "index": 590,
     "name": "& Elfblade~",
     "symbol": "|",
     "color": "w",
@@ -15392,8 +15940,9 @@
     "toAc": 0,
     "flags": []
   },
-  {
-    "id": 591,
+  "whip_of_entanglement": {
+    "key": "whip_of_entanglement",
+    "index": 591,
     "name": "& Whip~ of Entanglement",
     "symbol": "\\",
     "color": "D",
@@ -15420,8 +15969,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 592,
+  "psiblade": {
+    "key": "psiblade",
+    "index": 592,
     "name": "& Psiblade~",
     "symbol": "|",
     "color": "B",
@@ -15449,8 +15999,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 593,
+  "hammer_of_returning": {
+    "key": "hammer_of_returning",
+    "index": 593,
     "name": "& Hammer~ of Returning",
     "symbol": "\\",
     "color": "D",
@@ -15478,8 +16029,9 @@
       "SHOW_MODS"
     ]
   },
-  {
-    "id": 594,
+  "hagaromo": {
+    "key": "hagaromo",
+    "index": 594,
     "name": "& Hagaromo~",
     "symbol": "(",
     "color": "v",
@@ -15511,8 +16063,9 @@
       "SUST_CHR"
     ]
   },
-  {
-    "id": 595,
+  "sustenance": {
+    "key": "sustenance",
+    "index": 595,
     "name": "Sustenance",
     "symbol": "=",
     "color": "d",
@@ -15538,4 +16091,4 @@
       "EASY_KNOW"
     ]
   }
-]
+}

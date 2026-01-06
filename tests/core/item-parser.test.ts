@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseItems, type ItemDef } from '@/core/data/items';
+import { parseItems, type ItemDef, type ItemRecord } from '@/core/data/items';
 
 const SAMPLE_ITEMS = `
 # Comment
@@ -26,34 +26,37 @@ F:SHOW_MODS
 `;
 
 describe('parseItems', () => {
-  it('should parse item entries from text', () => {
-    const items: ItemDef[] = parseItems(SAMPLE_ITEMS);
-    expect(items.length).toBe(3);
+  it('should return a record keyed by slug', () => {
+    const items: ItemRecord = parseItems(SAMPLE_ITEMS);
+    expect(items['something']).toBeDefined();
+    expect(items['dagger']).toBeDefined();
+    expect(items['rapier']).toBeDefined();
   });
 
-  it('should parse item id and name', () => {
-    const items: ItemDef[] = parseItems(SAMPLE_ITEMS);
-    expect(items[1]?.id).toBe(43);
-    expect(items[1]?.name).toBe('& Dagger~');
+  it('should parse item key, index and name', () => {
+    const items: ItemRecord = parseItems(SAMPLE_ITEMS);
+    expect(items['dagger']?.key).toBe('dagger');
+    expect(items['dagger']?.index).toBe(43);
+    expect(items['dagger']?.name).toBe('& Dagger~');
   });
 
   it('should parse graphics', () => {
-    const items: ItemDef[] = parseItems(SAMPLE_ITEMS);
-    expect(items[1]?.symbol).toBe('|');
-    expect(items[1]?.color).toBe('W');
+    const items: ItemRecord = parseItems(SAMPLE_ITEMS);
+    expect(items['dagger']?.symbol).toBe('|');
+    expect(items['dagger']?.color).toBe('W');
   });
 
   it('should parse info line (tval, sval, pval)', () => {
-    const items: ItemDef[] = parseItems(SAMPLE_ITEMS);
-    const dagger = items[1];
+    const items: ItemRecord = parseItems(SAMPLE_ITEMS);
+    const dagger: ItemDef | undefined = items['dagger'];
     expect(dagger?.tval).toBe(23);
     expect(dagger?.sval).toBe(4);
     expect(dagger?.pval).toBe(0);
   });
 
   it('should parse world line (depth, rarity, weight, cost)', () => {
-    const items: ItemDef[] = parseItems(SAMPLE_ITEMS);
-    const dagger = items[1];
+    const items: ItemRecord = parseItems(SAMPLE_ITEMS);
+    const dagger: ItemDef | undefined = items['dagger'];
     expect(dagger?.depth).toBe(0);
     expect(dagger?.rarity).toBe(0);
     expect(dagger?.weight).toBe(12);
@@ -61,20 +64,20 @@ describe('parseItems', () => {
   });
 
   it('should parse allocation entries', () => {
-    const items: ItemDef[] = parseItems(SAMPLE_ITEMS);
-    const dagger = items[1];
+    const items: ItemRecord = parseItems(SAMPLE_ITEMS);
+    const dagger: ItemDef | undefined = items['dagger'];
     expect(dagger?.allocation).toEqual([
       { depth: 1, rarity: 1 },
       { depth: 9, rarity: 2 },
     ]);
 
-    const rapier = items[2];
+    const rapier: ItemDef | undefined = items['rapier'];
     expect(rapier?.allocation).toEqual([{ depth: 9, rarity: 1 }]);
   });
 
   it('should parse power line (ac, damage, to_hit, to_dam, to_ac)', () => {
-    const items: ItemDef[] = parseItems(SAMPLE_ITEMS);
-    const dagger = items[1];
+    const items: ItemRecord = parseItems(SAMPLE_ITEMS);
+    const dagger: ItemDef | undefined = items['dagger'];
     expect(dagger?.baseAc).toBe(0);
     expect(dagger?.damage).toBe('1d4');
     expect(dagger?.toHit).toBe(0);
@@ -83,13 +86,30 @@ describe('parseItems', () => {
   });
 
   it('should parse flags', () => {
-    const items: ItemDef[] = parseItems(SAMPLE_ITEMS);
-    const dagger = items[1];
+    const items: ItemRecord = parseItems(SAMPLE_ITEMS);
+    const dagger: ItemDef | undefined = items['dagger'];
     expect(dagger?.flags).toContain('THROW');
     expect(dagger?.flags).toContain('SHOW_MODS');
 
-    const rapier = items[2];
+    const rapier: ItemDef | undefined = items['rapier'];
     expect(rapier?.flags).toContain('SHOW_MODS');
     expect(rapier?.flags).not.toContain('THROW');
+  });
+
+  it('should add index suffix only for colliding names', () => {
+    const withCollisions = `
+N:100:& Ring~
+G:=:y
+
+N:200:& Ring~
+G:=:r
+
+N:43:& Dagger~
+G:|:W
+`;
+    const items: ItemRecord = parseItems(withCollisions);
+    expect(items['ring_100']).toBeDefined();
+    expect(items['ring_200']).toBeDefined();
+    expect(items['dagger']).toBeDefined(); // no suffix - unique
   });
 });

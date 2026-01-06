@@ -1,3 +1,5 @@
+import { toSlug } from './slug';
+
 export interface Attack {
   method: string;
   effect: string | undefined;
@@ -5,7 +7,8 @@ export interface Attack {
 }
 
 export interface MonsterDef {
-  id: number;
+  key: string;
+  index: number;
   name: string;
   symbol: string;
   color: string;
@@ -22,10 +25,32 @@ export interface MonsterDef {
   description: string;
 }
 
-function createEmptyMonster(): MonsterDef {
+export type MonsterRecord = Record<string, MonsterDef>;
+
+interface RawMonster {
+  index: number;
+  name: string;
+  slug: string;
+  symbol: string;
+  color: string;
+  speed: number;
+  hp: string;
+  vision: number;
+  ac: number;
+  alertness: number;
+  depth: number;
+  rarity: number;
+  exp: number;
+  attacks: Attack[];
+  flags: string[];
+  description: string;
+}
+
+function createEmptyRaw(index: number, name: string): RawMonster {
   return {
-    id: 0,
-    name: '',
+    index,
+    name,
+    slug: toSlug(name),
     symbol: '?',
     color: 'w',
     speed: 110,
@@ -42,10 +67,10 @@ function createEmptyMonster(): MonsterDef {
   };
 }
 
-export function parseMonsters(text: string): MonsterDef[] {
+export function parseMonsters(text: string): MonsterRecord {
   const lines = text.split('\n');
-  const monsters: MonsterDef[] = [];
-  let current: MonsterDef | null = null;
+  const entries: RawMonster[] = [];
+  let current: RawMonster | null = null;
 
   for (const line of lines) {
     const trimmed = line.trim();
@@ -63,12 +88,11 @@ export function parseMonsters(text: string): MonsterDef[] {
     switch (prefix) {
       case 'N': {
         if (current) {
-          monsters.push(current);
+          entries.push(current);
         }
-        const [idStr, ...nameParts] = value.split(':');
-        current = createEmptyMonster();
-        current.id = parseInt(idStr ?? '0', 10);
-        current.name = nameParts.join(':');
+        const [indexStr, ...nameParts] = value.split(':');
+        const name = nameParts.join(':');
+        current = createEmptyRaw(parseInt(indexStr ?? '0', 10), name);
         break;
       }
       case 'G': {
@@ -131,12 +155,47 @@ export function parseMonsters(text: string): MonsterDef[] {
         }
         break;
       }
-      // O: and S: lines ignored for now
     }
   }
 
   if (current) {
-    monsters.push(current);
+    entries.push(current);
+  }
+
+  // Detect collisions
+  const slugCounts = new Map<string, number>();
+  for (const entry of entries) {
+    slugCounts.set(entry.slug, (slugCounts.get(entry.slug) ?? 0) + 1);
+  }
+
+  // Build record with collision-aware keys
+  const monsters: MonsterRecord = {};
+  for (const entry of entries) {
+    const hasCollision = (slugCounts.get(entry.slug) ?? 0) > 1;
+    const key = hasCollision ? `${entry.slug}_${entry.index}` : entry.slug;
+
+    if (monsters[key]) {
+      throw new Error(`Duplicate monster key: ${key}`);
+    }
+
+    monsters[key] = {
+      key,
+      index: entry.index,
+      name: entry.name,
+      symbol: entry.symbol,
+      color: entry.color,
+      speed: entry.speed,
+      hp: entry.hp,
+      vision: entry.vision,
+      ac: entry.ac,
+      alertness: entry.alertness,
+      depth: entry.depth,
+      rarity: entry.rarity,
+      exp: entry.exp,
+      attacks: entry.attacks,
+      flags: entry.flags,
+      description: entry.description,
+    };
   }
 
   return monsters;

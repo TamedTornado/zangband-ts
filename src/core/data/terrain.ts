@@ -1,37 +1,51 @@
+import { toSlug } from './slug';
+
 export interface TerrainDef {
-  id: number;
+  key: string;
+  index: number;
   name: string;
   symbol: string;
   color: string;
   flags: string[];
 }
 
-export function parseTerrain(text: string): TerrainDef[] {
-  const lines = text.split('\n');
-  const terrain: TerrainDef[] = [];
-  let current: TerrainDef | null = null;
+export type TerrainRecord = Record<string, TerrainDef>;
 
+interface RawTerrain {
+  index: number;
+  name: string;
+  slug: string;
+  symbol: string;
+  color: string;
+  flags: string[];
+}
+
+export function parseTerrain(text: string): TerrainRecord {
+  const lines = text.split('\n');
+  const entries: RawTerrain[] = [];
+  let current: RawTerrain | null = null;
+
+  // First pass: parse all entries
   for (const line of lines) {
     const trimmed = line.trim();
 
-    // Skip empty lines, comments, and version
     if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('V:')) {
       continue;
     }
 
     const [prefix, ...rest] = trimmed.split(':');
-    const value = rest.join(':'); // Rejoin in case value contains colons
+    const value = rest.join(':');
 
     switch (prefix) {
       case 'N': {
-        // Save previous entry
         if (current) {
-          terrain.push(current);
+          entries.push(current);
         }
-        const [idStr, name] = value.split(':');
+        const [indexStr, name] = value.split(':');
         current = {
-          id: parseInt(idStr ?? '0', 10),
+          index: parseInt(indexStr ?? '0', 10),
           name: name ?? '',
+          slug: toSlug(name ?? ''),
           symbol: ' ',
           color: 'w',
           flags: [],
@@ -59,9 +73,34 @@ export function parseTerrain(text: string): TerrainDef[] {
     }
   }
 
-  // Don't forget the last entry
   if (current) {
-    terrain.push(current);
+    entries.push(current);
+  }
+
+  // Detect collisions
+  const slugCounts = new Map<string, number>();
+  for (const entry of entries) {
+    slugCounts.set(entry.slug, (slugCounts.get(entry.slug) ?? 0) + 1);
+  }
+
+  // Build record with collision-aware keys
+  const terrain: TerrainRecord = {};
+  for (const entry of entries) {
+    const hasCollision = (slugCounts.get(entry.slug) ?? 0) > 1;
+    const key = hasCollision ? `${entry.slug}_${entry.index}` : entry.slug;
+
+    if (terrain[key]) {
+      throw new Error(`Duplicate terrain key: ${key}`);
+    }
+
+    terrain[key] = {
+      key,
+      index: entry.index,
+      name: entry.name,
+      symbol: entry.symbol,
+      color: entry.color,
+      flags: entry.flags,
+    };
   }
 
   return terrain;

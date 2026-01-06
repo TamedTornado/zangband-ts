@@ -10,6 +10,7 @@ Reference C codebase is at `../zangband`. See `zangband-ts.md` for the full proj
 
 ## Development Rules
 
+- **No self-credit**: Don't add co-authored-by or credit yourself in commit messages.
 - **TDD**: Tests define the contract FIRST, then write code to make them pass. No exceptions.
 - **Proper TypeScript**: Use explicit type annotations. Don't remove types to silence warnings.
 - **GitHub**: Use GitHub for version control (master branch)

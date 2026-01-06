@@ -1,13 +1,15 @@
-[
-  {
-    "id": 0,
+{
+  "nothing": {
+    "key": "nothing",
+    "index": 0,
     "name": "nothing",
     "symbol": " ",
     "color": "w",
     "flags": []
   },
-  {
-    "id": 1,
+  "open_floor": {
+    "key": "open_floor",
+    "index": 1,
     "name": "open floor",
     "symbol": ".",
     "color": "w",
@@ -15,8 +17,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 2,
+  "invisible_trap": {
+    "key": "invisible_trap",
+    "index": 2,
     "name": "invisible trap",
     "symbol": ".",
     "color": "w",
@@ -24,8 +27,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 3,
+  "glyph_of_warding": {
+    "key": "glyph_of_warding",
+    "index": 3,
     "name": "glyph of warding",
     "symbol": ";",
     "color": "y",
@@ -33,8 +37,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 4,
+  "open_door": {
+    "key": "open_door",
+    "index": 4,
     "name": "open door",
     "symbol": "'",
     "color": "U",
@@ -44,8 +49,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 5,
+  "broken_door": {
+    "key": "broken_door",
+    "index": 5,
     "name": "broken door",
     "symbol": "'",
     "color": "u",
@@ -55,8 +61,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 6,
+  "up_staircase": {
+    "key": "up_staircase",
+    "index": 6,
     "name": "up staircase",
     "symbol": "<",
     "color": "w",
@@ -68,8 +75,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 7,
+  "down_staircase": {
+    "key": "down_staircase",
+    "index": 7,
     "name": "down staircase",
     "symbol": ">",
     "color": "w",
@@ -81,8 +89,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 8,
+  "sand": {
+    "key": "sand",
+    "index": 8,
     "name": "sand",
     "symbol": ".",
     "color": "y",
@@ -90,8 +99,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 9,
+  "salt": {
+    "key": "salt",
+    "index": 9,
     "name": "salt",
     "symbol": ".",
     "color": "W",
@@ -99,8 +109,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 10,
+  "wet_mud": {
+    "key": "wet_mud",
+    "index": 10,
     "name": "wet mud",
     "symbol": ".",
     "color": "u",
@@ -108,8 +119,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 11,
+  "dry_mud": {
+    "key": "dry_mud",
+    "index": 11,
     "name": "dry mud",
     "symbol": ".",
     "color": "D",
@@ -117,8 +129,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 12,
+  "tiled_floor": {
+    "key": "tiled_floor",
+    "index": 12,
     "name": "tiled floor",
     "symbol": ".",
     "color": "r",
@@ -126,8 +139,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 13,
+  "wooden_floor": {
+    "key": "wooden_floor",
+    "index": 13,
     "name": "wooden floor",
     "symbol": ".",
     "color": "s",
@@ -135,8 +149,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 14,
+  "pebbles": {
+    "key": "pebbles",
+    "index": 14,
     "name": "pebbles",
     "symbol": ".",
     "color": "D",
@@ -144,8 +159,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 15,
+  "solidified_lava": {
+    "key": "solidified_lava",
+    "index": 15,
     "name": "solidified lava",
     "symbol": "",
     "color": "",
@@ -153,8 +169,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 32,
+  "door": {
+    "key": "door",
+    "index": 32,
     "name": "door",
     "symbol": "+",
     "color": "U",
@@ -165,8 +182,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 33,
+  "pillar_33": {
+    "key": "pillar_33",
+    "index": 33,
     "name": "pillar",
     "symbol": "#",
     "color": "D",
@@ -178,8 +196,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 48,
+  "granite_wall_48": {
+    "key": "granite_wall_48",
+    "index": 48,
     "name": "granite wall",
     "symbol": "#",
     "color": "w",
@@ -191,8 +210,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 49,
+  "pile_of_rubble": {
+    "key": "pile_of_rubble",
+    "index": 49,
     "name": "pile of rubble",
     "symbol": "",
     "color": "",
@@ -204,8 +224,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 50,
+  "magma_vein_50": {
+    "key": "magma_vein_50",
+    "index": 50,
     "name": "magma vein",
     "symbol": "#",
     "color": "s",
@@ -217,8 +238,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 51,
+  "quartz_vein_51": {
+    "key": "quartz_vein_51",
+    "index": 51,
     "name": "quartz vein",
     "symbol": "#",
     "color": "W",
@@ -230,8 +252,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 52,
+  "magma_vein_52": {
+    "key": "magma_vein_52",
+    "index": 52,
     "name": "magma vein",
     "symbol": "#",
     "color": "s",
@@ -243,8 +266,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 53,
+  "quartz_vein_53": {
+    "key": "quartz_vein_53",
+    "index": 53,
     "name": "quartz vein",
     "symbol": "#",
     "color": "W",
@@ -256,8 +280,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 54,
+  "magma_vein_with_treasure": {
+    "key": "magma_vein_with_treasure",
+    "index": 54,
     "name": "magma vein with treasure",
     "symbol": "*",
     "color": "o",
@@ -269,8 +294,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 55,
+  "quartz_vein_with_treasure": {
+    "key": "quartz_vein_with_treasure",
+    "index": 55,
     "name": "quartz vein with treasure",
     "symbol": "*",
     "color": "o",
@@ -282,8 +308,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 56,
+  "granite_wall_56": {
+    "key": "granite_wall_56",
+    "index": 56,
     "name": "granite wall",
     "symbol": "#",
     "color": "w",
@@ -295,8 +322,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 57,
+  "granite_wall_57": {
+    "key": "granite_wall_57",
+    "index": 57,
     "name": "granite wall",
     "symbol": "#",
     "color": "w",
@@ -308,8 +336,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 58,
+  "granite_wall_58": {
+    "key": "granite_wall_58",
+    "index": 58,
     "name": "granite wall",
     "symbol": "#",
     "color": "w",
@@ -321,8 +350,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 59,
+  "granite_wall_59": {
+    "key": "granite_wall_59",
+    "index": 59,
     "name": "granite wall",
     "symbol": "#",
     "color": "w",
@@ -334,8 +364,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 60,
+  "permanent_wall_60": {
+    "key": "permanent_wall_60",
+    "index": 60,
     "name": "permanent wall",
     "symbol": "#",
     "color": "w",
@@ -348,8 +379,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 61,
+  "permanent_wall_61": {
+    "key": "permanent_wall_61",
+    "index": 61,
     "name": "permanent wall",
     "symbol": "#",
     "color": "w",
@@ -362,8 +394,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 62,
+  "permanent_wall_62": {
+    "key": "permanent_wall_62",
+    "index": 62,
     "name": "permanent wall",
     "symbol": "#",
     "color": "w",
@@ -376,8 +409,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 63,
+  "permanent_wall_63": {
+    "key": "permanent_wall_63",
+    "index": 63,
     "name": "permanent wall",
     "symbol": "#",
     "color": "w",
@@ -390,8 +424,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 64,
+  "explosive_rune": {
+    "key": "explosive_rune",
+    "index": 64,
     "name": "explosive rune",
     "symbol": "*",
     "color": "R",
@@ -401,8 +436,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 65,
+  "pattern_startpoint": {
+    "key": "pattern_startpoint",
+    "index": 65,
     "name": "Pattern startpoint",
     "symbol": "*",
     "color": "w",
@@ -414,8 +450,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 66,
+  "section_of_the_pattern_66": {
+    "key": "section_of_the_pattern_66",
+    "index": 66,
     "name": "section of the Pattern",
     "symbol": "*",
     "color": "B",
@@ -427,8 +464,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 67,
+  "section_of_the_pattern_67": {
+    "key": "section_of_the_pattern_67",
+    "index": 67,
     "name": "section of the Pattern",
     "symbol": "*",
     "color": "b",
@@ -440,8 +478,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 68,
+  "section_of_the_pattern_68": {
+    "key": "section_of_the_pattern_68",
+    "index": 68,
     "name": "section of the Pattern",
     "symbol": "*",
     "color": "B",
@@ -453,8 +492,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 69,
+  "section_of_the_pattern_69": {
+    "key": "section_of_the_pattern_69",
+    "index": 69,
     "name": "section of the Pattern",
     "symbol": "*",
     "color": "b",
@@ -466,8 +506,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 70,
+  "section_of_the_pattern_70": {
+    "key": "section_of_the_pattern_70",
+    "index": 70,
     "name": "section of the Pattern",
     "symbol": "*",
     "color": "W",
@@ -479,8 +520,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 71,
+  "section_of_the_pattern_discharged": {
+    "key": "section_of_the_pattern_discharged",
+    "index": 71,
     "name": "section of the Pattern (discharged)",
     "symbol": "*",
     "color": "W",
@@ -492,8 +534,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 72,
+  "pattern_exit": {
+    "key": "pattern_exit",
+    "index": 72,
     "name": "Pattern exit",
     "symbol": "*",
     "color": "w",
@@ -505,8 +548,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 73,
+  "corrupted_section_of_the_pattern": {
+    "key": "corrupted_section_of_the_pattern",
+    "index": 73,
     "name": "corrupted section of the Pattern",
     "symbol": "*",
     "color": "D",
@@ -518,8 +562,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 83,
+  "deep_water": {
+    "key": "deep_water",
+    "index": 83,
     "name": "deep water",
     "symbol": "~",
     "color": "b",
@@ -529,8 +574,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 84,
+  "shallow_water": {
+    "key": "shallow_water",
+    "index": 84,
     "name": "shallow water",
     "symbol": "~",
     "color": "B",
@@ -539,8 +585,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 85,
+  "deep_lava": {
+    "key": "deep_lava",
+    "index": 85,
     "name": "deep lava",
     "symbol": "~",
     "color": "R",
@@ -550,8 +597,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 86,
+  "shallow_lava": {
+    "key": "shallow_lava",
+    "index": 86,
     "name": "shallow lava",
     "symbol": "~",
     "color": "r",
@@ -560,8 +608,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 87,
+  "dark_pit": {
+    "key": "dark_pit",
+    "index": 87,
     "name": "dark pit",
     "symbol": "#",
     "color": "D",
@@ -572,8 +621,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 88,
+  "dirt": {
+    "key": "dirt",
+    "index": 88,
     "name": "dirt",
     "symbol": ".",
     "color": "u",
@@ -581,8 +631,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 89,
+  "patch_of_grass": {
+    "key": "patch_of_grass",
+    "index": 89,
     "name": "patch of grass",
     "symbol": ".",
     "color": "g",
@@ -591,8 +642,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 90,
+  "compact_rune": {
+    "key": "compact_rune",
+    "index": 90,
     "name": "compact rune",
     "symbol": "^",
     "color": "D",
@@ -601,8 +653,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 91,
+  "invisible_wall": {
+    "key": "invisible_wall",
+    "index": 91,
     "name": "invisible wall",
     "symbol": ".",
     "color": "w",
@@ -611,8 +664,9 @@
       "ICKY"
     ]
   },
-  {
-    "id": 92,
+  "very_deep_water": {
+    "key": "very_deep_water",
+    "index": 92,
     "name": "very deep water",
     "symbol": "~",
     "color": "D",
@@ -622,8 +676,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 93,
+  "deep_acid": {
+    "key": "deep_acid",
+    "index": 93,
     "name": "deep acid",
     "symbol": "~",
     "color": "g",
@@ -633,8 +688,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 94,
+  "shallow_acid": {
+    "key": "shallow_acid",
+    "index": 94,
     "name": "shallow acid",
     "symbol": "~",
     "color": "G",
@@ -643,8 +699,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 95,
+  "submerged_tree": {
+    "key": "submerged_tree",
+    "index": 95,
     "name": "submerged tree",
     "symbol": "%",
     "color": "b",
@@ -654,8 +711,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 96,
+  "tree": {
+    "key": "tree",
+    "index": 96,
     "name": "tree",
     "symbol": "%",
     "color": "G",
@@ -666,8 +724,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 97,
+  "rock_face": {
+    "key": "rock_face",
+    "index": 97,
     "name": "rock face",
     "symbol": "",
     "color": "",
@@ -678,8 +737,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 98,
+  "snow_covered_rock_face": {
+    "key": "snow_covered_rock_face",
+    "index": 98,
     "name": "snow covered rock face",
     "symbol": "",
     "color": "",
@@ -690,8 +750,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 99,
+  "boulder": {
+    "key": "boulder",
+    "index": 99,
     "name": "boulder",
     "symbol": "",
     "color": "",
@@ -702,8 +763,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 100,
+  "pine_tree": {
+    "key": "pine_tree",
+    "index": 100,
     "name": "pine tree",
     "symbol": "%",
     "color": "g",
@@ -714,8 +776,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 101,
+  "snow_covered_tree": {
+    "key": "snow_covered_tree",
+    "index": 101,
     "name": "snow covered tree",
     "symbol": "%",
     "color": "w",
@@ -726,8 +789,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 102,
+  "obelisk": {
+    "key": "obelisk",
+    "index": 102,
     "name": "obelisk",
     "symbol": ";",
     "color": "b",
@@ -739,8 +803,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 103,
+  "pillar_103": {
+    "key": "pillar_103",
+    "index": 103,
     "name": "pillar",
     "symbol": "#",
     "color": "w",
@@ -752,8 +817,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 112,
+  "stone_fence": {
+    "key": "stone_fence",
+    "index": 112,
     "name": "stone fence",
     "symbol": "",
     "color": "",
@@ -766,8 +832,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 113,
+  "well": {
+    "key": "well",
+    "index": 113,
     "name": "well",
     "symbol": "~",
     "color": "v",
@@ -780,8 +847,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 114,
+  "fountain": {
+    "key": "fountain",
+    "index": 114,
     "name": "fountain",
     "symbol": "~",
     "color": "U",
@@ -794,8 +862,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 115,
+  "jungle": {
+    "key": "jungle",
+    "index": 115,
     "name": "jungle",
     "symbol": "%",
     "color": "D",
@@ -807,8 +876,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 128,
+  "bush": {
+    "key": "bush",
+    "index": 128,
     "name": "bush",
     "symbol": "%",
     "color": "y",
@@ -817,8 +887,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 129,
+  "dead_bush": {
+    "key": "dead_bush",
+    "index": 129,
     "name": "dead bush",
     "symbol": "%",
     "color": "s",
@@ -827,8 +898,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 130,
+  "long_grass": {
+    "key": "long_grass",
+    "index": 130,
     "name": "long grass",
     "symbol": ";",
     "color": "U",
@@ -836,8 +908,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 131,
+  "rock_131": {
+    "key": "rock_131",
+    "index": 131,
     "name": "rock",
     "symbol": "",
     "color": "",
@@ -846,8 +919,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 132,
+  "rock_132": {
+    "key": "rock_132",
+    "index": 132,
     "name": "rock",
     "symbol": "",
     "color": "",
@@ -856,8 +930,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 133,
+  "dead_tree_133": {
+    "key": "dead_tree_133",
+    "index": 133,
     "name": "dead tree",
     "symbol": "%",
     "color": "u",
@@ -867,8 +942,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 134,
+  "dead_tree_134": {
+    "key": "dead_tree_134",
+    "index": 134,
     "name": "dead tree",
     "symbol": "%",
     "color": "u",
@@ -878,8 +954,9 @@
       "OBJECT"
     ]
   },
-  {
-    "id": 135,
+  "snow": {
+    "key": "snow",
+    "index": 135,
     "name": "snow",
     "symbol": ".",
     "color": "W",
@@ -887,8 +964,9 @@
       "USE_TRANS"
     ]
   },
-  {
-    "id": 136,
+  "thick_swamp": {
+    "key": "thick_swamp",
+    "index": 136,
     "name": "thick swamp",
     "symbol": ";",
     "color": "g",
@@ -898,8 +976,9 @@
       "MARK"
     ]
   },
-  {
-    "id": 137,
+  "swamp": {
+    "key": "swamp",
+    "index": 137,
     "name": "swamp",
     "symbol": ";",
     "color": "G",
@@ -908,4 +987,4 @@
       "MARK"
     ]
   }
-]
+}
