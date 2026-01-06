@@ -33,6 +33,7 @@ interface GameState {
   prompt: PromptState | null;
   gameOver: boolean;
   stateName: string;
+  cursor: { x: number; y: number } | null;
 }
 
 interface GameActions {
@@ -50,6 +51,13 @@ interface GameActions {
   eatFood: (itemIndex: number) => void;
   runInDirection: (dir: Direction) => void;
   restart: () => void;
+  // Targeting
+  look: () => void;
+  target: () => void;
+  moveCursor: (dir: Direction) => void;
+  cycleTarget: () => void;
+  confirmTarget: () => void;
+  cancelTarget: () => void;
   // Prompt system
   showPrompt: (text: string, callback: (value: string) => void) => void;
   updatePrompt: (value: string) => void;
@@ -70,7 +78,7 @@ const GameContext = createContext<GameContextValue | null>(null);
 const fsm = new GameFSM(new PlayingState());
 
 function extractState(fsm: GameFSM, prompt: PromptState | null): GameState {
-  const { player, level, depth, turn, messages, upStairs, downStairs } = fsm.data;
+  const { player, level, depth, turn, messages, upStairs, downStairs, cursor } = fsm.data;
   return {
     player,
     level,
@@ -82,6 +90,7 @@ function extractState(fsm: GameFSM, prompt: PromptState | null): GameState {
     prompt,
     gameOver: fsm.stateName === 'dead',
     stateName: fsm.stateName,
+    cursor,
   };
 }
 
@@ -157,6 +166,31 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
     restart: () => {
       fsm.dispatch({ type: 'restart' });
+    },
+
+    // Targeting
+    look: () => {
+      fsm.dispatch({ type: 'look' });
+    },
+
+    target: () => {
+      fsm.dispatch({ type: 'target' });
+    },
+
+    moveCursor: (dir: Direction) => {
+      fsm.dispatch({ type: 'moveCursor', dir });
+    },
+
+    cycleTarget: () => {
+      fsm.dispatch({ type: 'cycleTarget' });
+    },
+
+    confirmTarget: () => {
+      fsm.dispatch({ type: 'confirmTarget' });
+    },
+
+    cancelTarget: () => {
+      fsm.dispatch({ type: 'cancelTarget' });
     },
 
     // Prompt system (UI-only, not FSM)

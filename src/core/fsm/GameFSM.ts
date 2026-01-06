@@ -137,6 +137,7 @@ export class GameFSM {
       upStairs: [],
       downStairs: [],
       killedBy: null,
+      cursor: null,
     };
 
     this.messageId = 0;

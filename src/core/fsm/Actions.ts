@@ -17,4 +17,11 @@ export type GameAction =
   | { type: 'quaff'; itemIndex: number }
   | { type: 'read'; itemIndex: number }
   | { type: 'eat'; itemIndex: number }
-  | { type: 'restart' };
+  | { type: 'restart' }
+  // Targeting
+  | { type: 'look' }
+  | { type: 'target' }
+  | { type: 'moveCursor'; dir: Direction }
+  | { type: 'cycleTarget' }
+  | { type: 'confirmTarget' }
+  | { type: 'cancelTarget' };

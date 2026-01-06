@@ -28,4 +28,7 @@ export interface GameData {
 
   // Death info
   killedBy: string | null;
+
+  // Targeting cursor (null when not in targeting mode)
+  cursor: Coord | null;
 }

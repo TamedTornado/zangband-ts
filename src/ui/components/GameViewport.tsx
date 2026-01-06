@@ -151,6 +151,39 @@ export function GameViewport() {
     // Draw player at screen position (always on top)
     const playerScreen = camera.worldToScreen(player.position);
     display.draw(playerScreen.x, playerScreen.y, '@', '#fff', '#000');
+
+    // Draw targeting cursor if active
+    if (state.cursor) {
+      const cursorScreen = camera.worldToScreen(state.cursor);
+      // Only draw if on screen
+      if (cursorScreen.x >= 0 && cursorScreen.x < gridWidth &&
+          cursorScreen.y >= 0 && cursorScreen.y < gridHeight) {
+        // Get what's under the cursor to preserve the character
+        const tile = level.getTile(state.cursor);
+        let symbol = tile?.terrain.symbol ?? ' ';
+        let fg = '#ff0'; // Yellow foreground for cursor
+
+        // Check if player is at cursor
+        if (state.cursor.x === player.position.x && state.cursor.y === player.position.y) {
+          symbol = '@';
+        } else {
+          // Check for monster
+          const monster = level.getMonsterAt(state.cursor);
+          if (monster && !monster.isDead) {
+            symbol = monster.symbol;
+          } else {
+            // Check for items
+            const items = level.getItemsAt(state.cursor);
+            if (items.length > 0) {
+              symbol = items[items.length - 1].symbol;
+            }
+          }
+        }
+
+        // Draw with bright magenta background to highlight cursor position
+        display.draw(cursorScreen.x, cursorScreen.y, symbol, '#fff', '#f0f');
+      }
+    }
   }
 
   return <div ref={ref} style={{ width: '100%', height: '100%', overflow: 'hidden' }} />;

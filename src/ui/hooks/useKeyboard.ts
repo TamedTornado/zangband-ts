@@ -34,6 +34,12 @@ export const Action = {
   ToggleCharacter: 'action:toggle_character',
   // Other
   Rest: 'action:rest',
+  // Targeting
+  Look: 'action:look',
+  Target: 'action:target',
+  CycleTarget: 'action:cycle_target',
+  ConfirmTarget: 'action:confirm_target',
+  CancelTarget: 'action:cancel_target',
 } as const;
 
 export type Action = (typeof Action)[keyof typeof Action];
@@ -109,6 +115,12 @@ const ACTION_BINDINGS: { key: string; modifiers: string[]; action: Action }[] = 
   { key: 'C', modifiers: ['shift'], action: Action.ToggleCharacter },
   // Other
   { key: 'R', modifiers: ['shift'], action: Action.Rest },
+  // Targeting
+  { key: 'x', modifiers: [], action: Action.Look },
+  { key: '*', modifiers: [], action: Action.Target },
+  { key: 'Tab', modifiers: [], action: Action.CycleTarget },
+  { key: 'Enter', modifiers: [], action: Action.ConfirmTarget },
+  { key: 'Escape', modifiers: [], action: Action.CancelTarget },
 ];
 
 /**
@@ -187,6 +199,12 @@ const ACTION_HANDLERS: Record<Action, (actions: GameActions, modalActions: Modal
   [Action.ToggleEquipment]: (_a, m) => m.toggleModal('equipment'),
   [Action.ToggleCharacter]: (_a, m) => m.toggleModal('character'),
   [Action.Rest]: (a) => a.promptRest(),
+  // Targeting
+  [Action.Look]: (a) => a.look(),
+  [Action.Target]: (a) => a.target(),
+  [Action.CycleTarget]: (a) => a.cycleTarget(),
+  [Action.ConfirmTarget]: (a) => a.confirmTarget(),
+  [Action.CancelTarget]: (a) => a.cancelTarget(),
 };
 
 export function useKeyboard() {
@@ -232,6 +250,19 @@ export function useKeyboard() {
         return;
       }
 
+      // Handle targeting mode - route movement to cursor, allow targeting actions
+      if (state.stateName === 'targeting') {
+        e.preventDefault();
+        if (binding.type === 'axis') {
+          actions.moveCursor(binding.direction);
+        } else if (binding.action === Action.CycleTarget ||
+                   binding.action === Action.ConfirmTarget ||
+                   binding.action === Action.CancelTarget) {
+          ACTION_HANDLERS[binding.action](actions, modalActions);
+        }
+        return;
+      }
+
       // Execute the binding
       e.preventDefault();
       if (binding.type === 'axis') {
@@ -243,5 +274,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [actions, activeModal, modalActions, state.prompt]);
+  }, [actions, activeModal, modalActions, state.prompt, state.stateName]);
 }

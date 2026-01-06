@@ -503,9 +503,9 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] Tunnel (`T`)
 - [ ] Destroy item (`k`)
 
-**Look & Target (TODO)**
-- [ ] Look command (`l`/`x`) - cursor mode
-- [ ] Target command (`*`)
+**Look & Target (PARTIAL)**
+- [x] Look command (`x`) - cursor mode with Tab cycling, movement keys
+- [x] Target command (`*`) - same as look but for future ranged
 - [ ] Identify symbol (`/`)
 
 **Information Screens (TODO)**

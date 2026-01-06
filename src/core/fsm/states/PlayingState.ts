@@ -8,6 +8,7 @@ import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { DeadState } from './DeadState';
+import { TargetingState } from './TargetingState';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, HP_REGEN_RATE } from '../../constants';
@@ -60,6 +61,12 @@ export class PlayingState implements State {
         return true;
       case 'eat':
         this.handleEat(fsm, action.itemIndex);
+        return true;
+      case 'look':
+        fsm.transition(new TargetingState(false));
+        return true;
+      case 'target':
+        fsm.transition(new TargetingState(true));
         return true;
       default:
         return false;
