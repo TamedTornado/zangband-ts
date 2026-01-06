@@ -1,54 +1,65 @@
 import type { Actor } from '../entities/Actor';
 import type { Item } from '../entities/Item';
+import type { TerrainDef } from '../data/terrain';
+import terrainData from '../../data/terrain/terrain.json';
 
-// Terrain definitions - simplified for now
-// Later these will come from terrain.json
-const TERRAIN_DATA: Record<string, { walkable: boolean; transparent: boolean }> = {
-  floor: { walkable: true, transparent: true },
-  granite_wall: { walkable: false, transparent: false },
-  permanent_wall: { walkable: false, transparent: false },
-  open_door: { walkable: true, transparent: true },
-  closed_door: { walkable: false, transparent: false },
-  up_stairs: { walkable: true, transparent: true },
-  down_stairs: { walkable: true, transparent: true },
-  // Default for unknown terrain
-  unknown: { walkable: false, transparent: false },
+const TERRAIN: Record<string, TerrainDef> = terrainData;
+
+// Aliases for terrain keys with index suffixes (TODO: fix in data extraction)
+const TERRAIN_ALIASES: Record<string, string> = {
+  floor: 'open_floor',
+  granite_wall: 'granite_wall_48',
+  permanent_wall: 'permanent_wall_60',
+  magma_vein: 'magma_vein_50',
+  quartz_vein: 'quartz_vein_51',
+  pillar: 'pillar_33',
 };
 
+function resolveTerrain(key: string): TerrainDef {
+  const terrain = TERRAIN[key] ?? TERRAIN[TERRAIN_ALIASES[key] ?? ''];
+  if (!terrain) {
+    throw new Error(`Unknown terrain: ${key}`);
+  }
+  return terrain;
+}
+
+export function getTerrain(key: string): TerrainDef {
+  return resolveTerrain(key);
+}
+
 export class Tile {
-  private _terrainKey: string;
+  private _terrain: TerrainDef;
   private _occupant: Actor | null = null;
   private _items: Item[] = [];
   private _explored: boolean = false;
 
-  constructor(terrainKey: string = 'floor') {
-    this._terrainKey = terrainKey;
+  constructor(terrain: TerrainDef | string = 'floor') {
+    this._terrain = typeof terrain === 'string' ? resolveTerrain(terrain) : terrain;
+  }
+
+  get terrain(): TerrainDef {
+    return this._terrain;
+  }
+
+  set terrain(terrain: TerrainDef) {
+    this._terrain = terrain;
   }
 
   get terrainKey(): string {
-    return this._terrainKey;
-  }
-
-  set terrainKey(key: string) {
-    this._terrainKey = key;
-  }
-
-  private get terrainData(): { walkable: boolean; transparent: boolean } {
-    return TERRAIN_DATA[this._terrainKey] ?? TERRAIN_DATA['unknown'];
+    return this._terrain.key;
   }
 
   get isWalkable(): boolean {
-    // Tile is walkable if terrain is walkable AND no blocking occupant
-    return this.terrainData.walkable && this._occupant === null;
+    return !this._terrain.flags.includes('BLOCK') && this._occupant === null;
   }
 
   get isPassable(): boolean {
-    // Terrain is passable (ignoring occupants)
-    return this.terrainData.walkable;
+    return !this._terrain.flags.includes('BLOCK');
   }
 
   get isTransparent(): boolean {
-    return this.terrainData.transparent;
+    // Terrain is transparent for LOS if it doesn't block movement
+    return !this._terrain.flags.includes('BLOCK');
   }
 
   get occupant(): Actor | null {

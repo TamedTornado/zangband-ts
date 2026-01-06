@@ -1,5 +1,6 @@
 import type { Position } from '../types';
-import { Tile } from './Tile';
+import type { TerrainDef } from '../data/terrain';
+import { Tile, getTerrain } from './Tile';
 
 export interface LevelConfig {
   depth?: number;
@@ -38,10 +39,10 @@ export class Level {
     return this.tiles[pos.y][pos.x];
   }
 
-  setTerrain(pos: Position, terrainKey: string): void {
+  setTerrain(pos: Position, terrain: TerrainDef | string): void {
     const tile = this.getTile(pos);
     if (tile) {
-      tile.terrainKey = terrainKey;
+      tile.terrain = typeof terrain === 'string' ? getTerrain(terrain) : terrain;
     }
   }
 

@@ -9,7 +9,7 @@ import { Item } from '@/core/entities/Item';
 describe('Tile', () => {
   it('should have terrain key and properties', () => {
     const tile = new Tile('floor');
-    expect(tile.terrainKey).toBe('floor');
+    expect(tile.terrainKey).toBe('open_floor'); // 'floor' is alias for 'open_floor'
   });
 
   it('should report walkability based on terrain', () => {
@@ -81,14 +81,14 @@ describe('Level (enhanced)', () => {
     const level = new Level(10, 10);
     const tile = level.getTile({ x: 5, y: 5 });
     expect(tile).toBeDefined();
-    expect(tile?.terrainKey).toBe('floor');
+    expect(tile?.terrainKey).toBe('open_floor');
   });
 
   it('should set terrain at position', () => {
     const level = new Level(10, 10);
     level.setTerrain({ x: 5, y: 5 }, 'granite_wall');
     const tile = level.getTile({ x: 5, y: 5 });
-    expect(tile?.terrainKey).toBe('granite_wall');
+    expect(tile?.terrainKey).toBe('granite_wall_48'); // 'granite_wall' is alias
     expect(tile?.isWalkable).toBe(false);
   });
 
