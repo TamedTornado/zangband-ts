@@ -1,0 +1,911 @@
+[
+  {
+    "id": 0,
+    "name": "nothing",
+    "symbol": " ",
+    "color": "w",
+    "flags": []
+  },
+  {
+    "id": 1,
+    "name": "open floor",
+    "symbol": ".",
+    "color": "w",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "invisible trap",
+    "symbol": ".",
+    "color": "w",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "glyph of warding",
+    "symbol": ";",
+    "color": "y",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "open door",
+    "symbol": "'",
+    "color": "U",
+    "flags": [
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "broken door",
+    "symbol": "'",
+    "color": "u",
+    "flags": [
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "up staircase",
+    "symbol": "<",
+    "color": "w",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "down staircase",
+    "symbol": ">",
+    "color": "w",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "sand",
+    "symbol": ".",
+    "color": "y",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "salt",
+    "symbol": ".",
+    "color": "W",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "wet mud",
+    "symbol": ".",
+    "color": "u",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "dry mud",
+    "symbol": ".",
+    "color": "D",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "tiled floor",
+    "symbol": ".",
+    "color": "r",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "wooden floor",
+    "symbol": ".",
+    "color": "s",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "pebbles",
+    "symbol": ".",
+    "color": "D",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "solidified lava",
+    "symbol": "",
+    "color": "",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 32,
+    "name": "door",
+    "symbol": "+",
+    "color": "U",
+    "flags": [
+      "BLOCK",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 33,
+    "name": "pillar",
+    "symbol": "#",
+    "color": "D",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 48,
+    "name": "granite wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 49,
+    "name": "pile of rubble",
+    "symbol": "",
+    "color": "",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 50,
+    "name": "magma vein",
+    "symbol": "#",
+    "color": "s",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 51,
+    "name": "quartz vein",
+    "symbol": "#",
+    "color": "W",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 52,
+    "name": "magma vein",
+    "symbol": "#",
+    "color": "s",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 53,
+    "name": "quartz vein",
+    "symbol": "#",
+    "color": "W",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 54,
+    "name": "magma vein with treasure",
+    "symbol": "*",
+    "color": "o",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 55,
+    "name": "quartz vein with treasure",
+    "symbol": "*",
+    "color": "o",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 56,
+    "name": "granite wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 57,
+    "name": "granite wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 58,
+    "name": "granite wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 59,
+    "name": "granite wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 60,
+    "name": "permanent wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 61,
+    "name": "permanent wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 62,
+    "name": "permanent wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 63,
+    "name": "permanent wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 64,
+    "name": "explosive rune",
+    "symbol": "*",
+    "color": "R",
+    "flags": [
+      "USE_TRANS",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Pattern startpoint",
+    "symbol": "*",
+    "color": "w",
+    "flags": [
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "PATTERN",
+      "MARK"
+    ]
+  },
+  {
+    "id": 66,
+    "name": "section of the Pattern",
+    "symbol": "*",
+    "color": "B",
+    "flags": [
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "PATTERN",
+      "MARK"
+    ]
+  },
+  {
+    "id": 67,
+    "name": "section of the Pattern",
+    "symbol": "*",
+    "color": "b",
+    "flags": [
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "PATTERN",
+      "MARK"
+    ]
+  },
+  {
+    "id": 68,
+    "name": "section of the Pattern",
+    "symbol": "*",
+    "color": "B",
+    "flags": [
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "PATTERN",
+      "MARK"
+    ]
+  },
+  {
+    "id": 69,
+    "name": "section of the Pattern",
+    "symbol": "*",
+    "color": "b",
+    "flags": [
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "PATTERN",
+      "MARK"
+    ]
+  },
+  {
+    "id": 70,
+    "name": "section of the Pattern",
+    "symbol": "*",
+    "color": "W",
+    "flags": [
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "PATTERN",
+      "MARK"
+    ]
+  },
+  {
+    "id": 71,
+    "name": "section of the Pattern (discharged)",
+    "symbol": "*",
+    "color": "W",
+    "flags": [
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "PATTERN",
+      "MARK"
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Pattern exit",
+    "symbol": "*",
+    "color": "w",
+    "flags": [
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "PATTERN",
+      "MARK"
+    ]
+  },
+  {
+    "id": 73,
+    "name": "corrupted section of the Pattern",
+    "symbol": "*",
+    "color": "D",
+    "flags": [
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "PATTERN",
+      "MARK"
+    ]
+  },
+  {
+    "id": 83,
+    "name": "deep water",
+    "symbol": "~",
+    "color": "b",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "MARK"
+    ]
+  },
+  {
+    "id": 84,
+    "name": "shallow water",
+    "symbol": "~",
+    "color": "B",
+    "flags": [
+      "USE_TRANS",
+      "MARK"
+    ]
+  },
+  {
+    "id": 85,
+    "name": "deep lava",
+    "symbol": "~",
+    "color": "R",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "MARK"
+    ]
+  },
+  {
+    "id": 86,
+    "name": "shallow lava",
+    "symbol": "~",
+    "color": "r",
+    "flags": [
+      "USE_TRANS",
+      "MARK"
+    ]
+  },
+  {
+    "id": 87,
+    "name": "dark pit",
+    "symbol": "#",
+    "color": "D",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 88,
+    "name": "dirt",
+    "symbol": ".",
+    "color": "u",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 89,
+    "name": "patch of grass",
+    "symbol": ".",
+    "color": "g",
+    "flags": [
+      "USE_TRANS",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 90,
+    "name": "compact rune",
+    "symbol": "^",
+    "color": "D",
+    "flags": [
+      "USE_TRANS",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 91,
+    "name": "invisible wall",
+    "symbol": ".",
+    "color": "w",
+    "flags": [
+      "USE_TRANS",
+      "ICKY"
+    ]
+  },
+  {
+    "id": 92,
+    "name": "very deep water",
+    "symbol": "~",
+    "color": "D",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "MARK"
+    ]
+  },
+  {
+    "id": 93,
+    "name": "deep acid",
+    "symbol": "~",
+    "color": "g",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "MARK"
+    ]
+  },
+  {
+    "id": 94,
+    "name": "shallow acid",
+    "symbol": "~",
+    "color": "G",
+    "flags": [
+      "USE_TRANS",
+      "MARK"
+    ]
+  },
+  {
+    "id": 95,
+    "name": "submerged tree",
+    "symbol": "%",
+    "color": "b",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 96,
+    "name": "tree",
+    "symbol": "%",
+    "color": "G",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 97,
+    "name": "rock face",
+    "symbol": "",
+    "color": "",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 98,
+    "name": "snow covered rock face",
+    "symbol": "",
+    "color": "",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 99,
+    "name": "boulder",
+    "symbol": "",
+    "color": "",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 100,
+    "name": "pine tree",
+    "symbol": "%",
+    "color": "g",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 101,
+    "name": "snow covered tree",
+    "symbol": "%",
+    "color": "w",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 102,
+    "name": "obelisk",
+    "symbol": ";",
+    "color": "b",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 103,
+    "name": "pillar",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 112,
+    "name": "stone fence",
+    "symbol": "",
+    "color": "",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 113,
+    "name": "well",
+    "symbol": "~",
+    "color": "v",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 114,
+    "name": "fountain",
+    "symbol": "~",
+    "color": "U",
+    "flags": [
+      "HALF_LOS",
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 115,
+    "name": "jungle",
+    "symbol": "%",
+    "color": "D",
+    "flags": [
+      "BLOCK",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
+  {
+    "id": 128,
+    "name": "bush",
+    "symbol": "%",
+    "color": "y",
+    "flags": [
+      "USE_TRANS",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 129,
+    "name": "dead bush",
+    "symbol": "%",
+    "color": "s",
+    "flags": [
+      "USE_TRANS",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 130,
+    "name": "long grass",
+    "symbol": ";",
+    "color": "U",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 131,
+    "name": "rock",
+    "symbol": "",
+    "color": "",
+    "flags": [
+      "USE_TRANS",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 132,
+    "name": "rock",
+    "symbol": "",
+    "color": "",
+    "flags": [
+      "USE_TRANS",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 133,
+    "name": "dead tree",
+    "symbol": "%",
+    "color": "u",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 134,
+    "name": "dead tree",
+    "symbol": "%",
+    "color": "u",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT"
+    ]
+  },
+  {
+    "id": 135,
+    "name": "snow",
+    "symbol": ".",
+    "color": "W",
+    "flags": [
+      "USE_TRANS"
+    ]
+  },
+  {
+    "id": 136,
+    "name": "thick swamp",
+    "symbol": ";",
+    "color": "g",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "MARK"
+    ]
+  },
+  {
+    "id": 137,
+    "name": "swamp",
+    "symbol": ";",
+    "color": "G",
+    "flags": [
+      "USE_TRANS",
+      "MARK"
+    ]
+  }
+]

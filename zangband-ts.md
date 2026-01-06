@@ -143,23 +143,22 @@ zangband-ts/
 
 ## Phase 1: Foundation & Data Extraction
 
-### 1.1 Project Setup
-- [ ] Initialize project with Vite + TypeScript
-- [ ] Configure strict TypeScript settings
-- [ ] Set up Vitest
-- [ ] Add rot.js dependency
-- [ ] Create folder structure
-- [ ] Basic "@ walking around empty map" proof of life
+### 1.1 Project Setup [DONE]
+- [x] Initialize project with Vite + TypeScript
+- [x] Configure strict TypeScript settings
+- [x] Set up Vitest
+- [x] Add rot.js dependency
+- [x] Create folder structure
+- [x] Basic "@ walking around empty map" proof of life
 
-### 1.2 Clone ZangbandTK Source
-- [ ] Clone from GitHub mirror (jjnoo/Zangband or AngbandPlus)
-- [ ] Identify key source files:
-  - Monster definitions (likely `monster1.c`, `monster2.c`, or `r_info.txt`)
-  - Item definitions (`object1.c`, `object2.c`, `k_info.txt`)
-  - Spell definitions (`spells1.c`, `spells2.c`, `spells3.c`)
-  - Race/class data
-  - Combat formulas
-  - Generation parameters
+### 1.2 Reference Source [DONE]
+Reference C codebase is at `../zangband`. Key data files:
+- `lib/edit/r_info.txt` - Monster definitions
+- `lib/edit/k_info.txt` - Item definitions
+- `lib/edit/a_info.txt` - Artifact definitions
+- `lib/edit/e_info.txt` - Ego item definitions
+- `lib/edit/f_info.txt` - Terrain definitions
+- `src/spells*.c` - Spell definitions (in code, not data files)
 
 ### 1.3 Data Extraction Scripts
 - [ ] Write parser for monster definitions → JSON
@@ -298,6 +297,7 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 ## Phase 4: UI Layer
 
 ### 4.1 Display Foundation
+- [ ] Replace hacky main.ts render loop with proper renderer (current proof-of-life is throwaway)
 - [ ] rot.js Display setup (sizing, font)
 - [ ] Viewport management (scrolling dungeon view)
 - [ ] Color scheme matching Zangband aesthetic
