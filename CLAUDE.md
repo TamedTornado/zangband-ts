@@ -11,6 +11,7 @@ Reference C codebase is at `../zangband`. See `zangband-ts.md` for the full proj
 ## Development Rules
 
 - **TDD**: Tests define the contract FIRST, then write code to make them pass. No exceptions.
+- **Proper TypeScript**: Use explicit type annotations. Don't remove types to silence warnings.
 - **GitHub**: Use GitHub for version control (master branch)
 - **Data-driven**: Game content lives in JSON, not code
 - **Separation of concerns**: Core game logic (`src/core/`) has zero UI dependencies
