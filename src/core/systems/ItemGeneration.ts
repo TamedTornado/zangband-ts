@@ -10,6 +10,7 @@
  * Ported from Zangband's object2.c
  */
 
+import { RNG } from 'rot-js';
 import type { ItemDef } from '@/core/data/items';
 import type { EgoItemDef } from '@/core/data/ego-items';
 import type { ArtifactDef } from '@/core/data/artifacts';
@@ -117,11 +118,13 @@ export class ItemGeneration {
   private artifacts: Record<string, ArtifactDef>;
   private allocationTable: AllocationEntry[] = [];
   private createdArtifacts: Set<string> = new Set();
+  private rng: typeof RNG;
 
-  constructor(config: ItemGenerationConfig) {
+  constructor(config: ItemGenerationConfig, rng: typeof RNG = RNG) {
     this.items = config.items;
     this.egoItems = config.egoItems;
     this.artifacts = config.artifacts;
+    this.rng = rng;
     this.buildAllocationTable();
   }
 
@@ -406,7 +409,7 @@ export class ItemGeneration {
    * @param deltaLevel - Bonus to item quality
    * @returns The artifact definition, or null if not created
    */
-  tryCreateArtifact(playerDepth: number, deltaLevel: number): ArtifactDef | null {
+  tryCreateArtifact(playerDepth: number, _deltaLevel: number): ArtifactDef | null {
     for (const artifact of Object.values(this.artifacts)) {
       // Skip empty or already created artifacts
       if (!artifact.name) continue;
@@ -696,7 +699,7 @@ export class ItemGeneration {
   /**
    * Apply magic to jewelry (rings and amulets)
    */
-  private applyJewelryMagic(item: GeneratedItem, _level: number, _flags: number): void {
+  private applyJewelryMagic(_item: GeneratedItem, _level: number, _flags: number): void {
     // Jewelry is mostly handled by the base item type
     // Special processing would go here
   }
@@ -809,14 +812,16 @@ export class ItemGeneration {
    * Random integer in range [0, max)
    */
   private randint0(max: number): number {
-    return Math.floor(Math.random() * max);
+    if (max <= 0) return 0;
+    return this.rng.getUniformInt(0, max - 1);
   }
 
   /**
    * Random integer in range [1, max]
    */
   private randint1(max: number): number {
-    return Math.floor(Math.random() * max) + 1;
+    if (max <= 0) return 1;
+    return this.rng.getUniformInt(1, max);
   }
 
   /**
@@ -830,9 +835,9 @@ export class ItemGeneration {
    * Normal distribution random number
    */
   private randNormal(mean: number, stdDev: number): number {
-    // Box-Muller transform
-    const u1 = Math.random();
-    const u2 = Math.random();
+    // Box-Muller transform using rot.js RNG
+    const u1 = this.rng.getUniform();
+    const u2 = this.rng.getUniform();
     const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
     return Math.round(mean + z * stdDev);
   }

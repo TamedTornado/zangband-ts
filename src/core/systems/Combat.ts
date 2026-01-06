@@ -188,11 +188,14 @@ export class Combat {
       damage = this.rollDice(dice);
     }
 
-    return {
+    const result: AttackResult = {
       hit: true,
       damage,
-      effect: attack.effect,
       method: attack.method,
     };
+    if (attack.effect) {
+      result.effect = attack.effect;
+    }
+    return result;
   }
 }

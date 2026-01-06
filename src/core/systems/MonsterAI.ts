@@ -9,6 +9,7 @@
  * - Special behaviors (breeding, stealing, etc.)
  */
 
+import { RNG } from 'rot-js';
 import type { Position } from '../types';
 import type { Level } from '../world/Level';
 
@@ -95,6 +96,12 @@ export interface MonsterAIContext {
  * Monster AI system based on Zangband melee2.c
  */
 export class MonsterAI {
+  private rng: typeof RNG;
+
+  constructor(rng: typeof RNG = RNG) {
+    this.rng = rng;
+  }
+
   /**
    * Main decision function - determines what action a monster should take
    */
@@ -209,7 +216,7 @@ export class MonsterAI {
     const hpPercent = (ctx.monsterHp * 100) / ctx.monsterMaxHp;
     if (hpPercent <= 10) {
       // Random chance to become afraid at low HP
-      return Math.random() * 100 < 80;
+      return this.rng.getUniform() * 100 < 80;
     }
 
     return this.willRun(ctx);
@@ -267,7 +274,7 @@ export class MonsterAI {
     if (ctx.flags.includes('RAND_50')) randChance += 50;
     if (ctx.flags.includes('RAND_25')) randChance += 25;
 
-    if (randChance > 0 && Math.random() * 100 < randChance) {
+    if (randChance > 0 && this.rng.getUniform() * 100 < randChance) {
       return this.getRandomMove(ctx);
     }
 
@@ -299,7 +306,7 @@ export class MonsterAI {
     }
 
     // Roll against spell chance
-    if (Math.random() * 100 >= ctx.spellChance) {
+    if (this.rng.getUniform() * 100 >= ctx.spellChance) {
       return null;
     }
 
@@ -318,13 +325,13 @@ export class MonsterAI {
     }
 
     // Choose a random spell from available
-    const spell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
+    const spell = availableSpells[this.rng.getUniformInt(0, availableSpells.length - 1)];
 
     // Calculate spell failure rate (STUPID monsters never fail)
     let spellFailed = false;
     if (!ctx.flags.includes('STUPID')) {
       const failrate = Math.max(0, 25 - (ctx.monsterLevel + 3) / 4);
-      spellFailed = Math.random() * 100 < failrate;
+      spellFailed = this.rng.getUniform() * 100 < failrate;
     }
 
     return {
@@ -384,11 +391,11 @@ export class MonsterAI {
 
     // Random chance, reduced by crowding
     if (adjacent > 0) {
-      return Math.random() < 1 / (adjacent * MON_MULT_ADJ);
+      return this.rng.getUniform() < 1 / (adjacent * MON_MULT_ADJ);
     }
 
     // Base breeding chance
-    return Math.random() < 0.1;
+    return this.rng.getUniform() < 0.1;
   }
 
   /**
@@ -406,7 +413,7 @@ export class MonsterAI {
       { x: 1, y: 1 },
     ];
 
-    const dir = directions[Math.floor(Math.random() * directions.length)];
+    const dir = directions[this.rng.getUniformInt(0, directions.length - 1)];
     const targetPos = {
       x: ctx.monsterPos.x + dir.x,
       y: ctx.monsterPos.y + dir.y,

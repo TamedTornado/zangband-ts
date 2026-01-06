@@ -1,10 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import {
-  ItemGeneration,
-  type ItemGenerationConfig,
-  type GeneratedItem,
-  type AllocationEntry,
-} from '@/core/systems/ItemGeneration';
+import { ItemGeneration, type GeneratedItem } from '@/core/systems/ItemGeneration';
 import type { ItemDef } from '@/core/data/items';
 import type { EgoItemDef } from '@/core/data/ego-items';
 import type { ArtifactDef } from '@/core/data/artifacts';
@@ -442,16 +437,11 @@ describe('ItemGeneration', () => {
 
     it('should occasionally boost level (EGO_INFLATE mechanic)', () => {
       // Try to get a high-level ego at low depth
-      let foundHighLevel = false;
+      // Just verify the occasional level boost mechanic doesn't crash
+      // We don't assert on the result since EGO_INFLATE is random
       for (let i = 0; i < 500; i++) {
-        const ego = gen.selectEgoItem(30, 24, true);
-        if (ego && ego.depth > 30) {
-          foundHighLevel = true;
-          break;
-        }
+        gen.selectEgoItem(30, 24, true);
       }
-      // May or may not find one depending on RNG and EGO_INFLATE
-      // This is an "occasional" mechanic
     });
 
     it('should return null if no matching ego items', () => {
@@ -463,7 +453,7 @@ describe('ItemGeneration', () => {
   describe('applyEgoItem', () => {
     it('should add ego item bonuses to base item', () => {
       const baseItem: GeneratedItem = {
-        baseItem: testItems.iron_sword,
+        baseItem: testItems['iron_sword'],
         toHit: 0,
         toDam: 0,
         toAc: 0,
@@ -471,18 +461,18 @@ describe('ItemGeneration', () => {
         flags: [],
       };
 
-      gen.applyEgoItem(baseItem, testEgoItems.of_slaying);
+      gen.applyEgoItem(baseItem, testEgoItems['of_slaying']);
 
       // Should have added random bonuses (1 to max)
       expect(baseItem.toHit).toBeGreaterThan(0);
       expect(baseItem.toDam).toBeGreaterThan(0);
-      expect(baseItem.egoItem).toBe(testEgoItems.of_slaying);
+      expect(baseItem.egoItem).toBe(testEgoItems['of_slaying']);
       expect(baseItem.flags).toContain('SLAY_EVIL');
     });
 
     it('should subtract bonuses for cursed ego items', () => {
       const baseItem: GeneratedItem = {
-        baseItem: testItems.iron_sword,
+        baseItem: testItems['iron_sword'],
         toHit: 5,
         toDam: 5,
         toAc: 5,
@@ -510,7 +500,7 @@ describe('ItemGeneration', () => {
 
     it('should add pval for ego items with pval', () => {
       const baseItem: GeneratedItem = {
-        baseItem: { ...testItems.iron_sword, pval: 0 },
+        baseItem: { ...testItems['iron_sword'], pval: 0 },
         toHit: 0,
         toDam: 0,
         toAc: 0,
@@ -518,7 +508,7 @@ describe('ItemGeneration', () => {
         flags: [],
       };
 
-      gen.applyEgoItem(baseItem, testEgoItems.of_extra_attacks);
+      gen.applyEgoItem(baseItem, testEgoItems['of_extra_attacks']);
 
       expect(baseItem.pval).toBeGreaterThan(0);
       expect(baseItem.flags).toContain('BLOWS');
@@ -688,7 +678,8 @@ describe('ItemGeneration', () => {
         gen.tryCreateArtifact(60, 40);
       }
 
-      const beforeReset = gen.getCreatedArtifacts().length;
+      // Verify there are artifacts before reset
+      expect(gen.getCreatedArtifacts().length).toBeGreaterThan(0);
 
       gen.resetArtifacts();
 

@@ -479,6 +479,14 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] Playtest through midgame
 - [ ] Playtest to endgame / winning
 
+### 5.6 Seed System & Reproducibility
+- [ ] Create centralized RNG manager with seedable rot.js RNG
+- [ ] Seed display on UI (short hash for sharing)
+- [ ] Seed input on new game (paste friend's seed)
+- [ ] Same seed = same overworld, dungeons, monsters, drops
+- [ ] Store seed in save file for replay
+- [ ] Test: verify identical seed produces identical game state
+
 ---
 
 ## Key Technical Decisions
@@ -503,8 +511,10 @@ function rollDice(roll: DiceRoll, rng: ROT.RNG): number {
 
 ### RNG Strategy
 - Use rot.js `ROT.RNG` throughout for seedability
-- Store RNG state in save file for deterministic replay (optional)
-- Seed from `Date.now()` for normal play
+- All random systems (combat, magic, item generation, monster AI) accept RNG via constructor
+- Store seed in save file for sharing/replay
+- Seed from `Date.now()` for normal play, or user-provided seed
+- Centralized GameRNG class manages seeding and provides consistent RNG access
 
 ### Effect System Architecture
 ```typescript

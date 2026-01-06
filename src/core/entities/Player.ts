@@ -1,4 +1,4 @@
-import { Actor, type ActorConfig } from './Actor';
+import { Actor } from './Actor';
 import type { Item } from './Item';
 import type { Level } from '../world/Level';
 import { type Position, type Direction, movePosition } from '../types';

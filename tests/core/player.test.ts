@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Player } from '@/core/entities/Player';
 import { Level } from '@/core/world/Level';
-import { Direction, movePosition } from '@/core/types';
+import { Direction } from '@/core/types';
 
 function createTestPlayer(x: number, y: number): Player {
   return new Player({

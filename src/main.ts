@@ -24,7 +24,13 @@ for (let y = 0; y < HEIGHT; y++) {
   level.setWalkable({ x: WIDTH - 1, y }, false);
 }
 
-const player = new Player({ x: 40, y: 12 });
+const player = new Player({
+  id: 'player',
+  position: { x: 40, y: 12 },
+  maxHp: 100,
+  speed: 110,
+  stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
+});
 
 const KEY_MAP: Record<string, Direction> = {
   ArrowUp: Direction.North,

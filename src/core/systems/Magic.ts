@@ -148,7 +148,7 @@ export class MagicSystem {
     };
   }
 
-  private executeBuff(effect: SpellEffect, target: Actor): EffectResult {
+  private executeBuff(effect: SpellEffect, _target: Actor): EffectResult {
     let duration = 0;
     if (effect.duration) {
       // Parse duration like "12+1d12"
@@ -172,7 +172,7 @@ export class MagicSystem {
     };
   }
 
-  private executeDebuff(effect: SpellEffect, target: Actor): EffectResult {
+  private executeDebuff(effect: SpellEffect, _target: Actor): EffectResult {
     let duration = 0;
     if (effect.duration) {
       const parts = effect.duration.split('+');
