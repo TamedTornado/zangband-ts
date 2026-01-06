@@ -253,19 +253,15 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 - [x] `Tile` class (TerrainDef reference, occupant, items, explored)
 - [x] `Level` class (2D tile grid, terrain from JSON)
 - [x] `GameWorld` class (current level, player ref, turn counter)
-- [ ] Serialization: `toJSON()` / `fromJSON()` for save/load
 
 ### 2.3 Turn System ⟨Wave 2⟩ [DONE]
 - [x] `Scheduler` class (energy-based turn order)
 - [x] Energy system matching Zangband (110 = normal speed)
 - [x] Actor turn resolution (highest energy first)
-- [ ] Player input blocking (async/await for player turn)
 
 ### 2.5 FOV & Memory ⟨Wave 2⟩ [DONE]
 - [x] Integrate rot.js FOV (PreciseShadowcasting)
 - [x] Compute visible tiles, mark explored
-- [ ] "Remembered" tile state (show old terrain, not current monsters)
-- [ ] Light sources, infravision
 
 ---
 
@@ -307,6 +303,11 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 - [ ] Experience and leveling
 - [ ] Stat gain on level up
 - [ ] Skills (if Zangband has them? Need to verify)
+
+### 3.6 Vision System
+- [ ] Light sources (torches, lanterns, glowing items)
+- [ ] Infravision (see warm-blooded in dark)
+- [ ] Telepathy, see invisible
 
 ---
 
@@ -421,19 +422,21 @@ const defaultBindings: Record<string, GameAction> = {
 2. [ ] GameViewport component wrapping rot.js
 3. [ ] Basic layout: viewport + StatsPanel + MessageWindow
 4. [ ] Keyboard input system (useKeyboard hook)
-5. [ ] StatsPanel with HP/MP bars, stat icons
-6. [ ] MessageWindow + MessageHistory
-7. [ ] Autobar (quick-use buttons)
-8. [ ] InventoryModal + EquipmentModal
-9. [ ] CharacterModal with all tabs (Info, Flags, Mutations, Virtues, Notes)
-10. [ ] SpellbookModal
-11. [ ] TargetingOverlay
-12. [ ] RecallPanel (monster/item memory)
-13. [ ] KnowledgeModal (discovered things)
-14. [ ] StoreModal
-15. [ ] PetsModal
-16. [ ] Minimap
-17. [ ] Tooltips and polish
+5. [ ] Player input blocking (async/await game loop)
+6. [ ] Remembered tile rendering (show old terrain, not current monsters)
+7. [ ] StatsPanel with HP/MP bars, stat icons
+8. [ ] MessageWindow + MessageHistory
+9. [ ] Autobar (quick-use buttons)
+10. [ ] InventoryModal + EquipmentModal
+11. [ ] CharacterModal with all tabs (Info, Flags, Mutations, Virtues, Notes)
+12. [ ] SpellbookModal
+13. [ ] TargetingOverlay
+14. [ ] RecallPanel (monster/item memory)
+15. [ ] KnowledgeModal (discovered things)
+16. [ ] StoreModal
+17. [ ] PetsModal
+18. [ ] Minimap
+19. [ ] Tooltips and polish
 
 ---
 
