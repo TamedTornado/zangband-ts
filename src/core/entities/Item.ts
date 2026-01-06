@@ -1,5 +1,6 @@
 import { Entity, type EntityConfig } from './Entity';
 import type { GeneratedItem } from '../systems/ItemGeneration';
+import { TV_FOOD, TV_POTION, TV_SCROLL } from '../data/tval';
 
 export interface ItemConfig extends EntityConfig {
   name: string;
@@ -55,5 +56,30 @@ export class Item extends Entity {
   /** Check if item has a specific flag */
   hasFlag(flag: string): boolean {
     return this.generated?.flags.includes(flag) ?? false;
+  }
+
+  /** Get the item's tval (type value) */
+  get tval(): number {
+    return this.generated?.baseItem.tval ?? 0;
+  }
+
+  /** Get the item's sval (subtype value) */
+  get sval(): number {
+    return this.generated?.baseItem.sval ?? 0;
+  }
+
+  /** Check if item is food */
+  get isFood(): boolean {
+    return this.tval === TV_FOOD;
+  }
+
+  /** Check if item is a potion */
+  get isPotion(): boolean {
+    return this.tval === TV_POTION;
+  }
+
+  /** Check if item is a scroll */
+  get isScroll(): boolean {
+    return this.tval === TV_SCROLL;
   }
 }

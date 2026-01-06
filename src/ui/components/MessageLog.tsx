@@ -5,12 +5,12 @@ export function MessageLog() {
   const { state } = useGame();
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom on new messages
+  // Auto-scroll to bottom on new messages or prompt changes
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [state.messages.length]);
+  }, [state.messages.length, state.prompt]);
 
   return (
     <div className="message-log" ref={scrollRef}>
@@ -19,6 +19,13 @@ export function MessageLog() {
           {msg.text}
         </div>
       ))}
+      {state.prompt && (
+        <div className="message-prompt">
+          <span className="prompt-text">{state.prompt.text}</span>
+          <span className="prompt-value">{state.prompt.value}</span>
+          <span className="prompt-cursor">_</span>
+        </div>
+      )}
     </div>
   );
 }

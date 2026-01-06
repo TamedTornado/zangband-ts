@@ -415,3 +415,73 @@ body {
   color: #555;
   font-style: italic;
 }
+
+/* Rest modal */
+.rest-modal {
+  padding: 8px;
+}
+
+.rest-prompt {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+}
+
+.rest-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: #888;
+}
+
+.rest-option {
+  font-family: monospace;
+}
+
+.rest-input {
+  width: 100%;
+  background: #111;
+  border: 1px solid #444;
+  color: #fff;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.rest-input:focus {
+  outline: none;
+  border-color: #666;
+}
+
+.rest-error {
+  margin: 8px 0 0 0;
+  color: #f66;
+  font-size: 12px;
+}
+
+/* Inline prompt in message log */
+.message-prompt {
+  padding: 2px 8px;
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+  font-family: monospace;
+}
+
+.prompt-text {
+  color: #ff0;
+}
+
+.prompt-value {
+  color: #fff;
+}
+
+.prompt-cursor {
+  color: #ff0;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}

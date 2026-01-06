@@ -26,14 +26,14 @@ const TABS: Array<{ id: TabId; label: string }> = [
  */
 export function CharacterModal() {
   const { state } = useGame();
-  const { closeModal } = useModal();
+  const { modalActions } = useModal();
   const [activeTab, setActiveTab] = useState<TabId>('info');
   const { player } = state;
 
   return (
     <Modal
       title="Character"
-      onClose={closeModal}
+      onClose={modalActions.closeModal}
       width={500}
     >
       <div className="char-tabs">

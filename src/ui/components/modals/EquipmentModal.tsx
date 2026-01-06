@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Modal } from './Modal';
 import { useGame } from '../../context/GameContext';
 import { useModal } from '../../context/ModalContext';
@@ -22,6 +23,11 @@ const EQUIPMENT_SLOTS: Array<{ slot: EquipmentSlot; label: string; letter: strin
   { slot: 'gloves', label: 'Hands', letter: 'k' },
   { slot: 'boots', label: 'Feet', letter: 'l' },
 ];
+
+/** Map letter to slot */
+const LETTER_TO_SLOT: Record<string, EquipmentSlot> = Object.fromEntries(
+  EQUIPMENT_SLOTS.map(({ slot, letter }) => [letter, slot])
+);
 
 /**
  * Format item display string
@@ -60,14 +66,32 @@ function formatItem(item: Item | undefined): string {
  * - Letter selection for takeoff
  */
 export function EquipmentModal() {
-  const { state } = useGame();
-  const { closeModal } = useModal();
+  const { state, actions } = useGame();
+  const { modalActions } = useModal();
   const equipment = state.player.getAllEquipment();
+
+  // Handle a-l keys for takeoff
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key >= 'a' && e.key <= 'l') {
+        const slot = LETTER_TO_SLOT[e.key];
+        if (slot && equipment[slot]) {
+          e.preventDefault();
+          e.stopPropagation();
+          actions.takeOffItem(slot);
+          modalActions.closeModal();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown, true);
+    return () => window.removeEventListener('keydown', handleKeyDown, true);
+  }, [equipment, actions, modalActions]);
 
   return (
     <Modal
       title="Equipment"
-      onClose={closeModal}
+      onClose={modalActions.closeModal}
       width={450}
       footer={
         <div className="modal-hints">
@@ -85,6 +109,13 @@ export function EquipmentModal() {
             <div
               key={slot}
               className={`equipment-row ${isEmpty ? 'empty' : ''}`}
+              onClick={() => {
+                if (item) {
+                  actions.takeOffItem(slot);
+                  modalActions.closeModal();
+                }
+              }}
+              style={{ cursor: item ? 'pointer' : 'default' }}
             >
               <span className="slot-letter">{letter})</span>
               <span className="slot-label">{label}:</span>
