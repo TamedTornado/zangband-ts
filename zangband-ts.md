@@ -479,14 +479,15 @@ const defaultBindings: Record<string, GameAction> = {
 **Character Info (DONE)**
 - [x] Character screen (`C`) - Info tab with stats, depth, turn
 
-**Data-Driven Effects System (TODO)**
-- [ ] Design unified effect schema (heals, damage, buffs, teleport, detection, etc.)
-- [ ] Add `useEffects` to ItemDef for consumables (potions, scrolls, food)
-- [ ] Add `useEffects` to ItemDef for devices (wands, rods, staves)
-- [ ] Potions/other items need a possible separate effect on throw.
-- [ ] Create ItemEffects executor that reads from data
-- [ ] Remove hardcoded name-based effect logic from PlayingState
+**Data-Driven Effects System (IN PROGRESS)**
+- [x] Design unified effect schema (heal, applyStatus, cure, reduce)
+- [x] Add `effects` to ItemDef for consumables (potions, food)
+- [x] Create EffectExecutor that reads from item.generated.baseItem.effects
+- [x] Remove hardcoded name-based effect logic from handleQuaff/handleEat
+- [ ] Add `effects` to ItemDef for devices (wands, rods, staves)
+- [ ] Potions/other items need a possible separate effect on throw
 - [ ] Same system will be used for spell effects
+- [ ] Clean up duplicate items in items.json (items with _NNN suffix collisions)
 
 **Items - Magical Devices (TODO)**
 - [ ] Aim wand (`a`)
