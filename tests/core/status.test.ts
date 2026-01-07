@@ -47,8 +47,8 @@ describe('StatusDef', () => {
   it('has cut severity thresholds', () => {
     const cut = getStatusDef('cut');
     expect(cut.type).toBe('cut');
-    expect(cut.data?.severity).toBeDefined();
-    const severity = cut.data?.severity as Record<string, { message: string; damage: number }>;
+    expect(cut.data?.['severity']).toBeDefined();
+    const severity = cut.data?.['severity'] as Record<string, { message: string; damage: number }>;
     expect(severity['50'].message).toBe('You have a bad cut.');
     expect(severity['50'].damage).toBe(3);
   });

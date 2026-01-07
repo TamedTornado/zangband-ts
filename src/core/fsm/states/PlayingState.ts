@@ -4,6 +4,7 @@
  * Handles movement, combat, items, stairs, rest, running.
  */
 
+import { RNG } from 'rot-js';
 import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
@@ -12,6 +13,7 @@ import { TargetingState } from './TargetingState';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, HP_REGEN_RATE } from '../../constants';
+import { getPotionEffects, executeEffects } from '../../systems/effects';
 
 export class PlayingState implements State {
   readonly name = 'playing';
@@ -421,33 +423,15 @@ export class PlayingState implements State {
 
     fsm.addMessage(`You quaff ${item.name}.`, 'info');
 
-    const name = item.name.toLowerCase();
-    if (name.includes('cure light wounds') || name.includes('minor healing')) {
-      const heal = 2 + Math.floor(Math.random() * 8) + 1;
-      player.heal(heal);
-      fsm.addMessage(`You feel better. (+${heal} HP)`, 'info');
-    } else if (name.includes('cure serious wounds') || name.includes('healing')) {
-      const heal = 4 + Math.floor(Math.random() * 16) + 2;
-      player.heal(heal);
-      fsm.addMessage(`You feel much better. (+${heal} HP)`, 'info');
-    } else if (name.includes('cure critical wounds') || name.includes('major healing')) {
-      const heal = 6 + Math.floor(Math.random() * 24) + 3;
-      player.heal(heal);
-      fsm.addMessage(`You feel very good! (+${heal} HP)`, 'info');
-    } else if (name.includes('restore life')) {
-      player.hp = player.maxHp;
-      fsm.addMessage('You feel your life force return!', 'info');
-    } else if (name.includes('speed') || name.includes('haste')) {
-      fsm.addMessage('You feel yourself moving faster!', 'info');
-    } else if (name.includes('heroism')) {
-      const heal = 5 + Math.floor(Math.random() * 11);
-      player.heal(heal);
-      fsm.addMessage(`You feel like a hero! (+${heal} HP)`, 'info');
-    } else if (name.includes('berserk')) {
-      const heal = 10 + Math.floor(Math.random() * 16);
-      player.heal(heal);
-      fsm.addMessage(`You feel like a killing machine! (+${heal} HP)`, 'combat');
+    // Look up effects by sval
+    const effects = getPotionEffects(item.sval);
+    if (effects && effects.length > 0) {
+      const result = executeEffects(effects, player, RNG);
+      for (const msg of result.messages) {
+        fsm.addMessage(msg, 'info');
+      }
     } else {
+      // Fallback for potions without defined effects
       fsm.addMessage('That tasted... interesting.', 'info');
     }
 

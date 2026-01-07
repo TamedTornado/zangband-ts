@@ -22,8 +22,8 @@ export class StunStatus implements Status {
   constructor(id: string, def: StatusDef, params: StatusParams) {
     this.id = id;
     this.def = def;
-    const maxIntensity = (def.data?.maxIntensity as number) ?? 100;
-    this.intensity = Math.min(params.intensity ?? 0, maxIntensity);
+    const maxIntensity = (def.data?.['maxIntensity'] as number) ?? 100;
+    this.intensity = Math.min(params['intensity'] ?? 0, maxIntensity);
   }
 
   onApply(_actor: Actor): string[] {
@@ -50,7 +50,7 @@ export class StunStatus implements Status {
     }
 
     // Natural recovery
-    const healRate = (this.def.data?.healRate as number) ?? 1;
+    const healRate = (this.def.data?.['healRate'] as number) ?? 1;
     this.intensity -= healRate;
 
     return { messages };
@@ -58,7 +58,7 @@ export class StunStatus implements Status {
 
   merge(incoming: Status): boolean {
     const stun = incoming as StunStatus;
-    const maxIntensity = (this.def.data?.maxIntensity as number) ?? 100;
+    const maxIntensity = (this.def.data?.['maxIntensity'] as number) ?? 100;
     this.intensity = Math.min(this.intensity + stun.intensity, maxIntensity);
     return true;
   }
@@ -97,7 +97,7 @@ export class StunStatus implements Status {
   }
 
   private getSeverityLevel(): SeverityLevel | null {
-    const severity = this.def.data?.severity as Record<string, SeverityLevel> | undefined;
+    const severity = this.def.data?.['severity'] as Record<string, SeverityLevel> | undefined;
     if (!severity) return null;
 
     const thresholds = Object.keys(severity)

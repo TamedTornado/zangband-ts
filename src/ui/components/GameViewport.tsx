@@ -161,7 +161,6 @@ export function GameViewport() {
         // Get what's under the cursor to preserve the character
         const tile = level.getTile(state.cursor);
         let symbol = tile?.terrain.symbol ?? ' ';
-        let fg = '#ff0'; // Yellow foreground for cursor
 
         // Check if player is at cursor
         if (state.cursor.x === player.position.x && state.cursor.y === player.position.y) {

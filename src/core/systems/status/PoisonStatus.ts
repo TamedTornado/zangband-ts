@@ -21,8 +21,8 @@ export class PoisonStatus implements Status {
   constructor(id: string, def: StatusDef, params: StatusParams) {
     this.id = id;
     this.def = def;
-    this.remaining = params.duration ?? 0;
-    this.damage = params.damage ?? 0;
+    this.remaining = params['duration'] ?? 0;
+    this.damage = params['damage'] ?? 0;
   }
 
   onApply(_actor: Actor): string[] {
