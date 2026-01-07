@@ -156,7 +156,7 @@ export class PlayingState implements State {
       // Check for items
       const itemsHere = level.getItemsAt(newPos);
       if (itemsHere.length === 1) {
-        fsm.addMessage(`You see ${itemsHere[0].name} here.`, 'info');
+        fsm.addMessage(`You see ${fsm.getItemDisplayName(itemsHere[0]!)} here.`, 'info');
       } else if (itemsHere.length > 1) {
         fsm.addMessage(`You see ${itemsHere.length} items here.`, 'info');
       }
@@ -234,7 +234,7 @@ export class PlayingState implements State {
       const itemsHere = level.getItemsAt(newPos);
       if (itemsHere.length > 0) {
         const text = itemsHere.length === 1
-          ? `You see ${itemsHere[0].name} here.`
+          ? `You see ${fsm.getItemDisplayName(itemsHere[0]!)} here.`
           : `You see ${itemsHere.length} items here.`;
         fsm.addMessage(text, 'info');
         break;

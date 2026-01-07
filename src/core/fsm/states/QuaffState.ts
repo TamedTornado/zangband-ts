@@ -41,7 +41,7 @@ export class QuaffState implements State {
     const { player } = fsm.data;
     const item = selection.item;
 
-    fsm.addMessage(`You quaff ${item.name}.`, 'info');
+    fsm.addMessage(`You quaff ${fsm.getItemDisplayName(item)}.`, 'info');
 
     const effects = item.generated?.baseItem.effects;
     if (effects && effects.length > 0) {
@@ -52,6 +52,9 @@ export class QuaffState implements State {
     } else {
       fsm.addMessage('That tasted... interesting.', 'info');
     }
+
+    // Mark potion type as known
+    fsm.makeAware(item);
 
     player.removeItem(item.id);
     fsm.transition(new PlayingState());

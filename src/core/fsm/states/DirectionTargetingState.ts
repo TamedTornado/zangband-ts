@@ -71,6 +71,7 @@ export class DirectionTargetingState implements State {
     }
 
     if (result.success && this.sourceItem) {
+      fsm.makeAware(this.sourceItem);
       fsm.data.player.removeItem(this.sourceItem.id);
     }
 

@@ -61,14 +61,15 @@ export class ReadScrollState implements State {
     const effects = item.generated?.baseItem.effects as GPEffectDef[] | undefined;
 
     if (!effects || effects.length === 0) {
-      fsm.addMessage(`You read ${item.name}.`, 'info');
+      fsm.addMessage(`You read ${fsm.getItemDisplayName(item)}.`, 'info');
       fsm.addMessage('The scroll crumbles to dust.', 'info');
+      fsm.makeAware(item);
       player.removeItem(item.id);
       fsm.transition(new PlayingState());
       return;
     }
 
-    fsm.addMessage(`You read ${item.name}.`, 'info');
+    fsm.addMessage(`You read ${fsm.getItemDisplayName(item)}.`, 'info');
 
     // Build base context
     const baseContext: GPEffectContext = {
@@ -87,6 +88,7 @@ export class ReadScrollState implements State {
         fsm.addMessage(msg, 'info');
       }
       if (result.success) {
+        fsm.makeAware(item);
         player.removeItem(item.id);
       }
       fsm.transition(new PlayingState());

@@ -10,7 +10,7 @@ import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { Direction, movePosition } from '../../types';
-import { VISION_RADIUS } from '../../constants';
+import { VIEW_RADIUS } from '../../constants';
 
 export class TargetingState implements State {
   readonly name = 'targeting';
@@ -110,7 +110,7 @@ export class TargetingState implements State {
   /** Build list of visible monsters for Tab cycling */
   private buildTargetList(fsm: GameFSM): void {
     const { player, level } = fsm.data;
-    const visibleTiles = fsm.fovSystem.compute(level, player.position, VISION_RADIUS);
+    const visibleTiles = fsm.fovSystem.compute(level, player.position, VIEW_RADIUS);
 
     this.visibleTargets = [];
     for (const monster of level.getMonsters()) {
@@ -144,7 +144,7 @@ export class TargetingState implements State {
     }
 
     // Check visibility
-    const visibleTiles = fsm.fovSystem.compute(level, player.position, VISION_RADIUS);
+    const visibleTiles = fsm.fovSystem.compute(level, player.position, VIEW_RADIUS);
     const key = `${cursor.x},${cursor.y}`;
     const isVisible = visibleTiles.has(key);
 
@@ -171,7 +171,7 @@ export class TargetingState implements State {
       // Check for items
       const items = level.getItemsAt(cursor);
       if (items.length === 1) {
-        parts.push(items[0].name);
+        parts.push(fsm.getItemDisplayName(items[0]!));
       } else if (items.length > 1) {
         parts.push(`${items.length} items`);
       }

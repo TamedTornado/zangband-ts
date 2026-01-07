@@ -90,6 +90,7 @@ export class ItemTargetingState implements State {
     }
 
     if (result.success && this.sourceItem) {
+      fsm.makeAware(this.sourceItem);
       player.removeItem(this.sourceItem.id);
     }
 

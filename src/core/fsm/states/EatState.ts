@@ -41,7 +41,7 @@ export class EatState implements State {
     const { player } = fsm.data;
     const item = selection.item;
 
-    fsm.addMessage(`You eat ${item.name}.`, 'info');
+    fsm.addMessage(`You eat ${fsm.getItemDisplayName(item)}.`, 'info');
 
     const effects = item.generated?.baseItem.effects;
     if (effects && effects.length > 0) {
@@ -52,6 +52,9 @@ export class EatState implements State {
     } else {
       fsm.addMessage('That was tasty.', 'info');
     }
+
+    // Mark food type as known
+    fsm.makeAware(item);
 
     player.removeItem(item.id);
     fsm.transition(new PlayingState());

@@ -17,8 +17,11 @@ import { ItemGeneration } from '../systems/ItemGeneration';
 import { MonsterSpawner } from '../systems/MonsterSpawner';
 import { ItemSpawner } from '../systems/ItemSpawner';
 import { GameLoop } from '../systems/GameLoop';
+import { FlavorSystem, getArticle } from '../systems/FlavorSystem';
 import { MonsterDataManager } from '../data/MonsterDataManager';
 import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT } from '../constants';
+import { TV_POTION, TV_SCROLL } from '../data/tval';
+import type { Item } from '../entities/Item';
 import type { ItemDef } from '../data/items';
 import type { EgoItemDef } from '../data/ego-items';
 import type { ArtifactDef } from '../data/artifacts';
@@ -57,6 +60,7 @@ export class GameFSM {
   readonly gameLoop = new GameLoop(RNG, monsterDataManager);
   readonly monsterDataManager = monsterDataManager;
   readonly itemGen = itemGen;
+  readonly flavorSystem = new FlavorSystem(RNG);
 
   constructor(initialState: State) {
     this.initGameData();
@@ -231,5 +235,92 @@ export class GameFSM {
   /** Get monster name from definition */
   getMonsterName(monster: { definitionKey: string }): string {
     return monsterDataManager.getMonsterDef(monster.definitionKey)?.name ?? 'monster';
+  }
+
+  /**
+   * Get the display name for an item with proper article and flavor.
+   *
+   * Examples:
+   * - "a Robe" (basic equipment)
+   * - "an Icky Green Potion" (unidentified potion)
+   * - "a Potion of Salt Water" (identified potion)
+   * - "The One Ring" (known artifact)
+   *
+   * @param item - The item to get a name for
+   * @param options - Display options
+   * @returns Formatted display name with article
+   */
+  getItemDisplayName(
+    item: Item,
+    options: { article?: boolean; quantity?: number } = {},
+  ): string {
+    const { article = true, quantity = item.quantity } = options;
+
+    if (!item.generated) {
+      return article ? 'an unknown item' : 'unknown item';
+    }
+
+    const base = item.generated.baseItem;
+    const tval = base.tval;
+    const sval = base.sval;
+
+    // Artifacts always show their name
+    if (item.generated.artifact?.name) {
+      const name = item.generated.artifact.name;
+      if (!article) return name;
+      // Known artifacts get "The" prefix
+      return `The ${name}`;
+    }
+
+    // Check if this item type has flavors (potions, scrolls)
+    const hasFlavor = tval === TV_POTION || tval === TV_SCROLL;
+    const isAware = this.flavorSystem.isAware(tval, sval);
+
+    let name: string;
+
+    if (hasFlavor && !isAware) {
+      // Show flavor name (e.g., "Icky Green Potion", "Scroll titled \"BLAA JU\"")
+      if (tval === TV_POTION) {
+        name = this.flavorSystem.getPotionFlavorName(sval);
+      } else {
+        name = this.flavorSystem.getScrollFlavorName(sval);
+      }
+    } else {
+      // Show real name
+      name = item.name;
+    }
+
+    // Add ego item suffix if identified
+    if (item.generated.egoItem?.name && item.generated.identified) {
+      name = `${name} ${item.generated.egoItem.name}`;
+    }
+
+    if (!article) return name;
+
+    // Handle pluralization for quantities > 1
+    if (quantity > 1) {
+      // Simple pluralization (add 's' or 'es')
+      let plural = name;
+      if (name.endsWith('s') || name.endsWith('h')) {
+        plural = `${name}es`;
+      } else {
+        plural = `${name}s`;
+      }
+      return `${quantity} ${plural}`;
+    }
+
+    // Get the appropriate article (a/an)
+    const art = getArticle(name, quantity);
+    return `${art} ${name}`;
+  }
+
+  /**
+   * Mark an item type as known (after identifying, using, etc.)
+   */
+  makeAware(item: Item): void {
+    if (item.generated) {
+      const { tval, sval } = item.generated.baseItem;
+      this.flavorSystem.setAware(tval, sval);
+    }
   }
 }
