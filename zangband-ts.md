@@ -484,10 +484,25 @@ const defaultBindings: Record<string, GameAction> = {
 - [x] Add `effects` to ItemDef for consumables (potions, food)
 - [x] Create EffectExecutor that reads from item.generated.baseItem.effects
 - [x] Remove hardcoded name-based effect logic from handleQuaff/handleEat
+- [x] GPEffect system with targeting (item, symbol, direction, position)
+- [x] Targeting FSM states (ItemTargetingState, SymbolTargetingState, DirectionTargetingState)
 - [ ] Add `effects` to ItemDef for devices (wands, rods, staves)
 - [ ] Potions/other items need a possible separate effect on throw
 - [ ] Same system will be used for spell effects
 - [ ] Clean up duplicate items in items.json (items with _NNN suffix collisions)
+
+**FSM Modal/Input Refactoring (DONE)**
+- [x] Push/pop state stack for child states with result passing
+- [x] ItemSelectionState for inline item prompts
+- [x] Explicit action states: ReadScrollState, QuaffState, EatState, WieldState, DropState
+- [x] View states: InventoryState, EquipmentState, CharacterState
+- [x] FSM stateName is single source of truth for modal rendering
+
+**Item Display System (DONE)**
+- [x] FlavorSystem: random potion colors, scroll titles per game
+- [x] Awareness tracking: using items reveals their type
+- [x] Article formatting: "a Robe", "an Azure Potion", "The One Ring"
+- [x] getItemDisplayName() integrates flavor, awareness, and articles
 
 **Items - Magical Devices (TODO)**
 - [ ] Aim wand (`a`)
