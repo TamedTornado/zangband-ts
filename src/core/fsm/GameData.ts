@@ -31,4 +31,13 @@ export interface GameData {
 
   // Targeting cursor (null when not in targeting mode)
   cursor: Coord | null;
+
+  // Effect targeting states (null when not active)
+  itemTargeting: { prompt: string; validItemIndices: number[] } | null;
+  symbolTargeting: { prompt: string } | null;
+  directionTargeting: { prompt: string } | null;
+
+  // Modal state
+  activeModal: 'inventory' | 'equipment' | 'character' | null;
+  inventoryMode: 'browse' | 'wield' | 'drop' | 'quaff' | 'read' | 'eat';
 }

@@ -45,6 +45,7 @@ const WARRIOR_STARTING_ITEMS = ['short_sword', 'soft_leather_armour', 'wooden_to
 
 export class GameFSM {
   private currentState: State | null = null;
+  private stateStack: State[] = [];
   private listeners: Set<() => void> = new Set();
   private messageId: number = 0;
 
@@ -78,12 +79,34 @@ export class GameFSM {
     return this.currentState?.name ?? 'none';
   }
 
-  /** Transition to a new state */
+  /** Transition to a new state (clears stack) */
   transition(newState: State): void {
     this.currentState?.onExit(this);
+    this.stateStack = [];
     this.currentState = newState;
     this.currentState.onEnter(this);
     this.notify();
+  }
+
+  /** Push a child state onto the stack */
+  push(childState: State): void {
+    if (this.currentState) {
+      this.stateStack.push(this.currentState);
+    }
+    this.currentState = childState;
+    this.currentState.onEnter(this);
+    this.notify();
+  }
+
+  /** Pop current state and return to parent, passing result to onResume */
+  pop(result?: unknown): void {
+    this.currentState?.onExit(this);
+    const parent = this.stateStack.pop();
+    if (parent) {
+      this.currentState = parent;
+      parent.onResume?.(this, result);
+      this.notify();
+    }
   }
 
   /** Dispatch an action to the current state */
@@ -138,6 +161,11 @@ export class GameFSM {
       downStairs: [],
       killedBy: null,
       cursor: null,
+      itemTargeting: null,
+      symbolTargeting: null,
+      directionTargeting: null,
+      activeModal: null,
+      inventoryMode: 'browse',
     };
 
     this.messageId = 0;

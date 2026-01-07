@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Direction } from '@/core/types';
 import { useGame } from '../context/GameContext';
-import { useModal } from '../context/ModalContext';
 
 /**
  * Axis inputs - directional discrete events
@@ -40,6 +39,7 @@ export const Action = {
   CycleTarget: 'action:cycle_target',
   ConfirmTarget: 'action:confirm_target',
   CancelTarget: 'action:cancel_target',
+  ShowList: 'action:show_list',
 } as const;
 
 export type Action = (typeof Action)[keyof typeof Action];
@@ -121,6 +121,7 @@ const ACTION_BINDINGS: { key: string; modifiers: string[]; action: Action }[] = 
   { key: 'Tab', modifiers: [], action: Action.CycleTarget },
   { key: 'Enter', modifiers: [], action: Action.ConfirmTarget },
   { key: 'Escape', modifiers: [], action: Action.CancelTarget },
+  { key: '?', modifiers: [], action: Action.ShowList },
 ];
 
 /**
@@ -176,7 +177,6 @@ function getKeyWithModifiers(e: KeyboardEvent): string {
 }
 
 type GameActions = ReturnType<typeof useGame>['actions'];
-type ModalActions = ReturnType<typeof useModal>['modalActions'];
 
 /** Axis event handlers */
 const AXIS_HANDLERS: Record<Axis, (dir: Direction, actions: GameActions) => void> = {
@@ -185,19 +185,19 @@ const AXIS_HANDLERS: Record<Axis, (dir: Direction, actions: GameActions) => void
 };
 
 /** Action event handlers */
-const ACTION_HANDLERS: Record<Action, (actions: GameActions, modalActions: ModalActions) => void> = {
+const ACTION_HANDLERS: Record<Action, (actions: GameActions) => void> = {
   [Action.GoDownStairs]: (a) => a.goDownStairs(),
   [Action.GoUpStairs]: (a) => a.goUpStairs(),
   [Action.Pickup]: (a) => a.pickupItem(),
-  [Action.Wield]: (_a, m) => m.openInventory('wield'),
-  [Action.Drop]: (_a, m) => m.openInventory('drop'),
-  [Action.Takeoff]: (_a, m) => m.openModal('equipment'),
-  [Action.Quaff]: (_a, m) => m.openInventory('quaff'),
-  [Action.Read]: (_a, m) => m.openInventory('read'),
-  [Action.Eat]: (_a, m) => m.openInventory('eat'),
-  [Action.ToggleInventory]: (_a, m) => m.toggleModal('inventory'),
-  [Action.ToggleEquipment]: (_a, m) => m.toggleModal('equipment'),
-  [Action.ToggleCharacter]: (_a, m) => m.toggleModal('character'),
+  [Action.Wield]: (a) => a.wieldItem(),
+  [Action.Drop]: (a) => a.dropItem(),
+  [Action.Takeoff]: (a) => a.toggleEquipment(), // Opens equipment view, user can then take off
+  [Action.Quaff]: (a) => a.quaffPotion(),
+  [Action.Read]: (a) => a.readScroll(),
+  [Action.Eat]: (a) => a.eatFood(),
+  [Action.ToggleInventory]: (a) => a.toggleInventory(),
+  [Action.ToggleEquipment]: (a) => a.toggleEquipment(),
+  [Action.ToggleCharacter]: (a) => a.toggleCharacter(),
   [Action.Rest]: (a) => a.promptRest(),
   // Targeting
   [Action.Look]: (a) => a.look(),
@@ -205,11 +205,11 @@ const ACTION_HANDLERS: Record<Action, (actions: GameActions, modalActions: Modal
   [Action.CycleTarget]: (a) => a.cycleTarget(),
   [Action.ConfirmTarget]: (a) => a.confirmTarget(),
   [Action.CancelTarget]: (a) => a.cancelTarget(),
+  [Action.ShowList]: (a) => a.showList(),
 };
 
 export function useKeyboard() {
   const { state, actions } = useGame();
-  const { activeModal, modalActions } = useModal();
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -236,15 +236,66 @@ export function useKeyboard() {
       // Look up binding - try with modifiers first, then plain key
       const keyWithMods = getKeyWithModifiers(e);
       const binding = KEY_BINDINGS[keyWithMods] ?? KEY_BINDINGS[e.key];
-      if (!binding) return;
 
-      // If a modal is open, only allow toggle for the active modal
-      if (activeModal) {
-        if (binding.type === 'action' && binding.action.startsWith('action:toggle_')) {
-          const modal = binding.action.replace('action:toggle_', '');
-          if (modal === activeModal) {
-            e.preventDefault();
-            ACTION_HANDLERS[binding.action](actions, modalActions);
+      // Handle item selection mode - route a-z to letterSelect, Escape to cancel
+      if (state.stateName === 'itemSelection') {
+        e.preventDefault();
+        if (e.key >= 'a' && e.key <= 'z' && !e.ctrlKey && !e.altKey) {
+          actions.letterSelect(e.key);
+        } else if (e.key === 'Escape') {
+          actions.cancelTarget();
+        } else if (e.key === '?') {
+          actions.showList();
+        }
+        return;
+      }
+
+      // Handle symbol targeting - route a-z to letterSelect
+      if (state.stateName === 'symbolTargeting') {
+        e.preventDefault();
+        if (e.key.length === 1 && !e.ctrlKey && !e.altKey) {
+          actions.letterSelect(e.key);
+        } else if (e.key === 'Escape') {
+          actions.cancelTarget();
+        }
+        return;
+      }
+
+      // Handle direction targeting - route direction keys
+      if (state.stateName === 'directionTargeting') {
+        e.preventDefault();
+        if (binding?.type === 'axis') {
+          // Direction keys - dispatch the direction via moveCursor for now
+          // DirectionTargetingState will interpret this
+          actions.moveCursor(binding.direction);
+        } else if (e.key === 'Escape') {
+          actions.cancelTarget();
+        }
+        return;
+      }
+
+      // No binding - check for letter (a-z) to dispatch letterSelect
+      if (!binding) {
+        if (e.key.length === 1 && e.key >= 'a' && e.key <= 'z' && !e.ctrlKey && !e.altKey) {
+          e.preventDefault();
+          actions.letterSelect(e.key);
+        }
+        return;
+      }
+
+      // Handle inventory/equipment/character FSM states
+      if (state.stateName === 'inventory' || state.stateName === 'equipment' || state.stateName === 'character') {
+        e.preventDefault();
+        // Allow toggle actions to close the view
+        if (binding.type === 'action') {
+          if (binding.action === Action.ToggleInventory && state.stateName === 'inventory') {
+            ACTION_HANDLERS[binding.action](actions);
+          } else if (binding.action === Action.ToggleEquipment && state.stateName === 'equipment') {
+            ACTION_HANDLERS[binding.action](actions);
+          } else if (binding.action === Action.ToggleCharacter && state.stateName === 'character') {
+            ACTION_HANDLERS[binding.action](actions);
+          } else if (binding.action === Action.CancelTarget) {
+            actions.cancelTarget();
           }
         }
         return;
@@ -258,7 +309,7 @@ export function useKeyboard() {
         } else if (binding.action === Action.CycleTarget ||
                    binding.action === Action.ConfirmTarget ||
                    binding.action === Action.CancelTarget) {
-          ACTION_HANDLERS[binding.action](actions, modalActions);
+          ACTION_HANDLERS[binding.action](actions);
         }
         return;
       }
@@ -268,11 +319,11 @@ export function useKeyboard() {
       if (binding.type === 'axis') {
         AXIS_HANDLERS[binding.axis](binding.direction, actions);
       } else {
-        ACTION_HANDLERS[binding.action](actions, modalActions);
+        ACTION_HANDLERS[binding.action](actions);
       }
     }
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [actions, activeModal, modalActions, state.prompt, state.stateName]);
+  }, [actions, state.prompt, state.stateName]);
 }

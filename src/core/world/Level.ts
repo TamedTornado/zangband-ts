@@ -1,9 +1,17 @@
+import type { RNG } from 'rot-js';
 import type { Position } from '../types';
 import type { TerrainDef } from '../data/terrain';
 import { Tile, getTerrain } from './Tile';
 import type { Monster } from '../entities/Monster';
 import type { Item } from '../entities/Item';
 import type { Trap } from '../entities/Trap';
+import type {
+  GPActiveEffect,
+  GPActiveEffectContext,
+  GPActiveEffectTickResult,
+  GameEvent,
+  GPActiveEffectTriggerResult,
+} from '../systems/activeEffects';
 
 export interface LevelConfig {
   depth?: number;
@@ -19,6 +27,7 @@ export class Level {
   private monsters: Monster[] = [];
   private items: Item[] = [];
   private traps: Trap[] = [];
+  private activeEffects: GPActiveEffect[] = [];
 
   constructor(width: number, height: number, config: LevelConfig = {}) {
     this.width = width;
@@ -142,5 +151,76 @@ export class Level {
   // Check if position is occupied by a monster
   isOccupied(pos: Position): boolean {
     return this.getMonsterAt(pos) !== undefined;
+  }
+
+  // Active effect methods
+
+  /**
+   * Add an active effect to the level
+   */
+  addActiveEffect(effect: GPActiveEffect): void {
+    this.activeEffects.push(effect);
+  }
+
+  /**
+   * Remove an active effect from the level
+   */
+  removeActiveEffect(effect: GPActiveEffect): void {
+    const index = this.activeEffects.indexOf(effect);
+    if (index !== -1) {
+      this.activeEffects.splice(index, 1);
+    }
+  }
+
+  /**
+   * Get all active effects
+   */
+  getActiveEffects(): GPActiveEffect[] {
+    return [...this.activeEffects];
+  }
+
+  /**
+   * Get active effects at a specific position
+   */
+  getActiveEffectsAt(pos: Position): GPActiveEffect[] {
+    return this.activeEffects.filter(
+      (e) => e.position && e.position.x === pos.x && e.position.y === pos.y
+    );
+  }
+
+  /**
+   * Tick all active effects and return results
+   */
+  tickActiveEffects(rng: typeof RNG): GPActiveEffectTickResult[] {
+    const context: GPActiveEffectContext = { level: this, rng };
+    const results: GPActiveEffectTickResult[] = [];
+
+    for (const effect of this.activeEffects) {
+      results.push(effect.tick(context));
+    }
+
+    // Remove expired effects
+    this.activeEffects = this.activeEffects.filter((e) => !e.isExpired());
+
+    return results;
+  }
+
+  /**
+   * Fire a game event and let reactive effects respond
+   */
+  fireEvent(event: GameEvent, rng: typeof RNG): GPActiveEffectTriggerResult[] {
+    const context: GPActiveEffectContext = { level: this, rng };
+    const results: GPActiveEffectTriggerResult[] = [];
+
+    for (const effect of this.activeEffects) {
+      if (effect.shouldTrigger?.(event)) {
+        const result = effect.onTrigger?.(event, context);
+        if (result) {
+          results.push(result);
+        }
+      }
+    }
+
+    return results;
   }
 }

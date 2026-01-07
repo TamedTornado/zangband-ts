@@ -10,18 +10,30 @@ export type GameAction =
   | { type: 'goDownStairs' }
   | { type: 'goUpStairs' }
   | { type: 'pickup' }
-  | { type: 'wield'; itemIndex: number }
-  | { type: 'drop'; itemIndex: number }
   | { type: 'takeOff'; slot: string }
   | { type: 'rest'; mode: 'full' | 'hp' | { turns: number } }
-  | { type: 'quaff'; itemIndex: number }
-  | { type: 'read'; itemIndex: number }
-  | { type: 'eat'; itemIndex: number }
   | { type: 'restart' }
-  // Targeting
+  // Item actions (trigger FSM state transitions for item selection)
+  | { type: 'wield' }
+  | { type: 'drop' }
+  | { type: 'quaff' }
+  | { type: 'read' }
+  | { type: 'eat' }
+  // Modal/view actions (trigger FSM state transitions)
+  | { type: 'toggleInventory' }
+  | { type: 'toggleEquipment' }
+  | { type: 'toggleCharacter' }
+  // Look/Target mode (cursor-based)
   | { type: 'look' }
   | { type: 'target' }
   | { type: 'moveCursor'; dir: Direction }
   | { type: 'cycleTarget' }
   | { type: 'confirmTarget' }
-  | { type: 'cancelTarget' };
+  | { type: 'cancelTarget' }
+  // Effect targeting (item selection, symbol input, direction)
+  | { type: 'selectTargetItem'; itemIndex: number }
+  | { type: 'selectTargetSymbol'; symbol: string }
+  | { type: 'selectTargetDirection'; dir: Direction }
+  // Generic inputs (states interpret contextually)
+  | { type: 'letterSelect'; letter: string }
+  | { type: 'showList' };

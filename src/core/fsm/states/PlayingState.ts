@@ -4,16 +4,22 @@
  * Handles movement, combat, items, stairs, rest, running.
  */
 
-import { RNG } from 'rot-js';
 import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { DeadState } from './DeadState';
 import { TargetingState } from './TargetingState';
+import { ReadScrollState } from './ReadScrollState';
+import { QuaffState } from './QuaffState';
+import { EatState } from './EatState';
+import { WieldState } from './WieldState';
+import { DropState } from './DropState';
+import { InventoryState } from './InventoryState';
+import { EquipmentState } from './EquipmentState';
+import { CharacterState } from './CharacterState';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, HP_REGEN_RATE } from '../../constants';
-import { executeEffects } from '../../systems/effects';
 
 export class PlayingState implements State {
   readonly name = 'playing';
@@ -44,10 +50,10 @@ export class PlayingState implements State {
         this.handlePickup(fsm);
         return true;
       case 'wield':
-        this.handleWield(fsm, action.itemIndex);
+        fsm.transition(new WieldState());
         return true;
       case 'drop':
-        this.handleDrop(fsm, action.itemIndex);
+        fsm.transition(new DropState());
         return true;
       case 'takeOff':
         this.handleTakeOff(fsm, action.slot);
@@ -56,19 +62,28 @@ export class PlayingState implements State {
         this.handleRest(fsm, action.mode);
         return true;
       case 'quaff':
-        this.handleQuaff(fsm, action.itemIndex);
+        fsm.transition(new QuaffState());
         return true;
       case 'read':
-        this.handleRead(fsm, action.itemIndex);
+        fsm.transition(new ReadScrollState());
         return true;
       case 'eat':
-        this.handleEat(fsm, action.itemIndex);
+        fsm.transition(new EatState());
         return true;
       case 'look':
         fsm.transition(new TargetingState(false));
         return true;
       case 'target':
         fsm.transition(new TargetingState(true));
+        return true;
+      case 'toggleInventory':
+        fsm.transition(new InventoryState());
+        return true;
+      case 'toggleEquipment':
+        fsm.transition(new EquipmentState());
+        return true;
+      case 'toggleCharacter':
+        fsm.transition(new CharacterState());
         return true;
       default:
         return false;
@@ -305,33 +320,6 @@ export class PlayingState implements State {
     fsm.notify();
   }
 
-  private handleWield(fsm: GameFSM, itemIndex: number): void {
-    const { player } = fsm.data;
-    const item = player.inventory[itemIndex];
-    if (!item) return;
-
-    const result = player.equip(item);
-    if (result.equipped) {
-      fsm.addMessage(`You wield ${item.name}.`, 'info');
-      if (result.unequipped) {
-        fsm.addMessage(`You were wielding ${result.unequipped.name}.`, 'info');
-      }
-    }
-    fsm.notify();
-  }
-
-  private handleDrop(fsm: GameFSM, itemIndex: number): void {
-    const { player, level } = fsm.data;
-    const item = player.inventory[itemIndex];
-    if (!item) return;
-
-    player.removeItem(item.id);
-    item.position = { ...player.position };
-    level.addItem(item);
-    fsm.addMessage(`You drop ${item.name}.`, 'info');
-    fsm.notify();
-  }
-
   private handleTakeOff(fsm: GameFSM, slot: string): void {
     const { player } = fsm.data;
     const item = player.unequip(slot as any);
@@ -407,108 +395,6 @@ export class PlayingState implements State {
       fsm.addMessage(`You finish resting. (${turnsRested} turns)`, 'info');
     }
 
-    fsm.notify();
-  }
-
-  private handleQuaff(fsm: GameFSM, itemIndex: number): void {
-    const { player } = fsm.data;
-    const item = player.inventory[itemIndex];
-    if (!item) return;
-
-    if (!item.isPotion) {
-      fsm.addMessage(`You cannot quaff ${item.name}.`, 'info');
-      fsm.notify();
-      return;
-    }
-
-    fsm.addMessage(`You quaff ${item.name}.`, 'info');
-
-    // Effects are on the item definition
-    const effects = item.generated?.baseItem.effects;
-    if (effects && effects.length > 0) {
-      const result = executeEffects(effects, player, RNG);
-      for (const msg of result.messages) {
-        fsm.addMessage(msg, 'info');
-      }
-    } else {
-      fsm.addMessage('That tasted... interesting.', 'info');
-    }
-
-    player.removeItem(item.id);
-    fsm.notify();
-  }
-
-  private handleRead(fsm: GameFSM, itemIndex: number): void {
-    const { player, level } = fsm.data;
-    const item = player.inventory[itemIndex];
-    if (!item) return;
-
-    if (!item.isScroll) {
-      fsm.addMessage(`You cannot read ${item.name}.`, 'info');
-      fsm.notify();
-      return;
-    }
-
-    fsm.addMessage(`You read ${item.name}.`, 'info');
-
-    const name = item.name.toLowerCase();
-    if (name.includes('teleport') || name.includes('phase door')) {
-      const attempts = 100;
-      for (let i = 0; i < attempts; i++) {
-        const newX = 1 + Math.floor(Math.random() * (level.width - 2));
-        const newY = 1 + Math.floor(Math.random() * (level.height - 2));
-        if (level.isWalkable({ x: newX, y: newY })) {
-          player.position = { x: newX, y: newY };
-          fsm.addMessage('Your surroundings blur and shift!', 'info');
-          break;
-        }
-      }
-    } else if (name.includes('word of recall')) {
-      fsm.addMessage('The air around you crackles...', 'info');
-    } else if (name.includes('identify')) {
-      fsm.addMessage('You sense the nature of your possessions.', 'info');
-    } else if (name.includes('light') || name.includes('illumination')) {
-      fsm.addMessage('The area is lit up!', 'info');
-    } else if (name.includes('mapping') || name.includes('magic mapping')) {
-      fsm.addMessage('You sense the layout of the dungeon.', 'info');
-    } else if (name.includes('monster detection')) {
-      fsm.addMessage('You sense the presence of monsters!', 'info');
-    } else if (name.includes('blessing') || name.includes('holy chant')) {
-      fsm.addMessage('You feel righteous!', 'info');
-    } else {
-      fsm.addMessage('The scroll crumbles to dust.', 'info');
-    }
-
-    player.removeItem(item.id);
-    fsm.notify();
-  }
-
-  private handleEat(fsm: GameFSM, itemIndex: number): void {
-    const { player } = fsm.data;
-    const item = player.inventory[itemIndex];
-    if (!item) return;
-
-    if (!item.isFood) {
-      fsm.addMessage(`You cannot eat ${item.name}.`, 'info');
-      fsm.notify();
-      return;
-    }
-
-    fsm.addMessage(`You eat ${item.name}.`, 'info');
-
-    // Effects are on the item definition
-    const effects = item.generated?.baseItem.effects;
-    if (effects && effects.length > 0) {
-      const result = executeEffects(effects, player, RNG);
-      for (const msg of result.messages) {
-        fsm.addMessage(msg, 'info');
-      }
-    } else {
-      // Basic food with no special effects
-      fsm.addMessage('That was tasty.', 'info');
-    }
-
-    player.removeItem(item.id);
     fsm.notify();
   }
 }

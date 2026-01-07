@@ -5300,6 +5300,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "identify",
+        "target": "item",
+        "prompt": "Identify which item?"
+      }
     ]
   },
   "identify_177": {
@@ -5578,6 +5585,12 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "teleportSelf",
+        "range": "10"
+      }
     ]
   },
   "teleportation_186": {
@@ -5606,6 +5619,12 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "teleportSelf",
+        "range": "100"
+      }
     ]
   },
   "teleport_level": {

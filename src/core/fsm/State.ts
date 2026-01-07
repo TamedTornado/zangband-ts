@@ -17,4 +17,7 @@ export interface State {
 
   /** Handle an action - returns true if action was handled */
   handleAction(fsm: GameFSM, action: GameAction): boolean;
+
+  /** Called when a child state pops and returns to this state */
+  onResume?(fsm: GameFSM, result: unknown): void;
 }

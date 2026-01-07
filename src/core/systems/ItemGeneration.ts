@@ -97,6 +97,7 @@ export interface GeneratedItem {
   cost?: number;
   dd?: number; // Damage dice (may be modified)
   ds?: number; // Damage sides (may be modified)
+  identified?: boolean; // Whether item properties have been revealed
 }
 
 /**

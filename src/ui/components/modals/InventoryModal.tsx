@@ -1,49 +1,6 @@
 import { Modal, ItemList } from './Modal';
 import { useGame } from '../../context/GameContext';
-import { useModal, type InventoryMode } from '../../context/ModalContext';
 import type { Item } from '@/core/entities/Item';
-
-interface ModeConfig {
-  title: string;
-  hint: string;
-  filter?: (item: Item) => boolean;
-  emptyMessage?: string;
-}
-
-/**
- * Get title and hints based on inventory mode
- */
-function getModeConfig(mode: InventoryMode): ModeConfig {
-  switch (mode) {
-    case 'wield':
-      return { title: 'Wield/Wear which item?', hint: 'a-z) Wield item' };
-    case 'drop':
-      return { title: 'Drop which item?', hint: 'a-z) Drop item' };
-    case 'quaff':
-      return {
-        title: 'Quaff which potion?',
-        hint: 'a-z) Quaff potion',
-        filter: (item: Item) => item.isPotion,
-        emptyMessage: 'You have no potions.',
-      };
-    case 'read':
-      return {
-        title: 'Read which scroll?',
-        hint: 'a-z) Read scroll',
-        filter: (item: Item) => item.isScroll,
-        emptyMessage: 'You have no scrolls.',
-      };
-    case 'eat':
-      return {
-        title: 'Eat what?',
-        hint: 'a-z) Eat',
-        filter: (item: Item) => item.isFood,
-        emptyMessage: 'You have no food.',
-      };
-    default:
-      return { title: 'Inventory', hint: 'a-z) Select item' };
-  }
-}
 
 /** Item with original index for filtered lists */
 interface IndexedItem {
@@ -61,14 +18,11 @@ interface IndexedItem {
  */
 export function InventoryModal() {
   const { state, actions } = useGame();
-  const { inventoryMode, modalActions } = useModal();
   const inventory = state.player.inventory;
-  const config = getModeConfig(inventoryMode);
 
-  // Build indexed items with optional filtering
+  // Build indexed items
   const indexedItems: IndexedItem[] = inventory
-    .map((item: Item, index: number) => ({ item, originalIndex: index }))
-    .filter(({ item }: { item: Item }) => !config.filter || config.filter(item));
+    .map((item: Item, index: number) => ({ item, originalIndex: index }));
 
   const renderItem = (indexed: IndexedItem, _index: number, letter: string) => {
     const item = indexed.item;
@@ -100,43 +54,20 @@ export function InventoryModal() {
     );
   };
 
-  const handleSelect = (indexed: IndexedItem, _listIndex: number) => {
-    const originalIndex = indexed.originalIndex;
-    switch (inventoryMode) {
-      case 'wield':
-        actions.wieldItem(originalIndex);
-        modalActions.closeModal();
-        break;
-      case 'drop':
-        actions.dropItem(originalIndex);
-        modalActions.closeModal();
-        break;
-      case 'quaff':
-        actions.quaffPotion(originalIndex);
-        modalActions.closeModal();
-        break;
-      case 'read':
-        actions.readScroll(originalIndex);
-        modalActions.closeModal();
-        break;
-      case 'eat':
-        actions.eatFood(originalIndex);
-        modalActions.closeModal();
-        break;
-      default:
-        // Browse mode - could show item details in future
-        break;
-    }
+  const handleSelect = (_indexed: IndexedItem, _listIndex: number) => {
+    // In browse mode, selection does nothing (could show item details in future)
+    // Item actions (wield, drop, quaff, read, eat) now go through FSM states
+    // with inline prompts, so modal-based selection is deprecated
   };
 
   return (
     <Modal
-      title={config.title}
-      onClose={modalActions.closeModal}
+      title="Inventory"
+      onClose={() => actions.cancelTarget()}
       width={450}
       footer={
         <div className="modal-hints">
-          <span>{config.hint}</span>
+          <span>i) Close</span>
           <span>ESC) Close</span>
         </div>
       }
@@ -145,7 +76,7 @@ export function InventoryModal() {
         items={indexedItems}
         renderItem={renderItem}
         onSelect={handleSelect}
-        emptyMessage={config.emptyMessage ?? 'Your pack is empty.'}
+        emptyMessage="Your pack is empty."
       />
     </Modal>
   );

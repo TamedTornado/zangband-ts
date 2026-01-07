@@ -1,5 +1,4 @@
-import { GameProvider } from './context/GameContext';
-import { ModalProvider, useModal } from './context/ModalContext';
+import { GameProvider, useGame } from './context/GameContext';
 import { GameViewport } from './components/GameViewport';
 import { StatsPanel } from './components/StatsPanel';
 import { MessageLog } from './components/MessageLog';
@@ -7,13 +6,13 @@ import { InventoryModal, EquipmentModal, CharacterModal } from './components/mod
 import { useKeyboard } from './hooks/useKeyboard';
 
 function ModalContainer() {
-  const { activeModal } = useModal();
+  const { state } = useGame();
 
   return (
     <>
-      {activeModal === 'inventory' && <InventoryModal />}
-      {activeModal === 'equipment' && <EquipmentModal />}
-      {activeModal === 'character' && <CharacterModal />}
+      {state.stateName === 'inventory' && <InventoryModal />}
+      {state.stateName === 'equipment' && <EquipmentModal />}
+      {state.stateName === 'character' && <CharacterModal />}
     </>
   );
 }
@@ -40,9 +39,7 @@ function GameLayout() {
 export function App() {
   return (
     <GameProvider>
-      <ModalProvider>
-        <GameLayout />
-      </ModalProvider>
+      <GameLayout />
     </GameProvider>
   );
 }

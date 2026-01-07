@@ -34,6 +34,10 @@ interface GameState {
   gameOver: boolean;
   stateName: string;
   cursor: { x: number; y: number } | null;
+  // Targeting state (from FSM)
+  itemTargeting: { prompt: string; validItemIndices: number[] } | null;
+  symbolTargeting: { prompt: string } | null;
+  directionTargeting: { prompt: string } | null;
 }
 
 interface GameActions {
@@ -42,13 +46,13 @@ interface GameActions {
   goDownStairs: () => void;
   goUpStairs: () => void;
   pickupItem: () => void;
-  wieldItem: (itemIndex: number) => void;
-  dropItem: (itemIndex: number) => void;
+  wieldItem: () => void;
+  dropItem: () => void;
   takeOffItem: (slot: string) => void;
   startRest: (duration: RestDuration) => void;
-  quaffPotion: (itemIndex: number) => void;
-  readScroll: (itemIndex: number) => void;
-  eatFood: (itemIndex: number) => void;
+  quaffPotion: () => void;
+  readScroll: () => void;
+  eatFood: () => void;
   runInDirection: (dir: Direction) => void;
   restart: () => void;
   // Targeting
@@ -58,6 +62,13 @@ interface GameActions {
   cycleTarget: () => void;
   confirmTarget: () => void;
   cancelTarget: () => void;
+  // View toggles
+  toggleInventory: () => void;
+  toggleEquipment: () => void;
+  toggleCharacter: () => void;
+  // Generic input (states interpret contextually)
+  letterSelect: (letter: string) => void;
+  showList: () => void;
   // Prompt system
   showPrompt: (text: string, callback: (value: string) => void) => void;
   updatePrompt: (value: string) => void;
@@ -78,7 +89,10 @@ const GameContext = createContext<GameContextValue | null>(null);
 const fsm = new GameFSM(new PlayingState());
 
 function extractState(fsm: GameFSM, prompt: PromptState | null): GameState {
-  const { player, level, depth, turn, messages, upStairs, downStairs, cursor } = fsm.data;
+  const {
+    player, level, depth, turn, messages, upStairs, downStairs, cursor,
+    itemTargeting, symbolTargeting, directionTargeting,
+  } = fsm.data;
   return {
     player,
     level,
@@ -91,6 +105,9 @@ function extractState(fsm: GameFSM, prompt: PromptState | null): GameState {
     gameOver: fsm.stateName === 'dead',
     stateName: fsm.stateName,
     cursor,
+    itemTargeting,
+    symbolTargeting,
+    directionTargeting,
   };
 }
 
@@ -131,12 +148,12 @@ export function GameProvider({ children }: { children: ReactNode }) {
       fsm.dispatch({ type: 'pickup' });
     },
 
-    wieldItem: (itemIndex: number) => {
-      fsm.dispatch({ type: 'wield', itemIndex });
+    wieldItem: () => {
+      fsm.dispatch({ type: 'wield' });
     },
 
-    dropItem: (itemIndex: number) => {
-      fsm.dispatch({ type: 'drop', itemIndex });
+    dropItem: () => {
+      fsm.dispatch({ type: 'drop' });
     },
 
     takeOffItem: (slot: string) => {
@@ -152,16 +169,16 @@ export function GameProvider({ children }: { children: ReactNode }) {
       fsm.dispatch({ type: 'rest', mode: mode as 'full' | 'hp' | { turns: number } });
     },
 
-    quaffPotion: (itemIndex: number) => {
-      fsm.dispatch({ type: 'quaff', itemIndex });
+    quaffPotion: () => {
+      fsm.dispatch({ type: 'quaff' });
     },
 
-    readScroll: (itemIndex: number) => {
-      fsm.dispatch({ type: 'read', itemIndex });
+    readScroll: () => {
+      fsm.dispatch({ type: 'read' });
     },
 
-    eatFood: (itemIndex: number) => {
-      fsm.dispatch({ type: 'eat', itemIndex });
+    eatFood: () => {
+      fsm.dispatch({ type: 'eat' });
     },
 
     restart: () => {
@@ -191,6 +208,26 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
     cancelTarget: () => {
       fsm.dispatch({ type: 'cancelTarget' });
+    },
+
+    toggleInventory: () => {
+      fsm.dispatch({ type: 'toggleInventory' });
+    },
+
+    toggleEquipment: () => {
+      fsm.dispatch({ type: 'toggleEquipment' });
+    },
+
+    toggleCharacter: () => {
+      fsm.dispatch({ type: 'toggleCharacter' });
+    },
+
+    letterSelect: (letter: string) => {
+      fsm.dispatch({ type: 'letterSelect', letter });
+    },
+
+    showList: () => {
+      fsm.dispatch({ type: 'showList' });
     },
 
     // Prompt system (UI-only, not FSM)

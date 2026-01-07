@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import { Modal } from './Modal';
 import { useGame } from '../../context/GameContext';
-import { useModal } from '../../context/ModalContext';
 import type { EquipmentSlot } from '@/core/entities/Player';
 import type { Item } from '@/core/entities/Item';
 
@@ -23,11 +21,6 @@ const EQUIPMENT_SLOTS: Array<{ slot: EquipmentSlot; label: string; letter: strin
   { slot: 'gloves', label: 'Hands', letter: 'k' },
   { slot: 'boots', label: 'Feet', letter: 'l' },
 ];
-
-/** Map letter to slot */
-const LETTER_TO_SLOT: Record<string, EquipmentSlot> = Object.fromEntries(
-  EQUIPMENT_SLOTS.map(({ slot, letter }) => [letter, slot])
-);
 
 /**
  * Format item display string
@@ -67,35 +60,16 @@ function formatItem(item: Item | undefined): string {
  */
 export function EquipmentModal() {
   const { state, actions } = useGame();
-  const { modalActions } = useModal();
   const equipment = state.player.getAllEquipment();
-
-  // Handle a-l keys for takeoff
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key >= 'a' && e.key <= 'l') {
-        const slot = LETTER_TO_SLOT[e.key];
-        if (slot && equipment[slot]) {
-          e.preventDefault();
-          e.stopPropagation();
-          actions.takeOffItem(slot);
-          modalActions.closeModal();
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown, true);
-    return () => window.removeEventListener('keydown', handleKeyDown, true);
-  }, [equipment, actions, modalActions]);
 
   return (
     <Modal
       title="Equipment"
-      onClose={modalActions.closeModal}
+      onClose={() => actions.cancelTarget()}
       width={450}
       footer={
         <div className="modal-hints">
-          <span>a-l) Take off</span>
+          <span>e) Close</span>
           <span>ESC) Close</span>
         </div>
       }
@@ -112,7 +86,6 @@ export function EquipmentModal() {
               onClick={() => {
                 if (item) {
                   actions.takeOffItem(slot);
-                  modalActions.closeModal();
                 }
               }}
               style={{ cursor: item ? 'pointer' : 'default' }}

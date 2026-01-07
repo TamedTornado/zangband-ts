@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Modal } from './Modal';
 import { useGame } from '../../context/GameContext';
-import { useModal } from '../../context/ModalContext';
 
 /**
  * Tab configuration - matches Zangband TCL/TK character-window.tcl
@@ -25,15 +24,14 @@ const TABS: Array<{ id: TabId; label: string }> = [
  * - Uses NSTabs widget pattern
  */
 export function CharacterModal() {
-  const { state } = useGame();
-  const { modalActions } = useModal();
+  const { state, actions } = useGame();
   const [activeTab, setActiveTab] = useState<TabId>('info');
   const { player } = state;
 
   return (
     <Modal
       title="Character"
-      onClose={modalActions.closeModal}
+      onClose={() => actions.cancelTarget()}
       width={500}
     >
       <div className="char-tabs">
