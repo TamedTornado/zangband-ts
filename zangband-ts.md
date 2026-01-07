@@ -483,6 +483,7 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] Design unified effect schema (heals, damage, buffs, teleport, detection, etc.)
 - [ ] Add `useEffects` to ItemDef for consumables (potions, scrolls, food)
 - [ ] Add `useEffects` to ItemDef for devices (wands, rods, staves)
+- [ ] Potions/other items need a possible separate effect on throw.
 - [ ] Create ItemEffects executor that reads from data
 - [ ] Remove hardcoded name-based effect logic from PlayingState
 - [ ] Same system will be used for spell effects

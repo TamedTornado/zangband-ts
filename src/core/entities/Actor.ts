@@ -1,4 +1,5 @@
 import { Entity, type EntityConfig } from './Entity';
+import { StatusManager } from '@/core/systems/status';
 
 export interface ActorConfig extends EntityConfig {
   maxHp: number;
@@ -6,17 +7,29 @@ export interface ActorConfig extends EntityConfig {
 }
 
 export class Actor extends Entity {
-  readonly maxHp: number;
+  readonly baseMaxHp: number;
   private _hp: number;
-  readonly speed: number;
+  readonly baseSpeed: number;
   private _energy: number;
+  readonly statuses: StatusManager;
 
   constructor(config: ActorConfig) {
     super(config);
-    this.maxHp = config.maxHp;
+    this.baseMaxHp = config.maxHp;
     this._hp = config.maxHp;
-    this.speed = config.speed;
+    this.baseSpeed = config.speed;
     this._energy = 0;
+    this.statuses = new StatusManager();
+  }
+
+  /** Effective max HP including status modifiers */
+  get maxHp(): number {
+    return this.baseMaxHp + this.statuses.getModifier('maxHp');
+  }
+
+  /** Effective speed including status modifiers */
+  get speed(): number {
+    return this.baseSpeed + this.statuses.getModifier('speed');
   }
 
   get hp(): number {

@@ -1,0 +1,297 @@
+{
+  "blind": {
+    "type": "duration",
+    "name": "Blind",
+    "messages": {
+      "apply": "You are blind!",
+      "expire": "You can see again.",
+      "refresh": "You are more blind!"
+    },
+    "data": {
+      "cantSee": true
+    }
+  },
+  "confused": {
+    "type": "duration",
+    "name": "Confused",
+    "messages": {
+      "apply": "You are confused!",
+      "expire": "You feel less confused now.",
+      "refresh": "You are more confused!"
+    },
+    "data": {
+      "randomMove": true
+    }
+  },
+  "afraid": {
+    "type": "duration",
+    "name": "Afraid",
+    "messages": {
+      "apply": "You are terrified!",
+      "expire": "You feel bolder now.",
+      "refresh": "You are more terrified!"
+    },
+    "data": {
+      "cantAttack": true
+    }
+  },
+  "paralyzed": {
+    "type": "duration",
+    "name": "Paralyzed",
+    "messages": {
+      "apply": "You are paralyzed!",
+      "expire": "You can move again.",
+      "refresh": "You are more paralyzed!"
+    },
+    "data": {
+      "cantAct": true
+    }
+  },
+  "hallucinating": {
+    "type": "duration",
+    "name": "Hallucinating",
+    "messages": {
+      "apply": "Oh, wow! Everything looks so cosmic now!",
+      "expire": "You can see clearly again.",
+      "refresh": "You feel more trippy!"
+    },
+    "data": {
+      "scramble": true
+    }
+  },
+  "slow": {
+    "type": "duration",
+    "name": "Slow",
+    "messages": {
+      "apply": "You feel yourself moving slower!",
+      "expire": "You feel yourself speed up.",
+      "refresh": "You feel slower!"
+    },
+    "data": {
+      "speed": -10
+    }
+  },
+  "haste": {
+    "type": "duration",
+    "name": "Haste",
+    "messages": {
+      "apply": "You feel yourself moving faster!",
+      "expire": "You feel yourself slow down.",
+      "refresh": "You feel faster!"
+    },
+    "data": {
+      "speed": 10
+    }
+  },
+  "heroism": {
+    "type": "duration",
+    "name": "Heroism",
+    "messages": {
+      "apply": "You feel like a hero!",
+      "expire": "The heroism wears off.",
+      "refresh": "You feel more heroic!"
+    },
+    "data": {
+      "toHit": 12,
+      "maxHp": 12
+    }
+  },
+  "berserk": {
+    "type": "duration",
+    "name": "Berserk",
+    "messages": {
+      "apply": "You feel like a killing machine!",
+      "expire": "You feel less berserk.",
+      "refresh": "You feel more berserk!"
+    },
+    "data": {
+      "toHit": 24,
+      "maxHp": 24,
+      "ac": -10
+    }
+  },
+  "blessed": {
+    "type": "duration",
+    "name": "Blessed",
+    "messages": {
+      "apply": "You feel righteous!",
+      "expire": "The prayer has expired.",
+      "refresh": "You feel more righteous!"
+    },
+    "data": {
+      "ac": 5,
+      "toHit": 10
+    }
+  },
+  "shield": {
+    "type": "duration",
+    "name": "Shield",
+    "messages": {
+      "apply": "A mystic shield forms around your body!",
+      "expire": "Your mystic shield crumbles away.",
+      "refresh": "The shield strengthens!"
+    },
+    "data": {
+      "ac": 50
+    }
+  },
+  "invuln": {
+    "type": "duration",
+    "name": "Invulnerable",
+    "messages": {
+      "apply": "You feel invulnerable!",
+      "expire": "You feel vulnerable once more.",
+      "refresh": "You feel more invulnerable!"
+    },
+    "data": {
+      "invuln": true,
+      "ac": 100
+    }
+  },
+  "protevil": {
+    "type": "duration",
+    "name": "Protection from Evil",
+    "messages": {
+      "apply": "You feel safe from evil!",
+      "expire": "You no longer feel safe from evil.",
+      "refresh": "You feel safer from evil!"
+    },
+    "data": {
+      "protEvil": true
+    }
+  },
+  "oppose_acid": {
+    "type": "duration",
+    "name": "Resist Acid",
+    "messages": {
+      "apply": "You feel resistant to acid!",
+      "expire": "You feel less resistant to acid.",
+      "refresh": "You feel more resistant to acid!"
+    },
+    "data": {
+      "grantsResist": "RES_ACID"
+    }
+  },
+  "oppose_elec": {
+    "type": "duration",
+    "name": "Resist Electricity",
+    "messages": {
+      "apply": "You feel resistant to electricity!",
+      "expire": "You feel less resistant to electricity.",
+      "refresh": "You feel more resistant to electricity!"
+    },
+    "data": {
+      "grantsResist": "RES_ELEC"
+    }
+  },
+  "oppose_fire": {
+    "type": "duration",
+    "name": "Resist Fire",
+    "messages": {
+      "apply": "You feel resistant to fire!",
+      "expire": "You feel less resistant to fire.",
+      "refresh": "You feel more resistant to fire!"
+    },
+    "data": {
+      "grantsResist": "RES_FIRE"
+    }
+  },
+  "oppose_cold": {
+    "type": "duration",
+    "name": "Resist Cold",
+    "messages": {
+      "apply": "You feel resistant to cold!",
+      "expire": "You feel less resistant to cold.",
+      "refresh": "You feel more resistant to cold!"
+    },
+    "data": {
+      "grantsResist": "RES_COLD"
+    }
+  },
+  "oppose_pois": {
+    "type": "duration",
+    "name": "Resist Poison",
+    "messages": {
+      "apply": "You feel resistant to poison!",
+      "expire": "You feel less resistant to poison.",
+      "refresh": "You feel more resistant to poison!"
+    },
+    "data": {
+      "grantsResist": "RES_POIS"
+    }
+  },
+  "see_invis": {
+    "type": "duration",
+    "name": "See Invisible",
+    "messages": {
+      "apply": "Your eyes feel very sensitive!",
+      "expire": "Your eyes feel less sensitive.",
+      "refresh": "Your eyes feel more sensitive!"
+    },
+    "data": {
+      "seeInvis": true
+    }
+  },
+  "infravision": {
+    "type": "duration",
+    "name": "Infravision",
+    "messages": {
+      "apply": "Your eyes begin to tingle!",
+      "expire": "Your eyes stop tingling.",
+      "refresh": "Your eyes tingle more!"
+    },
+    "data": {
+      "infra": true,
+      "infravision": 3
+    }
+  },
+  "cut": {
+    "type": "cut",
+    "name": "Cut",
+    "messages": {
+      "apply": "You have been cut.",
+      "expire": "You are no longer bleeding."
+    },
+    "data": {
+      "maxIntensity": 1000,
+      "healRate": 1,
+      "severity": {
+        "10": { "message": "You have a graze.", "damage": 0 },
+        "25": { "message": "You have a light cut.", "damage": 1 },
+        "50": { "message": "You have a bad cut.", "damage": 3 },
+        "100": { "message": "You have a nasty cut.", "damage": 6 },
+        "200": { "message": "You have a severe cut.", "damage": 16 },
+        "1000": { "message": "You have a deep gash.", "damage": 32 },
+        "9999": { "message": "You have a mortal wound.", "damage": 200 }
+      }
+    }
+  },
+  "stun": {
+    "type": "stun",
+    "name": "Stunned",
+    "messages": {
+      "apply": "You have been stunned.",
+      "expire": "You are no longer stunned."
+    },
+    "data": {
+      "maxIntensity": 100,
+      "healRate": 1,
+      "severity": {
+        "1": { "message": "You are stunned.", "toHit": -5, "toDam": -5 },
+        "50": { "message": "You are heavily stunned.", "toHit": -20, "toDam": -20 },
+        "100": { "message": "You have been knocked out.", "toHit": -40, "toDam": -40, "cantAct": true }
+      },
+      "toHit": -20,
+      "toDam": -20
+    }
+  },
+  "poisoned": {
+    "type": "poison",
+    "name": "Poisoned",
+    "messages": {
+      "apply": "You are poisoned!",
+      "expire": "You are no longer poisoned."
+    },
+    "data": {}
+  }
+}
