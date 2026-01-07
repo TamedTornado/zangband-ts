@@ -25,6 +25,7 @@ bun run test:run   # Run tests once
 - **Data-driven**: Game content lives in JSON (`src/data/`), not code
 - **Separation of concerns**: Core logic (`src/core/`) has ZERO UI dependencies
 - **No enums**: TypeScript strict mode with `erasableSyntaxOnly` - use const objects instead
+- **No integer keys**: Never key data by integers or sval/tval - data belongs on the item definition itself
 
 ## Architecture
 

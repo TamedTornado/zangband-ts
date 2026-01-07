@@ -13,7 +13,7 @@ import { TargetingState } from './TargetingState';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, HP_REGEN_RATE } from '../../constants';
-import { getPotionEffects, executeEffects } from '../../systems/effects';
+import { executeEffects } from '../../systems/effects';
 
 export class PlayingState implements State {
   readonly name = 'playing';
@@ -423,15 +423,14 @@ export class PlayingState implements State {
 
     fsm.addMessage(`You quaff ${item.name}.`, 'info');
 
-    // Look up effects by sval
-    const effects = getPotionEffects(item.sval);
+    // Effects are on the item definition
+    const effects = item.generated?.baseItem.effects;
     if (effects && effects.length > 0) {
       const result = executeEffects(effects, player, RNG);
       for (const msg of result.messages) {
         fsm.addMessage(msg, 'info');
       }
     } else {
-      // Fallback for potions without defined effects
       fsm.addMessage('That tasted... interesting.', 'info');
     }
 
@@ -497,29 +496,16 @@ export class PlayingState implements State {
 
     fsm.addMessage(`You eat ${item.name}.`, 'info');
 
-    const name = item.name.toLowerCase();
-    const pval = item.generated?.baseItem.pval ?? 0;
-
-    if (name.includes('ration') || name.includes('slime mold') || name.includes('jerky')) {
-      if (pval >= 5000) {
-        fsm.addMessage('That was very satisfying!', 'info');
-      } else if (pval >= 2500) {
-        fsm.addMessage('That hit the spot!', 'info');
-      } else {
-        fsm.addMessage('That was tasty.', 'info');
+    // Effects are on the item definition
+    const effects = item.generated?.baseItem.effects;
+    if (effects && effects.length > 0) {
+      const result = executeEffects(effects, player, RNG);
+      for (const msg of result.messages) {
+        fsm.addMessage(msg, 'info');
       }
-    } else if (name.includes('waybread') || name.includes('lembas')) {
-      const heal = 5 + Math.floor(Math.random() * 11);
-      player.heal(heal);
-      fsm.addMessage(`You feel refreshed! (+${heal} HP)`, 'info');
-    } else if (name.includes('poison') || name.includes('sickness')) {
-      const damage = 1 + Math.floor(Math.random() * 10);
-      player.takeDamage(damage);
-      fsm.addMessage(`Yuck! That was poisonous! (-${damage} HP)`, 'danger');
-    } else if (name.includes('apple') || name.includes('juice')) {
-      fsm.addMessage('Refreshing!', 'info');
     } else {
-      fsm.addMessage('That was... edible.', 'info');
+      // Basic food with no special effects
+      fsm.addMessage('That was tasty.', 'info');
     }
 
     player.removeItem(item.id);

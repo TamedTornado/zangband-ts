@@ -1,4 +1,5 @@
 import { toSlug } from './slug';
+import type { Effect } from '@/core/systems/effects';
 
 export interface Allocation {
   depth: number;
@@ -25,6 +26,7 @@ export interface ItemDef {
   toDam: number;
   toAc: number;
   flags: string[];
+  effects?: Effect[];
 }
 
 export type ItemRecord = Record<string, ItemDef>;

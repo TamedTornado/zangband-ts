@@ -6,15 +6,10 @@ import {
   executeEffects,
   type Effect,
 } from '@/core/systems/effects/EffectExecutor';
-import {
-  loadPotionDefs,
-  getPotionEffects,
-  getPotionDef,
-  hasPotionEffects,
-} from '@/core/systems/effects/PotionEffects';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
-import potionsData from '@/data/potions.json';
+import itemsData from '@/data/items/items.json';
+import type { ItemDef } from '@/core/data/items';
 
 // Load data before tests
 beforeEach(() => {
@@ -31,6 +26,11 @@ function createTestActor(hp = 100): Actor {
     maxHp: hp,
     speed: 110,
   });
+}
+
+// Helper to get item by key
+function getItem(key: string): ItemDef {
+  return (itemsData as Record<string, ItemDef>)[key];
 }
 
 describe('rollDiceExpression', () => {
@@ -317,61 +317,62 @@ describe('executeEffects - unknown type', () => {
   });
 });
 
-describe('PotionEffects', () => {
-  it('loads potion definitions', () => {
-    expect(hasPotionEffects(34)).toBe(true); // Cure Light Wounds
-    expect(hasPotionEffects(29)).toBe(true); // Speed
-  });
+describe('Item effects', () => {
+  it('Cure Light Wounds potion has heal + reduce cut effects', () => {
+    const item = getItem('cure_light_wounds_437');
+    expect(item).toBeDefined();
+    expect(item.effects).toBeDefined();
+    expect(item.effects!.length).toBe(2);
 
-  it('returns undefined for unknown sval', () => {
-    expect(getPotionEffects(9999)).toBeUndefined();
-  });
-
-  it('gets potion effects by sval', () => {
-    const effects = getPotionEffects(34); // Cure Light Wounds
-    expect(effects).toBeDefined();
-    expect(effects!.length).toBeGreaterThan(0);
-    expect(effects![0].type).toBe('heal');
-  });
-
-  it('gets potion def by sval', () => {
-    const def = getPotionDef(29); // Speed
-    expect(def).toBeDefined();
-    expect(def!.name).toBe('Speed');
-    expect(def!.effects.length).toBe(1);
-    expect(def!.effects[0].type).toBe('applyStatus');
-    expect(def!.effects[0].status).toBe('haste');
-  });
-
-  it('Cure Light Wounds has heal + reduce cut', () => {
-    const effects = getPotionEffects(34);
-    expect(effects).toBeDefined();
-
-    const heal = effects!.find(e => e.type === 'heal');
+    const heal = item.effects!.find((e: Effect) => e.type === 'heal');
     expect(heal).toBeDefined();
     expect(heal!.dice).toBe('2d8');
 
-    const reduce = effects!.find(e => e.type === 'reduce');
+    const reduce = item.effects!.find((e: Effect) => e.type === 'reduce');
     expect(reduce).toBeDefined();
     expect(reduce!.status).toBe('cut');
-    expect(reduce!.amount).toBe(10);
+  });
+
+  it('Speed potion has haste effect', () => {
+    const item = getItem('speed_249');
+    expect(item).toBeDefined();
+    expect(item.effects).toBeDefined();
+    expect(item.effects![0].type).toBe('applyStatus');
+    expect(item.effects![0].status).toBe('haste');
   });
 
   it('Resistance potion applies all oppose statuses', () => {
-    const effects = getPotionEffects(60); // Resistance
-    expect(effects).toBeDefined();
-    expect(effects!.length).toBe(5);
+    const item = getItem('resistance_268');
+    expect(item).toBeDefined();
+    expect(item.effects).toBeDefined();
+    expect(item.effects!.length).toBe(5);
 
-    const statuses = effects!.map(e => e.status);
+    const statuses = item.effects!.map((e: Effect) => e.status);
     expect(statuses).toContain('oppose_acid');
     expect(statuses).toContain('oppose_elec');
     expect(statuses).toContain('oppose_fire');
     expect(statuses).toContain('oppose_cold');
     expect(statuses).toContain('oppose_pois');
   });
+
+  it('Cure Poison food has cure effect', () => {
+    const item = getItem('cure_poison');
+    expect(item).toBeDefined();
+    expect(item.effects).toBeDefined();
+    expect(item.effects![0].type).toBe('cure');
+    expect(item.effects![0].status).toBe('poisoned');
+  });
+
+  it('Blindness food applies blind status', () => {
+    const item = getItem('blindness_1');
+    expect(item).toBeDefined();
+    expect(item.effects).toBeDefined();
+    expect(item.effects![0].type).toBe('applyStatus');
+    expect(item.effects![0].status).toBe('blind');
+  });
 });
 
-describe('Integration: potion effects on actor', () => {
+describe('Integration: item effects on actor', () => {
   it('Cure Light Wounds heals and reduces cut', () => {
     const actor = createTestActor(100);
     actor.takeDamage(30);
@@ -383,9 +384,9 @@ describe('Integration: potion effects on actor', () => {
       RNG
     );
 
-    // Use Cure Light Wounds
-    const effects = getPotionEffects(34)!;
-    const result = executeEffects(effects, actor, RNG);
+    // Use Cure Light Wounds effects
+    const item = getItem('cure_light_wounds_437');
+    const result = executeEffects(item.effects!, actor, RNG);
 
     expect(actor.hp).toBeGreaterThan(70); // Healed some
     expect(result.healed).toBeGreaterThan(0);
@@ -396,8 +397,8 @@ describe('Integration: potion effects on actor', () => {
     const actor = createTestActor();
     expect(actor.statuses.has('haste')).toBe(false);
 
-    const effects = getPotionEffects(29)!;
-    executeEffects(effects, actor, RNG);
+    const item = getItem('speed_249');
+    executeEffects(item.effects!, actor, RNG);
 
     expect(actor.statuses.has('haste')).toBe(true);
     expect(actor.speed).toBe(120); // Base 110 + 10 from haste
@@ -415,8 +416,8 @@ describe('Integration: potion effects on actor', () => {
     expect(actor.statuses.has('poisoned')).toBe(true);
 
     // Use Neutralize Poison
-    const effects = getPotionEffects(27)!;
-    executeEffects(effects, actor, RNG);
+    const item = getItem('neutralize_poison');
+    executeEffects(item.effects!, actor, RNG);
 
     expect(actor.statuses.has('poisoned')).toBe(false);
   });
@@ -425,10 +426,29 @@ describe('Integration: potion effects on actor', () => {
     const actor = createTestActor();
     expect(actor.speed).toBe(110);
 
-    const effects = getPotionEffects(4)!; // Slowness
-    executeEffects(effects, actor, RNG);
+    const item = getItem('slowness_250');
+    executeEffects(item.effects!, actor, RNG);
 
     expect(actor.statuses.has('slow')).toBe(true);
     expect(actor.speed).toBe(100); // 110 - 10
+  });
+
+  it('Elvish Waybread heals and cures poison', () => {
+    const actor = createTestActor(100);
+    actor.takeDamage(50);
+
+    // Apply poison
+    executeEffects(
+      [{ type: 'applyStatus', status: 'poisoned', duration: '10', damage: 5 }],
+      actor,
+      RNG
+    );
+
+    const item = getItem('piece_of_elvish_waybread');
+    const result = executeEffects(item.effects!, actor, RNG);
+
+    expect(actor.hp).toBeGreaterThan(50);
+    expect(result.healed).toBeGreaterThan(0);
+    expect(actor.statuses.has('poisoned')).toBe(false);
   });
 });

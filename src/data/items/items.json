@@ -46,6 +46,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "blind",
+        "duration": "200+1d200"
+      }
     ]
   },
   "paranoia": {
@@ -74,6 +81,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "afraid",
+        "duration": "10+1d10"
+      }
     ]
   },
   "confusion": {
@@ -102,6 +116,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "confused",
+        "duration": "10+1d10"
+      }
     ]
   },
   "hallucination": {
@@ -130,6 +151,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "hallucinating",
+        "duration": "250+1d250"
+      }
     ]
   },
   "cure_poison": {
@@ -158,6 +186,12 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "cure",
+        "status": "poisoned"
+      }
     ]
   },
   "cure_blindness": {
@@ -186,6 +220,12 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "cure",
+        "status": "blind"
+      }
     ]
   },
   "cure_paranoia": {
@@ -214,6 +254,12 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "cure",
+        "status": "afraid"
+      }
     ]
   },
   "cure_confusion": {
@@ -242,6 +288,12 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "cure",
+        "status": "confused"
+      }
     ]
   },
   "weakness_9": {
@@ -446,6 +498,14 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "poisoned",
+        "duration": "10+1d10",
+        "damage": 3
+      }
     ]
   },
   "sickness": {
@@ -502,6 +562,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "paralyzed",
+        "duration": "10+1d10"
+      }
     ]
   },
   "restore_strength_18": {
@@ -586,6 +653,25 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "heal",
+        "dice": "4d8"
+      },
+      {
+        "type": "reduce",
+        "status": "cut",
+        "amount": 25
+      },
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      }
     ]
   },
   "ration_of_food": {
@@ -746,6 +832,16 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "heal",
+        "dice": "5d10"
+      },
+      {
+        "type": "cure",
+        "status": "poisoned"
+      }
     ]
   },
   "pint_of_fine_ale": {
@@ -7046,6 +7142,32 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      },
+      {
+        "type": "cure",
+        "status": "poisoned"
+      },
+      {
+        "type": "cure",
+        "status": "stun"
+      },
+      {
+        "type": "cure",
+        "status": "cut"
+      },
+      {
+        "type": "cure",
+        "status": "hallucinating"
+      }
     ]
   },
   "invulnerability": {
@@ -7074,6 +7196,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "invuln",
+        "duration": "7+1d7"
+      }
     ]
   },
   "new_life": {
@@ -7146,6 +7275,25 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "heal",
+        "dice": "4d8"
+      },
+      {
+        "type": "reduce",
+        "status": "cut",
+        "amount": 25
+      },
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      }
     ]
   },
   "cure_critical_wounds": {
@@ -7178,6 +7326,28 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "heal",
+        "dice": "6d8"
+      },
+      {
+        "type": "cure",
+        "status": "cut"
+      },
+      {
+        "type": "cure",
+        "status": "stun"
+      },
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      }
     ]
   },
   "healing_242": {
@@ -7218,6 +7388,28 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "heal",
+        "amount": 300
+      },
+      {
+        "type": "cure",
+        "status": "cut"
+      },
+      {
+        "type": "cure",
+        "status": "stun"
+      },
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      }
     ]
   },
   "constitution_243": {
@@ -7314,6 +7506,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "paralyzed",
+        "duration": "4+1d4"
+      }
     ]
   },
   "blindness_246": {
@@ -7342,6 +7541,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "blind",
+        "duration": "100+1d100"
+      }
     ]
   },
   "booze": {
@@ -7370,6 +7576,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "confused",
+        "duration": "15+1d15"
+      }
     ]
   },
   "poison_248": {
@@ -7398,6 +7611,14 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "poisoned",
+        "duration": "10+1d10",
+        "damage": 3
+      }
     ]
   },
   "speed_249": {
@@ -7430,6 +7651,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "haste",
+        "duration": "15+1d25"
+      }
     ]
   },
   "slowness_250": {
@@ -7458,6 +7686,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "slow",
+        "duration": "15+1d25"
+      }
     ]
   },
   "dexterity_251": {
@@ -7674,6 +7909,17 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "heroism",
+        "duration": "25+1d25"
+      },
+      {
+        "type": "cure",
+        "status": "afraid"
+      }
     ]
   },
   "berserk_strength_258": {
@@ -7702,6 +7948,17 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "berserk",
+        "duration": "25+1d25"
+      },
+      {
+        "type": "cure",
+        "status": "afraid"
+      }
     ]
   },
   "boldness": {
@@ -7730,6 +7987,12 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "cure",
+        "status": "afraid"
+      }
     ]
   },
   "restore_life_levels": {
@@ -7806,6 +8069,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "oppose_fire",
+        "duration": "10+1d10"
+      }
     ]
   },
   "resist_cold_262": {
@@ -7842,6 +8112,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "oppose_cold",
+        "duration": "10+1d10"
+      }
     ]
   },
   "detect_invisible_263": {
@@ -7870,6 +8147,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "see_invis",
+        "duration": "12+1d12"
+      }
     ]
   },
   "slow_poison": {
@@ -7898,6 +8182,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "reduce",
+        "status": "poisoned",
+        "amount": 50
+      }
     ]
   },
   "neutralize_poison": {
@@ -7926,6 +8217,12 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "cure",
+        "status": "poisoned"
+      }
     ]
   },
   "restore_mana": {
@@ -7982,6 +8279,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "infravision",
+        "duration": "100+1d100"
+      }
     ]
   },
   "resistance_268": {
@@ -8022,6 +8326,33 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "oppose_acid",
+        "duration": "20+1d20"
+      },
+      {
+        "type": "applyStatus",
+        "status": "oppose_elec",
+        "duration": "20+1d20"
+      },
+      {
+        "type": "applyStatus",
+        "status": "oppose_fire",
+        "duration": "20+1d20"
+      },
+      {
+        "type": "applyStatus",
+        "status": "oppose_cold",
+        "duration": "20+1d20"
+      },
+      {
+        "type": "applyStatus",
+        "status": "oppose_pois",
+        "duration": "20+1d20"
+      }
     ]
   },
   "light_269": {
@@ -12493,6 +12824,32 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "heal",
+        "amount": 1200
+      },
+      {
+        "type": "cure",
+        "status": "cut"
+      },
+      {
+        "type": "cure",
+        "status": "stun"
+      },
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      },
+      {
+        "type": "cure",
+        "status": "poisoned"
+      }
     ]
   },
   "life": {
@@ -12525,6 +12882,32 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "heal",
+        "amount": 5000
+      },
+      {
+        "type": "cure",
+        "status": "cut"
+      },
+      {
+        "type": "cure",
+        "status": "stun"
+      },
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      },
+      {
+        "type": "cure",
+        "status": "poisoned"
+      }
     ]
   },
   "self_knowledge": {
@@ -13037,6 +13420,17 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "heal",
+        "dice": "2d8"
+      },
+      {
+        "type": "reduce",
+        "status": "cut",
+        "amount": 10
+      }
     ]
   },
   "clumsiness": {
