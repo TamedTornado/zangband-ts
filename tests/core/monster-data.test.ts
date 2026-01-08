@@ -134,12 +134,15 @@ describe('MonsterDataManager', () => {
   });
 
   describe('selectMonster', () => {
-    it('selects monsters appropriate for depth', () => {
-      // At depth 5, only rat and giant_rat should be eligible
-      const monster = manager.selectMonster(5);
+    it('selects monsters within acceptable depth range', () => {
+      // Level boosting can add up to 10 + 7 + 7 = 24 levels
+      const MAX_BOOST = 24;
+      const level = 5;
+      const monster = manager.selectMonster(level);
 
       expect(monster).toBeDefined();
-      expect(['rat', 'giant_rat']).toContain(monster?.key);
+      // Monster's native depth should be at most level + max boost
+      expect(monster!.depth).toBeLessThanOrEqual(level + MAX_BOOST);
     });
 
     it('returns null when no monsters available', () => {

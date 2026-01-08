@@ -18,6 +18,7 @@ import { MonsterSpawner } from '../systems/MonsterSpawner';
 import { ItemSpawner } from '../systems/ItemSpawner';
 import { GameLoop } from '../systems/GameLoop';
 import { FlavorSystem, getArticle } from '../systems/FlavorSystem';
+import { TickSystem } from '../systems/TickSystem';
 import { MonsterDataManager } from '../data/MonsterDataManager';
 import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT } from '../constants';
 import type { Item } from '../entities/Item';
@@ -57,6 +58,7 @@ export class GameFSM {
   // Shared systems (exposed for states to use)
   readonly fovSystem = new FOVSystem();
   readonly gameLoop = new GameLoop(RNG, monsterDataManager);
+  readonly tickSystem = new TickSystem();
   readonly monsterDataManager = monsterDataManager;
   readonly itemGen = itemGen;
   readonly flavorSystem = new FlavorSystem(RNG);

@@ -94,6 +94,14 @@ export class PlayingState implements State {
     }
   }
 
+  /** Process per-turn time effects (rods, statuses, etc.) */
+  private processTurnEffects(fsm: GameFSM): void {
+    const result = fsm.tickSystem.tick(fsm.data.player);
+    for (const msg of result.messages) {
+      fsm.addMessage(msg, 'info');
+    }
+  }
+
   /** Process monster turns and check for player death */
   private processMonsterTurns(fsm: GameFSM): void {
     const { player, level, scheduler } = fsm.data;
@@ -146,6 +154,7 @@ export class PlayingState implements State {
       }
 
       player.spendEnergy(ENERGY_PER_TURN);
+      this.processTurnEffects(fsm);
       this.processMonsterTurns(fsm);
       fsm.notify();
       return;
@@ -156,6 +165,7 @@ export class PlayingState implements State {
       fsm.data.turn++;
       player.position = newPos;
       player.spendEnergy(ENERGY_PER_TURN);
+      this.processTurnEffects(fsm);
 
       // Check for items
       const itemsHere = level.getItemsAt(newPos);
@@ -177,6 +187,7 @@ export class PlayingState implements State {
       level.setTerrain(newPos, 'open_door');
       fsm.addMessage('You open the door.', 'info');
       player.spendEnergy(ENERGY_PER_TURN);
+      this.processTurnEffects(fsm);
       this.processMonsterTurns(fsm);
       fsm.notify();
       return;
@@ -218,6 +229,7 @@ export class PlayingState implements State {
       fsm.data.turn++;
       player.position = newPos;
       player.spendEnergy(ENERGY_PER_TURN);
+      this.processTurnEffects(fsm);
 
       // Process monsters
       this.processMonsterTurns(fsm);
@@ -362,6 +374,7 @@ export class PlayingState implements State {
       fsm.data.turn++;
       turnsRested++;
       player.spendEnergy(ENERGY_PER_TURN);
+      this.processTurnEffects(fsm);
 
       // HP regeneration
       if (turnsRested % HP_REGEN_RATE === 0 && player.hp < player.maxHp) {
