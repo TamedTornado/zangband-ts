@@ -83,9 +83,10 @@ export class DetectEffect extends SelfGPEffect {
         for (const monster of monsters) {
           if (monster.isDead) continue;
           if (this.inRange(monster.position, playerPos)) {
-            // Remember monster appearance on the tile
+            // Remember monster appearance on the tile and mark as explored
             const tile = level.getTile(monster.position);
             if (tile) {
+              tile.explored = true;
               tile.rememberMonster(monster.symbol, monster.color);
             }
             found++;
