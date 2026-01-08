@@ -86,7 +86,7 @@ function InfoTab({ player, depth, turn }: TabProps) {
         </div>
         <div className="char-row">
           <span className="char-label">Level:</span>
-          <span className="char-value">1</span>
+          <span className="char-value">{player.level}</span>
         </div>
       </div>
 

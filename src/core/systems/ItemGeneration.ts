@@ -871,6 +871,12 @@ export class ItemGeneration {
       cost: itemDef.cost,
     };
 
+    // Apply device magic to initialize charges for wands/staves/rods
+    const type = itemDef.type;
+    if (type === 'wand' || type === 'staff' || type === 'rod') {
+      this.applyDeviceMagic(generated, 1);
+    }
+
     return new Item({
       id: `item_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
       position: { x: 0, y: 0 },

@@ -69,6 +69,9 @@ export function applyDebugSetup(player: Player, itemGen: ItemGeneration): void {
   // (HP is determined by baseMaxHp from player creation)
   player.setLevel(10);
 
+  // Restore mana to full (recalculateMana doesn't increase current mana)
+  player.restoreMana(player.maxMana);
+
   // Give starting items
   for (const itemKey of DEBUG_STARTING_ITEMS) {
     const item = itemGen.createItemByKey(itemKey);
