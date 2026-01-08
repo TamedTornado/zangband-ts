@@ -18,6 +18,8 @@ import { DropState } from './DropState';
 import { InventoryState } from './InventoryState';
 import { EquipmentState } from './EquipmentState';
 import { CharacterState } from './CharacterState';
+import { CastSpellState } from './CastSpellState';
+import { StudySpellState } from './StudySpellState';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, HP_REGEN_RATE } from '../../constants';
@@ -73,6 +75,12 @@ export class PlayingState implements State {
         return true;
       case 'zap':
         fsm.transition(new ZapState());
+        return true;
+      case 'cast':
+        fsm.transition(new CastSpellState());
+        return true;
+      case 'study':
+        fsm.transition(new StudySpellState());
         return true;
       case 'look':
         fsm.transition(new TargetingState(false));

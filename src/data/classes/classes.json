@@ -7,7 +7,12 @@
     "xSkills": { "disarm": 12, "device": 7, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 100, "ranged": 55 },
     "hitDie": 9, "expMod": 0,
     "petUpkeepDiv": 20,
-    "heavySense": true
+    "heavySense": true,
+    "spellStat": null,
+    "spellFirst": null,
+    "spellWeight": null,
+    "realms": [],
+    "secondaryRealm": false
   },
   "mage": {
     "index": 1,
@@ -17,7 +22,12 @@
     "xSkills": { "disarm": 7, "device": 13, "save": 12, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 25, "ranged": 14 },
     "hitDie": 0, "expMod": 30,
     "petUpkeepDiv": 15,
-    "heavySense": false
+    "heavySense": false,
+    "spellStat": "int",
+    "spellFirst": 1,
+    "spellWeight": 300,
+    "realms": ["life", "sorcery", "nature", "chaos", "death", "trump", "arcane"],
+    "secondaryRealm": true
   },
   "priest": {
     "index": 2,
@@ -27,7 +37,12 @@
     "xSkills": { "disarm": 7, "device": 10, "save": 17, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 50, "ranged": 18 },
     "hitDie": 2, "expMod": 20,
     "petUpkeepDiv": 20,
-    "heavySense": false
+    "heavySense": false,
+    "spellStat": "wis",
+    "spellFirst": 1,
+    "spellWeight": 350,
+    "realms": ["life", "death"],
+    "secondaryRealm": true
   },
   "rogue": {
     "index": 3,
@@ -37,7 +52,12 @@
     "xSkills": { "disarm": 15, "device": 10, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 70, "ranged": 40 },
     "hitDie": 6, "expMod": 25,
     "petUpkeepDiv": 20,
-    "heavySense": true
+    "heavySense": true,
+    "spellStat": "int",
+    "spellFirst": 5,
+    "spellWeight": 350,
+    "realms": ["sorcery", "death", "trump", "arcane"],
+    "secondaryRealm": false
   },
   "ranger": {
     "index": 4,
@@ -47,7 +67,12 @@
     "xSkills": { "disarm": 8, "device": 10, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 65, "ranged": 63 },
     "hitDie": 4, "expMod": 30,
     "petUpkeepDiv": 20,
-    "heavySense": true
+    "heavySense": true,
+    "spellStat": "int",
+    "spellFirst": 3,
+    "spellWeight": 400,
+    "realms": ["nature"],
+    "secondaryRealm": false
   },
   "paladin": {
     "index": 5,
@@ -57,7 +82,12 @@
     "xSkills": { "disarm": 7, "device": 10, "save": 15, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 76, "ranged": 14 },
     "hitDie": 6, "expMod": 35,
     "petUpkeepDiv": 20,
-    "heavySense": true
+    "heavySense": true,
+    "spellStat": "wis",
+    "spellFirst": 1,
+    "spellWeight": 450,
+    "realms": ["life", "death"],
+    "secondaryRealm": false
   },
   "warrior_mage": {
     "index": 6,
@@ -67,7 +97,12 @@
     "xSkills": { "disarm": 7, "device": 10, "save": 12, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 75, "ranged": 50 },
     "hitDie": 4, "expMod": 50,
     "petUpkeepDiv": 20,
-    "heavySense": false
+    "heavySense": false,
+    "spellStat": "int",
+    "spellFirst": 1,
+    "spellWeight": 350,
+    "realms": ["arcane"],
+    "secondaryRealm": false
   },
   "chaos_warrior": {
     "index": 7,
@@ -77,7 +112,12 @@
     "xSkills": { "disarm": 7, "device": 11, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 90, "ranged": 40 },
     "hitDie": 6, "expMod": 35,
     "petUpkeepDiv": 20,
-    "heavySense": true
+    "heavySense": true,
+    "spellStat": "int",
+    "spellFirst": 1,
+    "spellWeight": 400,
+    "realms": ["chaos"],
+    "secondaryRealm": false
   },
   "monk": {
     "index": 8,
@@ -87,7 +127,12 @@
     "xSkills": { "disarm": 15, "device": 11, "save": 15, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 30, "ranged": 25 },
     "hitDie": 6, "expMod": 40,
     "petUpkeepDiv": 20,
-    "heavySense": false
+    "heavySense": false,
+    "spellStat": "wis",
+    "spellFirst": 1,
+    "spellWeight": 350,
+    "realms": ["life", "nature", "death"],
+    "secondaryRealm": false
   },
   "mindcrafter": {
     "index": 9,
@@ -97,7 +142,12 @@
     "xSkills": { "disarm": 10, "device": 10, "save": 14, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 30, "ranged": 20 },
     "hitDie": 2, "expMod": 25,
     "petUpkeepDiv": 20,
-    "heavySense": false
+    "heavySense": false,
+    "spellStat": "wis",
+    "spellFirst": 1,
+    "spellWeight": 350,
+    "realms": [],
+    "secondaryRealm": false
   },
   "high_mage": {
     "index": 10,
@@ -107,6 +157,12 @@
     "xSkills": { "disarm": 7, "device": 13, "save": 12, "stealth": 0, "search": 0, "searchFreq": 0, "melee": 15, "ranged": 10 },
     "hitDie": 0, "expMod": 30,
     "petUpkeepDiv": 12,
-    "heavySense": false
+    "heavySense": false,
+    "spellStat": "int",
+    "spellFirst": 1,
+    "spellWeight": 300,
+    "realms": ["life", "sorcery", "nature", "chaos", "death", "trump", "arcane"],
+    "secondaryRealm": false,
+    "manaBonus": 1.25
   }
 }

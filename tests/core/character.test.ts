@@ -43,6 +43,11 @@ const warriorClass: ClassDef = {
   expMod: 0,
   petUpkeepDiv: 20,
   heavySense: true,
+  spellStat: null,
+  spellFirst: null,
+  spellWeight: null,
+  realms: [],
+  secondaryRealm: false,
 };
 
 const mageClass: ClassDef = {
@@ -55,6 +60,11 @@ const mageClass: ClassDef = {
   expMod: 30,
   petUpkeepDiv: 15,
   heavySense: false,
+  spellStat: 'int',
+  spellFirst: 1,
+  spellWeight: 300,
+  realms: ['life', 'sorcery', 'nature', 'chaos', 'death', 'trump', 'arcane'],
+  secondaryRealm: true,
 };
 
 function createTestConfig(overrides: Partial<CharacterConfig> = {}): CharacterConfig {

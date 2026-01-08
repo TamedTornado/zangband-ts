@@ -28,6 +28,9 @@ export const Action = {
   Read: 'action:read',
   Eat: 'action:eat',
   Zap: 'action:zap',
+  // Magic
+  Cast: 'action:cast',
+  Study: 'action:study',
   // Modals
   ToggleInventory: 'action:toggle_inventory',
   ToggleEquipment: 'action:toggle_equipment',
@@ -112,6 +115,9 @@ const ACTION_BINDINGS: { key: string; modifiers: string[]; action: Action }[] = 
   { key: 'E', modifiers: ['shift'], action: Action.Eat },
   { key: 'z', modifiers: [], action: Action.Zap },
   { key: 'a', modifiers: [], action: Action.Zap }, // Alias: aim wand
+  // Magic
+  { key: 'm', modifiers: [], action: Action.Cast },
+  { key: 'G', modifiers: ['shift'], action: Action.Study },
   // Modals
   { key: 'i', modifiers: [], action: Action.ToggleInventory },
   { key: 'e', modifiers: [], action: Action.ToggleEquipment },
@@ -199,6 +205,8 @@ const ACTION_HANDLERS: Record<Action, (actions: GameActions) => void> = {
   [Action.Read]: (a) => a.readScroll(),
   [Action.Eat]: (a) => a.eatFood(),
   [Action.Zap]: (a) => a.zapDevice(),
+  [Action.Cast]: (a) => a.castSpell(),
+  [Action.Study]: (a) => a.studySpell(),
   [Action.ToggleInventory]: (a) => a.toggleInventory(),
   [Action.ToggleEquipment]: (a) => a.toggleEquipment(),
   [Action.ToggleCharacter]: (a) => a.toggleCharacter(),
@@ -243,6 +251,19 @@ export function useKeyboard() {
 
       // Handle item selection mode - route a-z to letterSelect, Escape to cancel
       if (state.stateName === 'itemSelection') {
+        e.preventDefault();
+        if (e.key >= 'a' && e.key <= 'z' && !e.ctrlKey && !e.altKey) {
+          actions.letterSelect(e.key);
+        } else if (e.key === 'Escape') {
+          actions.cancelTarget();
+        } else if (e.key === '?') {
+          actions.showList();
+        }
+        return;
+      }
+
+      // Handle spell casting mode - route a-z to letterSelect, Escape to cancel
+      if (state.stateName === 'cast' || state.stateName === 'study') {
         e.preventDefault();
         if (e.key >= 'a' && e.key <= 'z' && !e.ctrlKey && !e.altKey) {
           actions.letterSelect(e.key);

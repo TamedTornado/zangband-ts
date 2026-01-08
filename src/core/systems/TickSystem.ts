@@ -25,6 +25,9 @@ export class TickSystem {
     // Tick rod timeouts
     this.tickRods(player);
 
+    // Tick mana regeneration
+    this.tickMana(player);
+
     // Tick status effects
     const statusMessages = player.statuses.tick(player, rng);
     messages.push(...statusMessages);
@@ -41,5 +44,12 @@ export class TickSystem {
         item.tickTimeout();
       }
     }
+  }
+
+  /**
+   * Tick mana regeneration for spellcasters
+   */
+  private tickMana(player: Player): void {
+    player.regenerateMana();
   }
 }

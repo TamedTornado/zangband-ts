@@ -54,6 +54,8 @@ interface GameActions {
   readScroll: () => void;
   eatFood: () => void;
   zapDevice: () => void;
+  castSpell: () => void;
+  studySpell: () => void;
   runInDirection: (dir: Direction) => void;
   restart: () => void;
   // Targeting
@@ -184,6 +186,14 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
     zapDevice: () => {
       fsm.dispatch({ type: 'zap' });
+    },
+
+    castSpell: () => {
+      fsm.dispatch({ type: 'cast' });
+    },
+
+    studySpell: () => {
+      fsm.dispatch({ type: 'study' });
     },
 
     restart: () => {

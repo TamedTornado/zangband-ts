@@ -5,6 +5,9 @@ export function StatsPanel() {
   const { player, turn } = state;
 
   const hpPercent = Math.max(0, Math.min(100, (player.hp / player.maxHp) * 100));
+  const mpPercent = player.maxMana > 0
+    ? Math.max(0, Math.min(100, (player.currentMana / player.maxMana) * 100))
+    : 0;
   const stats = player.stats;
 
   return (
@@ -16,10 +19,14 @@ export function StatsPanel() {
       </div>
       <div className="bar-text">HP: {player.hp}/{player.maxHp}</div>
 
-      <div className="mp-bar">
-        <div className="fill" style={{ width: '100%' }} />
-      </div>
-      <div className="bar-text">MP: 50/50</div>
+      {player.maxMana > 0 && (
+        <>
+          <div className="mp-bar">
+            <div className="fill" style={{ width: `${mpPercent}%` }} />
+          </div>
+          <div className="bar-text">MP: {player.currentMana}/{player.maxMana}</div>
+        </>
+      )}
 
       <div style={{ marginTop: 16 }}>
         <div className="stat-row">

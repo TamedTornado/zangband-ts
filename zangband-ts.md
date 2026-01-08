@@ -707,10 +707,15 @@ Wands, rods, and staves have special stacking and charge mechanics from Zangband
 - [ ] Message history (`Ctrl+P`)
 - [ ] Knowledge menu (`~`)
 
-**Magic System (TODO)**
-- [ ] Spell casting (`m`)
+**Magic System (PARTIAL)**
+- [x] Spell casting (`m`) - select known spell, check mana/level requirements, roll failure, execute via GPEffect
 - [ ] Browse spellbook (`b`)
-- [ ] Learn spells (`G`)
+- [x] Learn spells (`G`) - select book, show learnable spells by class/level, learn spell to memory
+- [x] Player mana pool with class-based calculation (INT or WIS based on spellStat)
+- [x] Mana regeneration via TickSystem (maxMana/100 per turn)
+- [x] Per-realm spell tracking (Map<string, Set<string>>)
+- [x] Spell book utilities (spellBooks.ts, spellLoader.ts)
+- [x] Book 1 spells (indices 0-7) have effects for all 7 realms
 
 **Save/Load (TODO)**
 - [ ] Save game (`Ctrl+S`) to localStorage/IndexedDB

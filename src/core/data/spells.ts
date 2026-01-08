@@ -22,6 +22,8 @@
  * for balance. Future work could derive formulas + override table.
  */
 
+import type { GPEffectDef } from '../systems/effects/GPEffect';
+
 export interface ClassSpellReq {
   level: number;
   mana: number;
@@ -30,9 +32,12 @@ export interface ClassSpellReq {
 }
 
 export interface SpellDef {
-  index: number;
-  name: string;
+  key: string;        // Unique slug identifier (e.g., "detect_evil")
+  index: number;      // Position within realm (0-31)
+  name: string;       // Display name
   classes: Record<string, ClassSpellReq>;
+  effects?: GPEffectDef[];  // Spell effects (same format as item effects)
+  target?: string;    // Target type: 'self', 'position', 'direction'
 }
 
 export type RealmSpells = SpellDef[];

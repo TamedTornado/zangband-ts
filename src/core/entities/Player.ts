@@ -3,6 +3,7 @@ import type { Item } from './Item';
 import type { Level } from '../world/Level';
 import type { ItemGeneration } from '../systems/ItemGeneration';
 import { type Position, type Direction, movePosition } from '../types';
+import type { ClassDef } from '../data/classes';
 
 export interface Stats {
   str: number;
@@ -51,14 +52,30 @@ export interface PlayerConfig {
   speed: number;
   stats: Stats;
   className?: string;
+  classDef?: ClassDef;
+  level?: number;
+  primaryRealm?: string;
+  secondaryRealm?: string;
 }
 
 export class Player extends Actor {
   readonly stats: Stats;
   readonly className: string;
+  readonly classDef: ClassDef | undefined;
   private _inventory: Item[] = [];
-  private _knownSpells: string[] = [];
+  private _knownSpells: Map<string, Set<string>> = new Map(); // realm -> spell keys
   private _equipment: Partial<Record<EquipmentSlot, Item>> = {};
+
+  // Character progression
+  private _level: number = 1;
+
+  // Mana pool
+  private _currentMana: number = 0;
+  private _maxMana: number = 0;
+
+  // Magic realms (chosen at character creation)
+  private _primaryRealm: string | null = null;
+  private _secondaryRealm: string | null = null;
 
   constructor(config: PlayerConfig) {
     super({
@@ -71,14 +88,149 @@ export class Player extends Actor {
     });
     this.stats = { ...config.stats };
     this.className = config.className ?? 'Warrior';
+    this.classDef = config.classDef;
+    this._level = config.level ?? 1;
+    this._primaryRealm = config.primaryRealm ?? null;
+    this._secondaryRealm = config.secondaryRealm ?? null;
+
+    // Initialize mana pool
+    this._maxMana = this.calculateMaxMana();
+    this._currentMana = this._maxMana;
+  }
+
+  // Character level
+  get level(): number {
+    return this._level;
+  }
+
+  set level(value: number) {
+    this._level = value;
+    // Recalculate max mana when level changes
+    const oldMax = this._maxMana;
+    this._maxMana = this.calculateMaxMana();
+    // Restore the mana gained from leveling
+    this._currentMana = Math.min(this._currentMana + (this._maxMana - oldMax), this._maxMana);
+  }
+
+  // Mana pool accessors
+  get maxMana(): number {
+    return this._maxMana;
+  }
+
+  get currentMana(): number {
+    return this._currentMana;
+  }
+
+  // Magic realm accessors
+  get primaryRealm(): string | null {
+    return this._primaryRealm;
+  }
+
+  get secondaryRealm(): string | null {
+    return this._secondaryRealm;
+  }
+
+  /**
+   * Calculate maximum mana based on class, level, and casting stat
+   * Formula: (base from level) * stat_modifier * class_bonus
+   */
+  calculateMaxMana(): number {
+    if (!this.classDef || !this.classDef.spellStat) {
+      return 0; // Non-caster class
+    }
+
+    const spellStat = this.classDef.spellStat;
+    const statValue = this.stats[spellStat];
+
+    // Stat modifier: (stat - 10) / 2, similar to D&D
+    // But we'll use Zangband-style: higher stats give more mana
+    const statMod = Math.floor((statValue - 8) / 2);
+
+    // Base mana from level: roughly level * 2-3 depending on class
+    // Mages get more base mana than hybrid classes
+    const levelMana = this._level * 3;
+
+    // Stat contribution: stat_mod * level / 2
+    const statMana = Math.max(0, statMod * this._level / 2);
+
+    // Total before class bonus
+    let totalMana = Math.floor(levelMana + statMana);
+
+    // Apply class mana bonus (e.g., high_mage gets 1.25x)
+    if (this.classDef.manaBonus) {
+      totalMana = Math.floor(totalMana * this.classDef.manaBonus);
+    }
+
+    // Minimum 1 mana for casters
+    return Math.max(1, totalMana);
+  }
+
+  /**
+   * Spend mana for casting a spell
+   * @returns true if mana was spent, false if not enough mana
+   */
+  spendMana(amount: number): boolean {
+    if (this._currentMana < amount) {
+      return false;
+    }
+    this._currentMana -= amount;
+    return true;
+  }
+
+  /**
+   * Restore mana (from regeneration, potions, etc.)
+   */
+  restoreMana(amount: number): void {
+    this._currentMana = Math.min(this._currentMana + amount, this._maxMana);
+  }
+
+  /**
+   * Regenerate mana (called each turn)
+   * Rate: maxMana / 100 per turn (roughly 100 turns to full)
+   */
+  regenerateMana(): void {
+    if (this._maxMana <= 0) return;
+    const regenRate = Math.max(1, Math.floor(this._maxMana / 100));
+    this.restoreMana(regenRate);
+  }
+
+  /**
+   * Recalculate max mana (call after stat changes)
+   */
+  recalculateMana(): void {
+    this._maxMana = this.calculateMaxMana();
+    this._currentMana = Math.min(this._currentMana, this._maxMana);
   }
 
   get inventory(): Item[] {
     return [...this._inventory];
   }
 
+  /**
+   * Get all known spell keys across all realms
+   */
   get knownSpells(): string[] {
-    return [...this._knownSpells];
+    const allSpells: string[] = [];
+    for (const spells of this._knownSpells.values()) {
+      allSpells.push(...spells);
+    }
+    return allSpells;
+  }
+
+  /**
+   * Get known spells for a specific realm
+   */
+  getKnownSpellsInRealm(realm: string): string[] {
+    const spells = this._knownSpells.get(realm);
+    return spells ? [...spells] : [];
+  }
+
+  /**
+   * Check if a spell is known
+   */
+  knowsSpell(realm: string, spellKey: string): boolean {
+    const spells = this._knownSpells.get(realm);
+    return spells?.has(spellKey) ?? false;
   }
 
   /**
@@ -106,10 +258,27 @@ export class Player extends Actor {
     return undefined;
   }
 
-  learnSpell(spellId: string): void {
-    if (!this._knownSpells.includes(spellId)) {
-      this._knownSpells.push(spellId);
+  /**
+   * Learn a spell in a specific realm
+   */
+  learnSpell(realm: string, spellKey: string): void {
+    let realmSpells = this._knownSpells.get(realm);
+    if (!realmSpells) {
+      realmSpells = new Set();
+      this._knownSpells.set(realm, realmSpells);
     }
+    realmSpells.add(spellKey);
+  }
+
+  /**
+   * Get count of known spells (for spell slot tracking)
+   */
+  get knownSpellCount(): number {
+    let count = 0;
+    for (const spells of this._knownSpells.values()) {
+      count += spells.size;
+    }
+    return count;
   }
 
   // Equipment methods

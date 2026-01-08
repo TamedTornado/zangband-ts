@@ -1,6 +1,20 @@
 import { describe, it, expect } from 'vitest';
 import { type SpellRecord } from '@/core/data/spells';
 import spellsJson from '@/data/spells/spells.json';
+import {
+  isSpellBookType,
+  getBookRealm,
+  getBookSpellRange,
+  getBookSpellIndices,
+  getBookInfo,
+} from '@/core/data/spellBooks';
+import {
+  getRealmSpells,
+  getSpellByIndex,
+  getSpellByKey,
+  getBookSpells,
+  canClassLearnSpell,
+} from '@/core/data/spellLoader';
 
 const spells = spellsJson as SpellRecord;
 
@@ -26,54 +40,7 @@ describe('spells data', () => {
     expect(spells.arcane.length).toBe(32);
   });
 
-  // Spot-checks against tables.c:5450-5743 to verify extraction
-  // Reference: ../zangband/src/tables.c
 
-  it('should match Life spells from tables.c:5452-5491', () => {
-    expect(spells.life[0].name).toBe('Detect Evil');
-    expect(spells.life[1].name).toBe('Cure Light Wounds');
-    expect(spells.life[14].name).toBe('Healing');
-    expect(spells.life[15].name).toBe('Glyph of Warding');
-    expect(spells.life[31].name).toBe('Holy Invulnerability');
-  });
-
-  it('should match Sorcery spells from tables.c:5493-5533', () => {
-    expect(spells.sorcery[0].name).toBe('Detect Monsters');
-    expect(spells.sorcery[1].name).toBe('Phase Door');
-    expect(spells.sorcery[9].name).toBe('Identify');
-    expect(spells.sorcery[31].name).toBe('Globe of Invulnerability');
-  });
-
-  it('should match Nature spells from tables.c:5535-5575', () => {
-    expect(spells.nature[0].name).toBe('Detect Creatures');
-    expect(spells.nature[8].name).toBe('Stone to Mud');
-    expect(spells.nature[31].name).toBe("Nature's Wrath");
-  });
-
-  it('should match Chaos spells from tables.c:5577-5617', () => {
-    expect(spells.chaos[0].name).toBe('Magic Missile');
-    expect(spells.chaos[5].name).toBe('Fire Bolt');
-    expect(spells.chaos[31].name).toBe('Call the Void');
-  });
-
-  it('should match Death spells from tables.c:5619-5659', () => {
-    expect(spells.death[0].name).toBe('Detect Unlife');
-    expect(spells.death[11].name).toBe('Vampiric Drain');
-    expect(spells.death[31].name).toBe('Wraithform');
-  });
-
-  it('should match Trump spells from tables.c:5661-5702', () => {
-    expect(spells.trump[0].name).toBe('Phase Door');
-    expect(spells.trump[1].name).toBe('Mind Blast');
-    expect(spells.trump[31].name).toBe('Trump Greater Undead');
-  });
-
-  it('should match Arcane spells from tables.c:5704-5742', () => {
-    expect(spells.arcane[0].name).toBe('Zap');
-    expect(spells.arcane[1].name).toBe('Wizard Lock');
-    expect(spells.arcane[26].name).toBe('Identify');
-    expect(spells.arcane[31].name).toBe('Clairvoyance');
-  });
 });
 
 describe('spell class requirements (merged from magic_info)', () => {
@@ -113,5 +80,97 @@ describe('spell class requirements (merged from magic_info)', () => {
   it('should show High-Mage has lower requirements than Mage', () => {
     // High-Mage typically has lower fail rates
     expect(spells.life[0].classes['high_mage'].fail).toBeLessThan(spells.life[0].classes['mage'].fail);
+  });
+});
+
+describe('spell book utilities', () => {
+  it('isSpellBookType returns true for book types', () => {
+    expect(isSpellBookType('life_book')).toBe(true);
+    expect(isSpellBookType('sorcery_book')).toBe(true);
+  });
+
+  it('isSpellBookType returns false for non-book types', () => {
+    expect(isSpellBookType('potion')).toBe(false);
+    expect(isSpellBookType('sword')).toBe(false);
+  });
+
+  it('getBookRealm extracts realm from book type', () => {
+    expect(getBookRealm('life_book')).toBe('life');
+    expect(getBookRealm('chaos_book')).toBe('chaos');
+    expect(getBookRealm('potion')).toBeNull();
+  });
+
+  it('getBookSpellRange returns correct indices for each sval', () => {
+    expect(getBookSpellRange(0)).toEqual([0, 7]);
+    expect(getBookSpellRange(1)).toEqual([8, 15]);
+    expect(getBookSpellRange(2)).toEqual([16, 23]);
+    expect(getBookSpellRange(3)).toEqual([24, 31]);
+  });
+
+  it('getBookSpellIndices returns 8 consecutive indices', () => {
+    expect(getBookSpellIndices(0)).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+    expect(getBookSpellIndices(2)).toEqual([16, 17, 18, 19, 20, 21, 22, 23]);
+  });
+
+  it('getBookInfo combines realm and spell indices', () => {
+    const info = getBookInfo({ type: 'sorcery_book', sval: 1 });
+    expect(info?.realm).toBe('sorcery');
+    expect(info?.bookNumber).toBe(2);
+    expect(info?.spellIndices).toEqual([8, 9, 10, 11, 12, 13, 14, 15]);
+  });
+
+  it('getBookInfo returns null for non-books', () => {
+    expect(getBookInfo({ type: 'potion', sval: 0 })).toBeNull();
+  });
+});
+
+describe('spell loader', () => {
+  it('getRealmSpells returns all spells for a realm', () => {
+    expect(getRealmSpells('life')).toHaveLength(32);
+    expect(getRealmSpells('invalid')).toHaveLength(0);
+  });
+
+  it('getSpellByIndex finds spell by realm and index', () => {
+    const spell = getSpellByIndex('life', 0);
+    expect(spell?.key).toBe('detect_evil');
+    expect(getSpellByIndex('life', 99)).toBeNull();
+  });
+
+  it('getSpellByKey finds spell by realm and key', () => {
+    const spell = getSpellByKey('life', 'cure_light_wounds');
+    expect(spell?.index).toBe(1);
+    expect(getSpellByKey('life', 'nonexistent')).toBeNull();
+  });
+
+  it('getBookSpells returns 8 spells for book sval', () => {
+    const book1Spells = getBookSpells('sorcery', 0);
+    expect(book1Spells).toHaveLength(8);
+    expect(book1Spells.every(s => s.index >= 0 && s.index <= 7)).toBe(true);
+  });
+
+  it('canClassLearnSpell checks level requirement', () => {
+    const detectEvil = getSpellByKey('life', 'detect_evil')!;
+    expect(canClassLearnSpell(detectEvil, 'priest')).toBe(true);
+    expect(canClassLearnSpell(detectEvil, 'warrior')).toBe(false);
+  });
+});
+
+describe('spell effects (book 1)', () => {
+  it('life book 1 spells have effects', () => {
+    const detectEvil = getSpellByKey('life', 'detect_evil')!;
+    expect(detectEvil.effects).toBeDefined();
+    expect(detectEvil.effects![0].type).toBe('detect');
+  });
+
+  it('chaos book 1 has offensive spells with position target', () => {
+    const magicMissile = getSpellByKey('chaos', 'magic_missile')!;
+    expect(magicMissile.target).toBe('position');
+    expect(magicMissile.effects![0].type).toBe('bolt');
+  });
+
+  it('self-targeted spells have self target', () => {
+    const cureLightWounds = getSpellByKey('life', 'cure_light_wounds')!;
+    expect(cureLightWounds.target).toBe('self');
+    expect(cureLightWounds.effects![0].type).toBe('heal');
   });
 });

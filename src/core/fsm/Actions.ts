@@ -20,6 +20,9 @@ export type GameAction =
   | { type: 'read' }
   | { type: 'eat' }
   | { type: 'zap' }
+  // Magic actions
+  | { type: 'cast' }
+  | { type: 'study' }
   // Modal/view actions (trigger FSM state transitions)
   | { type: 'toggleInventory' }
   | { type: 'toggleEquipment' }
