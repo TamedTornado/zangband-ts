@@ -494,7 +494,8 @@ const defaultBindings: Record<string, GameAction> = {
 - [x] Remove hardcoded name-based effect logic from handleQuaff/handleEat
 - [x] GPEffect system with targeting (item, symbol, direction, position)
 - [x] Targeting FSM states (ItemTargetingState, SymbolTargetingState, DirectionTargetingState)
-- [ ] Add `effects` to ItemDef for devices (wands, rods, staves)
+- [x] ZapState executes effects from device definitions
+- [ ] Add `effects` to ItemDef for devices (wands, rods, staves) - data entry needed
 - [ ] Potions/other items need a possible separate effect on throw
 - [ ] Same system will be used for spell effects
 - [ ] Clean up duplicate items in items.json (items with _NNN suffix collisions)
@@ -535,15 +536,22 @@ Wands, rods, and staves have special stacking and charge mechanics from Zangband
 - [ ] Stacked rods: count how many are charging based on timeout/pval
 
 *Usage:*
-- [ ] Wands: decrement charges, mark empty when 0
-- [ ] Rods: add pval to timeout on use, can't use if all charging
-- [ ] Staffs: decrement charges like wands
-- [ ] Rod recharge: each turn, timeout -= (number of charging rods)
+- [x] Wands: decrement charges on use
+- [x] Rods: add pval to timeout on use
+- [x] Staffs: decrement charges like wands
+- [x] Rod recharge: TickSystem ticks rod timeouts each turn
+- [x] Unified Zap action (`z` or `a`) for all device types
 
-**Items - Magical Devices (TODO)**
-- [ ] Aim wand (`a`)
-- [ ] Zap rod (`z`)
-- [ ] Use staff (`u`)
+*TickSystem:*
+- [x] Centralized per-turn effects in TickSystem
+- [x] Rod timeout ticking
+- [x] Status effect duration ticking
+- [ ] Light source fuel consumption (future)
+- [ ] Hunger/food clock (future)
+
+**Items - Magical Devices (DONE)**
+- [x] Zap device (`z`) - unified action for wands, rods, staves
+- [x] Aim wand (`a`) - alias for zap
 
 **Items - Ranged (TODO)**
 - [ ] Throw item (`v`)
