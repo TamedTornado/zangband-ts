@@ -7,6 +7,7 @@ import {
   type GPEffectDef,
   type GPEffectContext,
   type GPEffectResult,
+  type EffectResources,
   TargetType,
 } from './GPEffect';
 
@@ -16,6 +17,7 @@ import {
  */
 export abstract class BaseGPEffect implements GPEffect {
   readonly def: GPEffectDef;
+  resources: EffectResources | null = null;
 
   constructor(def: GPEffectDef) {
     this.def = def;

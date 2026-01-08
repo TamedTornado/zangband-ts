@@ -6640,7 +6640,10 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "scroll"
+    "type": "scroll",
+    "effects": [
+      { "type": "recall", "duration": "15+1d20" }
+    ]
   },
   "scroll_of_star_destruction": {
     "key": "scroll_of_star_destruction",
@@ -8566,7 +8569,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "polymorph", "target": "position" }
+    ]
   },
   "heal_monster": {
     "key": "heal_monster",
@@ -11118,7 +11124,10 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "recall", "duration": "15+1d20" }
+    ]
   },
   "illumination": {
     "key": "illumination",
@@ -11323,7 +11332,10 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "polymorph", "target": "position" }
+    ]
   },
   "rod_of_slow_monster": {
     "key": "rod_of_slow_monster",

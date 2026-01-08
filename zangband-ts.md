@@ -500,8 +500,14 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] Potions/other items need a possible separate effect on throw
 - [ ] Same system will be used for spell effects
 
+**Effect Manager Architecture (DONE)**
+- [x] `EffectManager` class centralizes effect creation and resource injection
+- [x] Effects access shared resources (MonsterDataManager) via `this.resources` ownership chain
+- [x] GameFSM initializes global effect manager with data managers
+- [x] Standalone functions delegate to global manager (marked deprecated)
+
 **Device Effects Implementation (IN PROGRESS)**
-68/89 device items have effects (18/30 wands, 24/29 rods, 26/30 staves). Remaining effects needed:
+~75/89 device items have effects. Remaining effects needed:
 
 *Bolt Effects (DONE):*
 - [x] `bolt` effect type - fires projectile at target, deals damage to first monster
@@ -529,7 +535,7 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] `healMonster` - restore monster HP (cursed effect)
 - [ ] `hasteMonster` - speed up monster (cursed effect)
 - [ ] `cloneMonster` - duplicate monster (cursed effect)
-- [ ] `polymorphMonster` - transform monster randomly
+- [x] `polymorph` - transform monster randomly (uses MonsterDataManager for new form selection)
 - [ ] `annihilate` - instant kill (high level)
 
 *Area Monster Effects (DONE):*
@@ -540,19 +546,22 @@ const defaultBindings: Record<string, GameAction> = {
 - [x] `dispel` effect type - damages monsters with specific flag in radius
   - dispel_evil (staff) - 60 damage to EVIL monsters
 
-*Terrain Effects:*
-- [ ] `stoneToMud` - convert wall to floor
-- [ ] `trapDoorDestruction` - destroy traps and doors
-- [ ] `disarm` - disarm trap at target
-- [ ] `earthquake` - collapse nearby walls randomly
+*Terrain Effects (DONE):*
+- [x] `stoneToMud` - convert wall to floor
+- [x] `trapDoorDestruction` - destroy traps and doors
+- [x] `disarm` - disarm trap at target
+- [x] `earthquake` - collapse nearby walls randomly
 
 *Special Effects:*
 - [ ] `wonder` - random effect from pool
 - [ ] `summon` - summon monsters (cursed for staff)
-- [ ] `recall` - toggle word of recall
+- [x] `recall` - toggle word of recall (applies recalling status)
 - [ ] `power` - major damage + self damage
-- [ ] `holiness` - cure + damage evil + protection
-- [ ] `havoc` - random destructive effect
+- [x] `holiness` - dispel evil (300) + heal (50) + cure effects (Staff of Holiness)
+- [x] `dragons_breath` - breath 200 fire damage radius 3 (Wand of Dragon's Breath)
+- [x] `annihilation` - ball 175 disintegrate damage radius 2 (Wand of Annihilation)
+- [x] `rockets` - ball 250 rocket damage radius 2 (Wand of Rockets)
+- [ ] `havoc` - call_chaos (complex, not yet implemented)
 - [ ] `pesticide` - kill weak monsters
 
 **FSM Modal/Input Refactoring (DONE)**

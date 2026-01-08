@@ -11,6 +11,7 @@ import type { Item } from '@/core/entities/Item';
 import type { Monster } from '@/core/entities/Monster';
 import type { Level } from '@/core/world/Level';
 import type { Position, Direction } from '@/core/types';
+import type { MonsterDataManager } from '@/core/data/MonsterDataManager';
 
 /**
  * Info about a monster for damage/effect purposes
@@ -18,6 +19,15 @@ import type { Position, Direction } from '@/core/types';
 export interface MonsterInfo {
   name: string;
   flags: string[];
+}
+
+/**
+ * Resources provided to effects by the manager
+ * Defined here to avoid circular dependencies
+ */
+export interface EffectResources {
+  /** Monster data manager for polymorph, summoning, etc. */
+  monsterDataManager: MonsterDataManager | null;
 }
 
 /**
@@ -74,6 +84,10 @@ export interface GPEffectContext {
   /** Target actor for effects (resolved from position, defaults to actor for self) */
   targetActor?: Actor;
 
+  // Data managers (injected by caller)
+  /** Monster data manager for polymorph, summoning, etc. */
+  monsterDataManager?: MonsterDataManager;
+
   // Helper functions (injected by caller)
   /** Get monster info (name, flags) for damage calculations */
   getMonsterInfo?: (monster: Monster) => MonsterInfo;
@@ -108,6 +122,9 @@ export interface GPEffect {
 
   /** What targeting mode this effect requires */
   readonly targetType: TargetType;
+
+  /** Resources provided by the effect manager */
+  resources: EffectResources | null;
 
   /**
    * Validate if effect can be executed with given context.

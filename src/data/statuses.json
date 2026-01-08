@@ -305,5 +305,17 @@
     "data": {
       "cantAct": true
     }
+  },
+  "recalling": {
+    "type": "duration",
+    "name": "Recalling",
+    "messages": {
+      "apply": "The air about you becomes charged...",
+      "expire": "You feel yourself yanked away!",
+      "refresh": "The air charges further..."
+    },
+    "data": {
+      "recalling": true
+    }
   }
 }

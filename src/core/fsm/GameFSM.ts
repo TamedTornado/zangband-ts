@@ -20,6 +20,7 @@ import { GameLoop } from '../systems/GameLoop';
 import { FlavorSystem, getArticle } from '../systems/FlavorSystem';
 import { TickSystem } from '../systems/TickSystem';
 import { MonsterDataManager } from '../data/MonsterDataManager';
+import { getEffectManager } from '../systems/effects';
 import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT } from '../constants';
 import type { Item } from '../entities/Item';
 import type { ItemDef } from '../data/items';
@@ -43,6 +44,9 @@ const monsterDataManager = new MonsterDataManager(monstersData as unknown as Rec
 const monsterSpawner = new MonsterSpawner(monsterDataManager, RNG);
 const itemSpawner = new ItemSpawner(itemGen, RNG);
 
+// Initialize effect manager with shared resources
+getEffectManager().setMonsterDataManager(monsterDataManager);
+
 // Starting equipment
 const WARRIOR_STARTING_ITEMS = ['short_sword', 'soft_leather_armour', 'wooden_torch'];
 
@@ -62,6 +66,7 @@ export class GameFSM {
   readonly monsterDataManager = monsterDataManager;
   readonly itemGen = itemGen;
   readonly flavorSystem = new FlavorSystem(RNG);
+  readonly effectManager = getEffectManager();
 
   constructor(initialState: State) {
     this.initGameData();

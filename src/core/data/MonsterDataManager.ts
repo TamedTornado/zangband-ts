@@ -13,11 +13,16 @@
 
 import { RNG } from 'rot-js';
 import type { MonsterDef } from './monsters';
+import type { Position } from '@/core/types';
+import { Monster } from '@/core/entities/Monster';
 
 // Constants from Zangband defines.h
 const MAX_DEPTH = 128;
 const GREAT_MON = 50; // 1 in 50 chance of level boost
 const NASTY_MON = 50; // 1 in 50 chance per nasty pass to boost by 7
+
+// Monster ID counter for creation
+let monsterIdCounter = 1000000; // Start high to avoid collision with spawner
 
 /**
  * An entry in the allocation table for monster generation
@@ -210,6 +215,96 @@ export class MonsterDataManager {
    */
   getKilledUniques(): string[] {
     return [...this.killedUniques];
+  }
+
+  /**
+   * Select a monster suitable for polymorphing to from a given level.
+   * Similar to selectMonster but without GREAT_MON/NASTY_MON boosting.
+   *
+   * @param level - The approximate level to select from
+   * @returns The selected monster definition, or null if none available
+   */
+  selectPolymorphTarget(level: number): MonsterDef | null {
+    // Polymorph variation: +/- 5 levels
+    const variation = this.randint0(11) - 5; // -5 to +5
+    let effectiveLevel = Math.max(1, level + variation);
+
+    // Cap at MAX_DEPTH
+    if (effectiveLevel > MAX_DEPTH - 1) {
+      effectiveLevel = MAX_DEPTH - 1;
+    }
+
+    // Calculate total probability for eligible monsters
+    let total = 0;
+    const eligible: Array<{ entry: MonsterAllocationEntry; monster: MonsterDef }> = [];
+
+    for (const entry of this.allocationTable) {
+      if (entry.depth > effectiveLevel) break;
+
+      const monster = this.monsters[entry.monsterKey];
+      if (!monster) continue;
+
+      // Skip uniques (can't polymorph into a unique)
+      if (monster.flags.includes('UNIQUE')) continue;
+
+      // Skip FORCE_DEPTH monsters if we're too shallow
+      if (monster.flags.includes('FORCE_DEPTH') && level < monster.depth) continue;
+
+      total += entry.probability;
+      eligible.push({ entry, monster });
+    }
+
+    if (total <= 0 || eligible.length === 0) return null;
+
+    // Simple random selection (no bias for polymorph)
+    let value = this.randint0(total);
+
+    for (const { entry, monster } of eligible) {
+      value -= entry.probability;
+      if (value < 0) {
+        return monster;
+      }
+    }
+
+    return eligible[eligible.length - 1]?.monster ?? null;
+  }
+
+  /**
+   * Create a Monster entity from a definition at a position.
+   * Used for polymorph, summoning, etc.
+   *
+   * @param def - Monster definition to create from
+   * @param pos - Position for the new monster
+   * @returns New Monster entity
+   */
+  createMonsterFromDef(def: MonsterDef, pos: Position): Monster {
+    const hp = this.rollDice(def.hp);
+
+    return new Monster({
+      id: `monster_poly_${++monsterIdCounter}`,
+      position: { x: pos.x, y: pos.y },
+      symbol: def.symbol,
+      color: def.color,
+      definitionKey: def.key,
+      speed: def.speed,
+      maxHp: hp,
+    });
+  }
+
+  /**
+   * Roll dice in XdY format
+   */
+  private rollDice(diceStr: string): number {
+    const match = diceStr.match(/^(\d+)d(\d+)$/);
+    if (!match) return 1;
+
+    const count = parseInt(match[1], 10);
+    const sides = parseInt(match[2], 10);
+    let total = 0;
+    for (let i = 0; i < count; i++) {
+      total += this.rng.getUniformInt(1, sides);
+    }
+    return total;
   }
 
   // Random number utilities

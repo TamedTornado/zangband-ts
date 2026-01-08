@@ -1,0 +1,184 @@
+/**
+ * EffectManager - Central manager for GPEffect creation and execution
+ *
+ * Holds references to shared resources (MonsterDataManager, etc.) and
+ * provides them to effects without explicit injection in every context.
+ */
+
+import type { GPEffect, GPEffectDef, GPEffectContext, GPEffectResult, GPEffectConstructor, EffectResources } from './GPEffect';
+import { combineGPEffectResults, TargetType } from './GPEffect';
+import type { MonsterDataManager } from '@/core/data/MonsterDataManager';
+
+// Effect class imports
+import { HealEffect } from './HealEffect';
+import { ApplyStatusEffect } from './ApplyStatusEffect';
+import { CureEffect } from './CureEffect';
+import { ReduceEffect } from './ReduceEffect';
+import { TeleportSelfEffect } from './TeleportSelfEffect';
+import { IdentifyEffect } from './IdentifyEffect';
+import { GenocideEffect } from './GenocideEffect';
+import { LightAreaEffect } from './LightAreaEffect';
+import { DetectEffect } from './DetectEffect';
+import { RestoreStatEffect } from './RestoreStatEffect';
+import { BoltEffect } from './BoltEffect';
+import { BallEffect } from './BallEffect';
+import { BreathEffect } from './BreathEffect';
+import { DrainLifeEffect } from './DrainLifeEffect';
+import { TeleportOtherEffect } from './TeleportOtherEffect';
+import { AreaStatusEffect } from './AreaStatusEffect';
+import { DispelEffect } from './DispelEffect';
+import { StoneToMudEffect } from './StoneToMudEffect';
+import { TrapDoorDestructionEffect } from './TrapDoorDestructionEffect';
+import { DisarmEffect } from './DisarmEffect';
+import { EarthquakeEffect } from './EarthquakeEffect';
+import { PolymorphEffect } from './PolymorphEffect';
+import { RecallEffect } from './RecallEffect';
+
+/**
+ * Default effect registry
+ */
+const defaultRegistry: Record<string, GPEffectConstructor> = {
+  // Self targeted
+  heal: HealEffect,
+  applyStatus: ApplyStatusEffect,
+  cure: CureEffect,
+  reduce: ReduceEffect,
+  teleportSelf: TeleportSelfEffect,
+  restoreStat: RestoreStatEffect,
+  // Area effects
+  lightArea: LightAreaEffect,
+  detect: DetectEffect,
+  // Item targeted
+  identify: IdentifyEffect,
+  // Symbol targeted
+  genocide: GenocideEffect,
+  // Position targeted
+  bolt: BoltEffect,
+  ball: BallEffect,
+  breath: BreathEffect,
+  drainLife: DrainLifeEffect,
+  teleportOther: TeleportOtherEffect,
+  // Area effects
+  areaStatus: AreaStatusEffect,
+  dispel: DispelEffect,
+  // Terrain effects
+  stoneToMud: StoneToMudEffect,
+  trapDoorDestruction: TrapDoorDestructionEffect,
+  disarm: DisarmEffect,
+  earthquake: EarthquakeEffect,
+  // Transformation effects
+  polymorph: PolymorphEffect,
+  // Special effects
+  recall: RecallEffect,
+};
+
+export class EffectManager {
+  private registry: Record<string, GPEffectConstructor>;
+  private _monsterDataManager: MonsterDataManager | null = null;
+
+  constructor() {
+    // Copy default registry
+    this.registry = { ...defaultRegistry };
+  }
+
+  /**
+   * Set the monster data manager (called during game initialization)
+   */
+  setMonsterDataManager(manager: MonsterDataManager): void {
+    this._monsterDataManager = manager;
+  }
+
+  /**
+   * Get the monster data manager (for effects that need it)
+   */
+  get monsterDataManager(): MonsterDataManager | null {
+    return this._monsterDataManager;
+  }
+
+  /**
+   * Get the resources object for effects
+   */
+  get resources(): EffectResources {
+    return {
+      monsterDataManager: this._monsterDataManager,
+    };
+  }
+
+  /**
+   * Register a custom effect class
+   */
+  registerEffect(type: string, ctor: GPEffectConstructor): void {
+    this.registry[type] = ctor;
+  }
+
+  /**
+   * Create a GPEffect instance from a definition
+   */
+  createEffect(def: GPEffectDef): GPEffect {
+    const EffectClass = this.registry[def.type];
+    if (!EffectClass) {
+      throw new Error(`Unknown GPEffect type: ${def.type}`);
+    }
+    const effect = new EffectClass(def);
+    effect.resources = this.resources;
+    return effect;
+  }
+
+  /**
+   * Check if any effect in the list requires targeting
+   */
+  getRequiredTargetType(defs: GPEffectDef[]): TargetType | null {
+    for (const def of defs) {
+      const target = (def.target ?? TargetType.Self) as TargetType;
+      if (target !== TargetType.Self) {
+        return target;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Execute a list of GPEffects.
+   * All effects must be self-targeted or have their targets already set in context.
+   */
+  executeEffects(defs: GPEffectDef[], context: GPEffectContext): GPEffectResult {
+    const results: GPEffectResult[] = [];
+
+    for (const def of defs) {
+      const effect = this.createEffect(def);
+
+      if (!effect.canExecute(context)) {
+        results.push({
+          success: false,
+          messages: [`Effect ${def.type} cannot execute - missing target`],
+          turnConsumed: false,
+        });
+        continue;
+      }
+
+      results.push(effect.execute(context));
+    }
+
+    return combineGPEffectResults(results);
+  }
+}
+
+// Singleton instance for global access
+let globalEffectManager: EffectManager | null = null;
+
+/**
+ * Get the global effect manager instance
+ */
+export function getEffectManager(): EffectManager {
+  if (!globalEffectManager) {
+    globalEffectManager = new EffectManager();
+  }
+  return globalEffectManager;
+}
+
+/**
+ * Set a custom effect manager (for testing)
+ */
+export function setEffectManager(manager: EffectManager | null): void {
+  globalEffectManager = manager;
+}
