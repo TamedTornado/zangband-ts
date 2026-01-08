@@ -8436,7 +8436,13 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      {
+        "type": "tameMonster",
+        "target": "position"
+      }
+    ]
   },
   "wand_of_frost_bolts": {
     "key": "wand_of_frost_bolts",
@@ -8598,7 +8604,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "healMonster", "target": "position", "amount": 30 }
+    ]
   },
   "haste_monster": {
     "key": "haste_monster",
@@ -8624,7 +8633,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "hasteMonster", "target": "position", "duration": 20 }
+    ]
   },
   "wand_of_slow_monster": {
     "key": "wand_of_slow_monster",
@@ -8847,7 +8859,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "cloneMonster", "target": "position" }
+    ]
   },
   "scare_monster": {
     "key": "scare_monster",

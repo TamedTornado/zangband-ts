@@ -7,6 +7,7 @@ export interface MonsterConfig extends ActorConfig {
 export class Monster extends Actor {
   readonly definitionKey: string;
   private _isAwake: boolean = false;
+  private _isTamed: boolean = false;
 
   constructor(config: MonsterConfig) {
     super(config);
@@ -23,6 +24,25 @@ export class Monster extends Actor {
 
   sleep(): void {
     this._isAwake = false;
+  }
+
+  get isTamed(): boolean {
+    return this._isTamed;
+  }
+
+  tame(): void {
+    this._isTamed = true;
+  }
+
+  /**
+   * Check if this monster can be tamed.
+   * UNIQUE monsters cannot be tamed.
+   */
+  canBeTamed(flags: string[]): boolean {
+    if (flags.includes('UNIQUE')) {
+      return false;
+    }
+    return true;
   }
 
   /**

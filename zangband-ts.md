@@ -531,10 +531,64 @@ const defaultBindings: Record<string, GameAction> = {
   - Monster resistance checked via `canReceiveStatus()` (NO_CONF, NO_FEAR, NO_SLEEP, NO_STUN, NO_SLOW flags)
 - [x] `drainLife` - steal HP from living monsters (not UNDEAD/DEMON/NONLIVING)
 - [x] `teleportOther` - teleport monster away (distance 45, blocked by RES_TELE)
-- [ ] `tameMonster` - attempt to charm monster
-- [ ] `healMonster` - restore monster HP (cursed effect)
-- [ ] `hasteMonster` - speed up monster (cursed effect)
-- [ ] `cloneMonster` - duplicate monster (cursed effect)
+- [x] `tameMonster` - charm monster (UNIQUE immune, tamed monsters skip turns)
+
+**Pet System (TODO)** - Full implementation requires:
+
+*Monster Data Structures:*
+- [ ] Add `smart` flags field to Monster: `SM_PET` (0x00800000), `SM_FRIENDLY` (0x10000000)
+- [ ] Add `tx`, `ty` target position fields to Monster for tracking current enemy target
+- [ ] Helper methods: `isPet()`, `isFriendly()`, `isHostile()`
+
+*Player Pet Settings:*
+- [ ] `petFollowDistance` - leash length (can be negative for "stay away")
+- [ ] `petOpenDoors` - allow pets to open doors
+- [ ] `petPickupItems` - allow pets to pick up items
+
+*Pet Commands Menu:*
+- [ ] PET_STAY_CLOSE (distance: 1) - extremely close
+- [ ] PET_FOLLOW_ME (distance: 6) - default follow mode
+- [ ] PET_SEEK_AND_DESTROY (distance: 255) - roam and hunt freely
+- [ ] PET_ALLOW_SPACE (distance: -10) - maintain distance from player
+- [ ] PET_STAY_AWAY (distance: -25) - avoid player
+- [ ] PET_OPEN_DOORS - toggle door opening
+- [ ] PET_TAKE_ITEMS - toggle item pickup
+- [ ] PET_INFO - display current pets
+- [ ] PET_DISMISS - dismiss one or all pets
+
+*Enemy Detection (`are_enemies()` logic):*
+- [ ] Two monsters are enemies if: alignment opposition (GOOD vs EVIL) OR hostility mismatch (pet vs hostile)
+- [ ] Pets/friendly monsters fight hostile monsters, hostile monsters fight pets
+
+*Pet Target Selection (`get_enemy_target()` + `nice_target()`):*
+- [ ] Scan all monsters for valid enemy targets
+- [ ] Valid target: not self, not dead, is enemy, within 20 distance, has line of sight
+- [ ] Pet constraints: if `petFollowDistance < 0`, target must not be in stay-away radius
+- [ ] Pet constraints: if positive leash, target must not be farther than leash AND farther than pet from player
+
+*Pet Movement AI (3 priorities):*
+- [ ] 1. Hunt enemies: if valid target found, move toward it
+- [ ] 2. Return to player: if too far (lonely) or in avoid mode and too close, seek player
+- [ ] 3. Fallback: random movement
+
+*Monster AI Changes:*
+- [ ] Hostile monsters use `get_enemy_target()` to find pets/friendlies to attack
+- [ ] Monsters attack nearest valid enemy (pet or player)
+- [ ] Pets never cast hostile spells at player
+
+*Pet Upkeep System:*
+- [ ] Max free pets = 1 + (playerLevel / classPetUpkeepDiv)
+- [ ] Upkeep = sum of all pet levels (capped 5-95%)
+- [ ] Reduces mana regeneration by upkeep percentage
+
+*Charm Spell Variants:*
+- [ ] Charm Monster: general charm, damage > 29 and random check
+- [ ] Dominate Undead: undead-specific, blocked by UNIQUE/QUESTOR/level check
+- [ ] Charm Animal: animal-specific, blocked by NO_CONF flag, grants V_NATURE virtue
+- [ ] All blocked by TR_AGGRAVATE player flag
+- [x] `healMonster` - restore monster HP (cursed effect)
+- [x] `hasteMonster` - speed up monster (cursed effect)
+- [x] `cloneMonster` - duplicate monster (cursed effect)
 - [x] `polymorph` - transform monster randomly (uses MonsterDataManager for new form selection)
 - [ ] `annihilate` - instant kill (high level)
 

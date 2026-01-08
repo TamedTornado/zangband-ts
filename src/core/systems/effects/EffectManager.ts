@@ -33,6 +33,10 @@ import { DisarmEffect } from './DisarmEffect';
 import { EarthquakeEffect } from './EarthquakeEffect';
 import { PolymorphEffect } from './PolymorphEffect';
 import { RecallEffect } from './RecallEffect';
+import { HealMonsterEffect } from './HealMonsterEffect';
+import { HasteMonsterEffect } from './HasteMonsterEffect';
+import { CloneMonsterEffect } from './CloneMonsterEffect';
+import { TameMonsterEffect } from './TameMonsterEffect';
 
 /**
  * Default effect registry
@@ -70,6 +74,12 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   polymorph: PolymorphEffect,
   // Special effects
   recall: RecallEffect,
+  // Cursed monster effects
+  healMonster: HealMonsterEffect,
+  hasteMonster: HasteMonsterEffect,
+  cloneMonster: CloneMonsterEffect,
+  // Monster charm effects
+  tameMonster: TameMonsterEffect,
 };
 
 export class EffectManager {

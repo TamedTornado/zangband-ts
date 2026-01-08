@@ -164,6 +164,12 @@ export class GameLoop {
       const monster = nextActor as Monster;
       if (monster.isDead) continue;
 
+      // Tamed monsters skip their turn (MVP - full pet AI is future work)
+      if (monster.isTamed) {
+        monster.spendEnergy(ENERGY_PER_TURN);
+        continue;
+      }
+
       const monsterDef = this.monsterData.getMonsterDef(monster.definitionKey);
       if (!monsterDef) continue;
 

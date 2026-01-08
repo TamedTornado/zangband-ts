@@ -18,7 +18,7 @@ export interface Effect {
   dice?: string;
   // applyStatus
   status?: string;
-  duration?: string;
+  duration?: string | number;
   intensity?: string;
   damage?: number | string;
   // reduce
@@ -145,9 +145,11 @@ function executeApplyStatus(
 
   const params: Record<string, number> = {};
 
-  // Parse duration expression
-  if (effect.duration) {
-    params['duration'] = rollDiceExpression(effect.duration, rng);
+  // Parse duration expression (can be string dice expr or number)
+  if (effect.duration !== undefined) {
+    params['duration'] = typeof effect.duration === 'string'
+      ? rollDiceExpression(effect.duration, rng)
+      : effect.duration;
   }
 
   // Parse intensity expression

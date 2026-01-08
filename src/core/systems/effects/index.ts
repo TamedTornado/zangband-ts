@@ -59,6 +59,10 @@ export { DisarmEffect } from './DisarmEffect';
 export { EarthquakeEffect } from './EarthquakeEffect';
 export { PolymorphEffect } from './PolymorphEffect';
 export { RecallEffect } from './RecallEffect';
+export { HealMonsterEffect } from './HealMonsterEffect';
+export { HasteMonsterEffect } from './HasteMonsterEffect';
+export { CloneMonsterEffect } from './CloneMonsterEffect';
+export { TameMonsterEffect } from './TameMonsterEffect';
 
 // Legacy exports for backward compatibility
 export {
