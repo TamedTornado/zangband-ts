@@ -12,6 +12,7 @@ import { TargetingState } from './TargetingState';
 import { ReadScrollState } from './ReadScrollState';
 import { QuaffState } from './QuaffState';
 import { EatState } from './EatState';
+import { ZapState } from './ZapState';
 import { WieldState } from './WieldState';
 import { DropState } from './DropState';
 import { InventoryState } from './InventoryState';
@@ -69,6 +70,9 @@ export class PlayingState implements State {
         return true;
       case 'eat':
         fsm.transition(new EatState());
+        return true;
+      case 'zap':
+        fsm.transition(new ZapState());
         return true;
       case 'look':
         fsm.transition(new TargetingState(false));

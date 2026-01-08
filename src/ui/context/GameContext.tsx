@@ -53,6 +53,7 @@ interface GameActions {
   quaffPotion: () => void;
   readScroll: () => void;
   eatFood: () => void;
+  zapDevice: () => void;
   runInDirection: (dir: Direction) => void;
   restart: () => void;
   // Targeting
@@ -179,6 +180,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
     eatFood: () => {
       fsm.dispatch({ type: 'eat' });
+    },
+
+    zapDevice: () => {
+      fsm.dispatch({ type: 'zap' });
     },
 
     restart: () => {

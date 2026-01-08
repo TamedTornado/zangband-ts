@@ -19,6 +19,7 @@ export type GameAction =
   | { type: 'quaff' }
   | { type: 'read' }
   | { type: 'eat' }
+  | { type: 'zap' }
   // Modal/view actions (trigger FSM state transitions)
   | { type: 'toggleInventory' }
   | { type: 'toggleEquipment' }

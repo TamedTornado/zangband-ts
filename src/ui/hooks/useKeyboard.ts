@@ -27,6 +27,7 @@ export const Action = {
   Quaff: 'action:quaff',
   Read: 'action:read',
   Eat: 'action:eat',
+  Zap: 'action:zap',
   // Modals
   ToggleInventory: 'action:toggle_inventory',
   ToggleEquipment: 'action:toggle_equipment',
@@ -109,6 +110,8 @@ const ACTION_BINDINGS: { key: string; modifiers: string[]; action: Action }[] = 
   { key: 'q', modifiers: [], action: Action.Quaff },
   { key: 'r', modifiers: [], action: Action.Read },
   { key: 'E', modifiers: ['shift'], action: Action.Eat },
+  { key: 'z', modifiers: [], action: Action.Zap },
+  { key: 'a', modifiers: [], action: Action.Zap }, // Alias: aim wand
   // Modals
   { key: 'i', modifiers: [], action: Action.ToggleInventory },
   { key: 'e', modifiers: [], action: Action.ToggleEquipment },
@@ -195,6 +198,7 @@ const ACTION_HANDLERS: Record<Action, (actions: GameActions) => void> = {
   [Action.Quaff]: (a) => a.quaffPotion(),
   [Action.Read]: (a) => a.readScroll(),
   [Action.Eat]: (a) => a.eatFood(),
+  [Action.Zap]: (a) => a.zapDevice(),
   [Action.ToggleInventory]: (a) => a.toggleInventory(),
   [Action.ToggleEquipment]: (a) => a.toggleEquipment(),
   [Action.ToggleCharacter]: (a) => a.toggleCharacter(),
