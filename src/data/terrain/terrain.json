@@ -163,8 +163,8 @@
     "key": "solidified_lava",
     "index": 15,
     "name": "solidified lava",
-    "symbol": "",
-    "color": "",
+    "symbol": ".",
+    "color": "s",
     "flags": [
       "USE_TRANS"
     ]
@@ -215,8 +215,8 @@
     "key": "pile_of_rubble",
     "index": 49,
     "name": "pile of rubble",
-    "symbol": "",
-    "color": "",
+    "symbol": ":",
+    "color": "U",
     "flags": [
       "BLOCK",
       "USE_TRANS",
@@ -729,8 +729,8 @@
     "key": "rock_face",
     "index": 97,
     "name": "rock face",
-    "symbol": "",
-    "color": "",
+    "symbol": "#",
+    "color": "s",
     "flags": [
       "HALF_LOS",
       "USE_TRANS",
@@ -742,8 +742,8 @@
     "key": "snow_covered_rock_face",
     "index": 98,
     "name": "snow covered rock face",
-    "symbol": "",
-    "color": "",
+    "symbol": "#",
+    "color": "w",
     "flags": [
       "HALF_LOS",
       "USE_TRANS",
@@ -755,8 +755,8 @@
     "key": "boulder",
     "index": 99,
     "name": "boulder",
-    "symbol": "",
-    "color": "",
+    "symbol": ":",
+    "color": "s",
     "flags": [
       "HALF_LOS",
       "USE_TRANS",
@@ -822,8 +822,8 @@
     "key": "stone_fence",
     "index": 112,
     "name": "stone fence",
-    "symbol": "",
-    "color": "",
+    "symbol": "#",
+    "color": "s",
     "flags": [
       "HALF_LOS",
       "USE_TRANS",
@@ -913,8 +913,8 @@
     "key": "rock_131",
     "index": 131,
     "name": "rock",
-    "symbol": "",
-    "color": "",
+    "symbol": "#",
+    "color": "s",
     "flags": [
       "USE_TRANS",
       "OBJECT"
@@ -924,8 +924,8 @@
     "key": "rock_132",
     "index": 132,
     "name": "rock",
-    "symbol": "",
-    "color": "",
+    "symbol": "#",
+    "color": "s",
     "flags": [
       "USE_TRANS",
       "OBJECT"
