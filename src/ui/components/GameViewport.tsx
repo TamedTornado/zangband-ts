@@ -117,6 +117,8 @@ export function GameViewport() {
 
         if (isVisible) {
           // Full visibility - show traps, items, and monsters
+          // Clear any remembered monster since we can now see the actual state
+          tile.clearRememberedMonster();
 
           // Check for revealed traps at this position
           const trap = level.getTrapAt(world);
@@ -142,6 +144,13 @@ export function GameViewport() {
         } else {
           // Explored but not visible - dim terrain only
           fg = dimColor(fg);
+
+          // Check for remembered monster (from detection spell)
+          const remembered = tile.rememberedMonster;
+          if (remembered) {
+            symbol = remembered.symbol;
+            fg = parseColor(remembered.color);
+          }
         }
 
         display.draw(screenX, screenY, symbol, fg, bg);

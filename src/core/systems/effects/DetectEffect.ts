@@ -15,6 +15,8 @@
 
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
+import type { Monster } from '@/core/entities/Monster';
+import { DETECT_RADIUS } from '@/core/constants';
 
 export type DetectType =
   | 'monsters'
@@ -41,7 +43,7 @@ export class DetectEffect extends SelfGPEffect {
     super(def);
     const detectDef = def as DetectEffectDef;
     this.detectTypes = Array.isArray(detectDef.detectType) ? detectDef.detectType : [detectDef.detectType];
-    this.radius = detectDef.radius ?? null;  // null = entire level
+    this.radius = detectDef.radius ?? DETECT_RADIUS;
   }
 
   execute(context: GPEffectContext): GPEffectResult {
@@ -71,7 +73,7 @@ export class DetectEffect extends SelfGPEffect {
 
   private detectType(
     detectType: DetectType,
-    level: { getTile: (pos: { x: number; y: number }) => any; width: number; height: number; getMonsters: () => any[] },
+    level: { getTile: (pos: { x: number; y: number }) => any; width: number; height: number; getMonsters: () => Monster[] },
     playerPos: { x: number; y: number }
   ): string | null {
     switch (detectType) {
@@ -79,8 +81,13 @@ export class DetectEffect extends SelfGPEffect {
         const monsters = level.getMonsters();
         let found = 0;
         for (const monster of monsters) {
+          if (monster.isDead) continue;
           if (this.inRange(monster.position, playerPos)) {
-            // Mark monster as detected (would need monster.detected flag)
+            // Remember monster appearance on the tile
+            const tile = level.getTile(monster.position);
+            if (tile) {
+              tile.rememberMonster(monster.symbol, monster.color);
+            }
             found++;
           }
         }

@@ -49,17 +49,8 @@ function createTestMonster(hp = 50): Monster {
 
 // Helper to create test level with monster
 function createTestLevel(): Level {
-  const level = new Level(20, 20);
-  // Make all tiles walkable
-  for (let y = 0; y < 20; y++) {
-    for (let x = 0; x < 20; x++) {
-      const tile = level.getTile(x, y);
-      if (tile) {
-        tile.terrain = 'floor';
-      }
-    }
-  }
-  return level;
+  // Level constructor already creates floor tiles by default
+  return new Level(20, 20);
 }
 
 // Helper to create effect context for device usage

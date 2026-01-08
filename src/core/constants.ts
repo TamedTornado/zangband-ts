@@ -17,6 +17,9 @@ export const BASE_SPEED = 110;
 export const VIEW_RADIUS = 20;
 export const VISION_RADIUS = 10;
 
+// Detection spells
+export const DETECT_RADIUS = 30;
+
 // Regeneration
 export const HP_REGEN_RATE = 10; // Regen 1 HP every N turns
 

@@ -44,11 +44,18 @@ export function getTerrain(key: string): TerrainDef {
   return resolveTerrain(key);
 }
 
+/** Remembered monster appearance for detection spells */
+export interface RememberedMonster {
+  symbol: string;
+  color: string;
+}
+
 export class Tile {
   private _terrain: TerrainDef;
   private _occupant: Actor | null = null;
   private _items: Item[] = [];
   private _explored: boolean = false;
+  private _rememberedMonster: RememberedMonster | null = null;
 
   constructor(terrain: TerrainDef | string = 'floor') {
     this._terrain = typeof terrain === 'string' ? resolveTerrain(terrain) : terrain;
@@ -109,5 +116,20 @@ export class Tile {
 
   set explored(value: boolean) {
     this._explored = value;
+  }
+
+  /** Get remembered monster (from detection spell) */
+  get rememberedMonster(): RememberedMonster | null {
+    return this._rememberedMonster;
+  }
+
+  /** Set remembered monster appearance (from detection spell) */
+  rememberMonster(symbol: string, color: string): void {
+    this._rememberedMonster = { symbol, color };
+  }
+
+  /** Clear remembered monster (when tile becomes visible again) */
+  clearRememberedMonster(): void {
+    this._rememberedMonster = null;
   }
 }
