@@ -101,6 +101,8 @@ export class GameFSM {
       set symbolTargeting(t: typeof store.symbolTargeting) { useGameStore.setState({ symbolTargeting: t }); },
       get directionTargeting() { return store.directionTargeting; },
       set directionTargeting(t: typeof store.directionTargeting) { useGameStore.setState({ directionTargeting: t }); },
+      get spellTargeting() { return store.spellTargeting; },
+      set spellTargeting(t: typeof store.spellTargeting) { useGameStore.setState({ spellTargeting: t }); },
       get activeModal() { return store.activeModal; },
       set activeModal(m: typeof store.activeModal) { useGameStore.setState({ activeModal: m }); },
       get inventoryMode() { return store.inventoryMode; },

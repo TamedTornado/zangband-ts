@@ -2,7 +2,13 @@ import { GameProvider, useGame } from './context/GameContext';
 import { GameViewport } from './components/GameViewport';
 import { StatsPanel } from './components/StatsPanel';
 import { MessageLog } from './components/MessageLog';
-import { InventoryModal, EquipmentModal, CharacterModal } from './components/modals';
+import {
+  InventoryModal,
+  EquipmentModal,
+  CharacterModal,
+  ItemSelectionModal,
+  SpellSelectionModal,
+} from './components/modals';
 import { useKeyboard } from './hooks/useKeyboard';
 
 function ModalContainer() {
@@ -13,6 +19,8 @@ function ModalContainer() {
       {state.stateName === 'inventory' && <InventoryModal />}
       {state.stateName === 'equipment' && <EquipmentModal />}
       {state.stateName === 'character' && <CharacterModal />}
+      {state.stateName === 'itemSelection' && <ItemSelectionModal />}
+      {(state.stateName === 'cast' || state.stateName === 'study') && <SpellSelectionModal />}
     </>
   );
 }

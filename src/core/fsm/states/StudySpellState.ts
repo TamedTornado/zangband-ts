@@ -63,8 +63,8 @@ export class StudySpellState implements State {
     }));
   }
 
-  onExit(_fsm: GameFSM): void {
-    // Nothing to clean up
+  onExit(fsm: GameFSM): void {
+    fsm.data.spellTargeting = null;
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {
@@ -115,7 +115,35 @@ export class StudySpellState implements State {
       return;
     }
 
-    fsm.addMessage('Learn which spell? [a-z, ? for list, ESC to cancel]', 'info');
+    // Populate spell targeting for UI modal
+    fsm.data.spellTargeting = {
+      mode: 'study',
+      prompt: 'Learn which spell?',
+      spells: this.learnableSpells.map(entry => {
+        const spell: {
+          letter: string;
+          name: string;
+          level: number;
+          mana: number;
+          fail: number;
+          canUse: boolean;
+          reason?: string;
+          realm?: string;
+        } = {
+          letter: entry.letter,
+          name: entry.spell.name,
+          level: entry.req.level,
+          mana: entry.req.mana,
+          fail: entry.req.fail,
+          canUse: entry.canLearn,
+        };
+        if (entry.reason) spell.reason = entry.reason;
+        if (this.bookRealm) spell.realm = this.bookRealm;
+        return spell;
+      }),
+    };
+
+    fsm.addMessage('Learn which spell? [a-z, ESC to cancel]', 'info');
   }
 
   private buildLearnableSpells(

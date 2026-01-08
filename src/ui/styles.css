@@ -221,6 +221,23 @@ body {
 .tval-70, .tval-75, .tval-77, .tval-80 { color: #0ff; } /* potions/scrolls */
 .tval-65, .tval-66, .tval-67 { color: #0f0; } /* wands/staves/rods */
 
+/* Spell selection modal */
+.spell-list-header {
+  display: none; /* Hide header for now - info is inline */
+}
+
+.spell-entry {
+  font-size: 13px;
+}
+
+.spell-available {
+  color: #0f0;
+}
+
+.spell-unavailable {
+  color: #666;
+}
+
 /* Equipment modal */
 .equipment-list {
   display: flex;

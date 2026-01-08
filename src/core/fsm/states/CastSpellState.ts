@@ -105,11 +105,39 @@ export class CastSpellState implements State {
       return;
     }
 
-    fsm.addMessage('Cast which spell? [a-z, ? for list, ESC to cancel]', 'info');
+    // Populate spell targeting for UI modal
+    fsm.data.spellTargeting = {
+      mode: 'cast',
+      prompt: 'Cast which spell?',
+      spells: this.spellList.map(entry => {
+        const spell: {
+          letter: string;
+          name: string;
+          level: number;
+          mana: number;
+          fail: number;
+          canUse: boolean;
+          reason?: string;
+          realm?: string;
+        } = {
+          letter: entry.letter,
+          name: entry.spell.name,
+          level: entry.req.level,
+          mana: entry.req.mana,
+          fail: this.calculateFailChance(fsm, entry.req),
+          canUse: entry.canCast,
+          realm: entry.realm,
+        };
+        if (entry.reason) spell.reason = entry.reason;
+        return spell;
+      }),
+    };
+
+    fsm.addMessage('Cast which spell? [a-z, ESC to cancel]', 'info');
   }
 
-  onExit(_fsm: GameFSM): void {
-    // Nothing to clean up
+  onExit(fsm: GameFSM): void {
+    fsm.data.spellTargeting = null;
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {

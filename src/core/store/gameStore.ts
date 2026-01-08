@@ -42,6 +42,22 @@ export interface GameState {
   symbolTargeting: { prompt: string } | null;
   directionTargeting: { prompt: string } | null;
 
+  // Spell selection state (for cast/study modals)
+  spellTargeting: {
+    mode: 'cast' | 'study';
+    prompt: string;
+    spells: Array<{
+      letter: string;
+      name: string;
+      level: number;
+      mana: number;
+      fail: number;
+      canUse: boolean;
+      reason?: string;
+      realm?: string;
+    }>;
+  } | null;
+
   // Modal state
   activeModal: 'inventory' | 'equipment' | 'character' | null;
   inventoryMode: 'browse' | 'wield' | 'drop' | 'quaff' | 'read' | 'eat';
@@ -78,6 +94,7 @@ export interface GameActions {
   setItemTargeting: (targeting: GameState['itemTargeting']) => void;
   setSymbolTargeting: (targeting: GameState['symbolTargeting']) => void;
   setDirectionTargeting: (targeting: GameState['directionTargeting']) => void;
+  setSpellTargeting: (targeting: GameState['spellTargeting']) => void;
   setActiveModal: (modal: GameState['activeModal']) => void;
   setInventoryMode: (mode: GameState['inventoryMode']) => void;
 
@@ -108,6 +125,7 @@ const initialState: GameState = {
   itemTargeting: null,
   symbolTargeting: null,
   directionTargeting: null,
+  spellTargeting: null,
   activeModal: null,
   inventoryMode: 'browse',
   stateName: 'none',
@@ -158,6 +176,7 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
   setItemTargeting: (itemTargeting) => set({ itemTargeting }),
   setSymbolTargeting: (symbolTargeting) => set({ symbolTargeting }),
   setDirectionTargeting: (directionTargeting) => set({ directionTargeting }),
+  setSpellTargeting: (spellTargeting) => set({ spellTargeting }),
   setActiveModal: (activeModal) => set({ activeModal }),
   setInventoryMode: (inventoryMode) => set({ inventoryMode }),
 
