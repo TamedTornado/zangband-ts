@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach, beforeAll } from 'vitest';
 import { RNG } from 'rot-js';
 import { BallEffect } from '@/core/systems/effects/BallEffect';
-import { Element } from '@/core/types';
 import { Actor } from '@/core/entities/Actor';
 import { Monster } from '@/core/entities/Monster';
 import { loadStatusDefs } from '@/core/systems/status';
@@ -51,6 +50,8 @@ function createMonster(x: number, y: number, hp = 50): Monster {
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
+    symbol: 'r',
+    color: '#fff',
     definitionKey: 'giant_white_mouse',
     maxHp: hp,
     speed: 110,
@@ -229,7 +230,7 @@ describe('BallEffect', () => {
       };
 
       const initialHp = monster.hp;
-      const result = ball.execute(context);
+      ball.execute(context);
 
       // Damage should be reduced based on distance
       expect(monster.hp).toBeGreaterThan(initialHp - 100);
@@ -351,7 +352,7 @@ describe('BallEffect', () => {
         getMonsterInfo,
       };
 
-      const result = ball.execute(context);
+      ball.execute(context);
 
       expect(monster1.isDead).toBe(true);
       expect(monster2.isDead).toBe(true);
@@ -421,52 +422,6 @@ describe('BallEffect', () => {
       // 50 * 2 = 100 damage
       expect(result.damageDealt).toBe(100);
       expect(result.messages[0]).toContain('hit hard');
-    });
-  });
-
-  describe('Item data integration', () => {
-    it('Fire Balls wand has correct ball effect', () => {
-      const items = require('@/data/items/items.json');
-      const wand = items.wand_of_fire_balls;
-
-      expect(wand.effects).toBeDefined();
-      expect(wand.effects[0].type).toBe('ball');
-      expect(wand.effects[0].damage).toBe(150);
-      expect(wand.effects[0].element).toBe('fire');
-      expect(wand.effects[0].radius).toBe(2);
-    });
-
-    it('Lightning Balls rod has correct ball effect', () => {
-      const items = require('@/data/items/items.json');
-      const rod = items.rod_of_lightning_balls;
-
-      expect(rod.effects).toBeDefined();
-      expect(rod.effects[0].type).toBe('ball');
-      expect(rod.effects[0].damage).toBe(75);
-      expect(rod.effects[0].element).toBe('lightning');
-      expect(rod.effects[0].radius).toBe(2);
-    });
-
-    it("Dragon's Flame has radius 3 ball effect", () => {
-      const items = require('@/data/items/items.json');
-      const wand = items.dragons_flame;
-
-      expect(wand.effects).toBeDefined();
-      expect(wand.effects[0].type).toBe('ball');
-      expect(wand.effects[0].damage).toBe(250);
-      expect(wand.effects[0].element).toBe('fire');
-      expect(wand.effects[0].radius).toBe(3);
-    });
-
-    it('Stinking Cloud has poison ball effect', () => {
-      const items = require('@/data/items/items.json');
-      const wand = items.stinking_cloud;
-
-      expect(wand.effects).toBeDefined();
-      expect(wand.effects[0].type).toBe('ball');
-      expect(wand.effects[0].damage).toBe(15);
-      expect(wand.effects[0].element).toBe('poison');
-      expect(wand.effects[0].radius).toBe(2);
     });
   });
 

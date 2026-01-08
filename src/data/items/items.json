@@ -8638,7 +8638,15 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "slow",
+        "duration": "20",
+        "target": "position"
+      }
+    ]
   },
   "confuse_monster": {
     "key": "confuse_monster",
@@ -8664,7 +8672,15 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "confused",
+        "duration": "10",
+        "target": "position"
+      }
+    ]
   },
   "wand_of_sleep_monster": {
     "key": "wand_of_sleep_monster",
@@ -8690,7 +8706,15 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "sleeping",
+        "duration": "50",
+        "target": "position"
+      }
+    ]
   },
   "wand_of_drain_life": {
     "key": "wand_of_drain_life",
@@ -8716,7 +8740,14 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      {
+        "type": "drainLife",
+        "damage": 150,
+        "target": "position"
+      }
+    ]
   },
   "wand_of_trap_door_destruction": {
     "key": "wand_of_trap_door_destruction",
@@ -8827,7 +8858,15 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "afraid",
+        "duration": "20",
+        "target": "position"
+      }
+    ]
   },
   "wand_of_teleport_other": {
     "key": "wand_of_teleport_other",
@@ -8853,7 +8892,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "teleportOther", "target": "position" }
+    ]
   },
   "wand_of_disarming": {
     "key": "wand_of_disarming",
@@ -11265,7 +11307,15 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "slow",
+        "duration": "20",
+        "target": "position"
+      }
+    ]
   },
   "rod_of_sleep_monster": {
     "key": "rod_of_sleep_monster",
@@ -11293,7 +11343,15 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "sleeping",
+        "duration": "50",
+        "target": "position"
+      }
+    ]
   },
   "rod_of_drain_life": {
     "key": "rod_of_drain_life",
@@ -11325,7 +11383,14 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "drainLife",
+        "damage": 150,
+        "target": "position"
+      }
+    ]
   },
   "rod_of_teleport_other": {
     "key": "rod_of_teleport_other",
@@ -11357,7 +11422,10 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "teleportOther", "target": "position" }
+    ]
   },
   "rod_of_disarming": {
     "key": "rod_of_disarming",

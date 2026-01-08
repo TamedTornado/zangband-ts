@@ -71,6 +71,8 @@ export interface GPEffectContext {
   targetDirection?: Direction;
   /** Selected position (for target: 'position') */
   targetPosition?: Position;
+  /** Target actor for effects (resolved from position, defaults to actor for self) */
+  targetActor?: Actor;
 
   // Helper functions (injected by caller)
   /** Get monster info (name, flags) for damage calculations */

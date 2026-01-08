@@ -67,4 +67,14 @@ export class Actor extends Entity {
   heal(amount: number): void {
     this.hp += amount;
   }
+
+  /**
+   * Check if this actor can receive a status effect.
+   * Override in subclasses to implement immunity checks.
+   * @param _statusId The status being applied
+   * @param _flags Optional flags (e.g., monster flags) for resistance checks
+   */
+  canReceiveStatus(_statusId: string, _flags?: string[]): boolean {
+    return true;
+  }
 }

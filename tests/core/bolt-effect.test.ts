@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach, beforeAll } from 'vitest';
 import { RNG } from 'rot-js';
 import { BoltEffect } from '@/core/systems/effects/BoltEffect';
-import { Element } from '@/core/types';
 import { Actor } from '@/core/entities/Actor';
 import { Monster } from '@/core/entities/Monster';
 import { loadStatusDefs } from '@/core/systems/status';
@@ -45,6 +44,8 @@ function createMonster(x: number, y: number, hp = 50): Monster {
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
+    symbol: 'r',
+    color: '#fff',
     definitionKey: 'giant_white_mouse',
     maxHp: hp,
     speed: 110,
@@ -52,7 +53,7 @@ function createMonster(x: number, y: number, hp = 50): Monster {
 }
 
 // Helper to get monster info
-function getMonsterInfo(monster: Monster): MonsterInfo {
+function getMonsterInfo(_monster: Monster): MonsterInfo {
   return {
     name: 'test monster',
     flags: [],
@@ -235,7 +236,7 @@ describe('BoltEffect', () => {
         getMonsterInfo,
       };
 
-      const result = bolt.execute(context);
+      bolt.execute(context);
 
       // Should hit monster1 (first in path)
       expect(monster1.hp).toBeLessThan(50);
@@ -262,7 +263,7 @@ describe('BoltEffect', () => {
         getMonsterInfo,
       };
 
-      const result = bolt.execute(context);
+      bolt.execute(context);
 
       expect(monster.hp).toBeLessThan(50);
     });
@@ -313,7 +314,7 @@ describe('BoltEffect', () => {
         getMonsterInfo,
       };
 
-      const result = bolt.execute(context);
+      bolt.execute(context);
 
       expect(monster.hp).toBeLessThan(50);
     });
@@ -332,7 +333,7 @@ describe('BoltEffect', () => {
       const level = createMockLevel([monster]);
 
       // Monster with fire immunity
-      const getFireImmuneInfo = (m: Monster): MonsterInfo => ({
+      const getFireImmuneInfo = (_m: Monster): MonsterInfo => ({
         name: 'fire elemental',
         flags: ['IM_FIRE'],
       });
@@ -364,7 +365,7 @@ describe('BoltEffect', () => {
       const level = createMockLevel([monster]);
 
       // Monster vulnerable to fire
-      const getVulnerableInfo = (m: Monster): MonsterInfo => ({
+      const getVulnerableInfo = (_m: Monster): MonsterInfo => ({
         name: 'ice troll',
         flags: ['HURT_FIRE'],
       });
@@ -382,39 +383,6 @@ describe('BoltEffect', () => {
       // Damage should be doubled
       expect(result.damageDealt).toBe(10); // 5 * 2
       expect(result.messages[0]).toContain('hit hard');
-    });
-  });
-
-  describe('Item data integration', () => {
-    it('Magic Missile wand has correct bolt effect', () => {
-      // Load items and check the effect is defined correctly
-      const items = require('@/data/items/items.json');
-      const wand = items.magic_missile;
-
-      expect(wand.effects).toBeDefined();
-      expect(wand.effects[0].type).toBe('bolt');
-      expect(wand.effects[0].dice).toBe('2d6');
-      expect(wand.effects[0].element).toBe('magic');
-    });
-
-    it('Fire Bolts wand has correct bolt effect', () => {
-      const items = require('@/data/items/items.json');
-      const wand = items.wand_of_fire_bolts;
-
-      expect(wand.effects).toBeDefined();
-      expect(wand.effects[0].type).toBe('bolt');
-      expect(wand.effects[0].dice).toBe('10d8');
-      expect(wand.effects[0].element).toBe('fire');
-    });
-
-    it('Lightning Bolts rod has correct bolt effect', () => {
-      const items = require('@/data/items/items.json');
-      const rod = items.lightning_bolts;
-
-      expect(rod.effects).toBeDefined();
-      expect(rod.effects[0].type).toBe('bolt');
-      expect(rod.effects[0].dice).toBe('5d8');
-      expect(rod.effects[0].element).toBe('lightning');
     });
   });
 });

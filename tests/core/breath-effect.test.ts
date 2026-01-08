@@ -39,6 +39,8 @@ function createMonster(x: number, y: number, hp = 50): Monster {
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
+    symbol: 'r',
+    color: '#fff',
     definitionKey: 'giant_white_mouse',
     maxHp: hp,
     speed: 110,
@@ -325,7 +327,7 @@ describe('BreathEffect', () => {
         getMonsterInfo,
       };
 
-      const result = breath.execute(context);
+      breath.execute(context);
 
       expect(monster.hp).toBeLessThan(200);
     });

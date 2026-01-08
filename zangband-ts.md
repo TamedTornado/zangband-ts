@@ -501,7 +501,7 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] Same system will be used for spell effects
 
 **Device Effects Implementation (IN PROGRESS)**
-54/89 device items have effects. Remaining effects needed:
+64/89 device items have effects (18/30 wands, 24/29 rods, 22/30 staves). Remaining effects needed:
 
 *Bolt Effects (DONE):*
 - [x] `bolt` effect type - fires projectile at target, deals damage to first monster
@@ -517,17 +517,19 @@ const defaultBindings: Record<string, GameAction> = {
 - Note: Dragon wands use ball effects, not breath (per source)
 
 *Monster-Targeting Effects (affect single monster):*
-- [ ] `slowMonster` - reduce monster speed
-- [ ] `sleepMonster` - put monster to sleep
-- [ ] `confuseMonster` - confuse monster
-- [ ] `scareMonster` - frighten monster
+- [x] Status effects via unified `applyStatus` with `target: "position"`:
+  - `slow` - wand/rod of slow monster
+  - `confused` - wand of confuse monster
+  - `sleeping` - wand/rod of sleep monster
+  - `afraid` - wand of scare monster
+  - Monster resistance checked via `canReceiveStatus()` (NO_CONF, NO_FEAR, NO_SLEEP, NO_STUN, NO_SLOW flags)
+- [x] `drainLife` - steal HP from living monsters (not UNDEAD/DEMON/NONLIVING)
+- [x] `teleportOther` - teleport monster away (distance 45, blocked by RES_TELE)
 - [ ] `tameMonster` - attempt to charm monster
 - [ ] `healMonster` - restore monster HP (cursed effect)
 - [ ] `hasteMonster` - speed up monster (cursed effect)
 - [ ] `cloneMonster` - duplicate monster (cursed effect)
 - [ ] `polymorphMonster` - transform monster randomly
-- [ ] `drainLife` - steal HP from monster
-- [ ] `teleportOther` - teleport monster away
 - [ ] `annihilate` - instant kill (high level)
 
 *Area Monster Effects (affect all monsters in radius):*
