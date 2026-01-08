@@ -52,6 +52,10 @@ export { DrainLifeEffect } from './DrainLifeEffect';
 export { TeleportOtherEffect } from './TeleportOtherEffect';
 export { AreaStatusEffect } from './AreaStatusEffect';
 export { DispelEffect } from './DispelEffect';
+export { StoneToMudEffect } from './StoneToMudEffect';
+export { TrapDoorDestructionEffect } from './TrapDoorDestructionEffect';
+export { DisarmEffect } from './DisarmEffect';
+export { EarthquakeEffect } from './EarthquakeEffect';
 
 // Legacy exports for backward compatibility
 export {
@@ -81,6 +85,10 @@ import { DrainLifeEffect } from './DrainLifeEffect';
 import { TeleportOtherEffect } from './TeleportOtherEffect';
 import { AreaStatusEffect } from './AreaStatusEffect';
 import { DispelEffect } from './DispelEffect';
+import { StoneToMudEffect } from './StoneToMudEffect';
+import { TrapDoorDestructionEffect } from './TrapDoorDestructionEffect';
+import { DisarmEffect } from './DisarmEffect';
+import { EarthquakeEffect } from './EarthquakeEffect';
 
 /**
  * Registry mapping effect type names to constructors
@@ -109,6 +117,11 @@ const gpEffectRegistry: Record<string, GPEffectConstructor> = {
   // Area effects
   areaStatus: AreaStatusEffect,
   dispel: DispelEffect,
+  // Terrain effects
+  stoneToMud: StoneToMudEffect,
+  trapDoorDestruction: TrapDoorDestructionEffect,
+  disarm: DisarmEffect,
+  earthquake: EarthquakeEffect,
 };
 
 /**

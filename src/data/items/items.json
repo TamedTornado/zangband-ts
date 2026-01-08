@@ -6161,7 +6161,10 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "scroll"
+    "type": "scroll",
+    "effects": [
+      { "type": "trapDoorDestruction", "target": "self", "radius": 8 }
+    ]
   },
   "artifact_creation": {
     "key": "artifact_creation",
@@ -8534,7 +8537,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "stoneToMud", "target": "position" }
+    ]
   },
   "wand_of_polymorph": {
     "key": "wand_of_polymorph",
@@ -8773,7 +8779,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "trapDoorDestruction", "target": "position" }
+    ]
   },
   "magic_missile": {
     "key": "magic_missile",
@@ -8921,7 +8930,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "disarm", "target": "position" }
+    ]
   },
   "wand_of_lightning_balls": {
     "key": "wand_of_lightning_balls",
@@ -9517,7 +9529,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      { "type": "earthquake", "target": "self", "radius": 8, "damage": "4d8" }
+    ]
   },
   "summoning": {
     "key": "summoning",
@@ -11469,7 +11484,10 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "disarm", "target": "position" }
+    ]
   },
   "rod_of_lightning_balls": {
     "key": "rod_of_lightning_balls",
