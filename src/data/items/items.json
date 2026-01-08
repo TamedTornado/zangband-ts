@@ -9313,7 +9313,10 @@
       "IGNORE_FIRE",
       "IGNORE_COLD"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "breath", "damage": "200", "element": "fire", "radius": 3, "target": "position" }
+    ]
   },
   "annihilation": {
     "key": "annihilation",
@@ -9344,7 +9347,10 @@
       "IGNORE_FIRE",
       "IGNORE_COLD"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "ball", "damage": "175", "element": "disintegrate", "radius": 2, "target": "position" }
+    ]
   },
   "rockets": {
     "key": "rockets",
@@ -9375,7 +9381,10 @@
       "IGNORE_FIRE",
       "IGNORE_COLD"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "ball", "damage": "250", "element": "rocket", "radius": 2, "target": "position" }
+    ]
   },
   "staff_of_trap_location": {
     "key": "staff_of_trap_location",
@@ -10281,7 +10290,15 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      { "type": "dispel", "damage": "300", "targetFlag": "EVIL", "radius": 20 },
+      { "type": "heal", "amount": "50" },
+      { "type": "cure", "status": "poisoned" },
+      { "type": "cure", "status": "afraid" },
+      { "type": "cure", "status": "stunned" },
+      { "type": "cure", "status": "cut" }
+    ]
   },
   "staff_of_enlightenment": {
     "key": "staff_of_enlightenment",
