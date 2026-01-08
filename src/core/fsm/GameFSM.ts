@@ -27,6 +27,7 @@ import type { ItemDef } from '../data/items';
 import type { EgoItemDef } from '../data/ego-items';
 import type { ArtifactDef } from '../data/artifacts';
 import type { MonsterDef } from '../data/monsters';
+import { DEBUG_MODE, applyDebugSetup } from '../debug/debugSetup';
 
 // Game data imports
 import itemsData from '@/data/items/items.json';
@@ -150,12 +151,17 @@ export class GameFSM {
       stats: { str: 16, int: 10, wis: 10, dex: 14, con: 15, chr: 10 },
     });
 
-    // Give starting equipment
-    for (const itemKey of WARRIOR_STARTING_ITEMS) {
-      const item = itemGen.createItemByKey(itemKey);
-      if (item) {
-        player.addItem(item);
-        player.equip(item);
+    // Apply debug setup or give default starting equipment
+    if (DEBUG_MODE) {
+      applyDebugSetup(player, itemGen);
+    } else {
+      // Give starting equipment
+      for (const itemKey of WARRIOR_STARTING_ITEMS) {
+        const item = itemGen.createItemByKey(itemKey);
+        if (item) {
+          player.addItem(item);
+          player.equip(item);
+        }
       }
     }
 

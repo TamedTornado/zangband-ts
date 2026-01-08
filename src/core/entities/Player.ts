@@ -60,8 +60,8 @@ export interface PlayerConfig {
 
 export class Player extends Actor {
   readonly stats: Stats;
-  readonly className: string;
-  readonly classDef: ClassDef | undefined;
+  private _className: string;
+  private _classDef: ClassDef | undefined;
   private _inventory: Item[] = [];
   private _knownSpells: Map<string, Set<string>> = new Map(); // realm -> spell keys
   private _equipment: Partial<Record<EquipmentSlot, Item>> = {};
@@ -87,8 +87,8 @@ export class Player extends Actor {
       speed: config.speed,
     });
     this.stats = { ...config.stats };
-    this.className = config.className ?? 'Warrior';
-    this.classDef = config.classDef;
+    this._className = config.className ?? 'Warrior';
+    this._classDef = config.classDef;
     this._level = config.level ?? 1;
     this._primaryRealm = config.primaryRealm ?? null;
     this._secondaryRealm = config.secondaryRealm ?? null;
@@ -96,6 +96,46 @@ export class Player extends Actor {
     // Initialize mana pool
     this._maxMana = this.calculateMaxMana();
     this._currentMana = this._maxMana;
+  }
+
+  // Class accessors
+  get className(): string {
+    return this._className;
+  }
+
+  get classDef(): ClassDef | undefined {
+    return this._classDef;
+  }
+
+  /**
+   * Set the player's class (for character creation or debug)
+   */
+  setClass(classDef: ClassDef): void {
+    this._classDef = classDef;
+    this._className = classDef.name;
+    this.recalculateMana();
+  }
+
+  /**
+   * Set the player's level (recalculates mana)
+   */
+  setLevel(level: number): void {
+    this._level = level;
+    this.recalculateMana();
+  }
+
+  /**
+   * Set primary magic realm
+   */
+  setPrimaryRealm(realm: string): void {
+    this._primaryRealm = realm;
+  }
+
+  /**
+   * Set secondary magic realm
+   */
+  setSecondaryRealm(realm: string): void {
+    this._secondaryRealm = realm;
   }
 
   // Character level
