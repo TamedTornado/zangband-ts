@@ -293,5 +293,17 @@
       "expire": "You are no longer poisoned."
     },
     "data": {}
+  },
+  "sleeping": {
+    "type": "duration",
+    "name": "Sleeping",
+    "messages": {
+      "apply": "You fall asleep!",
+      "expire": "You wake up.",
+      "refresh": "You fall into a deeper sleep!"
+    },
+    "data": {
+      "cantAct": true
+    }
   }
 }

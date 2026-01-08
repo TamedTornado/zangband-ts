@@ -20,9 +20,16 @@ export interface Effect {
   status?: string;
   duration?: string;
   intensity?: string;
-  damage?: number;
+  damage?: number | string;
   // reduce
   // (uses status, amount)
+  // GPEffect extensions
+  target?: string;
+  element?: string;
+  radius?: number;
+  targetFlag?: string;
+  distance?: number;
+  [key: string]: unknown;
 }
 
 /** Result of executing effects */
@@ -150,7 +157,9 @@ function executeApplyStatus(
 
   // Direct damage for poison
   if (effect.damage !== undefined) {
-    params['damage'] = effect.damage;
+    params['damage'] = typeof effect.damage === 'string'
+      ? rollDiceExpression(effect.damage, rng)
+      : effect.damage;
   }
 
   const status = createStatus(effect.status, params);

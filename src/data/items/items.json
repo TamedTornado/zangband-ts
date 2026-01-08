@@ -9672,7 +9672,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      { "type": "areaStatus", "status": "haste", "duration": "20" }
+    ]
   },
   "slow_monsters": {
     "key": "slow_monsters",
@@ -9698,7 +9701,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      { "type": "areaStatus", "status": "slow", "duration": "20" }
+    ]
   },
   "sleep_monsters": {
     "key": "sleep_monsters",
@@ -9724,7 +9730,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      { "type": "areaStatus", "status": "sleeping", "duration": "50" }
+    ]
   },
   "staff_of_cure_light_wounds": {
     "key": "staff_of_cure_light_wounds",
@@ -10032,7 +10041,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      { "type": "dispel", "damage": "60", "targetFlag": "EVIL" }
+    ]
   },
   "staff_of_probing": {
     "key": "staff_of_probing",

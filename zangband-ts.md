@@ -501,7 +501,7 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] Same system will be used for spell effects
 
 **Device Effects Implementation (IN PROGRESS)**
-64/89 device items have effects (18/30 wands, 24/29 rods, 22/30 staves). Remaining effects needed:
+68/89 device items have effects (18/30 wands, 24/29 rods, 26/30 staves). Remaining effects needed:
 
 *Bolt Effects (DONE):*
 - [x] `bolt` effect type - fires projectile at target, deals damage to first monster
@@ -532,11 +532,13 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] `polymorphMonster` - transform monster randomly
 - [ ] `annihilate` - instant kill (high level)
 
-*Area Monster Effects (affect all monsters in radius):*
-- [ ] `slowMonsters` - slow all nearby monsters
-- [ ] `sleepMonsters` - sleep all nearby monsters
-- [ ] `hasteMonsters` - haste all nearby monsters (cursed)
-- [ ] `dispelEvil` - damage evil monsters in area
+*Area Monster Effects (DONE):*
+- [x] `areaStatus` effect type - applies status to all monsters in radius
+  - slow_monsters (staff) - applies slow status
+  - sleep_monsters (staff) - applies sleeping status
+  - haste_monsters (staff, cursed) - applies haste status
+- [x] `dispel` effect type - damages monsters with specific flag in radius
+  - dispel_evil (staff) - 60 damage to EVIL monsters
 
 *Terrain Effects:*
 - [ ] `stoneToMud` - convert wall to floor

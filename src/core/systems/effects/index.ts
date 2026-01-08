@@ -50,6 +50,8 @@ export { BallEffect } from './BallEffect';
 export { BreathEffect } from './BreathEffect';
 export { DrainLifeEffect } from './DrainLifeEffect';
 export { TeleportOtherEffect } from './TeleportOtherEffect';
+export { AreaStatusEffect } from './AreaStatusEffect';
+export { DispelEffect } from './DispelEffect';
 
 // Legacy exports for backward compatibility
 export {
@@ -77,6 +79,8 @@ import { BallEffect } from './BallEffect';
 import { BreathEffect } from './BreathEffect';
 import { DrainLifeEffect } from './DrainLifeEffect';
 import { TeleportOtherEffect } from './TeleportOtherEffect';
+import { AreaStatusEffect } from './AreaStatusEffect';
+import { DispelEffect } from './DispelEffect';
 
 /**
  * Registry mapping effect type names to constructors
@@ -102,6 +106,9 @@ const gpEffectRegistry: Record<string, GPEffectConstructor> = {
   breath: BreathEffect,
   drainLife: DrainLifeEffect,
   teleportOther: TeleportOtherEffect,
+  // Area effects
+  areaStatus: AreaStatusEffect,
+  dispel: DispelEffect,
 };
 
 /**
