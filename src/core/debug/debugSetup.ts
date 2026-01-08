@@ -89,20 +89,5 @@ export function applyDebugSetup(player: Player, itemGen: ItemGeneration): void {
     }
   }
 
-  // Learn some starting spells from each realm
-  // Sorcery book 1 spells (indices 0-7)
-  player.learnSpell('sorcery', 'detect_monsters');
-  player.learnSpell('sorcery', 'phase_door');
-  player.learnSpell('sorcery', 'detect_doors_and_traps');
-  player.learnSpell('sorcery', 'light_area');
-  player.learnSpell('sorcery', 'confuse_monster');
-  player.learnSpell('sorcery', 'teleport');
-
-  // Chaos book 1 spells (indices 0-7)
-  player.learnSpell('chaos', 'magic_missile');
-  player.learnSpell('chaos', 'trap_door_destruction');
-  player.learnSpell('chaos', 'flash_of_light');
-  player.learnSpell('chaos', 'touch_of_confusion');
-  player.learnSpell('chaos', 'mana_burst');
-  player.learnSpell('chaos', 'fire_bolt');
+  // No pre-learned spells - test the study flow to learn them
 }
