@@ -5,8 +5,9 @@ import { Actor } from '@/core/entities/Actor';
 import { Monster } from '@/core/entities/Monster';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
-import type { GPEffectContext } from '@/core/systems/effects/GPEffect';
+import type { GPEffectContext, GPEffectDef } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { getEffectManager } from '@/core/systems/effects/EffectManager';
 
 // Mock level
 function createMockLevel(monsters: Monster[] = [], width = 50, height = 50) {
@@ -61,6 +62,12 @@ function createMonster(x: number, y: number, hp = 100): Monster {
     maxHp: hp,
     speed: 110,
   });
+}
+
+// Helper to create effect factory for tests
+function createEffectFactory() {
+  const manager = getEffectManager();
+  return (def: GPEffectDef) => manager.createEffect(def);
 }
 
 describe('WonderEffect', () => {
@@ -134,6 +141,7 @@ describe('WonderEffect', () => {
         level: level as any,
         rng: RNG,
         targetPosition: { x: 15, y: 10 },
+        createEffect: createEffectFactory(),
       };
 
       const result = effect.execute(context);
@@ -165,6 +173,7 @@ describe('WonderEffect', () => {
         rng: RNG,
         targetPosition: { x: 15, y: 10 },
         getMonsterInfo: () => ({ name: 'Orc', flags: [] }),
+        createEffect: createEffectFactory(),
       };
       const result1 = effect1.execute(context1);
 
@@ -181,6 +190,7 @@ describe('WonderEffect', () => {
         rng: RNG,
         targetPosition: { x: 15, y: 10 },
         getMonsterInfo: () => ({ name: 'Orc', flags: [] }),
+        createEffect: createEffectFactory(),
       };
       const result2 = effect2.execute(context2);
 
@@ -211,6 +221,7 @@ describe('WonderEffect', () => {
           level: level as any,
           rng: RNG,
           targetPosition: { x: 15, y: 10 },
+          createEffect: createEffectFactory(),
         };
 
         const result = effect.execute(context);
@@ -241,6 +252,7 @@ describe('WonderEffect', () => {
         rng: RNG,
         targetPosition: { x: 15, y: 10 },
         getMonsterInfo: () => ({ name: 'Orc', flags: [] }),
+        createEffect: createEffectFactory(),
       };
 
       const result = effect.execute(context);

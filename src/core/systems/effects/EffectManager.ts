@@ -163,10 +163,16 @@ export class EffectManager {
   executeEffects(defs: GPEffectDef[], context: GPEffectContext): GPEffectResult {
     const results: GPEffectResult[] = [];
 
+    // Inject createEffect into context for compound effects (Wonder, Havoc)
+    const contextWithFactory: GPEffectContext = {
+      ...context,
+      createEffect: (def: GPEffectDef) => this.createEffect(def),
+    };
+
     for (const def of defs) {
       const effect = this.createEffect(def);
 
-      if (!effect.canExecute(context)) {
+      if (!effect.canExecute(contextWithFactory)) {
         results.push({
           success: false,
           messages: [`Effect ${def.type} cannot execute - missing target`],
@@ -175,7 +181,7 @@ export class EffectManager {
         continue;
       }
 
-      results.push(effect.execute(context));
+      results.push(effect.execute(contextWithFactory));
     }
 
     return combineGPEffectResults(results);

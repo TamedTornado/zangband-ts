@@ -5,8 +5,9 @@ import { Actor } from '@/core/entities/Actor';
 import { Monster } from '@/core/entities/Monster';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
-import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
+import type { GPEffectContext, GPEffectDef, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { getEffectManager } from '@/core/systems/effects/EffectManager';
 
 // Mock level
 function createMockLevel(monsters: Monster[] = [], width = 100, height = 100) {
@@ -67,6 +68,12 @@ function getMonsterInfo(_monster: Monster): MonsterInfo {
   };
 }
 
+// Helper to create effect factory for tests
+function createEffectFactory() {
+  const manager = getEffectManager();
+  return (def: GPEffectDef) => manager.createEffect(def);
+}
+
 describe('HavocEffect', () => {
   beforeAll(() => {
     loadStatusDefs(statusesData);
@@ -96,6 +103,7 @@ describe('HavocEffect', () => {
         actor,
         level: level as any,
         rng: RNG,
+        createEffect: createEffectFactory(),
       };
 
       expect(effect.canExecute(context)).toBe(true);
@@ -112,6 +120,7 @@ describe('HavocEffect', () => {
         actor,
         level: level as any,
         rng: RNG,
+        createEffect: createEffectFactory(),
       };
 
       const result = effect.execute(context);
@@ -145,6 +154,7 @@ describe('HavocEffect', () => {
           level: level as any,
           rng: RNG,
           getMonsterInfo,
+          createEffect: createEffectFactory(),
         };
 
         effect.execute(context);
@@ -168,6 +178,7 @@ describe('HavocEffect', () => {
         actor,
         level: level as any,
         rng: RNG,
+        createEffect: createEffectFactory(),
       };
 
       const result = effect.execute(context);
@@ -193,6 +204,7 @@ describe('HavocEffect', () => {
           actor,
           level: level as any,
           rng: RNG,
+          createEffect: createEffectFactory(),
         };
 
         const result = effect.execute(context);

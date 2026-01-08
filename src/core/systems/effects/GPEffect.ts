@@ -91,6 +91,8 @@ export interface GPEffectContext {
   // Helper functions (injected by caller)
   /** Get monster info (name, flags) for damage calculations */
   getMonsterInfo?: (monster: Monster) => MonsterInfo;
+  /** Create a nested effect (for compound effects like Wonder) */
+  createEffect?: (def: GPEffectDef) => GPEffect;
 }
 
 /**

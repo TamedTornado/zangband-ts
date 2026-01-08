@@ -11,7 +11,6 @@
 
 import { PositionGPEffect } from './PositionGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
-import { getEffectManager } from './EffectManager';
 
 /**
  * Pool of possible effects for Wand of Wonder
@@ -58,15 +57,22 @@ const WONDER_EFFECTS: GPEffectDef[] = [
 
 export class WonderEffect extends PositionGPEffect {
   execute(context: GPEffectContext): GPEffectResult {
-    const { rng } = context;
+    const { rng, createEffect } = context;
+
+    if (!createEffect) {
+      return {
+        success: false,
+        messages: ['Cannot execute wonder effect - no effect factory'],
+        turnConsumed: false,
+      };
+    }
 
     // Randomly select an effect from the pool
     const effectIndex = rng.getUniformInt(0, WONDER_EFFECTS.length - 1);
     const selectedDef = WONDER_EFFECTS[effectIndex];
 
     // Create and execute the selected effect
-    const effectManager = getEffectManager();
-    const effect = effectManager.createEffect(selectedDef);
+    const effect = createEffect(selectedDef);
 
     // Check if the selected effect can execute
     if (!effect.canExecute(context)) {

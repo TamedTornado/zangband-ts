@@ -16,7 +16,6 @@
 
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
-import { getEffectManager } from './EffectManager';
 
 // Available chaos elements (subset of Zangband's 30 types)
 const CHAOS_ELEMENTS = [
@@ -38,7 +37,15 @@ const DIRECTIONS = [
 
 export class HavocEffect extends SelfGPEffect {
   execute(context: GPEffectContext): GPEffectResult {
-    const { actor, rng } = context;
+    const { actor, rng, createEffect } = context;
+
+    if (!createEffect) {
+      return {
+        success: false,
+        messages: ['Cannot execute havoc effect - no effect factory'],
+        turnConsumed: false,
+      };
+    }
 
     // Select random chaos element
     const element = CHAOS_ELEMENTS[rng.getUniformInt(0, CHAOS_ELEMENTS.length - 1)];
@@ -58,8 +65,6 @@ export class HavocEffect extends SelfGPEffect {
     const messages: string[] = [`You unleash chaotic ${element} energy!`];
     let totalDamage = 0;
 
-    const effectManager = getEffectManager();
-
     switch (pattern) {
       case 'omnidirectional': {
         // Fire in all 8 directions
@@ -77,7 +82,7 @@ export class HavocEffect extends SelfGPEffect {
             radius: 2,
           };
 
-          const ballEffect = effectManager.createEffect(ballDef);
+          const ballEffect = createEffect(ballDef);
           const ballContext = { ...context, targetPosition: targetPos };
 
           if (ballEffect.canExecute(ballContext)) {
@@ -99,7 +104,7 @@ export class HavocEffect extends SelfGPEffect {
           radius: 8,
         };
 
-        const ballEffect = effectManager.createEffect(ballDef);
+        const ballEffect = createEffect(ballDef);
         const ballContext = { ...context, targetPosition: actor.position };
 
         if (ballEffect.canExecute(ballContext)) {
@@ -128,7 +133,7 @@ export class HavocEffect extends SelfGPEffect {
           radius: 3,
         };
 
-        const ballEffect = effectManager.createEffect(ballDef);
+        const ballEffect = createEffect(ballDef);
         const ballContext = { ...context, targetPosition: targetPos };
 
         if (ballEffect.canExecute(ballContext)) {
