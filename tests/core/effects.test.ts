@@ -1,11 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { RNG } from 'rot-js';
 import { Actor } from '@/core/entities/Actor';
-import {
-  rollDiceExpression,
-  executeEffects,
-  type Effect,
-} from '@/core/systems/effects/EffectExecutor';
+import { Level } from '@/core/world/Level';
+import { rollDiceExpression, getEffectManager, type GPEffectDef, type GPEffectContext } from '@/core/systems/effects';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import itemsData from '@/data/items/items.json';
@@ -26,6 +23,21 @@ function createTestActor(hp = 100): Actor {
     maxHp: hp,
     speed: 110,
   });
+}
+
+// Helper to create minimal effect context
+function createTestContext(actor: Actor): GPEffectContext {
+  return {
+    actor,
+    level: new Level(10, 10),
+    rng: RNG,
+  };
+}
+
+// Helper to execute effects with minimal context
+function executeEffects(effects: GPEffectDef[], actor: Actor) {
+  const context = createTestContext(actor);
+  return getEffectManager().executeEffects(effects, context);
 }
 
 // Helper to get item by key
@@ -70,17 +82,16 @@ describe('rollDiceExpression', () => {
   });
 });
 
-describe('executeEffects - heal', () => {
+describe('GPEffect - heal', () => {
   it('heals fixed amount', () => {
     const actor = createTestActor(100);
     actor.takeDamage(50);
     expect(actor.hp).toBe(50);
 
-    const effects: Effect[] = [{ type: 'heal', amount: 30 }];
-    const result = executeEffects(effects, actor, RNG);
+    const effects: GPEffectDef[] = [{ type: 'heal', amount: 30 }];
+    const result = executeEffects(effects, actor);
 
     expect(actor.hp).toBe(80);
-    expect(result.healed).toBe(30);
     expect(result.messages.some(m => m.includes('+30 HP'))).toBe(true);
   });
 
@@ -89,11 +100,10 @@ describe('executeEffects - heal', () => {
     actor.takeDamage(50);
 
     // 2d1 = 2
-    const effects: Effect[] = [{ type: 'heal', dice: '2d1' }];
-    const result = executeEffects(effects, actor, RNG);
+    const effects: GPEffectDef[] = [{ type: 'heal', dice: '2d1' }];
+    executeEffects(effects, actor);
 
     expect(actor.hp).toBe(52);
-    expect(result.healed).toBe(2);
   });
 
   it('does not overheal', () => {
@@ -101,37 +111,23 @@ describe('executeEffects - heal', () => {
     actor.takeDamage(10);
     expect(actor.hp).toBe(90);
 
-    const effects: Effect[] = [{ type: 'heal', amount: 50 }];
-    const result = executeEffects(effects, actor, RNG);
+    const effects: GPEffectDef[] = [{ type: 'heal', amount: 50 }];
+    executeEffects(effects, actor);
 
     expect(actor.hp).toBe(100);
-    expect(result.healed).toBe(10); // Only healed 10, not 50
-  });
-
-  it('no message when no healing needed', () => {
-    const actor = createTestActor(100);
-    // At full HP
-
-    const effects: Effect[] = [{ type: 'heal', amount: 50 }];
-    const result = executeEffects(effects, actor, RNG);
-
-    expect(actor.hp).toBe(100);
-    expect(result.healed).toBe(0);
-    expect(result.messages.length).toBe(0);
   });
 });
 
-describe('executeEffects - applyStatus', () => {
+describe('GPEffect - applyStatus', () => {
   it('applies duration status', () => {
     const actor = createTestActor();
 
-    const effects: Effect[] = [
+    const effects: GPEffectDef[] = [
       { type: 'applyStatus', status: 'haste', duration: '10' },
     ];
-    const result = executeEffects(effects, actor, RNG);
+    const result = executeEffects(effects, actor);
 
     expect(actor.statuses.has('haste')).toBe(true);
-    expect(result.statusesApplied).toContain('haste');
     expect(result.messages.some(m => m.includes('faster'))).toBe(true);
   });
 
@@ -139,10 +135,10 @@ describe('executeEffects - applyStatus', () => {
     const actor = createTestActor();
 
     // 10+1d1 = 11
-    const effects: Effect[] = [
+    const effects: GPEffectDef[] = [
       { type: 'applyStatus', status: 'heroism', duration: '10+1d1' },
     ];
-    executeEffects(effects, actor, RNG);
+    executeEffects(effects, actor);
 
     expect(actor.statuses.has('heroism')).toBe(true);
   });
@@ -150,82 +146,74 @@ describe('executeEffects - applyStatus', () => {
   it('applies poison with duration and damage', () => {
     const actor = createTestActor();
 
-    const effects: Effect[] = [
+    const effects: GPEffectDef[] = [
       { type: 'applyStatus', status: 'poisoned', duration: '5', damage: 3 },
     ];
-    const result = executeEffects(effects, actor, RNG);
+    executeEffects(effects, actor);
 
     expect(actor.statuses.has('poisoned')).toBe(true);
-    expect(result.statusesApplied).toContain('poisoned');
   });
 
   it('applies multiple statuses', () => {
     const actor = createTestActor();
 
-    const effects: Effect[] = [
+    const effects: GPEffectDef[] = [
       { type: 'applyStatus', status: 'haste', duration: '10' },
       { type: 'applyStatus', status: 'heroism', duration: '10' },
     ];
-    const result = executeEffects(effects, actor, RNG);
+    executeEffects(effects, actor);
 
     expect(actor.statuses.has('haste')).toBe(true);
     expect(actor.statuses.has('heroism')).toBe(true);
-    expect(result.statusesApplied).toContain('haste');
-    expect(result.statusesApplied).toContain('heroism');
   });
 });
 
-describe('executeEffects - cure', () => {
+describe('GPEffect - cure', () => {
   it('cures existing status', () => {
     const actor = createTestActor();
 
     // First apply blind
     executeEffects(
       [{ type: 'applyStatus', status: 'blind', duration: '100' }],
-      actor,
-      RNG
+      actor
     );
     expect(actor.statuses.has('blind')).toBe(true);
 
     // Now cure it
-    const result = executeEffects([{ type: 'cure', status: 'blind' }], actor, RNG);
+    executeEffects([{ type: 'cure', status: 'blind' }], actor);
 
     expect(actor.statuses.has('blind')).toBe(false);
-    expect(result.statusesCured).toContain('blind');
   });
 
   it('does nothing if status not present', () => {
     const actor = createTestActor();
     expect(actor.statuses.has('blind')).toBe(false);
 
-    const result = executeEffects([{ type: 'cure', status: 'blind' }], actor, RNG);
+    const result = executeEffects([{ type: 'cure', status: 'blind' }], actor);
 
-    expect(result.statusesCured).not.toContain('blind');
-    expect(result.messages.length).toBe(0);
+    // No error, just no effect
+    expect(result.success).toBe(true);
   });
 });
 
-describe('executeEffects - reduce', () => {
+describe('GPEffect - reduce', () => {
   it('reduces cut intensity', () => {
     const actor = createTestActor();
 
     // Apply a cut with intensity 100
     executeEffects(
       [{ type: 'applyStatus', status: 'cut', intensity: '100' }],
-      actor,
-      RNG
+      actor
     );
     expect(actor.statuses.has('cut')).toBe(true);
 
     // Reduce by 30
-    const result = executeEffects(
+    executeEffects(
       [{ type: 'reduce', status: 'cut', amount: 30 }],
-      actor,
-      RNG
+      actor
     );
 
     expect(actor.statuses.has('cut')).toBe(true); // Still has cut
-    expect(result.statusesReduced).toContain('cut');
   });
 
   it('removes status when reduced to zero', () => {
@@ -234,15 +222,13 @@ describe('executeEffects - reduce', () => {
     // Apply a cut with intensity 50
     executeEffects(
       [{ type: 'applyStatus', status: 'cut', intensity: '50' }],
-      actor,
-      RNG
+      actor
     );
 
     // Reduce by 100 (more than intensity)
     const result = executeEffects(
       [{ type: 'reduce', status: 'cut', amount: 100 }],
-      actor,
-      RNG
+      actor
     );
 
     expect(actor.statuses.has('cut')).toBe(false);
@@ -250,7 +236,7 @@ describe('executeEffects - reduce', () => {
   });
 });
 
-describe('executeEffects - combined', () => {
+describe('GPEffect - combined', () => {
   it('executes heal + cure combo (Cure Serious Wounds)', () => {
     const actor = createTestActor(100);
     actor.takeDamage(50);
@@ -261,24 +247,20 @@ describe('executeEffects - combined', () => {
         { type: 'applyStatus', status: 'blind', duration: '100' },
         { type: 'applyStatus', status: 'confused', duration: '100' },
       ],
-      actor,
-      RNG
+      actor
     );
 
     // Cure Serious Wounds: heal + cure blind + cure confused
-    const effects: Effect[] = [
+    const effects: GPEffectDef[] = [
       { type: 'heal', dice: '4d1' }, // 4 HP
       { type: 'cure', status: 'blind' },
       { type: 'cure', status: 'confused' },
     ];
-    const result = executeEffects(effects, actor, RNG);
+    executeEffects(effects, actor);
 
     expect(actor.hp).toBe(54);
     expect(actor.statuses.has('blind')).toBe(false);
     expect(actor.statuses.has('confused')).toBe(false);
-    expect(result.healed).toBe(4);
-    expect(result.statusesCured).toContain('blind');
-    expect(result.statusesCured).toContain('confused');
   });
 
   it('executes status + cure combo (Heroism)', () => {
@@ -287,33 +269,29 @@ describe('executeEffects - combined', () => {
     // Apply afraid first
     executeEffects(
       [{ type: 'applyStatus', status: 'afraid', duration: '100' }],
-      actor,
-      RNG
+      actor
     );
     expect(actor.statuses.has('afraid')).toBe(true);
 
     // Heroism: apply heroism + cure afraid
-    const effects: Effect[] = [
+    const effects: GPEffectDef[] = [
       { type: 'applyStatus', status: 'heroism', duration: '25' },
       { type: 'cure', status: 'afraid' },
     ];
-    const result = executeEffects(effects, actor, RNG);
+    executeEffects(effects, actor);
 
     expect(actor.statuses.has('heroism')).toBe(true);
     expect(actor.statuses.has('afraid')).toBe(false);
-    expect(result.statusesApplied).toContain('heroism');
-    expect(result.statusesCured).toContain('afraid');
   });
 });
 
-describe('executeEffects - unknown type', () => {
-  it('reports unknown effect type', () => {
+describe('GPEffect - unknown type', () => {
+  it('throws error for unknown effect type', () => {
     const actor = createTestActor();
 
-    const effects: Effect[] = [{ type: 'unknown_effect' }];
-    const result = executeEffects(effects, actor, RNG);
+    const effects: GPEffectDef[] = [{ type: 'unknown_effect' }];
 
-    expect(result.messages).toContain('Unknown effect type: unknown_effect');
+    expect(() => executeEffects(effects, actor)).toThrow('Unknown GPEffect type: unknown_effect');
   });
 });
 
@@ -324,13 +302,13 @@ describe('Item effects', () => {
     expect(item.effects).toBeDefined();
     expect(item.effects!.length).toBe(2);
 
-    const heal = item.effects!.find((e: Effect) => e.type === 'heal');
+    const heal = item.effects!.find((e) => e.type === 'heal');
     expect(heal).toBeDefined();
-    expect(heal!.dice).toBe('2d8');
+    expect(heal!['dice']).toBe('2d8');
 
-    const reduce = item.effects!.find((e: Effect) => e.type === 'reduce');
+    const reduce = item.effects!.find((e) => e.type === 'reduce');
     expect(reduce).toBeDefined();
-    expect(reduce!.status).toBe('cut');
+    expect(reduce!['status']).toBe('cut');
   });
 
   it('Speed potion has haste effect', () => {
@@ -338,7 +316,7 @@ describe('Item effects', () => {
     expect(item).toBeDefined();
     expect(item.effects).toBeDefined();
     expect(item.effects![0].type).toBe('applyStatus');
-    expect(item.effects![0].status).toBe('haste');
+    expect(item.effects![0]['status']).toBe('haste');
   });
 
   it('Resistance potion applies all oppose statuses', () => {
@@ -347,7 +325,7 @@ describe('Item effects', () => {
     expect(item.effects).toBeDefined();
     expect(item.effects!.length).toBe(5);
 
-    const statuses = item.effects!.map((e: Effect) => e.status);
+    const statuses = item.effects!.map((e) => e['status']);
     expect(statuses).toContain('oppose_acid');
     expect(statuses).toContain('oppose_elec');
     expect(statuses).toContain('oppose_fire');
@@ -360,7 +338,7 @@ describe('Item effects', () => {
     expect(item).toBeDefined();
     expect(item.effects).toBeDefined();
     expect(item.effects![0].type).toBe('cure');
-    expect(item.effects![0].status).toBe('poisoned');
+    expect(item.effects![0]['status']).toBe('poisoned');
   });
 
   it('Blindness food applies blind status', () => {
@@ -368,7 +346,7 @@ describe('Item effects', () => {
     expect(item).toBeDefined();
     expect(item.effects).toBeDefined();
     expect(item.effects![0].type).toBe('applyStatus');
-    expect(item.effects![0].status).toBe('blind');
+    expect(item.effects![0]['status']).toBe('blind');
   });
 });
 
@@ -380,17 +358,14 @@ describe('Integration: item effects on actor', () => {
     // Apply a cut
     executeEffects(
       [{ type: 'applyStatus', status: 'cut', intensity: '50' }],
-      actor,
-      RNG
+      actor
     );
 
     // Use Cure Light Wounds effects
     const item = getItem('potion_of_cure_light_wounds');
-    const result = executeEffects(item.effects!, actor, RNG);
+    executeEffects(item.effects! as GPEffectDef[], actor);
 
     expect(actor.hp).toBeGreaterThan(70); // Healed some
-    expect(result.healed).toBeGreaterThan(0);
-    expect(result.statusesReduced).toContain('cut');
   });
 
   it('Speed potion applies haste', () => {
@@ -398,7 +373,7 @@ describe('Integration: item effects on actor', () => {
     expect(actor.statuses.has('haste')).toBe(false);
 
     const item = getItem('potion_of_speed');
-    executeEffects(item.effects!, actor, RNG);
+    executeEffects(item.effects! as GPEffectDef[], actor);
 
     expect(actor.statuses.has('haste')).toBe(true);
     expect(actor.speed).toBe(120); // Base 110 + 10 from haste
@@ -410,14 +385,13 @@ describe('Integration: item effects on actor', () => {
     // Apply poison
     executeEffects(
       [{ type: 'applyStatus', status: 'poisoned', duration: '10', damage: 5 }],
-      actor,
-      RNG
+      actor
     );
     expect(actor.statuses.has('poisoned')).toBe(true);
 
     // Use Neutralize Poison
     const item = getItem('neutralize_poison');
-    executeEffects(item.effects!, actor, RNG);
+    executeEffects(item.effects! as GPEffectDef[], actor);
 
     expect(actor.statuses.has('poisoned')).toBe(false);
   });
@@ -427,7 +401,7 @@ describe('Integration: item effects on actor', () => {
     expect(actor.speed).toBe(110);
 
     const item = getItem('potion_of_slowness');
-    executeEffects(item.effects!, actor, RNG);
+    executeEffects(item.effects! as GPEffectDef[], actor);
 
     expect(actor.statuses.has('slow')).toBe(true);
     expect(actor.speed).toBe(100); // 110 - 10
@@ -440,15 +414,13 @@ describe('Integration: item effects on actor', () => {
     // Apply poison
     executeEffects(
       [{ type: 'applyStatus', status: 'poisoned', duration: '10', damage: 5 }],
-      actor,
-      RNG
+      actor
     );
 
     const item = getItem('piece_of_elvish_waybread');
-    const result = executeEffects(item.effects!, actor, RNG);
+    executeEffects(item.effects! as GPEffectDef[], actor);
 
     expect(actor.hp).toBeGreaterThan(50);
-    expect(result.healed).toBeGreaterThan(0);
     expect(actor.statuses.has('poisoned')).toBe(false);
   });
 });

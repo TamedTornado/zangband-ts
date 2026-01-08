@@ -67,13 +67,8 @@ export { SummonEffect } from './SummonEffect';
 export { WonderEffect } from './WonderEffect';
 export { HavocEffect } from './HavocEffect';
 
-// Legacy exports for backward compatibility
-export {
-  type Effect,
-  type EffectResult,
-  rollDiceExpression,
-  executeEffects,
-} from './EffectExecutor';
+// Dice utilities
+export { rollDiceExpression } from './diceUtils';
 
 // Effect Manager - central registry and resource provider
 export { EffectManager, getEffectManager, setEffectManager } from './EffectManager';

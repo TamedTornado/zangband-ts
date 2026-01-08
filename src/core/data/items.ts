@@ -1,4 +1,4 @@
-import type { Effect } from '@/core/systems/effects';
+import type { GPEffectDef } from '@/core/systems/effects';
 
 export interface Allocation {
   depth: number;
@@ -25,7 +25,7 @@ export interface ItemDef {
   toDam: number;
   toAc: number;
   flags: string[];
-  effects?: Effect[];
+  effects?: GPEffectDef[];
 }
 
 export type ItemRecord = Record<string, ItemDef>;

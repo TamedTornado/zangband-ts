@@ -9,7 +9,7 @@
 import { PositionGPEffect } from './PositionGPEffect';
 import type { GPEffectContext, GPEffectResult } from './GPEffect';
 import { createStatus } from '@/core/systems/status';
-import { rollDiceExpression } from './EffectExecutor';
+import { rollDiceExpression } from './diceUtils';
 
 export class HasteMonsterEffect extends PositionGPEffect {
   execute(context: GPEffectContext): GPEffectResult {

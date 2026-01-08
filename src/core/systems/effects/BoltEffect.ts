@@ -6,7 +6,7 @@
  */
 
 import { PositionGPEffect } from './PositionGPEffect';
-import { rollDiceExpression } from './EffectExecutor';
+import { rollDiceExpression } from './diceUtils';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
 import type { Position, Element } from '@/core/types';
 import { Element as ElementConst, ELEMENT_NAMES } from '@/core/types';

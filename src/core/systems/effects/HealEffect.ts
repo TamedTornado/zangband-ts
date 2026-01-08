@@ -8,7 +8,7 @@
 
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectContext, GPEffectResult } from './GPEffect';
-import { rollDiceExpression } from './EffectExecutor';
+import { rollDiceExpression } from './diceUtils';
 
 export class HealEffect extends SelfGPEffect {
   execute(context: GPEffectContext): GPEffectResult {

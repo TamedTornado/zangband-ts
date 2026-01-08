@@ -20,8 +20,10 @@ bun run test:run   # Run tests once
 
 ## Development Rules
 
+- **We use BUN not NODE**
 - **No self-credit**: Don't add co-authored-by or credit yourself in commit messages
 - **TDD**: Tests define contracts FIRST, then write code to make them pass
+- **TDD Part 2**: When fixing bugs tests didn't catch, write tests that catch that bug FIRST.
 - **Data-driven**: Game content lives in JSON (`src/data/`), not code
 - **Separation of concerns**: Core logic (`src/core/`) has ZERO UI dependencies
 - **No enums**: TypeScript strict mode with `erasableSyntaxOnly` - use const objects instead

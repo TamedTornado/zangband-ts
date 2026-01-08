@@ -8,7 +8,7 @@
 
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
-import { rollDiceExpression } from './EffectExecutor';
+import { rollDiceExpression } from './diceUtils';
 
 export interface DispelEffectDef extends GPEffectDef {
   type: 'dispel';

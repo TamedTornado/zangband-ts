@@ -9,7 +9,7 @@
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
 import { createStatus } from '../status';
-import { rollDiceExpression } from './EffectExecutor';
+import { rollDiceExpression } from './diceUtils';
 
 export interface AreaStatusEffectDef extends GPEffectDef {
   type: 'areaStatus';

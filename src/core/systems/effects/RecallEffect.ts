@@ -13,7 +13,7 @@
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectContext, GPEffectResult } from './GPEffect';
 import { createStatus } from '@/core/systems/status';
-import { rollDiceExpression } from './EffectExecutor';
+import { rollDiceExpression } from './diceUtils';
 
 export class RecallEffect extends SelfGPEffect {
   execute(context: GPEffectContext): GPEffectResult {

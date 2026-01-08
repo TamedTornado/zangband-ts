@@ -11,10 +11,14 @@ import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionState';
-import { executeEffects } from '../../systems/effects';
+import { TargetingState } from './TargetingState';
+import type { Item } from '@/core/entities/Item';
+import { getEffectManager, getRequiredTargetType, TargetType, type GPEffectContext } from '../../systems/effects';
 
 export class ZapState implements State {
   readonly name = 'zap';
+
+  private selectedItem: Item | null = null;
 
   onEnter(fsm: GameFSM): void {
     fsm.push(new ItemSelectionState({
@@ -24,7 +28,7 @@ export class ZapState implements State {
   }
 
   onExit(_fsm: GameFSM): void {
-    // Nothing to clean up
+    this.selectedItem = null;
   }
 
   handleAction(_fsm: GameFSM, _action: GameAction): boolean {
@@ -32,6 +36,21 @@ export class ZapState implements State {
   }
 
   onResume(fsm: GameFSM, result: unknown): void {
+    // Check if returning from targeting
+    if (this.selectedItem) {
+      const targetResult = result as { position?: { x: number; y: number }; cancelled?: boolean };
+      if (targetResult.cancelled || !targetResult.position) {
+        fsm.addMessage('Cancelled.', 'info');
+        fsm.transition(new PlayingState());
+        return;
+      }
+
+      // Execute with target position
+      this.executeDevice(fsm, this.selectedItem, targetResult.position);
+      return;
+    }
+
+    // Returning from item selection
     const selection = result as ItemSelectionResult;
 
     if (!selection.item) {
@@ -39,7 +58,6 @@ export class ZapState implements State {
       return;
     }
 
-    const { player } = fsm.data;
     const item = selection.item;
 
     // Check if the device can be used
@@ -61,9 +79,52 @@ export class ZapState implements State {
     const verb = item.isWand ? 'aim' : item.isRod ? 'zap' : 'use';
     fsm.addMessage(`You ${verb} ${fsm.getItemDisplayName(item)}.`, 'info');
 
+    // Check if effects need targeting
     const effects = item.generated?.baseItem.effects;
     if (effects && effects.length > 0) {
-      const effectResult = executeEffects(effects, player, RNG);
+      const targetType = getRequiredTargetType(effects);
+      if (targetType === TargetType.Position) {
+        // Need to target a position
+        this.selectedItem = item;
+        fsm.addMessage('Aim at which target?', 'info');
+        fsm.push(new TargetingState(true));
+        return;
+      }
+    }
+
+    // No targeting needed, execute immediately
+    this.executeDevice(fsm, item);
+  }
+
+  private executeDevice(
+    fsm: GameFSM,
+    item: Item,
+    targetPosition?: { x: number; y: number }
+  ): void {
+    const { player, level } = fsm.data;
+
+    const effects = item.generated?.baseItem.effects;
+    if (effects && effects.length > 0) {
+      const context: GPEffectContext = {
+        actor: player,
+        level,
+        rng: RNG,
+        monsterDataManager: fsm.monsterDataManager,
+        getMonsterInfo: (monster) => {
+          const def = fsm.monsterDataManager.getMonsterDef(monster.definitionKey);
+          return {
+            name: def?.name ?? 'creature',
+            flags: def?.flags ?? [],
+          };
+        },
+      };
+
+      // Add target position if provided
+      if (targetPosition) {
+        context.targetPosition = targetPosition;
+      }
+
+      const effectResult = getEffectManager().executeEffects(effects, context);
       for (const msg of effectResult.messages) {
         fsm.addMessage(msg, 'info');
       }

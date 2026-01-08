@@ -11,7 +11,7 @@
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectContext, GPEffectResult } from './GPEffect';
 import { createStatus } from '@/core/systems/status';
-import { rollDiceExpression } from './EffectExecutor';
+import { rollDiceExpression } from './diceUtils';
 import type { Monster } from '@/core/entities/Monster';
 
 export class ApplyStatusEffect extends SelfGPEffect {

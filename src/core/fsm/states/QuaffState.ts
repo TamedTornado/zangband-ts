@@ -10,7 +10,7 @@ import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionState';
-import { executeEffects } from '../../systems/effects';
+import { getEffectManager, type GPEffectContext } from '../../systems/effects';
 
 export class QuaffState implements State {
   readonly name = 'quaff';
@@ -38,14 +38,19 @@ export class QuaffState implements State {
       return;
     }
 
-    const { player } = fsm.data;
+    const { player, level } = fsm.data;
     const item = selection.item;
 
     fsm.addMessage(`You quaff ${fsm.getItemDisplayName(item)}.`, 'info');
 
     const effects = item.generated?.baseItem.effects;
     if (effects && effects.length > 0) {
-      const effectResult = executeEffects(effects, player, RNG);
+      const context: GPEffectContext = {
+        actor: player,
+        level,
+        rng: RNG,
+      };
+      const effectResult = getEffectManager().executeEffects(effects, context);
       for (const msg of effectResult.messages) {
         fsm.addMessage(msg, 'info');
       }
