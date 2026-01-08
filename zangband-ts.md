@@ -501,19 +501,20 @@ const defaultBindings: Record<string, GameAction> = {
 - [ ] Same system will be used for spell effects
 
 **Device Effects Implementation (IN PROGRESS)**
-35/89 device items have effects. Remaining effects needed:
+54/89 device items have effects. Remaining effects needed:
 
-*Bolt Effects (targeted projectile, single target):*
-- [ ] `bolt` effect type - fires projectile at target, deals damage
-- Items: Magic Missile, Frost Bolts, Fire Bolts, Acid Bolts, Lightning Bolts
+*Bolt Effects (DONE):*
+- [x] `bolt` effect type - fires projectile at target, deals damage to first monster
+- [x] Items: Magic Missile (2d6), Frost Bolts (6d8), Fire Bolts (10d8), Acid Bolts (6d8), Lightning Bolts (5d8)
 
-*Ball Effects (targeted area, radius damage):*
-- [ ] `ball` effect type - explosion at target, radius damage
-- Items: Lightning Balls, Cold Balls, Fire Balls, Acid Balls, Stinking Cloud, Rockets
+*Ball Effects (DONE):*
+- [x] `ball` effect type - explosion at target, radius damage with falloff
+- [x] Items: Lightning Balls (75), Cold Balls (100), Fire Balls (150), Acid Balls (125), Stinking Cloud (15)
+- [x] Dragon's Flame (250, radius 3), Dragon's Frost (200, radius 3)
 
-*Breath Effects (cone from player):*
-- [ ] `breath` effect type - cone attack in direction
-- Items: Dragon's Flame, Dragon's Frost, Dragon's Breath
+*Breath Effects (DONE):*
+- [x] `breath` effect type - cone attack from caster toward target (for monster use)
+- Note: Dragon wands use ball effects, not breath (per source)
 
 *Monster-Targeting Effects (affect single monster):*
 - [ ] `slowMonster` - reduce monster speed
@@ -640,6 +641,33 @@ Wands, rods, and staves have special stacking and charge mechanics from Zangband
 - [ ] Options menu (`=`)
 - [ ] Artifact activation (`A`)
 - [ ] Racial/mutation powers (`p`, `U`)
+
+**Monster Abilities & Effects (TODO)**
+Monsters use the same GPEffect system as player items/spells. Effects are defined per monster via flags.
+
+*Breath Weapons:*
+- [ ] Add breath effects to monster definitions (BR_FIRE, BR_COLD, BR_ACID, etc.)
+- [ ] Monster AI selects breath attack when in range and player in line of fire
+- [ ] Breath damage scales with monster HP (typically hp/3 or hp/6)
+- [ ] Elements: fire, cold, acid, lightning, poison, nether, chaos, disenchant, etc.
+
+*Spell-like Abilities:*
+- [ ] Bolt attacks (BA_FIRE, BA_COLD, etc.) - use existing BoltEffect
+- [ ] Ball attacks (same as player balls)
+- [ ] Summon spells (summon kin, summon undead, summon demon, etc.)
+- [ ] Status effects (blind, confuse, scare, slow, paralyze)
+- [ ] Healing/buffing (heal self, haste self, blink)
+- [ ] Special (teleport player, cause wounds, brain smash)
+
+*Innate Abilities:*
+- [ ] Melee attacks with elemental brands (touch attacks)
+- [ ] Gaze attacks (paralysis, drain XP)
+- [ ] Auras (fire aura, cold aura)
+
+*Resistance/Immunity Application:*
+- [x] Elemental damage system with player/monster resistance formulas
+- [x] Element types and ELEMENT_NAMES defined
+- [ ] Wire monster flags (IM_*, RES_*, HURT_*) to damage calculation
 
 ---
 
