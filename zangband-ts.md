@@ -665,9 +665,8 @@ Wands, rods, and staves have special stacking and charge mechanics from Zangband
 
 *Display:*
 - [x] Wands/Staffs: "(N/M charges)" when identified (current/max)
-- [x] Rods: "(ready)" or "(N turns to recharge)"
-- [ ] Rods: "(M charging)" when timeout > 0, nothing when ready
-- [ ] Stacked rods: count how many are charging based on timeout/pval
+- [x] Rods: "(charging)" when timeout > 0, nothing when ready (Zangband style)
+- [x] Stacked rods: "(N charging)" where N = ceil(timeout/pval), capped at quantity
 
 *Usage:*
 - [x] Wands: decrement charges on use

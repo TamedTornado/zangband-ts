@@ -472,7 +472,7 @@ describe('Item', () => {
       expect(wand.name).toBe('Wand of Magic Missile (5/8 charges)');
     });
 
-    it('shows rod ready status', () => {
+    it('shows nothing when rod is ready (Zangband style)', () => {
       const rod = new Item({
         id: 'rod-1',
         position: { x: 0, y: 0 },
@@ -483,10 +483,10 @@ describe('Item', () => {
           toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 0, identified: true,
         },
       });
-      expect(rod.name).toBe('Rod of Light (ready)');
+      expect(rod.name).toBe('Rod of Light');
     });
 
-    it('shows rod recharge time', () => {
+    it('shows (charging) when single rod is recharging', () => {
       const rod = new Item({
         id: 'rod-1',
         position: { x: 0, y: 0 },
@@ -497,7 +497,190 @@ describe('Item', () => {
           toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 5, identified: true,
         },
       });
-      expect(rod.name).toBe('Rod of Light (5 turns to recharge)');
+      expect(rod.name).toBe('Rod of Light (charging)');
+    });
+
+    it('shows (N charging) for stacked rods', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        quantity: 3,
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 15, identified: true,
+        },
+      });
+      // timeout=15, pval=10, quantity=3 → ceil(15/10) = 2 charging
+      expect(rod.name).toBe('Rod of Light (2 charging)');
+    });
+  });
+
+  describe('rod stacking and charging', () => {
+    it('chargingCount calculates correctly', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        quantity: 5,
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 25, identified: true,
+        },
+      });
+      // timeout=25, pval=10 → ceil(25/10) = 3 charging
+      expect(rod.chargingCount).toBe(3);
+    });
+
+    it('chargingCount caps at quantity', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        quantity: 2,
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 50, identified: true,
+        },
+      });
+      // timeout=50, pval=10 → ceil(50/10) = 5, but capped at quantity=2
+      expect(rod.chargingCount).toBe(2);
+    });
+
+    it('isReady returns true when timeout is 0', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 0, identified: true,
+        },
+      });
+      expect(rod.isReady).toBe(true);
+    });
+
+    it('isReady returns false when single rod is charging', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 5, identified: true,
+        },
+      });
+      expect(rod.isReady).toBe(false);
+    });
+
+    it('isReady returns true when stacked rod has at least one ready', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        quantity: 3,
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 15, identified: true,
+        },
+      });
+      // timeout=15, pval=10, quantity=3 → 2 charging, 1 ready
+      expect(rod.chargingCount).toBe(2);
+      expect(rod.isReady).toBe(true);
+    });
+
+    it('isReady returns false when all stacked rods are charging', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        quantity: 3,
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 30, identified: true,
+        },
+      });
+      // timeout=30, pval=10, quantity=3 → 3 charging, 0 ready
+      expect(rod.chargingCount).toBe(3);
+      expect(rod.isReady).toBe(false);
+    });
+
+    it('useCharge accumulates timeout for stacked rods', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        quantity: 3,
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 0, identified: true,
+        },
+      });
+      expect(rod.timeout).toBe(0);
+      rod.useCharge();
+      expect(rod.timeout).toBe(10); // pval added
+      rod.useCharge();
+      expect(rod.timeout).toBe(20); // pval added again
+    });
+
+    it('rods can stack regardless of timeout state', () => {
+      const rod1 = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 5, identified: true,
+        },
+      });
+      const rod2 = new Item({
+        id: 'rod-2',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 0, identified: true,
+        },
+      });
+      expect(rod1.canStack(rod2)).toBe(true);
+    });
+
+    it('absorb combines rod timeouts', () => {
+      const rod1 = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        quantity: 2,
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 15, identified: true,
+        },
+      });
+      const rod2 = new Item({
+        id: 'rod-2',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        quantity: 1,
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 5, identified: true,
+        },
+      });
+      rod1.absorb(rod2);
+      expect(rod1.quantity).toBe(3);
+      expect(rod1.timeout).toBe(20); // 15 + 5
     });
   });
 });

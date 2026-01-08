@@ -44,10 +44,14 @@ export class Item extends Entity {
       } else if (this.isRod) {
         const timeout = this.generated.timeout ?? 0;
         if (timeout > 0) {
-          name = `${name} (${timeout} turns to recharge)`;
-        } else {
-          name = `${name} (ready)`;
+          const charging = this.chargingCount;
+          if (this.quantity > 1) {
+            name = `${name} (${charging} charging)`;
+          } else {
+            name = `${name} (charging)`;
+          }
         }
+        // When ready (timeout == 0), show nothing - Zangband behavior
       }
     }
     return name;
@@ -140,15 +144,40 @@ export class Item extends Entity {
     return this.generated?.timeout ?? 0;
   }
 
-  /** Check if a rod is ready to use */
+  /** Get the pval (recharge time per rod) */
+  get pval(): number {
+    return this.generated?.baseItem.pval ?? 0;
+  }
+
+  /**
+   * Count how many rods in a stack are charging
+   * Uses Zangband formula: ceil(timeout / pval)
+   */
+  get chargingCount(): number {
+    if (!this.isRod) return 0;
+    const timeout = this.timeout;
+    const pval = this.pval;
+    if (timeout === 0 || pval === 0) return 0;
+    // Round up: (timeout + pval - 1) / pval
+    return Math.min(this.quantity, Math.ceil(timeout / pval));
+  }
+
+  /**
+   * Check if a rod (or at least one rod in a stack) is ready to use
+   * For stacked rods: ready if timeout <= (quantity - 1) * pval
+   */
   get isReady(): boolean {
-    return !this.isRod || this.timeout === 0;
+    if (!this.isRod) return true;
+    const timeout = this.timeout;
+    if (timeout === 0) return true;
+    // For stacks: at least one rod is ready if charging < quantity
+    return this.chargingCount < this.quantity;
   }
 
   /**
    * Use one charge from this item
    * For wands/staffs: decrements charges
-   * For rods: sets timeout to recharge time (pval)
+   * For rods: adds pval to timeout (accumulates for stacked rods)
    */
   useCharge(): void {
     if (!this.generated) return;
@@ -158,8 +187,9 @@ export class Item extends Entity {
         this.generated.charges--;
       }
     } else if (this.isRod) {
-      // Set timeout to the recharge time (pval)
-      this.generated.timeout = this.generated.baseItem.pval;
+      // Add pval to timeout (accumulates for stacked rods)
+      const currentTimeout = this.generated.timeout ?? 0;
+      this.generated.timeout = currentTimeout + this.generated.baseItem.pval;
     }
   }
 
@@ -230,9 +260,8 @@ export class Item extends Entity {
     }
 
     if (this.isRod) {
-      // Rods stack by type (we'd need array of timeouts for proper tracking)
-      // For simplicity, only stack if both are ready
-      return this.timeout === 0 && other.timeout === 0;
+      // Rods always stack by type - timeout accumulates
+      return true;
     }
 
     // Regular stackable items (potions, scrolls, etc.)
@@ -256,9 +285,11 @@ export class Item extends Entity {
       // Wands: add charges together
       this.generated.charges = (this.generated.charges ?? 0) + (other.generated.charges ?? 0);
       this.generated.maxCharges = (this.generated.maxCharges ?? 0) + (other.generated.maxCharges ?? 0);
+    } else if (this.isRod) {
+      // Rods: add timeouts together (accumulated charging time)
+      this.generated.timeout = (this.generated.timeout ?? 0) + (other.generated.timeout ?? 0);
     }
     // Staffs: charges stay the same since we only stack identical charges
-    // Rods: would need array tracking for multiple rods
 
     return true;
   }
