@@ -97,7 +97,6 @@ export class ReadScrollState implements State {
 
     // Transition to appropriate targeting state
     const onComplete = () => {
-      fsm.notify();
     };
 
     switch (requiredTarget) {

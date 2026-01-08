@@ -39,7 +39,6 @@ export class DirectionTargetingState implements State {
     fsm.addMessage(prompt, 'info');
 
     fsm.data.directionTargeting = { prompt };
-    fsm.notify();
   }
 
   onExit(fsm: GameFSM): void {

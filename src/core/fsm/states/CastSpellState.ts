@@ -121,7 +121,6 @@ export class CastSpellState implements State {
         if (this.showList) {
           this.showSpellList(fsm);
         }
-        fsm.notify();
         return true;
       case 'cancelTarget':
         fsm.addMessage('Cancelled.', 'info');

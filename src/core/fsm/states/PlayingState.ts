@@ -164,7 +164,6 @@ export class PlayingState implements State {
       player.spendEnergy(ENERGY_PER_TURN);
       this.processTurnEffects(fsm);
       this.processMonsterTurns(fsm);
-      fsm.notify();
       return;
     }
 
@@ -184,7 +183,6 @@ export class PlayingState implements State {
       }
 
       this.processMonsterTurns(fsm);
-      fsm.notify();
       return;
     }
 
@@ -197,7 +195,6 @@ export class PlayingState implements State {
       player.spendEnergy(ENERGY_PER_TURN);
       this.processTurnEffects(fsm);
       this.processMonsterTurns(fsm);
-      fsm.notify();
       return;
     }
 
@@ -210,7 +207,6 @@ export class PlayingState implements State {
     // Check for visible monsters first
     if (fsm.fovSystem.getVisibleMonster(level, player.position, VISION_RADIUS)) {
       fsm.addMessage('You cannot run with monsters nearby!', 'danger');
-      fsm.notify();
       return;
     }
 
@@ -277,7 +273,6 @@ export class PlayingState implements State {
       fsm.addMessage(interruptReason, 'danger');
     }
 
-    fsm.notify();
   }
 
   private handleDownStairs(fsm: GameFSM): void {
@@ -287,14 +282,12 @@ export class PlayingState implements State {
 
     if (!onDownStairs) {
       fsm.addMessage('There are no down stairs here.', 'info');
-      fsm.notify();
       return;
     }
 
     fsm.data.depth = depth + 1;
     fsm.generateLevel(fsm.data.depth);
     fsm.addMessage(`You descend to dungeon level ${fsm.data.depth}.`, 'info');
-    fsm.notify();
   }
 
   private handleUpStairs(fsm: GameFSM): void {
@@ -304,13 +297,11 @@ export class PlayingState implements State {
 
     if (!onUpStairs) {
       fsm.addMessage('There are no up stairs here.', 'info');
-      fsm.notify();
       return;
     }
 
     if (depth <= 1) {
       fsm.addMessage('You cannot leave the dungeon!', 'danger');
-      fsm.notify();
       return;
     }
 
@@ -324,7 +315,6 @@ export class PlayingState implements State {
     }
 
     fsm.addMessage(`You ascend to dungeon level ${fsm.data.depth}.`, 'info');
-    fsm.notify();
   }
 
   private handlePickup(fsm: GameFSM): void {
@@ -333,7 +323,6 @@ export class PlayingState implements State {
 
     if (items.length === 0) {
       fsm.addMessage('There is nothing here to pick up.', 'info');
-      fsm.notify();
       return;
     }
 
@@ -341,7 +330,6 @@ export class PlayingState implements State {
     player.addItem(item);
     level.removeItem(item);
     fsm.addMessage(`You pick up ${item.name}.`, 'info');
-    fsm.notify();
   }
 
   private handleTakeOff(fsm: GameFSM, slot: string): void {
@@ -350,7 +338,6 @@ export class PlayingState implements State {
     if (item) {
       fsm.addMessage(`You take off ${item.name}.`, 'info');
     }
-    fsm.notify();
   }
 
   private handleRest(fsm: GameFSM, mode: 'full' | 'hp' | { turns: number }): void {
@@ -359,14 +346,12 @@ export class PlayingState implements State {
     // Check for visible monsters
     if (fsm.fovSystem.getVisibleMonster(level, player.position, VISION_RADIUS)) {
       fsm.addMessage('You cannot rest with monsters nearby!', 'danger');
-      fsm.notify();
       return;
     }
 
     // Already at full HP
     if (player.hp >= player.maxHp) {
       fsm.addMessage('You are already fully rested.', 'info');
-      fsm.notify();
       return;
     }
 
@@ -420,6 +405,5 @@ export class PlayingState implements State {
       fsm.addMessage(`You finish resting. (${turnsRested} turns)`, 'info');
     }
 
-    fsm.notify();
   }
 }

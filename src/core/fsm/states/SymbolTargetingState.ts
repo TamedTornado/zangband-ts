@@ -38,7 +38,6 @@ export class SymbolTargetingState implements State {
     fsm.addMessage(prompt, 'info');
 
     fsm.data.symbolTargeting = { prompt };
-    fsm.notify();
   }
 
   onExit(fsm: GameFSM): void {

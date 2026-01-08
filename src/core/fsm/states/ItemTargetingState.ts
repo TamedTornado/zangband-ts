@@ -43,7 +43,6 @@ export class ItemTargetingState implements State {
       validItemIndices: validItems.map((_, i) => i),
     };
 
-    fsm.notify();
   }
 
   onExit(fsm: GameFSM): void {

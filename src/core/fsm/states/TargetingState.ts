@@ -37,7 +37,6 @@ export class TargetingState implements State {
     const mode = this.isTargeting ? 'Targeting' : 'Looking';
     fsm.addMessage(`${mode} mode. Use movement keys, Tab to cycle, Escape to cancel.`, 'info');
     this.describeCursor(fsm);
-    fsm.notify();
   }
 
   onExit(fsm: GameFSM): void {
@@ -76,14 +75,12 @@ export class TargetingState implements State {
       fsm.data.cursor = newPos;
       this.currentTargetIndex = -1; // Clear cycle index on manual move
       this.describeCursor(fsm);
-      fsm.notify();
     }
   }
 
   private handleCycleTarget(fsm: GameFSM): void {
     if (this.visibleTargets.length === 0) {
       fsm.addMessage('No visible targets.', 'info');
-      fsm.notify();
       return;
     }
 
@@ -91,7 +88,6 @@ export class TargetingState implements State {
     const target = this.visibleTargets[this.currentTargetIndex];
     fsm.data.cursor = { x: target.x, y: target.y };
     this.describeCursor(fsm);
-    fsm.notify();
   }
 
   private handleConfirm(fsm: GameFSM): void {

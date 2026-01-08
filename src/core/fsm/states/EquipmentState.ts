@@ -42,6 +42,5 @@ export class EquipmentState implements State {
     if (item) {
       fsm.addMessage(`You take off ${item.name}.`, 'info');
     }
-    fsm.notify();
   }
 }

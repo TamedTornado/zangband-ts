@@ -1,9 +1,11 @@
-import { createContext, useContext, useState, useEffect, useMemo, type ReactNode } from 'react';
+import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { Direction } from '@/core/types';
 import { GameFSM } from '@/core/fsm/GameFSM';
 import { PlayingState } from '@/core/fsm/states/PlayingState';
 import type { GameMessage } from '@/core/fsm/GameData';
 import type { Player } from '@/core/entities/Player';
+import type { Level } from '@/core/world/Level';
+import { useGameStore, type PromptState } from '@/core/store/gameStore';
 
 /**
  * Rest duration types - matches Zangband rest options
@@ -13,18 +15,9 @@ export type RestDuration =
   | { type: 'hp_sp' }
   | { type: 'full' };
 
-/**
- * Prompt state for inline input (rest duration, counts, etc.)
- */
-interface PromptState {
-  text: string;
-  value: string;
-  callback: (value: string) => void;
-}
-
 interface GameState {
   player: Player;
-  level: GameFSM['data']['level'];
+  level: Level;
   depth: number;
   turn: number;
   messages: GameMessage[];
@@ -34,7 +27,7 @@ interface GameState {
   gameOver: boolean;
   stateName: string;
   cursor: { x: number; y: number } | null;
-  // Targeting state (from FSM)
+  // Targeting state
   itemTargeting: { prompt: string; validItemIndices: number[] } | null;
   symbolTargeting: { prompt: string } | null;
   directionTargeting: { prompt: string } | null;
@@ -91,44 +84,45 @@ const GameContext = createContext<GameContextValue | null>(null);
 // Create FSM instance (singleton for the app)
 const fsm = new GameFSM(new PlayingState());
 
-function extractState(fsm: GameFSM, prompt: PromptState | null): GameState {
-  const {
-    player, level, depth, turn, messages, upStairs, downStairs, cursor,
-    itemTargeting, symbolTargeting, directionTargeting,
-  } = fsm.data;
-  return {
-    player,
-    level,
+export function GameProvider({ children }: { children: ReactNode }) {
+  // Subscribe to store updates - Zustand handles this automatically
+  const player = useGameStore(s => s.player);
+  const level = useGameStore(s => s.level);
+  const depth = useGameStore(s => s.depth);
+  const turn = useGameStore(s => s.turn);
+  const messages = useGameStore(s => s.messages);
+  const upStairs = useGameStore(s => s.upStairs);
+  const downStairs = useGameStore(s => s.downStairs);
+  const prompt = useGameStore(s => s.prompt);
+  const stateName = useGameStore(s => s.stateName);
+  const cursor = useGameStore(s => s.cursor);
+  const itemTargeting = useGameStore(s => s.itemTargeting);
+  const symbolTargeting = useGameStore(s => s.symbolTargeting);
+  const directionTargeting = useGameStore(s => s.directionTargeting);
+  const setPrompt = useGameStore(s => s.setPrompt);
+  const updatePromptValue = useGameStore(s => s.updatePromptValue);
+  const addMessage = useGameStore(s => s.addMessage);
+
+  const state: GameState = {
+    player: player!,
+    level: level!,
     depth,
     turn,
     messages,
     upStairs,
     downStairs,
     prompt,
-    gameOver: fsm.stateName === 'dead',
-    stateName: fsm.stateName,
+    gameOver: stateName === 'dead',
+    stateName,
     cursor,
     itemTargeting,
     symbolTargeting,
     directionTargeting,
   };
-}
-
-export function GameProvider({ children }: { children: ReactNode }) {
-  const [prompt, setPrompt] = useState<PromptState | null>(null);
-  const [, forceUpdate] = useState({});
-
-  // Subscribe to FSM changes
-  useEffect(() => {
-    return fsm.subscribe(() => forceUpdate({}));
-  }, []);
-
-  const state = extractState(fsm, prompt);
 
   const actions = useMemo<GameActions>(() => ({
     addMessage: (text: string, type: GameMessage['type'] = 'normal') => {
-      fsm.addMessage(text, type);
-      fsm.notify();
+      addMessage(text, type);
     },
 
     movePlayer: (dir: Direction) => {
@@ -245,13 +239,13 @@ export function GameProvider({ children }: { children: ReactNode }) {
       fsm.dispatch({ type: 'showList' });
     },
 
-    // Prompt system (UI-only, not FSM)
+    // Prompt system
     showPrompt: (text: string, callback: (value: string) => void) => {
       setPrompt({ text, value: '', callback });
     },
 
     updatePrompt: (value: string) => {
-      setPrompt(prev => prev ? { ...prev, value } : null);
+      updatePromptValue(value);
     },
 
     submitPrompt: () => {
@@ -286,7 +280,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
         callback: handleRestInput,
       });
     },
-  }), [prompt]);
+  }), [prompt, setPrompt, updatePromptValue, addMessage]);
 
   const value: GameContextValue = { state, actions };
 

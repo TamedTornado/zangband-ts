@@ -2,12 +2,13 @@
  * Game Finite State Machine
  *
  * Controls game state transitions and delegates actions to current state.
+ * Game data is stored in Zustand store for automatic React updates.
  */
 
 import { RNG } from 'rot-js';
 import type { State } from './State';
 import type { GameAction } from './Actions';
-import type { GameData, GameMessage } from './GameData';
+import type { GameMessage } from './GameData';
 import { Player } from '../entities/Player';
 import { Level } from '../world/Level';
 import { Scheduler } from '../systems/Scheduler';
@@ -28,6 +29,7 @@ import type { EgoItemDef } from '../data/ego-items';
 import type { ArtifactDef } from '../data/artifacts';
 import type { MonsterDef } from '../data/monsters';
 import { DEBUG_MODE, applyDebugSetup } from '../debug/debugSetup';
+import { useGameStore, getGameStore } from '../store/gameStore';
 
 // Game data imports
 import itemsData from '@/data/items/items.json';
@@ -54,11 +56,6 @@ const WARRIOR_STARTING_ITEMS = ['short_sword', 'soft_leather_armour', 'wooden_to
 export class GameFSM {
   private currentState: State | null = null;
   private stateStack: State[] = [];
-  private listeners: Set<() => void> = new Set();
-  private messageId: number = 0;
-
-  // Game data
-  data!: GameData;
 
   // Shared systems (exposed for states to use)
   readonly fovSystem = new FOVSystem();
@@ -74,15 +71,41 @@ export class GameFSM {
     this.transition(initialState);
   }
 
-  /** Subscribe to state changes */
-  subscribe(listener: () => void): () => void {
-    this.listeners.add(listener);
-    return () => this.listeners.delete(listener);
-  }
-
-  /** Notify all listeners of state change */
-  notify(): void {
-    this.listeners.forEach(l => l());
+  /**
+   * Get current game data from store.
+   * This provides backward compatibility for states using fsm.data.x
+   */
+  get data() {
+    const store = getGameStore();
+    return {
+      get player() { return store.player!; },
+      set player(p: Player) { useGameStore.setState({ player: p }); },
+      get level() { return store.level!; },
+      set level(l: Level) { useGameStore.setState({ level: l }); },
+      get scheduler() { return store.scheduler!; },
+      set scheduler(s: Scheduler) { useGameStore.setState({ scheduler: s }); },
+      get depth() { return store.depth; },
+      set depth(d: number) { useGameStore.setState({ depth: d }); },
+      get turn() { return store.turn; },
+      set turn(t: number) { useGameStore.setState({ turn: t }); },
+      get messages() { return store.messages; },
+      get upStairs() { return store.upStairs; },
+      get downStairs() { return store.downStairs; },
+      get killedBy() { return store.killedBy; },
+      set killedBy(k: string | null) { useGameStore.setState({ killedBy: k }); },
+      get cursor() { return store.cursor; },
+      set cursor(c: { x: number; y: number } | null) { useGameStore.setState({ cursor: c }); },
+      get itemTargeting() { return store.itemTargeting; },
+      set itemTargeting(t: typeof store.itemTargeting) { useGameStore.setState({ itemTargeting: t }); },
+      get symbolTargeting() { return store.symbolTargeting; },
+      set symbolTargeting(t: typeof store.symbolTargeting) { useGameStore.setState({ symbolTargeting: t }); },
+      get directionTargeting() { return store.directionTargeting; },
+      set directionTargeting(t: typeof store.directionTargeting) { useGameStore.setState({ directionTargeting: t }); },
+      get activeModal() { return store.activeModal; },
+      set activeModal(m: typeof store.activeModal) { useGameStore.setState({ activeModal: m }); },
+      get inventoryMode() { return store.inventoryMode; },
+      set inventoryMode(m: typeof store.inventoryMode) { useGameStore.setState({ inventoryMode: m }); },
+    };
   }
 
   /** Get current state name */
@@ -95,8 +118,8 @@ export class GameFSM {
     this.currentState?.onExit(this);
     this.stateStack = [];
     this.currentState = newState;
+    getGameStore().setStateName(newState.name);
     this.currentState.onEnter(this);
-    this.notify();
   }
 
   /** Push a child state onto the stack */
@@ -105,8 +128,8 @@ export class GameFSM {
       this.stateStack.push(this.currentState);
     }
     this.currentState = childState;
+    getGameStore().setStateName(childState.name);
     this.currentState.onEnter(this);
-    this.notify();
   }
 
   /** Pop current state and return to parent, passing result to onResume */
@@ -115,8 +138,8 @@ export class GameFSM {
     const parent = this.stateStack.pop();
     if (parent) {
       this.currentState = parent;
+      getGameStore().setStateName(parent.name);
       parent.onResume?.(this, result);
-      this.notify();
     }
   }
 
@@ -127,22 +150,34 @@ export class GameFSM {
     }
   }
 
+  /**
+   * @deprecated Use notify() for backward compatibility during migration.
+   * This is now a no-op since Zustand auto-updates React.
+   */
+  notify(): void {
+    // No-op - Zustand handles React updates automatically
+  }
+
+  /**
+   * @deprecated Subscribe is no longer needed with Zustand.
+   * Returns a no-op unsubscribe function for backward compatibility.
+   */
+  subscribe(_listener: () => void): () => void {
+    return () => {};
+  }
+
   /** Add a message to the log */
   addMessage(text: string, type: GameMessage['type'] = 'normal'): void {
-    this.data.messages.push({
-      id: this.messageId++,
-      text,
-      type,
-      turn: this.data.turn,
-    });
-    if (this.data.messages.length > 100) {
-      this.data.messages = this.data.messages.slice(-100);
-    }
-    this.notify();
+    getGameStore().addMessage(text, type);
   }
 
   /** Initialize fresh game data */
   initGameData(): void {
+    const store = getGameStore();
+
+    // Reset store
+    store.reset();
+
     // Create player
     const player = new Player({
       id: 'player',
@@ -166,36 +201,21 @@ export class GameFSM {
       }
     }
 
-    // Initialize data with placeholder level (will be generated)
-    this.data = {
-      player,
-      level: new Level(DUNGEON_WIDTH, DUNGEON_HEIGHT, { depth: 1 }),
-      scheduler: new Scheduler(),
-      depth: 1,
-      turn: 0,
-      messages: [],
-      upStairs: [],
-      downStairs: [],
-      killedBy: null,
-      cursor: null,
-      itemTargeting: null,
-      symbolTargeting: null,
-      directionTargeting: null,
-      activeModal: null,
-      inventoryMode: 'browse',
-    };
-
-    this.messageId = 0;
+    // Set player in store
+    store.setPlayer(player);
 
     // Generate first level
     this.generateLevel(1);
 
     this.addMessage('Welcome to Zangband!', 'info');
-    this.addMessage(`You enter dungeon level ${this.data.depth}.`, 'info');
+    this.addMessage(`You enter dungeon level ${store.depth}.`, 'info');
   }
 
   /** Generate a new dungeon level */
   generateLevel(depth: number): void {
+    const store = getGameStore();
+    const player = store.player!;
+
     const generator = new DungeonGenerator(RNG);
     const dungeon = generator.generate({ width: DUNGEON_WIDTH, height: DUNGEON_HEIGHT, depth });
 
@@ -215,18 +235,18 @@ export class GameFSM {
     // Place player at up stairs or fallback to first room
     if (dungeon.upStairs.length > 0) {
       const stairs = dungeon.upStairs[0];
-      this.data.player.position = { x: stairs.x, y: stairs.y };
+      player.position = { x: stairs.x, y: stairs.y };
     } else if (dungeon.rooms.length > 0) {
       const room = dungeon.rooms[0];
-      this.data.player.position = { x: room.centerX, y: room.centerY };
+      player.position = { x: room.centerX, y: room.centerY };
     } else {
       // Last resort - center of map
-      this.data.player.position = { x: Math.floor(DUNGEON_WIDTH / 2), y: Math.floor(DUNGEON_HEIGHT / 2) };
+      player.position = { x: Math.floor(DUNGEON_WIDTH / 2), y: Math.floor(DUNGEON_HEIGHT / 2) };
     }
 
     // Initialize scheduler
     const scheduler = new Scheduler();
-    scheduler.add(this.data.player);
+    scheduler.add(player);
 
     // Spawn monsters and items
     monsterSpawner.spawnMonstersForLevel(level, depth, BASE_MONSTER_COUNT + depth);
@@ -237,12 +257,14 @@ export class GameFSM {
       scheduler.add(monster);
     }
 
-    // Update data
-    this.data.level = level;
-    this.data.scheduler = scheduler;
-    this.data.depth = depth;
-    this.data.upStairs = dungeon.upStairs;
-    this.data.downStairs = dungeon.downStairs;
+    // Update store with all level data
+    store.setLevelData({
+      level,
+      scheduler,
+      depth,
+      upStairs: dungeon.upStairs,
+      downStairs: dungeon.downStairs,
+    });
   }
 
   /** Get monster name from definition */
@@ -252,16 +274,6 @@ export class GameFSM {
 
   /**
    * Get the display name for an item with proper article and flavor.
-   *
-   * Examples:
-   * - "a Robe" (basic equipment)
-   * - "an Icky Green Potion" (unidentified potion)
-   * - "a Potion of Salt Water" (identified potion)
-   * - "The One Ring" (known artifact)
-   *
-   * @param item - The item to get a name for
-   * @param options - Display options
-   * @returns Formatted display name with article
    */
   getItemDisplayName(
     item: Item,
