@@ -1,5 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { RNG } from 'rot-js';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { TickSystem } from '@/core/systems/TickSystem';
 import { Player } from '@/core/entities/Player';
 import { Item } from '@/core/entities/Item';

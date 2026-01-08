@@ -8,8 +8,17 @@
 import type { RNG } from 'rot-js';
 import type { Actor } from '@/core/entities/Actor';
 import type { Item } from '@/core/entities/Item';
+import type { Monster } from '@/core/entities/Monster';
 import type { Level } from '@/core/world/Level';
 import type { Position, Direction } from '@/core/types';
+
+/**
+ * Info about a monster for damage/effect purposes
+ */
+export interface MonsterInfo {
+  name: string;
+  flags: string[];
+}
 
 /**
  * Targeting modes for effects
@@ -62,6 +71,10 @@ export interface GPEffectContext {
   targetDirection?: Direction;
   /** Selected position (for target: 'position') */
   targetPosition?: Position;
+
+  // Helper functions (injected by caller)
+  /** Get monster info (name, flags) for damage calculations */
+  getMonsterInfo?: (monster: Monster) => MonsterInfo;
 }
 
 /**

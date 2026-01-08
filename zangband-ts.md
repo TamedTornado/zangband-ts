@@ -495,10 +495,60 @@ const defaultBindings: Record<string, GameAction> = {
 - [x] GPEffect system with targeting (item, symbol, direction, position)
 - [x] Targeting FSM states (ItemTargetingState, SymbolTargetingState, DirectionTargetingState)
 - [x] ZapState executes effects from device definitions
-- [ ] Add `effects` to ItemDef for devices (wands, rods, staves) - data entry needed
+- [x] Clean up item keys (renamed _NNN suffix keys to semantic names)
+- [x] Self-targeting effects: lightArea, detect, heal, applyStatus, cure, restoreStat, teleportSelf, identify, genocide
 - [ ] Potions/other items need a possible separate effect on throw
 - [ ] Same system will be used for spell effects
-- [ ] Clean up duplicate items in items.json (items with _NNN suffix collisions)
+
+**Device Effects Implementation (IN PROGRESS)**
+35/89 device items have effects. Remaining effects needed:
+
+*Bolt Effects (targeted projectile, single target):*
+- [ ] `bolt` effect type - fires projectile at target, deals damage
+- Items: Magic Missile, Frost Bolts, Fire Bolts, Acid Bolts, Lightning Bolts
+
+*Ball Effects (targeted area, radius damage):*
+- [ ] `ball` effect type - explosion at target, radius damage
+- Items: Lightning Balls, Cold Balls, Fire Balls, Acid Balls, Stinking Cloud, Rockets
+
+*Breath Effects (cone from player):*
+- [ ] `breath` effect type - cone attack in direction
+- Items: Dragon's Flame, Dragon's Frost, Dragon's Breath
+
+*Monster-Targeting Effects (affect single monster):*
+- [ ] `slowMonster` - reduce monster speed
+- [ ] `sleepMonster` - put monster to sleep
+- [ ] `confuseMonster` - confuse monster
+- [ ] `scareMonster` - frighten monster
+- [ ] `tameMonster` - attempt to charm monster
+- [ ] `healMonster` - restore monster HP (cursed effect)
+- [ ] `hasteMonster` - speed up monster (cursed effect)
+- [ ] `cloneMonster` - duplicate monster (cursed effect)
+- [ ] `polymorphMonster` - transform monster randomly
+- [ ] `drainLife` - steal HP from monster
+- [ ] `teleportOther` - teleport monster away
+- [ ] `annihilate` - instant kill (high level)
+
+*Area Monster Effects (affect all monsters in radius):*
+- [ ] `slowMonsters` - slow all nearby monsters
+- [ ] `sleepMonsters` - sleep all nearby monsters
+- [ ] `hasteMonsters` - haste all nearby monsters (cursed)
+- [ ] `dispelEvil` - damage evil monsters in area
+
+*Terrain Effects:*
+- [ ] `stoneToMud` - convert wall to floor
+- [ ] `trapDoorDestruction` - destroy traps and doors
+- [ ] `disarm` - disarm trap at target
+- [ ] `earthquake` - collapse nearby walls randomly
+
+*Special Effects:*
+- [ ] `wonder` - random effect from pool
+- [ ] `summon` - summon monsters (cursed for staff)
+- [ ] `recall` - toggle word of recall
+- [ ] `power` - major damage + self damage
+- [ ] `holiness` - cure + damage evil + protection
+- [ ] `havoc` - random destructive effect
+- [ ] `pesticide` - kill weak monsters
 
 **FSM Modal/Input Refactoring (DONE)**
 - [x] Push/pop state stack for child states with result passing

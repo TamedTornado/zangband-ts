@@ -319,7 +319,7 @@ describe('executeEffects - unknown type', () => {
 
 describe('Item effects', () => {
   it('Cure Light Wounds potion has heal + reduce cut effects', () => {
-    const item = getItem('cure_light_wounds_437');
+    const item = getItem('potion_of_cure_light_wounds');
     expect(item).toBeDefined();
     expect(item.effects).toBeDefined();
     expect(item.effects!.length).toBe(2);
@@ -334,7 +334,7 @@ describe('Item effects', () => {
   });
 
   it('Speed potion has haste effect', () => {
-    const item = getItem('speed_249');
+    const item = getItem('potion_of_speed');
     expect(item).toBeDefined();
     expect(item.effects).toBeDefined();
     expect(item.effects![0].type).toBe('applyStatus');
@@ -342,7 +342,7 @@ describe('Item effects', () => {
   });
 
   it('Resistance potion applies all oppose statuses', () => {
-    const item = getItem('resistance_268');
+    const item = getItem('potion_of_resistance');
     expect(item).toBeDefined();
     expect(item.effects).toBeDefined();
     expect(item.effects!.length).toBe(5);
@@ -364,7 +364,7 @@ describe('Item effects', () => {
   });
 
   it('Blindness food applies blind status', () => {
-    const item = getItem('blindness_1');
+    const item = getItem('food_blindness');
     expect(item).toBeDefined();
     expect(item.effects).toBeDefined();
     expect(item.effects![0].type).toBe('applyStatus');
@@ -385,7 +385,7 @@ describe('Integration: item effects on actor', () => {
     );
 
     // Use Cure Light Wounds effects
-    const item = getItem('cure_light_wounds_437');
+    const item = getItem('potion_of_cure_light_wounds');
     const result = executeEffects(item.effects!, actor, RNG);
 
     expect(actor.hp).toBeGreaterThan(70); // Healed some
@@ -397,7 +397,7 @@ describe('Integration: item effects on actor', () => {
     const actor = createTestActor();
     expect(actor.statuses.has('haste')).toBe(false);
 
-    const item = getItem('speed_249');
+    const item = getItem('potion_of_speed');
     executeEffects(item.effects!, actor, RNG);
 
     expect(actor.statuses.has('haste')).toBe(true);
@@ -426,7 +426,7 @@ describe('Integration: item effects on actor', () => {
     const actor = createTestActor();
     expect(actor.speed).toBe(110);
 
-    const item = getItem('slowness_250');
+    const item = getItem('potion_of_slowness');
     executeEffects(item.effects!, actor, RNG);
 
     expect(actor.statuses.has('slow')).toBe(true);

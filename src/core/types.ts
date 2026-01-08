@@ -3,6 +3,77 @@ export interface Position {
   y: number;
 }
 
+/**
+ * Damage/effect elements - matches Zangband GF_* types
+ */
+export const Element = {
+  // Physical
+  Physical: 'physical',
+
+  // Classic elements
+  Fire: 'fire',
+  Cold: 'cold',
+  Acid: 'acid',
+  Lightning: 'lightning',
+  Poison: 'poison',
+
+  // Light/Dark
+  Light: 'light',
+  Dark: 'dark',
+
+  // High-level elements
+  Chaos: 'chaos',
+  Nether: 'nether',
+  Nexus: 'nexus',
+  Sound: 'sound',
+  Shards: 'shards',
+  Confusion: 'confusion',
+  Disenchant: 'disenchant',
+  Time: 'time',
+  Gravity: 'gravity',
+  Inertia: 'inertia',
+  Force: 'force',
+  Plasma: 'plasma',
+  Mana: 'mana',
+
+  // Special
+  Magic: 'magic', // Pure magic damage, rarely resisted
+  Holy: 'holy', // Damages evil
+  Arrow: 'arrow', // Physical ranged
+} as const;
+
+export type Element = (typeof Element)[keyof typeof Element];
+
+/**
+ * Human-readable names for elements
+ */
+export const ELEMENT_NAMES: Record<Element, string> = {
+  physical: 'physical',
+  fire: 'fire',
+  cold: 'cold',
+  acid: 'acid',
+  lightning: 'lightning',
+  poison: 'poison',
+  light: 'light',
+  dark: 'darkness',
+  chaos: 'chaos',
+  nether: 'nether',
+  nexus: 'nexus',
+  sound: 'sound',
+  shards: 'shards',
+  confusion: 'confusion',
+  disenchant: 'disenchantment',
+  time: 'time',
+  gravity: 'gravity',
+  inertia: 'inertia',
+  force: 'force',
+  plasma: 'plasma',
+  mana: 'mana',
+  magic: 'magic',
+  holy: 'holy',
+  arrow: '',
+};
+
 export const Direction = {
   North: 'north',
   South: 'south',

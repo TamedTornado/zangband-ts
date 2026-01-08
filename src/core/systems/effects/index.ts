@@ -39,6 +39,16 @@ export { IdentifyEffect } from './IdentifyEffect';
 // Concrete effects - Symbol targeted
 export { GenocideEffect } from './GenocideEffect';
 
+// Concrete effects - Area/Detection
+export { LightAreaEffect } from './LightAreaEffect';
+export { DetectEffect } from './DetectEffect';
+export { RestoreStatEffect } from './RestoreStatEffect';
+
+// Concrete effects - Position targeted (bolts, balls, breaths)
+export { BoltEffect } from './BoltEffect';
+export { BallEffect } from './BallEffect';
+export { BreathEffect } from './BreathEffect';
+
 // Legacy exports for backward compatibility
 export {
   type Effect,
@@ -57,6 +67,12 @@ import { ReduceEffect } from './ReduceEffect';
 import { TeleportSelfEffect } from './TeleportSelfEffect';
 import { IdentifyEffect } from './IdentifyEffect';
 import { GenocideEffect } from './GenocideEffect';
+import { LightAreaEffect } from './LightAreaEffect';
+import { DetectEffect } from './DetectEffect';
+import { RestoreStatEffect } from './RestoreStatEffect';
+import { BoltEffect } from './BoltEffect';
+import { BallEffect } from './BallEffect';
+import { BreathEffect } from './BreathEffect';
 
 /**
  * Registry mapping effect type names to constructors
@@ -68,10 +84,18 @@ const gpEffectRegistry: Record<string, GPEffectConstructor> = {
   cure: CureEffect,
   reduce: ReduceEffect,
   teleportSelf: TeleportSelfEffect,
+  restoreStat: RestoreStatEffect,
+  // Area effects
+  lightArea: LightAreaEffect,
+  detect: DetectEffect,
   // Item targeted
   identify: IdentifyEffect,
   // Symbol targeted
   genocide: GenocideEffect,
+  // Position targeted
+  bolt: BoltEffect,
+  ball: BallEffect,
+  breath: BreathEffect,
 };
 
 /**

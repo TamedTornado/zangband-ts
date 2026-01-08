@@ -20,8 +20,8 @@
     "flags": [],
     "type": "unknown"
   },
-  "blindness_1": {
-    "key": "blindness_1",
+  "food_blindness": {
+    "key": "food_blindness",
     "index": 1,
     "name": "Blindness",
     "symbol": ",",
@@ -296,8 +296,8 @@
     ],
     "type": "food"
   },
-  "weakness_9": {
-    "key": "weakness_9",
+  "food_weakness": {
+    "key": "food_weakness",
     "index": 9,
     "name": "Weakness",
     "symbol": ",",
@@ -352,8 +352,8 @@
     ],
     "type": "food"
   },
-  "restore_constitution_11": {
-    "key": "restore_constitution_11",
+  "food_restore_constitution": {
+    "key": "food_restore_constitution",
     "index": 11,
     "name": "Restore Constitution",
     "symbol": ",",
@@ -416,8 +416,8 @@
     ],
     "type": "food"
   },
-  "stupidity_13": {
-    "key": "stupidity_13",
+  "food_stupidity": {
+    "key": "food_stupidity",
     "index": 13,
     "name": "Stupidity",
     "symbol": ",",
@@ -444,8 +444,8 @@
     ],
     "type": "food"
   },
-  "naivety_14": {
-    "key": "naivety_14",
+  "food_naivety": {
+    "key": "food_naivety",
     "index": 14,
     "name": "Naivety",
     "symbol": ",",
@@ -472,8 +472,8 @@
     ],
     "type": "food"
   },
-  "poison_15": {
-    "key": "poison_15",
+  "food_poison": {
+    "key": "food_poison",
     "index": 15,
     "name": "Poison",
     "symbol": ",",
@@ -571,8 +571,8 @@
     ],
     "type": "food"
   },
-  "restore_strength_18": {
-    "key": "restore_strength_18",
+  "food_restore_strength": {
+    "key": "food_restore_strength",
     "index": 18,
     "name": "Restore Strength",
     "symbol": ",",
@@ -627,8 +627,8 @@
     ],
     "type": "food"
   },
-  "cure_serious_wounds_20": {
-    "key": "cure_serious_wounds_20",
+  "food_cure_serious_wounds": {
+    "key": "food_cure_serious_wounds",
     "index": 20,
     "name": "Cure Serious Wounds",
     "symbol": ",",
@@ -3932,8 +3932,8 @@
     "flags": [],
     "type": "shield"
   },
-  "strength_132": {
-    "key": "strength_132",
+  "ring_strength": {
+    "key": "ring_strength",
     "index": 132,
     "name": "Strength",
     "symbol": "=",
@@ -3961,8 +3961,8 @@
     ],
     "type": "ring"
   },
-  "dexterity_133": {
-    "key": "dexterity_133",
+  "ring_dexterity": {
+    "key": "ring_dexterity",
     "index": 133,
     "name": "Dexterity",
     "symbol": "=",
@@ -3990,8 +3990,8 @@
     ],
     "type": "ring"
   },
-  "constitution_134": {
-    "key": "constitution_134",
+  "ring_constitution": {
+    "key": "ring_constitution",
     "index": 134,
     "name": "Constitution",
     "symbol": "=",
@@ -4019,8 +4019,8 @@
     ],
     "type": "ring"
   },
-  "intelligence_135": {
-    "key": "intelligence_135",
+  "ring_intelligence": {
+    "key": "ring_intelligence",
     "index": 135,
     "name": "Intelligence",
     "symbol": "=",
@@ -4048,8 +4048,8 @@
     ],
     "type": "ring"
   },
-  "speed_136": {
-    "key": "speed_136",
+  "ring_speed": {
+    "key": "ring_speed",
     "index": 136,
     "name": "Speed",
     "symbol": "=",
@@ -4077,8 +4077,8 @@
     ],
     "type": "ring"
   },
-  "sensing_137": {
-    "key": "sensing_137",
+  "ring_sensing": {
+    "key": "ring_sensing",
     "index": 137,
     "name": "Sensing",
     "symbol": "=",
@@ -4106,8 +4106,8 @@
     ],
     "type": "ring"
   },
-  "teleportation_138": {
-    "key": "teleportation_138",
+  "ring_teleportation": {
+    "key": "ring_teleportation",
     "index": 138,
     "name": "Teleportation",
     "symbol": "=",
@@ -4136,8 +4136,8 @@
     ],
     "type": "ring"
   },
-  "slow_digestion_139": {
-    "key": "slow_digestion_139",
+  "ring_slow_digestion": {
+    "key": "ring_slow_digestion",
     "index": 139,
     "name": "Slow Digestion",
     "symbol": "=",
@@ -4195,8 +4195,8 @@
     ],
     "type": "ring"
   },
-  "resist_cold_141": {
-    "key": "resist_cold_141",
+  "ring_resist_cold": {
+    "key": "ring_resist_cold",
     "index": 141,
     "name": "Resist Cold",
     "symbol": "=",
@@ -4316,8 +4316,8 @@
     ],
     "type": "ring"
   },
-  "weakness_145": {
-    "key": "weakness_145",
+  "ring_weakness": {
+    "key": "ring_weakness",
     "index": 145,
     "name": "Weakness",
     "symbol": "=",
@@ -4406,8 +4406,8 @@
     ],
     "type": "ring"
   },
-  "ice_148": {
-    "key": "ice_148",
+  "ring_ice": {
+    "key": "ring_ice",
     "index": 148,
     "name": "Ice",
     "symbol": "=",
@@ -4468,8 +4468,8 @@
     ],
     "type": "ring"
   },
-  "stupidity_150": {
-    "key": "stupidity_150",
+  "ring_stupidity": {
+    "key": "ring_stupidity",
     "index": 150,
     "name": "Stupidity",
     "symbol": "=",
@@ -4576,8 +4576,8 @@
     "flags": [],
     "type": "ring"
   },
-  "aggravate_monster_154": {
-    "key": "aggravate_monster_154",
+  "ring_aggravate_monster": {
+    "key": "ring_aggravate_monster",
     "index": 154,
     "name": "Aggravate Monster",
     "symbol": "=",
@@ -4899,8 +4899,8 @@
     ],
     "type": "amulet"
   },
-  "charisma_164": {
-    "key": "charisma_164",
+  "amulet_charisma": {
+    "key": "amulet_charisma",
     "index": 164,
     "name": "Charisma",
     "symbol": "\"",
@@ -4928,8 +4928,8 @@
     ],
     "type": "amulet"
   },
-  "sensing_165": {
-    "key": "sensing_165",
+  "amulet_sensing": {
+    "key": "amulet_sensing",
     "index": 165,
     "name": "Sensing",
     "symbol": "\"",
@@ -4957,8 +4957,8 @@
     ],
     "type": "amulet"
   },
-  "teleportation_166": {
-    "key": "teleportation_166",
+  "amulet_teleportation": {
+    "key": "amulet_teleportation",
     "index": 166,
     "name": "Teleportation",
     "symbol": "\"",
@@ -4987,8 +4987,8 @@
     ],
     "type": "amulet"
   },
-  "slow_digestion_167": {
-    "key": "slow_digestion_167",
+  "amulet_slow_digestion": {
+    "key": "amulet_slow_digestion",
     "index": 167,
     "name": "Slow Digestion",
     "symbol": "\"",
@@ -5046,8 +5046,8 @@
     ],
     "type": "amulet"
   },
-  "berserk_strength_169": {
-    "key": "berserk_strength_169",
+  "amulet_berserk_strength": {
+    "key": "amulet_berserk_strength",
     "index": 169,
     "name": "Berserk Strength",
     "symbol": "\"",
@@ -5100,8 +5100,8 @@
     "flags": [],
     "type": "hard_armor"
   },
-  "the_magi_171": {
-    "key": "the_magi_171",
+  "amulet_the_magi": {
+    "key": "amulet_the_magi",
     "index": 171,
     "name": "the Magi",
     "symbol": "\"",
@@ -5138,8 +5138,8 @@
     ],
     "type": "amulet"
   },
-  "destruction_172": {
-    "key": "destruction_172",
+  "amulet_destruction": {
+    "key": "amulet_destruction",
     "index": 172,
     "name": "Destruction",
     "symbol": "\"",
@@ -5234,8 +5234,8 @@
     ],
     "type": "scroll"
   },
-  "enchant_armor_175": {
-    "key": "enchant_armor_175",
+  "scroll_of_enchant_armor": {
+    "key": "scroll_of_enchant_armor",
     "index": 175,
     "name": "Enchant Armor",
     "symbol": "?",
@@ -5262,8 +5262,8 @@
     ],
     "type": "scroll"
   },
-  "identify_176": {
-    "key": "identify_176",
+  "scroll_of_identify": {
+    "key": "scroll_of_identify",
     "index": 176,
     "name": "Identify",
     "symbol": "?",
@@ -5309,8 +5309,8 @@
     ],
     "type": "scroll"
   },
-  "identify_177": {
-    "key": "identify_177",
+  "scroll_of_star_identify": {
+    "key": "scroll_of_star_identify",
     "index": 177,
     "name": "*Identify*",
     "symbol": "?",
@@ -5405,8 +5405,8 @@
     ],
     "type": "scroll"
   },
-  "remove_curse_180": {
-    "key": "remove_curse_180",
+  "scroll_of_remove_curse": {
+    "key": "scroll_of_remove_curse",
     "index": 180,
     "name": "Remove Curse",
     "symbol": "?",
@@ -5441,8 +5441,8 @@
     ],
     "type": "scroll"
   },
-  "light_181": {
-    "key": "light_181",
+  "scroll_of_light": {
+    "key": "scroll_of_light",
     "index": 181,
     "name": "Light",
     "symbol": "?",
@@ -5502,8 +5502,8 @@
     ],
     "type": "scroll"
   },
-  "ice_183": {
-    "key": "ice_183",
+  "scroll_of_ice": {
+    "key": "scroll_of_ice",
     "index": 183,
     "name": "Ice",
     "symbol": "?",
@@ -5593,8 +5593,8 @@
     ],
     "type": "scroll"
   },
-  "teleportation_186": {
-    "key": "teleportation_186",
+  "scroll_of_teleportation": {
+    "key": "scroll_of_teleportation",
     "index": 186,
     "name": "Teleportation",
     "symbol": "?",
@@ -5743,8 +5743,8 @@
     ],
     "type": "scroll"
   },
-  "remove_curse_191": {
-    "key": "remove_curse_191",
+  "scroll_of_star_remove_curse": {
+    "key": "scroll_of_star_remove_curse",
     "index": 191,
     "name": "*Remove Curse*",
     "symbol": "?",
@@ -5927,8 +5927,8 @@
     ],
     "type": "shot"
   },
-  "doorstair_location_197": {
-    "key": "doorstair_location_197",
+  "scroll_of_door_stair_location": {
+    "key": "scroll_of_door_stair_location",
     "index": 197,
     "name": "Door/Stair Location",
     "symbol": "?",
@@ -5955,8 +5955,8 @@
     ],
     "type": "scroll"
   },
-  "acquirement_198": {
-    "key": "acquirement_198",
+  "scroll_of_acquirement": {
+    "key": "scroll_of_acquirement",
     "index": 198,
     "name": "Acquirement",
     "symbol": "?",
@@ -5983,8 +5983,8 @@
     ],
     "type": "scroll"
   },
-  "acquirement_199": {
-    "key": "acquirement_199",
+  "scroll_of_star_acquirement": {
+    "key": "scroll_of_star_acquirement",
     "index": 199,
     "name": "*Acquirement*",
     "symbol": "?",
@@ -6043,8 +6043,8 @@
     ],
     "type": "scroll"
   },
-  "detect_invisible_201": {
-    "key": "detect_invisible_201",
+  "scroll_of_detect_invisible": {
+    "key": "scroll_of_detect_invisible",
     "index": 201,
     "name": "Detect Invisible",
     "symbol": "?",
@@ -6071,8 +6071,8 @@
     ],
     "type": "scroll"
   },
-  "aggravate_monster_202": {
-    "key": "aggravate_monster_202",
+  "scroll_of_aggravate_monster": {
+    "key": "scroll_of_aggravate_monster",
     "index": 202,
     "name": "Aggravate Monster",
     "symbol": "?",
@@ -6131,8 +6131,8 @@
     ],
     "type": "scroll"
   },
-  "trapdoor_destruction_204": {
-    "key": "trapdoor_destruction_204",
+  "scroll_of_trap_door_destruction": {
+    "key": "scroll_of_trap_door_destruction",
     "index": 204,
     "name": "Trap/Door Destruction",
     "symbol": "?",
@@ -6219,8 +6219,8 @@
     ],
     "type": "scroll"
   },
-  "genocide_207": {
-    "key": "genocide_207",
+  "scroll_of_genocide": {
+    "key": "scroll_of_genocide",
     "index": 207,
     "name": "Genocide",
     "symbol": "?",
@@ -6247,8 +6247,8 @@
     ],
     "type": "scroll"
   },
-  "darkness_208": {
-    "key": "darkness_208",
+  "scroll_of_darkness": {
+    "key": "scroll_of_darkness",
     "index": 208,
     "name": "Darkness",
     "symbol": "?",
@@ -6275,8 +6275,8 @@
     ],
     "type": "scroll"
   },
-  "protection_from_evil_209": {
-    "key": "protection_from_evil_209",
+  "scroll_of_protection_from_evil": {
+    "key": "scroll_of_protection_from_evil",
     "index": 209,
     "name": "Protection from Evil",
     "symbol": "?",
@@ -6431,8 +6431,8 @@
     ],
     "type": "scroll"
   },
-  "enchant_armor_214": {
-    "key": "enchant_armor_214",
+  "scroll_of_star_enchant_armor": {
+    "key": "scroll_of_star_enchant_armor",
     "index": 214,
     "name": "*Enchant Armor*",
     "symbol": "?",
@@ -6639,8 +6639,8 @@
     ],
     "type": "scroll"
   },
-  "destruction_221": {
-    "key": "destruction_221",
+  "scroll_of_star_destruction": {
+    "key": "scroll_of_star_destruction",
     "index": 221,
     "name": "*Destruction*",
     "symbol": "?",
@@ -6751,8 +6751,8 @@
     ],
     "type": "potion"
   },
-  "strength_225": {
-    "key": "strength_225",
+  "potion_of_strength": {
+    "key": "potion_of_strength",
     "index": 225,
     "name": "Strength",
     "symbol": "!",
@@ -6791,8 +6791,8 @@
     ],
     "type": "potion"
   },
-  "weakness_226": {
-    "key": "weakness_226",
+  "potion_of_weakness": {
+    "key": "potion_of_weakness",
     "index": 226,
     "name": "Weakness",
     "symbol": "!",
@@ -6819,8 +6819,8 @@
     ],
     "type": "potion"
   },
-  "restore_strength_227": {
-    "key": "restore_strength_227",
+  "potion_of_restore_strength": {
+    "key": "potion_of_restore_strength",
     "index": 227,
     "name": "Restore Strength",
     "symbol": "!",
@@ -6847,8 +6847,8 @@
     ],
     "type": "potion"
   },
-  "intelligence_228": {
-    "key": "intelligence_228",
+  "potion_of_intelligence": {
+    "key": "potion_of_intelligence",
     "index": 228,
     "name": "Intelligence",
     "symbol": "!",
@@ -6887,8 +6887,8 @@
     ],
     "type": "potion"
   },
-  "stupidity_229": {
-    "key": "stupidity_229",
+  "potion_of_stupidity": {
+    "key": "potion_of_stupidity",
     "index": 229,
     "name": "Stupidity",
     "symbol": "!",
@@ -6983,8 +6983,8 @@
     ],
     "type": "potion"
   },
-  "naivety_232": {
-    "key": "naivety_232",
+  "potion_of_naivety": {
+    "key": "potion_of_naivety",
     "index": 232,
     "name": "Naivety",
     "symbol": "!",
@@ -7039,8 +7039,8 @@
     ],
     "type": "potion"
   },
-  "charisma_234": {
-    "key": "charisma_234",
+  "potion_of_charisma": {
+    "key": "potion_of_charisma",
     "index": 234,
     "name": "Charisma",
     "symbol": "!",
@@ -7135,8 +7135,8 @@
     ],
     "type": "potion"
   },
-  "curing_237": {
-    "key": "curing_237",
+  "potion_of_curing": {
+    "key": "potion_of_curing",
     "index": 237,
     "name": "Curing",
     "symbol": "!",
@@ -7260,8 +7260,8 @@
     ],
     "type": "potion"
   },
-  "cure_serious_wounds_240": {
-    "key": "cure_serious_wounds_240",
+  "potion_of_cure_serious_wounds": {
+    "key": "potion_of_cure_serious_wounds",
     "index": 240,
     "name": "Cure Serious Wounds",
     "symbol": "!",
@@ -7369,8 +7369,8 @@
     ],
     "type": "potion"
   },
-  "healing_242": {
-    "key": "healing_242",
+  "potion_of_healing": {
+    "key": "potion_of_healing",
     "index": 242,
     "name": "Healing",
     "symbol": "!",
@@ -7431,8 +7431,8 @@
     ],
     "type": "potion"
   },
-  "constitution_243": {
-    "key": "constitution_243",
+  "potion_of_constitution": {
+    "key": "potion_of_constitution",
     "index": 243,
     "name": "Constitution",
     "symbol": "!",
@@ -7534,8 +7534,8 @@
     ],
     "type": "potion"
   },
-  "blindness_246": {
-    "key": "blindness_246",
+  "potion_of_blindness": {
+    "key": "potion_of_blindness",
     "index": 246,
     "name": "Blindness",
     "symbol": "!",
@@ -7604,8 +7604,8 @@
     ],
     "type": "potion"
   },
-  "poison_248": {
-    "key": "poison_248",
+  "potion_of_poison": {
+    "key": "potion_of_poison",
     "index": 248,
     "name": "Poison",
     "symbol": "!",
@@ -7640,8 +7640,8 @@
     ],
     "type": "potion"
   },
-  "speed_249": {
-    "key": "speed_249",
+  "potion_of_speed": {
+    "key": "potion_of_speed",
     "index": 249,
     "name": "Speed",
     "symbol": "!",
@@ -7679,8 +7679,8 @@
     ],
     "type": "potion"
   },
-  "slowness_250": {
-    "key": "slowness_250",
+  "potion_of_slowness": {
+    "key": "potion_of_slowness",
     "index": 250,
     "name": "Slowness",
     "symbol": "!",
@@ -7714,8 +7714,8 @@
     ],
     "type": "potion"
   },
-  "dexterity_251": {
-    "key": "dexterity_251",
+  "potion_of_dexterity": {
+    "key": "potion_of_dexterity",
     "index": 251,
     "name": "Dexterity",
     "symbol": "!",
@@ -7782,8 +7782,8 @@
     ],
     "type": "potion"
   },
-  "restore_constitution_253": {
-    "key": "restore_constitution_253",
+  "potion_of_restore_constitution": {
+    "key": "potion_of_restore_constitution",
     "index": 253,
     "name": "Restore Constitution",
     "symbol": "!",
@@ -7866,8 +7866,8 @@
     ],
     "type": "potion"
   },
-  "enlightenment_256": {
-    "key": "enlightenment_256",
+  "potion_of_enlightenment": {
+    "key": "potion_of_enlightenment",
     "index": 256,
     "name": "Enlightenment",
     "symbol": "!",
@@ -7941,8 +7941,8 @@
     ],
     "type": "potion"
   },
-  "berserk_strength_258": {
-    "key": "berserk_strength_258",
+  "potion_of_berserk_strength": {
+    "key": "potion_of_berserk_strength",
     "index": 258,
     "name": "Berserk Strength",
     "symbol": "!",
@@ -8097,8 +8097,8 @@
     ],
     "type": "potion"
   },
-  "resist_cold_262": {
-    "key": "resist_cold_262",
+  "potion_of_resist_cold": {
+    "key": "potion_of_resist_cold",
     "index": 262,
     "name": "Resist Cold",
     "symbol": "!",
@@ -8140,8 +8140,8 @@
     ],
     "type": "potion"
   },
-  "detect_invisible_263": {
-    "key": "detect_invisible_263",
+  "potion_of_detect_invisible": {
+    "key": "potion_of_detect_invisible",
     "index": 263,
     "name": "Detect Invisible",
     "symbol": "!",
@@ -8307,8 +8307,8 @@
     ],
     "type": "potion"
   },
-  "resistance_268": {
-    "key": "resistance_268",
+  "potion_of_resistance": {
+    "key": "potion_of_resistance",
     "index": 268,
     "name": "Resistance",
     "symbol": "!",
@@ -8374,8 +8374,8 @@
     ],
     "type": "potion"
   },
-  "light_269": {
-    "key": "light_269",
+  "wand_of_light": {
+    "key": "wand_of_light",
     "index": 269,
     "name": "Light",
     "symbol": "-",
@@ -8398,7 +8398,13 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 2
+      }
+    ]
   },
   "tame_monster": {
     "key": "tame_monster",
@@ -8426,8 +8432,8 @@
     "flags": [],
     "type": "wand"
   },
-  "frost_bolts_271": {
-    "key": "frost_bolts_271",
+  "wand_of_frost_bolts": {
+    "key": "wand_of_frost_bolts",
     "index": 271,
     "name": "Frost Bolts",
     "symbol": "-",
@@ -8458,10 +8464,13 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "bolt", "dice": "6d8", "element": "cold", "target": "position" }
+    ]
   },
-  "fire_bolts_272": {
-    "key": "fire_bolts_272",
+  "wand_of_fire_bolts": {
+    "key": "wand_of_fire_bolts",
     "index": 272,
     "name": "Fire Bolts",
     "symbol": "-",
@@ -8492,7 +8501,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "bolt", "dice": "10d8", "element": "fire", "target": "position" }
+    ]
   },
   "stone_to_mud": {
     "key": "stone_to_mud",
@@ -8524,8 +8536,8 @@
     "flags": [],
     "type": "wand"
   },
-  "polymorph_274": {
-    "key": "polymorph_274",
+  "wand_of_polymorph": {
+    "key": "wand_of_polymorph",
     "index": 274,
     "name": "Polymorph",
     "symbol": "-",
@@ -8602,8 +8614,8 @@
     "flags": [],
     "type": "wand"
   },
-  "slow_monster_277": {
-    "key": "slow_monster_277",
+  "wand_of_slow_monster": {
+    "key": "wand_of_slow_monster",
     "index": 277,
     "name": "Slow Monster",
     "symbol": "-",
@@ -8654,8 +8666,8 @@
     "flags": [],
     "type": "wand"
   },
-  "sleep_monster_279": {
-    "key": "sleep_monster_279",
+  "wand_of_sleep_monster": {
+    "key": "wand_of_sleep_monster",
     "index": 279,
     "name": "Sleep Monster",
     "symbol": "-",
@@ -8680,8 +8692,8 @@
     "flags": [],
     "type": "wand"
   },
-  "drain_life_280": {
-    "key": "drain_life_280",
+  "wand_of_drain_life": {
+    "key": "wand_of_drain_life",
     "index": 280,
     "name": "Drain Life",
     "symbol": "-",
@@ -8706,8 +8718,8 @@
     "flags": [],
     "type": "wand"
   },
-  "trapdoor_destruction_281": {
-    "key": "trapdoor_destruction_281",
+  "wand_of_trap_door_destruction": {
+    "key": "wand_of_trap_door_destruction",
     "index": 281,
     "name": "Trap/Door Destruction",
     "symbol": "-",
@@ -8756,7 +8768,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "bolt", "dice": "2d6", "element": "magic", "target": "position" }
+    ]
   },
   "clone_monster": {
     "key": "clone_monster",
@@ -8814,8 +8829,8 @@
     "flags": [],
     "type": "wand"
   },
-  "teleport_other_285": {
-    "key": "teleport_other_285",
+  "wand_of_teleport_other": {
+    "key": "wand_of_teleport_other",
     "index": 285,
     "name": "Teleport Other",
     "symbol": "-",
@@ -8840,8 +8855,8 @@
     "flags": [],
     "type": "wand"
   },
-  "disarming_286": {
-    "key": "disarming_286",
+  "wand_of_disarming": {
+    "key": "wand_of_disarming",
     "index": 286,
     "name": "Disarming",
     "symbol": "-",
@@ -8866,8 +8881,8 @@
     "flags": [],
     "type": "wand"
   },
-  "lightning_balls_287": {
-    "key": "lightning_balls_287",
+  "wand_of_lightning_balls": {
+    "key": "wand_of_lightning_balls",
     "index": 287,
     "name": "Lightning Balls",
     "symbol": "-",
@@ -8896,10 +8911,13 @@
     "flags": [
       "IGNORE_ELEC"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "ball", "damage": 75, "element": "lightning", "radius": 2, "target": "position" }
+    ]
   },
-  "cold_balls_288": {
-    "key": "cold_balls_288",
+  "wand_of_cold_balls": {
+    "key": "wand_of_cold_balls",
     "index": 288,
     "name": "Cold Balls",
     "symbol": "-",
@@ -8928,10 +8946,13 @@
     "flags": [
       "IGNORE_COLD"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "ball", "damage": 100, "element": "cold", "radius": 2, "target": "position" }
+    ]
   },
-  "fire_balls_289": {
-    "key": "fire_balls_289",
+  "wand_of_fire_balls": {
+    "key": "wand_of_fire_balls",
     "index": 289,
     "name": "Fire Balls",
     "symbol": "-",
@@ -8960,7 +8981,10 @@
     "flags": [
       "IGNORE_FIRE"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "ball", "damage": 150, "element": "fire", "radius": 2, "target": "position" }
+    ]
   },
   "stinking_cloud": {
     "key": "stinking_cloud",
@@ -8986,10 +9010,13 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "ball", "damage": 15, "element": "poison", "radius": 2, "target": "position" }
+    ]
   },
-  "acid_balls_291": {
-    "key": "acid_balls_291",
+  "wand_of_acid_balls": {
+    "key": "wand_of_acid_balls",
     "index": 291,
     "name": "Acid Balls",
     "symbol": "-",
@@ -9018,7 +9045,10 @@
     "flags": [
       "IGNORE_ACID"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "ball", "damage": 125, "element": "acid", "radius": 2, "target": "position" }
+    ]
   },
   "wonder": {
     "key": "wonder",
@@ -9083,8 +9113,8 @@
     ],
     "type": "arrow"
   },
-  "acid_bolts_294": {
-    "key": "acid_bolts_294",
+  "wand_of_acid_bolts": {
+    "key": "wand_of_acid_bolts",
     "index": 294,
     "name": "Acid Bolts",
     "symbol": "-",
@@ -9115,7 +9145,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "bolt", "dice": "6d8", "element": "acid", "target": "position" }
+    ]
   },
   "dragons_flame": {
     "key": "dragons_flame",
@@ -9150,7 +9183,10 @@
       "IGNORE_FIRE",
       "IGNORE_COLD"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "ball", "damage": 250, "element": "fire", "radius": 3, "target": "position" }
+    ]
   },
   "dragons_frost": {
     "key": "dragons_frost",
@@ -9185,7 +9221,10 @@
       "IGNORE_FIRE",
       "IGNORE_COLD"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "ball", "damage": 200, "element": "cold", "radius": 3, "target": "position" }
+    ]
   },
   "dragons_breath": {
     "key": "dragons_breath",
@@ -9284,8 +9323,8 @@
     ],
     "type": "wand"
   },
-  "trap_location_300": {
-    "key": "trap_location_300",
+  "staff_of_trap_location": {
+    "key": "staff_of_trap_location",
     "index": 300,
     "name": "Trap Location",
     "symbol": "_",
@@ -9308,7 +9347,13 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "traps"
+      }
+    ]
   },
   "treasure_location": {
     "key": "treasure_location",
@@ -9334,7 +9379,13 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "treasure"
+      }
+    ]
   },
   "object_location": {
     "key": "object_location",
@@ -9360,10 +9411,16 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "items"
+      }
+    ]
   },
-  "teleportation_303": {
-    "key": "teleportation_303",
+  "staff_of_teleportation": {
+    "key": "staff_of_teleportation",
     "index": 303,
     "name": "Teleportation",
     "symbol": "_",
@@ -9386,7 +9443,13 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "teleportSelf",
+        "range": 100
+      }
+    ]
   },
   "earthquakes": {
     "key": "earthquakes",
@@ -9444,8 +9507,8 @@
     "flags": [],
     "type": "staff"
   },
-  "light_306": {
-    "key": "light_306",
+  "staff_of_light": {
+    "key": "staff_of_light",
     "index": 306,
     "name": "Light",
     "symbol": "_",
@@ -9468,10 +9531,16 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 2
+      }
+    ]
   },
-  "destruction_307": {
-    "key": "destruction_307",
+  "staff_of_star_destruction": {
+    "key": "staff_of_star_destruction",
     "index": 307,
     "name": "*Destruction*",
     "symbol": "_",
@@ -9498,7 +9567,12 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "genocide"
+      }
+    ]
   },
   "starlight": {
     "key": "starlight",
@@ -9524,7 +9598,13 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 5
+      }
+    ]
   },
   "haste_monsters": {
     "key": "haste_monsters",
@@ -9604,8 +9684,8 @@
     "flags": [],
     "type": "staff"
   },
-  "cure_light_wounds_312": {
-    "key": "cure_light_wounds_312",
+  "staff_of_cure_light_wounds": {
+    "key": "staff_of_cure_light_wounds",
     "index": 312,
     "name": "Cure Light Wounds",
     "symbol": "_",
@@ -9628,10 +9708,21 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "heal",
+        "dice": "2d8"
+      },
+      {
+        "type": "reduce",
+        "status": "cut",
+        "amount": 10
+      }
+    ]
   },
-  "detect_invisible_313": {
-    "key": "detect_invisible_313",
+  "staff_of_detect_invisible": {
+    "key": "staff_of_detect_invisible",
     "index": 313,
     "name": "Detect Invisible",
     "symbol": "_",
@@ -9654,10 +9745,16 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "invisible"
+      }
+    ]
   },
-  "speed_314": {
-    "key": "speed_314",
+  "staff_of_speed": {
+    "key": "staff_of_speed",
     "index": 314,
     "name": "Speed",
     "symbol": "_",
@@ -9680,10 +9777,17 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "haste",
+        "duration": "1d20+20"
+      }
+    ]
   },
-  "slowness_315": {
-    "key": "slowness_315",
+  "staff_of_slowness": {
+    "key": "staff_of_slowness",
     "index": 315,
     "name": "Slowness",
     "symbol": "_",
@@ -9706,10 +9810,17 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "slow",
+        "duration": "1d20+15"
+      }
+    ]
   },
-  "doorstair_location_316": {
-    "key": "doorstair_location_316",
+  "staff_of_door_stair_location": {
+    "key": "staff_of_door_stair_location",
     "index": 316,
     "name": "Door/Stair Location",
     "symbol": "_",
@@ -9732,10 +9843,19 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": [
+          "doors",
+          "stairs"
+        ]
+      }
+    ]
   },
-  "remove_curse_317": {
-    "key": "remove_curse_317",
+  "staff_of_remove_curse": {
+    "key": "staff_of_remove_curse",
     "index": 317,
     "name": "Remove Curse",
     "symbol": "_",
@@ -9758,7 +9878,12 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "removeCurse"
+      }
+    ]
   },
   "detect_evil": {
     "key": "detect_evil",
@@ -9784,10 +9909,16 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "evil"
+      }
+    ]
   },
-  "curing_319": {
-    "key": "curing_319",
+  "staff_of_curing": {
+    "key": "staff_of_curing",
     "index": 319,
     "name": "Curing",
     "symbol": "_",
@@ -9810,7 +9941,30 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "poisoned"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      },
+      {
+        "type": "cure",
+        "status": "stun"
+      },
+      {
+        "type": "reduce",
+        "status": "cut",
+        "amount": 9999
+      }
+    ]
   },
   "dispel_evil": {
     "key": "dispel_evil",
@@ -9838,8 +9992,8 @@
     "flags": [],
     "type": "staff"
   },
-  "probing_321": {
-    "key": "probing_321",
+  "staff_of_probing": {
+    "key": "staff_of_probing",
     "index": 321,
     "name": "Probing",
     "symbol": "_",
@@ -9862,10 +10016,16 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "monsters"
+      }
+    ]
   },
-  "darkness_322": {
-    "key": "darkness_322",
+  "staff_of_darkness": {
+    "key": "staff_of_darkness",
     "index": 322,
     "name": "Darkness",
     "symbol": "_",
@@ -9888,10 +10048,17 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 3,
+        "darken": true
+      }
+    ]
   },
-  "genocide_323": {
-    "key": "genocide_323",
+  "staff_of_genocide": {
+    "key": "staff_of_genocide",
     "index": 323,
     "name": "Genocide",
     "symbol": "_",
@@ -9914,7 +10081,12 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "genocide"
+      }
+    ]
   },
   "power": {
     "key": "power",
@@ -9942,8 +10114,8 @@
     "flags": [],
     "type": "staff"
   },
-  "the_magi_325": {
-    "key": "the_magi_325",
+  "staff_of_the_magi": {
+    "key": "staff_of_the_magi",
     "index": 325,
     "name": "the Magi",
     "symbol": "_",
@@ -9966,10 +10138,19 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "restoreStat",
+        "stat": [
+          "int",
+          "wis"
+        ]
+      }
+    ]
   },
-  "perception_326": {
-    "key": "perception_326",
+  "staff_of_perception": {
+    "key": "staff_of_perception",
     "index": 326,
     "name": "Perception",
     "symbol": "_",
@@ -10000,7 +10181,12 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "identify"
+      }
+    ]
   },
   "holiness": {
     "key": "holiness",
@@ -10028,8 +10214,8 @@
     "flags": [],
     "type": "staff"
   },
-  "enlightenment_328": {
-    "key": "enlightenment_328",
+  "staff_of_enlightenment": {
+    "key": "staff_of_enlightenment",
     "index": 328,
     "name": "Enlightenment",
     "symbol": "_",
@@ -10052,10 +10238,16 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "all"
+      }
+    ]
   },
-  "healing_329": {
-    "key": "healing_329",
+  "staff_of_healing": {
+    "key": "staff_of_healing",
     "index": 329,
     "name": "Healing",
     "symbol": "_",
@@ -10078,7 +10270,13 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      {
+        "type": "heal",
+        "dice": "300"
+      }
+    ]
   },
   "book_of_common_prayer": {
     "key": "book_of_common_prayer",
@@ -10699,8 +10897,8 @@
     ],
     "type": "rod"
   },
-  "doorstair_location_351": {
-    "key": "doorstair_location_351",
+  "rod_of_door_stair_location": {
+    "key": "rod_of_door_stair_location",
     "index": 351,
     "name": "Door/Stair Location",
     "symbol": "-",
@@ -10725,10 +10923,19 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": [
+          "doors",
+          "stairs"
+        ]
+      }
+    ]
   },
-  "trap_location_352": {
-    "key": "trap_location_352",
+  "rod_of_trap_location": {
+    "key": "rod_of_trap_location",
     "index": 352,
     "name": "Trap Location",
     "symbol": "-",
@@ -10753,10 +10960,16 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "traps"
+      }
+    ]
   },
-  "probing_353": {
-    "key": "probing_353",
+  "rod_of_probing": {
+    "key": "rod_of_probing",
     "index": 353,
     "name": "Probing",
     "symbol": "-",
@@ -10781,7 +10994,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "monsters"
+      }
+    ]
   },
   "recall": {
     "key": "recall",
@@ -10841,10 +11060,16 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 3
+      }
+    ]
   },
-  "light_356": {
-    "key": "light_356",
+  "rod_of_light": {
+    "key": "rod_of_light",
     "index": 356,
     "name": "Light",
     "symbol": "-",
@@ -10873,7 +11098,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 2
+      }
+    ]
   },
   "lightning_bolts": {
     "key": "lightning_bolts",
@@ -10905,10 +11136,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "bolt", "dice": "5d8", "element": "lightning", "target": "position" }
+    ]
   },
-  "frost_bolts_358": {
-    "key": "frost_bolts_358",
+  "rod_of_frost_bolts": {
+    "key": "rod_of_frost_bolts",
     "index": 358,
     "name": "Frost Bolts",
     "symbol": "-",
@@ -10937,10 +11171,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "bolt", "dice": "6d8", "element": "cold", "target": "position" }
+    ]
   },
-  "fire_bolts_359": {
-    "key": "fire_bolts_359",
+  "rod_of_fire_bolts": {
+    "key": "rod_of_fire_bolts",
     "index": 359,
     "name": "Fire Bolts",
     "symbol": "-",
@@ -10969,10 +11206,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "bolt", "dice": "10d8", "element": "fire", "target": "position" }
+    ]
   },
-  "polymorph_360": {
-    "key": "polymorph_360",
+  "rod_of_polymorph": {
+    "key": "rod_of_polymorph",
     "index": 360,
     "name": "Polymorph",
     "symbol": "-",
@@ -10999,8 +11239,8 @@
     ],
     "type": "rod"
   },
-  "slow_monster_361": {
-    "key": "slow_monster_361",
+  "rod_of_slow_monster": {
+    "key": "rod_of_slow_monster",
     "index": 361,
     "name": "Slow Monster",
     "symbol": "-",
@@ -11027,8 +11267,8 @@
     ],
     "type": "rod"
   },
-  "sleep_monster_362": {
-    "key": "sleep_monster_362",
+  "rod_of_sleep_monster": {
+    "key": "rod_of_sleep_monster",
     "index": 362,
     "name": "Sleep Monster",
     "symbol": "-",
@@ -11055,8 +11295,8 @@
     ],
     "type": "rod"
   },
-  "drain_life_363": {
-    "key": "drain_life_363",
+  "rod_of_drain_life": {
+    "key": "rod_of_drain_life",
     "index": 363,
     "name": "Drain Life",
     "symbol": "-",
@@ -11087,8 +11327,8 @@
     ],
     "type": "rod"
   },
-  "teleport_other_364": {
-    "key": "teleport_other_364",
+  "rod_of_teleport_other": {
+    "key": "rod_of_teleport_other",
     "index": 364,
     "name": "Teleport Other",
     "symbol": "-",
@@ -11119,8 +11359,8 @@
     ],
     "type": "rod"
   },
-  "disarming_365": {
-    "key": "disarming_365",
+  "rod_of_disarming": {
+    "key": "rod_of_disarming",
     "index": 365,
     "name": "Disarming",
     "symbol": "-",
@@ -11151,8 +11391,8 @@
     ],
     "type": "rod"
   },
-  "lightning_balls_366": {
-    "key": "lightning_balls_366",
+  "rod_of_lightning_balls": {
+    "key": "rod_of_lightning_balls",
     "index": 366,
     "name": "Lightning Balls",
     "symbol": "-",
@@ -11181,10 +11421,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "ball", "damage": 75, "element": "lightning", "radius": 2, "target": "position" }
+    ]
   },
-  "cold_balls_367": {
-    "key": "cold_balls_367",
+  "rod_of_cold_balls": {
+    "key": "rod_of_cold_balls",
     "index": 367,
     "name": "Cold Balls",
     "symbol": "-",
@@ -11213,10 +11456,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "ball", "damage": 100, "element": "cold", "radius": 2, "target": "position" }
+    ]
   },
-  "fire_balls_368": {
-    "key": "fire_balls_368",
+  "rod_of_fire_balls": {
+    "key": "rod_of_fire_balls",
     "index": 368,
     "name": "Fire Balls",
     "symbol": "-",
@@ -11245,10 +11491,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "ball", "damage": 150, "element": "fire", "radius": 2, "target": "position" }
+    ]
   },
-  "acid_balls_369": {
-    "key": "acid_balls_369",
+  "rod_of_acid_balls": {
+    "key": "rod_of_acid_balls",
     "index": 369,
     "name": "Acid Balls",
     "symbol": "-",
@@ -11277,10 +11526,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "ball", "damage": 125, "element": "acid", "radius": 2, "target": "position" }
+    ]
   },
-  "acid_bolts_370": {
-    "key": "acid_bolts_370",
+  "rod_of_acid_bolts": {
+    "key": "rod_of_acid_bolts",
     "index": 370,
     "name": "Acid Bolts",
     "symbol": "-",
@@ -11309,10 +11561,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "bolt", "dice": "6d8", "element": "acid", "target": "position" }
+    ]
   },
-  "enlightenment_371": {
-    "key": "enlightenment_371",
+  "rod_of_enlightenment": {
+    "key": "rod_of_enlightenment",
     "index": 371,
     "name": "Enlightenment",
     "symbol": "-",
@@ -11341,10 +11596,16 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "all"
+      }
+    ]
   },
-  "perception_372": {
-    "key": "perception_372",
+  "rod_of_perception": {
+    "key": "rod_of_perception",
     "index": 372,
     "name": "Perception",
     "symbol": "-",
@@ -11373,10 +11634,15 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "identify"
+      }
+    ]
   },
-  "curing_373": {
-    "key": "curing_373",
+  "rod_of_curing": {
+    "key": "rod_of_curing",
     "index": 373,
     "name": "Curing",
     "symbol": "-",
@@ -11405,10 +11671,33 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "poisoned"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      },
+      {
+        "type": "cure",
+        "status": "stun"
+      },
+      {
+        "type": "reduce",
+        "status": "cut",
+        "amount": 9999
+      }
+    ]
   },
-  "healing_374": {
-    "key": "healing_374",
+  "rod_of_healing": {
+    "key": "rod_of_healing",
     "index": 374,
     "name": "Healing",
     "symbol": "-",
@@ -11437,7 +11726,13 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "heal",
+        "dice": "300"
+      }
+    ]
   },
   "detection": {
     "key": "detection",
@@ -11469,7 +11764,19 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": [
+          "monsters",
+          "traps",
+          "doors",
+          "stairs",
+          "items"
+        ]
+      }
+    ]
   },
   "restoration": {
     "key": "restoration",
@@ -11501,10 +11808,16 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "restoreStat",
+        "stat": "all"
+      }
+    ]
   },
-  "speed_377": {
-    "key": "speed_377",
+  "rod_of_speed": {
+    "key": "rod_of_speed",
     "index": 377,
     "name": "Speed",
     "symbol": "-",
@@ -11533,7 +11846,14 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "haste",
+        "duration": "1d20+20"
+      }
+    ]
   },
   "pesticide": {
     "key": "pesticide",
@@ -12805,8 +13125,8 @@
     ],
     "type": "potion"
   },
-  "healing_419": {
-    "key": "healing_419",
+  "potion_of_star_healing": {
+    "key": "potion_of_star_healing",
     "index": 419,
     "name": "*Healing*",
     "symbol": "!",
@@ -12961,8 +13281,8 @@
     ],
     "type": "potion"
   },
-  "enlightenment_422": {
-    "key": "enlightenment_422",
+  "potion_of_star_enlightenment": {
+    "key": "potion_of_star_enlightenment",
     "index": 422,
     "name": "*Enlightenment*",
     "symbol": "!",
@@ -13409,8 +13729,8 @@
     ],
     "type": "ring"
   },
-  "cure_light_wounds_437": {
-    "key": "cure_light_wounds_437",
+  "potion_of_cure_light_wounds": {
+    "key": "potion_of_cure_light_wounds",
     "index": 437,
     "name": "Cure Light Wounds",
     "symbol": "!",
@@ -14541,8 +14861,8 @@
     ],
     "type": "amulet"
   },
-  "resistance_523": {
-    "key": "resistance_523",
+  "amulet_resistance": {
+    "key": "amulet_resistance",
     "index": 523,
     "name": "Resistance",
     "symbol": "\"",
@@ -16237,8 +16557,8 @@
     ],
     "type": "ring"
   },
-  "protection_from_evil_587": {
-    "key": "protection_from_evil_587",
+  "amulet_protection_from_evil": {
+    "key": "amulet_protection_from_evil",
     "index": 587,
     "name": "Protection from Evil",
     "symbol": "\"",
