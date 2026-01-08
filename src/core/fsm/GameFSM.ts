@@ -138,6 +138,7 @@ export class GameFSM {
     if (this.data.messages.length > 100) {
       this.data.messages = this.data.messages.slice(-100);
     }
+    this.notify();
   }
 
   /** Initialize fresh game data */

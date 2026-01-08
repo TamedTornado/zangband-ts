@@ -57,8 +57,7 @@ export class ItemSelectionState implements State {
       case 'letterSelect':
         return this.handleLetterSelect(fsm, action.letter);
       case 'showList':
-        this.showList = !this.showList;
-        fsm.notify();
+        this.displayItemList(fsm);
         return true;
       case 'cancelTarget':
         fsm.addMessage('Cancelled.', 'info');
@@ -108,5 +107,22 @@ export class ItemSelectionState implements State {
 
   isShowingList(): boolean {
     return this.showList;
+  }
+
+  private displayItemList(fsm: GameFSM): void {
+    const { player } = fsm.data;
+    const validIndices = this.getValidItemIndices(fsm);
+
+    if (validIndices.length === 0) {
+      fsm.addMessage('No items available.', 'info');
+      return;
+    }
+
+    fsm.addMessage('Available items:', 'info');
+    for (const index of validIndices) {
+      const item = player.inventory[index];
+      const letter = String.fromCharCode('a'.charCodeAt(0) + index);
+      fsm.addMessage(`  ${letter}) ${item.name}`, 'info');
+    }
   }
 }
