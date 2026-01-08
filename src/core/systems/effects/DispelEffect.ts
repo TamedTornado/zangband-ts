@@ -61,8 +61,8 @@ export class DispelEffect extends SelfGPEffect {
         ? context.getMonsterInfo(monster)
         : { name: 'creature', flags: [] };
 
-      // Check if monster has the target flag
-      if (!monsterInfo.flags.includes(this.targetFlag)) {
+      // Check if monster has the target flag (skip check if targetFlag is 'ALL')
+      if (this.targetFlag !== 'ALL' && !monsterInfo.flags.includes(this.targetFlag)) {
         continue;
       }
 

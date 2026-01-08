@@ -607,16 +607,32 @@ const defaultBindings: Record<string, GameAction> = {
 - [x] `earthquake` - collapse nearby walls randomly
 
 *Special Effects:*
-- [ ] `wonder` - random effect from pool
-- [ ] `summon` - summon monsters (cursed for staff)
+- [x] `wonder` - Wand of Wonder: picks 1 of 20+ random effects:
+  - healMonster, hasteMonster, cloneMonster, teleportOther, disarm, trapDoorDestruction
+  - stoneToMud, lightArea, sleepMonster, slowMonster, confuseMonster, scareMonster
+  - drainLife (150), polymorph, stinkingCloud (15), magicMissile (2d6)
+  - acidBolt (6d8), charmMonster (power 45), fireBolt (10d8), coldBolt (6d8)
+  - acidBall (125), electricBall (75), fireBall (150), coldBall (100)
+- [x] `summon` - Staff of Summoning: summon 1-4 hostile monsters near player
+  - Uses summon_specific() with friendly=false, pet=false
+  - Monster level = (base_level + depth) / 2 + 5
+  - Spawns within 1-2 tiles of player on empty floor
 - [x] `recall` - toggle word of recall (applies recalling status)
-- [ ] `power` - major damage + self damage
+- [x] `power` - Staff of Power: dispel_monsters(300) - dispels all monsters in LOS
+  - Very high level (95), powerful dispel effect
 - [x] `holiness` - dispel evil (300) + heal (50) + cure effects (Staff of Holiness)
 - [x] `dragons_breath` - breath 200 fire damage radius 3 (Wand of Dragon's Breath)
 - [x] `annihilation` - ball 175 disintegrate damage radius 2 (Wand of Annihilation)
 - [x] `rockets` - ball 250 rocket damage radius 2 (Wand of Rockets)
-- [ ] `havoc` - call_chaos (complex, not yet implemented)
-- [ ] `pesticide` - kill weak monsters
+- [x] `havoc` - Rod of Havoc: call_chaos() - extremely chaotic:
+  - Picks 1 of 30 chaos effect types (elec, pois, acid, cold, fire, missile, plasma,
+    holy_fire, water, lite, dark, force, inertia, mana, meteor, ice, chaos, nether,
+    disenchant, shards, sound, nexus, confusion, time, gravity, rocket, nuke, hell_fire, disintegrate)
+  - 16.7% chance: omnidirectional (8 directions, 75 damage each)
+  - 33.3% chance: large ball radius 8 centered on player (300 damage)
+  - 50% chance: directed beam (150) or ball (150, radius 3+level/35)
+- [x] `pesticide` - Rod of Pesticide: poison ball, 8 damage, radius 3
+  - Weak effect for killing vermin/weak creatures
 
 **FSM Modal/Input Refactoring (DONE)**
 - [x] Push/pop state stack for child states with result passing

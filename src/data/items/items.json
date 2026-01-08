@@ -9154,7 +9154,10 @@
       "IGNORE_FIRE",
       "IGNORE_COLD"
     ],
-    "type": "wand"
+    "type": "wand",
+    "effects": [
+      { "type": "wonder", "target": "position" }
+    ]
   },
   "flight_arrow": {
     "key": "flight_arrow",
@@ -9592,7 +9595,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      { "type": "summon", "minCount": 1, "maxCount": 4 }
+    ]
   },
   "staff_of_light": {
     "key": "staff_of_light",
@@ -10211,7 +10217,10 @@
     "toDam": 0,
     "toAc": 0,
     "flags": [],
-    "type": "staff"
+    "type": "staff",
+    "effects": [
+      { "type": "dispel", "damage": "300", "targetFlag": "ALL", "radius": 20 }
+    ]
   },
   "staff_of_the_magi": {
     "key": "staff_of_the_magi",
@@ -11002,7 +11011,10 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "havoc" }
+    ]
   },
   "rod_of_door_stair_location": {
     "key": "rod_of_door_stair_location",
@@ -12023,7 +12035,10 @@
     "flags": [
       "EASY_KNOW"
     ],
-    "type": "rod"
+    "type": "rod",
+    "effects": [
+      { "type": "ball", "damage": 8, "element": "poison", "radius": 3, "target": "position" }
+    ]
   },
   "call_of_the_wild": {
     "key": "call_of_the_wild",

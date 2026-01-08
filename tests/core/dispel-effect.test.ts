@@ -325,4 +325,72 @@ describe('DispelEffect', () => {
       expect(farEvil.hp).toBe(100); // Not hit - outside radius
     });
   });
+
+  describe('execute - dispel ALL (Staff of Power)', () => {
+    it('damages all monsters regardless of flags when targetFlag is ALL', () => {
+      const effect = new DispelEffect({
+        type: 'dispel',
+        damage: '100',
+        targetFlag: 'ALL',
+        radius: 20,
+      });
+      const actor = createActor(50, 50);
+      const evilMonster = createMonster(52, 50, 200);
+      const goodMonster = createMonster(54, 50, 200);
+      const neutralMonster = createMonster(56, 50, 200);
+      const level = createMockLevel([evilMonster, goodMonster, neutralMonster]);
+
+      const getMonsterInfo = (m: Monster): MonsterInfo => {
+        if (m === evilMonster) return { name: 'demon', flags: ['EVIL'] };
+        if (m === goodMonster) return { name: 'unicorn', flags: ['GOOD'] };
+        return { name: 'animal', flags: [] };
+      };
+
+      const context: GPEffectContext = {
+        actor,
+        level: level as any,
+        rng: RNG,
+        getMonsterInfo,
+      };
+
+      const result = effect.execute(context);
+
+      // All monsters should be hit
+      expect(evilMonster.hp).toBe(100); // 200 - 100
+      expect(goodMonster.hp).toBe(100); // 200 - 100
+      expect(neutralMonster.hp).toBe(100); // 200 - 100
+      expect(result.damageDealt).toBe(300);
+    });
+
+    it('kills weak monsters with high damage dispel all', () => {
+      const effect = new DispelEffect({
+        type: 'dispel',
+        damage: '300',
+        targetFlag: 'ALL',
+        radius: 20,
+      });
+      const actor = createActor(50, 50);
+      const weakMonster = createMonster(52, 50, 50);
+      const strongMonster = createMonster(54, 50, 500);
+      const level = createMockLevel([weakMonster, strongMonster]);
+
+      const getMonsterInfo = (_m: Monster): MonsterInfo => ({
+        name: 'creature',
+        flags: [],
+      });
+
+      const context: GPEffectContext = {
+        actor,
+        level: level as any,
+        rng: RNG,
+        getMonsterInfo,
+      };
+
+      const result = effect.execute(context);
+
+      expect(weakMonster.isDead).toBe(true);
+      expect(strongMonster.hp).toBe(200); // 500 - 300
+      expect(result.messages.some(m => m.includes('destroyed'))).toBe(true);
+    });
+  });
 });

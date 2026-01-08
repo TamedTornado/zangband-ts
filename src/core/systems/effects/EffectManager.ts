@@ -37,6 +37,9 @@ import { HealMonsterEffect } from './HealMonsterEffect';
 import { HasteMonsterEffect } from './HasteMonsterEffect';
 import { CloneMonsterEffect } from './CloneMonsterEffect';
 import { TameMonsterEffect } from './TameMonsterEffect';
+import { SummonEffect } from './SummonEffect';
+import { WonderEffect } from './WonderEffect';
+import { HavocEffect } from './HavocEffect';
 
 /**
  * Default effect registry
@@ -80,6 +83,12 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   cloneMonster: CloneMonsterEffect,
   // Monster charm effects
   tameMonster: TameMonsterEffect,
+  // Summoning effects
+  summon: SummonEffect,
+  // Random effects
+  wonder: WonderEffect,
+  // Chaos effects
+  havoc: HavocEffect,
 };
 
 export class EffectManager {

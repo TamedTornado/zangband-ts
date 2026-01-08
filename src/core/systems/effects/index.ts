@@ -63,6 +63,9 @@ export { HealMonsterEffect } from './HealMonsterEffect';
 export { HasteMonsterEffect } from './HasteMonsterEffect';
 export { CloneMonsterEffect } from './CloneMonsterEffect';
 export { TameMonsterEffect } from './TameMonsterEffect';
+export { SummonEffect } from './SummonEffect';
+export { WonderEffect } from './WonderEffect';
+export { HavocEffect } from './HavocEffect';
 
 // Legacy exports for backward compatibility
 export {
