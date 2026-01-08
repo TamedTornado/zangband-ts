@@ -3,7 +3,6 @@
     "key": "of_galadriel",
     "index": 1,
     "name": "of Galadriel",
-    "tval": 39,
     "sval": 4,
     "pval": 1,
     "depth": 20,
@@ -20,13 +19,13 @@
       "SENSE",
       "INSTA_ART",
       "LITE"
-    ]
+    ],
+    "type": "light"
   },
   "of_elendil": {
     "key": "of_elendil",
     "index": 2,
     "name": "of Elendil",
-    "tval": 39,
     "sval": 5,
     "pval": 1,
     "depth": 52,
@@ -45,13 +44,13 @@
       "INSTA_ART",
       "SPEED",
       "LITE"
-    ]
+    ],
+    "type": "light"
   },
   "of_judgement": {
     "key": "of_judgement",
     "index": 3,
     "name": "of Judgement",
-    "tval": 39,
     "sval": 6,
     "pval": 3,
     "depth": 80,
@@ -74,13 +73,13 @@
       "WIS",
       "INT",
       "LITE"
-    ]
+    ],
+    "type": "light"
   },
   "of_carlammas": {
     "key": "of_carlammas",
     "index": 4,
     "name": "of Carlammas",
-    "tval": 40,
     "sval": 10,
     "pval": 2,
     "depth": 80,
@@ -98,13 +97,13 @@
       "ACTIVATE",
       "RES_FIRE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "amulet"
   },
   "of_ingwe": {
     "key": "of_ingwe",
     "index": 5,
     "name": "of Ingwe",
-    "tval": 40,
     "sval": 11,
     "pval": 3,
     "depth": 95,
@@ -128,13 +127,13 @@
       "RES_COLD",
       "RES_ELEC",
       "INSTA_ART"
-    ]
+    ],
+    "type": "amulet"
   },
   "of_the_dwarves_6": {
     "key": "of_the_dwarves_6",
     "index": 6,
     "name": "of the Dwarves",
-    "tval": 40,
     "sval": 12,
     "pval": 3,
     "depth": 100,
@@ -156,13 +155,13 @@
       "REGEN",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "amulet"
   },
   "of_sawall_7": {
     "key": "of_sawall_7",
     "index": 7,
     "name": "of Sawall",
-    "tval": 39,
     "sval": 3,
     "pval": 3,
     "depth": 35,
@@ -180,13 +179,13 @@
       "SH_FIRE",
       "SH_ELEC",
       "LITE"
-    ]
+    ],
+    "type": "light"
   },
   "frakir": {
     "key": "frakir",
     "index": 8,
     "name": "'Frakir'",
-    "tval": 45,
     "sval": 32,
     "pval": 1,
     "depth": 80,
@@ -212,13 +211,13 @@
       "SEE_INVIS",
       "SENSE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "of_tulkas": {
     "key": "of_tulkas",
     "index": 9,
     "name": "of Tulkas",
-    "tval": 45,
     "sval": 33,
     "pval": 4,
     "depth": 100,
@@ -238,13 +237,13 @@
       "ACTIVATE",
       "SPEED",
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "of_power_narya": {
     "key": "of_power_narya",
     "index": 10,
     "name": "of Power (Narya)",
-    "tval": 45,
     "sval": 34,
     "pval": 1,
     "depth": 100,
@@ -274,13 +273,13 @@
       "SUST_DEX",
       "IM_FIRE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "of_power_nenya": {
     "key": "of_power_nenya",
     "index": 11,
     "name": "of Power (Nenya)",
-    "tval": 45,
     "sval": 35,
     "pval": 2,
     "depth": 105,
@@ -312,13 +311,13 @@
       "SUST_WIS",
       "IM_COLD",
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "of_power_vilya": {
     "key": "of_power_vilya",
     "index": 12,
     "name": "of Power (Vilya)",
-    "tval": 45,
     "sval": 36,
     "pval": 3,
     "depth": 105,
@@ -352,13 +351,13 @@
       "SUST_DEX",
       "IM_ELEC",
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "of_power_the_one_ring": {
     "key": "of_power_the_one_ring",
     "index": 13,
     "name": "of Power (The One Ring)",
-    "tval": 45,
     "sval": 37,
     "pval": 5,
     "depth": 100,
@@ -399,13 +398,13 @@
       "SUST_WIS",
       "SUST_CHR",
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "of_elemental_mastery": {
     "key": "of_elemental_mastery",
     "index": 14,
     "name": "of Elemental Mastery",
-    "tval": 45,
     "sval": 50,
     "pval": 4,
     "depth": 105,
@@ -432,13 +431,13 @@
       "TELEPATHY",
       "INSTA_ART",
       "ACTIVATE"
-    ]
+    ],
+    "type": "ring"
   },
   "razorback": {
     "key": "razorback",
     "index": 16,
     "name": "'Razorback'",
-    "tval": 38,
     "sval": 6,
     "pval": 0,
     "depth": 90,
@@ -463,13 +462,13 @@
       "IM_ELEC",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "bladeturner": {
     "key": "bladeturner",
     "index": 17,
     "name": "'Bladeturner'",
-    "tval": 38,
     "sval": 30,
     "pval": 0,
     "depth": 95,
@@ -506,13 +505,13 @@
       "IGNORE_COLD",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "of_the_thaumaturgist": {
     "key": "of_the_thaumaturgist",
     "index": 18,
     "name": "of the Thaumaturgist",
-    "tval": 36,
     "sval": 2,
     "pval": 4,
     "depth": 18,
@@ -533,13 +532,13 @@
       "RES_NEXUS",
       "HIDE_TYPE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "soft_armor"
   },
   "soulkeeper": {
     "key": "soulkeeper",
     "index": 19,
     "name": "'Soulkeeper'",
-    "tval": 37,
     "sval": 30,
     "pval": 2,
     "depth": 100,
@@ -563,13 +562,13 @@
       "RES_CHAOS",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "of_isildur": {
     "key": "of_isildur",
     "index": 20,
     "name": "of Isildur",
-    "tval": 37,
     "sval": 15,
     "pval": 1,
     "depth": 52,
@@ -591,13 +590,13 @@
       "RES_CONF",
       "RES_NEXUS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "of_the_rohirrim": {
     "key": "of_the_rohirrim",
     "index": 21,
     "name": "of the Rohirrim",
-    "tval": 37,
     "sval": 9,
     "pval": 2,
     "depth": 52,
@@ -620,13 +619,13 @@
       "RES_CONF",
       "RES_SOUND",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "of_the_crusader": {
     "key": "of_the_crusader",
     "index": 22,
     "name": "of the Crusader",
-    "tval": 37,
     "sval": 20,
     "pval": 4,
     "depth": 70,
@@ -655,13 +654,13 @@
       "ACTIVATE",
       "SLAY_EVIL",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "of_julian": {
     "key": "of_julian",
     "index": 23,
     "name": "of Julian",
-    "tval": 37,
     "sval": 3,
     "pval": 4,
     "depth": 70,
@@ -685,13 +684,13 @@
       "RES_DISEN",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "of_command": {
     "key": "of_command",
     "index": 24,
     "name": "of Command",
-    "tval": 37,
     "sval": 4,
     "pval": 2,
     "depth": 35,
@@ -712,13 +711,13 @@
       "RES_ELEC",
       "RES_FIRE",
       "RES_COLD"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "of_caspanion": {
     "key": "of_caspanion",
     "index": 25,
     "name": "of Caspanion",
-    "tval": 37,
     "sval": 6,
     "pval": 3,
     "depth": 43,
@@ -740,13 +739,13 @@
       "RES_POIS",
       "RES_CONF",
       "ACTIVATE"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "nemovebla": {
     "key": "nemovebla",
     "index": 26,
     "name": "'Nemovebla'",
-    "tval": 37,
     "sval": 3,
     "pval": 4,
     "depth": 25,
@@ -767,13 +766,13 @@
       "SLOW_DIGEST",
       "HIDE_TYPE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "tenyos_despair": {
     "key": "tenyos_despair",
     "index": 27,
     "name": "'Tenyo's Despair'",
-    "tval": 36,
     "sval": 16,
     "pval": 4,
     "depth": 45,
@@ -801,13 +800,13 @@
       "SUST_CON",
       "SUST_CHR",
       "INSTA_ART"
-    ]
+    ],
+    "type": "soft_armor"
   },
   "thalkettoth": {
     "key": "thalkettoth",
     "index": 28,
     "name": "'Thalkettoth'",
-    "tval": 36,
     "sval": 11,
     "pval": 3,
     "depth": 35,
@@ -825,13 +824,13 @@
       "RES_ACID",
       "RES_SHARDS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "soft_armor"
   },
   "of_melman": {
     "key": "of_melman",
     "index": 29,
     "name": "of Melman",
-    "tval": 36,
     "sval": 12,
     "pval": 2,
     "depth": 52,
@@ -850,13 +849,13 @@
       "RES_FIRE",
       "RES_COLD",
       "INSTA_ART"
-    ]
+    ],
+    "type": "soft_armor"
   },
   "of_thorin": {
     "key": "of_thorin",
     "index": 30,
     "name": "of Thorin",
-    "tval": 34,
     "sval": 3,
     "pval": 4,
     "depth": 52,
@@ -877,13 +876,13 @@
       "RES_SOUND",
       "RES_CHAOS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "shield"
   },
   "of_celegorm": {
     "key": "of_celegorm",
     "index": 31,
     "name": "of Celegorm",
-    "tval": 34,
     "sval": 4,
     "pval": 0,
     "depth": 52,
@@ -903,13 +902,13 @@
       "RES_LITE",
       "RES_DARK",
       "INSTA_ART"
-    ]
+    ],
+    "type": "shield"
   },
   "of_anarion": {
     "key": "of_anarion",
     "index": 32,
     "name": "of Anarion",
-    "tval": 34,
     "sval": 5,
     "pval": 0,
     "depth": 70,
@@ -933,13 +932,13 @@
       "SUST_CON",
       "SUST_CHR",
       "INSTA_ART"
-    ]
+    ],
+    "type": "shield"
   },
   "of_sawall_33": {
     "key": "of_sawall_33",
     "index": 33,
     "name": "of Sawall",
-    "tval": 32,
     "sval": 2,
     "pval": 3,
     "depth": 52,
@@ -960,13 +959,13 @@
       "SUST_CHR",
       "RES_BLIND",
       "INSTA_ART"
-    ]
+    ],
+    "type": "helm"
   },
   "of_chaos": {
     "key": "of_chaos",
     "index": 34,
     "name": "of Chaos",
-    "tval": 33,
     "sval": 50,
     "pval": 125,
     "depth": 100,
@@ -1005,13 +1004,13 @@
       "NO_TELE",
       "INSTA_ART",
       "QUESTITEM"
-    ]
+    ],
+    "type": "crown"
   },
   "of_beruthiel": {
     "key": "of_beruthiel",
     "index": 35,
     "name": "of Beruthiel",
-    "tval": 33,
     "sval": 10,
     "pval": -25,
     "depth": 70,
@@ -1033,13 +1032,13 @@
       "TELEPATHY",
       "CURSED",
       "INSTA_ART"
-    ]
+    ],
+    "type": "crown"
   },
   "of_thranduil": {
     "key": "of_thranduil",
     "index": 36,
     "name": "of Thranduil",
-    "tval": 32,
     "sval": 2,
     "pval": 2,
     "depth": 35,
@@ -1058,13 +1057,13 @@
       "RES_BLIND",
       "TELEPATHY",
       "INSTA_ART"
-    ]
+    ],
+    "type": "helm"
   },
   "of_thengel": {
     "key": "of_thengel",
     "index": 37,
     "name": "of Thengel",
-    "tval": 32,
     "sval": 3,
     "pval": 3,
     "depth": 17,
@@ -1081,13 +1080,13 @@
       "CHR",
       "HIDE_TYPE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "helm"
   },
   "of_hammerhand": {
     "key": "of_hammerhand",
     "index": 38,
     "name": "of Hammerhand",
-    "tval": 32,
     "sval": 6,
     "pval": 3,
     "depth": 35,
@@ -1107,13 +1106,13 @@
       "RES_ACID",
       "RES_NEXUS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "helm"
   },
   "of_dorlomin": {
     "key": "of_dorlomin",
     "index": 39,
     "name": "of Dor-Lomin",
-    "tval": 32,
     "sval": 7,
     "pval": 4,
     "depth": 70,
@@ -1141,13 +1140,13 @@
       "TELEPATHY",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "helm"
   },
   "holhenneth": {
     "key": "holhenneth",
     "index": 40,
     "name": "'Holhenneth'",
-    "tval": 32,
     "sval": 5,
     "pval": 2,
     "depth": 35,
@@ -1168,13 +1167,13 @@
       "SEE_INVIS",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "helm"
   },
   "terror_mask": {
     "key": "terror_mask",
     "index": 41,
     "name": "'Terror Mask'",
-    "tval": 32,
     "sval": 5,
     "pval": -1,
     "depth": 35,
@@ -1204,13 +1203,13 @@
       "RES_POIS",
       "TELEPORT",
       "INSTA_ART"
-    ]
+    ],
+    "type": "helm"
   },
   "of_amber": {
     "key": "of_amber",
     "index": 42,
     "name": "of Amber",
-    "tval": 33,
     "sval": 11,
     "pval": 3,
     "depth": 70,
@@ -1240,13 +1239,13 @@
       "REGEN",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "crown"
   },
   "of_keri_the_humble": {
     "key": "of_keri_the_humble",
     "index": 43,
     "name": "of Keri the Humble",
-    "tval": 36,
     "sval": 1,
     "pval": 1,
     "depth": 9,
@@ -1267,13 +1266,13 @@
       "SLOW_DIGEST",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "soft_armor"
   },
   "colluin": {
     "key": "colluin",
     "index": 44,
     "name": "'Colluin'",
-    "tval": 35,
     "sval": 1,
     "pval": 0,
     "depth": 9,
@@ -1293,13 +1292,13 @@
       "RES_POIS",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "cloak"
   },
   "thiefs_shadow": {
     "key": "thiefs_shadow",
     "index": 45,
     "name": "'Thief's Shadow'",
-    "tval": 35,
     "sval": 1,
     "pval": 2,
     "depth": 9,
@@ -1318,13 +1317,13 @@
       "RES_LITE",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "cloak"
   },
   "of_the_alchemist": {
     "key": "of_the_alchemist",
     "index": 46,
     "name": "of the Alchemist",
-    "tval": 35,
     "sval": 1,
     "pval": 3,
     "depth": 17,
@@ -1346,13 +1345,13 @@
       "RES_COLD",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "cloak"
   },
   "of_thorongil": {
     "key": "of_thorongil",
     "index": 47,
     "name": "of Thorongil",
-    "tval": 35,
     "sval": 1,
     "pval": 0,
     "depth": 9,
@@ -1369,13 +1368,13 @@
       "RES_ACID",
       "SEE_INVIS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "cloak"
   },
   "colannon": {
     "key": "colannon",
     "index": 48,
     "name": "'Colannon'",
-    "tval": 35,
     "sval": 1,
     "pval": 3,
     "depth": 5,
@@ -1392,13 +1391,13 @@
       "RES_ACID",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "cloak"
   },
   "of_luthien": {
     "key": "of_luthien",
     "index": 49,
     "name": "of Luthien",
-    "tval": 35,
     "sval": 6,
     "pval": 2,
     "depth": 70,
@@ -1424,13 +1423,13 @@
       "RES_DARK",
       "RES_LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "cloak"
   },
   "of_tuor": {
     "key": "of_tuor",
     "index": 50,
     "name": "of Tuor",
-    "tval": 35,
     "sval": 6,
     "pval": 4,
     "depth": 70,
@@ -1448,13 +1447,13 @@
       "IM_ACID",
       "SEE_INVIS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "cloak"
   },
   "of_the_ogre": {
     "key": "of_the_ogre",
     "index": 52,
     "name": "of the Ogre",
-    "tval": 31,
     "sval": 1,
     "pval": 3,
     "depth": 17,
@@ -1472,13 +1471,13 @@
       "HIDE_TYPE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "gloves"
   },
   "cammithrim": {
     "key": "cammithrim",
     "index": 53,
     "name": "'Cammithrim'",
-    "tval": 31,
     "sval": 1,
     "pval": 0,
     "depth": 17,
@@ -1497,13 +1496,13 @@
       "LITE",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "gloves"
   },
   "paurhach": {
     "key": "paurhach",
     "index": 54,
     "name": "'Paurhach'",
-    "tval": 31,
     "sval": 2,
     "pval": 0,
     "depth": 17,
@@ -1519,13 +1518,13 @@
       "RES_FIRE",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "gloves"
   },
   "of_corwin": {
     "key": "of_corwin",
     "index": 55,
     "name": "of Corwin",
-    "tval": 31,
     "sval": 2,
     "pval": 4,
     "depth": 17,
@@ -1544,13 +1543,13 @@
       "RES_COLD",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "gloves"
   },
   "pauraegen": {
     "key": "pauraegen",
     "index": 56,
     "name": "'Pauraegen'",
-    "tval": 31,
     "sval": 2,
     "pval": 0,
     "depth": 17,
@@ -1566,13 +1565,13 @@
       "RES_ELEC",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "gloves"
   },
   "paurnen": {
     "key": "paurnen",
     "index": 57,
     "name": "'Paurnen'",
-    "tval": 31,
     "sval": 2,
     "pval": 0,
     "depth": 17,
@@ -1588,13 +1587,13 @@
       "RES_ACID",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "gloves"
   },
   "of_thanos": {
     "key": "of_thanos",
     "index": 58,
     "name": "of Thanos",
-    "tval": 31,
     "sval": 2,
     "pval": 2,
     "depth": 17,
@@ -1626,13 +1625,13 @@
       "TY_CURSE",
       "TELEPORT",
       "INSTA_ART"
-    ]
+    ],
+    "type": "gloves"
   },
   "of_fingolfin": {
     "key": "of_fingolfin",
     "index": 59,
     "name": "of Fingolfin",
-    "tval": 31,
     "sval": 5,
     "pval": 4,
     "depth": 70,
@@ -1652,13 +1651,13 @@
       "ACTIVATE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "gloves"
   },
   "of_feanor": {
     "key": "of_feanor",
     "index": 60,
     "name": "of Feanor",
-    "tval": 30,
     "sval": 3,
     "pval": 15,
     "depth": 70,
@@ -1675,13 +1674,13 @@
       "RES_NEXUS",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "boots"
   },
   "of_flora": {
     "key": "of_flora",
     "index": 61,
     "name": "of Flora",
-    "tval": 30,
     "sval": 2,
     "pval": 5,
     "depth": 17,
@@ -1704,13 +1703,13 @@
       "RES_CHAOS",
       "SUST_CON",
       "INSTA_ART"
-    ]
+    ],
+    "type": "boots"
   },
   "of_thror": {
     "key": "of_thror",
     "index": 62,
     "name": "of Thror",
-    "tval": 30,
     "sval": 6,
     "pval": 3,
     "depth": 52,
@@ -1728,13 +1727,13 @@
       "HIDE_TYPE",
       "SPEED",
       "INSTA_ART"
-    ]
+    ],
+    "type": "boots"
   },
   "of_bleys": {
     "key": "of_bleys",
     "index": 63,
     "name": "of Bleys",
-    "tval": 30,
     "sval": 2,
     "pval": 4,
     "depth": 52,
@@ -1753,13 +1752,13 @@
       "SUST_DEX",
       "FREE_ACT",
       "INSTA_ART"
-    ]
+    ],
+    "type": "boots"
   },
   "of_maedhros": {
     "key": "of_maedhros",
     "index": 64,
     "name": "of Maedhros",
-    "tval": 23,
     "sval": 5,
     "pval": 3,
     "depth": 26,
@@ -1782,13 +1781,13 @@
       "SEE_INVIS",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "of_caine": {
     "key": "of_caine",
     "index": 65,
     "name": "of Caine",
-    "tval": 23,
     "sval": 4,
     "pval": 4,
     "depth": 35,
@@ -1816,13 +1815,13 @@
       "SHOW_MODS",
       "THROW",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "narthanc": {
     "key": "narthanc",
     "index": 66,
     "name": "'Narthanc'",
-    "tval": 23,
     "sval": 4,
     "pval": 0,
     "depth": 7,
@@ -1843,13 +1842,13 @@
       "THROW",
       "RETURN",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "nimthanc": {
     "key": "nimthanc",
     "index": 67,
     "name": "'Nimthanc'",
-    "tval": 23,
     "sval": 4,
     "pval": 0,
     "depth": 5,
@@ -1869,13 +1868,13 @@
       "THROW",
       "RETURN",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "dethanc": {
     "key": "dethanc",
     "index": 68,
     "name": "'Dethanc'",
-    "tval": 23,
     "sval": 4,
     "pval": 0,
     "depth": 9,
@@ -1895,13 +1894,13 @@
       "THROW",
       "RETURN",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "of_rilia": {
     "key": "of_rilia",
     "index": 69,
     "name": "of Rilia",
-    "tval": 23,
     "sval": 4,
     "pval": 0,
     "depth": 9,
@@ -1923,13 +1922,13 @@
       "THROW",
       "RETURN",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "of_fiona": {
     "key": "of_fiona",
     "index": 70,
     "name": "of Fiona",
-    "tval": 23,
     "sval": 4,
     "pval": 2,
     "depth": 17,
@@ -1956,13 +1955,13 @@
       "BRAND_POIS",
       "THROW",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "calris": {
     "key": "calris",
     "index": 71,
     "name": "'Calris'",
-    "tval": 23,
     "sval": 21,
     "pval": 5,
     "depth": 52,
@@ -1987,13 +1986,13 @@
       "HEAVY_CURSE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "grayswandir": {
     "key": "grayswandir",
     "index": 72,
     "name": "'Grayswandir'",
-    "tval": 23,
     "sval": 11,
     "pval": 4,
     "depth": 35,
@@ -2029,13 +2028,13 @@
       "HIDE_TYPE",
       "BLESSED",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "glamdring": {
     "key": "glamdring",
     "index": 73,
     "name": "'Glamdring'",
-    "tval": 23,
     "sval": 16,
     "pval": 1,
     "depth": 35,
@@ -2058,13 +2057,13 @@
       "SLOW_DIGEST",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "nothung": {
     "key": "nothung",
     "index": 74,
     "name": "'Nothung'",
-    "tval": 23,
     "sval": 16,
     "pval": 4,
     "depth": 35,
@@ -2089,13 +2088,13 @@
       "SLOW_DIGEST",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "orcrist": {
     "key": "orcrist",
     "index": 75,
     "name": "'Orcrist'",
-    "tval": 23,
     "sval": 16,
     "pval": 3,
     "depth": 35,
@@ -2117,13 +2116,13 @@
       "SLOW_DIGEST",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "gurthang": {
     "key": "gurthang",
     "index": 76,
     "name": "'Gurthang'",
-    "tval": 23,
     "sval": 25,
     "pval": 2,
     "depth": 52,
@@ -2145,13 +2144,13 @@
       "REGEN",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "zarcuthra": {
     "key": "zarcuthra",
     "index": 77,
     "name": "'Zarcuthra'",
-    "tval": 23,
     "sval": 25,
     "pval": 4,
     "depth": 52,
@@ -2187,13 +2186,13 @@
       "AGGRAVATE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "twilight": {
     "key": "twilight",
     "index": 78,
     "name": "'Twilight'",
-    "tval": 23,
     "sval": 25,
     "pval": 10,
     "depth": 52,
@@ -2219,13 +2218,13 @@
       "TY_CURSE",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "gondricam": {
     "key": "gondricam",
     "index": 79,
     "name": "'Gondricam'",
-    "tval": 23,
     "sval": 12,
     "pval": 3,
     "depth": 35,
@@ -2250,13 +2249,13 @@
       "REGEN",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "crisdurian": {
     "key": "crisdurian",
     "index": 80,
     "name": "'Crisdurian'",
-    "tval": 23,
     "sval": 28,
     "pval": 0,
     "depth": 70,
@@ -2280,13 +2279,13 @@
       "VORPAL",
       "BRAND_POIS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "of_groo": {
     "key": "of_groo",
     "index": 81,
     "name": "of Groo",
-    "tval": 23,
     "sval": 20,
     "pval": 2,
     "depth": 52,
@@ -2306,13 +2305,13 @@
       "SHOW_MODS",
       "SPEED",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "ringil": {
     "key": "ringil",
     "index": 82,
     "name": "'Ringil'",
-    "tval": 23,
     "sval": 17,
     "pval": 10,
     "depth": 35,
@@ -2341,13 +2340,13 @@
       "SEE_INVIS",
       "SLOW_DIGEST",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "anduril": {
     "key": "anduril",
     "index": 83,
     "name": "'Anduril'",
-    "tval": 23,
     "sval": 17,
     "pval": 4,
     "depth": 35,
@@ -2374,13 +2373,13 @@
       "SHOW_MODS",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "werewindle": {
     "key": "werewindle",
     "index": 84,
     "name": "'Werewindle'",
-    "tval": 23,
     "sval": 17,
     "pval": 2,
     "depth": 35,
@@ -2420,13 +2419,13 @@
       "RES_FEAR",
       "SPEED",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "chainsword": {
     "key": "chainsword",
     "index": 85,
     "name": "'Chainsword'",
-    "tval": 23,
     "sval": 16,
     "pval": 2,
     "depth": 52,
@@ -2449,13 +2448,13 @@
       "SEE_INVIS",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "forasgil": {
     "key": "forasgil",
     "index": 86,
     "name": "'Forasgil'",
-    "tval": 23,
     "sval": 7,
     "pval": 0,
     "depth": 26,
@@ -2475,13 +2474,13 @@
       "LITE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "careth_asdriag": {
     "key": "careth_asdriag",
     "index": 87,
     "name": "'Careth Asdriag'",
-    "tval": 23,
     "sval": 11,
     "pval": 1,
     "depth": 26,
@@ -2502,13 +2501,13 @@
       "SLAY_ORC",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "sting": {
     "key": "sting",
     "index": 88,
     "name": "'Sting'",
-    "tval": 23,
     "sval": 8,
     "pval": 2,
     "depth": 35,
@@ -2534,13 +2533,13 @@
       "SEE_INVIS",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "soulsword": {
     "key": "soulsword",
     "index": 89,
     "name": "'Soulsword'",
-    "tval": 23,
     "sval": 18,
     "pval": 2,
     "depth": 35,
@@ -2569,13 +2568,13 @@
       "HOLD_LIFE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "of_merlin": {
     "key": "of_merlin",
     "index": 90,
     "name": "of Merlin",
-    "tval": 23,
     "sval": 10,
     "pval": 2,
     "depth": 35,
@@ -2596,13 +2595,13 @@
       "SEE_INVIS",
       "RES_DISEN",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "doomcaller": {
     "key": "doomcaller",
     "index": 91,
     "name": "'Doomcaller'",
-    "tval": 23,
     "sval": 30,
     "pval": 0,
     "depth": 100,
@@ -2638,13 +2637,13 @@
       "BRAND_POIS",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "vorpal_blade": {
     "key": "vorpal_blade",
     "index": 92,
     "name": "'Vorpal Blade'",
-    "tval": 23,
     "sval": 17,
     "pval": 2,
     "depth": 80,
@@ -2668,13 +2667,13 @@
       "STR",
       "DEX",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "of_theoden": {
     "key": "of_theoden",
     "index": 93,
     "name": "of Theoden",
-    "tval": 22,
     "sval": 10,
     "pval": 3,
     "depth": 35,
@@ -2696,13 +2695,13 @@
       "ACTIVATE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_pain": {
     "key": "of_pain",
     "index": 94,
     "name": "of Pain",
-    "tval": 22,
     "sval": 13,
     "pval": 0,
     "depth": 52,
@@ -2717,13 +2716,13 @@
     "flags": [
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "osondir": {
     "key": "osondir",
     "index": 95,
     "name": "'Osondir'",
-    "tval": 22,
     "sval": 15,
     "pval": 3,
     "depth": 35,
@@ -2748,13 +2747,13 @@
       "SHOW_MODS",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "tiliarc": {
     "key": "tiliarc",
     "index": 96,
     "name": "'Til-i-arc'",
-    "tval": 22,
     "sval": 8,
     "pval": 2,
     "depth": 35,
@@ -2781,13 +2780,13 @@
       "SHOW_MODS",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "runespear": {
     "key": "runespear",
     "index": 97,
     "name": "'Runespear'",
-    "tval": 22,
     "sval": 2,
     "pval": 4,
     "depth": 26,
@@ -2820,13 +2819,13 @@
       "THROW",
       "RETURN",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_destiny": {
     "key": "of_destiny",
     "index": 98,
     "name": "of Destiny",
-    "tval": 22,
     "sval": 2,
     "pval": 4,
     "depth": 26,
@@ -2863,13 +2862,13 @@
       "SHOW_MODS",
       "THROW",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_hagen": {
     "key": "of_hagen",
     "index": 99,
     "name": "of Hagen",
-    "tval": 22,
     "sval": 2,
     "pval": 3,
     "depth": 26,
@@ -2893,13 +2892,13 @@
       "SHOW_MODS",
       "THROW",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "soulsucker": {
     "key": "soulsucker",
     "index": 100,
     "name": "'Soulsucker'",
-    "tval": 22,
     "sval": 2,
     "pval": 4,
     "depth": 35,
@@ -2924,13 +2923,13 @@
       "SEE_INVIS",
       "DRAIN_EXP",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_durin": {
     "key": "of_durin",
     "index": 101,
     "name": "of Durin",
-    "tval": 22,
     "sval": 25,
     "pval": 3,
     "depth": 52,
@@ -2957,13 +2956,13 @@
       "RES_CHAOS",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_eonwe": {
     "key": "of_eonwe",
     "index": 102,
     "name": "of Eonwe",
-    "tval": 22,
     "sval": 25,
     "pval": 2,
     "depth": 52,
@@ -2994,13 +2993,13 @@
       "BLESSED",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_balli_stonehand": {
     "key": "of_balli_stonehand",
     "index": 103,
     "name": "of Balli Stonehand",
-    "tval": 22,
     "sval": 22,
     "pval": 3,
     "depth": 52,
@@ -3031,13 +3030,13 @@
       "REGEN",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "lotharang": {
     "key": "lotharang",
     "index": 104,
     "name": "'Lotharang'",
-    "tval": 22,
     "sval": 22,
     "pval": 1,
     "depth": 52,
@@ -3058,13 +3057,13 @@
       "ACTIVATE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_the_dwarves_105": {
     "key": "of_the_dwarves_105",
     "index": 105,
     "name": "of the Dwarves",
-    "tval": 22,
     "sval": 28,
     "pval": 10,
     "depth": 52,
@@ -3089,13 +3088,13 @@
       "RES_FEAR",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "barukkheled": {
     "key": "barukkheled",
     "index": 106,
     "name": "'Barukkheled'",
-    "tval": 22,
     "sval": 11,
     "pval": 3,
     "depth": 35,
@@ -3117,13 +3116,13 @@
       "SEE_INVIS",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_wrath": {
     "key": "of_wrath",
     "index": 107,
     "name": "of Wrath",
-    "tval": 22,
     "sval": 5,
     "pval": 2,
     "depth": 26,
@@ -3148,13 +3147,13 @@
       "BLESSED",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_ulmo": {
     "key": "of_ulmo",
     "index": 108,
     "name": "of Ulmo",
-    "tval": 22,
     "sval": 5,
     "pval": 4,
     "depth": 52,
@@ -3182,13 +3181,13 @@
       "BLESSED",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "avavir": {
     "key": "avavir",
     "index": 109,
     "name": "'Avavir'",
-    "tval": 22,
     "sval": 17,
     "pval": 3,
     "depth": 70,
@@ -3215,13 +3214,13 @@
       "ACTIVATE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_the_dawn": {
     "key": "of_the_dawn",
     "index": 110,
     "name": "of the Dawn",
-    "tval": 23,
     "sval": 17,
     "pval": 3,
     "depth": 70,
@@ -3253,13 +3252,13 @@
       "REGEN",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "grond": {
     "key": "grond",
     "index": 111,
     "name": "'Grond'",
-    "tval": 21,
     "sval": 50,
     "pval": 0,
     "depth": 100,
@@ -3291,13 +3290,13 @@
       "SHOW_MODS",
       "INSTA_ART",
       "QUESTITEM"
-    ]
+    ],
+    "type": "hafted"
   },
   "totila": {
     "key": "totila",
     "index": 112,
     "name": "'Totila'",
-    "tval": 21,
     "sval": 13,
     "pval": 2,
     "depth": 35,
@@ -3319,13 +3318,13 @@
       "SHOW_MODS",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hafted"
   },
   "thunderfist": {
     "key": "thunderfist",
     "index": 113,
     "name": "'Thunderfist'",
-    "tval": 21,
     "sval": 18,
     "pval": 4,
     "depth": 75,
@@ -3351,13 +3350,13 @@
       "SHOW_MODS",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hafted"
   },
   "whirlwind": {
     "key": "whirlwind",
     "index": 114,
     "name": "'Whirlwind'",
-    "tval": 21,
     "sval": 6,
     "pval": 2,
     "depth": 60,
@@ -3386,13 +3385,13 @@
       "ACTIVATE",
       "INSTA_ART",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "hafted"
   },
   "firestar": {
     "key": "firestar",
     "index": 115,
     "name": "'Firestar'",
-    "tval": 21,
     "sval": 12,
     "pval": 0,
     "depth": 35,
@@ -3411,13 +3410,13 @@
       "SHOW_MODS",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hafted"
   },
   "of_energy": {
     "key": "of_energy",
     "index": 116,
     "name": "of Energy",
-    "tval": 22,
     "sval": 17,
     "pval": 4,
     "depth": 70,
@@ -3438,13 +3437,13 @@
       "KILL_DRAGON",
       "INSTA_ART",
       "ACTIVATE"
-    ]
+    ],
+    "type": "polearm"
   },
   "of_aule": {
     "key": "of_aule",
     "index": 117,
     "name": "of Aule",
-    "tval": 21,
     "sval": 8,
     "pval": 4,
     "depth": 70,
@@ -3473,13 +3472,13 @@
       "SEE_INVIS",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hafted"
   },
   "narivagil": {
     "key": "narivagil",
     "index": 118,
     "name": "'Nar-i-vagil'",
-    "tval": 21,
     "sval": 3,
     "pval": 3,
     "depth": 35,
@@ -3500,13 +3499,13 @@
       "SHOW_MODS",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hafted"
   },
   "of_the_wandering_wizard": {
     "key": "of_the_wandering_wizard",
     "index": 119,
     "name": "of the Wandering Wizard",
-    "tval": 21,
     "sval": 3,
     "pval": 2,
     "depth": 35,
@@ -3529,13 +3528,13 @@
       "ACTIVATE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hafted"
   },
   "of_gandalf": {
     "key": "of_gandalf",
     "index": 120,
     "name": "of Gandalf",
-    "tval": 21,
     "sval": 3,
     "pval": 4,
     "depth": 52,
@@ -3566,13 +3565,13 @@
       "ACTIVATE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hafted"
   },
   "deathwreaker": {
     "key": "deathwreaker",
     "index": 121,
     "name": "'Deathwreaker'",
-    "tval": 21,
     "sval": 20,
     "pval": 6,
     "depth": 100,
@@ -3605,13 +3604,13 @@
       "BRAND_POIS",
       "VAMPIRIC",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hafted"
   },
   "turmil": {
     "key": "turmil",
     "index": 122,
     "name": "'Turmil'",
-    "tval": 22,
     "sval": 12,
     "pval": 4,
     "depth": 35,
@@ -3637,13 +3636,13 @@
       "ACTIVATE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "polearm"
   },
   "catapult": {
     "key": "catapult",
     "index": 123,
     "name": "'Catapult'",
-    "tval": 19,
     "sval": 2,
     "pval": 2,
     "depth": 12,
@@ -3663,13 +3662,13 @@
       "XTRA_MIGHT",
       "ACTIVATE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "bow"
   },
   "belthronding": {
     "key": "belthronding",
     "index": 124,
     "name": "'Belthronding'",
-    "tval": 19,
     "sval": 13,
     "pval": 3,
     "depth": 70,
@@ -3689,13 +3688,13 @@
       "XTRA_SHOTS",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "bow"
   },
   "of_bard": {
     "key": "of_bard",
     "index": 125,
     "name": "of Bard",
-    "tval": 19,
     "sval": 13,
     "pval": 3,
     "depth": 52,
@@ -3714,13 +3713,13 @@
       "XTRA_MIGHT",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "bow"
   },
   "of_brand": {
     "key": "of_brand",
     "index": 126,
     "name": "of Brand",
-    "tval": 19,
     "sval": 23,
     "pval": 10,
     "depth": 80,
@@ -3739,13 +3738,13 @@
       "ACTIVATE",
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "bow"
   },
   "of_marksmanship": {
     "key": "of_marksmanship",
     "index": 127,
     "name": "of Marksmanship",
-    "tval": 19,
     "sval": 12,
     "pval": 4,
     "depth": 25,
@@ -3770,13 +3769,13 @@
       "XTRA_MIGHT",
       "XTRA_SHOTS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "bow"
   },
   "soulless_one": {
     "key": "soulless_one",
     "index": 128,
     "name": "'Soulless One'",
-    "tval": 35,
     "sval": 1,
     "pval": 4,
     "depth": 45,
@@ -3798,13 +3797,13 @@
       "CURSED",
       "AUTO_CURSE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "cloak"
   },
   "luck_blade": {
     "key": "luck_blade",
     "index": 129,
     "name": "'Luck Blade'",
-    "tval": 23,
     "sval": 17,
     "pval": 0,
     "depth": 20,
@@ -3823,13 +3822,13 @@
       "FREE_ACT",
       "LITE",
       "INSTA_ART"
-    ]
+    ],
+    "type": "sword"
   },
   "stormbringer": {
     "key": "stormbringer",
     "index": 130,
     "name": "'Stormbringer'",
-    "tval": 23,
     "sval": 30,
     "pval": 2,
     "depth": 95,
@@ -3856,6 +3855,7 @@
       "HEAVY_CURSE",
       "NO_TELE",
       "QUESTITEM"
-    ]
+    ],
+    "type": "sword"
   }
 }

@@ -24,40 +24,40 @@ describe('FlavorSystem', () => {
   });
 
   describe('getFlavor', () => {
-    it('returns flavor for potions (tval 75)', () => {
-      const flavor = flavorSystem.getFlavor(75, 0);
+    it('returns flavor for potions', () => {
+      const flavor = flavorSystem.getFlavor('potion', 0);
       expect(flavor).toBeTruthy();
       expect(typeof flavor).toBe('string');
     });
 
-    it('returns flavor for scrolls (tval 70)', () => {
-      const flavor = flavorSystem.getFlavor(70, 0);
+    it('returns flavor for scrolls', () => {
+      const flavor = flavorSystem.getFlavor('scroll', 0);
       expect(flavor).toBeTruthy();
       expect(typeof flavor).toBe('string');
     });
 
     it('returns null for non-flavored items', () => {
-      expect(flavorSystem.getFlavor(23, 0)).toBeNull(); // sword
-      expect(flavorSystem.getFlavor(36, 0)).toBeNull(); // armor
+      expect(flavorSystem.getFlavor('sword', 0)).toBeNull();
+      expect(flavorSystem.getFlavor('soft_armor', 0)).toBeNull();
     });
   });
 
   describe('awareness tracking', () => {
     it('items start unaware', () => {
-      expect(flavorSystem.isAware(75, 0)).toBe(false);
-      expect(flavorSystem.isAware(70, 0)).toBe(false);
+      expect(flavorSystem.isAware('potion', 0)).toBe(false);
+      expect(flavorSystem.isAware('scroll', 0)).toBe(false);
     });
 
     it('setAware marks item type as known', () => {
-      flavorSystem.setAware(75, 5);
-      expect(flavorSystem.isAware(75, 5)).toBe(true);
+      flavorSystem.setAware('potion', 5);
+      expect(flavorSystem.isAware('potion', 5)).toBe(true);
     });
 
-    it('awareness is per item type (tval:sval)', () => {
-      flavorSystem.setAware(75, 5);
-      expect(flavorSystem.isAware(75, 5)).toBe(true);
-      expect(flavorSystem.isAware(75, 6)).toBe(false); // different sval
-      expect(flavorSystem.isAware(70, 5)).toBe(false); // different tval
+    it('awareness is per item type (type:sval)', () => {
+      flavorSystem.setAware('potion', 5);
+      expect(flavorSystem.isAware('potion', 5)).toBe(true);
+      expect(flavorSystem.isAware('potion', 6)).toBe(false); // different sval
+      expect(flavorSystem.isAware('scroll', 5)).toBe(false); // different type
     });
   });
 
@@ -75,8 +75,8 @@ describe('FlavorSystem', () => {
 
   describe('export/import', () => {
     it('preserves flavor data across export/import', () => {
-      flavorSystem.setAware(75, 3);
-      const flavor = flavorSystem.getFlavor(75, 0);
+      flavorSystem.setAware('potion', 3);
+      const flavor = flavorSystem.getFlavor('potion', 0);
       const scrollTitle = flavorSystem.getScrollFlavorName(5);
 
       const exported = flavorSystem.export();
@@ -84,8 +84,8 @@ describe('FlavorSystem', () => {
       const newSystem = new FlavorSystem(mockRNG as unknown as typeof import('rot-js').RNG);
       newSystem.import(exported);
 
-      expect(newSystem.isAware(75, 3)).toBe(true);
-      expect(newSystem.getFlavor(75, 0)).toBe(flavor);
+      expect(newSystem.isAware('potion', 3)).toBe(true);
+      expect(newSystem.getFlavor('potion', 0)).toBe(flavor);
       expect(newSystem.getScrollFlavorName(5)).toBe(scrollTitle);
     });
   });

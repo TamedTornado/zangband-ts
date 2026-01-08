@@ -157,9 +157,8 @@ describe('Item', () => {
       position: { x: 3, y: 4 },
       symbol: '!',
       color: '#00f',
-      itemType: 'potion',
       generated: {
-        baseItem: { name: 'Healing', tval: 75, sval: 1 } as any,
+        baseItem: { name: 'Healing', type: 'potion', sval: 1 } as any,
         toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], cost: 0,
       },
     });
@@ -167,7 +166,7 @@ describe('Item', () => {
     expect(item.id).toBe('item-1');
     expect(item.symbol).toBe('!');
     expect(item.name).toBe('Potion of Healing');
-    expect(item.itemType).toBe('potion');
+    expect(item.type).toBe('potion');
   });
 
   it('should support stacking with quantity', () => {
@@ -176,10 +175,9 @@ describe('Item', () => {
       position: { x: 3, y: 4 },
       symbol: '!',
       color: '#00f',
-      itemType: 'potion',
       quantity: 5,
       generated: {
-        baseItem: { name: 'Healing', tval: 75, sval: 1 } as any,
+        baseItem: { name: 'Healing', type: 'potion', sval: 1 } as any,
         toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], cost: 0,
       },
     });
@@ -193,14 +191,314 @@ describe('Item', () => {
       position: { x: 3, y: 4 },
       symbol: '!',
       color: '#00f',
-      itemType: 'potion',
       generated: {
-        baseItem: { name: 'Healing', tval: 75, sval: 1 } as any,
+        baseItem: { name: 'Healing', type: 'potion', sval: 1 } as any,
         toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], cost: 0,
       },
     });
 
     expect(item.quantity).toBe(1);
+  });
+
+  describe('device type checks', () => {
+    it('identifies wands', () => {
+      const wand = new Item({
+        id: 'wand-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#f0f',
+        generated: {
+          baseItem: { name: 'Magic Missile', type: 'wand', sval: 1, key: 'wand_magic_missile', pval: 5 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 5, maxCharges: 5,
+        },
+      });
+      expect(wand.isWand).toBe(true);
+      expect(wand.isStaff).toBe(false);
+      expect(wand.isRod).toBe(false);
+      expect(wand.isDevice).toBe(true);
+    });
+
+    it('identifies staffs', () => {
+      const staff = new Item({
+        id: 'staff-1',
+        position: { x: 0, y: 0 },
+        symbol: '_',
+        color: '#880',
+        generated: {
+          baseItem: { name: 'Teleportation', type: 'staff', sval: 1, key: 'staff_teleport', pval: 3 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 3, maxCharges: 3,
+        },
+      });
+      expect(staff.isStaff).toBe(true);
+      expect(staff.isWand).toBe(false);
+      expect(staff.isDevice).toBe(true);
+    });
+
+    it('identifies rods', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 0,
+        },
+      });
+      expect(rod.isRod).toBe(true);
+      expect(rod.isWand).toBe(false);
+      expect(rod.isDevice).toBe(true);
+    });
+  });
+
+  describe('device charges', () => {
+    it('tracks wand charges', () => {
+      const wand = new Item({
+        id: 'wand-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#f0f',
+        generated: {
+          baseItem: { name: 'Magic Missile', type: 'wand', sval: 1, key: 'wand_magic_missile', pval: 5 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 5, maxCharges: 8,
+        },
+      });
+      expect(wand.charges).toBe(5);
+      expect(wand.maxCharges).toBe(8);
+    });
+
+    it('useCharge decrements wand charges', () => {
+      const wand = new Item({
+        id: 'wand-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#f0f',
+        generated: {
+          baseItem: { name: 'Magic Missile', type: 'wand', sval: 1, key: 'wand_magic_missile', pval: 5 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 5, maxCharges: 5,
+        },
+      });
+      wand.useCharge();
+      expect(wand.charges).toBe(4);
+    });
+
+    it('useCharge sets rod timeout', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 0,
+        },
+      });
+      expect(rod.isReady).toBe(true);
+      rod.useCharge();
+      expect(rod.timeout).toBe(10); // pval is recharge time
+      expect(rod.isReady).toBe(false);
+    });
+
+    it('tickTimeout reduces rod recharge time', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 5,
+        },
+      });
+      rod.tickTimeout(2);
+      expect(rod.timeout).toBe(3);
+      rod.tickTimeout(5);
+      expect(rod.timeout).toBe(0);
+      expect(rod.isReady).toBe(true);
+    });
+  });
+
+  describe('item stacking', () => {
+    it('potions can stack with same type', () => {
+      const potion1 = new Item({
+        id: 'potion-1',
+        position: { x: 0, y: 0 },
+        symbol: '!',
+        color: '#f00',
+        generated: {
+          baseItem: { name: 'Healing', type: 'potion', sval: 1, key: 'potion_healing' } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [],
+        },
+      });
+      const potion2 = new Item({
+        id: 'potion-2',
+        position: { x: 0, y: 0 },
+        symbol: '!',
+        color: '#f00',
+        generated: {
+          baseItem: { name: 'Healing', type: 'potion', sval: 1, key: 'potion_healing' } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [],
+        },
+      });
+      expect(potion1.canStack(potion2)).toBe(true);
+    });
+
+    it('different potions cannot stack', () => {
+      const healing = new Item({
+        id: 'potion-1',
+        position: { x: 0, y: 0 },
+        symbol: '!',
+        color: '#f00',
+        generated: {
+          baseItem: { name: 'Healing', type: 'potion', sval: 1, key: 'potion_healing' } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [],
+        },
+      });
+      const speed = new Item({
+        id: 'potion-2',
+        position: { x: 0, y: 0 },
+        symbol: '!',
+        color: '#0f0',
+        generated: {
+          baseItem: { name: 'Speed', type: 'potion', sval: 2, key: 'potion_speed' } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [],
+        },
+      });
+      expect(healing.canStack(speed)).toBe(false);
+    });
+
+    it('wands of same type can stack and combine charges', () => {
+      const wand1 = new Item({
+        id: 'wand-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#f0f',
+        generated: {
+          baseItem: { name: 'Magic Missile', type: 'wand', sval: 1, key: 'wand_magic_missile', pval: 5 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 3, maxCharges: 5,
+        },
+      });
+      const wand2 = new Item({
+        id: 'wand-2',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#f0f',
+        generated: {
+          baseItem: { name: 'Magic Missile', type: 'wand', sval: 1, key: 'wand_magic_missile', pval: 5 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 4, maxCharges: 6,
+        },
+      });
+      expect(wand1.canStack(wand2)).toBe(true);
+      wand1.absorb(wand2);
+      expect(wand1.quantity).toBe(2);
+      expect(wand1.charges).toBe(7); // 3 + 4
+      expect(wand1.maxCharges).toBe(11); // 5 + 6
+    });
+
+    it('staffs only stack if same charges', () => {
+      const staff1 = new Item({
+        id: 'staff-1',
+        position: { x: 0, y: 0 },
+        symbol: '_',
+        color: '#880',
+        generated: {
+          baseItem: { name: 'Teleportation', type: 'staff', sval: 1, key: 'staff_teleport', pval: 3 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 3, maxCharges: 3,
+        },
+      });
+      const staff2 = new Item({
+        id: 'staff-2',
+        position: { x: 0, y: 0 },
+        symbol: '_',
+        color: '#880',
+        generated: {
+          baseItem: { name: 'Teleportation', type: 'staff', sval: 1, key: 'staff_teleport', pval: 3 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 3, maxCharges: 3,
+        },
+      });
+      const staff3 = new Item({
+        id: 'staff-3',
+        position: { x: 0, y: 0 },
+        symbol: '_',
+        color: '#880',
+        generated: {
+          baseItem: { name: 'Teleportation', type: 'staff', sval: 1, key: 'staff_teleport', pval: 3 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 2, maxCharges: 3,
+        },
+      });
+      expect(staff1.canStack(staff2)).toBe(true); // same charges
+      expect(staff1.canStack(staff3)).toBe(false); // different charges
+    });
+
+    it('artifacts cannot stack', () => {
+      const artifact1 = new Item({
+        id: 'art-1',
+        position: { x: 0, y: 0 },
+        symbol: '|',
+        color: '#ff0',
+        generated: {
+          baseItem: { name: 'Sword', type: 'sword', sval: 1, key: 'long_sword' } as any,
+          artifact: { name: 'Excalibur', key: 'excalibur' } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [],
+        },
+      });
+      const artifact2 = new Item({
+        id: 'art-2',
+        position: { x: 0, y: 0 },
+        symbol: '|',
+        color: '#ff0',
+        generated: {
+          baseItem: { name: 'Sword', type: 'sword', sval: 1, key: 'long_sword' } as any,
+          artifact: { name: 'Excalibur', key: 'excalibur' } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [],
+        },
+      });
+      expect(artifact1.canStack(artifact2)).toBe(false);
+    });
+  });
+
+  describe('device display names', () => {
+    it('shows wand charges in name', () => {
+      const wand = new Item({
+        id: 'wand-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#f0f',
+        generated: {
+          baseItem: { name: 'Magic Missile', type: 'wand', sval: 1, key: 'wand_magic_missile', pval: 5 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], charges: 5, maxCharges: 8, identified: true,
+        },
+      });
+      expect(wand.name).toBe('Wand of Magic Missile (5/8 charges)');
+    });
+
+    it('shows rod ready status', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 0, identified: true,
+        },
+      });
+      expect(rod.name).toBe('Rod of Light (ready)');
+    });
+
+    it('shows rod recharge time', () => {
+      const rod = new Item({
+        id: 'rod-1',
+        position: { x: 0, y: 0 },
+        symbol: '-',
+        color: '#888',
+        generated: {
+          baseItem: { name: 'Light', type: 'rod', sval: 1, key: 'rod_light', pval: 10 } as any,
+          toHit: 0, toDam: 0, toAc: 0, pval: 0, flags: [], timeout: 5, identified: true,
+        },
+      });
+      expect(rod.name).toBe('Rod of Light (5 turns to recharge)');
+    });
   });
 });
 

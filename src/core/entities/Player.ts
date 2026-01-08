@@ -28,20 +28,20 @@ export type EquipmentSlot =
   | 'amulet'
   | 'light';
 
-/** Type values for equipment slots */
-const SLOT_TVALS: Record<EquipmentSlot, number[]> = {
-  weapon: [20, 21, 22, 23], // TV_DIGGING, TV_HAFTED, TV_POLEARM, TV_SWORD
-  bow: [19],               // TV_BOW
-  armor: [36, 37, 38],     // TV_SOFT_ARMOR, TV_HARD_ARMOR, TV_DRAG_ARMOR
-  cloak: [35],             // TV_CLOAK
-  shield: [34],            // TV_SHIELD
-  helmet: [32, 33],        // TV_HELM, TV_CROWN
-  gloves: [31],            // TV_GLOVES
-  boots: [30],             // TV_BOOTS
-  ring1: [45],             // TV_RING
-  ring2: [45],             // TV_RING
-  amulet: [40],            // TV_AMULET
-  light: [39],             // TV_LITE
+/** Item types for equipment slots */
+const SLOT_TYPES: Record<EquipmentSlot, string[]> = {
+  weapon: ['digging', 'hafted', 'polearm', 'sword'],
+  bow: ['bow'],
+  armor: ['soft_armor', 'hard_armor', 'dragon_armor'],
+  cloak: ['cloak'],
+  shield: ['shield'],
+  helmet: ['helm', 'crown'],
+  gloves: ['gloves'],
+  boots: ['boots'],
+  ring1: ['ring'],
+  ring2: ['ring'],
+  amulet: ['amulet'],
+  light: ['light'],
 };
 
 export interface PlayerConfig {
@@ -81,8 +81,21 @@ export class Player extends Actor {
     return [...this._knownSpells];
   }
 
-  addItem(item: Item): void {
+  /**
+   * Add an item to inventory, attempting to stack with existing items first.
+   * @returns true if the item was stacked, false if added as a new slot
+   */
+  addItem(item: Item): boolean {
+    // Try to stack with existing items
+    for (const existing of this._inventory) {
+      if (existing.canStack(item)) {
+        existing.absorb(item);
+        return true;
+      }
+    }
+    // No stackable item found, add as new
     this._inventory.push(item);
+    return false;
   }
 
   removeItem(itemId: string): Item | undefined {
@@ -113,18 +126,18 @@ export class Player extends Actor {
 
   /** Check if an item can be equipped in a slot */
   canEquip(item: Item, slot: EquipmentSlot): boolean {
-    const tval = item.generated?.baseItem.tval;
-    if (tval === undefined) return false;
-    return SLOT_TVALS[slot].includes(tval);
+    const type = item.generated?.baseItem.type;
+    if (type === undefined) return false;
+    return SLOT_TYPES[slot].includes(type);
   }
 
   /** Find the appropriate slot for an item */
   findSlotForItem(item: Item): EquipmentSlot | null {
-    const tval = item.generated?.baseItem.tval;
-    if (tval === undefined) return null;
+    const type = item.generated?.baseItem.type;
+    if (type === undefined) return null;
 
-    for (const [slot, tvals] of Object.entries(SLOT_TVALS)) {
-      if (tvals.includes(tval)) {
+    for (const [slot, types] of Object.entries(SLOT_TYPES)) {
+      if (types.includes(type)) {
         // For rings, use ring1 if empty, else ring2
         if (slot === 'ring1' || slot === 'ring2') {
           if (!this._equipment.ring1) return 'ring1';

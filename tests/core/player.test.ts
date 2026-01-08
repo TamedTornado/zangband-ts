@@ -72,7 +72,7 @@ function createTestWeapon(): Item {
     name: 'Test Sword',
     symbol: '|',
     color: 'w',
-    tval: 23, // TV_SWORD
+    type: 'sword',
     sval: 1,
     pval: 0,
     depth: 1,
@@ -92,7 +92,6 @@ function createTestWeapon(): Item {
     position: { x: 0, y: 0 },
     symbol: '|',
     color: 'w',
-    itemType: 'weapon',
     generated: {
       baseItem,
       toHit: 3,
@@ -111,7 +110,7 @@ function createTestArmor(): Item {
     name: 'Test Armor',
     symbol: '[',
     color: 's',
-    tval: 36, // TV_SOFT_ARMOR
+    type: 'soft_armor',
     sval: 1,
     pval: 0,
     depth: 1,
@@ -131,7 +130,6 @@ function createTestArmor(): Item {
     position: { x: 0, y: 0 },
     symbol: '[',
     color: 's',
-    itemType: 'armor',
     generated: {
       baseItem,
       toHit: 0,
@@ -215,7 +213,6 @@ describe('Player equipment', () => {
       position: { x: 0, y: 0 },
       symbol: '|',
       color: 'w',
-      itemType: 'weapon',
       generated: {
         baseItem: {
           ...weapon1.generated!.baseItem,

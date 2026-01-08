@@ -11,7 +11,7 @@ const createTestItem = (overrides: Partial<ItemDef> = {}): ItemDef => ({
   name: 'Test Sword',
   symbol: '|',
   color: 'w',
-  tval: 23, // TV_SWORD
+  type: 'sword',
   sval: 1,
   pval: 0,
   depth: 5,
@@ -50,7 +50,7 @@ const createTestArtifact = (overrides: Partial<ArtifactDef> = {}): ArtifactDef =
   key: 'excalibur',
   index: 1,
   name: 'Excalibur',
-  tval: 23, // TV_SWORD
+  type: 'sword',
   sval: 10,
   pval: 3,
   depth: 40,
@@ -78,7 +78,7 @@ describe('ItemGeneration', () => {
         key: 'wooden_torch',
         index: 10,
         name: 'Wooden Torch',
-        tval: 39, // TV_LITE
+        type: 'light',
         depth: 0,
         rarity: 1,
         allocation: [{ depth: 0, rarity: 1 }],
@@ -87,7 +87,7 @@ describe('ItemGeneration', () => {
         key: 'iron_sword',
         index: 20,
         name: 'Iron Sword',
-        tval: 23, // TV_SWORD
+        type: 'sword',
         depth: 5,
         rarity: 2,
         allocation: [{ depth: 5, rarity: 2 }],
@@ -96,7 +96,7 @@ describe('ItemGeneration', () => {
         key: 'steel_sword',
         index: 30,
         name: 'Steel Sword',
-        tval: 23, // TV_SWORD
+        type: 'sword',
         depth: 15,
         rarity: 3,
         allocation: [{ depth: 15, rarity: 3 }],
@@ -105,7 +105,7 @@ describe('ItemGeneration', () => {
         key: 'mithril_sword',
         index: 40,
         name: 'Mithril Sword',
-        tval: 23, // TV_SWORD
+        type: 'sword',
         depth: 40,
         rarity: 5,
         allocation: [{ depth: 40, rarity: 5 }],
@@ -114,7 +114,7 @@ describe('ItemGeneration', () => {
         key: 'adamantite_sword',
         index: 45,
         name: 'Adamantite Sword',
-        tval: 23, // TV_SWORD
+        type: 'sword',
         depth: 60,
         rarity: 6,
         allocation: [{ depth: 60, rarity: 6 }],
@@ -123,7 +123,7 @@ describe('ItemGeneration', () => {
         key: 'leather_armor',
         index: 50,
         name: 'Leather Armor',
-        tval: 36, // TV_SOFT_ARMOR
+        type: 'soft_armor',
         depth: 3,
         rarity: 1,
         allocation: [{ depth: 3, rarity: 1 }],
@@ -185,7 +185,7 @@ describe('ItemGeneration', () => {
         key: 'ring_of_power',
         index: 2,
         name: 'The One Ring',
-        tval: 45, // TV_RING
+        type: 'ring',
         sval: 1,
         depth: 100,
         rarity: 100,
@@ -637,24 +637,24 @@ describe('ItemGeneration', () => {
     });
   });
 
-  describe('getSlotForTval', () => {
-    it('should return correct slot for weapon tvals', () => {
-      expect(gen.getSlotForTval(23)).toBe(24); // TV_SWORD -> ES_WIELD
-      expect(gen.getSlotForTval(21)).toBe(24); // TV_HAFTED -> ES_WIELD
-      expect(gen.getSlotForTval(22)).toBe(24); // TV_POLEARM -> ES_WIELD
+  describe('getSlotForType', () => {
+    it('should return correct slot for weapon types', () => {
+      expect(gen.getSlotForType('sword')).toBe(24); // ES_WIELD
+      expect(gen.getSlotForType('hafted')).toBe(24); // ES_WIELD
+      expect(gen.getSlotForType('polearm')).toBe(24); // ES_WIELD
     });
 
-    it('should return correct slot for armor tvals', () => {
-      expect(gen.getSlotForTval(36)).toBe(30); // TV_SOFT_ARMOR -> ES_BODY
-      expect(gen.getSlotForTval(37)).toBe(30); // TV_HARD_ARMOR -> ES_BODY
-      expect(gen.getSlotForTval(32)).toBe(33); // TV_HELM -> ES_HEAD
-      expect(gen.getSlotForTval(35)).toBe(31); // TV_CLOAK -> ES_OUTER
+    it('should return correct slot for armor types', () => {
+      expect(gen.getSlotForType('soft_armor')).toBe(30); // ES_BODY
+      expect(gen.getSlotForType('hard_armor')).toBe(30); // ES_BODY
+      expect(gen.getSlotForType('helm')).toBe(33); // ES_HEAD
+      expect(gen.getSlotForType('cloak')).toBe(31); // ES_OUTER
     });
 
     it('should return correct slot for other equipment', () => {
-      expect(gen.getSlotForTval(19)).toBe(25); // TV_BOW -> ES_BOW
-      expect(gen.getSlotForTval(20)).toBe(22); // TV_DIGGING -> ES_DIG
-      expect(gen.getSlotForTval(39)).toBe(29); // TV_LITE -> ES_LITE
+      expect(gen.getSlotForType('bow')).toBe(25); // ES_BOW
+      expect(gen.getSlotForType('digging')).toBe(22); // ES_DIG
+      expect(gen.getSlotForType('light')).toBe(29); // ES_LITE
     });
   });
 

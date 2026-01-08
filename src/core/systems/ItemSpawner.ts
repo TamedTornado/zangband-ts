@@ -18,31 +18,6 @@ function generateItemId(): string {
   return `item_${++itemIdCounter}`;
 }
 
-/**
- * Get the item type category from tval
- */
-function getItemTypeFromTval(tval: number): string {
-  // Weapon types
-  if (tval >= 16 && tval <= 23) return 'weapon';
-  // Armor types
-  if (tval >= 30 && tval <= 38) return 'armor';
-  // Jewelry
-  if (tval === 40) return 'amulet';
-  if (tval === 45) return 'ring';
-  // Light
-  if (tval === 39) return 'light';
-  // Potions
-  if (tval === 75) return 'potion';
-  // Scrolls
-  if (tval === 70) return 'scroll';
-  // Food
-  if (tval === 80) return 'food';
-  // Gold
-  if (tval === 100) return 'gold';
-  // Default
-  return 'misc';
-}
-
 export class ItemSpawner {
   private itemGen: ItemGeneration;
   private rng: typeof RNG;
@@ -153,7 +128,6 @@ export class ItemSpawner {
       position: pos,
       symbol: baseItem.symbol,
       color: baseItem.color,
-      itemType: getItemTypeFromTval(baseItem.tval),
       generated,
     });
   }

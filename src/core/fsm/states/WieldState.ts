@@ -13,24 +13,21 @@ import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionSta
 export class WieldState implements State {
   readonly name = 'wield';
 
+  private static readonly WIELDABLE_TYPES = new Set([
+    // Weapons
+    'sword', 'hafted', 'polearm', 'bow', 'digging',
+    // Armor
+    'soft_armor', 'hard_armor', 'dragon_armor',
+    // Other equipment
+    'shield', 'cloak', 'gloves', 'boots', 'helm', 'crown',
+    // Accessories
+    'ring', 'amulet', 'light',
+  ]);
+
   onEnter(fsm: GameFSM): void {
     fsm.push(new ItemSelectionState({
       prompt: 'Wield/wear which item?',
-      filter: (item) => {
-        // Can wield weapons, armor, and accessories
-        const tval = item.tval;
-        // Weapons: TV_SWORD, TV_HAFTED, TV_POLEARM, TV_BOW
-        // Armor: TV_SOFT_ARMOR, TV_HARD_ARMOR, TV_DRAG_ARMOR
-        // Other: TV_SHIELD, TV_CLOAK, TV_GLOVES, TV_BOOTS, TV_HELM, TV_CROWN
-        // Accessories: TV_RING, TV_AMULET, TV_LITE
-        const wieldableTvals = [
-          23, 21, 22, 19, // weapons (sword, hafted, polearm, bow)
-          36, 37, 38, // armor (soft, hard, dragon)
-          34, 35, 33, 30, 32, 31, // shield, cloak, gloves, boots, helm, crown
-          45, 40, 39, // ring, amulet, lite
-        ];
-        return wieldableTvals.includes(tval);
-      },
+      filter: (item) => WieldState.WIELDABLE_TYPES.has(item.type),
     }));
   }
 

@@ -5,7 +5,6 @@
     "name": "something",
     "symbol": "&",
     "color": "w",
-    "tval": 0,
     "sval": 0,
     "pval": 0,
     "depth": 0,
@@ -18,7 +17,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "unknown"
   },
   "blindness_1": {
     "key": "blindness_1",
@@ -26,7 +26,6 @@
     "name": "Blindness",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 1,
     "pval": 500,
     "depth": 9,
@@ -53,7 +52,8 @@
         "status": "blind",
         "duration": "200+1d200"
       }
-    ]
+    ],
+    "type": "food"
   },
   "paranoia": {
     "key": "paranoia",
@@ -61,7 +61,6 @@
     "name": "Paranoia",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 2,
     "pval": 500,
     "depth": 9,
@@ -88,7 +87,8 @@
         "status": "afraid",
         "duration": "10+1d10"
       }
-    ]
+    ],
+    "type": "food"
   },
   "confusion": {
     "key": "confusion",
@@ -96,7 +96,6 @@
     "name": "Confusion",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 3,
     "pval": 500,
     "depth": 9,
@@ -123,7 +122,8 @@
         "status": "confused",
         "duration": "10+1d10"
       }
-    ]
+    ],
+    "type": "food"
   },
   "hallucination": {
     "key": "hallucination",
@@ -131,7 +131,6 @@
     "name": "Hallucination",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 4,
     "pval": 500,
     "depth": 17,
@@ -158,7 +157,8 @@
         "status": "hallucinating",
         "duration": "250+1d250"
       }
-    ]
+    ],
+    "type": "food"
   },
   "cure_poison": {
     "key": "cure_poison",
@@ -166,7 +166,6 @@
     "name": "Cure Poison",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 12,
     "pval": 500,
     "depth": 9,
@@ -192,7 +191,8 @@
         "type": "cure",
         "status": "poisoned"
       }
-    ]
+    ],
+    "type": "food"
   },
   "cure_blindness": {
     "key": "cure_blindness",
@@ -200,7 +200,6 @@
     "name": "Cure Blindness",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 13,
     "pval": 500,
     "depth": 9,
@@ -226,7 +225,8 @@
         "type": "cure",
         "status": "blind"
       }
-    ]
+    ],
+    "type": "food"
   },
   "cure_paranoia": {
     "key": "cure_paranoia",
@@ -234,7 +234,6 @@
     "name": "Cure Paranoia",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 14,
     "pval": 500,
     "depth": 9,
@@ -260,7 +259,8 @@
         "type": "cure",
         "status": "afraid"
       }
-    ]
+    ],
+    "type": "food"
   },
   "cure_confusion": {
     "key": "cure_confusion",
@@ -268,7 +268,6 @@
     "name": "Cure Confusion",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 15,
     "pval": 500,
     "depth": 9,
@@ -294,7 +293,8 @@
         "type": "cure",
         "status": "confused"
       }
-    ]
+    ],
+    "type": "food"
   },
   "weakness_9": {
     "key": "weakness_9",
@@ -302,7 +302,6 @@
     "name": "Weakness",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 6,
     "pval": 500,
     "depth": 9,
@@ -322,7 +321,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "unhealth": {
     "key": "unhealth",
@@ -330,7 +330,6 @@
     "name": "Unhealth",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 10,
     "pval": 500,
     "depth": 26,
@@ -350,7 +349,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "restore_constitution_11": {
     "key": "restore_constitution_11",
@@ -358,7 +358,6 @@
     "name": "Restore Constitution",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 18,
     "pval": 500,
     "depth": 25,
@@ -378,7 +377,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "restoring": {
     "key": "restoring",
@@ -386,7 +386,6 @@
     "name": "Restoring",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 19,
     "pval": 500,
     "depth": 50,
@@ -414,7 +413,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "stupidity_13": {
     "key": "stupidity_13",
@@ -422,7 +422,6 @@
     "name": "Stupidity",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 8,
     "pval": 500,
     "depth": 26,
@@ -442,7 +441,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "naivety_14": {
     "key": "naivety_14",
@@ -450,7 +450,6 @@
     "name": "Naivety",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 9,
     "pval": 500,
     "depth": 26,
@@ -470,7 +469,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "poison_15": {
     "key": "poison_15",
@@ -478,7 +478,6 @@
     "name": "Poison",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 0,
     "pval": 500,
     "depth": 9,
@@ -506,7 +505,8 @@
         "duration": "10+1d10",
         "damage": 3
       }
-    ]
+    ],
+    "type": "food"
   },
   "sickness": {
     "key": "sickness",
@@ -514,7 +514,6 @@
     "name": "Sickness",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 7,
     "pval": 500,
     "depth": 17,
@@ -534,7 +533,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "paralysis": {
     "key": "paralysis",
@@ -542,7 +542,6 @@
     "name": "Paralysis",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 5,
     "pval": 500,
     "depth": 35,
@@ -569,7 +568,8 @@
         "status": "paralyzed",
         "duration": "10+1d10"
       }
-    ]
+    ],
+    "type": "food"
   },
   "restore_strength_18": {
     "key": "restore_strength_18",
@@ -577,7 +577,6 @@
     "name": "Restore Strength",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 17,
     "pval": 500,
     "depth": 25,
@@ -597,7 +596,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "disease": {
     "key": "disease",
@@ -605,7 +605,6 @@
     "name": "Disease",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 11,
     "pval": 500,
     "depth": 35,
@@ -625,7 +624,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "cure_serious_wounds_20": {
     "key": "cure_serious_wounds_20",
@@ -633,7 +633,6 @@
     "name": "Cure Serious Wounds",
     "symbol": ",",
     "color": "d",
-    "tval": 80,
     "sval": 16,
     "pval": 500,
     "depth": 16,
@@ -672,7 +671,8 @@
         "type": "cure",
         "status": "confused"
       }
-    ]
+    ],
+    "type": "food"
   },
   "ration_of_food": {
     "key": "ration_of_food",
@@ -680,7 +680,6 @@
     "name": "& Ration~ of Food",
     "symbol": ",",
     "color": "U",
-    "tval": 80,
     "sval": 35,
     "pval": 5000,
     "depth": 0,
@@ -708,7 +707,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "hard_biscuit": {
     "key": "hard_biscuit",
@@ -716,7 +716,6 @@
     "name": "& Hard Biscuit~",
     "symbol": ",",
     "color": "U",
-    "tval": 80,
     "sval": 32,
     "pval": 500,
     "depth": 0,
@@ -736,7 +735,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "strip_of_venison": {
     "key": "strip_of_venison",
@@ -744,7 +744,6 @@
     "name": "& Strip~ of Venison",
     "symbol": ",",
     "color": "u",
-    "tval": 80,
     "sval": 33,
     "pval": 1500,
     "depth": 0,
@@ -764,7 +763,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "slime_mold": {
     "key": "slime_mold",
@@ -772,7 +772,6 @@
     "name": "& Slime Mold~",
     "symbol": ",",
     "color": "g",
-    "tval": 80,
     "sval": 36,
     "pval": 3000,
     "depth": 1,
@@ -792,7 +791,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "piece_of_elvish_waybread": {
     "key": "piece_of_elvish_waybread",
@@ -800,7 +800,6 @@
     "name": "& Piece~ of Elvish Waybread",
     "symbol": ",",
     "color": "B",
-    "tval": 80,
     "sval": 37,
     "pval": 7500,
     "depth": 10,
@@ -842,7 +841,8 @@
         "type": "cure",
         "status": "poisoned"
       }
-    ]
+    ],
+    "type": "food"
   },
   "pint_of_fine_ale": {
     "key": "pint_of_fine_ale",
@@ -850,7 +850,6 @@
     "name": "& Pint~ of Fine Ale",
     "symbol": ",",
     "color": "y",
-    "tval": 80,
     "sval": 38,
     "pval": 500,
     "depth": 0,
@@ -870,7 +869,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "pint_of_fine_wine": {
     "key": "pint_of_fine_wine",
@@ -878,7 +878,6 @@
     "name": "& Pint~ of Fine Wine",
     "symbol": ",",
     "color": "r",
-    "tval": 80,
     "sval": 39,
     "pval": 1000,
     "depth": 0,
@@ -898,7 +897,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "food"
   },
   "mattock": {
     "key": "mattock",
@@ -906,7 +906,6 @@
     "name": "& Mattock~",
     "symbol": "\\",
     "color": "D",
-    "tval": 20,
     "sval": 7,
     "pval": 2,
     "depth": 30,
@@ -931,7 +930,8 @@
     "flags": [
       "SHOW_MODS",
       "TUNNEL"
-    ]
+    ],
+    "type": "digging"
   },
   "nodachi": {
     "key": "nodachi",
@@ -939,7 +939,6 @@
     "name": "& No-dachi~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 27,
     "pval": 0,
     "depth": 61,
@@ -963,7 +962,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "broken_dagger": {
     "key": "broken_dagger",
@@ -971,7 +971,6 @@
     "name": "& Broken Dagger~",
     "symbol": "|",
     "color": "D",
-    "tval": 23,
     "sval": 1,
     "pval": 0,
     "depth": 0,
@@ -991,7 +990,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "bastard_sword": {
     "key": "bastard_sword",
@@ -999,7 +999,6 @@
     "name": "& Bastard Sword~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 21,
     "pval": 0,
     "depth": 26,
@@ -1019,7 +1018,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "scimitar": {
     "key": "scimitar",
@@ -1027,7 +1027,6 @@
     "name": "& Scimitar~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 18,
     "pval": 0,
     "depth": 17,
@@ -1047,7 +1046,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "tulwar": {
     "key": "tulwar",
@@ -1055,7 +1055,6 @@
     "name": "& Tulwar~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 15,
     "pval": 0,
     "depth": 9,
@@ -1075,7 +1074,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "broad_sword": {
     "key": "broad_sword",
@@ -1083,7 +1083,6 @@
     "name": "& Broad Sword~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 16,
     "pval": 0,
     "depth": 17,
@@ -1107,7 +1106,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "short_sword": {
     "key": "short_sword",
@@ -1115,7 +1115,6 @@
     "name": "& Short Sword~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 10,
     "pval": 0,
     "depth": 9,
@@ -1135,7 +1134,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "blade_of_chaos": {
     "key": "blade_of_chaos",
@@ -1143,7 +1143,6 @@
     "name": "& Blade~ of Chaos",
     "symbol": "|",
     "color": "v",
-    "tval": 23,
     "sval": 30,
     "pval": 0,
     "depth": 95,
@@ -1164,7 +1163,8 @@
     "flags": [
       "RES_CHAOS",
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "twohanded_sword": {
     "key": "twohanded_sword",
@@ -1172,7 +1172,6 @@
     "name": "& Two-Handed Sword~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 25,
     "pval": 0,
     "depth": 53,
@@ -1200,7 +1199,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "main_gauche": {
     "key": "main_gauche",
@@ -1208,7 +1208,6 @@
     "name": "& Main Gauche~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 5,
     "pval": 0,
     "depth": 5,
@@ -1228,7 +1227,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "cutlass": {
     "key": "cutlass",
@@ -1236,7 +1236,6 @@
     "name": "& Cutlass~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 12,
     "pval": 0,
     "depth": 9,
@@ -1256,7 +1255,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "executioners_sword": {
     "key": "executioners_sword",
@@ -1264,7 +1264,6 @@
     "name": "& Executioner's Sword~",
     "symbol": "|",
     "color": "r",
-    "tval": 23,
     "sval": 28,
     "pval": 0,
     "depth": 65,
@@ -1288,7 +1287,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "katana": {
     "key": "katana",
@@ -1296,7 +1296,6 @@
     "name": "& Katana~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 20,
     "pval": 0,
     "depth": 35,
@@ -1316,7 +1315,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "long_sword": {
     "key": "long_sword",
@@ -1324,7 +1324,6 @@
     "name": "& Long Sword~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 17,
     "pval": 0,
     "depth": 17,
@@ -1348,7 +1347,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "dagger": {
     "key": "dagger",
@@ -1356,7 +1356,6 @@
     "name": "& Dagger~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 4,
     "pval": 0,
     "depth": 0,
@@ -1381,7 +1380,8 @@
     "flags": [
       "THROW",
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "rapier": {
     "key": "rapier",
@@ -1389,7 +1389,6 @@
     "name": "& Rapier~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 7,
     "pval": 0,
     "depth": 9,
@@ -1409,7 +1408,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "sabre": {
     "key": "sabre",
@@ -1417,7 +1417,6 @@
     "name": "& Sabre~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 11,
     "pval": 0,
     "depth": 9,
@@ -1437,7 +1436,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "small_sword": {
     "key": "small_sword",
@@ -1445,7 +1445,6 @@
     "name": "& Small Sword~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 8,
     "pval": 0,
     "depth": 9,
@@ -1465,7 +1464,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "broken_sword": {
     "key": "broken_sword",
@@ -1473,7 +1473,6 @@
     "name": "& Broken Sword~",
     "symbol": "|",
     "color": "D",
-    "tval": 23,
     "sval": 2,
     "pval": 0,
     "depth": 0,
@@ -1493,7 +1492,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "ballandchain": {
     "key": "ballandchain",
@@ -1501,7 +1501,6 @@
     "name": "& Ball-and-Chain~",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 6,
     "pval": 0,
     "depth": 35,
@@ -1521,7 +1520,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "whip": {
     "key": "whip",
@@ -1529,7 +1529,6 @@
     "name": "& Whip~",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 2,
     "pval": 0,
     "depth": 5,
@@ -1549,7 +1548,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "flail": {
     "key": "flail",
@@ -1557,7 +1557,6 @@
     "name": "& Flail~",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 13,
     "pval": 0,
     "depth": 17,
@@ -1581,7 +1580,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "twohanded_flail": {
     "key": "twohanded_flail",
@@ -1589,7 +1589,6 @@
     "name": "& Two-Handed Flail~",
     "symbol": "\\",
     "color": "y",
-    "tval": 21,
     "sval": 18,
     "pval": 0,
     "depth": 60,
@@ -1613,7 +1612,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "morning_star": {
     "key": "morning_star",
@@ -1621,7 +1621,6 @@
     "name": "& Morning Star~",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 12,
     "pval": 0,
     "depth": 17,
@@ -1641,7 +1640,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "mace": {
     "key": "mace",
@@ -1649,7 +1649,6 @@
     "name": "& Mace~",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 5,
     "pval": 0,
     "depth": 9,
@@ -1669,7 +1668,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "quarterstaff": {
     "key": "quarterstaff",
@@ -1677,7 +1677,6 @@
     "name": "& Quarterstaff~",
     "symbol": "\\",
     "color": "U",
-    "tval": 21,
     "sval": 3,
     "pval": 0,
     "depth": 30,
@@ -1701,7 +1700,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "war_hammer": {
     "key": "war_hammer",
@@ -1709,7 +1709,6 @@
     "name": "& War Hammer~",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 8,
     "pval": 0,
     "depth": 9,
@@ -1729,7 +1728,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "leadfilled_mace": {
     "key": "leadfilled_mace",
@@ -1737,7 +1737,6 @@
     "name": "& Lead-Filled Mace~",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 15,
     "pval": 0,
     "depth": 26,
@@ -1757,7 +1756,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "mace_of_disruption": {
     "key": "mace_of_disruption",
@@ -1765,7 +1765,6 @@
     "name": "& Mace~ of Disruption",
     "symbol": "\\",
     "color": "v",
-    "tval": 21,
     "sval": 20,
     "pval": 0,
     "depth": 100,
@@ -1786,7 +1785,8 @@
     "flags": [
       "SLAY_UNDEAD",
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "lucerne_hammer": {
     "key": "lucerne_hammer",
@@ -1794,7 +1794,6 @@
     "name": "& Lucerne Hammer~",
     "symbol": "/",
     "color": "B",
-    "tval": 22,
     "sval": 12,
     "pval": 0,
     "depth": 17,
@@ -1814,7 +1813,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "beaked_axe": {
     "key": "beaked_axe",
@@ -1822,7 +1822,6 @@
     "name": "& Beaked Axe~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 10,
     "pval": 0,
     "depth": 26,
@@ -1842,7 +1841,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "glaive": {
     "key": "glaive",
@@ -1850,7 +1850,6 @@
     "name": "& Glaive~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 13,
     "pval": 0,
     "depth": 35,
@@ -1870,7 +1869,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "halberd": {
     "key": "halberd",
@@ -1878,7 +1878,6 @@
     "name": "& Halberd~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 15,
     "pval": 0,
     "depth": 43,
@@ -1898,7 +1897,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "awlpike": {
     "key": "awlpike",
@@ -1906,7 +1906,6 @@
     "name": "& Awl-Pike~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 4,
     "pval": 0,
     "depth": 30,
@@ -1926,7 +1925,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "pike": {
     "key": "pike",
@@ -1934,7 +1934,6 @@
     "name": "& Pike~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 8,
     "pval": 0,
     "depth": 26,
@@ -1954,7 +1953,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "spear": {
     "key": "spear",
@@ -1962,7 +1962,6 @@
     "name": "& Spear~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 2,
     "pval": 0,
     "depth": 5,
@@ -1986,7 +1985,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "trident": {
     "key": "trident",
@@ -1994,7 +1994,6 @@
     "name": "& Trident~",
     "symbol": "/",
     "color": "y",
-    "tval": 22,
     "sval": 5,
     "pval": 0,
     "depth": 15,
@@ -2014,7 +2013,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "lance": {
     "key": "lance",
@@ -2022,7 +2022,6 @@
     "name": "& Lance~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 20,
     "pval": 0,
     "depth": 30,
@@ -2046,7 +2045,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "great_axe": {
     "key": "great_axe",
@@ -2054,7 +2054,6 @@
     "name": "& Great Axe~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 25,
     "pval": 0,
     "depth": 65,
@@ -2078,7 +2077,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "battle_axe": {
     "key": "battle_axe",
@@ -2086,7 +2086,6 @@
     "name": "& Battle Axe~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 22,
     "pval": 0,
     "depth": 26,
@@ -2106,7 +2105,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "lochaber_axe": {
     "key": "lochaber_axe",
@@ -2114,7 +2114,6 @@
     "name": "& Lochaber Axe~",
     "symbol": "/",
     "color": "D",
-    "tval": 22,
     "sval": 28,
     "pval": 0,
     "depth": 70,
@@ -2138,7 +2137,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "broad_axe": {
     "key": "broad_axe",
@@ -2146,7 +2146,6 @@
     "name": "& Broad Axe~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 11,
     "pval": 0,
     "depth": 26,
@@ -2166,7 +2165,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "scythe": {
     "key": "scythe",
@@ -2174,7 +2174,6 @@
     "name": "& Scythe~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 17,
     "pval": 0,
     "depth": 70,
@@ -2198,7 +2197,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "scythe_of_slicing": {
     "key": "scythe_of_slicing",
@@ -2206,7 +2206,6 @@
     "name": "& Scythe~ of Slicing",
     "symbol": "/",
     "color": "r",
-    "tval": 22,
     "sval": 30,
     "pval": 0,
     "depth": 93,
@@ -2230,7 +2229,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "short_bow": {
     "key": "short_bow",
@@ -2238,7 +2238,6 @@
     "name": "& Short Bow~",
     "symbol": "}",
     "color": "U",
-    "tval": 19,
     "sval": 12,
     "pval": 0,
     "depth": 5,
@@ -2262,7 +2261,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "bow"
   },
   "long_bow": {
     "key": "long_bow",
@@ -2270,7 +2270,6 @@
     "name": "& Long Bow~",
     "symbol": "}",
     "color": "U",
-    "tval": 19,
     "sval": 13,
     "pval": 0,
     "depth": 17,
@@ -2294,7 +2293,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "bow"
   },
   "light_crossbow": {
     "key": "light_crossbow",
@@ -2302,7 +2302,6 @@
     "name": "& Light Crossbow~",
     "symbol": "}",
     "color": "s",
-    "tval": 19,
     "sval": 23,
     "pval": 0,
     "depth": 26,
@@ -2326,7 +2325,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "bow"
   },
   "heavy_crossbow": {
     "key": "heavy_crossbow",
@@ -2334,7 +2334,6 @@
     "name": "& Heavy Crossbow~",
     "symbol": "}",
     "color": "s",
-    "tval": 19,
     "sval": 24,
     "pval": 0,
     "depth": 52,
@@ -2358,7 +2357,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "bow"
   },
   "sling": {
     "key": "sling",
@@ -2366,7 +2366,6 @@
     "name": "& Sling~",
     "symbol": "}",
     "color": "u",
-    "tval": 19,
     "sval": 2,
     "pval": 0,
     "depth": 1,
@@ -2390,7 +2389,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "bow"
   },
   "arrow": {
     "key": "arrow",
@@ -2398,7 +2398,6 @@
     "name": "& Arrow~",
     "symbol": "{",
     "color": "U",
-    "tval": 17,
     "sval": 1,
     "pval": 0,
     "depth": 10,
@@ -2426,7 +2425,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "arrow"
   },
   "seeker_arrow": {
     "key": "seeker_arrow",
@@ -2434,7 +2434,6 @@
     "name": "& Seeker Arrow~",
     "symbol": "{",
     "color": "G",
-    "tval": 17,
     "sval": 2,
     "pval": 0,
     "depth": 50,
@@ -2466,7 +2465,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "arrow"
   },
   "bolt": {
     "key": "bolt",
@@ -2474,7 +2474,6 @@
     "name": "& Bolt~",
     "symbol": "{",
     "color": "s",
-    "tval": 18,
     "sval": 0,
     "pval": 0,
     "depth": 5,
@@ -2502,7 +2501,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "bolt"
   },
   "seeker_bolt": {
     "key": "seeker_bolt",
@@ -2510,7 +2510,6 @@
     "name": "& Seeker Bolt~",
     "symbol": "{",
     "color": "B",
-    "tval": 18,
     "sval": 2,
     "pval": 0,
     "depth": 60,
@@ -2538,7 +2537,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "bolt"
   },
   "rounded_pebble": {
     "key": "rounded_pebble",
@@ -2546,7 +2546,6 @@
     "name": "& Rounded Pebble~",
     "symbol": "{",
     "color": "s",
-    "tval": 16,
     "sval": 0,
     "pval": 0,
     "depth": 0,
@@ -2570,7 +2569,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "shot"
   },
   "iron_shot": {
     "key": "iron_shot",
@@ -2578,7 +2578,6 @@
     "name": "& Iron Shot~",
     "symbol": "{",
     "color": "s",
-    "tval": 16,
     "sval": 1,
     "pval": 0,
     "depth": 10,
@@ -2602,7 +2601,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "shot"
   },
   "shovel": {
     "key": "shovel",
@@ -2610,7 +2610,6 @@
     "name": "& Shovel~",
     "symbol": "\\",
     "color": "s",
-    "tval": 20,
     "sval": 1,
     "pval": 1,
     "depth": 4,
@@ -2631,7 +2630,8 @@
     "flags": [
       "SHOW_MODS",
       "TUNNEL"
-    ]
+    ],
+    "type": "digging"
   },
   "gnomish_shovel": {
     "key": "gnomish_shovel",
@@ -2639,7 +2639,6 @@
     "name": "& Gnomish Shovel~",
     "symbol": "\\",
     "color": "G",
-    "tval": 20,
     "sval": 2,
     "pval": 2,
     "depth": 35,
@@ -2660,7 +2659,8 @@
     "flags": [
       "SHOW_MODS",
       "TUNNEL"
-    ]
+    ],
+    "type": "digging"
   },
   "dwarven_shovel": {
     "key": "dwarven_shovel",
@@ -2668,7 +2668,6 @@
     "name": "& Dwarven Shovel~",
     "symbol": "\\",
     "color": "B",
-    "tval": 20,
     "sval": 3,
     "pval": 3,
     "depth": 55,
@@ -2689,7 +2688,8 @@
     "flags": [
       "SHOW_MODS",
       "TUNNEL"
-    ]
+    ],
+    "type": "digging"
   },
   "pick": {
     "key": "pick",
@@ -2697,7 +2697,6 @@
     "name": "& Pick~",
     "symbol": "\\",
     "color": "s",
-    "tval": 20,
     "sval": 4,
     "pval": 1,
     "depth": 17,
@@ -2718,7 +2717,8 @@
     "flags": [
       "SHOW_MODS",
       "TUNNEL"
-    ]
+    ],
+    "type": "digging"
   },
   "orcish_pick": {
     "key": "orcish_pick",
@@ -2726,7 +2726,6 @@
     "name": "& Orcish Pick~",
     "symbol": "\\",
     "color": "g",
-    "tval": 20,
     "sval": 5,
     "pval": 2,
     "depth": 52,
@@ -2747,7 +2746,8 @@
     "flags": [
       "SHOW_MODS",
       "TUNNEL"
-    ]
+    ],
+    "type": "digging"
   },
   "dwarven_pick": {
     "key": "dwarven_pick",
@@ -2755,7 +2755,6 @@
     "name": "& Dwarven Pick~",
     "symbol": "\\",
     "color": "b",
-    "tval": 20,
     "sval": 6,
     "pval": 3,
     "depth": 75,
@@ -2776,7 +2775,8 @@
     "flags": [
       "SHOW_MODS",
       "TUNNEL"
-    ]
+    ],
+    "type": "digging"
   },
   "elven_cloak": {
     "key": "elven_cloak",
@@ -2784,7 +2784,6 @@
     "name": "& Elven Cloak~",
     "symbol": "(",
     "color": "G",
-    "tval": 35,
     "sval": 2,
     "pval": 0,
     "depth": 52,
@@ -2813,7 +2812,8 @@
       "IGNORE_ELEC",
       "STEALTH",
       "SENSE"
-    ]
+    ],
+    "type": "cloak"
   },
   "pair_of_soft_leather_boots": {
     "key": "pair_of_soft_leather_boots",
@@ -2821,7 +2821,6 @@
     "name": "& Pair~ of Soft Leather Boots",
     "symbol": "]",
     "color": "U",
-    "tval": 30,
     "sval": 2,
     "pval": 0,
     "depth": 5,
@@ -2839,7 +2838,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "boots"
   },
   "pair_of_hard_leather_boots": {
     "key": "pair_of_hard_leather_boots",
@@ -2847,7 +2847,6 @@
     "name": "& Pair~ of Hard Leather Boots",
     "symbol": "]",
     "color": "U",
-    "tval": 30,
     "sval": 3,
     "pval": 0,
     "depth": 9,
@@ -2869,7 +2868,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "boots"
   },
   "pair_of_metal_shod_boots": {
     "key": "pair_of_metal_shod_boots",
@@ -2877,7 +2877,6 @@
     "name": "& Pair~ of Metal Shod Boots",
     "symbol": "]",
     "color": "s",
-    "tval": 30,
     "sval": 6,
     "pval": 0,
     "depth": 20,
@@ -2903,7 +2902,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "boots"
   },
   "hard_leather_cap": {
     "key": "hard_leather_cap",
@@ -2911,7 +2911,6 @@
     "name": "& Hard Leather Cap~",
     "symbol": "]",
     "color": "u",
-    "tval": 32,
     "sval": 2,
     "pval": 0,
     "depth": 5,
@@ -2929,7 +2928,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "helm"
   },
   "metal_cap": {
     "key": "metal_cap",
@@ -2937,7 +2937,6 @@
     "name": "& Metal Cap~",
     "symbol": "]",
     "color": "s",
-    "tval": 32,
     "sval": 3,
     "pval": 0,
     "depth": 17,
@@ -2955,7 +2954,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "helm"
   },
   "iron_helm": {
     "key": "iron_helm",
@@ -2963,7 +2963,6 @@
     "name": "& Iron Helm~",
     "symbol": "]",
     "color": "s",
-    "tval": 32,
     "sval": 5,
     "pval": 0,
     "depth": 35,
@@ -2981,7 +2980,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "helm"
   },
   "steel_helm": {
     "key": "steel_helm",
@@ -2989,7 +2989,6 @@
     "name": "& Steel Helm~",
     "symbol": "]",
     "color": "W",
-    "tval": 32,
     "sval": 6,
     "pval": 0,
     "depth": 45,
@@ -3007,7 +3006,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "helm"
   },
   "iron_crown": {
     "key": "iron_crown",
@@ -3015,7 +3015,6 @@
     "name": "& Iron Crown~",
     "symbol": "]",
     "color": "s",
-    "tval": 33,
     "sval": 10,
     "pval": 0,
     "depth": 60,
@@ -3033,7 +3032,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "crown"
   },
   "golden_crown": {
     "key": "golden_crown",
@@ -3041,7 +3041,6 @@
     "name": "& Golden Crown~",
     "symbol": "]",
     "color": "y",
-    "tval": 33,
     "sval": 11,
     "pval": 0,
     "depth": 75,
@@ -3061,7 +3060,8 @@
     "toAc": 0,
     "flags": [
       "IGNORE_ACID"
-    ]
+    ],
+    "type": "crown"
   },
   "jewel_encrusted_crown": {
     "key": "jewel_encrusted_crown",
@@ -3069,7 +3069,6 @@
     "name": "& Jewel Encrusted Crown~",
     "symbol": "]",
     "color": "v",
-    "tval": 33,
     "sval": 12,
     "pval": 0,
     "depth": 80,
@@ -3089,7 +3088,8 @@
     "toAc": 0,
     "flags": [
       "IGNORE_ACID"
-    ]
+    ],
+    "type": "crown"
   },
   "robe": {
     "key": "robe",
@@ -3097,7 +3097,6 @@
     "name": "& Robe~",
     "symbol": "(",
     "color": "b",
-    "tval": 36,
     "sval": 2,
     "pval": 0,
     "depth": 1,
@@ -3119,7 +3118,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "filthy_rag": {
     "key": "filthy_rag",
@@ -3127,7 +3127,6 @@
     "name": "& Filthy Rag~",
     "symbol": "(",
     "color": "D",
-    "tval": 36,
     "sval": 1,
     "pval": 0,
     "depth": 0,
@@ -3145,7 +3144,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": -1,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "soft_leather_armour": {
     "key": "soft_leather_armour",
@@ -3153,7 +3153,6 @@
     "name": "Soft Leather Armour~",
     "symbol": "(",
     "color": "U",
-    "tval": 36,
     "sval": 4,
     "pval": 0,
     "depth": 5,
@@ -3171,7 +3170,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "soft_studded_leather": {
     "key": "soft_studded_leather",
@@ -3179,7 +3179,6 @@
     "name": "Soft Studded Leather~",
     "symbol": "(",
     "color": "U",
-    "tval": 36,
     "sval": 5,
     "pval": 0,
     "depth": 5,
@@ -3197,7 +3196,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "hard_leather_armour": {
     "key": "hard_leather_armour",
@@ -3205,7 +3205,6 @@
     "name": "Hard Leather Armour~",
     "symbol": "(",
     "color": "U",
-    "tval": 36,
     "sval": 6,
     "pval": 0,
     "depth": 9,
@@ -3223,7 +3222,8 @@
     "toHit": -1,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "hard_studded_leather": {
     "key": "hard_studded_leather",
@@ -3231,7 +3231,6 @@
     "name": "Hard Studded Leather~",
     "symbol": "(",
     "color": "U",
-    "tval": 36,
     "sval": 7,
     "pval": 0,
     "depth": 17,
@@ -3249,7 +3248,8 @@
     "toHit": -1,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "leather_scale_mail": {
     "key": "leather_scale_mail",
@@ -3257,7 +3257,6 @@
     "name": "Leather Scale Mail~",
     "symbol": "(",
     "color": "U",
-    "tval": 36,
     "sval": 11,
     "pval": 0,
     "depth": 26,
@@ -3275,7 +3274,8 @@
     "toHit": -1,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "metal_scale_mail": {
     "key": "metal_scale_mail",
@@ -3283,7 +3283,6 @@
     "name": "Metal Scale Mail~",
     "symbol": "[",
     "color": "s",
-    "tval": 37,
     "sval": 3,
     "pval": 0,
     "depth": 43,
@@ -3301,7 +3300,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "chain_mail": {
     "key": "chain_mail",
@@ -3309,7 +3309,6 @@
     "name": "Chain Mail~",
     "symbol": "[",
     "color": "s",
-    "tval": 37,
     "sval": 4,
     "pval": 0,
     "depth": 43,
@@ -3327,7 +3326,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "rusty_chain_mail": {
     "key": "rusty_chain_mail",
@@ -3335,7 +3335,6 @@
     "name": "Rusty Chain Mail~",
     "symbol": "[",
     "color": "r",
-    "tval": 37,
     "sval": 1,
     "pval": 0,
     "depth": 25,
@@ -3353,7 +3352,8 @@
     "toHit": -5,
     "toDam": 0,
     "toAc": -8,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "augmented_chain_mail": {
     "key": "augmented_chain_mail",
@@ -3361,7 +3361,6 @@
     "name": "Augmented Chain Mail~",
     "symbol": "[",
     "color": "s",
-    "tval": 37,
     "sval": 6,
     "pval": 0,
     "depth": 52,
@@ -3379,7 +3378,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "bar_chain_mail": {
     "key": "bar_chain_mail",
@@ -3387,7 +3387,6 @@
     "name": "Bar Chain Mail~",
     "symbol": "[",
     "color": "s",
-    "tval": 37,
     "sval": 8,
     "pval": 0,
     "depth": 61,
@@ -3405,7 +3404,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "metal_brigandine_armour": {
     "key": "metal_brigandine_armour",
@@ -3413,7 +3413,6 @@
     "name": "Metal Brigandine Armour~",
     "symbol": "[",
     "color": "s",
-    "tval": 37,
     "sval": 9,
     "pval": 0,
     "depth": 61,
@@ -3431,7 +3430,8 @@
     "toHit": -3,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "partial_plate_armour": {
     "key": "partial_plate_armour",
@@ -3439,7 +3439,6 @@
     "name": "Partial Plate Armour~",
     "symbol": "[",
     "color": "W",
-    "tval": 37,
     "sval": 12,
     "pval": 0,
     "depth": 70,
@@ -3457,7 +3456,8 @@
     "toHit": -3,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "metal_lamellar_armour": {
     "key": "metal_lamellar_armour",
@@ -3465,7 +3465,6 @@
     "name": "Metal Lamellar Armour~",
     "symbol": "[",
     "color": "W",
-    "tval": 37,
     "sval": 13,
     "pval": 0,
     "depth": 70,
@@ -3483,7 +3482,8 @@
     "toHit": -3,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "full_plate_armour": {
     "key": "full_plate_armour",
@@ -3491,7 +3491,6 @@
     "name": "Full Plate Armour~",
     "symbol": "[",
     "color": "W",
-    "tval": 37,
     "sval": 15,
     "pval": 0,
     "depth": 75,
@@ -3509,7 +3508,8 @@
     "toHit": -3,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "ribbed_plate_armour": {
     "key": "ribbed_plate_armour",
@@ -3517,7 +3517,6 @@
     "name": "Ribbed Plate Armour~",
     "symbol": "[",
     "color": "W",
-    "tval": 37,
     "sval": 18,
     "pval": 0,
     "depth": 80,
@@ -3535,7 +3534,8 @@
     "toHit": -3,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "adamantite_plate_mail": {
     "key": "adamantite_plate_mail",
@@ -3543,7 +3543,6 @@
     "name": "Adamantite Plate Mail~",
     "symbol": "[",
     "color": "G",
-    "tval": 37,
     "sval": 30,
     "pval": 0,
     "depth": 95,
@@ -3563,7 +3562,8 @@
     "toAc": 0,
     "flags": [
       "IGNORE_ACID"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "mithril_plate_mail": {
     "key": "mithril_plate_mail",
@@ -3571,7 +3571,6 @@
     "name": "Mithril Plate Mail~",
     "symbol": "[",
     "color": "B",
-    "tval": 37,
     "sval": 25,
     "pval": 0,
     "depth": 90,
@@ -3591,7 +3590,8 @@
     "toAc": 0,
     "flags": [
       "IGNORE_ACID"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "mithril_chain_mail": {
     "key": "mithril_chain_mail",
@@ -3599,7 +3599,6 @@
     "name": "Mithril Chain Mail~",
     "symbol": "[",
     "color": "B",
-    "tval": 37,
     "sval": 20,
     "pval": 0,
     "depth": 85,
@@ -3619,7 +3618,8 @@
     "toAc": 0,
     "flags": [
       "IGNORE_ACID"
-    ]
+    ],
+    "type": "hard_armor"
   },
   "double_chain_mail": {
     "key": "double_chain_mail",
@@ -3627,7 +3627,6 @@
     "name": "Double Chain Mail~",
     "symbol": "[",
     "color": "s",
-    "tval": 37,
     "sval": 7,
     "pval": 0,
     "depth": 52,
@@ -3645,7 +3644,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "shield_of_deflection": {
     "key": "shield_of_deflection",
@@ -3653,7 +3653,6 @@
     "name": "& Shield~ of Deflection",
     "symbol": "[",
     "color": "B",
-    "tval": 34,
     "sval": 10,
     "pval": 0,
     "depth": 95,
@@ -3673,7 +3672,8 @@
     "toAc": 10,
     "flags": [
       "IGNORE_ACID"
-    ]
+    ],
+    "type": "shield"
   },
   "cloak": {
     "key": "cloak",
@@ -3681,7 +3681,6 @@
     "name": "& Cloak~",
     "symbol": "(",
     "color": "g",
-    "tval": 35,
     "sval": 1,
     "pval": 0,
     "depth": 1,
@@ -3703,7 +3702,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "cloak"
   },
   "shadow_cloak": {
     "key": "shadow_cloak",
@@ -3711,7 +3711,6 @@
     "name": "& Shadow Cloak~",
     "symbol": "(",
     "color": "D",
-    "tval": 35,
     "sval": 6,
     "pval": 0,
     "depth": 100,
@@ -3732,7 +3731,8 @@
     "flags": [
       "RES_DARK",
       "RES_LITE"
-    ]
+    ],
+    "type": "cloak"
   },
   "set_of_leather_gloves": {
     "key": "set_of_leather_gloves",
@@ -3740,7 +3740,6 @@
     "name": "& Set~ of Leather Gloves",
     "symbol": "]",
     "color": "U",
-    "tval": 31,
     "sval": 1,
     "pval": 0,
     "depth": 1,
@@ -3758,7 +3757,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gloves"
   },
   "set_of_gauntlets": {
     "key": "set_of_gauntlets",
@@ -3766,7 +3766,6 @@
     "name": "& Set~ of Gauntlets",
     "symbol": "]",
     "color": "U",
-    "tval": 31,
     "sval": 2,
     "pval": 0,
     "depth": 17,
@@ -3788,7 +3787,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gloves"
   },
   "set_of_cesti": {
     "key": "set_of_cesti",
@@ -3796,7 +3796,6 @@
     "name": "& Set~ of Cesti",
     "symbol": "]",
     "color": "W",
-    "tval": 31,
     "sval": 5,
     "pval": 0,
     "depth": 45,
@@ -3814,7 +3813,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gloves"
   },
   "small_leather_shield": {
     "key": "small_leather_shield",
@@ -3822,7 +3822,6 @@
     "name": "& Small Leather Shield~",
     "symbol": ")",
     "color": "U",
-    "tval": 34,
     "sval": 2,
     "pval": 0,
     "depth": 5,
@@ -3840,7 +3839,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "shield"
   },
   "large_leather_shield": {
     "key": "large_leather_shield",
@@ -3848,7 +3848,6 @@
     "name": "& Large Leather Shield~",
     "symbol": ")",
     "color": "U",
-    "tval": 34,
     "sval": 4,
     "pval": 0,
     "depth": 26,
@@ -3870,7 +3869,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "shield"
   },
   "small_metal_shield": {
     "key": "small_metal_shield",
@@ -3878,7 +3878,6 @@
     "name": "& Small Metal Shield~",
     "symbol": ")",
     "color": "s",
-    "tval": 34,
     "sval": 3,
     "pval": 0,
     "depth": 17,
@@ -3900,7 +3899,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "shield"
   },
   "large_metal_shield": {
     "key": "large_metal_shield",
@@ -3908,7 +3908,6 @@
     "name": "& Large Metal Shield~",
     "symbol": ")",
     "color": "s",
-    "tval": 34,
     "sval": 5,
     "pval": 0,
     "depth": 52,
@@ -3930,7 +3929,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "shield"
   },
   "strength_132": {
     "key": "strength_132",
@@ -3938,7 +3938,6 @@
     "name": "Strength",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 24,
     "pval": 5,
     "depth": 52,
@@ -3959,7 +3958,8 @@
     "flags": [
       "STR",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "ring"
   },
   "dexterity_133": {
     "key": "dexterity_133",
@@ -3967,7 +3967,6 @@
     "name": "Dexterity",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 26,
     "pval": 5,
     "depth": 52,
@@ -3988,7 +3987,8 @@
     "flags": [
       "DEX",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "ring"
   },
   "constitution_134": {
     "key": "constitution_134",
@@ -3996,7 +3996,6 @@
     "name": "Constitution",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 27,
     "pval": 5,
     "depth": 52,
@@ -4017,7 +4016,8 @@
     "flags": [
       "CON",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "ring"
   },
   "intelligence_135": {
     "key": "intelligence_135",
@@ -4025,7 +4025,6 @@
     "name": "Intelligence",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 25,
     "pval": 5,
     "depth": 52,
@@ -4046,7 +4045,8 @@
     "flags": [
       "INT",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "ring"
   },
   "speed_136": {
     "key": "speed_136",
@@ -4054,7 +4054,6 @@
     "name": "Speed",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 31,
     "pval": 10,
     "depth": 100,
@@ -4075,7 +4074,8 @@
     "flags": [
       "SPEED",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "ring"
   },
   "sensing_137": {
     "key": "sensing_137",
@@ -4083,7 +4083,6 @@
     "name": "Sensing",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 23,
     "pval": 5,
     "depth": 9,
@@ -4104,7 +4103,8 @@
     "flags": [
       "SENSE",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "ring"
   },
   "teleportation_138": {
     "key": "teleportation_138",
@@ -4112,7 +4112,6 @@
     "name": "Teleportation",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 4,
     "pval": 0,
     "depth": 9,
@@ -4134,7 +4133,8 @@
       "CURSED",
       "TELEPORT",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "slow_digestion_139": {
     "key": "slow_digestion_139",
@@ -4142,7 +4142,6 @@
     "name": "Slow Digestion",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 6,
     "pval": 0,
     "depth": 9,
@@ -4163,7 +4162,8 @@
     "flags": [
       "SLOW_DIGEST",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "resist_fire": {
     "key": "resist_fire",
@@ -4171,7 +4171,6 @@
     "name": "Resist Fire",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 8,
     "pval": 0,
     "depth": 17,
@@ -4193,7 +4192,8 @@
       "RES_FIRE",
       "IGNORE_FIRE",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "resist_cold_141": {
     "key": "resist_cold_141",
@@ -4201,7 +4201,6 @@
     "name": "Resist Cold",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 9,
     "pval": 0,
     "depth": 17,
@@ -4223,7 +4222,8 @@
       "RES_COLD",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "levitation": {
     "key": "levitation",
@@ -4231,7 +4231,6 @@
     "name": "Levitation",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 7,
     "pval": 0,
     "depth": 9,
@@ -4252,7 +4251,8 @@
     "flags": [
       "FEATHER",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "poison_resistance": {
     "key": "poison_resistance",
@@ -4260,7 +4260,6 @@
     "name": "Poison Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 20,
     "pval": 0,
     "depth": 60,
@@ -4285,7 +4284,8 @@
     "flags": [
       "RES_POIS",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "free_action": {
     "key": "free_action",
@@ -4293,7 +4293,6 @@
     "name": "Free Action",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 21,
     "pval": 0,
     "depth": 25,
@@ -4314,7 +4313,8 @@
     "flags": [
       "FREE_ACT",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "weakness_145": {
     "key": "weakness_145",
@@ -4322,7 +4322,6 @@
     "name": "Weakness",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 2,
     "pval": -5,
     "depth": 9,
@@ -4344,7 +4343,8 @@
       "CURSED",
       "STR",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "ring"
   },
   "flames": {
     "key": "flames",
@@ -4352,7 +4352,6 @@
     "name": "Flames",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 18,
     "pval": 0,
     "depth": 75,
@@ -4374,7 +4373,8 @@
       "RES_FIRE",
       "IGNORE_FIRE",
       "ACTIVATE"
-    ]
+    ],
+    "type": "ring"
   },
   "acid": {
     "key": "acid",
@@ -4382,7 +4382,6 @@
     "name": "Acid",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 17,
     "pval": 0,
     "depth": 75,
@@ -4404,7 +4403,8 @@
       "RES_ACID",
       "IGNORE_ACID",
       "ACTIVATE"
-    ]
+    ],
+    "type": "ring"
   },
   "ice_148": {
     "key": "ice_148",
@@ -4412,7 +4412,6 @@
     "name": "Ice",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 19,
     "pval": 0,
     "depth": 75,
@@ -4434,7 +4433,8 @@
       "RES_COLD",
       "IGNORE_COLD",
       "ACTIVATE"
-    ]
+    ],
+    "type": "ring"
   },
   "woe": {
     "key": "woe",
@@ -4442,7 +4442,6 @@
     "name": "Woe",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 0,
     "pval": -5,
     "depth": 75,
@@ -4466,7 +4465,8 @@
       "WIS",
       "CHR",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "ring"
   },
   "stupidity_150": {
     "key": "stupidity_150",
@@ -4474,7 +4474,6 @@
     "name": "Stupidity",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 3,
     "pval": -5,
     "depth": 9,
@@ -4496,7 +4495,8 @@
       "CURSED",
       "INT",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "ring"
   },
   "combat": {
     "key": "combat",
@@ -4504,7 +4504,6 @@
     "name": "Combat",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 29,
     "pval": 0,
     "depth": 35,
@@ -4522,7 +4521,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "ring"
   },
   "skill": {
     "key": "skill",
@@ -4530,7 +4530,6 @@
     "name": "Skill",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 28,
     "pval": 0,
     "depth": 35,
@@ -4548,7 +4547,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "ring"
   },
   "protection": {
     "key": "protection",
@@ -4556,7 +4556,6 @@
     "name": "Protection",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 16,
     "pval": 0,
     "depth": 17,
@@ -4574,7 +4573,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "ring"
   },
   "aggravate_monster_154": {
     "key": "aggravate_monster_154",
@@ -4582,7 +4582,6 @@
     "name": "Aggravate Monster",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 1,
     "pval": 0,
     "depth": 9,
@@ -4604,7 +4603,8 @@
       "CURSED",
       "AGGRAVATE",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "see_invisible": {
     "key": "see_invisible",
@@ -4612,7 +4612,6 @@
     "name": "See Invisible",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 22,
     "pval": 0,
     "depth": 30,
@@ -4637,7 +4636,8 @@
     "flags": [
       "SEE_INVIS",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "sustain_strength": {
     "key": "sustain_strength",
@@ -4645,7 +4645,6 @@
     "name": "Sustain Strength",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 10,
     "pval": 0,
     "depth": 20,
@@ -4670,7 +4669,8 @@
     "flags": [
       "SUST_STR",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "sustain_intelligence": {
     "key": "sustain_intelligence",
@@ -4678,7 +4678,6 @@
     "name": "Sustain Intelligence",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 11,
     "pval": 0,
     "depth": 20,
@@ -4703,7 +4702,8 @@
     "flags": [
       "SUST_INT",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "sustain_wisdom": {
     "key": "sustain_wisdom",
@@ -4711,7 +4711,6 @@
     "name": "Sustain Wisdom",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 12,
     "pval": 0,
     "depth": 20,
@@ -4736,7 +4735,8 @@
     "flags": [
       "SUST_WIS",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "sustain_constitution": {
     "key": "sustain_constitution",
@@ -4744,7 +4744,6 @@
     "name": "Sustain Constitution",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 13,
     "pval": 0,
     "depth": 20,
@@ -4769,7 +4768,8 @@
     "flags": [
       "SUST_CON",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "sustain_dexterity": {
     "key": "sustain_dexterity",
@@ -4777,7 +4777,6 @@
     "name": "Sustain Dexterity",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 14,
     "pval": 0,
     "depth": 20,
@@ -4802,7 +4801,8 @@
     "flags": [
       "SUST_DEX",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "sustain_charisma": {
     "key": "sustain_charisma",
@@ -4810,7 +4810,6 @@
     "name": "Sustain Charisma",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 15,
     "pval": 0,
     "depth": 20,
@@ -4835,7 +4834,8 @@
     "flags": [
       "SUST_CHR",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "slaying": {
     "key": "slaying",
@@ -4843,7 +4843,6 @@
     "name": "Slaying",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 30,
     "pval": 0,
     "depth": 65,
@@ -4863,7 +4862,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "ring"
   },
   "brilliance": {
     "key": "brilliance",
@@ -4871,7 +4871,6 @@
     "name": "Brilliance",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 6,
     "pval": 4,
     "depth": 35,
@@ -4897,7 +4896,8 @@
       "INT",
       "WIS",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "amulet"
   },
   "charisma_164": {
     "key": "charisma_164",
@@ -4905,7 +4905,6 @@
     "name": "Charisma",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 7,
     "pval": 4,
     "depth": 20,
@@ -4926,7 +4925,8 @@
     "flags": [
       "CHR",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "amulet"
   },
   "sensing_165": {
     "key": "sensing_165",
@@ -4934,7 +4934,6 @@
     "name": "Sensing",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 5,
     "pval": 5,
     "depth": 12,
@@ -4955,7 +4954,8 @@
     "flags": [
       "SENSE",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "amulet"
   },
   "teleportation_166": {
     "key": "teleportation_166",
@@ -4963,7 +4963,6 @@
     "name": "Teleportation",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 1,
     "pval": 0,
     "depth": 26,
@@ -4985,7 +4984,8 @@
       "CURSED",
       "TELEPORT",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "amulet"
   },
   "slow_digestion_167": {
     "key": "slow_digestion_167",
@@ -4993,7 +4993,6 @@
     "name": "Slow Digestion",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 3,
     "pval": 0,
     "depth": 26,
@@ -5014,7 +5013,8 @@
     "flags": [
       "SLOW_DIGEST",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "amulet"
   },
   "resist_acid": {
     "key": "resist_acid",
@@ -5022,7 +5022,6 @@
     "name": "Resist Acid",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 4,
     "pval": 0,
     "depth": 35,
@@ -5044,7 +5043,8 @@
       "RES_ACID",
       "IGNORE_ACID",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "amulet"
   },
   "berserk_strength_169": {
     "key": "berserk_strength_169",
@@ -5052,7 +5052,6 @@
     "name": "Berserk Strength",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 2,
     "pval": 0,
     "depth": 33,
@@ -5072,7 +5071,8 @@
     "toAc": 0,
     "flags": [
       "AGGRAVATE"
-    ]
+    ],
+    "type": "amulet"
   },
   "double_ring_mail": {
     "key": "double_ring_mail",
@@ -5080,7 +5080,6 @@
     "name": "Double Ring Mail~",
     "symbol": "[",
     "color": "s",
-    "tval": 37,
     "sval": 5,
     "pval": 0,
     "depth": 43,
@@ -5098,7 +5097,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "the_magi_171": {
     "key": "the_magi_171",
@@ -5106,7 +5106,6 @@
     "name": "the Magi",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 8,
     "pval": 5,
     "depth": 75,
@@ -5136,7 +5135,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "amulet"
   },
   "destruction_172": {
     "key": "destruction_172",
@@ -5144,7 +5144,6 @@
     "name": "Destruction",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 0,
     "pval": -5,
     "depth": 80,
@@ -5176,7 +5175,8 @@
       "NO_MAGIC",
       "REGEN",
       "HIDE_TYPE"
-    ]
+    ],
+    "type": "amulet"
   },
   "enchant_weapon_skill": {
     "key": "enchant_weapon_skill",
@@ -5184,7 +5184,6 @@
     "name": "Enchant Weapon Skill",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 17,
     "pval": 0,
     "depth": 26,
@@ -5204,7 +5203,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "enchant_weapon_deadliness": {
     "key": "enchant_weapon_deadliness",
@@ -5212,7 +5212,6 @@
     "name": "Enchant Weapon Deadliness",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 18,
     "pval": 0,
     "depth": 26,
@@ -5232,7 +5231,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "enchant_armor_175": {
     "key": "enchant_armor_175",
@@ -5240,7 +5240,6 @@
     "name": "Enchant Armor",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 16,
     "pval": 0,
     "depth": 26,
@@ -5260,7 +5259,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "identify_176": {
     "key": "identify_176",
@@ -5268,7 +5268,6 @@
     "name": "Identify",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 12,
     "pval": 0,
     "depth": 5,
@@ -5307,7 +5306,8 @@
         "target": "item",
         "prompt": "Identify which item?"
       }
-    ]
+    ],
+    "type": "scroll"
   },
   "identify_177": {
     "key": "identify_177",
@@ -5315,7 +5315,6 @@
     "name": "*Identify*",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 13,
     "pval": 0,
     "depth": 30,
@@ -5343,7 +5342,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "rumour": {
     "key": "rumour",
@@ -5351,7 +5351,6 @@
     "name": "Rumour",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 51,
     "pval": 0,
     "depth": 1,
@@ -5371,7 +5370,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "logrus": {
     "key": "logrus",
@@ -5379,7 +5379,6 @@
     "name": "Logrus",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 50,
     "pval": 0,
     "depth": 80,
@@ -5403,7 +5402,8 @@
       "IGNORE_COLD",
       "IGNORE_ELEC",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "remove_curse_180": {
     "key": "remove_curse_180",
@@ -5411,7 +5411,6 @@
     "name": "Remove Curse",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 14,
     "pval": 0,
     "depth": 17,
@@ -5439,7 +5438,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "light_181": {
     "key": "light_181",
@@ -5447,7 +5447,6 @@
     "name": "Light",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 24,
     "pval": 0,
     "depth": 0,
@@ -5471,7 +5470,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "fire": {
     "key": "fire",
@@ -5479,7 +5479,6 @@
     "name": "Fire",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 48,
     "pval": 0,
     "depth": 75,
@@ -5500,7 +5499,8 @@
     "flags": [
       "IGNORE_FIRE",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "ice_183": {
     "key": "ice_183",
@@ -5508,7 +5508,6 @@
     "name": "Ice",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 49,
     "pval": 0,
     "depth": 75,
@@ -5529,7 +5528,8 @@
     "flags": [
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "summon_monster": {
     "key": "summon_monster",
@@ -5537,7 +5537,6 @@
     "name": "Summon Monster",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 4,
     "pval": 0,
     "depth": 1,
@@ -5557,7 +5556,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "phase_door": {
     "key": "phase_door",
@@ -5565,7 +5565,6 @@
     "name": "Phase Door",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 8,
     "pval": 0,
     "depth": 1,
@@ -5591,7 +5590,8 @@
         "type": "teleportSelf",
         "range": "10"
       }
-    ]
+    ],
+    "type": "scroll"
   },
   "teleportation_186": {
     "key": "teleportation_186",
@@ -5599,7 +5599,6 @@
     "name": "Teleportation",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 9,
     "pval": 0,
     "depth": 17,
@@ -5625,7 +5624,8 @@
         "type": "teleportSelf",
         "range": "100"
       }
-    ]
+    ],
+    "type": "scroll"
   },
   "teleport_level": {
     "key": "teleport_level",
@@ -5633,7 +5633,6 @@
     "name": "Teleport Level",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 10,
     "pval": 0,
     "depth": 30,
@@ -5653,7 +5652,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "monster_confusion": {
     "key": "monster_confusion",
@@ -5661,7 +5661,6 @@
     "name": "Monster Confusion",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 36,
     "pval": 0,
     "depth": 9,
@@ -5681,7 +5680,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "magic_mapping": {
     "key": "magic_mapping",
@@ -5689,7 +5689,6 @@
     "name": "Magic Mapping",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 25,
     "pval": 0,
     "depth": 9,
@@ -5709,7 +5708,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "rune_of_protection": {
     "key": "rune_of_protection",
@@ -5717,7 +5717,6 @@
     "name": "Rune of Protection",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 38,
     "pval": 0,
     "depth": 75,
@@ -5741,7 +5740,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "remove_curse_191": {
     "key": "remove_curse_191",
@@ -5749,7 +5749,6 @@
     "name": "*Remove Curse*",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 15,
     "pval": 0,
     "depth": 75,
@@ -5773,7 +5772,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "treasure_detection": {
     "key": "treasure_detection",
@@ -5781,7 +5781,6 @@
     "name": "Treasure Detection",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 26,
     "pval": 0,
     "depth": 0,
@@ -5801,7 +5800,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "object_detection": {
     "key": "object_detection",
@@ -5809,7 +5809,6 @@
     "name": "Object Detection",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 27,
     "pval": 0,
     "depth": 0,
@@ -5829,7 +5828,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "trap_detection": {
     "key": "trap_detection",
@@ -5837,7 +5837,6 @@
     "name": "Trap Detection",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 28,
     "pval": 0,
     "depth": 9,
@@ -5857,7 +5856,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "sheaf_arrow": {
     "key": "sheaf_arrow",
@@ -5865,7 +5865,6 @@
     "name": "& Sheaf Arrow~",
     "symbol": "{",
     "color": "o",
-    "tval": 17,
     "sval": 2,
     "pval": 0,
     "depth": 35,
@@ -5893,7 +5892,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "arrow"
   },
   "mithril_shot": {
     "key": "mithril_shot",
@@ -5901,7 +5901,6 @@
     "name": "& Mithril Shot~",
     "symbol": "{",
     "color": "B",
-    "tval": 16,
     "sval": 2,
     "pval": 0,
     "depth": 43,
@@ -5925,7 +5924,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "shot"
   },
   "doorstair_location_197": {
     "key": "doorstair_location_197",
@@ -5933,7 +5933,6 @@
     "name": "Door/Stair Location",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 29,
     "pval": 0,
     "depth": 9,
@@ -5953,7 +5952,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "acquirement_198": {
     "key": "acquirement_198",
@@ -5961,7 +5961,6 @@
     "name": "Acquirement",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 46,
     "pval": 0,
     "depth": 50,
@@ -5981,7 +5980,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "acquirement_199": {
     "key": "acquirement_199",
@@ -5989,7 +5989,6 @@
     "name": "*Acquirement*",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 47,
     "pval": 0,
     "depth": 90,
@@ -6009,7 +6008,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "mass_genocide": {
     "key": "mass_genocide",
@@ -6017,7 +6017,6 @@
     "name": "Mass Genocide",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 45,
     "pval": 0,
     "depth": 75,
@@ -6041,7 +6040,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "detect_invisible_201": {
     "key": "detect_invisible_201",
@@ -6049,7 +6049,6 @@
     "name": "Detect Invisible",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 30,
     "pval": 0,
     "depth": 1,
@@ -6069,7 +6068,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "aggravate_monster_202": {
     "key": "aggravate_monster_202",
@@ -6077,7 +6077,6 @@
     "name": "Aggravate Monster",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 1,
     "pval": 0,
     "depth": 9,
@@ -6097,7 +6096,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "trap_creation": {
     "key": "trap_creation",
@@ -6105,7 +6105,6 @@
     "name": "Trap Creation",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 7,
     "pval": 0,
     "depth": 5,
@@ -6129,7 +6128,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "trapdoor_destruction_204": {
     "key": "trapdoor_destruction_204",
@@ -6137,7 +6137,6 @@
     "name": "Trap/Door Destruction",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 39,
     "pval": 0,
     "depth": 10,
@@ -6161,7 +6160,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "artifact_creation": {
     "key": "artifact_creation",
@@ -6169,7 +6169,6 @@
     "name": "Artifact Creation",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 52,
     "pval": 0,
     "depth": 100,
@@ -6189,7 +6188,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "recharging": {
     "key": "recharging",
@@ -6197,7 +6197,6 @@
     "name": "Recharging",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 22,
     "pval": 0,
     "depth": 40,
@@ -6217,7 +6216,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "genocide_207": {
     "key": "genocide_207",
@@ -6225,7 +6225,6 @@
     "name": "Genocide",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 44,
     "pval": 0,
     "depth": 65,
@@ -6245,7 +6244,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "darkness_208": {
     "key": "darkness_208",
@@ -6253,7 +6253,6 @@
     "name": "Darkness",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 0,
     "pval": 0,
     "depth": 1,
@@ -6273,7 +6272,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "protection_from_evil_209": {
     "key": "protection_from_evil_209",
@@ -6281,7 +6281,6 @@
     "name": "Protection from Evil",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 37,
     "pval": 0,
     "depth": 52,
@@ -6301,7 +6300,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "satisfy_hunger": {
     "key": "satisfy_hunger",
@@ -6309,7 +6309,6 @@
     "name": "Satisfy Hunger",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 32,
     "pval": 0,
     "depth": 5,
@@ -6341,7 +6340,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "dispel_undead": {
     "key": "dispel_undead",
@@ -6349,7 +6349,6 @@
     "name": "Dispel Undead",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 42,
     "pval": 0,
     "depth": 65,
@@ -6369,7 +6368,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "enchant_weapon": {
     "key": "enchant_weapon",
@@ -6377,7 +6377,6 @@
     "name": "*Enchant Weapon*",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 21,
     "pval": 0,
     "depth": 50,
@@ -6401,7 +6400,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "curse_weapon": {
     "key": "curse_weapon",
@@ -6409,7 +6409,6 @@
     "name": "Curse Weapon",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 3,
     "pval": 0,
     "depth": 75,
@@ -6429,7 +6428,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "enchant_armor_214": {
     "key": "enchant_armor_214",
@@ -6437,7 +6437,6 @@
     "name": "*Enchant Armor*",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 20,
     "pval": 0,
     "depth": 50,
@@ -6465,7 +6464,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "curse_armor": {
     "key": "curse_armor",
@@ -6473,7 +6473,6 @@
     "name": "Curse Armor",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 2,
     "pval": 0,
     "depth": 75,
@@ -6493,7 +6492,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "summon_undead": {
     "key": "summon_undead",
@@ -6501,7 +6501,6 @@
     "name": "Summon Undead",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 5,
     "pval": 0,
     "depth": 15,
@@ -6521,7 +6520,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "blessing": {
     "key": "blessing",
@@ -6529,7 +6529,6 @@
     "name": "Blessing",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 33,
     "pval": 0,
     "depth": 1,
@@ -6549,7 +6548,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "holy_chant": {
     "key": "holy_chant",
@@ -6557,7 +6557,6 @@
     "name": "Holy Chant",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 34,
     "pval": 0,
     "depth": 15,
@@ -6577,7 +6576,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "holy_prayer": {
     "key": "holy_prayer",
@@ -6585,7 +6585,6 @@
     "name": "Holy Prayer",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 35,
     "pval": 0,
     "depth": 30,
@@ -6605,7 +6604,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "word_of_recall": {
     "key": "word_of_recall",
@@ -6613,7 +6613,6 @@
     "name": "Word of Recall",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 11,
     "pval": 0,
     "depth": 5,
@@ -6637,7 +6636,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "destruction_221": {
     "key": "destruction_221",
@@ -6645,7 +6645,6 @@
     "name": "*Destruction*",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 41,
     "pval": 0,
     "depth": 65,
@@ -6665,7 +6664,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "slime_mold_juice": {
     "key": "slime_mold_juice",
@@ -6673,7 +6673,6 @@
     "name": "Slime Mold Juice",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 2,
     "pval": 400,
     "depth": 0,
@@ -6693,7 +6692,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "apple_juice": {
     "key": "apple_juice",
@@ -6701,7 +6701,6 @@
     "name": "Apple Juice",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 1,
     "pval": 250,
     "depth": 0,
@@ -6721,7 +6720,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "water": {
     "key": "water",
@@ -6729,7 +6729,6 @@
     "name": "Water",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 0,
     "pval": 200,
     "depth": 0,
@@ -6749,7 +6748,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "strength_225": {
     "key": "strength_225",
@@ -6757,7 +6757,6 @@
     "name": "Strength",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 48,
     "pval": 0,
     "depth": 40,
@@ -6789,7 +6788,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "weakness_226": {
     "key": "weakness_226",
@@ -6797,7 +6797,6 @@
     "name": "Weakness",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 16,
     "pval": 0,
     "depth": 5,
@@ -6817,7 +6816,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "restore_strength_227": {
     "key": "restore_strength_227",
@@ -6825,7 +6825,6 @@
     "name": "Restore Strength",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 42,
     "pval": 0,
     "depth": 15,
@@ -6845,7 +6844,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "intelligence_228": {
     "key": "intelligence_228",
@@ -6853,7 +6853,6 @@
     "name": "Intelligence",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 49,
     "pval": 0,
     "depth": 40,
@@ -6885,7 +6884,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "stupidity_229": {
     "key": "stupidity_229",
@@ -6893,7 +6893,6 @@
     "name": "Stupidity",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 17,
     "pval": 0,
     "depth": 35,
@@ -6913,7 +6912,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "restore_intelligence": {
     "key": "restore_intelligence",
@@ -6921,7 +6921,6 @@
     "name": "Restore Intelligence",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 43,
     "pval": 0,
     "depth": 15,
@@ -6941,7 +6940,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "wisdom": {
     "key": "wisdom",
@@ -6949,7 +6949,6 @@
     "name": "Wisdom",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 50,
     "pval": 0,
     "depth": 40,
@@ -6981,7 +6980,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "naivety_232": {
     "key": "naivety_232",
@@ -6989,7 +6989,6 @@
     "name": "Naivety",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 18,
     "pval": 0,
     "depth": 35,
@@ -7009,7 +7008,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "restore_wisdom": {
     "key": "restore_wisdom",
@@ -7017,7 +7017,6 @@
     "name": "Restore Wisdom",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 44,
     "pval": 0,
     "depth": 15,
@@ -7037,7 +7036,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "charisma_234": {
     "key": "charisma_234",
@@ -7045,7 +7045,6 @@
     "name": "Charisma",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 53,
     "pval": 0,
     "depth": 35,
@@ -7077,7 +7076,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "ugliness": {
     "key": "ugliness",
@@ -7085,7 +7085,6 @@
     "name": "Ugliness",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 21,
     "pval": 0,
     "depth": 35,
@@ -7105,7 +7104,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "restore_charisma": {
     "key": "restore_charisma",
@@ -7113,7 +7113,6 @@
     "name": "Restore Charisma",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 47,
     "pval": 0,
     "depth": 15,
@@ -7133,7 +7132,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "curing_237": {
     "key": "curing_237",
@@ -7141,7 +7141,6 @@
     "name": "Curing",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 61,
     "pval": 100,
     "depth": 18,
@@ -7187,7 +7186,8 @@
         "type": "cure",
         "status": "hallucinating"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "invulnerability": {
     "key": "invulnerability",
@@ -7195,7 +7195,6 @@
     "name": "Invulnerability",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 62,
     "pval": -2500,
     "depth": 105,
@@ -7222,7 +7221,8 @@
         "status": "invuln",
         "duration": "7+1d7"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "new_life": {
     "key": "new_life",
@@ -7230,7 +7230,6 @@
     "name": "New Life",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 63,
     "pval": 100,
     "depth": 100,
@@ -7258,7 +7257,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "cure_serious_wounds_240": {
     "key": "cure_serious_wounds_240",
@@ -7266,7 +7266,6 @@
     "name": "Cure Serious Wounds",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 35,
     "pval": 100,
     "depth": 5,
@@ -7313,7 +7312,8 @@
         "type": "cure",
         "status": "confused"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "cure_critical_wounds": {
     "key": "cure_critical_wounds",
@@ -7321,7 +7321,6 @@
     "name": "Cure Critical Wounds",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 36,
     "pval": 100,
     "depth": 20,
@@ -7367,7 +7366,8 @@
         "type": "cure",
         "status": "confused"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "healing_242": {
     "key": "healing_242",
@@ -7375,7 +7375,6 @@
     "name": "Healing",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 37,
     "pval": 200,
     "depth": 26,
@@ -7429,7 +7428,8 @@
         "type": "cure",
         "status": "confused"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "constitution_243": {
     "key": "constitution_243",
@@ -7437,7 +7437,6 @@
     "name": "Constitution",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 52,
     "pval": 0,
     "depth": 40,
@@ -7469,7 +7468,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "experience": {
     "key": "experience",
@@ -7477,7 +7477,6 @@
     "name": "Experience",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 59,
     "pval": 0,
     "depth": 75,
@@ -7497,7 +7496,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "sleep": {
     "key": "sleep",
@@ -7505,7 +7505,6 @@
     "name": "Sleep",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 11,
     "pval": 100,
     "depth": 0,
@@ -7532,7 +7531,8 @@
         "status": "paralyzed",
         "duration": "4+1d4"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "blindness_246": {
     "key": "blindness_246",
@@ -7540,7 +7540,6 @@
     "name": "Blindness",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 7,
     "pval": 0,
     "depth": 0,
@@ -7567,7 +7566,8 @@
         "status": "blind",
         "duration": "100+1d100"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "booze": {
     "key": "booze",
@@ -7575,7 +7575,6 @@
     "name": "Booze",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 9,
     "pval": 50,
     "depth": 0,
@@ -7602,7 +7601,8 @@
         "status": "confused",
         "duration": "15+1d15"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "poison_248": {
     "key": "poison_248",
@@ -7610,7 +7610,6 @@
     "name": "Poison",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 6,
     "pval": 0,
     "depth": 5,
@@ -7638,7 +7637,8 @@
         "duration": "10+1d10",
         "damage": 3
       }
-    ]
+    ],
+    "type": "potion"
   },
   "speed_249": {
     "key": "speed_249",
@@ -7646,7 +7646,6 @@
     "name": "Speed",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 29,
     "pval": 0,
     "depth": 2,
@@ -7677,7 +7676,8 @@
         "status": "haste",
         "duration": "15+1d25"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "slowness_250": {
     "key": "slowness_250",
@@ -7685,7 +7685,6 @@
     "name": "Slowness",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 4,
     "pval": 50,
     "depth": 1,
@@ -7712,7 +7711,8 @@
         "status": "slow",
         "duration": "15+1d25"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "dexterity_251": {
     "key": "dexterity_251",
@@ -7720,7 +7720,6 @@
     "name": "Dexterity",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 51,
     "pval": 0,
     "depth": 40,
@@ -7752,7 +7751,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "restore_dexterity": {
     "key": "restore_dexterity",
@@ -7760,7 +7760,6 @@
     "name": "Restore Dexterity",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 45,
     "pval": 0,
     "depth": 15,
@@ -7780,7 +7779,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "restore_constitution_253": {
     "key": "restore_constitution_253",
@@ -7788,7 +7788,6 @@
     "name": "Restore Constitution",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 46,
     "pval": 0,
     "depth": 15,
@@ -7808,7 +7807,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "lose_memories": {
     "key": "lose_memories",
@@ -7816,7 +7816,6 @@
     "name": "Lose Memories",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 13,
     "pval": 0,
     "depth": 17,
@@ -7836,7 +7835,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "salt_water": {
     "key": "salt_water",
@@ -7844,7 +7844,6 @@
     "name": "Salt Water",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 5,
     "pval": 0,
     "depth": 0,
@@ -7864,7 +7863,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "enlightenment_256": {
     "key": "enlightenment_256",
@@ -7872,7 +7872,6 @@
     "name": "Enlightenment",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 56,
     "pval": 0,
     "depth": 43,
@@ -7900,7 +7899,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "heroism": {
     "key": "heroism",
@@ -7908,7 +7908,6 @@
     "name": "Heroism",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 32,
     "pval": 0,
     "depth": 1,
@@ -7939,7 +7938,8 @@
         "type": "cure",
         "status": "afraid"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "berserk_strength_258": {
     "key": "berserk_strength_258",
@@ -7947,7 +7947,6 @@
     "name": "Berserk Strength",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 33,
     "pval": 0,
     "depth": 5,
@@ -7978,7 +7977,8 @@
         "type": "cure",
         "status": "afraid"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "boldness": {
     "key": "boldness",
@@ -7986,7 +7986,6 @@
     "name": "Boldness",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 28,
     "pval": 0,
     "depth": 1,
@@ -8012,7 +8011,8 @@
         "type": "cure",
         "status": "afraid"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "restore_life_levels": {
     "key": "restore_life_levels",
@@ -8020,7 +8020,6 @@
     "name": "Restore Life Levels",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 41,
     "pval": 0,
     "depth": 45,
@@ -8052,7 +8051,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "resist_heat": {
     "key": "resist_heat",
@@ -8060,7 +8060,6 @@
     "name": "Resist Heat",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 30,
     "pval": 0,
     "depth": 4,
@@ -8095,7 +8094,8 @@
         "status": "oppose_fire",
         "duration": "10+1d10"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "resist_cold_262": {
     "key": "resist_cold_262",
@@ -8103,7 +8103,6 @@
     "name": "Resist Cold",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 31,
     "pval": 0,
     "depth": 4,
@@ -8138,7 +8137,8 @@
         "status": "oppose_cold",
         "duration": "10+1d10"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "detect_invisible_263": {
     "key": "detect_invisible_263",
@@ -8146,7 +8146,6 @@
     "name": "Detect Invisible",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 25,
     "pval": 0,
     "depth": 3,
@@ -8173,7 +8172,8 @@
         "status": "see_invis",
         "duration": "12+1d12"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "slow_poison": {
     "key": "slow_poison",
@@ -8181,7 +8181,6 @@
     "name": "Slow Poison",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 26,
     "pval": 0,
     "depth": 1,
@@ -8208,7 +8207,8 @@
         "status": "poisoned",
         "amount": 50
       }
-    ]
+    ],
+    "type": "potion"
   },
   "neutralize_poison": {
     "key": "neutralize_poison",
@@ -8216,7 +8216,6 @@
     "name": "Neutralize Poison",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 27,
     "pval": 0,
     "depth": 5,
@@ -8242,7 +8241,8 @@
         "type": "cure",
         "status": "poisoned"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "restore_mana": {
     "key": "restore_mana",
@@ -8250,7 +8250,6 @@
     "name": "Restore Mana",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 40,
     "pval": 0,
     "depth": 43,
@@ -8270,7 +8269,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "infravision": {
     "key": "infravision",
@@ -8278,7 +8278,6 @@
     "name": "Infra-vision",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 24,
     "pval": 0,
     "depth": 5,
@@ -8305,7 +8304,8 @@
         "status": "infravision",
         "duration": "100+1d100"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "resistance_268": {
     "key": "resistance_268",
@@ -8313,7 +8313,6 @@
     "name": "Resistance",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 60,
     "pval": 100,
     "depth": 35,
@@ -8372,7 +8371,8 @@
         "status": "oppose_pois",
         "duration": "20+1d20"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "light_269": {
     "key": "light_269",
@@ -8380,7 +8380,6 @@
     "name": "Light",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 7,
     "pval": 17,
     "depth": 3,
@@ -8398,7 +8397,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "tame_monster": {
     "key": "tame_monster",
@@ -8406,7 +8406,6 @@
     "name": "Tame Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 17,
     "pval": 9,
     "depth": 52,
@@ -8424,7 +8423,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "frost_bolts_271": {
     "key": "frost_bolts_271",
@@ -8432,7 +8432,6 @@
     "name": "Frost Bolts",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 19,
     "pval": 12,
     "depth": 35,
@@ -8458,7 +8457,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "fire_bolts_272": {
     "key": "fire_bolts_272",
@@ -8466,7 +8466,6 @@
     "name": "Fire Bolts",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 18,
     "pval": 15,
     "depth": 50,
@@ -8492,7 +8491,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "stone_to_mud": {
     "key": "stone_to_mud",
@@ -8500,7 +8500,6 @@
     "name": "Stone to Mud",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 6,
     "pval": 12,
     "depth": 10,
@@ -8522,7 +8521,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "polymorph_274": {
     "key": "polymorph_274",
@@ -8530,7 +8530,6 @@
     "name": "Polymorph",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 13,
     "pval": 15,
     "depth": 35,
@@ -8548,7 +8547,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "heal_monster": {
     "key": "heal_monster",
@@ -8556,7 +8556,6 @@
     "name": "Heal Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 0,
     "pval": 29,
     "depth": 2,
@@ -8574,7 +8573,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "haste_monster": {
     "key": "haste_monster",
@@ -8582,7 +8582,6 @@
     "name": "Haste Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 1,
     "pval": 29,
     "depth": 2,
@@ -8600,7 +8599,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "slow_monster_277": {
     "key": "slow_monster_277",
@@ -8608,7 +8608,6 @@
     "name": "Slow Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 9,
     "pval": 17,
     "depth": 4,
@@ -8626,7 +8625,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "confuse_monster": {
     "key": "confuse_monster",
@@ -8634,7 +8634,6 @@
     "name": "Confuse Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 10,
     "pval": 19,
     "depth": 5,
@@ -8652,7 +8651,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "sleep_monster_279": {
     "key": "sleep_monster_279",
@@ -8660,7 +8660,6 @@
     "name": "Sleep Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 8,
     "pval": 24,
     "depth": 5,
@@ -8678,7 +8677,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "drain_life_280": {
     "key": "drain_life_280",
@@ -8686,7 +8686,6 @@
     "name": "Drain Life",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 12,
     "pval": 7,
     "depth": 75,
@@ -8704,7 +8703,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "trapdoor_destruction_281": {
     "key": "trapdoor_destruction_281",
@@ -8712,7 +8712,6 @@
     "name": "Trap/Door Destruction",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 5,
     "pval": 15,
     "depth": 17,
@@ -8730,7 +8729,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "magic_missile": {
     "key": "magic_missile",
@@ -8738,7 +8738,6 @@
     "name": "Magic Missile",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 15,
     "pval": 17,
     "depth": 2,
@@ -8756,7 +8755,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "clone_monster": {
     "key": "clone_monster",
@@ -8764,7 +8764,6 @@
     "name": "Clone Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 2,
     "pval": 9,
     "depth": 15,
@@ -8786,7 +8785,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "scare_monster": {
     "key": "scare_monster",
@@ -8794,7 +8794,6 @@
     "name": "Scare Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 11,
     "pval": 9,
     "depth": 17,
@@ -8812,7 +8811,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "teleport_other_285": {
     "key": "teleport_other_285",
@@ -8820,7 +8820,6 @@
     "name": "Teleport Other",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 3,
     "pval": 12,
     "depth": 35,
@@ -8838,7 +8837,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "disarming_286": {
     "key": "disarming_286",
@@ -8846,7 +8846,6 @@
     "name": "Disarming",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 4,
     "pval": 10,
     "depth": 35,
@@ -8864,7 +8863,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "lightning_balls_287": {
     "key": "lightning_balls_287",
@@ -8872,7 +8872,6 @@
     "name": "Lightning Balls",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 21,
     "pval": 13,
     "depth": 41,
@@ -8896,7 +8895,8 @@
     "toAc": 0,
     "flags": [
       "IGNORE_ELEC"
-    ]
+    ],
+    "type": "wand"
   },
   "cold_balls_288": {
     "key": "cold_balls_288",
@@ -8904,7 +8904,6 @@
     "name": "Cold Balls",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 23,
     "pval": 9,
     "depth": 45,
@@ -8928,7 +8927,8 @@
     "toAc": 0,
     "flags": [
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "wand"
   },
   "fire_balls_289": {
     "key": "fire_balls_289",
@@ -8936,7 +8936,6 @@
     "name": "Fire Balls",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 22,
     "pval": 7,
     "depth": 55,
@@ -8960,7 +8959,8 @@
     "toAc": 0,
     "flags": [
       "IGNORE_FIRE"
-    ]
+    ],
+    "type": "wand"
   },
   "stinking_cloud": {
     "key": "stinking_cloud",
@@ -8968,7 +8968,6 @@
     "name": "Stinking Cloud",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 14,
     "pval": 15,
     "depth": 5,
@@ -8986,7 +8985,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "acid_balls_291": {
     "key": "acid_balls_291",
@@ -8994,7 +8994,6 @@
     "name": "Acid Balls",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 20,
     "pval": 8,
     "depth": 55,
@@ -9018,7 +9017,8 @@
     "toAc": 0,
     "flags": [
       "IGNORE_ACID"
-    ]
+    ],
+    "type": "wand"
   },
   "wonder": {
     "key": "wonder",
@@ -9026,7 +9026,6 @@
     "name": "Wonder",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 24,
     "pval": 24,
     "depth": 3,
@@ -9049,7 +9048,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "wand"
   },
   "flight_arrow": {
     "key": "flight_arrow",
@@ -9057,7 +9057,6 @@
     "name": "& Flight Arrow~",
     "symbol": "{",
     "color": "y",
-    "tval": 17,
     "sval": 0,
     "pval": 0,
     "depth": 5,
@@ -9081,7 +9080,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "arrow"
   },
   "acid_bolts_294": {
     "key": "acid_bolts_294",
@@ -9089,7 +9089,6 @@
     "name": "Acid Bolts",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 16,
     "pval": 15,
     "depth": 40,
@@ -9115,7 +9114,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "wand"
   },
   "dragons_flame": {
     "key": "dragons_flame",
@@ -9123,7 +9123,6 @@
     "name": "Dragon's Flame",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 26,
     "pval": 5,
     "depth": 75,
@@ -9150,7 +9149,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "wand"
   },
   "dragons_frost": {
     "key": "dragons_frost",
@@ -9158,7 +9158,6 @@
     "name": "Dragon's Frost",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 27,
     "pval": 5,
     "depth": 75,
@@ -9185,7 +9184,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "wand"
   },
   "dragons_breath": {
     "key": "dragons_breath",
@@ -9193,7 +9193,6 @@
     "name": "Dragon's Breath",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 28,
     "pval": 5,
     "depth": 75,
@@ -9220,7 +9219,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "wand"
   },
   "annihilation": {
     "key": "annihilation",
@@ -9228,7 +9228,6 @@
     "name": "Annihilation",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 25,
     "pval": 4,
     "depth": 85,
@@ -9251,7 +9250,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "wand"
   },
   "rockets": {
     "key": "rockets",
@@ -9259,7 +9259,6 @@
     "name": "Rockets",
     "symbol": "-",
     "color": "d",
-    "tval": 65,
     "sval": 29,
     "pval": 4,
     "depth": 95,
@@ -9282,7 +9281,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "wand"
   },
   "trap_location_300": {
     "key": "trap_location_300",
@@ -9290,7 +9290,6 @@
     "name": "Trap Location",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 12,
     "pval": 12,
     "depth": 5,
@@ -9308,7 +9307,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "treasure_location": {
     "key": "treasure_location",
@@ -9316,7 +9316,6 @@
     "name": "Treasure Location",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 10,
     "pval": 29,
     "depth": 5,
@@ -9334,7 +9333,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "object_location": {
     "key": "object_location",
@@ -9342,7 +9342,6 @@
     "name": "Object Location",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 11,
     "pval": 22,
     "depth": 5,
@@ -9360,7 +9359,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "teleportation_303": {
     "key": "teleportation_303",
@@ -9368,7 +9368,6 @@
     "name": "Teleportation",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 4,
     "pval": 10,
     "depth": 35,
@@ -9386,7 +9385,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "earthquakes": {
     "key": "earthquakes",
@@ -9394,7 +9394,6 @@
     "name": "Earthquakes",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 28,
     "pval": 9,
     "depth": 65,
@@ -9412,7 +9411,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "summoning": {
     "key": "summoning",
@@ -9420,7 +9420,6 @@
     "name": "Summoning",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 3,
     "pval": 5,
     "depth": 10,
@@ -9442,7 +9441,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "light_306": {
     "key": "light_306",
@@ -9450,7 +9450,6 @@
     "name": "Light",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 8,
     "pval": 29,
     "depth": 5,
@@ -9468,7 +9467,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "destruction_307": {
     "key": "destruction_307",
@@ -9476,7 +9476,6 @@
     "name": "*Destruction*",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 29,
     "pval": 5,
     "depth": 80,
@@ -9498,7 +9497,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "starlight": {
     "key": "starlight",
@@ -9506,7 +9506,6 @@
     "name": "Starlight",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 7,
     "pval": 12,
     "depth": 15,
@@ -9524,7 +9523,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "haste_monsters": {
     "key": "haste_monsters",
@@ -9532,7 +9532,6 @@
     "name": "Haste Monsters",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 2,
     "pval": 17,
     "depth": 10,
@@ -9550,7 +9549,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "slow_monsters": {
     "key": "slow_monsters",
@@ -9558,7 +9558,6 @@
     "name": "Slow Monsters",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 21,
     "pval": 12,
     "depth": 17,
@@ -9576,7 +9575,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "sleep_monsters": {
     "key": "sleep_monsters",
@@ -9584,7 +9584,6 @@
     "name": "Sleep Monsters",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 20,
     "pval": 12,
     "depth": 15,
@@ -9602,7 +9601,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "cure_light_wounds_312": {
     "key": "cure_light_wounds_312",
@@ -9610,7 +9610,6 @@
     "name": "Cure Light Wounds",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 16,
     "pval": 12,
     "depth": 5,
@@ -9628,7 +9627,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "detect_invisible_313": {
     "key": "detect_invisible_313",
@@ -9636,7 +9636,6 @@
     "name": "Detect Invisible",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 14,
     "pval": 24,
     "depth": 5,
@@ -9654,7 +9653,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "speed_314": {
     "key": "speed_314",
@@ -9662,7 +9662,6 @@
     "name": "Speed",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 22,
     "pval": 8,
     "depth": 50,
@@ -9680,7 +9679,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "slowness_315": {
     "key": "slowness_315",
@@ -9688,7 +9688,6 @@
     "name": "Slowness",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 1,
     "pval": 17,
     "depth": 30,
@@ -9706,7 +9705,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "doorstair_location_316": {
     "key": "doorstair_location_316",
@@ -9714,7 +9714,6 @@
     "name": "Door/Stair Location",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 13,
     "pval": 15,
     "depth": 9,
@@ -9732,7 +9731,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "remove_curse_317": {
     "key": "remove_curse_317",
@@ -9740,7 +9740,6 @@
     "name": "Remove Curse",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 6,
     "pval": 8,
     "depth": 55,
@@ -9758,7 +9757,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "detect_evil": {
     "key": "detect_evil",
@@ -9766,7 +9766,6 @@
     "name": "Detect Evil",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 15,
     "pval": 24,
     "depth": 15,
@@ -9784,7 +9783,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "curing_319": {
     "key": "curing_319",
@@ -9792,7 +9792,6 @@
     "name": "Curing",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 17,
     "pval": 8,
     "depth": 33,
@@ -9810,7 +9809,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "dispel_evil": {
     "key": "dispel_evil",
@@ -9818,7 +9818,6 @@
     "name": "Dispel Evil",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 24,
     "pval": 8,
     "depth": 75,
@@ -9836,7 +9835,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "probing_321": {
     "key": "probing_321",
@@ -9844,7 +9844,6 @@
     "name": "Probing",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 23,
     "pval": 9,
     "depth": 20,
@@ -9862,7 +9861,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "darkness_322": {
     "key": "darkness_322",
@@ -9870,7 +9870,6 @@
     "name": "Darkness",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 0,
     "pval": 17,
     "depth": 5,
@@ -9888,7 +9887,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "genocide_323": {
     "key": "genocide_323",
@@ -9896,7 +9896,6 @@
     "name": "Genocide",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 27,
     "pval": 4,
     "depth": 95,
@@ -9914,7 +9913,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "power": {
     "key": "power",
@@ -9922,7 +9922,6 @@
     "name": "Power",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 25,
     "pval": 5,
     "depth": 95,
@@ -9940,7 +9939,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "the_magi_325": {
     "key": "the_magi_325",
@@ -9948,7 +9948,6 @@
     "name": "the Magi",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 19,
     "pval": 5,
     "depth": 100,
@@ -9966,7 +9965,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "perception_326": {
     "key": "perception_326",
@@ -9974,7 +9974,6 @@
     "name": "Perception",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 5,
     "pval": 21,
     "depth": 17,
@@ -10000,7 +9999,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "holiness": {
     "key": "holiness",
@@ -10008,7 +10008,6 @@
     "name": "Holiness",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 26,
     "pval": 5,
     "depth": 100,
@@ -10026,7 +10025,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "enlightenment_328": {
     "key": "enlightenment_328",
@@ -10034,7 +10034,6 @@
     "name": "Enlightenment",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 9,
     "pval": 11,
     "depth": 22,
@@ -10052,7 +10051,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "healing_329": {
     "key": "healing_329",
@@ -10060,7 +10060,6 @@
     "name": "Healing",
     "symbol": "_",
     "color": "d",
-    "tval": 55,
     "sval": 18,
     "pval": 4,
     "depth": 65,
@@ -10078,7 +10077,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "staff"
   },
   "book_of_common_prayer": {
     "key": "book_of_common_prayer",
@@ -10086,7 +10086,6 @@
     "name": "[Book of Common Prayer]",
     "symbol": "?",
     "color": "W",
-    "tval": 90,
     "sval": 0,
     "pval": 0,
     "depth": 17,
@@ -10106,7 +10105,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "life_book"
   },
   "high_mass": {
     "key": "high_mass",
@@ -10114,7 +10114,6 @@
     "name": "[High Mass]",
     "symbol": "?",
     "color": "W",
-    "tval": 90,
     "sval": 1,
     "pval": 0,
     "depth": 20,
@@ -10134,7 +10133,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "life_book"
   },
   "book_of_the_unicorn": {
     "key": "book_of_the_unicorn",
@@ -10142,7 +10142,6 @@
     "name": "[Book of the Unicorn]",
     "symbol": "?",
     "color": "w",
-    "tval": 90,
     "sval": 2,
     "pval": 0,
     "depth": 65,
@@ -10166,7 +10165,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "life_book"
   },
   "blessings_of_the_grail": {
     "key": "blessings_of_the_grail",
@@ -10174,7 +10174,6 @@
     "name": "[Blessings of the Grail]",
     "symbol": "?",
     "color": "w",
-    "tval": 90,
     "sval": 3,
     "pval": 0,
     "depth": 95,
@@ -10198,7 +10197,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "life_book"
   },
   "beginners_handbook": {
     "key": "beginners_handbook",
@@ -10206,7 +10206,6 @@
     "name": "[Beginner's Handbook]",
     "symbol": "?",
     "color": "B",
-    "tval": 91,
     "sval": 0,
     "pval": 0,
     "depth": 17,
@@ -10226,7 +10225,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "sorcery_book"
   },
   "master_sorcerers_handbook": {
     "key": "master_sorcerers_handbook",
@@ -10234,7 +10234,6 @@
     "name": "[Master Sorcerer's Handbook]",
     "symbol": "?",
     "color": "B",
-    "tval": 91,
     "sval": 1,
     "pval": 0,
     "depth": 20,
@@ -10254,7 +10253,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "sorcery_book"
   },
   "pattern_sorcery": {
     "key": "pattern_sorcery",
@@ -10262,7 +10262,6 @@
     "name": "[Pattern Sorcery]",
     "symbol": "?",
     "color": "b",
-    "tval": 91,
     "sval": 2,
     "pval": 0,
     "depth": 65,
@@ -10286,7 +10285,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "sorcery_book"
   },
   "grimoire_of_power": {
     "key": "grimoire_of_power",
@@ -10294,7 +10294,6 @@
     "name": "[Grimoire of Power]",
     "symbol": "?",
     "color": "b",
-    "tval": 91,
     "sval": 3,
     "pval": 0,
     "depth": 95,
@@ -10318,7 +10317,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "sorcery_book"
   },
   "small_wooden_chest": {
     "key": "small_wooden_chest",
@@ -10326,7 +10326,6 @@
     "name": "& Small wooden chest~",
     "symbol": "&",
     "color": "o",
-    "tval": 7,
     "sval": 1,
     "pval": 0,
     "depth": 9,
@@ -10344,7 +10343,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "chest"
   },
   "large_wooden_chest": {
     "key": "large_wooden_chest",
@@ -10352,7 +10352,6 @@
     "name": "& Large wooden chest~",
     "symbol": "&",
     "color": "U",
-    "tval": 7,
     "sval": 5,
     "pval": 0,
     "depth": 26,
@@ -10370,7 +10369,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "chest"
   },
   "small_iron_chest": {
     "key": "small_iron_chest",
@@ -10378,7 +10378,6 @@
     "name": "& Small iron chest~",
     "symbol": "&",
     "color": "D",
-    "tval": 7,
     "sval": 2,
     "pval": 0,
     "depth": 43,
@@ -10396,7 +10395,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "chest"
   },
   "large_iron_chest": {
     "key": "large_iron_chest",
@@ -10404,7 +10404,6 @@
     "name": "& Large iron chest~",
     "symbol": "&",
     "color": "s",
-    "tval": 7,
     "sval": 6,
     "pval": 0,
     "depth": 61,
@@ -10422,7 +10421,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "chest"
   },
   "small_steel_chest": {
     "key": "small_steel_chest",
@@ -10430,7 +10430,6 @@
     "name": "& Small steel chest~",
     "symbol": "&",
     "color": "s",
-    "tval": 7,
     "sval": 3,
     "pval": 0,
     "depth": 70,
@@ -10448,7 +10447,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "chest"
   },
   "large_steel_chest": {
     "key": "large_steel_chest",
@@ -10456,7 +10456,6 @@
     "name": "& Large steel chest~",
     "symbol": "&",
     "color": "W",
-    "tval": 7,
     "sval": 7,
     "pval": 0,
     "depth": 80,
@@ -10474,7 +10473,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "chest"
   },
   "ruined_chest": {
     "key": "ruined_chest",
@@ -10482,7 +10482,6 @@
     "name": "& Ruined chest~",
     "symbol": "&",
     "color": "u",
-    "tval": 7,
     "sval": 0,
     "pval": 0,
     "depth": 30,
@@ -10504,7 +10503,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "chest"
   },
   "iron_spike": {
     "key": "iron_spike",
@@ -10512,7 +10512,6 @@
     "name": "& Iron Spike~",
     "symbol": "~",
     "color": "W",
-    "tval": 5,
     "sval": 0,
     "pval": 0,
     "depth": 1,
@@ -10532,7 +10531,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "spike"
   },
   "wooden_torch": {
     "key": "wooden_torch",
@@ -10540,7 +10540,6 @@
     "name": "& Wooden Torch~",
     "symbol": "~",
     "color": "u",
-    "tval": 39,
     "sval": 0,
     "pval": 4000,
     "depth": 1,
@@ -10564,7 +10563,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "light"
   },
   "brass_lantern": {
     "key": "brass_lantern",
@@ -10572,7 +10572,6 @@
     "name": "& Brass Lantern~",
     "symbol": "~",
     "color": "U",
-    "tval": 39,
     "sval": 1,
     "pval": 7500,
     "depth": 5,
@@ -10601,7 +10600,8 @@
     "flags": [
       "EASY_KNOW",
       "IGNORE_FIRE"
-    ]
+    ],
+    "type": "light"
   },
   "flask_of_oil": {
     "key": "flask_of_oil",
@@ -10609,7 +10609,6 @@
     "name": "& Flask~ of oil",
     "symbol": "!",
     "color": "y",
-    "tval": 77,
     "sval": 0,
     "pval": 7500,
     "depth": 1,
@@ -10637,7 +10636,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "flask"
   },
   "empty_bottle": {
     "key": "empty_bottle",
@@ -10645,7 +10645,6 @@
     "name": "& Empty Bottle~",
     "symbol": "!",
     "color": "w",
-    "tval": 2,
     "sval": 1,
     "pval": 0,
     "depth": 0,
@@ -10665,7 +10664,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "bottle"
   },
   "havoc": {
     "key": "havoc",
@@ -10673,7 +10673,6 @@
     "name": "Havoc",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 28,
     "pval": 250,
     "depth": 95,
@@ -10697,7 +10696,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "doorstair_location_351": {
     "key": "doorstair_location_351",
@@ -10705,7 +10705,6 @@
     "name": "Door/Stair Location",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 1,
     "pval": 70,
     "depth": 12,
@@ -10725,7 +10724,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "trap_location_352": {
     "key": "trap_location_352",
@@ -10733,7 +10733,6 @@
     "name": "Trap Location",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 0,
     "pval": 15,
     "depth": 10,
@@ -10753,7 +10752,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "probing_353": {
     "key": "probing_353",
@@ -10761,7 +10761,6 @@
     "name": "Probing",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 7,
     "pval": 50,
     "depth": 25,
@@ -10781,7 +10780,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "recall": {
     "key": "recall",
@@ -10789,7 +10789,6 @@
     "name": "Recall",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 3,
     "pval": 60,
     "depth": 40,
@@ -10813,7 +10812,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "illumination": {
     "key": "illumination",
@@ -10821,7 +10821,6 @@
     "name": "Illumination",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 4,
     "pval": 16,
     "depth": 15,
@@ -10841,7 +10840,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "light_356": {
     "key": "light_356",
@@ -10849,7 +10849,6 @@
     "name": "Light",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 15,
     "pval": 9,
     "depth": 13,
@@ -10873,7 +10872,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "lightning_bolts": {
     "key": "lightning_bolts",
@@ -10881,7 +10881,6 @@
     "name": "Lightning Bolts",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 21,
     "pval": 11,
     "depth": 35,
@@ -10905,7 +10904,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "frost_bolts_358": {
     "key": "frost_bolts_358",
@@ -10913,7 +10913,6 @@
     "name": "Frost Bolts",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 23,
     "pval": 13,
     "depth": 43,
@@ -10937,7 +10936,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "fire_bolts_359": {
     "key": "fire_bolts_359",
@@ -10945,7 +10945,6 @@
     "name": "Fire Bolts",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 22,
     "pval": 15,
     "depth": 52,
@@ -10969,7 +10968,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "polymorph_360": {
     "key": "polymorph_360",
@@ -10977,7 +10977,6 @@
     "name": "Polymorph",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 19,
     "pval": 25,
     "depth": 32,
@@ -10997,7 +10996,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "slow_monster_361": {
     "key": "slow_monster_361",
@@ -11005,7 +11005,6 @@
     "name": "Slow Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 17,
     "pval": 20,
     "depth": 26,
@@ -11025,7 +11024,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "sleep_monster_362": {
     "key": "sleep_monster_362",
@@ -11033,7 +11033,6 @@
     "name": "Sleep Monster",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 16,
     "pval": 18,
     "depth": 26,
@@ -11053,7 +11052,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "drain_life_363": {
     "key": "drain_life_363",
@@ -11061,7 +11061,6 @@
     "name": "Drain Life",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 18,
     "pval": 23,
     "depth": 67,
@@ -11085,7 +11084,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "teleport_other_364": {
     "key": "teleport_other_364",
@@ -11093,7 +11093,6 @@
     "name": "Teleport Other",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 13,
     "pval": 3,
     "depth": 40,
@@ -11117,7 +11116,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "disarming_365": {
     "key": "disarming_365",
@@ -11125,7 +11125,6 @@
     "name": "Disarming",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 14,
     "pval": 22,
     "depth": 32,
@@ -11149,7 +11148,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "lightning_balls_366": {
     "key": "lightning_balls_366",
@@ -11157,7 +11157,6 @@
     "name": "Lightning Balls",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 25,
     "pval": 23,
     "depth": 49,
@@ -11181,7 +11180,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "cold_balls_367": {
     "key": "cold_balls_367",
@@ -11189,7 +11189,6 @@
     "name": "Cold Balls",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 27,
     "pval": 25,
     "depth": 85,
@@ -11213,7 +11212,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "fire_balls_368": {
     "key": "fire_balls_368",
@@ -11221,7 +11221,6 @@
     "name": "Fire Balls",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 26,
     "pval": 30,
     "depth": 95,
@@ -11245,7 +11244,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "acid_balls_369": {
     "key": "acid_balls_369",
@@ -11253,7 +11253,6 @@
     "name": "Acid Balls",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 24,
     "pval": 27,
     "depth": 95,
@@ -11277,7 +11276,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "acid_bolts_370": {
     "key": "acid_bolts_370",
@@ -11285,7 +11285,6 @@
     "name": "Acid Bolts",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 20,
     "pval": 12,
     "depth": 75,
@@ -11309,7 +11308,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "enlightenment_371": {
     "key": "enlightenment_371",
@@ -11317,7 +11317,6 @@
     "name": "Enlightenment",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 5,
     "pval": 99,
     "depth": 70,
@@ -11341,7 +11340,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "perception_372": {
     "key": "perception_372",
@@ -11349,7 +11349,6 @@
     "name": "Perception",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 2,
     "pval": 10,
     "depth": 75,
@@ -11373,7 +11372,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "curing_373": {
     "key": "curing_373",
@@ -11381,7 +11381,6 @@
     "name": "Curing",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 8,
     "pval": 999,
     "depth": 80,
@@ -11405,7 +11404,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "healing_374": {
     "key": "healing_374",
@@ -11413,7 +11413,6 @@
     "name": "Healing",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 9,
     "pval": 999,
     "depth": 100,
@@ -11437,7 +11436,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "detection": {
     "key": "detection",
@@ -11445,7 +11445,6 @@
     "name": "Detection",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 6,
     "pval": 99,
     "depth": 52,
@@ -11469,7 +11468,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "restoration": {
     "key": "restoration",
@@ -11477,7 +11477,6 @@
     "name": "Restoration",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 10,
     "pval": 999,
     "depth": 100,
@@ -11501,7 +11500,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "speed_377": {
     "key": "speed_377",
@@ -11509,7 +11509,6 @@
     "name": "Speed",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 11,
     "pval": 99,
     "depth": 105,
@@ -11533,7 +11532,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "pesticide": {
     "key": "pesticide",
@@ -11541,7 +11541,6 @@
     "name": "Pesticide",
     "symbol": "-",
     "color": "d",
-    "tval": 66,
     "sval": 12,
     "pval": 3,
     "depth": 23,
@@ -11561,7 +11560,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "rod"
   },
   "call_of_the_wild": {
     "key": "call_of_the_wild",
@@ -11569,7 +11569,6 @@
     "name": "[Call of the Wild]",
     "symbol": "?",
     "color": "G",
-    "tval": 92,
     "sval": 0,
     "pval": 0,
     "depth": 17,
@@ -11589,7 +11588,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "nature_book"
   },
   "nature_mastery": {
     "key": "nature_mastery",
@@ -11597,7 +11597,6 @@
     "name": "[Nature Mastery]",
     "symbol": "?",
     "color": "G",
-    "tval": 92,
     "sval": 1,
     "pval": 0,
     "depth": 20,
@@ -11617,7 +11616,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "nature_book"
   },
   "natures_gifts": {
     "key": "natures_gifts",
@@ -11625,7 +11625,6 @@
     "name": "[Nature's Gifts]",
     "symbol": "?",
     "color": "g",
-    "tval": 92,
     "sval": 2,
     "pval": 0,
     "depth": 75,
@@ -11649,7 +11648,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "nature_book"
   },
   "natures_wrath": {
     "key": "natures_wrath",
@@ -11657,7 +11657,6 @@
     "name": "[Nature's Wrath]",
     "symbol": "?",
     "color": "g",
-    "tval": 92,
     "sval": 3,
     "pval": 0,
     "depth": 100,
@@ -11681,7 +11680,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "nature_book"
   },
   "sign_of_chaos": {
     "key": "sign_of_chaos",
@@ -11689,7 +11689,6 @@
     "name": "[Sign of Chaos]",
     "symbol": "?",
     "color": "R",
-    "tval": 93,
     "sval": 0,
     "pval": 0,
     "depth": 17,
@@ -11709,7 +11708,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "chaos_book"
   },
   "chaos_mastery": {
     "key": "chaos_mastery",
@@ -11717,7 +11717,6 @@
     "name": "[Chaos Mastery]",
     "symbol": "?",
     "color": "R",
-    "tval": 93,
     "sval": 1,
     "pval": 0,
     "depth": 20,
@@ -11737,7 +11736,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "chaos_book"
   },
   "chaos_channels": {
     "key": "chaos_channels",
@@ -11745,7 +11745,6 @@
     "name": "[Chaos Channels]",
     "symbol": "?",
     "color": "r",
-    "tval": 93,
     "sval": 2,
     "pval": 0,
     "depth": 75,
@@ -11769,7 +11768,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "chaos_book"
   },
   "armageddon_tome": {
     "key": "armageddon_tome",
@@ -11777,7 +11777,6 @@
     "name": "[Armageddon Tome]",
     "symbol": "?",
     "color": "r",
-    "tval": 93,
     "sval": 3,
     "pval": 0,
     "depth": 105,
@@ -11801,7 +11800,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "chaos_book"
   },
   "black_prayers": {
     "key": "black_prayers",
@@ -11809,7 +11809,6 @@
     "name": "[Black Prayers]",
     "symbol": "?",
     "color": "D",
-    "tval": 94,
     "sval": 0,
     "pval": 0,
     "depth": 17,
@@ -11829,7 +11828,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "death_book"
   },
   "black_mass": {
     "key": "black_mass",
@@ -11837,7 +11837,6 @@
     "name": "[Black Mass]",
     "symbol": "?",
     "color": "D",
-    "tval": 94,
     "sval": 1,
     "pval": 0,
     "depth": 20,
@@ -11857,7 +11856,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "death_book"
   },
   "shard_of_pottery": {
     "key": "shard_of_pottery",
@@ -11865,7 +11865,6 @@
     "name": "& Shard~ of Pottery",
     "symbol": "~",
     "color": "r",
-    "tval": 3,
     "sval": 3,
     "pval": 0,
     "depth": 0,
@@ -11885,7 +11884,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "junk"
   },
   "broken_stick": {
     "key": "broken_stick",
@@ -11893,7 +11893,6 @@
     "name": "& Broken Stick~",
     "symbol": "~",
     "color": "r",
-    "tval": 3,
     "sval": 6,
     "pval": 0,
     "depth": 0,
@@ -11913,7 +11912,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "junk"
   },
   "broken_skull": {
     "key": "broken_skull",
@@ -11921,7 +11921,6 @@
     "name": "& Broken Skull~",
     "symbol": "~",
     "color": "w",
-    "tval": 1,
     "sval": 1,
     "pval": 0,
     "depth": 0,
@@ -11941,7 +11940,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "skeleton"
   },
   "broken_bone": {
     "key": "broken_bone",
@@ -11949,7 +11949,6 @@
     "name": "& Broken Bone~",
     "symbol": "~",
     "color": "w",
-    "tval": 1,
     "sval": 2,
     "pval": 0,
     "depth": 0,
@@ -11969,7 +11968,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "skeleton"
   },
   "canine_skeleton": {
     "key": "canine_skeleton",
@@ -11977,7 +11977,6 @@
     "name": "& Canine Skeleton~",
     "symbol": "~",
     "color": "w",
-    "tval": 1,
     "sval": 4,
     "pval": 0,
     "depth": 1,
@@ -11997,7 +11996,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "skeleton"
   },
   "rodent_skeleton": {
     "key": "rodent_skeleton",
@@ -12005,7 +12005,6 @@
     "name": "& Rodent Skeleton~",
     "symbol": "~",
     "color": "w",
-    "tval": 1,
     "sval": 3,
     "pval": 0,
     "depth": 1,
@@ -12025,7 +12024,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "skeleton"
   },
   "human_skeleton": {
     "key": "human_skeleton",
@@ -12033,7 +12033,6 @@
     "name": "& Human Skeleton~",
     "symbol": "~",
     "color": "w",
-    "tval": 1,
     "sval": 8,
     "pval": 0,
     "depth": 9,
@@ -12053,7 +12052,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "skeleton"
   },
   "dwarf_skeleton": {
     "key": "dwarf_skeleton",
@@ -12061,7 +12061,6 @@
     "name": "& Dwarf Skeleton~",
     "symbol": "~",
     "color": "w",
-    "tval": 1,
     "sval": 7,
     "pval": 0,
     "depth": 9,
@@ -12081,7 +12080,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "skeleton"
   },
   "elf_skeleton": {
     "key": "elf_skeleton",
@@ -12089,7 +12089,6 @@
     "name": "& Elf Skeleton~",
     "symbol": "~",
     "color": "w",
-    "tval": 1,
     "sval": 6,
     "pval": 0,
     "depth": 9,
@@ -12109,7 +12108,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "skeleton"
   },
   "gnome_skeleton": {
     "key": "gnome_skeleton",
@@ -12117,7 +12117,6 @@
     "name": "& Gnome Skeleton~",
     "symbol": "~",
     "color": "w",
-    "tval": 1,
     "sval": 5,
     "pval": 0,
     "depth": 9,
@@ -12137,7 +12136,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "skeleton"
   },
   "great_hammer": {
     "key": "great_hammer",
@@ -12145,7 +12145,6 @@
     "name": "& Great Hammer~",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 19,
     "pval": 0,
     "depth": 70,
@@ -12169,7 +12168,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "black_dragon_scale_mail": {
     "key": "black_dragon_scale_mail",
@@ -12177,7 +12177,6 @@
     "name": "Black Dragon Scale Mail~",
     "symbol": "[",
     "color": "s",
-    "tval": 38,
     "sval": 1,
     "pval": 0,
     "depth": 60,
@@ -12202,7 +12201,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "blue_dragon_scale_mail": {
     "key": "blue_dragon_scale_mail",
@@ -12210,7 +12210,6 @@
     "name": "Blue Dragon Scale Mail~",
     "symbol": "[",
     "color": "b",
-    "tval": 38,
     "sval": 2,
     "pval": 0,
     "depth": 40,
@@ -12235,7 +12234,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "white_dragon_scale_mail": {
     "key": "white_dragon_scale_mail",
@@ -12243,7 +12243,6 @@
     "name": "White Dragon Scale Mail~",
     "symbol": "[",
     "color": "w",
-    "tval": 38,
     "sval": 3,
     "pval": 0,
     "depth": 50,
@@ -12268,7 +12267,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "red_dragon_scale_mail": {
     "key": "red_dragon_scale_mail",
@@ -12276,7 +12276,6 @@
     "name": "Red Dragon Scale Mail~",
     "symbol": "[",
     "color": "r",
-    "tval": 38,
     "sval": 4,
     "pval": 0,
     "depth": 80,
@@ -12301,7 +12300,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "green_dragon_scale_mail": {
     "key": "green_dragon_scale_mail",
@@ -12309,7 +12309,6 @@
     "name": "Green Dragon Scale Mail~",
     "symbol": "[",
     "color": "g",
-    "tval": 38,
     "sval": 5,
     "pval": 0,
     "depth": 70,
@@ -12334,7 +12333,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "multihued_dragon_scale_mail": {
     "key": "multihued_dragon_scale_mail",
@@ -12342,7 +12342,6 @@
     "name": "Multi-Hued Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
-    "tval": 38,
     "sval": 6,
     "pval": 0,
     "depth": 100,
@@ -12371,7 +12370,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "pseudo_dragon_scale_mail": {
     "key": "pseudo_dragon_scale_mail",
@@ -12379,7 +12379,6 @@
     "name": "Pseudo Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
-    "tval": 38,
     "sval": 10,
     "pval": 0,
     "depth": 65,
@@ -12405,7 +12404,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "law_dragon_scale_mail": {
     "key": "law_dragon_scale_mail",
@@ -12413,7 +12413,6 @@
     "name": "Law Dragon Scale Mail~",
     "symbol": "[",
     "color": "B",
-    "tval": 38,
     "sval": 12,
     "pval": 0,
     "depth": 80,
@@ -12439,7 +12438,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "bronze_dragon_scale_mail": {
     "key": "bronze_dragon_scale_mail",
@@ -12447,7 +12447,6 @@
     "name": "Bronze Dragon Scale Mail~",
     "symbol": "[",
     "color": "U",
-    "tval": 38,
     "sval": 14,
     "pval": 0,
     "depth": 55,
@@ -12472,7 +12471,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "gold_dragon_scale_mail": {
     "key": "gold_dragon_scale_mail",
@@ -12480,7 +12480,6 @@
     "name": "Gold Dragon Scale Mail~",
     "symbol": "[",
     "color": "y",
-    "tval": 38,
     "sval": 16,
     "pval": 0,
     "depth": 65,
@@ -12505,7 +12504,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "chaos_dragon_scale_mail": {
     "key": "chaos_dragon_scale_mail",
@@ -12513,7 +12513,6 @@
     "name": "Chaos Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
-    "tval": 38,
     "sval": 18,
     "pval": 0,
     "depth": 75,
@@ -12539,7 +12538,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "balance_dragon_scale_mail": {
     "key": "balance_dragon_scale_mail",
@@ -12547,7 +12547,6 @@
     "name": "Balance Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
-    "tval": 38,
     "sval": 20,
     "pval": 0,
     "depth": 90,
@@ -12575,7 +12574,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "power_dragon_scale_mail": {
     "key": "power_dragon_scale_mail",
@@ -12583,7 +12583,6 @@
     "name": "Power Dragon Scale Mail~",
     "symbol": "[",
     "color": "v",
-    "tval": 38,
     "sval": 30,
     "pval": 0,
     "depth": 110,
@@ -12621,7 +12620,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "dragon_armor"
   },
   "dragon_helm": {
     "key": "dragon_helm",
@@ -12629,7 +12629,6 @@
     "name": "& Dragon Helm~",
     "symbol": "]",
     "color": "G",
-    "tval": 32,
     "sval": 7,
     "pval": 0,
     "depth": 80,
@@ -12656,7 +12655,8 @@
       "IGNORE_FIRE",
       "IGNORE_ELEC",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "helm"
   },
   "dragon_shield": {
     "key": "dragon_shield",
@@ -12664,7 +12664,6 @@
     "name": "& Dragon Shield~",
     "symbol": "[",
     "color": "G",
-    "tval": 34,
     "sval": 6,
     "pval": 0,
     "depth": 80,
@@ -12691,7 +12690,8 @@
       "IGNORE_FIRE",
       "IGNORE_ELEC",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "shield"
   },
   "death": {
     "key": "death",
@@ -12699,7 +12699,6 @@
     "name": "Death",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 23,
     "pval": 0,
     "depth": 85,
@@ -12719,7 +12718,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "ruination": {
     "key": "ruination",
@@ -12727,7 +12727,6 @@
     "name": "Ruination",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 15,
     "pval": 0,
     "depth": 70,
@@ -12747,7 +12746,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "detonations": {
     "key": "detonations",
@@ -12755,7 +12755,6 @@
     "name": "Detonations",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 22,
     "pval": 0,
     "depth": 90,
@@ -12775,7 +12774,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "augmentation": {
     "key": "augmentation",
@@ -12783,7 +12783,6 @@
     "name": "Augmentation",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 55,
     "pval": 0,
     "depth": 50,
@@ -12803,7 +12802,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "healing_419": {
     "key": "healing_419",
@@ -12811,7 +12811,6 @@
     "name": "*Healing*",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 38,
     "pval": 0,
     "depth": 65,
@@ -12869,7 +12868,8 @@
         "type": "cure",
         "status": "poisoned"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "life": {
     "key": "life",
@@ -12877,7 +12877,6 @@
     "name": "Life",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 39,
     "pval": 0,
     "depth": 85,
@@ -12927,7 +12926,8 @@
         "type": "cure",
         "status": "poisoned"
       }
-    ]
+    ],
+    "type": "potion"
   },
   "self_knowledge": {
     "key": "self_knowledge",
@@ -12935,7 +12935,6 @@
     "name": "Self Knowledge",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 58,
     "pval": 0,
     "depth": 45,
@@ -12959,7 +12958,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "enlightenment_422": {
     "key": "enlightenment_422",
@@ -12967,7 +12967,6 @@
     "name": "*Enlightenment*",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 57,
     "pval": 0,
     "depth": 95,
@@ -12987,7 +12986,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "black_channels": {
     "key": "black_channels",
@@ -12995,7 +12995,6 @@
     "name": "[Black Channels]",
     "symbol": "?",
     "color": "v",
-    "tval": 94,
     "sval": 2,
     "pval": 0,
     "depth": 75,
@@ -13019,7 +13018,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "death_book"
   },
   "necronomicon": {
     "key": "necronomicon",
@@ -13027,7 +13027,6 @@
     "name": "[Necronomicon]",
     "symbol": "?",
     "color": "v",
-    "tval": 94,
     "sval": 3,
     "pval": 0,
     "depth": 95,
@@ -13051,7 +13050,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "death_book"
   },
   "fear_resistance": {
     "key": "fear_resistance",
@@ -13059,7 +13059,6 @@
     "name": "Fear Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 38,
     "pval": 0,
     "depth": 17,
@@ -13080,7 +13079,8 @@
     "flags": [
       "RES_FEAR",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "light_and_darkness_resistance": {
     "key": "light_and_darkness_resistance",
@@ -13088,7 +13088,6 @@
     "name": "Light and Darkness Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 39,
     "pval": 0,
     "depth": 52,
@@ -13110,7 +13109,8 @@
       "RES_LITE",
       "RES_DARK",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "nether_resistance": {
     "key": "nether_resistance",
@@ -13118,7 +13118,6 @@
     "name": "Nether Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 40,
     "pval": 0,
     "depth": 60,
@@ -13140,7 +13139,8 @@
       "RES_NETHER",
       "HOLD_LIFE",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "nexus_resistance": {
     "key": "nexus_resistance",
@@ -13148,7 +13148,6 @@
     "name": "Nexus Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 41,
     "pval": 0,
     "depth": 42,
@@ -13169,7 +13168,8 @@
     "flags": [
       "RES_NEXUS",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "sound_resistance": {
     "key": "sound_resistance",
@@ -13177,7 +13177,6 @@
     "name": "Sound Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 42,
     "pval": 0,
     "depth": 45,
@@ -13198,7 +13197,8 @@
     "flags": [
       "RES_SOUND",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "confusion_resistance": {
     "key": "confusion_resistance",
@@ -13206,7 +13206,6 @@
     "name": "Confusion Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 43,
     "pval": 0,
     "depth": 39,
@@ -13227,7 +13226,8 @@
     "flags": [
       "RES_CONF",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "shard_resistance": {
     "key": "shard_resistance",
@@ -13235,7 +13235,6 @@
     "name": "Shard Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 44,
     "pval": 0,
     "depth": 43,
@@ -13256,7 +13255,8 @@
     "flags": [
       "RES_SHARDS",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "disenchantment_resistance": {
     "key": "disenchantment_resistance",
@@ -13264,7 +13264,6 @@
     "name": "Disenchantment Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 45,
     "pval": 0,
     "depth": 100,
@@ -13285,7 +13284,8 @@
     "flags": [
       "RES_DISEN",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "chaos_resistance": {
     "key": "chaos_resistance",
@@ -13293,7 +13293,6 @@
     "name": "Chaos Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 46,
     "pval": 0,
     "depth": 75,
@@ -13315,7 +13314,8 @@
       "RES_CHAOS",
       "RES_CONF",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "blindness_resistance": {
     "key": "blindness_resistance",
@@ -13323,7 +13323,6 @@
     "name": "Blindness Resistance",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 47,
     "pval": 0,
     "depth": 20,
@@ -13344,7 +13343,8 @@
     "flags": [
       "RES_BLIND",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "lordly_protection": {
     "key": "lordly_protection",
@@ -13352,7 +13352,6 @@
     "name": "Lordly Protection",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 48,
     "pval": 0,
     "depth": 105,
@@ -13375,7 +13374,8 @@
       "RES_POIS",
       "HOLD_LIFE",
       "FREE_ACT"
-    ]
+    ],
+    "type": "ring"
   },
   "extra_attacks": {
     "key": "extra_attacks",
@@ -13383,7 +13383,6 @@
     "name": "Extra Attacks",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 49,
     "pval": 1,
     "depth": 75,
@@ -13407,7 +13406,8 @@
     "toAc": 0,
     "flags": [
       "BLOWS"
-    ]
+    ],
+    "type": "ring"
   },
   "cure_light_wounds_437": {
     "key": "cure_light_wounds_437",
@@ -13415,7 +13415,6 @@
     "name": "Cure Light Wounds",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 34,
     "pval": 50,
     "depth": 0,
@@ -13450,7 +13449,8 @@
         "status": "cut",
         "amount": 10
       }
-    ]
+    ],
+    "type": "potion"
   },
   "clumsiness": {
     "key": "clumsiness",
@@ -13458,7 +13458,6 @@
     "name": "Clumsiness",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 19,
     "pval": 0,
     "depth": 9,
@@ -13478,7 +13477,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "sickliness": {
     "key": "sickliness",
@@ -13486,7 +13486,6 @@
     "name": "Sickliness",
     "symbol": "!",
     "color": "d",
-    "tval": 75,
     "sval": 20,
     "pval": 0,
     "depth": 17,
@@ -13506,7 +13505,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "potion"
   },
   "copper_480": {
     "key": "copper_480",
@@ -13514,7 +13514,6 @@
     "name": "copper",
     "symbol": "$",
     "color": "u",
-    "tval": 100,
     "sval": 1,
     "pval": 0,
     "depth": 1,
@@ -13527,7 +13526,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "copper_481": {
     "key": "copper_481",
@@ -13535,7 +13535,6 @@
     "name": "copper",
     "symbol": "$",
     "color": "u",
-    "tval": 100,
     "sval": 2,
     "pval": 0,
     "depth": 1,
@@ -13548,7 +13547,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "copper_482": {
     "key": "copper_482",
@@ -13556,7 +13556,6 @@
     "name": "copper",
     "symbol": "$",
     "color": "u",
-    "tval": 100,
     "sval": 3,
     "pval": 0,
     "depth": 1,
@@ -13569,7 +13568,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "silver_483": {
     "key": "silver_483",
@@ -13577,7 +13577,6 @@
     "name": "silver",
     "symbol": "$",
     "color": "s",
-    "tval": 100,
     "sval": 4,
     "pval": 0,
     "depth": 1,
@@ -13590,7 +13589,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "silver_484": {
     "key": "silver_484",
@@ -13598,7 +13598,6 @@
     "name": "silver",
     "symbol": "$",
     "color": "s",
-    "tval": 100,
     "sval": 5,
     "pval": 0,
     "depth": 1,
@@ -13611,7 +13610,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "silver_485": {
     "key": "silver_485",
@@ -13619,7 +13619,6 @@
     "name": "silver",
     "symbol": "$",
     "color": "s",
-    "tval": 100,
     "sval": 6,
     "pval": 0,
     "depth": 1,
@@ -13632,7 +13631,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "garnets_486": {
     "key": "garnets_486",
@@ -13640,7 +13640,6 @@
     "name": "garnets",
     "symbol": "$",
     "color": "r",
-    "tval": 100,
     "sval": 7,
     "pval": 0,
     "depth": 1,
@@ -13653,7 +13652,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "garnets_487": {
     "key": "garnets_487",
@@ -13661,7 +13661,6 @@
     "name": "garnets",
     "symbol": "$",
     "color": "r",
-    "tval": 100,
     "sval": 8,
     "pval": 0,
     "depth": 1,
@@ -13674,7 +13673,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "gold_488": {
     "key": "gold_488",
@@ -13682,7 +13682,6 @@
     "name": "gold",
     "symbol": "$",
     "color": "y",
-    "tval": 100,
     "sval": 9,
     "pval": 0,
     "depth": 1,
@@ -13695,7 +13694,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "gold_489": {
     "key": "gold_489",
@@ -13703,7 +13703,6 @@
     "name": "gold",
     "symbol": "$",
     "color": "y",
-    "tval": 100,
     "sval": 10,
     "pval": 0,
     "depth": 1,
@@ -13716,7 +13715,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "gold_490": {
     "key": "gold_490",
@@ -13724,7 +13724,6 @@
     "name": "gold",
     "symbol": "$",
     "color": "y",
-    "tval": 100,
     "sval": 11,
     "pval": 0,
     "depth": 1,
@@ -13737,7 +13736,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "opals": {
     "key": "opals",
@@ -13745,7 +13745,6 @@
     "name": "opals",
     "symbol": "$",
     "color": "W",
-    "tval": 100,
     "sval": 12,
     "pval": 0,
     "depth": 1,
@@ -13758,7 +13757,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "sapphires": {
     "key": "sapphires",
@@ -13766,7 +13766,6 @@
     "name": "sapphires",
     "symbol": "$",
     "color": "b",
-    "tval": 100,
     "sval": 13,
     "pval": 0,
     "depth": 1,
@@ -13779,7 +13778,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "rubies": {
     "key": "rubies",
@@ -13787,7 +13787,6 @@
     "name": "rubies",
     "symbol": "$",
     "color": "r",
-    "tval": 100,
     "sval": 14,
     "pval": 0,
     "depth": 1,
@@ -13800,7 +13799,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "diamonds": {
     "key": "diamonds",
@@ -13808,7 +13808,6 @@
     "name": "diamonds",
     "symbol": "$",
     "color": "w",
-    "tval": 100,
     "sval": 15,
     "pval": 0,
     "depth": 1,
@@ -13821,7 +13820,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "emeralds": {
     "key": "emeralds",
@@ -13829,7 +13829,6 @@
     "name": "emeralds",
     "symbol": "$",
     "color": "g",
-    "tval": 100,
     "sval": 16,
     "pval": 0,
     "depth": 1,
@@ -13842,7 +13841,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "mithril": {
     "key": "mithril",
@@ -13850,7 +13850,6 @@
     "name": "mithril",
     "symbol": "$",
     "color": "B",
-    "tval": 100,
     "sval": 17,
     "pval": 0,
     "depth": 1,
@@ -13863,7 +13862,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "adamantite": {
     "key": "adamantite",
@@ -13871,7 +13871,6 @@
     "name": "adamantite",
     "symbol": "$",
     "color": "G",
-    "tval": 100,
     "sval": 18,
     "pval": 0,
     "depth": 1,
@@ -13884,7 +13883,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "gold"
   },
   "mighty_hammer": {
     "key": "mighty_hammer",
@@ -13892,7 +13892,6 @@
     "name": "& Mighty Hammer~",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 50,
     "pval": 0,
     "depth": 15,
@@ -13908,7 +13907,8 @@
     "flags": [
       "SHOW_MODS",
       "INSTA_ART"
-    ]
+    ],
+    "type": "hafted"
   },
   "massive_iron_crown": {
     "key": "massive_iron_crown",
@@ -13916,7 +13916,6 @@
     "name": "& Massive Iron Crown~",
     "symbol": "]",
     "color": "D",
-    "tval": 33,
     "sval": 50,
     "pval": 0,
     "depth": 44,
@@ -13931,7 +13930,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "crown"
   },
   "phial": {
     "key": "phial",
@@ -13939,7 +13939,6 @@
     "name": "& Phial~",
     "symbol": "!",
     "color": "y",
-    "tval": 39,
     "sval": 4,
     "pval": 0,
     "depth": 5,
@@ -13955,7 +13954,8 @@
     "flags": [
       "INSTA_ART",
       "LITE"
-    ]
+    ],
+    "type": "light"
   },
   "star": {
     "key": "star",
@@ -13963,7 +13963,6 @@
     "name": "& Star~",
     "symbol": "*",
     "color": "y",
-    "tval": 39,
     "sval": 5,
     "pval": 0,
     "depth": 20,
@@ -13979,7 +13978,8 @@
     "flags": [
       "INSTA_ART",
       "LITE"
-    ]
+    ],
+    "type": "light"
   },
   "jewel": {
     "key": "jewel",
@@ -13987,7 +13987,6 @@
     "name": "& Jewel~",
     "symbol": "*",
     "color": "R",
-    "tval": 39,
     "sval": 6,
     "pval": 0,
     "depth": 50,
@@ -14003,7 +14002,8 @@
     "flags": [
       "INSTA_ART",
       "LITE"
-    ]
+    ],
+    "type": "light"
   },
   "amulet_503": {
     "key": "amulet_503",
@@ -14011,7 +14011,6 @@
     "name": "& Amulet~",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 10,
     "pval": 0,
     "depth": 10,
@@ -14026,7 +14025,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "amulet"
   },
   "amulet_504": {
     "key": "amulet_504",
@@ -14034,7 +14034,6 @@
     "name": "& Amulet~",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 11,
     "pval": 0,
     "depth": 30,
@@ -14049,7 +14048,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "amulet"
   },
   "necklace": {
     "key": "necklace",
@@ -14057,7 +14057,6 @@
     "name": "& Necklace~",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 12,
     "pval": 0,
     "depth": 50,
@@ -14072,7 +14071,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "amulet"
   },
   "ring_506": {
     "key": "ring_506",
@@ -14080,7 +14080,6 @@
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 32,
     "pval": 0,
     "depth": 10,
@@ -14095,7 +14094,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "ring_507": {
     "key": "ring_507",
@@ -14103,7 +14103,6 @@
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 33,
     "pval": 0,
     "depth": 30,
@@ -14118,7 +14117,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "ring_508": {
     "key": "ring_508",
@@ -14126,7 +14126,6 @@
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 34,
     "pval": 0,
     "depth": 50,
@@ -14141,7 +14140,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "ring_509": {
     "key": "ring_509",
@@ -14149,7 +14149,6 @@
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 35,
     "pval": 0,
     "depth": 70,
@@ -14164,7 +14163,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "ring_510": {
     "key": "ring_510",
@@ -14172,7 +14172,6 @@
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 36,
     "pval": 0,
     "depth": 90,
@@ -14187,7 +14186,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "ring_511": {
     "key": "ring_511",
@@ -14195,7 +14195,6 @@
     "name": "& Ring~",
     "symbol": "=",
     "color": "y",
-    "tval": 45,
     "sval": 37,
     "pval": 0,
     "depth": 110,
@@ -14210,7 +14209,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "conjurings_tricks": {
     "key": "conjurings_tricks",
@@ -14218,7 +14218,6 @@
     "name": "[Conjurings & Tricks]",
     "symbol": "?",
     "color": "U",
-    "tval": 95,
     "sval": 0,
     "pval": 0,
     "depth": 17,
@@ -14238,7 +14237,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "trump_book"
   },
   "deck_of_many_things": {
     "key": "deck_of_many_things",
@@ -14246,7 +14246,6 @@
     "name": "[Deck of Many Things]",
     "symbol": "?",
     "color": "U",
-    "tval": 95,
     "sval": 1,
     "pval": 0,
     "depth": 20,
@@ -14266,7 +14265,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "trump_book"
   },
   "trumps_of_doom": {
     "key": "trumps_of_doom",
@@ -14274,7 +14274,6 @@
     "name": "[Trumps of Doom]",
     "symbol": "?",
     "color": "o",
-    "tval": 95,
     "sval": 2,
     "pval": 0,
     "depth": 65,
@@ -14298,7 +14297,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "trump_book"
   },
   "five_aces": {
     "key": "five_aces",
@@ -14306,7 +14306,6 @@
     "name": "[Five Aces]",
     "symbol": "?",
     "color": "o",
-    "tval": 95,
     "sval": 3,
     "pval": 0,
     "depth": 95,
@@ -14330,7 +14329,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "trump_book"
   },
   "cantrips_for_beginners": {
     "key": "cantrips_for_beginners",
@@ -14338,7 +14338,6 @@
     "name": "[Cantrips for Beginners]",
     "symbol": "?",
     "color": "s",
-    "tval": 96,
     "sval": 0,
     "pval": 0,
     "depth": 10,
@@ -14358,7 +14357,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "arcane_book"
   },
   "minor_arcana": {
     "key": "minor_arcana",
@@ -14366,7 +14366,6 @@
     "name": "[Minor Arcana]",
     "symbol": "?",
     "color": "s",
-    "tval": 96,
     "sval": 1,
     "pval": 0,
     "depth": 15,
@@ -14386,7 +14385,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "arcane_book"
   },
   "major_arcana": {
     "key": "major_arcana",
@@ -14394,7 +14394,6 @@
     "name": "[Major Arcana]",
     "symbol": "?",
     "color": "s",
-    "tval": 96,
     "sval": 2,
     "pval": 0,
     "depth": 20,
@@ -14414,7 +14413,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "arcane_book"
   },
   "manual_of_mastery": {
     "key": "manual_of_mastery",
@@ -14422,7 +14422,6 @@
     "name": "[Manual of Mastery]",
     "symbol": "?",
     "color": "s",
-    "tval": 96,
     "sval": 3,
     "pval": 0,
     "depth": 20,
@@ -14442,7 +14441,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "arcane_book"
   },
   "reflection": {
     "key": "reflection",
@@ -14450,7 +14450,6 @@
     "name": "Reflection",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 9,
     "pval": 0,
     "depth": 85,
@@ -14475,7 +14474,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "amulet"
   },
   "antimagic": {
     "key": "antimagic",
@@ -14483,7 +14483,6 @@
     "name": "Anti-Magic",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 13,
     "pval": 0,
     "depth": 85,
@@ -14507,7 +14506,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "amulet"
   },
   "antiteleportation": {
     "key": "antiteleportation",
@@ -14515,7 +14515,6 @@
     "name": "Anti-Teleportation",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 14,
     "pval": 0,
     "depth": 52,
@@ -14539,7 +14538,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "amulet"
   },
   "resistance_523": {
     "key": "resistance_523",
@@ -14547,7 +14547,6 @@
     "name": "Resistance",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 15,
     "pval": 0,
     "depth": 75,
@@ -14574,7 +14573,8 @@
       "IGNORE_ELEC",
       "IGNORE_FIRE",
       "IGNORE_COLD"
-    ]
+    ],
+    "type": "amulet"
   },
   "zweihander": {
     "key": "zweihander",
@@ -14582,7 +14582,6 @@
     "name": "& Zweihander~",
     "symbol": "|",
     "color": "w",
-    "tval": 23,
     "sval": 29,
     "pval": 0,
     "depth": 65,
@@ -14606,7 +14605,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "tanto": {
     "key": "tanto",
@@ -14614,7 +14614,6 @@
     "name": "& Tanto~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 6,
     "pval": 0,
     "depth": 5,
@@ -14634,7 +14633,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "splint_mail": {
     "key": "splint_mail",
@@ -14642,7 +14642,6 @@
     "name": "& Splint Mail~",
     "symbol": "[",
     "color": "D",
-    "tval": 37,
     "sval": 10,
     "pval": 0,
     "depth": 61,
@@ -14660,7 +14659,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "domaru": {
     "key": "domaru",
@@ -14668,7 +14668,6 @@
     "name": "& Do-maru~",
     "symbol": "[",
     "color": "s",
-    "tval": 37,
     "sval": 11,
     "pval": 0,
     "depth": 70,
@@ -14686,7 +14685,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "trifurcate_spear": {
     "key": "trifurcate_spear",
@@ -14694,7 +14694,6 @@
     "name": "& Trifurcate Spear~",
     "symbol": "/",
     "color": "o",
-    "tval": 22,
     "sval": 26,
     "pval": 0,
     "depth": 61,
@@ -14714,7 +14713,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "three_piece_rod": {
     "key": "three_piece_rod",
@@ -14722,7 +14722,6 @@
     "name": "& Three Piece Rod~",
     "symbol": "\\",
     "color": "u",
-    "tval": 21,
     "sval": 11,
     "pval": 0,
     "depth": 35,
@@ -14742,7 +14741,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "oyoroi": {
     "key": "oyoroi",
@@ -14750,7 +14750,6 @@
     "name": "& O-yoroi~",
     "symbol": "[",
     "color": "D",
-    "tval": 37,
     "sval": 16,
     "pval": 0,
     "depth": 75,
@@ -14768,7 +14767,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "fur_cloak": {
     "key": "fur_cloak",
@@ -14776,7 +14776,6 @@
     "name": "& Fur Cloak~",
     "symbol": "(",
     "color": "W",
-    "tval": 35,
     "sval": 3,
     "pval": 0,
     "depth": 35,
@@ -14798,7 +14797,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "cloak"
   },
   "lajatang": {
     "key": "lajatang",
@@ -14806,7 +14806,6 @@
     "name": "& Lajatang~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 14,
     "pval": 0,
     "depth": 43,
@@ -14826,7 +14825,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "hatchet": {
     "key": "hatchet",
@@ -14834,7 +14834,6 @@
     "name": "& Hatchet~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 1,
     "pval": 0,
     "depth": 17,
@@ -14854,7 +14853,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "rhino_hide_armour": {
     "key": "rhino_hide_armour",
@@ -14862,7 +14862,6 @@
     "name": "& Rhino Hide Armour~",
     "symbol": "(",
     "color": "s",
-    "tval": 36,
     "sval": 8,
     "pval": 0,
     "depth": 26,
@@ -14880,7 +14879,8 @@
     "toHit": -1,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "leather_jacket": {
     "key": "leather_jacket",
@@ -14888,7 +14888,6 @@
     "name": "& Leather Jacket~",
     "symbol": "(",
     "color": "U",
-    "tval": 36,
     "sval": 12,
     "pval": 0,
     "depth": 35,
@@ -14906,7 +14905,8 @@
     "toHit": -1,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "sickle": {
     "key": "sickle",
@@ -14914,7 +14914,6 @@
     "name": "& Sickle~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 3,
     "pval": 0,
     "depth": 17,
@@ -14934,7 +14933,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "tetsubo": {
     "key": "tetsubo",
@@ -14942,7 +14942,6 @@
     "name": "& Tetsubo~",
     "symbol": "\\",
     "color": "u",
-    "tval": 21,
     "sval": 16,
     "pval": 0,
     "depth": 43,
@@ -14962,7 +14961,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "nunchaku": {
     "key": "nunchaku",
@@ -14970,7 +14970,6 @@
     "name": "& Nunchaku~",
     "symbol": "\\",
     "color": "u",
-    "tval": 21,
     "sval": 4,
     "pval": 0,
     "depth": 20,
@@ -14990,7 +14989,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "bo_staff": {
     "key": "bo_staff",
@@ -14998,7 +14998,6 @@
     "name": "& Bo Staff~",
     "symbol": "\\",
     "color": "U",
-    "tval": 21,
     "sval": 14,
     "pval": 0,
     "depth": 60,
@@ -15018,7 +15017,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "jo_staff": {
     "key": "jo_staff",
@@ -15026,7 +15026,6 @@
     "name": "& Jo Staff~",
     "symbol": "\\",
     "color": "U",
-    "tval": 21,
     "sval": 7,
     "pval": 0,
     "depth": 19,
@@ -15046,7 +15045,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "club": {
     "key": "club",
@@ -15054,7 +15054,6 @@
     "name": "& Club~",
     "symbol": "\\",
     "color": "u",
-    "tval": 21,
     "sval": 1,
     "pval": 0,
     "depth": 0,
@@ -15074,7 +15073,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "broad_spear": {
     "key": "broad_spear",
@@ -15082,7 +15082,6 @@
     "name": "& Broad Spear~",
     "symbol": "/",
     "color": "w",
-    "tval": 22,
     "sval": 7,
     "pval": 0,
     "depth": 60,
@@ -15102,7 +15101,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "khopesh": {
     "key": "khopesh",
@@ -15110,7 +15110,6 @@
     "name": "& Khopesh~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 14,
     "pval": 0,
     "depth": 17,
@@ -15130,7 +15129,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "flamberge": {
     "key": "flamberge",
@@ -15138,7 +15138,6 @@
     "name": "& Flamberge~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 26,
     "pval": 0,
     "depth": 65,
@@ -15162,7 +15161,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "claymore": {
     "key": "claymore",
@@ -15170,7 +15170,6 @@
     "name": "& Claymore~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 23,
     "pval": 0,
     "depth": 65,
@@ -15190,7 +15189,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "espadon": {
     "key": "espadon",
@@ -15198,7 +15198,6 @@
     "name": "& Espadon~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 24,
     "pval": 0,
     "depth": 65,
@@ -15218,7 +15217,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "great_scimitar": {
     "key": "great_scimitar",
@@ -15226,7 +15226,6 @@
     "name": "& Great Scimitar~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 22,
     "pval": 0,
     "depth": 85,
@@ -15250,7 +15249,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "wakizashi": {
     "key": "wakizashi",
@@ -15258,7 +15258,6 @@
     "name": "& Wakizashi~",
     "symbol": "|",
     "color": "W",
-    "tval": 23,
     "sval": 13,
     "pval": 0,
     "depth": 26,
@@ -15278,7 +15277,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "naginata": {
     "key": "naginata",
@@ -15286,7 +15286,6 @@
     "name": "& Naginata~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 9,
     "pval": 0,
     "depth": 43,
@@ -15306,7 +15305,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "fauchard": {
     "key": "fauchard",
@@ -15314,7 +15314,6 @@
     "name": "& Fauchard~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 6,
     "pval": 0,
     "depth": 82,
@@ -15334,7 +15333,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "guisarme": {
     "key": "guisarme",
@@ -15342,7 +15342,6 @@
     "name": "& Guisarme~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 16,
     "pval": 0,
     "depth": 37,
@@ -15362,7 +15361,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "heavy_lance": {
     "key": "heavy_lance",
@@ -15370,7 +15370,6 @@
     "name": "& Heavy Lance~",
     "symbol": "/",
     "color": "s",
-    "tval": 22,
     "sval": 29,
     "pval": 0,
     "depth": 88,
@@ -15394,7 +15393,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "polearm"
   },
   "basillard": {
     "key": "basillard",
@@ -15402,7 +15402,6 @@
     "name": "& Basillard~",
     "symbol": "|",
     "color": "w",
-    "tval": 23,
     "sval": 9,
     "pval": 0,
     "depth": 42,
@@ -15422,7 +15421,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "ninjato": {
     "key": "ninjato",
@@ -15430,7 +15430,6 @@
     "name": "& Ninjato~",
     "symbol": "|",
     "color": "s",
-    "tval": 23,
     "sval": 19,
     "pval": 0,
     "depth": 52,
@@ -15450,7 +15449,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "ring_mail": {
     "key": "ring_mail",
@@ -15458,7 +15458,6 @@
     "name": "& Ring Mail~",
     "symbol": "[",
     "color": "s",
-    "tval": 37,
     "sval": 2,
     "pval": 0,
     "depth": 35,
@@ -15476,7 +15475,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "cord_armour": {
     "key": "cord_armour",
@@ -15484,7 +15484,6 @@
     "name": "& Cord Armour~",
     "symbol": "(",
     "color": "y",
-    "tval": 36,
     "sval": 9,
     "pval": 0,
     "depth": 9,
@@ -15502,7 +15501,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "paper_armour": {
     "key": "paper_armour",
@@ -15510,7 +15510,6 @@
     "name": "& Paper Armour~",
     "symbol": "(",
     "color": "w",
-    "tval": 36,
     "sval": 3,
     "pval": 0,
     "depth": 9,
@@ -15528,7 +15527,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "padded_armour": {
     "key": "padded_armour",
@@ -15536,7 +15536,6 @@
     "name": "& Padded Armour~",
     "symbol": "(",
     "color": "y",
-    "tval": 36,
     "sval": 10,
     "pval": 0,
     "depth": 4,
@@ -15554,7 +15553,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "kabuto": {
     "key": "kabuto",
@@ -15562,7 +15562,6 @@
     "name": "& Kabuto~",
     "symbol": "]",
     "color": "D",
-    "tval": 32,
     "sval": 8,
     "pval": 0,
     "depth": 75,
@@ -15580,7 +15579,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "helm"
   },
   "stone_and_hide_armour": {
     "key": "stone_and_hide_armour",
@@ -15588,7 +15588,6 @@
     "name": "& Stone and Hide Armour~",
     "symbol": "(",
     "color": "U",
-    "tval": 36,
     "sval": 15,
     "pval": 0,
     "depth": 61,
@@ -15606,7 +15605,8 @@
     "toHit": -1,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "jingasa": {
     "key": "jingasa",
@@ -15614,7 +15614,6 @@
     "name": "& Jingasa~",
     "symbol": "]",
     "color": "s",
-    "tval": 32,
     "sval": 4,
     "pval": 0,
     "depth": 28,
@@ -15632,7 +15631,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "helm"
   },
   "haramakido": {
     "key": "haramakido",
@@ -15640,7 +15640,6 @@
     "name": "& Haramakido~",
     "symbol": "[",
     "color": "D",
-    "tval": 37,
     "sval": 14,
     "pval": 0,
     "depth": 56,
@@ -15658,7 +15657,8 @@
     "toHit": -2,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "hard_armor"
   },
   "incandescent_globe": {
     "key": "incandescent_globe",
@@ -15666,7 +15666,6 @@
     "name": "& Incandescent Globe~",
     "symbol": "!",
     "color": "y",
-    "tval": 39,
     "sval": 3,
     "pval": 0,
     "depth": 30,
@@ -15681,7 +15680,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "light"
   },
   "diamond_edge": {
     "key": "diamond_edge",
@@ -15689,7 +15689,6 @@
     "name": "& Diamond Edge~",
     "symbol": "|",
     "color": "w",
-    "tval": 23,
     "sval": 31,
     "pval": 0,
     "depth": 120,
@@ -15710,7 +15709,8 @@
     "flags": [
       "SHOW_MODS",
       "VORPAL"
-    ]
+    ],
+    "type": "sword"
   },
   "mundanity": {
     "key": "mundanity",
@@ -15718,7 +15718,6 @@
     "name": "Mundanity",
     "symbol": "?",
     "color": "d",
-    "tval": 70,
     "sval": 23,
     "pval": 0,
     "depth": 23,
@@ -15742,7 +15741,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "scroll"
   },
   "magical_figurine_of": {
     "key": "magical_figurine_of",
@@ -15750,7 +15750,6 @@
     "name": "& Magical Figurine~ of #",
     "symbol": "`",
     "color": "g",
-    "tval": 8,
     "sval": 0,
     "pval": 0,
     "depth": 50,
@@ -15778,7 +15777,8 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "figurine"
   },
   "wooden_statue_of": {
     "key": "wooden_statue_of",
@@ -15786,7 +15786,6 @@
     "name": "& Wooden Statue~ of #",
     "symbol": "`",
     "color": "u",
-    "tval": 9,
     "sval": 0,
     "pval": 0,
     "depth": 5,
@@ -15804,7 +15803,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "clay_statue_of": {
     "key": "clay_statue_of",
@@ -15812,7 +15812,6 @@
     "name": "& Clay Statue~ of #",
     "symbol": "`",
     "color": "U",
-    "tval": 9,
     "sval": 1,
     "pval": 0,
     "depth": 5,
@@ -15830,7 +15829,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "stone_statue_of": {
     "key": "stone_statue_of",
@@ -15838,7 +15838,6 @@
     "name": "& Stone Statue~ of #",
     "symbol": "`",
     "color": "s",
-    "tval": 9,
     "sval": 2,
     "pval": 0,
     "depth": 5,
@@ -15856,7 +15855,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "iron_statue_of": {
     "key": "iron_statue_of",
@@ -15864,7 +15864,6 @@
     "name": "& Iron Statue~ of #",
     "symbol": "`",
     "color": "D",
-    "tval": 9,
     "sval": 3,
     "pval": 0,
     "depth": 5,
@@ -15882,7 +15881,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "copper_statue_of": {
     "key": "copper_statue_of",
@@ -15890,7 +15890,6 @@
     "name": "& Copper Statue~ of #",
     "symbol": "`",
     "color": "o",
-    "tval": 9,
     "sval": 4,
     "pval": 0,
     "depth": 20,
@@ -15908,7 +15907,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "silver_statue_of": {
     "key": "silver_statue_of",
@@ -15916,7 +15916,6 @@
     "name": "& Silver Statue~ of #",
     "symbol": "`",
     "color": "W",
-    "tval": 9,
     "sval": 5,
     "pval": 0,
     "depth": 32,
@@ -15934,7 +15933,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "golden_statue_of": {
     "key": "golden_statue_of",
@@ -15942,7 +15942,6 @@
     "name": "& Golden Statue~ of #",
     "symbol": "`",
     "color": "y",
-    "tval": 9,
     "sval": 6,
     "pval": 0,
     "depth": 50,
@@ -15960,7 +15959,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "ivory_statue_of": {
     "key": "ivory_statue_of",
@@ -15968,7 +15968,6 @@
     "name": "& Ivory Statue~ of #",
     "symbol": "`",
     "color": "w",
-    "tval": 9,
     "sval": 7,
     "pval": 0,
     "depth": 40,
@@ -15986,7 +15985,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "mithril_statue_of": {
     "key": "mithril_statue_of",
@@ -15994,7 +15994,6 @@
     "name": "& Mithril Statue~ of #",
     "symbol": "`",
     "color": "B",
-    "tval": 9,
     "sval": 8,
     "pval": 0,
     "depth": 70,
@@ -16012,7 +16011,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "ornate_statue_of": {
     "key": "ornate_statue_of",
@@ -16020,7 +16020,6 @@
     "name": "& Ornate Statue~ of #",
     "symbol": "`",
     "color": "v",
-    "tval": 9,
     "sval": 9,
     "pval": 0,
     "depth": 60,
@@ -16038,7 +16037,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "statue"
   },
   "tshirt": {
     "key": "tshirt",
@@ -16046,7 +16046,6 @@
     "name": "& T-shirt~",
     "symbol": "~",
     "color": "w",
-    "tval": 36,
     "sval": 0,
     "pval": 0,
     "depth": 1,
@@ -16059,7 +16058,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "soft_armor"
   },
   "steel_bolt": {
     "key": "steel_bolt",
@@ -16067,7 +16067,6 @@
     "name": "& Steel Bolt~",
     "symbol": "{",
     "color": "W",
-    "tval": 18,
     "sval": 1,
     "pval": 0,
     "depth": 43,
@@ -16091,7 +16090,8 @@
     "toAc": 0,
     "flags": [
       "SHOW_MODS"
-    ]
+    ],
+    "type": "bolt"
   },
   "ring_582": {
     "key": "ring_582",
@@ -16099,7 +16099,6 @@
     "name": "& Ring~",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 50,
     "pval": 0,
     "depth": 100,
@@ -16114,7 +16113,8 @@
     "toAc": 0,
     "flags": [
       "INSTA_ART"
-    ]
+    ],
+    "type": "ring"
   },
   "resist_fire_and_cold": {
     "key": "resist_fire_and_cold",
@@ -16122,7 +16122,6 @@
     "name": "Resist Fire and Cold",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 51,
     "pval": 0,
     "depth": 21,
@@ -16146,7 +16145,8 @@
       "IGNORE_FIRE",
       "IGNORE_COLD",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "ring"
   },
   "the_cat": {
     "key": "the_cat",
@@ -16154,7 +16154,6 @@
     "name": "the Cat",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 52,
     "pval": 4,
     "depth": 13,
@@ -16175,7 +16174,8 @@
     "flags": [
       "STEALTH",
       "INFRA"
-    ]
+    ],
+    "type": "ring"
   },
   "fate": {
     "key": "fate",
@@ -16183,7 +16183,6 @@
     "name": "Fate",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 53,
     "pval": 0,
     "depth": 15,
@@ -16207,7 +16206,8 @@
     "toAc": 0,
     "flags": [
       "STRANGE_LUCK"
-    ]
+    ],
+    "type": "ring"
   },
   "wizardry": {
     "key": "wizardry",
@@ -16215,7 +16215,6 @@
     "name": "Wizardry",
     "symbol": "=",
     "color": "d",
-    "tval": 45,
     "sval": 54,
     "pval": 2,
     "depth": 60,
@@ -16235,7 +16234,8 @@
     "toAc": 0,
     "flags": [
       "SP"
-    ]
+    ],
+    "type": "ring"
   },
   "protection_from_evil_587": {
     "key": "protection_from_evil_587",
@@ -16243,7 +16243,6 @@
     "name": "Protection from Evil",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 16,
     "pval": 0,
     "depth": 35,
@@ -16264,7 +16263,8 @@
     "flags": [
       "SLAY_EVIL",
       "EASY_KNOW"
-    ]
+    ],
+    "type": "amulet"
   },
   "protection_from_undead": {
     "key": "protection_from_undead",
@@ -16272,7 +16272,6 @@
     "name": "Protection from Undead",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 17,
     "pval": 4,
     "depth": 35,
@@ -16293,7 +16292,8 @@
     "flags": [
       "SLAY_UNDEAD",
       "WIS"
-    ]
+    ],
+    "type": "amulet"
   },
   "luck": {
     "key": "luck",
@@ -16301,7 +16301,6 @@
     "name": "Luck",
     "symbol": "\"",
     "color": "d",
-    "tval": 40,
     "sval": 18,
     "pval": 0,
     "depth": 50,
@@ -16321,7 +16320,8 @@
     "toAc": 0,
     "flags": [
       "LUCK_10"
-    ]
+    ],
+    "type": "amulet"
   },
   "elfblade": {
     "key": "elfblade",
@@ -16329,7 +16329,6 @@
     "name": "& Elfblade~",
     "symbol": "|",
     "color": "w",
-    "tval": 23,
     "sval": 32,
     "pval": 0,
     "depth": 90,
@@ -16351,7 +16350,8 @@
     "toHit": 0,
     "toDam": 0,
     "toAc": 0,
-    "flags": []
+    "flags": [],
+    "type": "sword"
   },
   "whip_of_entanglement": {
     "key": "whip_of_entanglement",
@@ -16359,7 +16359,6 @@
     "name": "& Whip~ of Entanglement",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 21,
     "pval": 0,
     "depth": 20,
@@ -16380,7 +16379,8 @@
     "flags": [
       "SLAY_ANIMAL",
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "psiblade": {
     "key": "psiblade",
@@ -16388,7 +16388,6 @@
     "name": "& Psiblade~",
     "symbol": "|",
     "color": "B",
-    "tval": 23,
     "sval": 33,
     "pval": 0,
     "depth": 50,
@@ -16410,7 +16409,8 @@
       "PSI_CRIT",
       "LITE",
       "SHOW_MODS"
-    ]
+    ],
+    "type": "sword"
   },
   "hammer_of_returning": {
     "key": "hammer_of_returning",
@@ -16418,7 +16418,6 @@
     "name": "& Hammer~ of Returning",
     "symbol": "\\",
     "color": "D",
-    "tval": 21,
     "sval": 22,
     "pval": 0,
     "depth": 9,
@@ -16440,7 +16439,8 @@
       "THROW",
       "RETURN",
       "SHOW_MODS"
-    ]
+    ],
+    "type": "hafted"
   },
   "hagaromo": {
     "key": "hagaromo",
@@ -16448,7 +16448,6 @@
     "name": "& Hagaromo~",
     "symbol": "(",
     "color": "v",
-    "tval": 36,
     "sval": 16,
     "pval": 0,
     "depth": 40,
@@ -16474,7 +16473,8 @@
       "SUST_DEX",
       "SUST_CON",
       "SUST_CHR"
-    ]
+    ],
+    "type": "soft_armor"
   },
   "sustenance": {
     "key": "sustenance",
@@ -16482,7 +16482,6 @@
     "name": "Sustenance",
     "symbol": "=",
     "color": "d",
-    "tval": 40,
     "sval": 19,
     "pval": 0,
     "depth": 12,
@@ -16502,6 +16501,7 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
-    ]
+    ],
+    "type": "amulet"
   }
 }

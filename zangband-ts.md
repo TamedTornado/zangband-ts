@@ -182,7 +182,15 @@ Reference C codebase is at `../zangband`. Key data files:
 ### 1.4 Data Rationalization [DONE]
 - [x] Merge spell definitions with class requirements (no separate ordinal arrays)
 
-### 1.5 Define Core Type System
+### 1.5 Item Type Field Migration [DONE]
+- [x] Add `type` string field to items.json and artifacts.json (replacing numeric tval)
+- [x] Remove `tval` from all JSON data files and TypeScript interfaces
+- [x] Update ItemDef, ArtifactDef, GeneratedItem to use `type: string`
+- [x] Update all systems (ItemGeneration, FlavorSystem, WieldState, etc.) to use type strings
+- [x] Delete legacy parser code (parseItems, parseArtifacts, extract-data.ts)
+- [x] Type strings: "sword", "hafted", "polearm", "bow", "soft_armor", "potion", "scroll", "wand", "staff", "rod", etc.
+
+### 1.6 Define Core Type System
 ```typescript
 // Example types to define in src/core/data/types.ts
 
@@ -503,6 +511,34 @@ const defaultBindings: Record<string, GameAction> = {
 - [x] Awareness tracking: using items reveals their type
 - [x] Article formatting: "a Robe", "an Azure Potion", "The One Ring"
 - [x] getItemDisplayName() integrates flavor, awareness, and articles
+
+**Device System (COMPLETE)**
+Wands, rods, and staves have special stacking and charge mechanics from ZangbandTK.
+
+*Charge Tracking:*
+- [x] Add `charges`, `maxCharges` fields to GeneratedItem (wands/staffs)
+- [x] Add `timeout` field to GeneratedItem (rods recharge timer)
+- [x] Initialize charges on generation via applyDeviceMagic()
+- [x] Rods start with timeout=0 (ready to use), pval = recharge time
+
+*Stacking Rules:*
+- [x] Wands: always stack, charges combine
+- [x] Rods: stack if both are ready (timeout=0)
+- [x] Staffs: only stack if same sval AND identical charge counts
+- [x] On stack: combine charges/maxCharges (wands)
+- [x] Player.addItem checks canStack() and merges matching devices
+
+*Display:*
+- [x] Wands/Staffs: "(N/M charges)" when identified (current/max)
+- [x] Rods: "(ready)" or "(N turns to recharge)"
+- [ ] Rods: "(M charging)" when timeout > 0, nothing when ready
+- [ ] Stacked rods: count how many are charging based on timeout/pval
+
+*Usage:*
+- [ ] Wands: decrement charges, mark empty when 0
+- [ ] Rods: add pval to timeout on use, can't use if all charging
+- [ ] Staffs: decrement charges like wands
+- [ ] Rod recharge: each turn, timeout -= (number of charging rods)
 
 **Items - Magical Devices (TODO)**
 - [ ] Aim wand (`a`)

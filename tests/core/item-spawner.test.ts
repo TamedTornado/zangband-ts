@@ -13,7 +13,7 @@ const createTestItem = (overrides: Partial<ItemDef> = {}): ItemDef => ({
   name: 'Test Sword',
   symbol: '|',
   color: 'w',
-  tval: 23,
+  type: 'sword',
   sval: 1,
   pval: 0,
   depth: 1,
@@ -62,7 +62,7 @@ describe('ItemSpawner', () => {
         name: 'Potion of Healing',
         symbol: '!',
         color: 'r',
-        tval: 75, // potion
+        type: 'potion',
         depth: 1,
         rarity: 2,
       }),

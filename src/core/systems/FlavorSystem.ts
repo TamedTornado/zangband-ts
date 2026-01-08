@@ -9,7 +9,6 @@
  */
 
 import { RNG } from 'rot-js';
-import { TV_POTION, TV_SCROLL } from '../data/tval';
 
 /**
  * Potion color adjectives (from Zangband flavor.c)
@@ -114,7 +113,7 @@ function generateScrollTitle(rng: typeof RNG): string {
 export interface FlavorData {
   potionColors: Map<number, string>;   // sval -> color
   scrollTitles: Map<number, string>;   // sval -> title
-  awareness: Set<string>;              // "tval:sval" of items player knows
+  awareness: Set<string>;              // "type:sval" of items player knows
 }
 
 /**
@@ -158,11 +157,11 @@ export class FlavorSystem {
    * Get the flavor description for an item
    * Returns the color/title or null if not a flavored item type
    */
-  getFlavor(tval: number, sval: number): string | null {
-    if (tval === TV_POTION) {
+  getFlavor(type: string, sval: number): string | null {
+    if (type === 'potion') {
       return this.potionColors.get(sval) ?? null;
     }
-    if (tval === TV_SCROLL) {
+    if (type === 'scroll') {
       return this.scrollTitles.get(sval) ?? null;
     }
     return null;
@@ -171,15 +170,15 @@ export class FlavorSystem {
   /**
    * Check if the player knows what this item type is
    */
-  isAware(tval: number, sval: number): boolean {
-    return this.awareness.has(`${tval}:${sval}`);
+  isAware(type: string, sval: number): boolean {
+    return this.awareness.has(`${type}:${sval}`);
   }
 
   /**
    * Mark an item type as known (e.g., after using it or identifying it)
    */
-  setAware(tval: number, sval: number): void {
-    this.awareness.add(`${tval}:${sval}`);
+  setAware(type: string, sval: number): void {
+    this.awareness.add(`${type}:${sval}`);
   }
 
   /**

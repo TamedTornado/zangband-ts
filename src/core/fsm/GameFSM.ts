@@ -20,7 +20,6 @@ import { GameLoop } from '../systems/GameLoop';
 import { FlavorSystem, getArticle } from '../systems/FlavorSystem';
 import { MonsterDataManager } from '../data/MonsterDataManager';
 import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT } from '../constants';
-import { TV_POTION, TV_SCROLL } from '../data/tval';
 import type { Item } from '../entities/Item';
 import type { ItemDef } from '../data/items';
 import type { EgoItemDef } from '../data/ego-items';
@@ -261,7 +260,7 @@ export class GameFSM {
     }
 
     const base = item.generated.baseItem;
-    const tval = base.tval;
+    const type = base.type;
     const sval = base.sval;
 
     // Artifacts always show their name
@@ -273,14 +272,14 @@ export class GameFSM {
     }
 
     // Check if this item type has flavors (potions, scrolls)
-    const hasFlavor = tval === TV_POTION || tval === TV_SCROLL;
-    const isAware = this.flavorSystem.isAware(tval, sval);
+    const hasFlavor = type === 'potion' || type === 'scroll';
+    const isAware = this.flavorSystem.isAware(type, sval);
 
     let name: string;
 
     if (hasFlavor && !isAware) {
       // Show flavor name (e.g., "Icky Green Potion", "Scroll titled \"BLAA JU\"")
-      if (tval === TV_POTION) {
+      if (type === 'potion') {
         name = this.flavorSystem.getPotionFlavorName(sval);
       } else {
         name = this.flavorSystem.getScrollFlavorName(sval);
@@ -319,8 +318,8 @@ export class GameFSM {
    */
   makeAware(item: Item): void {
     if (item.generated) {
-      const { tval, sval } = item.generated.baseItem;
-      this.flavorSystem.setAware(tval, sval);
+      const { type, sval } = item.generated.baseItem;
+      this.flavorSystem.setAware(type, sval);
     }
   }
 }

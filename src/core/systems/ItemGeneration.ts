@@ -36,28 +36,6 @@ const ES_HEAD = 33;
 const ES_HANDS = 34;
 const ES_FEET = 35;
 
-// Type value constants (TV_*)
-const TV_SHOT = 16;
-const TV_ARROW = 17;
-const TV_BOLT = 18;
-const TV_BOW = 19;
-const TV_DIGGING = 20;
-const TV_HAFTED = 21;
-const TV_POLEARM = 22;
-const TV_SWORD = 23;
-const TV_BOOTS = 30;
-const TV_GLOVES = 31;
-const TV_HELM = 32;
-const TV_CROWN = 33;
-const TV_SHIELD = 34;
-const TV_CLOAK = 35;
-const TV_SOFT_ARMOR = 36;
-const TV_HARD_ARMOR = 37;
-const TV_DRAG_ARMOR = 38;
-const TV_LITE = 39;
-const TV_AMULET = 40;
-const TV_RING = 45;
-
 // Object creation flags
 const OC_NORMAL = 0x01;
 const OC_FORCE_GOOD = 0x02;
@@ -98,6 +76,10 @@ export interface GeneratedItem {
   dd?: number; // Damage dice (may be modified)
   ds?: number; // Damage sides (may be modified)
   identified?: boolean; // Whether item properties have been revealed
+  // Device charge tracking
+  charges?: number; // Current charges (wands, staffs)
+  maxCharges?: number; // Maximum charges when generated (for display: "5/8")
+  timeout?: number; // Recharge timeout (rods) - 0 when ready
 }
 
 /**
@@ -555,7 +537,7 @@ export class ItemGeneration {
    */
   private findBaseItemForArtifact(artifact: ArtifactDef): ItemDef | null {
     for (const item of Object.values(this.items)) {
-      if (item.tval === artifact.tval && item.sval === artifact.sval) {
+      if (item.type === artifact.type && item.sval === artifact.sval) {
         return item;
       }
     }
@@ -572,7 +554,7 @@ export class ItemGeneration {
       name: artifact.name,
       symbol: '?',
       color: 'w',
-      tval: artifact.tval,
+      type: artifact.type,
       sval: artifact.sval,
       pval: artifact.pval,
       depth: artifact.depth,
@@ -615,17 +597,19 @@ export class ItemGeneration {
       }
     }
 
-    const tval = item.baseItem.tval;
+    const type = item.baseItem.type;
 
     // Apply type-specific magic
-    if (this.isWeapon(tval)) {
+    if (this.isWeapon(type)) {
       this.applyWeaponMagic(item, level, levDif, flags);
-    } else if (this.isArmor(tval)) {
+    } else if (this.isArmor(type)) {
       this.applyArmorMagic(item, level, levDif, flags);
-    } else if (tval === TV_RING || tval === TV_AMULET) {
+    } else if (type === 'ring' || type === 'amulet') {
       this.applyJewelryMagic(item, level, flags);
-    } else if (tval === TV_LITE) {
+    } else if (type === 'light') {
       this.applyLiteMagic(item, level, flags);
+    } else if (type === 'wand' || type === 'staff' || type === 'rod') {
+      this.applyDeviceMagic(item, level);
     }
 
     // Random curse chance (15% for normal items)
@@ -661,7 +645,7 @@ export class ItemGeneration {
       }
 
       // Roll for ego item
-      const slot = this.getSlotForTval(item.baseItem.tval);
+      const slot = this.getSlotForType(item.baseItem.type);
       const ego = this.selectEgoItem(level, slot, true);
       if (ego) {
         this.applyEgoItem(item, ego);
@@ -678,7 +662,7 @@ export class ItemGeneration {
       item.toDam -= todam2 * 2;
 
       // Roll for cursed ego item
-      const slot = this.getSlotForTval(item.baseItem.tval);
+      const slot = this.getSlotForType(item.baseItem.type);
       const ego = this.selectEgoItem(level, slot, false);
       if (ego) {
         this.applyEgoItem(item, ego);
@@ -701,7 +685,7 @@ export class ItemGeneration {
       item.toAc += toac2;
 
       // Roll for ego item
-      const slot = this.getSlotForTval(item.baseItem.tval);
+      const slot = this.getSlotForType(item.baseItem.type);
       const ego = this.selectEgoItem(level, slot, true);
       if (ego) {
         this.applyEgoItem(item, ego);
@@ -711,7 +695,7 @@ export class ItemGeneration {
       item.toAc -= toac2 * 2;
 
       // Roll for cursed ego item
-      const slot = this.getSlotForTval(item.baseItem.tval);
+      const slot = this.getSlotForType(item.baseItem.type);
       const ego = this.selectEgoItem(level, slot, false);
       if (ego) {
         this.applyEgoItem(item, ego);
@@ -741,78 +725,83 @@ export class ItemGeneration {
   }
 
   /**
-   * Check if a tval represents a weapon
+   * Apply magic to devices (wands, staffs, rods)
+   * Initializes charges based on the item's pval and level
    */
-  private isWeapon(tval: number): boolean {
-    return (
-      tval === TV_DIGGING ||
-      tval === TV_HAFTED ||
-      tval === TV_POLEARM ||
-      tval === TV_SWORD ||
-      tval === TV_BOW ||
-      tval === TV_SHOT ||
-      tval === TV_ARROW ||
-      tval === TV_BOLT
-    );
-  }
+  private applyDeviceMagic(item: GeneratedItem, level: number): void {
+    const type = item.baseItem.type;
+    const basePval = item.baseItem.pval;
 
-  /**
-   * Check if a tval represents armor
-   */
-  private isArmor(tval: number): boolean {
-    return (
-      tval === TV_DRAG_ARMOR ||
-      tval === TV_HARD_ARMOR ||
-      tval === TV_SOFT_ARMOR ||
-      tval === TV_SHIELD ||
-      tval === TV_HELM ||
-      tval === TV_CROWN ||
-      tval === TV_CLOAK ||
-      tval === TV_GLOVES ||
-      tval === TV_BOOTS
-    );
-  }
-
-  /**
-   * Get the ego item slot for a given tval
-   */
-  getSlotForTval(tval: number): number {
-    switch (tval) {
-      case TV_SWORD:
-      case TV_HAFTED:
-      case TV_POLEARM:
-        return ES_WIELD;
-      case TV_BOW:
-        return ES_BOW;
-      case TV_DIGGING:
-        return ES_DIG;
-      case TV_SHOT:
-      case TV_ARROW:
-      case TV_BOLT:
-        return ES_AMMO;
-      case TV_SOFT_ARMOR:
-      case TV_HARD_ARMOR:
-      case TV_DRAG_ARMOR:
-        return ES_BODY;
-      case TV_CLOAK:
-        return ES_OUTER;
-      case TV_SHIELD:
-        return ES_ARM;
-      case TV_HELM:
-        return ES_HEAD;
-      case TV_CROWN:
-        return ES_CROWN;
-      case TV_GLOVES:
-        return ES_HANDS;
-      case TV_BOOTS:
-        return ES_FEET;
-      case TV_LITE:
-        return ES_LITE;
-      case TV_AMULET:
-        return ES_NECK;
-      default:
-        return 0;
+    if (type === 'wand') {
+      // Wands: charges = base pval + random bonus based on level
+      // Base charges from pval, plus 1-3 bonus at low levels, more at higher levels
+      const bonus = 1 + this.mBonus(Math.max(1, Math.floor(basePval / 2)), level);
+      const charges = basePval + bonus;
+      item.charges = charges;
+      item.maxCharges = charges;
+    } else if (type === 'staff') {
+      // Staffs: similar to wands but typically fewer charges
+      // Divide by 2 for staffs since they're more powerful
+      const bonus = 1 + this.mBonus(Math.max(1, Math.floor(basePval / 3)), level);
+      const charges = Math.max(1, Math.floor(basePval / 2)) + bonus;
+      item.charges = charges;
+      item.maxCharges = charges;
+    } else if (type === 'rod') {
+      // Rods: timeout starts at 0 (ready to use)
+      // pval represents the recharge time after use
+      item.timeout = 0;
     }
+  }
+
+  private static readonly WEAPON_TYPES = new Set([
+    'digging', 'hafted', 'polearm', 'sword', 'bow', 'shot', 'arrow', 'bolt'
+  ]);
+
+  private static readonly ARMOR_TYPES = new Set([
+    'dragon_armor', 'hard_armor', 'soft_armor', 'shield', 'helm', 'crown', 'cloak', 'gloves', 'boots'
+  ]);
+
+  private static readonly TYPE_TO_SLOT: Record<string, number> = {
+    sword: ES_WIELD,
+    hafted: ES_WIELD,
+    polearm: ES_WIELD,
+    bow: ES_BOW,
+    digging: ES_DIG,
+    shot: ES_AMMO,
+    arrow: ES_AMMO,
+    bolt: ES_AMMO,
+    soft_armor: ES_BODY,
+    hard_armor: ES_BODY,
+    dragon_armor: ES_BODY,
+    cloak: ES_OUTER,
+    shield: ES_ARM,
+    helm: ES_HEAD,
+    crown: ES_CROWN,
+    gloves: ES_HANDS,
+    boots: ES_FEET,
+    light: ES_LITE,
+    amulet: ES_NECK,
+  };
+
+  /**
+   * Check if a type represents a weapon
+   */
+  private isWeapon(type: string): boolean {
+    return ItemGeneration.WEAPON_TYPES.has(type);
+  }
+
+  /**
+   * Check if a type represents armor
+   */
+  private isArmor(type: string): boolean {
+    return ItemGeneration.ARMOR_TYPES.has(type);
+  }
+
+  /**
+   * Get the ego item slot for a given type
+   */
+  getSlotForType(type: string): number {
+    return ItemGeneration.TYPE_TO_SLOT[type] ?? 0;
   }
 
   /**
@@ -866,21 +855,6 @@ export class ItemGeneration {
   }
 
   /**
-   * Get item type category from tval
-   */
-  private getItemTypeFromTval(tval: number): string {
-    if (tval >= TV_SHOT && tval <= TV_SWORD) return 'weapon';
-    if (tval >= TV_BOOTS && tval <= TV_DRAG_ARMOR) return 'armor';
-    if (tval === TV_AMULET) return 'amulet';
-    if (tval === TV_RING) return 'ring';
-    if (tval === TV_LITE) return 'light';
-    if (tval === 75) return 'potion';
-    if (tval === 70) return 'scroll';
-    if (tval === 80) return 'food';
-    return 'misc';
-  }
-
-  /**
    * Create an Item entity from an item key (for starting equipment, etc.)
    */
   createItemByKey(itemKey: string): Item | null {
@@ -902,7 +876,6 @@ export class ItemGeneration {
       position: { x: 0, y: 0 },
       symbol: itemDef.symbol,
       color: itemDef.color,
-      itemType: this.getItemTypeFromTval(itemDef.tval),
       generated,
     });
   }
