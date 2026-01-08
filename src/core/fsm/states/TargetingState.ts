@@ -92,15 +92,22 @@ export class TargetingState implements State {
 
   private handleConfirm(fsm: GameFSM): void {
     if (this.isTargeting && fsm.data.cursor) {
-      // TODO: Store selected target for ranged attack/spell
-      fsm.addMessage('Target selected.', 'info');
+      // Pop back to the state that pushed us, passing the target position
+      fsm.pop({ position: { ...fsm.data.cursor } });
+    } else {
+      // Just looking, not targeting - transition back to playing
+      fsm.transition(new PlayingState());
     }
-    fsm.transition(new PlayingState());
   }
 
   private handleCancel(fsm: GameFSM): void {
-    fsm.addMessage('Cancelled.', 'info');
-    fsm.transition(new PlayingState());
+    if (this.isTargeting) {
+      // Pop back to the state that pushed us with cancelled flag
+      fsm.pop({ cancelled: true });
+    } else {
+      // Just looking - transition back to playing
+      fsm.transition(new PlayingState());
+    }
   }
 
   /** Build list of visible monsters for Tab cycling */
