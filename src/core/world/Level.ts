@@ -36,6 +36,7 @@ export interface ILevel {
   // Tile queries
   getTile(pos: Position): Tile | undefined;
   isWalkable(pos: Position): boolean;
+  isTransparent(pos: Position): boolean;
   isOccupied(pos: Position): boolean;
 
   // Monster management

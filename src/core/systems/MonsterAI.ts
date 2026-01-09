@@ -70,6 +70,7 @@ export interface MonsterAIContext {
   // Relationship
   distanceToPlayer: number;
   hasLineOfSight: boolean;
+  lastKnownPlayerPos: Position | null; // Where monster last saw player (null = never seen)
 
   // Status effects
   isConfused: boolean;
@@ -279,8 +280,13 @@ export class MonsterAI {
       return this.getRandomMove(ctx);
     }
 
-    // Move toward player
-    const targetPos = this.getDirectionToward(ctx.monsterPos, ctx.playerPos);
+    // No knowledge of player location - wander randomly
+    if (!ctx.lastKnownPlayerPos) {
+      return this.getRandomMove(ctx);
+    }
+
+    // Move toward last known player position
+    const targetPos = this.getDirectionToward(ctx.monsterPos, ctx.lastKnownPlayerPos);
 
     // Check for wall passing abilities
     const canPassWalls = ctx.flags.includes('PASS_WALL');

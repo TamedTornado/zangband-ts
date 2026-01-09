@@ -40,6 +40,9 @@ export interface GameState {
   // Last confirmed target monster ID (for repeat targeting)
   lastTargetMonsterId: string | null;
 
+  // Currently visible monster IDs (for tracking newly visible monsters)
+  visibleMonsterIds: Set<string>;
+
   // Repeat last command system
   lastCommand: {
     actionType: string;
@@ -105,6 +108,7 @@ export interface GameActions {
   setKilledBy: (killer: string | null) => void;
   setCursor: (cursor: Coord | null) => void;
   setLastTargetMonsterId: (monsterId: string | null) => void;
+  updateVisibleMonsters: (newIds: Set<string>) => Set<string>; // Returns newly visible IDs
   setLastCommand: (command: GameState['lastCommand']) => void;
   setIsRepeating: (isRepeating: boolean) => void;
   setItemTargeting: (targeting: GameState['itemTargeting']) => void;
@@ -139,6 +143,7 @@ const initialState: GameState = {
   killedBy: null,
   cursor: null,
   lastTargetMonsterId: null,
+  visibleMonsterIds: new Set<string>(),
   lastCommand: null,
   isRepeating: false,
   itemTargeting: null,
@@ -193,6 +198,17 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
   setKilledBy: (killedBy) => set({ killedBy }),
   setCursor: (cursor) => set({ cursor }),
   setLastTargetMonsterId: (lastTargetMonsterId) => set({ lastTargetMonsterId }),
+  updateVisibleMonsters: (newIds) => {
+    const current = get().visibleMonsterIds;
+    const newlyVisible = new Set<string>();
+    for (const id of newIds) {
+      if (!current.has(id)) {
+        newlyVisible.add(id);
+      }
+    }
+    set({ visibleMonsterIds: newIds });
+    return newlyVisible;
+  },
   setLastCommand: (lastCommand) => set({ lastCommand }),
   setIsRepeating: (isRepeating) => set({ isRepeating }),
   setItemTargeting: (itemTargeting) => set({ itemTargeting }),

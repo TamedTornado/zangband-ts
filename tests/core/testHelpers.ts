@@ -116,6 +116,10 @@ export function createMockLevel(
       if (pos.x < 0 || pos.x >= width || pos.y < 0 || pos.y >= height) return false;
       return !wallSet.has(`${pos.x},${pos.y}`);
     },
+    isTransparent: (pos: Position) => {
+      if (pos.x < 0 || pos.x >= width || pos.y < 0 || pos.y >= height) return false;
+      return !wallSet.has(`${pos.x},${pos.y}`);
+    },
     isOccupied: (pos: Position) => {
       return monsters.some((m) => !m.isDead && m.position.x === pos.x && m.position.y === pos.y);
     },

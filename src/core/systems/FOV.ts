@@ -45,4 +45,18 @@ export class FOVSystem {
     }
     return null;
   }
+
+  /** Get all visible monsters (returns monster IDs) */
+  getVisibleMonsterIds(level: Level, origin: Position, radius: number): Set<string> {
+    const visible = this.compute(level, origin, radius);
+    const monsterIds = new Set<string>();
+    for (const monster of level.getMonsters()) {
+      if (monster.isDead) continue;
+      const key = `${monster.position.x},${monster.position.y}`;
+      if (visible.has(key)) {
+        monsterIds.add(monster.id);
+      }
+    }
+    return monsterIds;
+  }
 }

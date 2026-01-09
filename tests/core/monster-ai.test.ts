@@ -35,6 +35,7 @@ describe('MonsterAI', () => {
       playerMaxHp: 100,
       distanceToPlayer: 7,
       hasLineOfSight: true,
+      lastKnownPlayerPos: { x: 10, y: 10 }, // Default: monster knows player location
       isConfused: false,
       isFeared: false,
       isStunned: false,
@@ -436,6 +437,51 @@ describe('MonsterAI', () => {
         }
 
         expect(failCount).toBe(0);
+      });
+    });
+
+    describe('last known player position', () => {
+      it('should wander randomly when no lastKnownPlayerPos', () => {
+        const ctx = createContext({
+          lastKnownPlayerPos: null,
+          distanceToPlayer: 5,
+        });
+
+        // Without knowledge of player location, monster should wander randomly
+        const decision = ai.decide(ctx);
+        expect(decision.action).toBe(AIAction.Move);
+        // Can't predict random movement, but it should move somewhere
+      });
+
+      it('should move toward lastKnownPlayerPos when set', () => {
+        const ctx = createContext({
+          monsterPos: { x: 5, y: 5 },
+          lastKnownPlayerPos: { x: 10, y: 5 }, // Player was last seen to the east
+          playerPos: { x: 15, y: 15 }, // Actual player position (unknown to monster)
+          distanceToPlayer: 14,
+          hasLineOfSight: false,
+        });
+
+        const decision = ai.decide(ctx);
+        expect(decision.action).toBe(AIAction.Move);
+        // Should move toward last known position (east), not actual position
+        expect(decision.targetPos?.x).toBeGreaterThan(ctx.monsterPos.x);
+        expect(decision.targetPos?.y).toBe(ctx.monsterPos.y);
+      });
+
+      it('should not move toward actual player position without LOS', () => {
+        const ctx = createContext({
+          monsterPos: { x: 5, y: 5 },
+          lastKnownPlayerPos: { x: 3, y: 5 }, // Last saw player to the west
+          playerPos: { x: 10, y: 10 }, // Actual player is to the east
+          distanceToPlayer: 7,
+          hasLineOfSight: false,
+        });
+
+        const decision = ai.decide(ctx);
+        expect(decision.action).toBe(AIAction.Move);
+        // Should move west (toward last known), not east (toward actual)
+        expect(decision.targetPos?.x).toBeLessThan(ctx.monsterPos.x);
       });
     });
 

@@ -103,8 +103,17 @@ export function GameViewport() {
         const isVisible = visibleTiles.has(posKey);
         const isExplored = tile.explored;
 
-        // Skip unexplored tiles
+        // Handle unexplored tiles - but telepathy can still see monsters
         if (!isExplored) {
+          // Check for telepathy monsters even on unexplored tiles
+          // TODO: Replace with proper VisionSystem.canSeeMonster() integration
+          if (player.hasTelepathy) {
+            const monster = level.getMonsterAt(world);
+            if (monster && !monster.isDead) {
+              display.draw(screenX, screenY, monster.symbol, '#f0f', '#000');
+              continue;
+            }
+          }
           display.draw(screenX, screenY, ' ', '#000', '#000');
           continue;
         }
@@ -150,6 +159,18 @@ export function GameViewport() {
           if (remembered) {
             symbol = remembered.symbol;
             fg = parseColor(remembered.color);
+          }
+
+          // Telepathy shows monsters even when not visible
+          // TODO: Replace with proper VisionSystem.canSeeMonster() integration
+          // that handles EMPTY_MIND, WEIRD_MIND flags and infravision
+          if (player.hasTelepathy) {
+            const monster = level.getMonsterAt(world);
+            if (monster && !monster.isDead) {
+              symbol = monster.symbol;
+              // Show telepathic monsters in a distinct color (purple/violet)
+              fg = '#f0f';
+            }
           }
         }
 

@@ -72,6 +72,9 @@ export function applyDebugSetup(player: Player, itemGen: ItemGeneration): void {
   // Restore mana to full (recalculateMana doesn't increase current mana)
   player.restoreMana(player.maxMana);
 
+  // Grant telepathy for testing monster awareness
+  player.hasTelepathy = true;
+
   // Give starting items
   for (const itemKey of DEBUG_STARTING_ITEMS) {
     const item = itemGen.createItemByKey(itemKey);

@@ -106,6 +106,9 @@ export class Player extends Actor {
   // Skills (derived from class, race, level, stats)
   private _skills: Skills;
 
+  // Intrinsic abilities (from equipment, mutations, etc.)
+  private _hasTelepathy: boolean = false;
+
   constructor(config: PlayerConfig) {
     super({
       id: config.id,
@@ -144,6 +147,25 @@ export class Player extends Actor {
    */
   get skills(): Skills {
     return this._skills;
+  }
+
+  /**
+   * Calculate player noise level for monster detection.
+   * Formula from Zangband: noise = 2^(30 - stealth)
+   * Higher stealth = lower noise = harder for monsters to detect
+   */
+  get noise(): number {
+    const stealth = Math.min(30, this._skills.stealth);
+    return Math.pow(2, 30 - stealth);
+  }
+
+  /** Whether player has telepathy (sees all monsters) */
+  get hasTelepathy(): boolean {
+    return this._hasTelepathy;
+  }
+
+  set hasTelepathy(value: boolean) {
+    this._hasTelepathy = value;
   }
 
   /**

@@ -11,6 +11,7 @@ import { MonsterSpellExecutor } from './MonsterSpellExecutor';
 import { getEffectManager } from './effects';
 import { ENERGY_PER_TURN } from '../constants';
 import type { MonsterDef } from '../data/monsters';
+import { checkAwareness, hasLineOfSight } from './Awareness';
 
 export interface GameMessage {
   text: string;
@@ -170,6 +171,15 @@ export class GameLoop {
       const monster = nextActor as Monster;
       if (monster.isDead) continue;
 
+      // Check awareness - may wake sleeping monsters
+      checkAwareness(monster, player, level, this.rng);
+
+      // Sleeping monsters skip their turn
+      if (!monster.isAwake) {
+        monster.spendEnergy(ENERGY_PER_TURN);
+        continue;
+      }
+
       // Tamed monsters skip their turn (MVP - full pet AI is future work)
       if (monster.isTamed) {
         monster.spendEnergy(ENERGY_PER_TURN);
@@ -204,6 +214,23 @@ export class GameLoop {
     player: Player,
     level: Level
   ): MonsterAIContext {
+    const distance = this.distance(monster.position, player.position);
+    const los = hasLineOfSight(monster.position, player.position, level);
+
+    // If monster has LOS to player, update its memory
+    if (los) {
+      monster.updatePlayerLocation(player.position);
+    }
+
+    // If monster reached its last known position and player isn't there, clear memory
+    const lastKnown = monster.lastKnownPlayerPos;
+    if (lastKnown &&
+        monster.position.x === lastKnown.x &&
+        monster.position.y === lastKnown.y &&
+        (player.position.x !== lastKnown.x || player.position.y !== lastKnown.y)) {
+      monster.clearPlayerLocation();
+    }
+
     return {
       monsterPos: monster.position,
       monsterHp: monster.hp,
@@ -213,12 +240,13 @@ export class GameLoop {
       playerHp: player.hp,
       playerMaxHp: player.maxHp,
       playerLevel: 1,
-      distanceToPlayer: this.distance(monster.position, player.position),
-      hasLineOfSight: true,
+      distanceToPlayer: distance,
+      hasLineOfSight: los,
+      lastKnownPlayerPos: monster.lastKnownPlayerPos,
       isConfused: false,
       isFeared: false,
       isStunned: false,
-      isSleeping: false,
+      isSleeping: !monster.isAwake,
       flags: monsterDef.flags,
       spells: monsterDef.spellFlags ?? [],
       spellChance: monsterDef.spellFrequency ?? 0,

@@ -22,7 +22,7 @@ import { FlavorSystem, getArticle } from '../systems/FlavorSystem';
 import { TickSystem } from '../systems/TickSystem';
 import { MonsterDataManager } from '../data/MonsterDataManager';
 import { getEffectManager } from '../systems/effects';
-import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT, ENERGY_PER_TURN } from '../constants';
+import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT, ENERGY_PER_TURN, VIEW_RADIUS } from '../constants';
 import type { Item } from '../entities/Item';
 import type { ItemDef } from '../data/items';
 import type { EgoItemDef } from '../data/ego-items';
@@ -372,6 +372,28 @@ export class GameFSM {
             store.setKilledBy(match[1]);
           }
         }
+      }
+    }
+
+    // Check for newly visible monsters and announce them
+    this.announceNewlyVisibleMonsters();
+  }
+
+  /** Check for newly visible monsters and announce them */
+  private announceNewlyVisibleMonsters(): void {
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
+
+    const visibleIds = this.fovSystem.getVisibleMonsterIds(level, player.position, VIEW_RADIUS);
+    const newlyVisible = store.updateVisibleMonsters(visibleIds);
+
+    for (const monsterId of newlyVisible) {
+      const monster = level.getMonsterById(monsterId);
+      if (monster && !monster.isDead) {
+        const name = this.getMonsterName(monster);
+        const sleepStatus = monster.isAwake ? '' : ' (sleeping)';
+        this.addMessage(`You see a ${name}${sleepStatus}.`, 'info');
       }
     }
   }
