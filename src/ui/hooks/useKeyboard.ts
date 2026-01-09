@@ -67,7 +67,7 @@ const DIRECTION_KEYS: Record<string, Direction>[] = [
     ArrowLeft: Direction.West,
     ArrowRight: Direction.East,
   },
-  // numpad
+  // numpad (with NumLock on)
   {
     '8': Direction.North,
     '2': Direction.South,
@@ -77,6 +77,17 @@ const DIRECTION_KEYS: Record<string, Direction>[] = [
     '9': Direction.NorthEast,
     '1': Direction.SouthWest,
     '3': Direction.SouthEast,
+  },
+  // numpad navigation keys (Shift+numpad reports these instead of digits)
+  {
+    ArrowUp: Direction.North,     // Shift+Numpad8
+    ArrowDown: Direction.South,   // Shift+Numpad2
+    ArrowLeft: Direction.West,    // Shift+Numpad4
+    ArrowRight: Direction.East,   // Shift+Numpad6
+    Home: Direction.NorthWest,    // Shift+Numpad7
+    PageUp: Direction.NorthEast,  // Shift+Numpad9
+    End: Direction.SouthWest,     // Shift+Numpad1
+    PageDown: Direction.SouthEast, // Shift+Numpad3
   },
 ];
 
