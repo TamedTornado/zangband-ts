@@ -34,6 +34,7 @@ export type GameAction =
   | { type: 'cycleTarget' }
   | { type: 'confirmTarget' }
   | { type: 'cancelTarget' }
+  | { type: 'enterTargetMode' }  // '*' to enter cursor targeting from direction mode
   // Effect targeting (item selection, symbol input, direction)
   | { type: 'selectTargetItem'; itemIndex: number }
   | { type: 'selectTargetSymbol'; symbol: string }

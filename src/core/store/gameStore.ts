@@ -46,6 +46,7 @@ export interface GameState {
     itemId: string;
     spellKey?: string;
     targetPosition?: { x: number; y: number };
+    targetDirection?: string;
   } | null;
   isRepeating: boolean;
 

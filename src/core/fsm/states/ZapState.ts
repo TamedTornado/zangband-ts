@@ -1,11 +1,10 @@
 /**
  * ZapState - Handles using magical devices (wands, rods, staves)
  *
- * Pushes ItemSelectionState to pick a device, then executes its effects.
- * Handles charges (wands/staves) and timeout (rods) appropriately.
+ * Pushes ItemSelectionState to pick a device, then delegates to ItemUseSystem.
+ * Uses TargetingState for targeted effects (supports both direction and position input).
  */
 
-import { RNG } from 'rot-js';
 import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
@@ -13,7 +12,8 @@ import { PlayingState } from './PlayingState';
 import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionState';
 import { TargetingState } from './TargetingState';
 import type { Item } from '@/core/entities/Item';
-import { getEffectManager, getRequiredTargetType, TargetType, type GPEffectContext } from '../../systems/effects';
+import { getRequiredTargetType, TargetType } from '../../systems/effects';
+import { useDevice, type ItemUseContext } from '../../systems/ItemUseSystem';
 import { getGameStore } from '@/core/store/gameStore';
 
 export class ZapState implements State {
@@ -39,8 +39,12 @@ export class ZapState implements State {
   onResume(fsm: GameFSM, result: unknown): void {
     // Check if returning from targeting
     if (this.selectedItem) {
-      const targetResult = result as { position?: { x: number; y: number }; cancelled?: boolean };
-      if (targetResult.cancelled || !targetResult.position) {
+      const targetResult = result as {
+        position?: { x: number; y: number };
+        direction?: string;
+        cancelled?: boolean;
+      };
+      if (targetResult.cancelled) {
         fsm.addMessage('Cancelled.', 'info');
         fsm.transition(new PlayingState());
         return;
@@ -59,9 +63,11 @@ export class ZapState implements State {
       return;
     }
 
-    const item = selection.item;
+    this.handleDeviceSelected(fsm, selection.item);
+  }
 
-    // Check if the device can be used
+  private handleDeviceSelected(fsm: GameFSM, item: Item): void {
+    // Check if the device can be used (early validation for better UX)
     if (item.isWand || item.isStaff) {
       if (item.charges <= 0) {
         fsm.addMessage(`The ${item.isWand ? 'wand' : 'staff'} has no charges left.`, 'danger');
@@ -84,16 +90,16 @@ export class ZapState implements State {
     const effects = item.generated?.baseItem.effects;
     if (effects && effects.length > 0) {
       const targetType = getRequiredTargetType(effects);
-      if (targetType === TargetType.Position) {
+
+      if (targetType === TargetType.Position || targetType === TargetType.Direction) {
         const store = getGameStore();
         // In repeat mode with saved target, use it directly
         if (store.isRepeating && store.lastCommand?.targetPosition) {
           this.executeDevice(fsm, item, store.lastCommand.targetPosition);
           return;
         }
-        // Need to target a position
+        // Need targeting - TargetingState handles both direction and position input
         this.selectedItem = item;
-        fsm.addMessage('Aim at which target?', 'info');
         fsm.push(new TargetingState(true));
         return;
       }
@@ -112,43 +118,30 @@ export class ZapState implements State {
     const player = store.player!;
     const level = store.level!;
 
-    const effects = item.generated?.baseItem.effects;
-    if (effects && effects.length > 0) {
-      const context: GPEffectContext = {
-        actor: player,
-        level,
-        rng: RNG,
-        monsterDataManager: fsm.monsterDataManager,
-        getMonsterInfo: (monster) => {
-          const def = fsm.monsterDataManager.getMonsterDef(monster.definitionKey);
-          return {
-            name: def?.name ?? 'creature',
-            flags: def?.flags ?? [],
-          };
-        },
-      };
-
-      // Add target position if provided
-      if (targetPosition) {
-        context.targetPosition = targetPosition;
-      }
-
-      const effectResult = getEffectManager().executeEffects(effects, context);
-      for (const msg of effectResult.messages) {
-        fsm.addMessage(msg, 'info');
-      }
-    } else {
-      fsm.addMessage('Nothing happens.', 'info');
+    // Execute device effects via ItemUseSystem
+    const context: ItemUseContext = {
+      player,
+      level,
+      monsterDataManager: fsm.monsterDataManager,
+    };
+    if (targetPosition) {
+      context.targetPosition = targetPosition;
     }
+    const useResult = useDevice(item, context);
 
-    // Use a charge / start timeout
-    item.useCharge();
+    for (const msg of useResult.messages) {
+      fsm.addMessage(msg, 'info');
+    }
 
     // Mark device type as known
     fsm.makeAware(item);
 
     // Save for repeat command (include target position if used)
-    const lastCommand: { actionType: string; itemId: string; targetPosition?: { x: number; y: number } } = {
+    const lastCommand: {
+      actionType: string;
+      itemId: string;
+      targetPosition?: { x: number; y: number };
+    } = {
       actionType: 'zap',
       itemId: item.id,
     };
@@ -158,7 +151,8 @@ export class ZapState implements State {
     store.setLastCommand(lastCommand);
     store.setIsRepeating(false);
 
-    // Devices are not consumed (unlike potions/scrolls)
+    // Complete the turn with the calculated energy cost
+    fsm.completeTurn(useResult.energyCost);
     fsm.transition(new PlayingState());
   }
 }

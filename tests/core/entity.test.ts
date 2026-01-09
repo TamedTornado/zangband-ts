@@ -100,21 +100,21 @@ describe('Actor', () => {
     expect(actor.isDead).toBe(true);
   });
 
-  it('should gain energy based on speed', () => {
+  it('should gain energy based on speed using extract_energy table', () => {
     const actor = new Actor({
       id: 'actor-1',
       position: { x: 0, y: 0 },
       symbol: 'k',
       color: '#0f0',
       maxHp: 50,
-      speed: 110, // normal speed
+      speed: 110, // normal speed = 10 energy per tick
     });
 
     actor.gainEnergy();
-    expect(actor.energy).toBe(110);
+    expect(actor.energy).toBe(10);
 
     actor.gainEnergy();
-    expect(actor.energy).toBe(220);
+    expect(actor.energy).toBe(20);
   });
 
   it('should spend energy on actions', () => {
@@ -127,11 +127,18 @@ describe('Actor', () => {
       speed: 110,
     });
 
+    // Speed 110 = 10 energy per tick (from extract_energy table)
     actor.gainEnergy();
-    expect(actor.energy).toBe(110);
+    expect(actor.energy).toBe(10);
+
+    // Gain more energy until we can act
+    for (let i = 0; i < 9; i++) {
+      actor.gainEnergy();
+    }
+    expect(actor.energy).toBe(100);
 
     actor.spendEnergy(100);
-    expect(actor.energy).toBe(10);
+    expect(actor.energy).toBe(0);
   });
 
   it('should report canAct when energy >= 100', () => {
@@ -145,7 +152,10 @@ describe('Actor', () => {
     });
 
     expect(actor.canAct).toBe(false);
-    actor.gainEnergy();
+    // Speed 110 = 10 energy per tick, need 10 ticks to get 100 energy
+    for (let i = 0; i < 10; i++) {
+      actor.gainEnergy();
+    }
     expect(actor.canAct).toBe(true);
   });
 });

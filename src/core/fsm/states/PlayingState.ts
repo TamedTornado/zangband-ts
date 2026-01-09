@@ -106,46 +106,15 @@ export class PlayingState implements State {
     }
   }
 
-  /** Process per-turn time effects (rods, statuses, etc.) */
-  private processTurnEffects(fsm: GameFSM): void {
-    const result = fsm.tickSystem.tick(getGameStore().player!);
-    for (const msg of result.messages) {
-      fsm.addMessage(msg, 'info');
-    }
-  }
-
-  /** Process monster turns and check for player death */
-  private processMonsterTurns(fsm: GameFSM): void {
+  /**
+   * Check if player died and transition to DeadState.
+   * Called after fsm.completeTurn() in relevant places.
+   */
+  private checkPlayerDeath(fsm: GameFSM): void {
     const store = getGameStore();
     const player = store.player!;
-    const level = store.level!;
-    const scheduler = store.scheduler!;
 
-    const result = fsm.gameLoop.processMonsterTurns(player, level, scheduler);
-    for (const msg of result.messages) {
-      fsm.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
-    }
-
-    // Clean up dead monsters
-    for (const monster of level.getMonsters()) {
-      if (monster.isDead) {
-        level.removeMonster(monster);
-        scheduler.remove(monster);
-      }
-    }
-
-    // Check for player death
     if (player.isDead) {
-      // Find what killed the player
-      const lastAttack = [...result.messages].reverse().find((m: { text: string }) =>
-        m.text.includes('hits you') || m.text.includes('bites you') || m.text.includes('claws you')
-      );
-      if (lastAttack) {
-        const match = lastAttack.text.match(/^The (.+?) /);
-        if (match) {
-          store.setKilledBy(match[1]);
-        }
-      }
       fsm.transition(new DeadState());
     }
   }
@@ -171,9 +140,8 @@ export class PlayingState implements State {
         scheduler.remove(targetMonster);
       }
 
-      player.spendEnergy(ENERGY_PER_TURN);
-      this.processTurnEffects(fsm);
-      this.processMonsterTurns(fsm);
+      fsm.completeTurn(ENERGY_PER_TURN);
+      this.checkPlayerDeath(fsm);
       return;
     }
 
@@ -181,10 +149,8 @@ export class PlayingState implements State {
     if (level.isWalkable(newPos) && !level.isOccupied(newPos)) {
       store.incrementTurn();
       player.position = newPos;
-      player.spendEnergy(ENERGY_PER_TURN);
-      this.processTurnEffects(fsm);
 
-      // Check for items
+      // Check for items (before completing turn so message appears first)
       const itemsHere = level.getItemsAt(newPos);
       if (itemsHere.length === 1) {
         fsm.addMessage(`You see ${fsm.getItemDisplayName(itemsHere[0]!)} here.`, 'info');
@@ -192,7 +158,8 @@ export class PlayingState implements State {
         fsm.addMessage(`You see ${itemsHere.length} items here.`, 'info');
       }
 
-      this.processMonsterTurns(fsm);
+      fsm.completeTurn(ENERGY_PER_TURN);
+      this.checkPlayerDeath(fsm);
       return;
     }
 
@@ -202,9 +169,8 @@ export class PlayingState implements State {
       store.incrementTurn();
       level.setTerrain(newPos, 'open_door');
       fsm.addMessage('You open the door.', 'info');
-      player.spendEnergy(ENERGY_PER_TURN);
-      this.processTurnEffects(fsm);
-      this.processMonsterTurns(fsm);
+      fsm.completeTurn(ENERGY_PER_TURN);
+      this.checkPlayerDeath(fsm);
       return;
     }
 
@@ -244,11 +210,8 @@ export class PlayingState implements State {
       stepsRun++;
       store.incrementTurn();
       player.position = newPos;
-      player.spendEnergy(ENERGY_PER_TURN);
-      this.processTurnEffects(fsm);
+      fsm.completeTurn(ENERGY_PER_TURN);
 
-      // Process monsters
-      this.processMonsterTurns(fsm);
       if (player.isDead) break;
 
       // Interruption checks
@@ -285,6 +248,7 @@ export class PlayingState implements State {
       fsm.addMessage(interruptReason, 'danger');
     }
 
+    this.checkPlayerDeath(fsm);
   }
 
   private handleDownStairs(fsm: GameFSM): void {
@@ -391,16 +355,13 @@ export class PlayingState implements State {
     while (turnsRested < maxTurns) {
       store.incrementTurn();
       turnsRested++;
-      player.spendEnergy(ENERGY_PER_TURN);
-      this.processTurnEffects(fsm);
 
-      // HP regeneration
+      // HP regeneration (before completing turn)
       if (turnsRested % HP_REGEN_RATE === 0 && player.hp < player.maxHp) {
         player.hp++;
       }
 
-      // Process monsters
-      this.processMonsterTurns(fsm);
+      fsm.completeTurn(ENERGY_PER_TURN);
 
       // Check interruptions
       if (player.hp < startHp) {
@@ -430,6 +391,7 @@ export class PlayingState implements State {
       fsm.addMessage(`You finish resting. (${turnsRested} turns)`, 'info');
     }
 
+    this.checkPlayerDeath(fsm);
   }
 
   private handleRepeatLastCommand(fsm: GameFSM): void {

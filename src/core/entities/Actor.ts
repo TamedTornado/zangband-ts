@@ -1,5 +1,6 @@
 import { Entity, type EntityConfig } from './Entity';
 import { StatusManager } from '@/core/systems/status';
+import { extractEnergy } from '@/core/systems/Energy';
 
 export interface ActorConfig extends EntityConfig {
   maxHp: number;
@@ -53,7 +54,7 @@ export class Actor extends Entity {
   }
 
   gainEnergy(): void {
-    this._energy += this.speed;
+    this._energy += extractEnergy(this.speed);
   }
 
   spendEnergy(amount: number): void {

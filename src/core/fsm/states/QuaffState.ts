@@ -1,16 +1,15 @@
 /**
  * QuaffState - Handles quaffing a potion
  *
- * Pushes ItemSelectionState to pick a potion, then executes its effects.
+ * Pushes ItemSelectionState to pick a potion, then delegates to ItemUseSystem.
  */
 
-import { RNG } from 'rot-js';
 import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionState';
-import { getEffectManager, type GPEffectContext } from '../../systems/effects';
+import { usePotion } from '../../systems/ItemUseSystem';
 import { getGameStore } from '@/core/store/gameStore';
 
 export class QuaffState implements State {
@@ -46,19 +45,10 @@ export class QuaffState implements State {
 
     fsm.addMessage(`You quaff ${fsm.getItemDisplayName(item)}.`, 'info');
 
-    const effects = item.generated?.baseItem.effects;
-    if (effects && effects.length > 0) {
-      const context: GPEffectContext = {
-        actor: player,
-        level,
-        rng: RNG,
-      };
-      const effectResult = getEffectManager().executeEffects(effects, context);
-      for (const msg of effectResult.messages) {
-        fsm.addMessage(msg, 'info');
-      }
-    } else {
-      fsm.addMessage('That tasted... interesting.', 'info');
+    // Execute potion effects via ItemUseSystem
+    const useResult = usePotion(item, { player, level });
+    for (const msg of useResult.messages) {
+      fsm.addMessage(msg, 'info');
     }
 
     // Mark potion type as known
@@ -68,7 +58,13 @@ export class QuaffState implements State {
     store.setLastCommand({ actionType: 'quaff', itemId: item.id });
     store.setIsRepeating(false);
 
-    player.removeItem(item.id);
+    // Remove consumed potion
+    if (useResult.itemConsumed) {
+      player.removeItem(item.id);
+    }
+
+    // Spend energy
+    fsm.completeTurn(useResult.energyCost);
     fsm.transition(new PlayingState());
   }
 }

@@ -22,7 +22,7 @@ import { FlavorSystem, getArticle } from '../systems/FlavorSystem';
 import { TickSystem } from '../systems/TickSystem';
 import { MonsterDataManager } from '../data/MonsterDataManager';
 import { getEffectManager } from '../systems/effects';
-import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT } from '../constants';
+import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT, ENERGY_PER_TURN } from '../constants';
 import type { Item } from '../entities/Item';
 import type { ItemDef } from '../data/items';
 import type { EgoItemDef } from '../data/ego-items';
@@ -309,6 +309,60 @@ export class GameFSM {
     if (item.generated) {
       const { type, sval } = item.generated.baseItem;
       this.flavorSystem.setAware(type, sval);
+    }
+  }
+
+  /**
+   * Complete a player turn: spend energy and process the game world.
+   *
+   * This is the ONLY way to complete a player turn. It:
+   * 1. Spends player energy
+   * 2. Processes status effect ticks (rod recharging, buffs, etc.)
+   * 3. Processes monster turns
+   * 4. Cleans up dead monsters
+   *
+   * @param energyCost The amount of energy to spend (default: ENERGY_PER_TURN = 100)
+   */
+  completeTurn(energyCost: number = ENERGY_PER_TURN): void {
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
+    const scheduler = store.scheduler!;
+
+    // Spend energy
+    player.spendEnergy(energyCost);
+
+    // Process status effect ticks
+    const tickResult = this.tickSystem.tick(player);
+    for (const msg of tickResult.messages) {
+      this.addMessage(msg, 'info');
+    }
+
+    // Process monster turns
+    const result = this.gameLoop.processMonsterTurns(player, level, scheduler);
+    for (const msg of result.messages) {
+      this.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
+    }
+
+    // Clean up dead monsters
+    for (const monster of level.getMonsters()) {
+      if (monster.isDead) {
+        level.removeMonster(monster);
+        scheduler.remove(monster);
+      }
+    }
+
+    // Track what killed the player (for death screen)
+    if (player.isDead) {
+      const lastAttack = [...result.messages].reverse().find((m: { text: string }) =>
+        m.text.includes('hits you') || m.text.includes('bites you') || m.text.includes('claws you')
+      );
+      if (lastAttack) {
+        const match = lastAttack.text.match(/^The (.+?) /);
+        if (match) {
+          store.setKilledBy(match[1]);
+        }
+      }
     }
   }
 }

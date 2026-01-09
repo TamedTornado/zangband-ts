@@ -31,43 +31,49 @@ describe('Scheduler', () => {
     expect(scheduler.actors).not.toContain(actor);
   });
 
-  it('should tick all actors to gain energy', () => {
+  it('should tick all actors to gain energy using extract_energy table', () => {
     const scheduler = new Scheduler();
-    const fast = createActor('fast', 120);
-    const slow = createActor('slow', 80);
+    const fast = createActor('fast', 120);  // Speed 120 = 20 energy/tick
+    const slow = createActor('slow', 80);   // Speed 80 = 2 energy/tick
 
     scheduler.add(fast);
     scheduler.add(slow);
     scheduler.tick();
 
-    expect(fast.energy).toBe(120);
-    expect(slow.energy).toBe(80);
+    expect(fast.energy).toBe(20);
+    expect(slow.energy).toBe(2);
   });
 
   it('should return next actor that can act', () => {
     const scheduler = new Scheduler();
-    const actor = createActor('a1', 110);
+    const actor = createActor('a1', 110);  // Speed 110 = 10 energy/tick
 
     scheduler.add(actor);
 
     // No energy yet
     expect(scheduler.next()).toBeNull();
 
-    // After tick, should have 110 energy (can act)
-    scheduler.tick();
+    // After 10 ticks, should have 100 energy (can act)
+    for (let i = 0; i < 10; i++) {
+      scheduler.tick();
+    }
     expect(scheduler.next()).toBe(actor);
   });
 
   it('should return faster actors first when multiple can act', () => {
     const scheduler = new Scheduler();
-    const fast = createActor('fast', 150);
-    const normal = createActor('normal', 110);
+    const fast = createActor('fast', 120);   // Speed 120 = 20 energy/tick
+    const normal = createActor('normal', 110); // Speed 110 = 10 energy/tick
 
     scheduler.add(normal);
     scheduler.add(fast);
-    scheduler.tick();
 
-    // Both can act, but fast has more energy
+    // After 5 ticks: fast has 100 energy (can act), normal has 50 (can't)
+    for (let i = 0; i < 5; i++) {
+      scheduler.tick();
+    }
+
+    // Only fast can act
     expect(scheduler.next()).toBe(fast);
   });
 
@@ -94,16 +100,20 @@ describe('Scheduler', () => {
 
   it('should handle energy-based turn order correctly', () => {
     const scheduler = new Scheduler();
-    const fast = createActor('fast', 200); // 2x speed
-    const normal = createActor('normal', 100);
+    // Speed 120 = 20 energy/tick (hasted), Speed 100 = 5 energy/tick (slowed)
+    const fast = createActor('fast', 120);
+    const slow = createActor('slow', 100);
 
     scheduler.add(fast);
-    scheduler.add(normal);
+    scheduler.add(slow);
 
     const actOrder: string[] = [];
 
-    // Simulate several ticks
-    for (let i = 0; i < 3; i++) {
+    // Simulate enough ticks for both to act multiple times
+    // Fast: 20 energy/tick, needs 5 ticks per action
+    // Slow: 5 energy/tick, needs 20 ticks per action
+    // After 100 ticks: fast acts 20 times, slow acts 5 times
+    for (let i = 0; i < 100; i++) {
       scheduler.tick();
       let next = scheduler.next();
       while (next) {
@@ -113,9 +123,9 @@ describe('Scheduler', () => {
       }
     }
 
-    // Fast actor should act twice as often
+    // Fast actor should act about 4x as often (20 energy vs 5 energy per tick)
     const fastCount = actOrder.filter(id => id === 'fast').length;
-    const normalCount = actOrder.filter(id => id === 'normal').length;
-    expect(fastCount).toBeGreaterThan(normalCount);
+    const slowCount = actOrder.filter(id => id === 'slow').length;
+    expect(fastCount).toBeGreaterThan(slowCount * 3); // At least 3x more
   });
 });

@@ -1,30 +1,30 @@
 /**
  * ReadScrollState - Handles reading a scroll
  *
- * Pushes ItemSelectionState to pick a scroll, then executes its effects.
+ * Pushes ItemSelectionState to pick a scroll, optionally pushes targeting states,
+ * then delegates to ItemUseSystem.useScroll().
  */
 
-import { RNG } from 'rot-js';
 import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionState';
-import { ItemTargetingState } from './ItemTargetingState';
-import { SymbolTargetingState } from './SymbolTargetingState';
-import { DirectionTargetingState } from './DirectionTargetingState';
-import {
-  executeGPEffects,
-  getRequiredTargetType,
-  TargetType,
-  type GPEffectDef,
-  type GPEffectContext,
-} from '../../systems/effects';
+import { ItemTargetingState, type ItemTargetingResult } from './ItemTargetingState';
+import { SymbolTargetingState, type SymbolTargetingResult } from './SymbolTargetingState';
+import { DirectionTargetingState, type DirectionTargetingResult } from './DirectionTargetingState';
+import { getRequiredTargetType, TargetType, type GPEffectDef } from '../../systems/effects';
+import { useScroll, type ItemUseContext } from '../../systems/ItemUseSystem';
 import type { Item } from '../../entities/Item';
+import type { Direction } from '../../types';
 import { getGameStore } from '@/core/store/gameStore';
 
 export class ReadScrollState implements State {
   readonly name = 'readScroll';
+
+  // Track selected scroll for multi-step targeting flow
+  private selectedScroll: Item | null = null;
+  private pendingTargetType: TargetType | null = null;
 
   onEnter(fsm: GameFSM): void {
     // Push item selection for scrolls
@@ -35,15 +35,23 @@ export class ReadScrollState implements State {
   }
 
   onExit(_fsm: GameFSM): void {
-    // Nothing to clean up
+    this.selectedScroll = null;
+    this.pendingTargetType = null;
   }
 
   handleAction(_fsm: GameFSM, _action: GameAction): boolean {
-    // We shouldn't receive actions directly - ItemSelectionState handles input
+    // We shouldn't receive actions directly - child states handle input
     return false;
   }
 
   onResume(fsm: GameFSM, result: unknown): void {
+    // Check if returning from targeting
+    if (this.selectedScroll && this.pendingTargetType) {
+      this.handleTargetingResult(fsm, result);
+      return;
+    }
+
+    // Returning from item selection
     const selection = result as ItemSelectionResult;
 
     if (!selection.item) {
@@ -52,68 +60,48 @@ export class ReadScrollState implements State {
       return;
     }
 
-    this.executeScroll(fsm, selection.item);
+    this.handleScrollSelected(fsm, selection.item);
   }
 
-  private executeScroll(fsm: GameFSM, item: Item): void {
-    const store = getGameStore();
-    const player = store.player!;
-    const level = store.level!;
+  private handleScrollSelected(fsm: GameFSM, item: Item): void {
+    fsm.addMessage(`You read ${fsm.getItemDisplayName(item)}.`, 'info');
 
     // Get effects from item definition
     const effects = item.generated?.baseItem.effects as GPEffectDef[] | undefined;
 
     if (!effects || effects.length === 0) {
-      fsm.addMessage(`You read ${fsm.getItemDisplayName(item)}.`, 'info');
-      fsm.addMessage('The scroll crumbles to dust.', 'info');
-      fsm.makeAware(item);
-      player.removeItem(item.id);
-      fsm.transition(new PlayingState());
+      this.executeScroll(fsm, item, {});
       return;
     }
-
-    fsm.addMessage(`You read ${fsm.getItemDisplayName(item)}.`, 'info');
-
-    // Build base context
-    const baseContext: GPEffectContext = {
-      actor: player,
-      level,
-      rng: RNG,
-    };
 
     // Check if targeting is required
     const requiredTarget = getRequiredTargetType(effects);
 
     if (!requiredTarget) {
-      // All self-targeted - execute immediately
-      const result = executeGPEffects(effects, baseContext);
-      for (const msg of result.messages) {
-        fsm.addMessage(msg, 'info');
-      }
-      if (result.success) {
-        fsm.makeAware(item);
-        // Save for repeat command (before removing item)
-        store.setLastCommand({ actionType: 'read', itemId: item.id });
-        store.setIsRepeating(false);
-        player.removeItem(item.id);
-      }
-      fsm.transition(new PlayingState());
+      // No targeting needed - execute immediately
+      this.executeScroll(fsm, item, {});
       return;
     }
 
-    // Transition to appropriate targeting state
-    const onComplete = () => {
-    };
+    // Need targeting - save scroll and push targeting state
+    this.selectedScroll = item;
+    this.pendingTargetType = requiredTarget;
 
     switch (requiredTarget) {
       case TargetType.Item:
-        fsm.transition(new ItemTargetingState(effects, baseContext, item, onComplete));
+        fsm.push(new ItemTargetingState({
+          prompt: this.getPromptForEffects(effects, 'item') ?? 'Select an item:',
+        }));
         break;
       case TargetType.Symbol:
-        fsm.transition(new SymbolTargetingState(effects, baseContext, item, onComplete));
+        fsm.push(new SymbolTargetingState({
+          prompt: this.getPromptForEffects(effects, 'symbol') ?? 'Enter monster symbol:',
+        }));
         break;
       case TargetType.Direction:
-        fsm.transition(new DirectionTargetingState(effects, baseContext, item, onComplete));
+        fsm.push(new DirectionTargetingState({
+          prompt: this.getPromptForEffects(effects, 'direction') ?? 'Choose a direction:',
+        }));
         break;
       case TargetType.Position:
         fsm.addMessage('Position targeting not yet implemented.', 'info');
@@ -123,5 +111,105 @@ export class ReadScrollState implements State {
         fsm.addMessage('Unknown targeting type.', 'info');
         fsm.transition(new PlayingState());
     }
+  }
+
+  private handleTargetingResult(fsm: GameFSM, result: unknown): void {
+    const scroll = this.selectedScroll!;
+    const targetType = this.pendingTargetType!;
+
+    // Build target context based on result type
+    const targetContext: {
+      targetItem?: Item;
+      targetSymbol?: string;
+      targetDirection?: Direction;
+    } = {};
+
+    switch (targetType) {
+      case TargetType.Item: {
+        const itemResult = result as ItemTargetingResult;
+        if (itemResult.cancelled || !itemResult.targetItem) {
+          fsm.addMessage('Cancelled.', 'info');
+          fsm.transition(new PlayingState());
+          return;
+        }
+        targetContext.targetItem = itemResult.targetItem;
+        break;
+      }
+      case TargetType.Symbol: {
+        const symbolResult = result as SymbolTargetingResult;
+        if (symbolResult.cancelled || !symbolResult.targetSymbol) {
+          fsm.addMessage('Cancelled.', 'info');
+          fsm.transition(new PlayingState());
+          return;
+        }
+        targetContext.targetSymbol = symbolResult.targetSymbol;
+        break;
+      }
+      case TargetType.Direction: {
+        const dirResult = result as DirectionTargetingResult;
+        if (dirResult.cancelled || !dirResult.targetDirection) {
+          fsm.addMessage('Cancelled.', 'info');
+          fsm.transition(new PlayingState());
+          return;
+        }
+        targetContext.targetDirection = dirResult.targetDirection;
+        break;
+      }
+    }
+
+    this.executeScroll(fsm, scroll, targetContext);
+  }
+
+  private executeScroll(
+    fsm: GameFSM,
+    item: Item,
+    targetContext: {
+      targetItem?: Item;
+      targetSymbol?: string;
+      targetDirection?: Direction;
+    }
+  ): void {
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
+
+    // Build full context
+    const context: ItemUseContext = {
+      player,
+      level,
+      ...targetContext,
+    };
+
+    // Execute scroll effects via ItemUseSystem
+    const useResult = useScroll(item, context);
+
+    for (const msg of useResult.messages) {
+      fsm.addMessage(msg, 'info');
+    }
+
+    // Mark scroll type as known
+    fsm.makeAware(item);
+
+    // Save for repeat command
+    store.setLastCommand({ actionType: 'read', itemId: item.id });
+    store.setIsRepeating(false);
+
+    // Remove consumed scroll
+    if (useResult.itemConsumed) {
+      player.removeItem(item.id);
+    }
+
+    // Complete the turn
+    fsm.completeTurn(useResult.energyCost);
+    fsm.transition(new PlayingState());
+  }
+
+  private getPromptForEffects(effects: GPEffectDef[], targetType: string): string | undefined {
+    for (const def of effects) {
+      if (def.target === targetType && typeof def['prompt'] === 'string') {
+        return def['prompt'];
+      }
+    }
+    return undefined;
   }
 }

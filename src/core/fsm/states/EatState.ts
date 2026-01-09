@@ -1,16 +1,15 @@
 /**
  * EatState - Handles eating food
  *
- * Pushes ItemSelectionState to pick food, then executes its effects.
+ * Pushes ItemSelectionState to pick food, then delegates to ItemUseSystem.
  */
 
-import { RNG } from 'rot-js';
 import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionState';
-import { getEffectManager, type GPEffectContext } from '../../systems/effects';
+import { useFood } from '../../systems/ItemUseSystem';
 import { getGameStore } from '@/core/store/gameStore';
 
 export class EatState implements State {
@@ -46,19 +45,10 @@ export class EatState implements State {
 
     fsm.addMessage(`You eat ${fsm.getItemDisplayName(item)}.`, 'info');
 
-    const effects = item.generated?.baseItem.effects;
-    if (effects && effects.length > 0) {
-      const context: GPEffectContext = {
-        actor: player,
-        level,
-        rng: RNG,
-      };
-      const effectResult = getEffectManager().executeEffects(effects, context);
-      for (const msg of effectResult.messages) {
-        fsm.addMessage(msg, 'info');
-      }
-    } else {
-      fsm.addMessage('That was tasty.', 'info');
+    // Execute food effects via ItemUseSystem
+    const useResult = useFood(item, { player, level });
+    for (const msg of useResult.messages) {
+      fsm.addMessage(msg, 'info');
     }
 
     // Mark food type as known
@@ -68,7 +58,13 @@ export class EatState implements State {
     store.setLastCommand({ actionType: 'eat', itemId: item.id });
     store.setIsRepeating(false);
 
-    player.removeItem(item.id);
+    // Remove consumed food
+    if (useResult.itemConsumed) {
+      player.removeItem(item.id);
+    }
+
+    // Complete the turn
+    fsm.completeTurn(useResult.energyCost);
     fsm.transition(new PlayingState());
   }
 }

@@ -303,8 +303,8 @@ export class CastSpellState implements State {
       fsm.addMessage('Nothing happens.', 'info');
     }
 
-    // Increment turn
-    store.incrementTurn();
+    // Spend energy for casting
+    fsm.completeTurn();
 
     // Save for repeat command
     const lastCommand: { actionType: string; itemId: string; spellKey: string; targetPosition?: { x: number; y: number } } = {

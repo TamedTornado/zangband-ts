@@ -1,49 +1,43 @@
 /**
  * ItemTargetingState - Select an inventory item for an effect
  *
- * Used for effects like Identify, Enchant, Recharge that target an item.
- * Filters valid items based on effect requirements.
+ * A utility state that gathers target info and pops back to the calling state.
+ * Does NOT execute effects - that's the caller's responsibility.
  */
 
 import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
-import { PlayingState } from './PlayingState';
-import type { GPEffectContext, GPEffectResult, GPEffectDef } from '@/core/systems/effects';
-import { executeGPEffects } from '@/core/systems/effects';
 import type { Item } from '@/core/entities/Item';
 import { getGameStore } from '@/core/store/gameStore';
+
+export interface ItemTargetingConfig {
+  prompt: string;
+  filter?: (item: Item) => boolean;
+}
+
+export interface ItemTargetingResult {
+  cancelled: boolean;
+  targetItem?: Item;
+}
 
 export class ItemTargetingState implements State {
   readonly name = 'itemTargeting';
 
-  private effectDefs: GPEffectDef[];
-  private baseContext: GPEffectContext;
-  private sourceItem: Item | null;
-  private onComplete: (fsm: GameFSM, result: GPEffectResult) => void;
+  private config: ItemTargetingConfig;
 
-  constructor(
-    effectDefs: GPEffectDef[],
-    baseContext: GPEffectContext,
-    sourceItem: Item | null,
-    onComplete: (fsm: GameFSM, result: GPEffectResult) => void
-  ) {
-    this.effectDefs = effectDefs;
-    this.baseContext = baseContext;
-    this.sourceItem = sourceItem;
-    this.onComplete = onComplete;
+  constructor(config: ItemTargetingConfig) {
+    this.config = config;
   }
 
   onEnter(fsm: GameFSM): void {
-    const prompt = this.getPrompt();
-    fsm.addMessage(prompt, 'info');
+    fsm.addMessage(this.config.prompt, 'info');
 
     const validItems = this.getValidItems();
     getGameStore().setItemTargeting({
-      prompt,
+      prompt: this.config.prompt,
       validItemIndices: validItems.map((_, i) => i),
     });
-
   }
 
   onExit(_fsm: GameFSM): void {
@@ -71,49 +65,34 @@ export class ItemTargetingState implements State {
   }
 
   private handleSelectItem(fsm: GameFSM, itemIndex: number): boolean {
-    const player = getGameStore().player!;
-    const item = player.inventory[itemIndex];
+    const validItems = this.getValidItems();
+    const item = validItems[itemIndex];
+
     if (!item) {
       fsm.addMessage('Invalid item selection.', 'info');
       return true;
     }
 
-    const context: GPEffectContext = {
-      ...this.baseContext,
+    // Pop back with the selected item
+    const result: ItemTargetingResult = {
+      cancelled: false,
       targetItem: item,
     };
-
-    const result = executeGPEffects(this.effectDefs, context);
-
-    for (const msg of result.messages) {
-      fsm.addMessage(msg, 'info');
-    }
-
-    if (result.success && this.sourceItem) {
-      fsm.makeAware(this.sourceItem);
-      player.removeItem(this.sourceItem.id);
-    }
-
-    this.onComplete(fsm, result);
-    fsm.transition(new PlayingState());
+    fsm.pop(result);
     return true;
   }
 
   private handleCancel(fsm: GameFSM): void {
     fsm.addMessage('Cancelled.', 'info');
-    fsm.transition(new PlayingState());
-  }
-
-  private getPrompt(): string {
-    for (const def of this.effectDefs) {
-      if (def.target === 'item' && typeof def['prompt'] === 'string') {
-        return def['prompt'];
-      }
-    }
-    return 'Select an item:';
+    const result: ItemTargetingResult = { cancelled: true };
+    fsm.pop(result);
   }
 
   private getValidItems(): Item[] {
-    return getGameStore().player!.inventory;
+    const player = getGameStore().player!;
+    if (this.config.filter) {
+      return player.inventory.filter(this.config.filter);
+    }
+    return player.inventory;
   }
 }

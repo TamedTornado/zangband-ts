@@ -120,6 +120,8 @@ const ACTION_BINDINGS: { key: string; modifiers: string[]; action: Action }[] = 
   { key: '*', modifiers: [], action: Action.Target },
   { key: 'Tab', modifiers: [], action: Action.CycleTarget },
   { key: 'Enter', modifiers: [], action: Action.ConfirmTarget },
+  { key: '5', modifiers: [], action: Action.ConfirmTarget },  // Numpad 5 = use last target
+  { key: '.', modifiers: [], action: Action.ConfirmTarget },  // '.' = use last target
   { key: 'Escape', modifiers: [], action: Action.CancelTarget },
   { key: '?', modifiers: [], action: Action.ShowList },
 ];
@@ -325,7 +327,8 @@ export function useKeyboard() {
           actions.moveCursor(binding.direction);
         } else if (binding.action === Action.CycleTarget ||
                    binding.action === Action.ConfirmTarget ||
-                   binding.action === Action.CancelTarget) {
+                   binding.action === Action.CancelTarget ||
+                   binding.action === Action.Target) {  // '*' to enter cursor mode
           ACTION_HANDLERS[binding.action](actions);
         }
         return;

@@ -4,6 +4,13 @@ import type { Level } from '../world/Level';
 import type { ItemGeneration } from '../systems/ItemGeneration';
 import { type Position, type Direction, movePosition } from '../types';
 import type { ClassDef } from '../data/classes';
+import {
+  adjIntDev,
+  adjWisSav,
+  adjDexDis,
+  adjIntDis,
+  adjStrDig,
+} from '../systems/StatTables';
 
 export interface Stats {
   str: number;
@@ -12,6 +19,23 @@ export interface Stats {
   dex: number;
   con: number;
   chr: number;
+}
+
+/**
+ * Player skills - derived from class, race, level, and stats.
+ * These affect various game mechanics like combat and magic device use.
+ */
+export interface Skills {
+  disarming: number;   // Disarming traps
+  device: number;      // Using magic devices (wands/rods/staves)
+  saving: number;      // Saving throws vs magic
+  stealth: number;     // Avoiding monster detection
+  searching: number;   // Finding hidden things (frequency)
+  perception: number;  // Sensing/awareness ability
+  melee: number;       // Melee combat (to-hit)
+  ranged: number;      // Ranged combat (to-hit with bows)
+  throwing: number;    // Throwing items (to-hit)
+  digging: number;     // Digging through walls
 }
 
 /** Equipment slot names */
@@ -77,6 +101,9 @@ export class Player extends Actor {
   private _primaryRealm: string | null = null;
   private _secondaryRealm: string | null = null;
 
+  // Skills (derived from class, race, level, stats)
+  private _skills: Skills;
+
   constructor(config: PlayerConfig) {
     super({
       id: config.id,
@@ -96,6 +123,9 @@ export class Player extends Actor {
     // Initialize mana pool
     this._maxMana = this.calculateMaxMana();
     this._currentMana = this._maxMana;
+
+    // Initialize skills
+    this._skills = this.calculateSkills();
   }
 
   // Class accessors
@@ -105,6 +135,20 @@ export class Player extends Actor {
 
   get classDef(): ClassDef | undefined {
     return this._classDef;
+  }
+
+  /**
+   * Get player skills (derived from class, race, level, stats)
+   */
+  get skills(): Skills {
+    return this._skills;
+  }
+
+  /**
+   * Recalculate skills (call when level or stats change)
+   */
+  recalculateSkills(): void {
+    this._skills = this.calculateSkills();
   }
 
   /**
@@ -203,6 +247,104 @@ export class Player extends Actor {
 
     // Minimum 1 mana for casters
     return Math.max(1, totalMana);
+  }
+
+  /**
+   * Calculate player skills based on class, race, level, and stats.
+   *
+   * Formula from Zangband xtra1.c:
+   * skill = race_base + class_base + stat_adjustment + (class_xskill * level / 10)
+   *
+   * Since we don't have races yet, we use 0 for race base values.
+   * Class data provides skills (base) and xSkills (level multiplier).
+   */
+  private calculateSkills(): Skills {
+    const { str, int, wis, dex } = this.stats;
+    const level = this._level;
+    const classDef = this._classDef;
+
+    // Default base skills if no class defined (warrior-like defaults)
+    const defaultSkills = {
+      disarm: 25, device: 18, save: 18, stealth: 1,
+      search: 14, searchFreq: 2, melee: 70, ranged: 55,
+    };
+    const defaultXSkills = {
+      disarm: 12, device: 7, save: 10, stealth: 0,
+      search: 0, searchFreq: 0, melee: 45, ranged: 45,
+    };
+
+    // Get class skills or use defaults
+    const baseSkills = classDef?.skills ?? defaultSkills;
+    const xSkills = classDef?.xSkills ?? defaultXSkills;
+
+    // Race base skills (0 until we implement races)
+    const raceDisarm = 0;
+    const raceDevice = 0;
+    const raceSave = 0;
+    const raceStealth = 0;
+    const raceSearch = 0;
+    const raceSearchFreq = 0;
+    const raceMelee = 0;
+    const raceRanged = 0;
+
+    // Calculate each skill using Zangband's formula:
+    // skill = race_base + class_base + stat_adj + (class_xskill * level / 10)
+
+    // Disarming: DEX adjustment + INT adjustment + level scaling
+    const disarming = raceDisarm + baseSkills.disarm
+      + adjDexDis(dex) + adjIntDis(int)
+      + Math.floor(xSkills.disarm * level / 10);
+
+    // Device: INT adjustment + level scaling
+    const device = raceDevice + baseSkills.device
+      + adjIntDev(int)
+      + Math.floor(xSkills.device * level / 10);
+
+    // Saving throw: WIS adjustment + level scaling
+    const saving = raceSave + baseSkills.save
+      + adjWisSav(wis)
+      + Math.floor(xSkills.save * level / 10);
+
+    // Stealth: just base + level scaling (no stat adjustment in Zangband)
+    const stealth = raceStealth + baseSkills.stealth
+      + Math.floor(xSkills.stealth * level / 10);
+
+    // Search frequency (how often you search)
+    const searching = raceSearchFreq + baseSkills.searchFreq
+      + Math.floor(xSkills.searchFreq * level / 10);
+
+    // Perception/sensing (used for detection)
+    const perception = raceSearch + baseSkills.search
+      + Math.floor(xSkills.search * level / 10);
+
+    // Melee: level scaling (stat bonuses applied elsewhere in combat)
+    const melee = raceMelee + baseSkills.melee
+      + Math.floor(xSkills.melee * level / 10);
+
+    // Ranged: level scaling
+    const ranged = raceRanged + baseSkills.ranged
+      + Math.floor(xSkills.ranged * level / 10);
+
+    // Throwing: uses ranged base + level scaling (at 1/5 rate per Zangband)
+    // Zangband: SKILL_THT = race_thb + class_thb + (class_xthb * level / 50)
+    const throwing = raceRanged + baseSkills.ranged
+      + Math.floor(xSkills.ranged * level / 50);
+
+    // Digging: STR adjustment only (equipment bonuses applied separately)
+    const digging = Math.max(1, adjStrDig(str));
+
+    return {
+      disarming,
+      device,
+      saving,
+      stealth,
+      searching,
+      perception,
+      melee,
+      ranged,
+      throwing,
+      digging,
+    };
   }
 
   /**

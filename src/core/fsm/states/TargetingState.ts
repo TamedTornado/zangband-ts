@@ -1,8 +1,15 @@
 /**
  * TargetingState - Look/Target cursor mode
  *
- * Player examines the map with a cursor. No turns pass.
- * Used for 'look' command and targeting for ranged attacks/spells.
+ * When targeting (isTargeting=true), follows Zangband's approach:
+ * - Direction keys → fire immediately in that direction
+ * - '*' → enter cursor mode to pick a specific position
+ * - '5', 't', '.' → use current/last target
+ * - Tab → cycle through visible monsters (in cursor mode)
+ * - Enter → confirm cursor position (in cursor mode)
+ * - Escape → cancel
+ *
+ * When just looking (isTargeting=false), always uses cursor mode.
  */
 
 import type { State } from '../State';
@@ -19,6 +26,9 @@ export class TargetingState implements State {
   /** Whether this is targeting mode (for ranged) vs just looking */
   private readonly isTargeting: boolean;
 
+  /** Whether we're in cursor mode (moving cursor) vs direction mode */
+  private cursorMode: boolean = false;
+
   /** List of visible monster positions for Tab cycling */
   private visibleTargets: Array<{ x: number; y: number }> = [];
   private currentTargetIndex: number = -1;
@@ -29,38 +39,26 @@ export class TargetingState implements State {
 
   onEnter(fsm: GameFSM): void {
     const store = getGameStore();
-    const player = store.player!;
-    const level = store.level!;
-    const lastTargetMonsterId = store.lastTargetMonsterId;
 
     // Build list of visible monsters for Tab cycling
     this.buildTargetList(fsm);
 
-    // Default cursor position
-    let startPos = { x: player.position.x, y: player.position.y };
-
-    // In targeting mode, try to start on last targeted monster if still alive and visible
-    if (this.isTargeting && lastTargetMonsterId) {
-      const monster = level.getMonsterById(lastTargetMonsterId);
-      if (monster && !monster.isDead) {
-        // Check if monster is visible
-        const key = `${monster.position.x},${monster.position.y}`;
-        const visibleTiles = fsm.fovSystem.compute(level, player.position, VIEW_RADIUS);
-        if (visibleTiles.has(key)) {
-          startPos = { x: monster.position.x, y: monster.position.y };
-          // Find this monster in the target list to sync the cycle index
-          this.currentTargetIndex = this.visibleTargets.findIndex(
-            t => t.x === monster.position.x && t.y === monster.position.y
-          );
-        }
+    if (this.isTargeting) {
+      // Targeting mode: start in direction mode, waiting for direction or '*'
+      this.cursorMode = false;
+      const hasTarget = store.lastTargetMonsterId && this.isLastTargetValid(fsm);
+      if (hasTarget) {
+        fsm.addMessage("Direction ('*' to target, '5' for last target, Escape to cancel)?", 'info');
+      } else {
+        fsm.addMessage("Direction ('*' to target, Escape to cancel)?", 'info');
       }
+    } else {
+      // Look mode: always use cursor
+      this.cursorMode = true;
+      this.initCursor(fsm);
+      fsm.addMessage('Looking mode. Use movement keys, Tab to cycle, Escape to exit.', 'info');
+      this.describeCursor(fsm);
     }
-
-    store.setCursor(startPos);
-
-    const mode = this.isTargeting ? 'Targeting' : 'Looking';
-    fsm.addMessage(`${mode} mode. Use movement keys, Tab to cycle, Escape to cancel.`, 'info');
-    this.describeCursor(fsm);
   }
 
   onExit(_fsm: GameFSM): void {
@@ -68,6 +66,59 @@ export class TargetingState implements State {
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {
+    if (this.cursorMode) {
+      return this.handleCursorModeAction(fsm, action);
+    } else {
+      return this.handleDirectionModeAction(fsm, action);
+    }
+  }
+
+  /** Handle actions in direction mode (waiting for direction or '*') */
+  private handleDirectionModeAction(fsm: GameFSM, action: GameAction): boolean {
+    switch (action.type) {
+      case 'moveCursor': {
+        // Direction key in direction mode = fire in that direction
+        const dir = action.dir;
+        // Convert direction to a position along that vector (for effects that need position)
+        const store = getGameStore();
+        const player = store.player!;
+        const targetPos = this.directionToTargetPosition(player.position, dir, fsm);
+        fsm.pop({ position: targetPos, direction: dir });
+        return true;
+      }
+      case 'target':
+      case 'enterTargetMode': {
+        // '*' key - enter cursor mode
+        this.cursorMode = true;
+        this.initCursor(fsm);
+        fsm.addMessage('Use movement keys to aim, Tab to cycle targets, Enter to confirm.', 'info');
+        this.describeCursor(fsm);
+        return true;
+      }
+      case 'confirmTarget': {
+        // '5', 't', '.' - use last target if valid
+        const store = getGameStore();
+        if (store.lastTargetMonsterId && this.isLastTargetValid(fsm)) {
+          const level = store.level!;
+          const monster = level.getMonsterById(store.lastTargetMonsterId);
+          if (monster) {
+            fsm.pop({ position: { ...monster.position } });
+            return true;
+          }
+        }
+        fsm.addMessage('No valid target.', 'info');
+        return true;
+      }
+      case 'cancelTarget':
+        this.handleCancel(fsm);
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  /** Handle actions in cursor mode (moving cursor around) */
+  private handleCursorModeAction(fsm: GameFSM, action: GameAction): boolean {
     switch (action.type) {
       case 'moveCursor':
         this.handleMoveCursor(fsm, action.dir);
@@ -84,6 +135,85 @@ export class TargetingState implements State {
       default:
         return false;
     }
+  }
+
+  /** Initialize cursor position */
+  private initCursor(fsm: GameFSM): void {
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
+    const lastTargetMonsterId = store.lastTargetMonsterId;
+
+    // Default cursor position
+    let startPos = { x: player.position.x, y: player.position.y };
+
+    // Try to start on last targeted monster if still alive and visible
+    if (lastTargetMonsterId) {
+      const monster = level.getMonsterById(lastTargetMonsterId);
+      if (monster && !monster.isDead) {
+        const key = `${monster.position.x},${monster.position.y}`;
+        const visibleTiles = fsm.fovSystem.compute(level, player.position, VIEW_RADIUS);
+        if (visibleTiles.has(key)) {
+          startPos = { x: monster.position.x, y: monster.position.y };
+          this.currentTargetIndex = this.visibleTargets.findIndex(
+            t => t.x === monster.position.x && t.y === monster.position.y
+          );
+        }
+      }
+    }
+
+    store.setCursor(startPos);
+  }
+
+  /** Convert a direction to a target position (first monster or max range) */
+  private directionToTargetPosition(
+    from: { x: number; y: number },
+    dir: Direction,
+    _fsm: GameFSM
+  ): { x: number; y: number } {
+    const store = getGameStore();
+    const level = store.level!;
+    const maxRange = VIEW_RADIUS;
+
+    let pos = { ...from };
+    for (let i = 0; i < maxRange; i++) {
+      const next = movePosition(pos, dir);
+
+      // Stop at walls
+      if (!level.isWalkable(next)) {
+        return pos;
+      }
+
+      pos = next;
+
+      // Stop at first monster
+      const monster = level.getMonsterAt(pos);
+      if (monster && !monster.isDead) {
+        // Save this monster as last target
+        store.setLastTargetMonsterId(monster.id);
+        return pos;
+      }
+    }
+
+    return pos;
+  }
+
+  /** Check if the last target is still valid */
+  private isLastTargetValid(fsm: GameFSM): boolean {
+    const store = getGameStore();
+    const lastTargetMonsterId = store.lastTargetMonsterId;
+    if (!lastTargetMonsterId) return false;
+
+    const level = store.level!;
+    const player = store.player!;
+    const monster = level.getMonsterById(lastTargetMonsterId);
+
+    if (!monster || monster.isDead) return false;
+
+    // Check if visible
+    const visibleTiles = fsm.fovSystem.compute(level, player.position, VIEW_RADIUS);
+    const key = `${monster.position.x},${monster.position.y}`;
+    return visibleTiles.has(key);
   }
 
   private handleMoveCursor(fsm: GameFSM, dir: Direction): void {
@@ -120,26 +250,24 @@ export class TargetingState implements State {
     const cursor = store.cursor;
 
     if (this.isTargeting && cursor) {
-      // Store the targeted monster's ID for next time (if there's a monster there)
+      // Store the targeted monster's ID for next time
       const monster = store.level!.getMonsterAt(cursor);
       if (monster && !monster.isDead) {
         store.setLastTargetMonsterId(monster.id);
       }
 
-      // Pop back to the state that pushed us, passing the target position
+      // Pop back with the target position
       fsm.pop({ position: { ...cursor } });
     } else {
-      // Just looking, not targeting - transition back to playing
+      // Just looking - transition back to playing
       fsm.transition(new PlayingState());
     }
   }
 
   private handleCancel(fsm: GameFSM): void {
     if (this.isTargeting) {
-      // Pop back to the state that pushed us with cancelled flag
       fsm.pop({ cancelled: true });
     } else {
-      // Just looking - transition back to playing
       fsm.transition(new PlayingState());
     }
   }
