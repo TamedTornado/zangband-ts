@@ -305,13 +305,14 @@ type DiceRoll = { dice: number; sides: number; bonus?: number }; // 3d5+2
 - [x] Movement patterns (approach, flee, wander)
 - [x] Spellcasting decisions
 - [x] Special behaviors (thieves, breeders, etc.)
+- [x] Monster wakes on taking damage
 
-### 3.5 Character System [DONE]
+### 3.5 Character System [IN PROGRESS]
 - [x] Race stat bonuses, abilities
 - [x] Class stat bonuses, spell realms, abilities
-- [x] Experience and leveling
+- [x] Experience and leveling (XP gain on kill, level-up, XP bar in UI)
 - [x] Stat gain on level up
-- [x] Skills (Zangband uses proficiency system)
+- [ ] Skills (Zangband uses proficiency system) - see issue #35
 
 ### 3.6 Vision System [DONE]
 - [x] Light sources (torches, lanterns, glowing items)
@@ -441,7 +442,7 @@ const defaultBindings: Record<string, GameAction> = {
 6. [x] Camera system (center/scroll modes, coordinate conversion)
 7. [x] Game FSM with PlayingState/DeadState (proper game over handling)
 8. [x] Remembered tile rendering (explored tiles dimmed)
-9. [x] StatsPanel with HP/MP display
+9. [x] StatsPanel with HP/MP/XP bars
 10. [x] MessageLog (scrollable)
 11. [ ] Autobar (quick-use buttons)
 12. [x] InventoryModal + EquipmentModal
@@ -729,6 +730,7 @@ One canonical API for completing player turns, fixing energy spending bugs:
 
 **Look & Target (DONE)**
 - [x] Look command (`x`) - cursor mode with Tab cycling, movement keys
+- [x] Monster status display: shows sleeping, pet, health (wounded/badly wounded/almost dead)
 - [x] Target command (`*`) - Zangband-style targeting with two modes:
   - Direction mode: direction keys fire immediately in that direction
   - Cursor mode: press `*` to enter, move cursor, Tab cycles visible monsters
@@ -957,11 +959,11 @@ The `lib/edit/*.txt` files, if present, are the easiest to parse - they're alrea
 ## Success Criteria for V1.0
 
 - [ ] Can create a character (choose race, class, stat allocation)
-- [ ] Can descend through dungeon levels
-- [ ] Combat works: melee, ranged, monster attacks
-- [ ] Magic works: learn spells, cast from all realms
-- [ ] Items work: find, identify, use, equip
-- [ ] Monsters behave correctly: AI, abilities, drops
+- [x] Can descend through dungeon levels
+- [x] Combat works: melee, ranged, monster attacks
+- [x] Magic works: learn spells, cast from all realms (Book 1 effects done, Books 2-4 TODO)
+- [x] Items work: find, identify, use, equip
+- [x] Monsters behave correctly: AI, abilities, drops
 - [ ] Can win the game (defeat Serpent of Chaos)
 - [ ] Save/load works
 - [ ] Gameplay feel matches original Zangband
