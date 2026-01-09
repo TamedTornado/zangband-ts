@@ -9,6 +9,7 @@
  */
 
 import { RNG } from 'rot-js';
+import type { Item } from '@/core/entities/Item';
 
 /**
  * Potion color adjectives (from Zangband flavor.c)
@@ -195,6 +196,81 @@ export class FlavorSystem {
   getScrollFlavorName(sval: number): string {
     const title = this.scrollTitles.get(sval) ?? 'UNKNOWN';
     return `Scroll titled "${title}"`;
+  }
+
+  /**
+   * Mark an item as known (after identifying, using, etc.)
+   */
+  makeAware(item: Item): void {
+    if (item.generated) {
+      const { type, sval } = item.generated.baseItem;
+      this.setAware(type, sval);
+    }
+  }
+
+  /**
+   * Get the display name for an item with proper article and flavor.
+   */
+  getItemDisplayName(
+    item: Item,
+    options: { article?: boolean; quantity?: number } = {},
+  ): string {
+    const { article = true, quantity = item.quantity } = options;
+
+    if (!item.generated) {
+      return article ? 'an unknown item' : 'unknown item';
+    }
+
+    const base = item.generated.baseItem;
+    const type = base.type;
+    const sval = base.sval;
+
+    // Artifacts always show their name
+    if (item.generated.artifact?.name) {
+      const name = item.generated.artifact.name;
+      if (!article) return name;
+      return `The ${name}`;
+    }
+
+    // Check if this item type has flavors (potions, scrolls)
+    const hasFlavor = type === 'potion' || type === 'scroll';
+    const isAware = this.isAware(type, sval);
+
+    let name: string;
+
+    if (hasFlavor && !isAware) {
+      // Show flavor name (e.g., "Icky Green Potion", "Scroll titled \"BLAA JU\"")
+      if (type === 'potion') {
+        name = this.getPotionFlavorName(sval);
+      } else {
+        name = this.getScrollFlavorName(sval);
+      }
+    } else {
+      // Show real name
+      name = item.name;
+    }
+
+    // Add ego item suffix if identified
+    if (item.generated.egoItem?.name && item.generated.identified) {
+      name = `${name} ${item.generated.egoItem.name}`;
+    }
+
+    if (!article) return name;
+
+    // Handle pluralization for quantities > 1
+    if (quantity > 1) {
+      let plural = name;
+      if (name.endsWith('s') || name.endsWith('h')) {
+        plural = `${name}es`;
+      } else {
+        plural = `${name}s`;
+      }
+      return `${quantity} ${plural}`;
+    }
+
+    // Get the appropriate article (a/an)
+    const art = getArticle(name, quantity);
+    return `${art} ${name}`;
   }
 
   /**

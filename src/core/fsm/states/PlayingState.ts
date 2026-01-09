@@ -265,7 +265,7 @@ export class PlayingState implements State {
 
     const newDepth = depth + 1;
     store.setDepth(newDepth);
-    fsm.generateLevel(newDepth);
+    fsm.goToLevel(newDepth);
     fsm.addMessage(`You descend to dungeon level ${newDepth}.`, 'info');
   }
 
@@ -289,7 +289,7 @@ export class PlayingState implements State {
 
     const newDepth = depth - 1;
     store.setDepth(newDepth);
-    fsm.generateLevel(newDepth);
+    fsm.goToLevel(newDepth);
 
     // Place at down stairs when going up
     const newDownStairs = store.downStairs;

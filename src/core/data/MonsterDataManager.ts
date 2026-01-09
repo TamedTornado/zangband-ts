@@ -90,6 +90,13 @@ export class MonsterDataManager {
   }
 
   /**
+   * Get monster name from definition key
+   */
+  getName(key: string): string {
+    return this.monsters[key]?.name ?? 'monster';
+  }
+
+  /**
    * Get all monsters eligible for a given depth
    */
   getMonstersForDepth(depth: number): MonsterDef[] {

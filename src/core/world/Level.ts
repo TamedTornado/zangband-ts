@@ -1,4 +1,4 @@
-import type { RNG } from 'rot-js';
+import { RNG } from 'rot-js';
 import type { Position } from '../types';
 import type { TerrainDef } from '../data/terrain';
 import { Tile, getTerrain } from './Tile';
@@ -13,6 +13,12 @@ import type {
   GameEvent,
   GPActiveEffectTriggerResult,
 } from '../systems/activeEffects';
+import type { Player } from '../entities/Player';
+import { Scheduler } from '../systems/Scheduler';
+import { DungeonGenerator } from '../systems/dungeon/DungeonGenerator';
+import { MonsterSpawner } from '../systems/MonsterSpawner';
+import { ItemSpawner } from '../systems/ItemSpawner';
+import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT } from '../constants';
 
 export interface LevelConfig {
   depth?: number;
@@ -292,4 +298,71 @@ export class Level implements ILevel {
 
     return results;
   }
+}
+
+export interface GeneratedLevelData {
+  level: Level;
+  scheduler: Scheduler;
+  upStairs: Position[];
+  downStairs: Position[];
+}
+
+/**
+ * Generate a new dungeon level with monsters and items.
+ */
+export function generateLevel(
+  depth: number,
+  player: Player,
+  monsterSpawner: MonsterSpawner,
+  itemSpawner: ItemSpawner,
+): GeneratedLevelData {
+  const generator = new DungeonGenerator(RNG);
+  const dungeon = generator.generate({ width: DUNGEON_WIDTH, height: DUNGEON_HEIGHT, depth });
+
+  // Create level
+  const level = new Level(DUNGEON_WIDTH, DUNGEON_HEIGHT, { depth });
+
+  // Apply terrain
+  for (let y = 0; y < DUNGEON_HEIGHT; y++) {
+    for (let x = 0; x < DUNGEON_WIDTH; x++) {
+      const tile = dungeon.tiles[y]?.[x];
+      if (tile) {
+        level.setTerrain({ x, y }, tile.feat);
+      }
+    }
+  }
+
+  // Place player at up stairs or fallback to first room
+  if (dungeon.upStairs.length > 0) {
+    const stairs = dungeon.upStairs[0];
+    player.position = { x: stairs.x, y: stairs.y };
+  } else if (dungeon.rooms.length > 0) {
+    const room = dungeon.rooms[0];
+    player.position = { x: room.centerX, y: room.centerY };
+  } else {
+    player.position = { x: Math.floor(DUNGEON_WIDTH / 2), y: Math.floor(DUNGEON_HEIGHT / 2) };
+  }
+
+  // Set level.player so player is in actors list
+  level.player = player;
+
+  // Initialize scheduler
+  const scheduler = new Scheduler();
+  scheduler.add(player);
+
+  // Spawn monsters and items
+  monsterSpawner.spawnMonstersForLevel(level, depth, BASE_MONSTER_COUNT + depth);
+  itemSpawner.spawnItemsForLevel(level, depth, 5 + depth);
+
+  // Add monsters to scheduler
+  for (const monster of level.getMonsters()) {
+    scheduler.add(monster);
+  }
+
+  return {
+    level,
+    scheduler,
+    upStairs: dungeon.upStairs,
+    downStairs: dungeon.downStairs,
+  };
 }

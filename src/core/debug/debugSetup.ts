@@ -67,7 +67,7 @@ export function applyDebugSetup(player: Player, itemGen: ItemGeneration): void {
 
   // Set level higher for more mana and spell access
   // (HP is determined by baseMaxHp from player creation)
-  player.setLevel(10);
+  player.setLevel(1);
 
   // Restore mana to full (recalculateMana doesn't increase current mana)
   player.restoreMana(player.maxMana);

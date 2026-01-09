@@ -10,19 +10,17 @@ import type { State } from './State';
 import type { GameAction } from './Actions';
 import type { GameMessage } from './GameData';
 import { Player } from '../entities/Player';
-import { Level } from '../world/Level';
-import { Scheduler } from '../systems/Scheduler';
-import { DungeonGenerator } from '../systems/dungeon/DungeonGenerator';
+import { generateLevel } from '../world/Level';
 import { FOVSystem } from '../systems/FOV';
 import { ItemGeneration } from '../systems/ItemGeneration';
 import { MonsterSpawner } from '../systems/MonsterSpawner';
 import { ItemSpawner } from '../systems/ItemSpawner';
 import { GameLoop } from '../systems/GameLoop';
-import { FlavorSystem, getArticle } from '../systems/FlavorSystem';
+import { FlavorSystem } from '../systems/FlavorSystem';
 import { TickSystem } from '../systems/TickSystem';
 import { MonsterDataManager } from '../data/MonsterDataManager';
 import { getEffectManager } from '../systems/effects';
-import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT, ENERGY_PER_TURN, VIEW_RADIUS } from '../constants';
+import { ENERGY_PER_TURN, VIEW_RADIUS } from '../constants';
 import type { Item } from '../entities/Item';
 import type { ItemDef } from '../data/items';
 import type { EgoItemDef } from '../data/ego-items';
@@ -168,151 +166,41 @@ export class GameFSM {
     store.setPlayer(player);
 
     // Generate first level
-    this.generateLevel(1);
+    this.goToLevel(1);
 
     this.addMessage('Welcome to Zangband!', 'info');
     this.addMessage(`You enter dungeon level ${store.depth}.`, 'info');
   }
 
-  /** Generate a new dungeon level */
-  generateLevel(depth: number): void {
+  /** Generate a new dungeon level and update store */
+  goToLevel(depth: number): void {
     const store = getGameStore();
     const player = store.player!;
 
-    const generator = new DungeonGenerator(RNG);
-    const dungeon = generator.generate({ width: DUNGEON_WIDTH, height: DUNGEON_HEIGHT, depth });
+    const data = generateLevel(depth, player, monsterSpawner, itemSpawner);
 
-    // Create level
-    const level = new Level(DUNGEON_WIDTH, DUNGEON_HEIGHT, { depth });
-
-    // Apply terrain
-    for (let y = 0; y < DUNGEON_HEIGHT; y++) {
-      for (let x = 0; x < DUNGEON_WIDTH; x++) {
-        const tile = dungeon.tiles[y]?.[x];
-        if (tile) {
-          level.setTerrain({ x, y }, tile.feat);
-        }
-      }
-    }
-
-    // Place player at up stairs or fallback to first room
-    if (dungeon.upStairs.length > 0) {
-      const stairs = dungeon.upStairs[0];
-      player.position = { x: stairs.x, y: stairs.y };
-    } else if (dungeon.rooms.length > 0) {
-      const room = dungeon.rooms[0];
-      player.position = { x: room.centerX, y: room.centerY };
-    } else {
-      // Last resort - center of map
-      player.position = { x: Math.floor(DUNGEON_WIDTH / 2), y: Math.floor(DUNGEON_HEIGHT / 2) };
-    }
-
-    // Set level.player so player is in actors list (needed for getActorAt)
-    level.player = player;
-
-    // Initialize scheduler
-    const scheduler = new Scheduler();
-    scheduler.add(player);
-
-    // Spawn monsters and items
-    monsterSpawner.spawnMonstersForLevel(level, depth, BASE_MONSTER_COUNT + depth);
-    itemSpawner.spawnItemsForLevel(level, depth, 5 + depth);
-
-    // Add monsters to scheduler
-    for (const monster of level.getMonsters()) {
-      scheduler.add(monster);
-    }
-
-    // Update store with all level data
     store.setLevelData({
-      level,
-      scheduler,
+      level: data.level,
+      scheduler: data.scheduler,
       depth,
-      upStairs: dungeon.upStairs,
-      downStairs: dungeon.downStairs,
+      upStairs: data.upStairs,
+      downStairs: data.downStairs,
     });
   }
 
   /** Get monster name from definition */
   getMonsterName(monster: { definitionKey: string }): string {
-    return monsterDataManager.getMonsterDef(monster.definitionKey)?.name ?? 'monster';
+    return this.monsterDataManager.getName(monster.definitionKey);
   }
 
-  /**
-   * Get the display name for an item with proper article and flavor.
-   */
-  getItemDisplayName(
-    item: Item,
-    options: { article?: boolean; quantity?: number } = {},
-  ): string {
-    const { article = true, quantity = item.quantity } = options;
-
-    if (!item.generated) {
-      return article ? 'an unknown item' : 'unknown item';
-    }
-
-    const base = item.generated.baseItem;
-    const type = base.type;
-    const sval = base.sval;
-
-    // Artifacts always show their name
-    if (item.generated.artifact?.name) {
-      const name = item.generated.artifact.name;
-      if (!article) return name;
-      // Known artifacts get "The" prefix
-      return `The ${name}`;
-    }
-
-    // Check if this item type has flavors (potions, scrolls)
-    const hasFlavor = type === 'potion' || type === 'scroll';
-    const isAware = this.flavorSystem.isAware(type, sval);
-
-    let name: string;
-
-    if (hasFlavor && !isAware) {
-      // Show flavor name (e.g., "Icky Green Potion", "Scroll titled \"BLAA JU\"")
-      if (type === 'potion') {
-        name = this.flavorSystem.getPotionFlavorName(sval);
-      } else {
-        name = this.flavorSystem.getScrollFlavorName(sval);
-      }
-    } else {
-      // Show real name
-      name = item.name;
-    }
-
-    // Add ego item suffix if identified
-    if (item.generated.egoItem?.name && item.generated.identified) {
-      name = `${name} ${item.generated.egoItem.name}`;
-    }
-
-    if (!article) return name;
-
-    // Handle pluralization for quantities > 1
-    if (quantity > 1) {
-      // Simple pluralization (add 's' or 'es')
-      let plural = name;
-      if (name.endsWith('s') || name.endsWith('h')) {
-        plural = `${name}es`;
-      } else {
-        plural = `${name}s`;
-      }
-      return `${quantity} ${plural}`;
-    }
-
-    // Get the appropriate article (a/an)
-    const art = getArticle(name, quantity);
-    return `${art} ${name}`;
+  /** Get the display name for an item with proper article and flavor */
+  getItemDisplayName(item: Item, options?: { article?: boolean; quantity?: number }): string {
+    return this.flavorSystem.getItemDisplayName(item, options);
   }
 
-  /**
-   * Mark an item type as known (after identifying, using, etc.)
-   */
+  /** Mark an item type as known (after identifying, using, etc.) */
   makeAware(item: Item): void {
-    if (item.generated) {
-      const { type, sval } = item.generated.baseItem;
-      this.flavorSystem.setAware(type, sval);
-    }
+    this.flavorSystem.makeAware(item);
   }
 
   /**
