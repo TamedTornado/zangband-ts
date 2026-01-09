@@ -74,6 +74,15 @@ describe('MonsterDataManager', () => {
         rarity: 3,
         flags: ['FORCE_DEPTH'],
       }),
+      town_npc: createTestMonster({
+        key: 'town_npc',
+        index: 6,
+        name: 'Farmer Maggot',
+        symbol: 'h',
+        depth: 0,
+        rarity: 3,
+        flags: ['WILD_TOWN', 'FRIENDLY'],
+      }),
     };
 
     manager = new MonsterDataManager(testMonsters);
@@ -83,7 +92,7 @@ describe('MonsterDataManager', () => {
     it('builds allocation table sorted by depth', () => {
       const table = manager.getAllocationTable();
 
-      expect(table.length).toBe(5);
+      expect(table.length).toBe(6);
       // Should be sorted by depth
       for (let i = 1; i < table.length; i++) {
         expect(table[i].depth).toBeGreaterThanOrEqual(table[i - 1].depth);
@@ -166,14 +175,36 @@ describe('MonsterDataManager', () => {
         expect(monster?.key).not.toBe('deep_monster');
       }
     });
+
+    it('excludes WILD_TOWN monsters from dungeon spawning', () => {
+      // WILD_TOWN monsters should only spawn at depth 0 (town)
+      // They should never appear in the dungeon (depth > 0)
+      for (let i = 0; i < 50; i++) {
+        const monster = manager.selectMonster(1);
+        expect(monster?.key).not.toBe('town_npc');
+      }
+    });
+
+    it('allows WILD_TOWN monsters at depth 0', () => {
+      // At depth 0 (town), WILD_TOWN monsters should be eligible
+      let foundTownNpc = false;
+      for (let i = 0; i < 100; i++) {
+        const monster = manager.selectMonster(0);
+        if (monster?.key === 'town_npc') {
+          foundTownNpc = true;
+          break;
+        }
+      }
+      expect(foundTownNpc).toBe(true);
+    });
   });
 
   describe('getMonstersForDepth', () => {
     it('returns all monsters eligible for given depth', () => {
       const monsters = manager.getMonstersForDepth(10);
 
-      // Depth 10 includes: rat (1), giant_rat (3), orc (10)
-      expect(monsters.length).toBe(3);
+      // Depth 10 includes: town_npc (0), rat (1), giant_rat (3), orc (10)
+      expect(monsters.length).toBe(4);
       expect(monsters.map(m => m.key)).toContain('rat');
       expect(monsters.map(m => m.key)).toContain('giant_rat');
       expect(monsters.map(m => m.key)).toContain('orc');
@@ -182,9 +213,10 @@ describe('MonsterDataManager', () => {
     it('excludes monsters below minimum depth', () => {
       const monsters = manager.getMonstersForDepth(2);
 
-      // Only rat (depth 1) should be eligible
-      expect(monsters.length).toBe(1);
-      expect(monsters[0].key).toBe('rat');
+      // Depth 2 includes: town_npc (0), rat (1)
+      expect(monsters.length).toBe(2);
+      expect(monsters.map(m => m.key)).toContain('rat');
+      expect(monsters.map(m => m.key)).toContain('town_npc');
     });
   });
 

@@ -160,6 +160,11 @@ export class MonsterDataManager {
         continue;
       }
 
+      // Skip WILD_TOWN monsters in the dungeon (they only spawn at depth 0)
+      if (monster.flags.includes('WILD_TOWN') && level > 0) {
+        continue;
+      }
+
       total += entry.probability;
       eligible.push({ entry, monster });
     }
