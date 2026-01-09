@@ -3,7 +3,10 @@
  */
 
 import type { MonsterDef } from '@/core/data/monsters';
+import type { Actor } from '@/core/entities/Actor';
 import { Monster } from '@/core/entities/Monster';
+import type { ILevel } from '@/core/world/Level';
+import type { Position } from '@/core/types';
 
 /**
  * Create a minimal MonsterDef for testing.
@@ -67,4 +70,61 @@ export function createTestMonster(
     speed: overrides.speed ?? 110,
     def,
   });
+}
+
+/**
+ * Create a mock level implementing ILevel for testing.
+ */
+export function createMockLevel(
+  monsters: Monster[] = [],
+  player: Actor | null = null,
+  options: { width?: number; height?: number; depth?: number; walls?: Position[] } = {}
+): ILevel {
+  const { width = 50, height = 50, depth = 1, walls = [] } = options;
+  const wallSet = new Set(walls.map((p) => `${p.x},${p.y}`));
+
+  return {
+    width,
+    height,
+    depth,
+    player,
+    getActorAt: (pos: Position) => {
+      if (player && !player.isDead && player.position.x === pos.x && player.position.y === pos.y) {
+        return player;
+      }
+      return monsters.find((m) => !m.isDead && m.position.x === pos.x && m.position.y === pos.y);
+    },
+    getMonsterAt: (pos: Position) => {
+      return monsters.find((m) => !m.isDead && m.position.x === pos.x && m.position.y === pos.y);
+    },
+    getMonsters: () => monsters.filter((m) => !m.isDead),
+    getMonstersInRadius: (center: Position, radius: number) => {
+      return monsters.filter((m) => {
+        if (m.isDead) return false;
+        const dx = m.position.x - center.x;
+        const dy = m.position.y - center.y;
+        return Math.sqrt(dx * dx + dy * dy) <= radius;
+      });
+    },
+    getTile: (pos: Position) => {
+      if (wallSet.has(`${pos.x},${pos.y}`)) {
+        return { terrain: { flags: ['WALL'] } } as unknown as ReturnType<ILevel['getTile']>;
+      }
+      return { terrain: { flags: [] } } as unknown as ReturnType<ILevel['getTile']>;
+    },
+    isWalkable: (pos: Position) => {
+      if (pos.x < 0 || pos.x >= width || pos.y < 0 || pos.y >= height) return false;
+      return !wallSet.has(`${pos.x},${pos.y}`);
+    },
+    isOccupied: (pos: Position) => {
+      return monsters.some((m) => !m.isDead && m.position.x === pos.x && m.position.y === pos.y);
+    },
+    addMonster: (monster: Monster) => {
+      monsters.push(monster);
+    },
+    removeMonster: (monster: Monster) => {
+      const idx = monsters.indexOf(monster);
+      if (idx !== -1) monsters.splice(idx, 1);
+    },
+  };
 }

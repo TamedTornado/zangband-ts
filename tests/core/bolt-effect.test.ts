@@ -6,27 +6,7 @@ import { Monster } from '@/core/entities/Monster';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
-import type { Position } from '@/core/types';
-import { createTestMonsterDef } from './testHelpers';
-
-// Mock level with monsters
-function createMockLevel(monsters: Monster[] = []) {
-  const monsterMap = new Map<string, Monster>();
-  for (const m of monsters) {
-    monsterMap.set(`${m.position.x},${m.position.y}`, m);
-  }
-
-  return {
-    getMonsterAt: (pos: Position) => monsterMap.get(`${pos.x},${pos.y}`),
-    getTile: (pos: Position) => {
-      // Return wall at x=10 for testing wall blocking
-      if (pos.x === 10) {
-        return { terrain: { flags: ['WALL'] } };
-      }
-      return { terrain: { flags: [] } };
-    },
-  };
-}
+import { createTestMonsterDef, createMockLevel } from './testHelpers';
 
 // Helper to create actor at position
 function createActor(x: number, y: number): Actor {
@@ -170,7 +150,7 @@ describe('BoltEffect', () => {
       const actor = createActor(0, 0);
       // Monster is at x=15, but wall at x=10 should block
       const monster = createMonster(15, 0);
-      const level = createMockLevel([monster]);
+      const level = createMockLevel([monster], null, { walls: [{ x: 10, y: 0 }] });
 
       const context: GPEffectContext = {
         actor,

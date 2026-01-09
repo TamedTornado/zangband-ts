@@ -2,6 +2,7 @@ import type { RNG } from 'rot-js';
 import type { Position } from '../types';
 import type { TerrainDef } from '../data/terrain';
 import { Tile, getTerrain } from './Tile';
+import type { Actor } from '../entities/Actor';
 import type { Monster } from '../entities/Monster';
 import type { Item } from '../entities/Item';
 import type { Trap } from '../entities/Trap';
@@ -17,17 +18,70 @@ export interface LevelConfig {
   depth?: number;
 }
 
-export class Level {
+/**
+ * Interface for Level - used by effects and for test mocks
+ */
+export interface ILevel {
+  readonly width: number;
+  readonly height: number;
+  readonly depth: number;
+  player: Actor | null;
+
+  // Actor queries
+  getActorAt(pos: Position): Actor | undefined;
+  getMonsterAt(pos: Position): Monster | undefined;
+  getMonsters(): Monster[];
+  getMonstersInRadius(center: Position, radius: number): Monster[];
+
+  // Tile queries
+  getTile(pos: Position): Tile | undefined;
+  isWalkable(pos: Position): boolean;
+  isOccupied(pos: Position): boolean;
+
+  // Monster management
+  addMonster(monster: Monster): void;
+  removeMonster(monster: Monster): void;
+}
+
+export class Level implements ILevel {
   readonly width: number;
   readonly height: number;
   readonly depth: number;
   private tiles: Tile[][];
 
-  // Entity tracking
-  private monsters: Monster[] = [];
+  // Entity tracking - unified actors list plus player reference for quick lookup
+  private actors: Actor[] = [];
+  private _player: Actor | null = null;
   private items: Item[] = [];
   private traps: Trap[] = [];
   private activeEffects: GPActiveEffect[] = [];
+
+  /** Set the player reference for actor queries */
+  set player(p: Actor | null) {
+    // Remove old player from actors list
+    if (this._player) {
+      const index = this.actors.indexOf(this._player);
+      if (index !== -1) {
+        this.actors.splice(index, 1);
+      }
+    }
+    this._player = p;
+    // Add new player to actors list
+    if (p) {
+      this.actors.push(p);
+    }
+  }
+
+  get player(): Actor | null {
+    return this._player;
+  }
+
+  /** Get any actor (player or monster) at a position */
+  getActorAt(pos: Position): Actor | undefined {
+    return this.actors.find(
+      (a) => !a.isDead && a.position.x === pos.x && a.position.y === pos.y
+    );
+  }
 
   constructor(width: number, height: number, config: LevelConfig = {}) {
     this.width = width;
@@ -82,30 +136,40 @@ export class Level {
     }
   }
 
-  // Monster methods
+  // Monster methods - monsters are actors, stored in unified actors list
   addMonster(monster: Monster): void {
-    this.monsters.push(monster);
+    this.actors.push(monster);
   }
 
   removeMonster(monster: Monster): void {
-    const index = this.monsters.indexOf(monster);
+    const index = this.actors.indexOf(monster);
     if (index !== -1) {
-      this.monsters.splice(index, 1);
+      this.actors.splice(index, 1);
     }
   }
 
   getMonsters(): Monster[] {
-    return [...this.monsters];
+    return this.actors.filter((a): a is Monster => a !== this._player) as Monster[];
   }
 
   getMonsterAt(pos: Position): Monster | undefined {
-    return this.monsters.find(
-      (m) => m.position.x === pos.x && m.position.y === pos.y
+    const actor = this.actors.find(
+      (a) => a !== this._player && !a.isDead && a.position.x === pos.x && a.position.y === pos.y
     );
+    return actor as Monster | undefined;
   }
 
   getMonsterById(id: string): Monster | undefined {
-    return this.monsters.find((m) => m.id === id);
+    return this.actors.find((a) => a !== this._player && a.id === id) as Monster | undefined;
+  }
+
+  getMonstersInRadius(center: Position, radius: number): Monster[] {
+    return this.getMonsters().filter((m) => {
+      if (m.isDead) return false;
+      const dx = m.position.x - center.x;
+      const dy = m.position.y - center.y;
+      return Math.sqrt(dx * dx + dy * dy) <= radius;
+    });
   }
 
   // Item methods

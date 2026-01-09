@@ -154,6 +154,7 @@ export class MonsterSpellExecutor {
       level: ctx.level,
       rng: ctx.rng,
       targetPosition: ctx.player.position,
+      targetActor: ctx.player,
     };
 
     // Execute via EffectManager

@@ -10,7 +10,9 @@ import { rollDiceExpression } from './diceUtils';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
 import type { Position, Element } from '@/core/types';
 import { Element as ElementConst, ELEMENT_NAMES } from '@/core/types';
+import type { Actor } from '@/core/entities/Actor';
 import type { Monster } from '@/core/entities/Monster';
+import type { ILevel } from '@/core/world/Level';
 
 export interface BoltEffectDef extends GPEffectDef {
   type: 'bolt';
@@ -33,14 +35,10 @@ export class BoltEffect extends PositionGPEffect {
     const { actor, level, rng } = context;
     const target = this.getTargetPosition(context);
 
-    // Trace line from actor to target, find first monster
-    const hitMonster = this.findFirstMonsterInPath(
-      actor.position,
-      target,
-      level
-    );
+    // Trace line from actor to target, find first actor blocking the path
+    const hitActor = this.findFirstActorInPath(actor.position, target, level);
 
-    if (!hitMonster) {
+    if (!hitActor) {
       const elementName = ELEMENT_NAMES[this.element];
       return {
         success: true,
@@ -49,23 +47,27 @@ export class BoltEffect extends PositionGPEffect {
       };
     }
 
-    // Get monster name from definition
-    const monsterName = hitMonster.def.name;
+    const isPlayer = hitActor === level.player;
+    const targetName = isPlayer ? 'you' : (hitActor as Monster).def.name;
 
     // Roll damage
     const damage = rollDiceExpression(this.dice, rng);
 
     // Apply resistance using polymorphic resistDamage()
-    const { damage: finalDamage, status } = hitMonster.resistDamage(this.element, damage, rng);
+    const { damage: finalDamage, status } = hitActor.resistDamage(this.element, damage, rng);
 
-    // Apply damage to monster
-    hitMonster.takeDamage(finalDamage);
+    // Apply damage
+    hitActor.takeDamage(finalDamage);
 
     // Build message based on status
-    const messages: string[] = [this.buildDamageMessage(monsterName, finalDamage, status)];
+    const messages: string[] = [this.buildDamageMessage(targetName, finalDamage, status, isPlayer)];
 
-    if (hitMonster.isDead) {
-      messages.push(`The ${monsterName} is destroyed!`);
+    if (hitActor.isDead) {
+      if (isPlayer) {
+        messages.push('You die...');
+      } else {
+        messages.push(`The ${targetName} is destroyed!`);
+      }
     }
 
     return {
@@ -79,37 +81,37 @@ export class BoltEffect extends PositionGPEffect {
   /**
    * Build damage message based on resistance status
    */
-  private buildDamageMessage(targetName: string, damage: number, status: string): string {
-    const name = `The ${targetName}`;
+  private buildDamageMessage(targetName: string, damage: number, status: string, isPlayer: boolean): string {
+    const name = isPlayer ? 'You' : `The ${targetName}`;
     const elementName = ELEMENT_NAMES[this.element];
 
     if (damage === 0) {
-      return `${name} is unaffected.`;
+      return isPlayer ? 'You are unaffected.' : `${name} is unaffected.`;
     }
 
     switch (status) {
       case 'immune':
-        return `${name} resists a lot. (${damage} damage)`;
+        return isPlayer ? `You resist a lot. (${damage} damage)` : `${name} resists a lot. (${damage} damage)`;
       case 'resists':
-        return `${name} resists. (${damage} damage)`;
+        return isPlayer ? `You resist. (${damage} damage)` : `${name} resists. (${damage} damage)`;
       case 'vulnerable':
-        return `${name} is hit hard! (${damage} damage)`;
+        return isPlayer ? `You are hit hard! (${damage} damage)` : `${name} is hit hard! (${damage} damage)`;
       default: {
         const damageDesc = elementName ? `${damage} ${elementName} damage` : `${damage} damage`;
-        return `${name} takes ${damageDesc}.`;
+        return isPlayer ? `You take ${damageDesc}.` : `${name} takes ${damageDesc}.`;
       }
     }
   }
 
   /**
-   * Trace a line from origin to target and find the first monster.
+   * Trace a line from origin to target and find the first actor.
    * Uses Bresenham's line algorithm.
    */
-  private findFirstMonsterInPath(
+  private findFirstActorInPath(
     origin: Position,
     target: Position,
-    level: { getMonsterAt: (pos: Position) => Monster | undefined; getTile: (pos: Position) => { terrain?: { flags?: string[] } } | undefined }
-  ): Monster | undefined {
+    level: ILevel
+  ): Actor | undefined {
     let x0 = origin.x;
     let y0 = origin.y;
     const x1 = target.x;
@@ -124,10 +126,10 @@ export class BoltEffect extends PositionGPEffect {
     while (true) {
       // Skip origin (where caster is standing)
       if (x0 !== origin.x || y0 !== origin.y) {
-        // Check for monster at this position
-        const monster = level.getMonsterAt({ x: x0, y: y0 });
-        if (monster && !monster.isDead) {
-          return monster;
+        // Check for any actor at this position
+        const actor = level.getActorAt({ x: x0, y: y0 });
+        if (actor) {
+          return actor;
         }
 
         // Check for wall (bolt stops)

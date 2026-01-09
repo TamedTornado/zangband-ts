@@ -6,41 +6,8 @@ import { Monster } from '@/core/entities/Monster';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, GPEffectDef } from '@/core/systems/effects/GPEffect';
-import type { Position } from '@/core/types';
 import { getEffectManager } from '@/core/systems/effects/EffectManager';
-import { createTestMonsterDef } from './testHelpers';
-
-// Mock level
-function createMockLevel(monsters: Monster[] = [], width = 50, height = 50) {
-  return {
-    width,
-    height,
-    getMonsterAt: (pos: Position) => {
-      return monsters.find(m => m.position.x === pos.x && m.position.y === pos.y);
-    },
-    getMonsters: () => [...monsters],
-    getMonstersInRadius: (center: Position, radius: number) => {
-      return monsters.filter(m => {
-        const dx = m.position.x - center.x;
-        const dy = m.position.y - center.y;
-        return Math.sqrt(dx * dx + dy * dy) <= radius && !m.isDead;
-      });
-    },
-    addMonster: (monster: Monster) => {
-      monsters.push(monster);
-    },
-    isWalkable: (pos: Position) => {
-      if (pos.x < 0 || pos.x >= width || pos.y < 0 || pos.y >= height) return false;
-      return true;
-    },
-    isOccupied: (pos: Position) => {
-      return monsters.some(m => m.position.x === pos.x && m.position.y === pos.y);
-    },
-    getTile: (_pos: Position) => ({
-      terrain: { flags: [], walkable: true },
-    }),
-  };
-}
+import { createTestMonsterDef, createMockLevel } from './testHelpers';
 
 function createActor(x: number, y: number): Actor {
   return new Actor({

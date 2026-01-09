@@ -191,15 +191,18 @@ export function parseMonsters(text: string): MonsterRecord {
     entries.push(current);
   }
 
+  // Filter out the "player" entry (index 0) - it's in r_info.txt but shouldn't be a spawnable monster
+  const filteredEntries = entries.filter((e) => e.index !== 0);
+
   // Detect collisions
   const slugCounts = new Map<string, number>();
-  for (const entry of entries) {
+  for (const entry of filteredEntries) {
     slugCounts.set(entry.slug, (slugCounts.get(entry.slug) ?? 0) + 1);
   }
 
   // Build record with collision-aware keys
   const monsters: MonsterRecord = {};
-  for (const entry of entries) {
+  for (const entry of filteredEntries) {
     const hasCollision = (slugCounts.get(entry.slug) ?? 0) > 1;
     const key = hasCollision ? `${entry.slug}_${entry.index}` : entry.slug;
 
