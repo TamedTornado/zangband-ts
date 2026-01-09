@@ -487,18 +487,20 @@ const defaultBindings: Record<string, GameAction> = {
 **Character Info (DONE)**
 - [x] Character screen (`C`) - Info tab with stats, depth, turn
 
-**Data-Driven Effects System (IN PROGRESS)**
+**Data-Driven Effects System (DONE - Core)**
 - [x] Design unified effect schema (heal, applyStatus, cure, reduce)
 - [x] Add `effects` to ItemDef for consumables (potions, food)
 - [x] Create EffectExecutor that reads from item.generated.baseItem.effects
 - [x] Remove hardcoded name-based effect logic from handleQuaff/handleEat
 - [x] GPEffect system with targeting (item, symbol, direction, position)
-- [x] Targeting FSM states (ItemTargetingState, SymbolTargetingState, DirectionTargetingState)
-- [x] ZapState executes effects from device definitions
+- [x] Targeting FSM states as pure utilities: gather target info, pop back to caller
+- [x] TargetingState with Zangband-style dual mode (direction mode + cursor mode)
+- [x] ZapState executes effects via ItemUseSystem
+- [x] ReadScrollState handles targeted scrolls correctly (energy now spent)
 - [x] Clean up item keys (renamed _NNN suffix keys to semantic names)
 - [x] Self-targeting effects: lightArea, detect, heal, applyStatus, cure, restoreStat, teleportSelf, identify, genocide
+- [x] Same system used for spell effects
 - [ ] Potions/other items need a possible separate effect on throw
-- [ ] Same system will be used for spell effects
 
 **Effect Manager Architecture (DONE)**
 - [x] `EffectManager` class centralizes effect creation and resource injection
@@ -506,8 +508,8 @@ const defaultBindings: Record<string, GameAction> = {
 - [x] GameFSM initializes global effect manager with data managers
 - [x] Standalone functions delegate to global manager (marked deprecated)
 
-**Device Effects Implementation (IN PROGRESS)**
-~75/89 device items have effects. Remaining effects needed:
+**Device Effects Implementation (DONE)**
+All core device effects implemented:
 
 *Bolt Effects (DONE):*
 - [x] `bolt` effect type - fires projectile at target, deals damage to first monster
@@ -682,6 +684,34 @@ Wands, rods, and staves have special stacking and charge mechanics from Zangband
 - [ ] Light source fuel consumption (future)
 - [ ] Hunger/food clock (future)
 
+**Turn Completion Architecture (DONE)**
+One canonical API for completing player turns, fixing energy spending bugs:
+
+*GameFSM.completeTurn(energyCost):*
+- [x] Single method that ALL player actions use to complete a turn
+- [x] Spends player energy
+- [x] Processes tick effects (rod recharging, status durations, mana regen)
+- [x] Processes monster turns via GameLoop
+- [x] Cleans up dead monsters
+- [x] Tracks killer for death screen
+
+*ItemUseSystem:*
+- [x] Pure effect executor - does NOT spend energy
+- [x] Returns `ItemUseResult { success, messages, energyCost, itemConsumed }`
+- [x] Functions: `usePotion()`, `useScroll()`, `useFood()`, `useDevice()`
+- [x] Caller (FSM state) is responsible for calling `fsm.completeTurn(result.energyCost)`
+- [x] Fixes bug where targeted scrolls/devices never spent energy
+
+*Device Energy Costs (Zangband formula):*
+- [x] Variable energy cost based on player device skill
+- [x] Formula: `max(75, 200 - 5 * skill / 8)` where skill = device skill (INT-based)
+- [x] Higher skill = faster device use (100 base, 75 minimum at high skill)
+
+*Player Skills:*
+- [x] Skills derived from stats using StatTables lookup
+- [x] Device skill uses INT modifier
+- [x] Used for device energy costs and future failure chance
+
 **Items - Magical Devices (DONE)**
 - [x] Zap device (`z`) - unified action for wands, rods, staves
 - [x] Aim wand (`a`) - alias for zap
@@ -697,9 +727,12 @@ Wands, rods, and staves have special stacking and charge mechanics from Zangband
 - [ ] Tunnel (`T`)
 - [ ] Destroy item (`k`)
 
-**Look & Target (PARTIAL)**
+**Look & Target (DONE)**
 - [x] Look command (`x`) - cursor mode with Tab cycling, movement keys
-- [x] Target command (`*`) - same as look but for future ranged
+- [x] Target command (`*`) - Zangband-style targeting with two modes:
+  - Direction mode: direction keys fire immediately in that direction
+  - Cursor mode: press `*` to enter, move cursor, Tab cycles visible monsters
+  - `5`, `.`, Enter use last target if still valid
 - [ ] Identify symbol (`/`)
 
 **Information Screens (TODO)**
@@ -707,15 +740,31 @@ Wands, rods, and staves have special stacking and charge mechanics from Zangband
 - [ ] Message history (`Ctrl+P`)
 - [ ] Knowledge menu (`~`)
 
-**Magic System (PARTIAL)**
+**Magic System (IN PROGRESS - 25%)**
+Infrastructure complete, spell effects mostly missing:
+
+*Infrastructure (DONE):*
 - [x] Spell casting (`m`) - select known spell, check mana/level requirements, roll failure, execute via GPEffect
-- [ ] Browse spellbook (`b`)
 - [x] Learn spells (`G`) - select book, show learnable spells by class/level, learn spell to memory
 - [x] Player mana pool with class-based calculation (INT or WIS based on spellStat)
 - [x] Mana regeneration via TickSystem (maxMana/100 per turn)
 - [x] Per-realm spell tracking (Map<string, Set<string>>)
 - [x] Spell book utilities (spellBooks.ts, spellLoader.ts)
-- [x] Book 1 spells (indices 0-7) have effects for all 7 realms
+- [x] Targeted spells use TargetingState with Zangband-style direction/cursor input
+- [ ] Browse spellbook (`b`) - view spells without casting
+
+*Spell Effects by Realm (56/224 = 25%):*
+| Realm | Book 1 (0-7) | Book 2 (8-15) | Book 3 (16-23) | Book 4 (24-31) |
+|-------|--------------|---------------|----------------|----------------|
+| Life | 8/8 | 0/8 | 0/8 | 0/8 |
+| Sorcery | 8/8 | 0/8 | 0/8 | 0/8 |
+| Nature | 8/8 | 0/8 | 0/8 | 0/8 |
+| Chaos | 8/8 | 0/8 | 0/8 | 0/8 |
+| Death | 8/8 | 0/8 | 0/8 | 0/8 |
+| Trump | 8/8 | 0/8 | 0/8 | 0/8 |
+| Arcane | 8/8 | 0/8 | 0/8 | 0/8 |
+
+*TODO: Books 2-4 spell effects for all realms (168 spells remaining)*
 
 **Save/Load (TODO)**
 - [ ] Save game (`Ctrl+S`) to localStorage/IndexedDB
