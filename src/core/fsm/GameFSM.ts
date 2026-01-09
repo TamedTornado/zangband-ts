@@ -207,6 +207,9 @@ export class GameFSM {
       player.position = { x: Math.floor(DUNGEON_WIDTH / 2), y: Math.floor(DUNGEON_HEIGHT / 2) };
     }
 
+    // Set level.player so player is in actors list (needed for getActorAt)
+    level.player = player;
+
     // Initialize scheduler
     const scheduler = new Scheduler();
     scheduler.add(player);

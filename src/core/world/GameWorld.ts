@@ -9,6 +9,9 @@ export class GameWorld {
   constructor(player: Player, initialLevel: Level) {
     this._player = player;
     this._currentLevel = initialLevel;
+    // Set level.player so the player is in the level's actors list
+    // This is required for getActorAt() to find the player
+    this._currentLevel.player = player;
   }
 
   get player(): Player {
@@ -29,5 +32,7 @@ export class GameWorld {
 
   changeLevel(level: Level): void {
     this._currentLevel = level;
+    // Ensure the new level has the player reference
+    this._currentLevel.player = this._player;
   }
 }
