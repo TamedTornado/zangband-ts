@@ -96,6 +96,22 @@ export class Monster extends Actor {
   }
 
   /**
+   * Get health description based on HP percentage.
+   * Returns null if unhurt, otherwise "wounded", "badly wounded", etc.
+   * Non-living monsters use "damaged" terminology.
+   */
+  get healthDesc(): string | null {
+    const pct = (this.hp / this.maxHp) * 100;
+    const isNonLiving = this.def.flags.includes('NONLIVING') || this.def.flags.includes('UNDEAD');
+
+    if (pct >= 100) return null;
+    if (pct >= 60) return isNonLiving ? 'somewhat damaged' : 'somewhat wounded';
+    if (pct >= 25) return isNonLiving ? 'damaged' : 'wounded';
+    if (pct >= 10) return isNonLiving ? 'badly damaged' : 'badly wounded';
+    return isNonLiving ? 'almost destroyed' : 'almost dead';
+  }
+
+  /**
    * Check if this monster can receive a status effect.
    * Uses monster's definition flags for immunity checks.
    */

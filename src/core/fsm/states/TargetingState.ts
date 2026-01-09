@@ -334,8 +334,12 @@ export class TargetingState implements State {
       const monster = level.getMonsterAt(cursor);
       if (monster && !monster.isDead) {
         const name = fsm.getMonsterName(monster);
-        const sleepStatus = monster.isAwake ? '' : ' (sleeping)';
-        parts.push(`a ${name}${sleepStatus}`);
+        const statusParts: string[] = [];
+        if (!monster.isAwake) statusParts.push('sleeping');
+        if (monster.isTamed) statusParts.push('pet');
+        if (monster.healthDesc) statusParts.push(monster.healthDesc);
+        const status = statusParts.length > 0 ? ` (${statusParts.join(', ')})` : '';
+        parts.push(`a ${name}${status}`);
       }
 
       // Check for items
