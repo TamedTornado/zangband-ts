@@ -5,6 +5,7 @@ import { PlayingState } from '@/core/fsm/states/PlayingState';
 import type { GameMessage } from '@/core/fsm/GameData';
 import type { Player } from '@/core/entities/Player';
 import type { Level } from '@/core/world/Level';
+import type { Item } from '@/core/entities/Item';
 import { useGameStore, type PromptState } from '@/core/store/gameStore';
 
 /**
@@ -74,6 +75,8 @@ interface GameActions {
   promptRest: () => void;
   // Repeat last command
   repeatLastCommand: () => void;
+  // Item display
+  getItemDisplayName: (item: Item) => string;
 }
 
 interface GameContextValue {
@@ -285,6 +288,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
     repeatLastCommand: () => {
       fsm.dispatch({ type: 'repeatLastCommand' });
+    },
+
+    getItemDisplayName: (item: Item) => {
+      return fsm.getItemDisplayName(item);
     },
   }), [prompt, setPrompt, updatePromptValue, addMessage]);
 

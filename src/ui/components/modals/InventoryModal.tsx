@@ -27,7 +27,7 @@ export function InventoryModal() {
   const renderItem = (indexed: IndexedItem, _index: number, letter: string) => {
     const item = indexed.item;
     // Format item display like TCL/TK: "a) Short Sword (1d6) (+2,+3)"
-    let display = `${letter}) ${item.name}`;
+    let display = `${letter}) ${actions.getItemDisplayName(item)}`;
 
     // Add damage for weapons
     const weaponTypes = ['sword', 'hafted', 'polearm', 'bow', 'digging', 'shot', 'arrow', 'bolt'];

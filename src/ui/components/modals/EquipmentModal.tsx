@@ -23,12 +23,10 @@ const EQUIPMENT_SLOTS: Array<{ slot: EquipmentSlot; label: string; letter: strin
 ];
 
 /**
- * Format item display string
+ * Format item display string with stats
  */
-function formatItem(item: Item | undefined): string {
-  if (!item) return '(empty)';
-
-  let display = item.name;
+function formatItemWithStats(item: Item, baseName: string): string {
+  let display = baseName;
 
   // Add damage for weapons
   if (item.damage && item.damage !== '0d0') {
@@ -93,7 +91,7 @@ export function EquipmentModal() {
               <span className="slot-letter">{letter})</span>
               <span className="slot-label">{label}:</span>
               <span className={`slot-item ${isEmpty ? 'empty' : ''}`}>
-                {formatItem(item)}
+                {item ? formatItemWithStats(item, actions.getItemDisplayName(item)) : '(empty)'}
               </span>
             </div>
           );

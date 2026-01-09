@@ -26,7 +26,8 @@ export function ItemSelectionModal() {
 
   const renderItem = (selectable: SelectableItem, _index: number, letter: string) => {
     const item = selectable.item;
-    let display = `${letter}) ${item.name}`;
+    const itemName = actions.getItemDisplayName(item);
+    let display = `${letter}) ${itemName}`;
 
     // Add charges for devices
     if (item.type === 'wand' || item.type === 'staff') {
@@ -39,9 +40,9 @@ export function ItemSelectionModal() {
       }
     }
 
-    // Add quantity for stackables
+    // Add quantity for stackables (getItemDisplayName handles quantity, so rebuild)
     if (item.quantity > 1) {
-      display = `${letter}) ${item.quantity}x ${item.name}`;
+      display = `${letter}) ${itemName}`;
     }
 
     return (

@@ -315,7 +315,7 @@ export class PlayingState implements State {
     const item = items[0];
     player.addItem(item);
     level.removeItem(item);
-    fsm.addMessage(`You pick up ${item.name}.`, 'info');
+    fsm.addMessage(`You pick up ${fsm.getItemDisplayName(item)}.`, 'info');
   }
 
   private handleTakeOff(fsm: GameFSM, slot: string): void {
