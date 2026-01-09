@@ -104,6 +104,10 @@ export class Level {
     );
   }
 
+  getMonsterById(id: string): Monster | undefined {
+    return this.monsters.find((m) => m.id === id);
+  }
+
   // Item methods
   addItem(item: Item): void {
     this.items.push(item);

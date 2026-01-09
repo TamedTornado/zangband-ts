@@ -11,6 +11,7 @@ import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionState';
 import { getEffectManager, type GPEffectContext } from '../../systems/effects';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class EatState implements State {
   readonly name = 'eat';
@@ -38,7 +39,9 @@ export class EatState implements State {
       return;
     }
 
-    const { player, level } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
     const item = selection.item;
 
     fsm.addMessage(`You eat ${fsm.getItemDisplayName(item)}.`, 'info');
@@ -60,6 +63,10 @@ export class EatState implements State {
 
     // Mark food type as known
     fsm.makeAware(item);
+
+    // Save for repeat command
+    store.setLastCommand({ actionType: 'eat', itemId: item.id });
+    store.setIsRepeating(false);
 
     player.removeItem(item.id);
     fsm.transition(new PlayingState());

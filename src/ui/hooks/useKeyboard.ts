@@ -37,6 +37,7 @@ export const Action = {
   ToggleCharacter: 'action:toggle_character',
   // Other
   Rest: 'action:rest',
+  RepeatLastCommand: 'action:repeat_last_command',
   // Targeting
   Look: 'action:look',
   Target: 'action:target',
@@ -59,17 +60,6 @@ type ResolvedInput =
  * Direction key sets - each maps keys to directions
  */
 const DIRECTION_KEYS: Record<string, Direction>[] = [
-  // vi keys
-  {
-    k: Direction.North,
-    j: Direction.South,
-    h: Direction.West,
-    l: Direction.East,
-    y: Direction.NorthWest,
-    u: Direction.NorthEast,
-    b: Direction.SouthWest,
-    n: Direction.SouthEast,
-  },
   // arrow keys
   {
     ArrowUp: Direction.North,
@@ -124,6 +114,7 @@ const ACTION_BINDINGS: { key: string; modifiers: string[]; action: Action }[] = 
   { key: 'C', modifiers: ['shift'], action: Action.ToggleCharacter },
   // Other
   { key: 'R', modifiers: ['shift'], action: Action.Rest },
+  { key: 'n', modifiers: [], action: Action.RepeatLastCommand },
   // Targeting
   { key: 'x', modifiers: [], action: Action.Look },
   { key: '*', modifiers: [], action: Action.Target },
@@ -211,6 +202,7 @@ const ACTION_HANDLERS: Record<Action, (actions: GameActions) => void> = {
   [Action.ToggleEquipment]: (a) => a.toggleEquipment(),
   [Action.ToggleCharacter]: (a) => a.toggleCharacter(),
   [Action.Rest]: (a) => a.promptRest(),
+  [Action.RepeatLastCommand]: (a) => a.repeatLastCommand(),
   // Targeting
   [Action.Look]: (a) => a.look(),
   [Action.Target]: (a) => a.target(),

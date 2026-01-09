@@ -29,7 +29,7 @@ import type { EgoItemDef } from '../data/ego-items';
 import type { ArtifactDef } from '../data/artifacts';
 import type { MonsterDef } from '../data/monsters';
 import { DEBUG_MODE, applyDebugSetup } from '../debug/debugSetup';
-import { useGameStore, getGameStore } from '../store/gameStore';
+import { getGameStore } from '../store/gameStore';
 
 // Game data imports
 import itemsData from '@/data/items/items.json';
@@ -69,45 +69,6 @@ export class GameFSM {
   constructor(initialState: State) {
     this.initGameData();
     this.transition(initialState);
-  }
-
-  /**
-   * Get current game data from store.
-   * This provides backward compatibility for states using fsm.data.x
-   */
-  get data() {
-    const store = getGameStore();
-    return {
-      get player() { return store.player!; },
-      set player(p: Player) { useGameStore.setState({ player: p }); },
-      get level() { return store.level!; },
-      set level(l: Level) { useGameStore.setState({ level: l }); },
-      get scheduler() { return store.scheduler!; },
-      set scheduler(s: Scheduler) { useGameStore.setState({ scheduler: s }); },
-      get depth() { return store.depth; },
-      set depth(d: number) { useGameStore.setState({ depth: d }); },
-      get turn() { return store.turn; },
-      set turn(t: number) { useGameStore.setState({ turn: t }); },
-      get messages() { return store.messages; },
-      get upStairs() { return store.upStairs; },
-      get downStairs() { return store.downStairs; },
-      get killedBy() { return store.killedBy; },
-      set killedBy(k: string | null) { useGameStore.setState({ killedBy: k }); },
-      get cursor() { return store.cursor; },
-      set cursor(c: { x: number; y: number } | null) { useGameStore.setState({ cursor: c }); },
-      get itemTargeting() { return store.itemTargeting; },
-      set itemTargeting(t: typeof store.itemTargeting) { useGameStore.setState({ itemTargeting: t }); },
-      get symbolTargeting() { return store.symbolTargeting; },
-      set symbolTargeting(t: typeof store.symbolTargeting) { useGameStore.setState({ symbolTargeting: t }); },
-      get directionTargeting() { return store.directionTargeting; },
-      set directionTargeting(t: typeof store.directionTargeting) { useGameStore.setState({ directionTargeting: t }); },
-      get spellTargeting() { return store.spellTargeting; },
-      set spellTargeting(t: typeof store.spellTargeting) { useGameStore.setState({ spellTargeting: t }); },
-      get activeModal() { return store.activeModal; },
-      set activeModal(m: typeof store.activeModal) { useGameStore.setState({ activeModal: m }); },
-      get inventoryMode() { return store.inventoryMode; },
-      set inventoryMode(m: typeof store.inventoryMode) { useGameStore.setState({ inventoryMode: m }); },
-    };
   }
 
   /** Get current state name */

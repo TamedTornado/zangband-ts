@@ -37,6 +37,18 @@ export interface GameState {
   // Targeting cursor
   cursor: Coord | null;
 
+  // Last confirmed target monster ID (for repeat targeting)
+  lastTargetMonsterId: string | null;
+
+  // Repeat last command system
+  lastCommand: {
+    actionType: string;
+    itemId: string;
+    spellKey?: string;
+    targetPosition?: { x: number; y: number };
+  } | null;
+  isRepeating: boolean;
+
   // Effect targeting states
   itemTargeting: { prompt: string; validItemIndices: number[] } | null;
   symbolTargeting: { prompt: string } | null;
@@ -91,6 +103,9 @@ export interface GameActions {
   setStairs: (upStairs: Coord[], downStairs: Coord[]) => void;
   setKilledBy: (killer: string | null) => void;
   setCursor: (cursor: Coord | null) => void;
+  setLastTargetMonsterId: (monsterId: string | null) => void;
+  setLastCommand: (command: GameState['lastCommand']) => void;
+  setIsRepeating: (isRepeating: boolean) => void;
   setItemTargeting: (targeting: GameState['itemTargeting']) => void;
   setSymbolTargeting: (targeting: GameState['symbolTargeting']) => void;
   setDirectionTargeting: (targeting: GameState['directionTargeting']) => void;
@@ -122,6 +137,9 @@ const initialState: GameState = {
   downStairs: [],
   killedBy: null,
   cursor: null,
+  lastTargetMonsterId: null,
+  lastCommand: null,
+  isRepeating: false,
   itemTargeting: null,
   symbolTargeting: null,
   directionTargeting: null,
@@ -173,6 +191,9 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
   setStairs: (upStairs, downStairs) => set({ upStairs, downStairs }),
   setKilledBy: (killedBy) => set({ killedBy }),
   setCursor: (cursor) => set({ cursor }),
+  setLastTargetMonsterId: (lastTargetMonsterId) => set({ lastTargetMonsterId }),
+  setLastCommand: (lastCommand) => set({ lastCommand }),
+  setIsRepeating: (isRepeating) => set({ isRepeating }),
   setItemTargeting: (itemTargeting) => set({ itemTargeting }),
   setSymbolTargeting: (symbolTargeting) => set({ symbolTargeting }),
   setDirectionTargeting: (directionTargeting) => set({ directionTargeting }),

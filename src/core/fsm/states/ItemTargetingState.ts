@@ -12,6 +12,7 @@ import { PlayingState } from './PlayingState';
 import type { GPEffectContext, GPEffectResult, GPEffectDef } from '@/core/systems/effects';
 import { executeGPEffects } from '@/core/systems/effects';
 import type { Item } from '@/core/entities/Item';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class ItemTargetingState implements State {
   readonly name = 'itemTargeting';
@@ -37,16 +38,16 @@ export class ItemTargetingState implements State {
     const prompt = this.getPrompt();
     fsm.addMessage(prompt, 'info');
 
-    const validItems = this.getValidItems(fsm);
-    fsm.data.itemTargeting = {
+    const validItems = this.getValidItems();
+    getGameStore().setItemTargeting({
       prompt,
       validItemIndices: validItems.map((_, i) => i),
-    };
+    });
 
   }
 
-  onExit(fsm: GameFSM): void {
-    fsm.data.itemTargeting = null;
+  onExit(_fsm: GameFSM): void {
+    getGameStore().setItemTargeting(null);
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {
@@ -70,7 +71,7 @@ export class ItemTargetingState implements State {
   }
 
   private handleSelectItem(fsm: GameFSM, itemIndex: number): boolean {
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
     const item = player.inventory[itemIndex];
     if (!item) {
       fsm.addMessage('Invalid item selection.', 'info');
@@ -112,7 +113,7 @@ export class ItemTargetingState implements State {
     return 'Select an item:';
   }
 
-  private getValidItems(fsm: GameFSM): Item[] {
-    return fsm.data.player.inventory;
+  private getValidItems(): Item[] {
+    return getGameStore().player!.inventory;
   }
 }

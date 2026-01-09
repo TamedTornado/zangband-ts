@@ -12,8 +12,9 @@ import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { getSpellByKey, getSpellRequirement } from '../../data/spellLoader';
 import type { SpellDef, ClassSpellReq } from '../../data/spells';
-import { executeGPEffects, type GPEffectContext, getRequiredTargetType, TargetType } from '../../systems/effects';
+import { executeGPEffects, type GPEffectContext } from '../../systems/effects';
 import { TargetingState } from './TargetingState';
+import { getGameStore } from '@/core/store/gameStore';
 
 interface SpellListEntry {
   realm: string;
@@ -35,7 +36,7 @@ export class CastSpellState implements State {
   private selectedSpell: SpellListEntry | null = null;
 
   onEnter(fsm: GameFSM): void {
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
 
     // Check if player can cast spells
     if (!player.classDef || !player.classDef.spellStat) {
@@ -105,8 +106,36 @@ export class CastSpellState implements State {
       return;
     }
 
+    // Check for repeat mode - auto-select saved spell
+    const store = getGameStore();
+    if (store.isRepeating && store.lastCommand?.spellKey) {
+      const entry = this.spellList.find(
+        e => `${e.realm}:${e.spellKey}` === store.lastCommand!.spellKey
+      );
+      if (entry && entry.canCast) {
+        // Check if spell needs targeting (spells have target at spell level)
+        if (entry.spell.target === 'position') {
+          if (store.lastCommand.targetPosition) {
+            // Use saved target position
+            this.executeSpell(fsm, entry, store.lastCommand.targetPosition);
+            return;
+          }
+          // Needs targeting but no saved position - go to targeting
+          this.selectedSpell = entry;
+          fsm.addMessage(`Cast ${entry.spell.name} at which target?`, 'info');
+          fsm.push(new TargetingState(true));
+          return;
+        }
+        // No targeting needed, execute immediately
+        this.executeSpell(fsm, entry);
+        return;
+      }
+      // Spell not found or can't cast - fall back to normal selection
+      store.setIsRepeating(false);
+    }
+
     // Populate spell targeting for UI modal
-    fsm.data.spellTargeting = {
+    getGameStore().setSpellTargeting({
       mode: 'cast',
       prompt: 'Cast which spell?',
       spells: this.spellList.map(entry => {
@@ -124,20 +153,20 @@ export class CastSpellState implements State {
           name: entry.spell.name,
           level: entry.req.level,
           mana: entry.req.mana,
-          fail: this.calculateFailChance(fsm, entry.req),
+          fail: this.calculateFailChance(entry.req),
           canUse: entry.canCast,
           realm: entry.realm,
         };
         if (entry.reason) spell.reason = entry.reason;
         return spell;
       }),
-    };
+    });
 
     fsm.addMessage('Cast which spell? [a-z, ESC to cancel]', 'info');
   }
 
-  onExit(fsm: GameFSM): void {
-    fsm.data.spellTargeting = null;
+  onExit(_fsm: GameFSM): void {
+    getGameStore().setSpellTargeting(null);
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {
@@ -202,17 +231,13 @@ export class CastSpellState implements State {
       return true;
     }
 
-    // Check if spell needs targeting
-    const effects = entry.spell.effects;
-    if (effects && effects.length > 0) {
-      const targetType = getRequiredTargetType(effects);
-      if (targetType === TargetType.Position) {
-        // Need to target a position
-        this.selectedSpell = entry;
-        fsm.addMessage(`Cast ${entry.spell.name} at which target?`, 'info');
-        fsm.push(new TargetingState(true));
-        return true;
-      }
+    // Check if spell needs targeting (spells have target at spell level, not effect level)
+    if (entry.spell.target === 'position') {
+      // Need to target a position
+      this.selectedSpell = entry;
+      fsm.addMessage(`Cast ${entry.spell.name} at which target?`, 'info');
+      fsm.push(new TargetingState(true));
+      return true;
     }
 
     // No targeting needed, execute immediately
@@ -225,11 +250,13 @@ export class CastSpellState implements State {
     entry: SpellListEntry,
     targetPosition?: { x: number; y: number }
   ): void {
-    const { player, level } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
     const { spell, req } = entry;
 
     // Roll for failure
-    const failChance = this.calculateFailChance(fsm, req);
+    const failChance = this.calculateFailChance(req);
     const roll = RNG.getUniformInt(0, 99);
 
     if (roll < failChance) {
@@ -277,13 +304,25 @@ export class CastSpellState implements State {
     }
 
     // Increment turn
-    fsm.data.turn++;
+    store.incrementTurn();
+
+    // Save for repeat command
+    const lastCommand: { actionType: string; itemId: string; spellKey: string; targetPosition?: { x: number; y: number } } = {
+      actionType: 'cast',
+      itemId: '',
+      spellKey: `${entry.realm}:${entry.spellKey}`,
+    };
+    if (targetPosition) {
+      lastCommand.targetPosition = targetPosition;
+    }
+    store.setLastCommand(lastCommand);
+    store.setIsRepeating(false);
 
     fsm.transition(new PlayingState());
   }
 
-  private calculateFailChance(fsm: GameFSM, req: ClassSpellReq): number {
-    const { player } = fsm.data;
+  private calculateFailChance(req: ClassSpellReq): number {
+    const player = getGameStore().player!;
     let fail = req.fail;
 
     // Reduce by stat bonus

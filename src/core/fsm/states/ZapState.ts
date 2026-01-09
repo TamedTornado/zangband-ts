@@ -14,6 +14,7 @@ import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionSta
 import { TargetingState } from './TargetingState';
 import type { Item } from '@/core/entities/Item';
 import { getEffectManager, getRequiredTargetType, TargetType, type GPEffectContext } from '../../systems/effects';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class ZapState implements State {
   readonly name = 'zap';
@@ -84,6 +85,12 @@ export class ZapState implements State {
     if (effects && effects.length > 0) {
       const targetType = getRequiredTargetType(effects);
       if (targetType === TargetType.Position) {
+        const store = getGameStore();
+        // In repeat mode with saved target, use it directly
+        if (store.isRepeating && store.lastCommand?.targetPosition) {
+          this.executeDevice(fsm, item, store.lastCommand.targetPosition);
+          return;
+        }
         // Need to target a position
         this.selectedItem = item;
         fsm.addMessage('Aim at which target?', 'info');
@@ -101,7 +108,9 @@ export class ZapState implements State {
     item: Item,
     targetPosition?: { x: number; y: number }
   ): void {
-    const { player, level } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
 
     const effects = item.generated?.baseItem.effects;
     if (effects && effects.length > 0) {
@@ -137,6 +146,17 @@ export class ZapState implements State {
 
     // Mark device type as known
     fsm.makeAware(item);
+
+    // Save for repeat command (include target position if used)
+    const lastCommand: { actionType: string; itemId: string; targetPosition?: { x: number; y: number } } = {
+      actionType: 'zap',
+      itemId: item.id,
+    };
+    if (targetPosition) {
+      lastCommand.targetPosition = targetPosition;
+    }
+    store.setLastCommand(lastCommand);
+    store.setIsRepeating(false);
 
     // Devices are not consumed (unlike potions/scrolls)
     fsm.transition(new PlayingState());

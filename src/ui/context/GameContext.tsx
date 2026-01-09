@@ -72,6 +72,8 @@ interface GameActions {
   cancelPrompt: () => void;
   // Rest prompt helper
   promptRest: () => void;
+  // Repeat last command
+  repeatLastCommand: () => void;
 }
 
 interface GameContextValue {
@@ -279,6 +281,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
         value: '',
         callback: handleRestInput,
       });
+    },
+
+    repeatLastCommand: () => {
+      fsm.dispatch({ type: 'repeatLastCommand' });
     },
   }), [prompt, setPrompt, updatePromptValue, addMessage]);
 

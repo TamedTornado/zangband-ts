@@ -40,4 +40,6 @@ export type GameAction =
   | { type: 'selectTargetDirection'; dir: Direction }
   // Generic inputs (states interpret contextually)
   | { type: 'letterSelect'; letter: string }
-  | { type: 'showList' };
+  | { type: 'showList' }
+  // Repeat last command
+  | { type: 'repeatLastCommand' };

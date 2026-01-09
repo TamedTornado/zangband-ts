@@ -7278,7 +7278,7 @@
         {
           "type": "bolt",
           "element": "magic",
-          "damage": "3d4"
+          "dice": "3d4"
         }
       ],
       "target": "position"
@@ -7438,7 +7438,7 @@
         {
           "type": "bolt",
           "element": "fire",
-          "damage": "6d8"
+          "dice": "6d8"
         }
       ],
       "target": "position"
@@ -7600,7 +7600,7 @@
         {
           "type": "bolt",
           "element": "lightning",
-          "damage": "5d8"
+          "dice": "5d8"
         }
       ],
       "target": "position"
@@ -7763,7 +7763,7 @@
         {
           "type": "bolt",
           "element": "plasma",
-          "damage": "5d8"
+          "dice": "5d8"
         }
       ],
       "target": "position"
@@ -9758,7 +9758,7 @@
         {
           "type": "bolt",
           "element": "dark",
-          "damage": "3d6"
+          "dice": "3d6"
         }
       ],
       "target": "position"
@@ -10000,7 +10000,7 @@
         {
           "type": "bolt",
           "element": "dark",
-          "damage": "3d6"
+          "dice": "3d6"
         }
       ],
       "target": "position"

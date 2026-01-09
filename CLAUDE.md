@@ -21,7 +21,9 @@ bun run test:run   # Run tests once
 ## Development Rules
 
 - **We use BUN not NODE**
+- **Prefer Painful Refactors**: When replacing a legacy system, it's better to rip it out and break code then use backwards compatibility shims and invite bugs.
 - **No self-credit**: Don't add co-authored-by or credit yourself in commit messages
+- **Issues and Bugs**: Do not push a fix to a bug or an issue or mark the issue closed until user confirms fix!
 - **TDD**: Tests define contracts FIRST, then write code to make them pass
 - **TDD Part 2**: When fixing bugs tests didn't catch, write tests that catch that bug FIRST.
 - **Data-driven**: Game content lives in JSON (`src/data/`), not code

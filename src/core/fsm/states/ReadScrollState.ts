@@ -21,6 +21,7 @@ import {
   type GPEffectContext,
 } from '../../systems/effects';
 import type { Item } from '../../entities/Item';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class ReadScrollState implements State {
   readonly name = 'readScroll';
@@ -55,7 +56,9 @@ export class ReadScrollState implements State {
   }
 
   private executeScroll(fsm: GameFSM, item: Item): void {
-    const { player, level } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
 
     // Get effects from item definition
     const effects = item.generated?.baseItem.effects as GPEffectDef[] | undefined;
@@ -89,6 +92,9 @@ export class ReadScrollState implements State {
       }
       if (result.success) {
         fsm.makeAware(item);
+        // Save for repeat command (before removing item)
+        store.setLastCommand({ actionType: 'read', itemId: item.id });
+        store.setIsRepeating(false);
         player.removeItem(item.id);
       }
       fsm.transition(new PlayingState());

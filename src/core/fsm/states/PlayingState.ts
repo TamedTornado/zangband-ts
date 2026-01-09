@@ -23,6 +23,7 @@ import { StudySpellState } from './StudySpellState';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, HP_REGEN_RATE } from '../../constants';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class PlayingState implements State {
   readonly name = 'playing';
@@ -97,6 +98,9 @@ export class PlayingState implements State {
       case 'toggleCharacter':
         fsm.transition(new CharacterState());
         return true;
+      case 'repeatLastCommand':
+        this.handleRepeatLastCommand(fsm);
+        return true;
       default:
         return false;
     }
@@ -104,7 +108,7 @@ export class PlayingState implements State {
 
   /** Process per-turn time effects (rods, statuses, etc.) */
   private processTurnEffects(fsm: GameFSM): void {
-    const result = fsm.tickSystem.tick(fsm.data.player);
+    const result = fsm.tickSystem.tick(getGameStore().player!);
     for (const msg of result.messages) {
       fsm.addMessage(msg, 'info');
     }
@@ -112,7 +116,10 @@ export class PlayingState implements State {
 
   /** Process monster turns and check for player death */
   private processMonsterTurns(fsm: GameFSM): void {
-    const { player, level, scheduler } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
+    const scheduler = store.scheduler!;
 
     const result = fsm.gameLoop.processMonsterTurns(player, level, scheduler);
     for (const msg of result.messages) {
@@ -136,7 +143,7 @@ export class PlayingState implements State {
       if (lastAttack) {
         const match = lastAttack.text.match(/^The (.+?) /);
         if (match) {
-          fsm.data.killedBy = match[1];
+          store.setKilledBy(match[1]);
         }
       }
       fsm.transition(new DeadState());
@@ -144,13 +151,16 @@ export class PlayingState implements State {
   }
 
   private handleMove(fsm: GameFSM, dir: Direction): void {
-    const { player, level, scheduler } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
+    const scheduler = store.scheduler!;
     const newPos = movePosition(player.position, dir);
 
     // Bump attack
     const targetMonster = level.getMonsterAt(newPos);
     if (targetMonster) {
-      fsm.data.turn++;
+      store.incrementTurn();
       const result = fsm.gameLoop.playerAttack(player, targetMonster);
       for (const msg of result.messages) {
         fsm.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
@@ -169,7 +179,7 @@ export class PlayingState implements State {
 
     // Normal movement
     if (level.isWalkable(newPos) && !level.isOccupied(newPos)) {
-      fsm.data.turn++;
+      store.incrementTurn();
       player.position = newPos;
       player.spendEnergy(ENERGY_PER_TURN);
       this.processTurnEffects(fsm);
@@ -189,7 +199,7 @@ export class PlayingState implements State {
     // Check for door
     const tile = level.getTile(newPos);
     if (tile?.terrain.flags.includes('DOOR')) {
-      fsm.data.turn++;
+      store.incrementTurn();
       level.setTerrain(newPos, 'open_door');
       fsm.addMessage('You open the door.', 'info');
       player.spendEnergy(ENERGY_PER_TURN);
@@ -202,7 +212,9 @@ export class PlayingState implements State {
   }
 
   private handleRun(fsm: GameFSM, dir: Direction): void {
-    const { player, level } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
 
     // Check for visible monsters first
     if (fsm.fovSystem.getVisibleMonster(level, player.position, VISION_RADIUS)) {
@@ -230,7 +242,7 @@ export class PlayingState implements State {
 
       // Move
       stepsRun++;
-      fsm.data.turn++;
+      store.incrementTurn();
       player.position = newPos;
       player.spendEnergy(ENERGY_PER_TURN);
       this.processTurnEffects(fsm);
@@ -276,7 +288,10 @@ export class PlayingState implements State {
   }
 
   private handleDownStairs(fsm: GameFSM): void {
-    const { player, downStairs, depth } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const downStairs = store.downStairs;
+    const depth = store.depth;
     const pos = player.position;
     const onDownStairs = downStairs.some(s => s.x === pos.x && s.y === pos.y);
 
@@ -285,13 +300,17 @@ export class PlayingState implements State {
       return;
     }
 
-    fsm.data.depth = depth + 1;
-    fsm.generateLevel(fsm.data.depth);
-    fsm.addMessage(`You descend to dungeon level ${fsm.data.depth}.`, 'info');
+    const newDepth = depth + 1;
+    store.setDepth(newDepth);
+    fsm.generateLevel(newDepth);
+    fsm.addMessage(`You descend to dungeon level ${newDepth}.`, 'info');
   }
 
   private handleUpStairs(fsm: GameFSM): void {
-    const { player, upStairs, depth } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const upStairs = store.upStairs;
+    const depth = store.depth;
     const pos = player.position;
     const onUpStairs = upStairs.some(s => s.x === pos.x && s.y === pos.y);
 
@@ -305,20 +324,24 @@ export class PlayingState implements State {
       return;
     }
 
-    fsm.data.depth = depth - 1;
-    fsm.generateLevel(fsm.data.depth);
+    const newDepth = depth - 1;
+    store.setDepth(newDepth);
+    fsm.generateLevel(newDepth);
 
     // Place at down stairs when going up
-    if (fsm.data.downStairs.length > 0) {
-      const stairs = fsm.data.downStairs[0];
+    const newDownStairs = store.downStairs;
+    if (newDownStairs.length > 0) {
+      const stairs = newDownStairs[0];
       player.position = { x: stairs.x, y: stairs.y };
     }
 
-    fsm.addMessage(`You ascend to dungeon level ${fsm.data.depth}.`, 'info');
+    fsm.addMessage(`You ascend to dungeon level ${newDepth}.`, 'info');
   }
 
   private handlePickup(fsm: GameFSM): void {
-    const { player, level } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
     const items = level.getItemsAt(player.position);
 
     if (items.length === 0) {
@@ -333,7 +356,7 @@ export class PlayingState implements State {
   }
 
   private handleTakeOff(fsm: GameFSM, slot: string): void {
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
     const item = player.unequip(slot as any);
     if (item) {
       fsm.addMessage(`You take off ${item.name}.`, 'info');
@@ -341,7 +364,9 @@ export class PlayingState implements State {
   }
 
   private handleRest(fsm: GameFSM, mode: 'full' | 'hp' | { turns: number }): void {
-    const { player, level } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
 
     // Check for visible monsters
     if (fsm.fovSystem.getVisibleMonster(level, player.position, VISION_RADIUS)) {
@@ -364,7 +389,7 @@ export class PlayingState implements State {
     let interruptReason = '';
 
     while (turnsRested < maxTurns) {
-      fsm.data.turn++;
+      store.incrementTurn();
       turnsRested++;
       player.spendEnergy(ENERGY_PER_TURN);
       this.processTurnEffects(fsm);
@@ -405,5 +430,21 @@ export class PlayingState implements State {
       fsm.addMessage(`You finish resting. (${turnsRested} turns)`, 'info');
     }
 
+  }
+
+  private handleRepeatLastCommand(fsm: GameFSM): void {
+    const store = getGameStore();
+    const lastCommand = store.lastCommand;
+
+    if (!lastCommand) {
+      fsm.addMessage('No command to repeat.', 'info');
+      return;
+    }
+
+    // Set repeat mode flag
+    store.setIsRepeating(true);
+
+    // Dispatch the original action
+    fsm.dispatch({ type: lastCommand.actionType } as GameAction);
   }
 }

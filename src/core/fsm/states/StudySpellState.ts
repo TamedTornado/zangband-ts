@@ -13,6 +13,7 @@ import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionSta
 import { getBookInfo } from '../../data/spellBooks';
 import { getSpellByIndex, getSpellRequirement, canClassLearnSpell } from '../../data/spellLoader';
 import type { SpellDef, ClassSpellReq } from '../../data/spells';
+import { getGameStore } from '@/core/store/gameStore';
 
 interface LearnableSpell {
   spell: SpellDef;
@@ -29,7 +30,7 @@ export class StudySpellState implements State {
   private learnableSpells: LearnableSpell[] = [];
 
   onEnter(fsm: GameFSM): void {
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
 
     // Check if player can cast spells
     if (!player.classDef || !player.classDef.spellStat) {
@@ -63,8 +64,8 @@ export class StudySpellState implements State {
     }));
   }
 
-  onExit(fsm: GameFSM): void {
-    fsm.data.spellTargeting = null;
+  onExit(_fsm: GameFSM): void {
+    getGameStore().setSpellTargeting(null);
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {
@@ -100,7 +101,7 @@ export class StudySpellState implements State {
     }
 
     this.bookRealm = bookInfo.realm;
-    this.buildLearnableSpells(fsm, bookInfo);
+    this.buildLearnableSpells(bookInfo);
 
     if (this.learnableSpells.length === 0) {
       fsm.addMessage('There are no spells in this book you can learn.', 'info');
@@ -116,7 +117,7 @@ export class StudySpellState implements State {
     }
 
     // Populate spell targeting for UI modal
-    fsm.data.spellTargeting = {
+    getGameStore().setSpellTargeting({
       mode: 'study',
       prompt: 'Learn which spell?',
       spells: this.learnableSpells.map(entry => {
@@ -141,16 +142,15 @@ export class StudySpellState implements State {
         if (this.bookRealm) spell.realm = this.bookRealm;
         return spell;
       }),
-    };
+    });
 
     fsm.addMessage('Learn which spell? [a-z, ESC to cancel]', 'info');
   }
 
   private buildLearnableSpells(
-    fsm: GameFSM,
     bookInfo: { realm: string; spellIndices: number[] }
   ): void {
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
     const classKey = player.className.toLowerCase().replace('-', '_');
     this.learnableSpells = [];
 
@@ -166,7 +166,7 @@ export class StudySpellState implements State {
       if (!req) continue;
 
       const letter = String.fromCharCode('a'.charCodeAt(0) + letterIndex++);
-      const { canLearn, reason } = this.checkCanLearn(fsm, spell, req);
+      const { canLearn, reason } = this.checkCanLearn(spell, req);
 
       this.learnableSpells.push({
         spell,
@@ -179,11 +179,10 @@ export class StudySpellState implements State {
   }
 
   private checkCanLearn(
-    fsm: GameFSM,
     spell: SpellDef,
     req: ClassSpellReq
   ): { canLearn: boolean; reason: string | undefined } {
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
 
     // Already known?
     if (player.knowsSpell(this.bookRealm!, spell.key)) {
@@ -211,7 +210,7 @@ export class StudySpellState implements State {
     }
 
     // Learn the spell
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
     player.learnSpell(this.bookRealm!, entry.spell.key);
     fsm.addMessage(`You have learned ${entry.spell.name}.`, 'info');
 

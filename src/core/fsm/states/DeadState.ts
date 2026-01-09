@@ -8,15 +8,16 @@ import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class DeadState implements State {
   readonly name = 'dead';
 
   onEnter(fsm: GameFSM): void {
-    const { killedBy, depth, turn } = fsm.data;
-    const cause = killedBy ?? 'unknown causes';
+    const store = getGameStore();
+    const cause = store.killedBy ?? 'unknown causes';
     fsm.addMessage(`You have been killed by ${cause}.`, 'danger');
-    fsm.addMessage(`You died on dungeon level ${depth}, turn ${turn}.`, 'info');
+    fsm.addMessage(`You died on dungeon level ${store.depth}, turn ${store.turn}.`, 'info');
     fsm.addMessage('Press R to restart.', 'info');
   }
 

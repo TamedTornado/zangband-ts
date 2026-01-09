@@ -8,6 +8,7 @@ import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class EquipmentState implements State {
   readonly name = 'equipment';
@@ -37,7 +38,7 @@ export class EquipmentState implements State {
   }
 
   private handleTakeOff(fsm: GameFSM, slot: string): void {
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
     const item = player.unequip(slot as any);
     if (item) {
       fsm.addMessage(`You take off ${item.name}.`, 'info');

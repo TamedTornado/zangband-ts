@@ -13,6 +13,7 @@ import type { GPEffectContext, GPEffectResult, GPEffectDef } from '@/core/system
 import { executeGPEffects } from '@/core/systems/effects';
 import type { Item } from '@/core/entities/Item';
 import type { Direction } from '@/core/types';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class DirectionTargetingState implements State {
   readonly name = 'directionTargeting';
@@ -38,11 +39,11 @@ export class DirectionTargetingState implements State {
     const prompt = this.getPrompt();
     fsm.addMessage(prompt, 'info');
 
-    fsm.data.directionTargeting = { prompt };
+    getGameStore().setDirectionTargeting({ prompt });
   }
 
-  onExit(fsm: GameFSM): void {
-    fsm.data.directionTargeting = null;
+  onExit(_fsm: GameFSM): void {
+    getGameStore().setDirectionTargeting(null);
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {
@@ -71,7 +72,7 @@ export class DirectionTargetingState implements State {
 
     if (result.success && this.sourceItem) {
       fsm.makeAware(this.sourceItem);
-      fsm.data.player.removeItem(this.sourceItem.id);
+      getGameStore().player!.removeItem(this.sourceItem.id);
     }
 
     this.onComplete(fsm, result);

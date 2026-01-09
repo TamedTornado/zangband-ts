@@ -12,6 +12,7 @@ import { PlayingState } from './PlayingState';
 import type { GPEffectContext, GPEffectResult, GPEffectDef } from '@/core/systems/effects';
 import { executeGPEffects } from '@/core/systems/effects';
 import type { Item } from '@/core/entities/Item';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class SymbolTargetingState implements State {
   readonly name = 'symbolTargeting';
@@ -37,11 +38,11 @@ export class SymbolTargetingState implements State {
     const prompt = this.getPrompt();
     fsm.addMessage(prompt, 'info');
 
-    fsm.data.symbolTargeting = { prompt };
+    getGameStore().setSymbolTargeting({ prompt });
   }
 
-  onExit(fsm: GameFSM): void {
-    fsm.data.symbolTargeting = null;
+  onExit(_fsm: GameFSM): void {
+    getGameStore().setSymbolTargeting(null);
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {
@@ -78,7 +79,7 @@ export class SymbolTargetingState implements State {
 
     if (result.success && this.sourceItem) {
       fsm.makeAware(this.sourceItem);
-      fsm.data.player.removeItem(this.sourceItem.id);
+      getGameStore().player!.removeItem(this.sourceItem.id);
     }
 
     this.onComplete(fsm, result);

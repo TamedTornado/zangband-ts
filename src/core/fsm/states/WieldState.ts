@@ -9,6 +9,7 @@ import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionState';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class WieldState implements State {
   readonly name = 'wield';
@@ -47,7 +48,7 @@ export class WieldState implements State {
       return;
     }
 
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
     const item = selection.item;
 
     const equipResult = player.equip(item);

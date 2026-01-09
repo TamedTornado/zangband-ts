@@ -9,6 +9,7 @@ import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { ItemSelectionState, type ItemSelectionResult } from './ItemSelectionState';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class DropState implements State {
   readonly name = 'drop';
@@ -36,7 +37,9 @@ export class DropState implements State {
       return;
     }
 
-    const { player, level } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
     const item = selection.item;
 
     player.removeItem(item.id);

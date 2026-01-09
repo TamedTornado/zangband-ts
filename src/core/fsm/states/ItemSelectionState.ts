@@ -10,6 +10,7 @@ import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import type { Item } from '@/core/entities/Item';
+import { getGameStore } from '@/core/store/gameStore';
 
 export interface ItemSelectionOptions {
   prompt: string;
@@ -32,7 +33,25 @@ export class ItemSelectionState implements State {
   }
 
   onEnter(fsm: GameFSM): void {
-    const validIndices = this.getValidItemIndices(fsm);
+    const store = getGameStore();
+
+    // Check for repeat mode - auto-select saved item
+    if (store.isRepeating && store.lastCommand) {
+      const player = store.player!;
+      const item = player.inventory.find((i) => i.id === store.lastCommand!.itemId);
+
+      if (item && (!this.options.filter || this.options.filter(item))) {
+        // Auto-select and skip UI
+        const itemIndex = player.inventory.indexOf(item);
+        fsm.pop({ item, itemIndex } as ItemSelectionResult);
+        return;
+      }
+
+      // Item not found or invalid - fall back to normal selection
+      store.setIsRepeating(false);
+    }
+
+    const validIndices = this.getValidItemIndices();
 
     if (validIndices.length === 0) {
       fsm.addMessage('You have nothing to select.', 'info');
@@ -42,14 +61,14 @@ export class ItemSelectionState implements State {
 
     fsm.addMessage(`${this.options.prompt} [a-z, ? for list]`, 'info');
 
-    fsm.data.itemTargeting = {
+    store.setItemTargeting({
       prompt: this.options.prompt,
       validItemIndices: validIndices,
-    };
+    });
   }
 
-  onExit(fsm: GameFSM): void {
-    fsm.data.itemTargeting = null;
+  onExit(_fsm: GameFSM): void {
+    getGameStore().setItemTargeting(null);
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {
@@ -74,7 +93,7 @@ export class ItemSelectionState implements State {
       return false;
     }
 
-    const { player } = fsm.data;
+    const player = getGameStore().player!;
     const item = player.inventory[index];
 
     if (!item) {
@@ -91,8 +110,8 @@ export class ItemSelectionState implements State {
     return true;
   }
 
-  private getValidItemIndices(fsm: GameFSM): number[] {
-    const { player } = fsm.data;
+  private getValidItemIndices(): number[] {
+    const player = getGameStore().player!;
     const indices: number[] = [];
 
     for (let i = 0; i < player.inventory.length; i++) {
@@ -110,8 +129,8 @@ export class ItemSelectionState implements State {
   }
 
   private displayItemList(fsm: GameFSM): void {
-    const { player } = fsm.data;
-    const validIndices = this.getValidItemIndices(fsm);
+    const player = getGameStore().player!;
+    const validIndices = this.getValidItemIndices();
 
     if (validIndices.length === 0) {
       fsm.addMessage('No items available.', 'info');

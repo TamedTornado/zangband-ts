@@ -11,6 +11,7 @@ import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
 import { Direction, movePosition } from '../../types';
 import { VIEW_RADIUS } from '../../constants';
+import { getGameStore } from '@/core/store/gameStore';
 
 export class TargetingState implements State {
   readonly name = 'targeting';
@@ -27,20 +28,43 @@ export class TargetingState implements State {
   }
 
   onEnter(fsm: GameFSM): void {
-    // Initialize cursor at player position
-    const { player } = fsm.data;
-    fsm.data.cursor = { x: player.position.x, y: player.position.y };
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
+    const lastTargetMonsterId = store.lastTargetMonsterId;
 
     // Build list of visible monsters for Tab cycling
     this.buildTargetList(fsm);
+
+    // Default cursor position
+    let startPos = { x: player.position.x, y: player.position.y };
+
+    // In targeting mode, try to start on last targeted monster if still alive and visible
+    if (this.isTargeting && lastTargetMonsterId) {
+      const monster = level.getMonsterById(lastTargetMonsterId);
+      if (monster && !monster.isDead) {
+        // Check if monster is visible
+        const key = `${monster.position.x},${monster.position.y}`;
+        const visibleTiles = fsm.fovSystem.compute(level, player.position, VIEW_RADIUS);
+        if (visibleTiles.has(key)) {
+          startPos = { x: monster.position.x, y: monster.position.y };
+          // Find this monster in the target list to sync the cycle index
+          this.currentTargetIndex = this.visibleTargets.findIndex(
+            t => t.x === monster.position.x && t.y === monster.position.y
+          );
+        }
+      }
+    }
+
+    store.setCursor(startPos);
 
     const mode = this.isTargeting ? 'Targeting' : 'Looking';
     fsm.addMessage(`${mode} mode. Use movement keys, Tab to cycle, Escape to cancel.`, 'info');
     this.describeCursor(fsm);
   }
 
-  onExit(fsm: GameFSM): void {
-    fsm.data.cursor = null;
+  onExit(_fsm: GameFSM): void {
+    getGameStore().setCursor(null);
   }
 
   handleAction(fsm: GameFSM, action: GameAction): boolean {
@@ -63,16 +87,17 @@ export class TargetingState implements State {
   }
 
   private handleMoveCursor(fsm: GameFSM, dir: Direction): void {
-    const cursor = fsm.data.cursor;
+    const store = getGameStore();
+    const cursor = store.cursor;
     if (!cursor) return;
 
     const newPos = movePosition(cursor, dir);
-    const { level } = fsm.data;
+    const level = store.level!;
 
     // Keep cursor in bounds
     if (newPos.x >= 0 && newPos.x < level.width &&
         newPos.y >= 0 && newPos.y < level.height) {
-      fsm.data.cursor = newPos;
+      store.setCursor(newPos);
       this.currentTargetIndex = -1; // Clear cycle index on manual move
       this.describeCursor(fsm);
     }
@@ -86,14 +111,23 @@ export class TargetingState implements State {
 
     this.currentTargetIndex = (this.currentTargetIndex + 1) % this.visibleTargets.length;
     const target = this.visibleTargets[this.currentTargetIndex];
-    fsm.data.cursor = { x: target.x, y: target.y };
+    getGameStore().setCursor({ x: target.x, y: target.y });
     this.describeCursor(fsm);
   }
 
   private handleConfirm(fsm: GameFSM): void {
-    if (this.isTargeting && fsm.data.cursor) {
+    const store = getGameStore();
+    const cursor = store.cursor;
+
+    if (this.isTargeting && cursor) {
+      // Store the targeted monster's ID for next time (if there's a monster there)
+      const monster = store.level!.getMonsterAt(cursor);
+      if (monster && !monster.isDead) {
+        store.setLastTargetMonsterId(monster.id);
+      }
+
       // Pop back to the state that pushed us, passing the target position
-      fsm.pop({ position: { ...fsm.data.cursor } });
+      fsm.pop({ position: { ...cursor } });
     } else {
       // Just looking, not targeting - transition back to playing
       fsm.transition(new PlayingState());
@@ -112,7 +146,9 @@ export class TargetingState implements State {
 
   /** Build list of visible monsters for Tab cycling */
   private buildTargetList(fsm: GameFSM): void {
-    const { player, level } = fsm.data;
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
     const visibleTiles = fsm.fovSystem.compute(level, player.position, VIEW_RADIUS);
 
     this.visibleTargets = [];
@@ -134,10 +170,12 @@ export class TargetingState implements State {
 
   /** Describe what's at the cursor position */
   private describeCursor(fsm: GameFSM): void {
-    const cursor = fsm.data.cursor;
+    const store = getGameStore();
+    const cursor = store.cursor;
     if (!cursor) return;
 
-    const { player, level } = fsm.data;
+    const player = store.player!;
+    const level = store.level!;
     const tile = level.getTile(cursor);
 
     // Check if cursor is on player
@@ -195,8 +233,10 @@ export class TargetingState implements State {
     }
 
     // Check for stairs
-    const isDownStairs = fsm.data.downStairs.some(s => s.x === cursor.x && s.y === cursor.y);
-    const isUpStairs = fsm.data.upStairs.some(s => s.x === cursor.x && s.y === cursor.y);
+    const downStairs = store.downStairs;
+    const upStairs = store.upStairs;
+    const isDownStairs = downStairs.some(s => s.x === cursor.x && s.y === cursor.y);
+    const isUpStairs = upStairs.some(s => s.x === cursor.x && s.y === cursor.y);
     if (isDownStairs) parts.push('(down stairs)');
     if (isUpStairs) parts.push('(up stairs)');
 
