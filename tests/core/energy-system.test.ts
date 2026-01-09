@@ -82,7 +82,11 @@ describe('Energy System', () => {
         speed: 110,
       });
 
+      // Actors start with 100 energy
+      expect(actor.energy).toBe(100);
+      actor.spendEnergy(100); // Reset to 0 for testing
       expect(actor.energy).toBe(0);
+
       actor.gainEnergy();
       // Should gain 10 energy (from table), not 110
       expect(actor.energy).toBe(10);
@@ -98,6 +102,7 @@ describe('Energy System', () => {
         speed: 120,
       });
 
+      actor.spendEnergy(100); // Reset to 0 for testing
       actor.gainEnergy();
       expect(actor.energy).toBe(20);
     });
@@ -113,6 +118,7 @@ describe('Energy System', () => {
         speed: 100,
       });
 
+      actor.spendEnergy(100); // Reset to 0 for testing
       actor.gainEnergy();
       expect(actor.energy).toBe(5);
     });
@@ -130,6 +136,7 @@ describe('Energy System', () => {
       });
 
       expect(actor.speed).toBe(120);
+      actor.spendEnergy(100); // Reset to 0 for testing
       actor.gainEnergy();
       expect(actor.energy).toBe(20);
     });
@@ -146,13 +153,14 @@ describe('Energy System', () => {
       });
 
       expect(actor.speed).toBe(100);
+      actor.spendEnergy(100); // Reset to 0 for testing
       actor.gainEnergy();
       expect(actor.energy).toBe(5);
     });
   });
 
   describe('Action timing with speed', () => {
-    it('normal speed actor needs 10 ticks to act', () => {
+    it('normal speed actor needs 10 ticks to act after spending energy', () => {
       const actor = new Actor({
         id: 'test',
         position: { x: 0, y: 0 },
@@ -161,6 +169,10 @@ describe('Energy System', () => {
         maxHp: 10,
         speed: 110,
       });
+
+      // Actors start with 100 energy, spend it first
+      actor.spendEnergy(100);
+      expect(actor.canAct).toBe(false);
 
       // 10 energy per tick, need 100 to act
       for (let i = 0; i < 9; i++) {
@@ -172,7 +184,7 @@ describe('Energy System', () => {
       expect(actor.energy).toBe(100);
     });
 
-    it('hasted actor needs only 5 ticks to act', () => {
+    it('hasted actor needs only 5 ticks to act after spending energy', () => {
       const actor = new Actor({
         id: 'test',
         position: { x: 0, y: 0 },
@@ -181,6 +193,10 @@ describe('Energy System', () => {
         maxHp: 10,
         speed: 120,
       });
+
+      // Actors start with 100 energy, spend it first
+      actor.spendEnergy(100);
+      expect(actor.canAct).toBe(false);
 
       // 20 energy per tick, need 100 to act
       for (let i = 0; i < 4; i++) {
@@ -192,7 +208,7 @@ describe('Energy System', () => {
       expect(actor.energy).toBe(100);
     });
 
-    it('slowed actor needs 20 ticks to act', () => {
+    it('slowed actor needs 20 ticks to act after spending energy', () => {
       const actor = new Actor({
         id: 'test',
         position: { x: 0, y: 0 },
@@ -201,6 +217,10 @@ describe('Energy System', () => {
         maxHp: 10,
         speed: 100,
       });
+
+      // Actors start with 100 energy, spend it first
+      actor.spendEnergy(100);
+      expect(actor.canAct).toBe(false);
 
       // 5 energy per tick, need 100 to act
       // 19 ticks = 95 energy (not enough)
@@ -232,6 +252,10 @@ describe('Energy System', () => {
         maxHp: 10,
         speed: 120,
       });
+
+      // Reset both to 0 energy for fair comparison
+      normal.spendEnergy(100);
+      hasted.spendEnergy(100);
 
       let normalActions = 0;
       let hastedActions = 0;

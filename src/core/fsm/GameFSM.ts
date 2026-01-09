@@ -317,9 +317,11 @@ export class GameFSM {
    *
    * This is the ONLY way to complete a player turn. It:
    * 1. Spends player energy
-   * 2. Processes status effect ticks (rod recharging, buffs, etc.)
-   * 3. Processes monster turns
-   * 4. Cleans up dead monsters
+   * 2. Loops until player can act again:
+   *    - Ticks energy for all actors
+   *    - Processes monster turns
+   *    - Processes status effect ticks
+   * 3. Cleans up dead monsters
    *
    * @param energyCost The amount of energy to spend (default: ENERGY_PER_TURN = 100)
    */
@@ -332,35 +334,43 @@ export class GameFSM {
     // Spend energy
     player.spendEnergy(energyCost);
 
-    // Process status effect ticks
-    const tickResult = this.tickSystem.tick(player);
-    for (const msg of tickResult.messages) {
-      this.addMessage(msg, 'info');
-    }
+    // Keep processing until player can act again (or dies)
+    let iterations = 0;
+    const maxIterations = 100; // Safety limit
 
-    // Process monster turns
-    const result = this.gameLoop.processMonsterTurns(player, level, scheduler);
-    for (const msg of result.messages) {
-      this.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
-    }
+    while (!player.canAct && !player.isDead && iterations < maxIterations) {
+      iterations++;
 
-    // Clean up dead monsters
-    for (const monster of level.getMonsters()) {
-      if (monster.isDead) {
-        level.removeMonster(monster);
-        scheduler.remove(monster);
+      // Process status effect ticks
+      const tickResult = this.tickSystem.tick(player);
+      for (const msg of tickResult.messages) {
+        this.addMessage(msg, 'info');
       }
-    }
 
-    // Track what killed the player (for death screen)
-    if (player.isDead) {
-      const lastAttack = [...result.messages].reverse().find((m: { text: string }) =>
-        m.text.includes('hits you') || m.text.includes('bites you') || m.text.includes('claws you')
-      );
-      if (lastAttack) {
-        const match = lastAttack.text.match(/^The (.+?) /);
-        if (match) {
-          store.setKilledBy(match[1]);
+      // Process monster turns (includes scheduler.tick())
+      const result = this.gameLoop.processMonsterTurns(player, level, scheduler);
+      for (const msg of result.messages) {
+        this.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
+      }
+
+      // Clean up dead monsters
+      for (const monster of level.getMonsters()) {
+        if (monster.isDead) {
+          level.removeMonster(monster);
+          scheduler.remove(monster);
+        }
+      }
+
+      // Track what killed the player
+      if (player.isDead) {
+        const lastAttack = [...result.messages].reverse().find((m: { text: string }) =>
+          m.text.includes('hits you') || m.text.includes('bites you') || m.text.includes('claws you')
+        );
+        if (lastAttack) {
+          const match = lastAttack.text.match(/^The (.+?) /);
+          if (match) {
+            store.setKilledBy(match[1]);
+          }
         }
       }
     }

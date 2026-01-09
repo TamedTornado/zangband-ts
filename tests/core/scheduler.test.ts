@@ -36,6 +36,10 @@ describe('Scheduler', () => {
     const fast = createActor('fast', 120);  // Speed 120 = 20 energy/tick
     const slow = createActor('slow', 80);   // Speed 80 = 2 energy/tick
 
+    // Actors start with 100 energy
+    fast.spendEnergy(100);
+    slow.spendEnergy(100);
+
     scheduler.add(fast);
     scheduler.add(slow);
     scheduler.tick();
@@ -50,10 +54,14 @@ describe('Scheduler', () => {
 
     scheduler.add(actor);
 
-    // No energy yet
+    // Actors start with 100 energy, so can act immediately
+    expect(scheduler.next()).toBe(actor);
+
+    // Spend energy and verify they can't act
+    actor.spendEnergy(100);
     expect(scheduler.next()).toBeNull();
 
-    // After 10 ticks, should have 100 energy (can act)
+    // After 10 ticks, should have 100 energy again (can act)
     for (let i = 0; i < 10; i++) {
       scheduler.tick();
     }

@@ -21,7 +21,7 @@ export class Actor extends Entity {
     this.baseMaxHp = config.maxHp;
     this._hp = config.maxHp;
     this.baseSpeed = config.speed;
-    this._energy = 0;
+    this._energy = 100; // Start with enough energy to act
     this.statuses = new StatusManager();
   }
 

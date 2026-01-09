@@ -63,7 +63,7 @@ describe('Actor', () => {
     expect(actor.maxHp).toBe(50);
     expect(actor.hp).toBe(50); // starts at max
     expect(actor.speed).toBe(110);
-    expect(actor.energy).toBe(0); // starts at 0
+    expect(actor.energy).toBe(100); // starts ready to act
   });
 
   it('should track hp changes', () => {
@@ -111,11 +111,14 @@ describe('Actor', () => {
       speed: 110, // normal speed = 10 energy per tick
     });
 
-    actor.gainEnergy();
-    expect(actor.energy).toBe(10);
+    // Actors start with 100 energy
+    expect(actor.energy).toBe(100);
 
     actor.gainEnergy();
-    expect(actor.energy).toBe(20);
+    expect(actor.energy).toBe(110);
+
+    actor.gainEnergy();
+    expect(actor.energy).toBe(120);
   });
 
   it('should spend energy on actions', () => {
@@ -128,18 +131,15 @@ describe('Actor', () => {
       speed: 110,
     });
 
-    // Speed 110 = 10 energy per tick (from extract_energy table)
-    actor.gainEnergy();
-    expect(actor.energy).toBe(10);
-
-    // Gain more energy until we can act
-    for (let i = 0; i < 9; i++) {
-      actor.gainEnergy();
-    }
+    // Actors start with 100 energy
     expect(actor.energy).toBe(100);
 
     actor.spendEnergy(100);
     expect(actor.energy).toBe(0);
+
+    // Speed 110 = 10 energy per tick (from extract_energy table)
+    actor.gainEnergy();
+    expect(actor.energy).toBe(10);
   });
 
   it('should report canAct when energy >= 100', () => {
@@ -152,7 +152,12 @@ describe('Actor', () => {
       speed: 110,
     });
 
+    // Actors start with 100 energy, so can act immediately
+    expect(actor.canAct).toBe(true);
+
+    actor.spendEnergy(100);
     expect(actor.canAct).toBe(false);
+
     // Speed 110 = 10 energy per tick, need 10 ticks to get 100 energy
     for (let i = 0; i < 10; i++) {
       actor.gainEnergy();
