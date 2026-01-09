@@ -8,6 +8,9 @@ export function StatsPanel() {
   const mpPercent = player.maxMana > 0
     ? Math.max(0, Math.min(100, (player.currentMana / player.maxMana) * 100))
     : 0;
+  const xpPercent = player.experienceToNextLevel === Infinity
+    ? 100
+    : Math.max(0, Math.min(100, (player.experience / player.experienceToNextLevel) * 100));
   const stats = player.stats;
 
   return (
@@ -53,6 +56,17 @@ export function StatsPanel() {
           <span className="stat-label">CHR</span>
           <span className="stat-value">{stats.chr}</span>
         </div>
+      </div>
+
+      <div style={{ marginTop: 16 }}>
+        <div className="stat-row">
+          <span className="stat-label">Level</span>
+          <span className="stat-value">{player.level}</span>
+        </div>
+        <div className="xp-bar">
+          <div className="fill" style={{ width: `${xpPercent}%` }} />
+        </div>
+        <div className="bar-text">XP: {player.experience}/{player.experienceToNextLevel === Infinity ? 'Max' : player.experienceToNextLevel}</div>
       </div>
 
       <div style={{ marginTop: 16 }}>

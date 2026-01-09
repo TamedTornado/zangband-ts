@@ -123,7 +123,6 @@ export class PlayingState implements State {
     const store = getGameStore();
     const player = store.player!;
     const level = store.level!;
-    const scheduler = store.scheduler!;
     const newPos = movePosition(player.position, dir);
 
     // Bump attack
@@ -135,11 +134,7 @@ export class PlayingState implements State {
         fsm.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
       }
 
-      if (targetMonster.isDead) {
-        level.removeMonster(targetMonster);
-        scheduler.remove(targetMonster);
-      }
-
+      // Dead monster cleanup and XP handled by completeTurn
       fsm.completeTurn(ENERGY_PER_TURN);
       this.checkPlayerDeath(fsm);
       return;

@@ -16,6 +16,7 @@ describe('Bolt targeting', () => {
       position: { x: 10, y: 10 },
       maxHp: 100,
       speed: 110,
+      stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
     });
     level.player = player;
 
@@ -56,9 +57,11 @@ describe('Bolt targeting', () => {
       position: { x: 10, y: 10 },
       maxHp: 100,
       speed: 110,
+      stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
     });
     // GameWorld now sets level.player in its constructor
-    const _world = new GameWorld(player, level);
+    const world = new GameWorld(player, level);
+    void world; // Silence unused variable warning
 
     const monsterDef = createTestMonsterDef({ spellFlags: ['BO_ELEC'] });
     const monster = new Monster({

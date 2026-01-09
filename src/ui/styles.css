@@ -61,7 +61,7 @@ body {
   color: #fff;
 }
 
-.hp-bar, .mp-bar {
+.hp-bar, .mp-bar, .xp-bar {
   height: 16px;
   background: #333;
   border-radius: 2px;
@@ -78,6 +78,12 @@ body {
 .mp-bar .fill {
   height: 100%;
   background: #00a;
+  transition: width 0.2s;
+}
+
+.xp-bar .fill {
+  height: 100%;
+  background: #a80;
   transition: width 0.2s;
 }
 

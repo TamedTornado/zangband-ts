@@ -198,14 +198,14 @@ describe('Player Mana Pool', () => {
       expect(mage.maxMana).toBeGreaterThan(manaAtLevel1);
     });
 
-    it('should restore mana gained from leveling', () => {
+    it('should NOT restore mana on level up (Zangband behavior)', () => {
       const mage = createMage({ level: 1 });
       mage.spendMana(Math.floor(mage.maxMana / 2)); // Spend half
       const manaBeforeLevelUp = mage.currentMana;
-      const maxBeforeLevelUp = mage.maxMana;
       mage.level = 5;
-      const manaGain = mage.maxMana - maxBeforeLevelUp;
-      expect(mage.currentMana).toBe(manaBeforeLevelUp + manaGain);
+      // In Zangband, leveling up doesn't restore mana - max increases but current stays same
+      expect(mage.currentMana).toBe(manaBeforeLevelUp);
+      expect(mage.maxMana).toBeGreaterThan(manaBeforeLevelUp); // Max did increase
     });
   });
 });

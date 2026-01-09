@@ -356,9 +356,15 @@ export class GameFSM {
         this.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
       }
 
-      // Clean up dead monsters
+      // Clean up dead monsters and award XP
       for (const monster of level.getMonsters()) {
         if (monster.isDead) {
+          // Award XP for kills (from spells, effects, etc.)
+          const xpMessages = this.gameLoop.awardXP(player, monster);
+          for (const msg of xpMessages) {
+            this.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
+          }
+
           level.removeMonster(monster);
           scheduler.remove(monster);
         }
@@ -400,4 +406,5 @@ export class GameFSM {
       }
     }
   }
+
 }

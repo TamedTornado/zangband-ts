@@ -80,6 +80,7 @@ export class GameLoop {
           text: `You have slain the ${monsterName}!`,
           type: 'combat',
         });
+        // XP awarded by completeTurn during dead monster cleanup
       }
 
       return { hit: true, damage, killed: monster.isDead, messages };
@@ -313,6 +314,28 @@ export class GameLoop {
         monster.spendEnergy(ENERGY_PER_TURN);
         break;
     }
+  }
+
+  /**
+   * Award XP for killing a monster.
+   * XP = floor(monster.exp / player.level), minimum 1.
+   */
+  awardXP(player: Player, monster: Monster): GameMessage[] {
+    const messages: GameMessage[] = [];
+    const monsterDef = this.monsterData.getMonsterDef(monster.definitionKey);
+    if (!monsterDef) return messages;
+
+    const baseXp = monsterDef.exp;
+    const xpGained = Math.max(1, Math.floor(baseXp / player.level));
+
+    const result = player.gainExperience(xpGained);
+    messages.push({ text: `You gain ${xpGained} experience.`, type: 'info' });
+
+    if (result.leveledUp) {
+      messages.push({ text: `Welcome to level ${result.newLevel}!`, type: 'info' });
+    }
+
+    return messages;
   }
 
   private distance(a: Position, b: Position): number {

@@ -4,6 +4,7 @@ import type { Level } from '../world/Level';
 import type { ItemGeneration } from '../systems/ItemGeneration';
 import { type Position, type Direction, type Element, movePosition } from '../types';
 import type { ClassDef } from '../data/classes';
+import type { RaceDef } from '../data/races';
 import {
   adjIntDev,
   adjWisSav,
@@ -13,6 +14,7 @@ import {
 } from '../systems/StatTables';
 import { getPlayerResistLevel, applyPlayerResistance } from '../systems/Damage';
 import type { RNG } from 'rot-js';
+import tables from '@/data/meta/tables.json';
 
 export interface Stats {
   str: number;
@@ -94,6 +96,11 @@ export class Player extends Actor {
 
   // Character progression
   private _level: number = 1;
+  private _experience: number = 0;
+  private _maxExperience: number = 0;
+
+  // Race (for experience factor calculation)
+  private _raceDef: RaceDef | undefined;
 
   // Mana pool
   private _currentMana: number = 0;
@@ -185,11 +192,77 @@ export class Player extends Actor {
   }
 
   /**
+   * Set the player's race (for character creation or debug)
+   */
+  setRace(raceDef: RaceDef): void {
+    this._raceDef = raceDef;
+  }
+
+  /**
    * Set the player's level (recalculates mana)
    */
   setLevel(level: number): void {
     this._level = level;
     this.recalculateMana();
+  }
+
+  // Experience accessors
+  get experience(): number {
+    return this._experience;
+  }
+
+  get maxExperience(): number {
+    return this._maxExperience;
+  }
+
+  /**
+   * Experience factor from race + class.
+   * Higher values mean more XP needed to level.
+   * Human = 100, Elf = 120, etc.
+   */
+  get expFactor(): number {
+    const raceExpMod = this._raceDef?.expMod ?? 100;
+    const classExpMod = this._classDef?.expMod ?? 0;
+    return raceExpMod + classExpMod;
+  }
+
+  /**
+   * Total experience required to reach next level.
+   * Uses experience table from Zangband, scaled by expFactor.
+   */
+  get experienceToNextLevel(): number {
+    if (this._level >= 50) return Infinity;
+    const baseExp = (tables as { experience: number[] }).experience[this._level - 1] ?? Infinity;
+    return Math.floor((baseExp * this.expFactor) / 100);
+  }
+
+  /**
+   * Gain experience points, potentially leveling up.
+   *
+   * @param amount - Amount of XP to gain
+   * @returns Object with leveledUp flag and new level
+   */
+  gainExperience(amount: number): { leveledUp: boolean; newLevel: number } {
+    const oldLevel = this._level;
+
+    this._experience += amount;
+    if (this._experience > this._maxExperience) {
+      this._maxExperience = this._experience;
+    }
+
+    // Check for level ups
+    while (this._level < 50 && this._experience >= this.experienceToNextLevel) {
+      this._level++;
+      // Recalculate mana max (but don't restore - Zangband behavior)
+      this._maxMana = this.calculateMaxMana();
+      if (this._currentMana > this._maxMana) {
+        this._currentMana = this._maxMana;
+      }
+      // Recalculate skills
+      this.recalculateSkills();
+    }
+
+    return { leveledUp: this._level > oldLevel, newLevel: this._level };
   }
 
   /**
@@ -213,11 +286,14 @@ export class Player extends Actor {
 
   set level(value: number) {
     this._level = value;
-    // Recalculate max mana when level changes
-    const oldMax = this._maxMana;
+    // Recalculate max mana - do NOT restore mana (Zangband behavior)
     this._maxMana = this.calculateMaxMana();
-    // Restore the mana gained from leveling
-    this._currentMana = Math.min(this._currentMana + (this._maxMana - oldMax), this._maxMana);
+    // Only cap if current exceeds new max (e.g., if max decreased)
+    if (this._currentMana > this._maxMana) {
+      this._currentMana = this._maxMana;
+    }
+    // Also recalculate skills
+    this.recalculateSkills();
   }
 
   // Mana pool accessors

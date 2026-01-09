@@ -88,6 +88,14 @@ function InfoTab({ player, depth, turn }: TabProps) {
           <span className="char-label">Level:</span>
           <span className="char-value">{player.level}</span>
         </div>
+        <div className="char-row">
+          <span className="char-label">Experience:</span>
+          <span className="char-value">{player.experience}</span>
+        </div>
+        <div className="char-row">
+          <span className="char-label">Next Level:</span>
+          <span className="char-value">{player.experienceToNextLevel === Infinity ? 'Max' : player.experienceToNextLevel}</span>
+        </div>
       </div>
 
       <div className="char-divider" />
