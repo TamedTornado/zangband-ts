@@ -6,9 +6,11 @@ export function MessageLog() {
   const endRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom on new messages or prompt changes
+  // Use last message ID (not length) since messages are trimmed at 100
+  const lastMessageId = state.messages[state.messages.length - 1]?.id;
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'instant', block: 'end' });
-  }, [state.messages.length, state.prompt]);
+  }, [lastMessageId, state.prompt]);
 
   return (
     <div className="message-log">
