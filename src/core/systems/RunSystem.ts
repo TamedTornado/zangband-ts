@@ -93,10 +93,11 @@ export class RunSystem {
     if (!openArea) {
       if (isDiagonal) {
         // Angled corridor entry: adjust scan direction to follow corridor
+        // Point oldDirection toward the OPEN side (where corridor continues)
         if (deepLeft && !deepRight) {
-          oldDirection = getLeft(dir);
+          oldDirection = getRight(dir);  // Wall on left, open on right -> scan right
         } else if (deepRight && !deepLeft) {
-          oldDirection = getRight(dir);
+          oldDirection = getLeft(dir);   // Wall on right, open on left -> scan left
         }
       } else {
         // Blunt corridor entry: if wall ahead, turn into the corridor
