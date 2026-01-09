@@ -7,6 +7,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { createTestMonsterDef } from './testHelpers';
 
 // Mock level with monsters
 function createMockLevel(monsters: Monster[] = []) {
@@ -40,12 +41,13 @@ function createActor(x: number, y: number): Actor {
 
 // Helper to create monster at position
 function createMonster(x: number, y: number, hp = 100): Monster {
+  const def = createTestMonsterDef({ key: 'orc', name: 'orc' });
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
     symbol: 'o',
     color: '#fff',
-    definitionKey: 'orc',
+    def,
     maxHp: hp,
     speed: 110,
   });

@@ -7,6 +7,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { createTestMonsterDef } from './testHelpers';
 
 // Mock level with monsters and walkable tiles
 function createMockLevel(monsters: Monster[] = [], width = 100, height = 100) {
@@ -48,12 +49,13 @@ function createActor(x: number, y: number): Actor {
 
 // Helper to create monster at position
 function createMonster(x: number, y: number, hp = 50): Monster {
+  const def = createTestMonsterDef({ key: 'giant_white_mouse', name: 'giant white mouse' });
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
     symbol: 'r',
     color: '#fff',
-    definitionKey: 'giant_white_mouse',
+    def,
     maxHp: hp,
     speed: 110,
   });

@@ -285,7 +285,7 @@ export class MonsterDataManager {
       position: { x: pos.x, y: pos.y },
       symbol: def.symbol,
       color: def.color,
-      definitionKey: def.key,
+      def,
       speed: def.speed,
       maxHp: hp,
     });

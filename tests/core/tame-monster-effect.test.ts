@@ -7,6 +7,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { createTestMonsterDef } from './testHelpers';
 
 // Mock level with monsters
 function createMockLevel(monsters: Monster[] = [], width = 50, height = 50) {
@@ -35,13 +36,14 @@ function createActor(x: number, y: number): Actor {
   });
 }
 
-function createMonster(x: number, y: number): Monster {
+function createMonster(x: number, y: number, flags: string[] = []): Monster {
+  const def = createTestMonsterDef({ key: 'orc', name: 'Orc', flags });
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
     symbol: 'o',
     color: '#0f0',
-    definitionKey: 'orc',
+    def,
     maxHp: 50,
     speed: 110,
   });
@@ -138,7 +140,8 @@ describe('TameMonsterEffect', () => {
     });
 
     it('does not tame unique monsters', () => {
-      const monster = createMonster(12, 10);
+      // Create a UNIQUE monster - uses def.flags now instead of getMonsterInfo
+      const monster = createMonster(12, 10, ['UNIQUE']);
       const level = createMockLevel([monster]);
 
       const effect = new TameMonsterEffect({
@@ -151,7 +154,6 @@ describe('TameMonsterEffect', () => {
         level: level as any,
         rng: RNG,
         targetPosition: { x: 12, y: 10 },
-        getMonsterInfo: () => ({ name: 'Morgoth', flags: ['UNIQUE'] }),
       };
 
       expect(monster.isTamed).toBe(false);
@@ -202,13 +204,13 @@ describe('Monster.isTamed', () => {
 
   describe('canBeTamed', () => {
     it('returns true for normal monsters', () => {
-      const monster = createMonster(5, 5);
-      expect(monster.canBeTamed([])).toBe(true);
+      const monster = createMonster(5, 5, []);
+      expect(monster.canBeTamed()).toBe(true);
     });
 
     it('returns false for UNIQUE monsters', () => {
-      const monster = createMonster(5, 5);
-      expect(monster.canBeTamed(['UNIQUE'])).toBe(false);
+      const monster = createMonster(5, 5, ['UNIQUE']);
+      expect(monster.canBeTamed()).toBe(false);
     });
   });
 });

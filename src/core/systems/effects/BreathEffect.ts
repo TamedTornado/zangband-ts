@@ -19,7 +19,6 @@ import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
 import type { Position, Element } from '@/core/types';
 import { Element as ElementConst, ELEMENT_NAMES } from '@/core/types';
 import type { Monster } from '@/core/entities/Monster';
-import { applyDamageToMonster, type MonsterTargetInfo } from '@/core/systems/Damage';
 
 export interface BreathEffectDef extends GPEffectDef {
   type: 'breath';
@@ -79,24 +78,20 @@ export class BreathEffect extends PositionGPEffect {
 
     // Apply damage to each monster in the cone
     for (const monster of monstersHit) {
-      // Get monster info for damage calculation
-      const monsterInfo: MonsterTargetInfo = context.getMonsterInfo
-        ? context.getMonsterInfo(monster)
-        : { name: 'creature', flags: [] };
+      // Get monster name from definition
+      const monsterName = monster.def.name;
 
-      const damageResult = applyDamageToMonster(
-        monster,
-        monsterInfo,
-        this.damage,
-        this.element,
-        rng
-      );
+      // Apply resistance using polymorphic resistDamage()
+      const { damage: finalDamage, status } = monster.resistDamage(this.element, this.damage, rng);
 
-      messages.push(damageResult.message);
-      totalDamage += damageResult.finalDamage;
+      // Apply damage
+      monster.takeDamage(finalDamage);
 
-      if (damageResult.killed) {
-        messages.push(`The ${monsterInfo.name} is destroyed!`);
+      messages.push(this.buildDamageMessage(monsterName, finalDamage, status));
+      totalDamage += finalDamage;
+
+      if (monster.isDead) {
+        messages.push(`The ${monsterName} is destroyed!`);
       }
     }
 
@@ -106,6 +101,31 @@ export class BreathEffect extends PositionGPEffect {
       turnConsumed: true,
       damageDealt: totalDamage,
     };
+  }
+
+  /**
+   * Build damage message based on resistance status
+   */
+  private buildDamageMessage(targetName: string, damage: number, status: string): string {
+    const name = `The ${targetName}`;
+    const elementName = ELEMENT_NAMES[this.element];
+
+    if (damage === 0) {
+      return `${name} is unaffected.`;
+    }
+
+    switch (status) {
+      case 'immune':
+        return `${name} resists a lot. (${damage} damage)`;
+      case 'resists':
+        return `${name} resists. (${damage} damage)`;
+      case 'vulnerable':
+        return `${name} is hit hard! (${damage} damage)`;
+      default: {
+        const damageDesc = elementName ? `${damage} ${elementName} damage` : `${damage} damage`;
+        return `${name} takes ${damageDesc}.`;
+      }
+    }
   }
 
   /**

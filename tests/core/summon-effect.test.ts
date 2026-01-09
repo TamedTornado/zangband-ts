@@ -7,6 +7,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { createTestMonsterDef } from './testHelpers';
 
 // Track added monsters
 const addedMonsters: Monster[] = [];
@@ -116,15 +117,22 @@ describe('SummonEffect', () => {
             depth: 5,
             flags: [],
           }],
-          createMonsterFromDef: (def: any, pos: Position) => {
+          createMonsterFromDef: (monsterDef: any, pos: Position) => {
+            const fullDef = createTestMonsterDef({
+              key: monsterDef.key,
+              name: monsterDef.name,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              speed: monsterDef.speed,
+            });
             return new Monster({
               id: `summoned-${pos.x}-${pos.y}`,
               position: pos,
-              symbol: def.symbol,
-              color: def.color,
-              definitionKey: def.key,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              def: fullDef,
               maxHp: 50,
-              speed: def.speed,
+              speed: monsterDef.speed,
             });
           },
         } as any,
@@ -170,15 +178,22 @@ describe('SummonEffect', () => {
             depth: 5,
             flags: [],
           }],
-          createMonsterFromDef: (def: any, pos: Position) => {
+          createMonsterFromDef: (monsterDef: any, pos: Position) => {
+            const fullDef = createTestMonsterDef({
+              key: monsterDef.key,
+              name: monsterDef.name,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              speed: monsterDef.speed,
+            });
             return new Monster({
               id: `summoned-${pos.x}-${pos.y}-${Math.random()}`,
               position: pos,
-              symbol: def.symbol,
-              color: def.color,
-              definitionKey: def.key,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              def: fullDef,
               maxHp: 50,
-              speed: def.speed,
+              speed: monsterDef.speed,
             });
           },
         } as any,
@@ -216,15 +231,22 @@ describe('SummonEffect', () => {
             depth: 5,
             flags: [],
           }],
-          createMonsterFromDef: (def: any, pos: Position) => {
+          createMonsterFromDef: (monsterDef: any, pos: Position) => {
+            const fullDef = createTestMonsterDef({
+              key: monsterDef.key,
+              name: monsterDef.name,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              speed: monsterDef.speed,
+            });
             return new Monster({
               id: `summoned-${pos.x}-${pos.y}`,
               position: pos,
-              symbol: def.symbol,
-              color: def.color,
-              definitionKey: def.key,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              def: fullDef,
               maxHp: 50,
-              speed: def.speed,
+              speed: monsterDef.speed,
             });
           },
         } as any,
@@ -264,15 +286,22 @@ describe('SummonEffect', () => {
             depth: 5,
             flags: [],
           }],
-          createMonsterFromDef: (def: any, pos: Position) => {
+          createMonsterFromDef: (monsterDef: any, pos: Position) => {
+            const fullDef = createTestMonsterDef({
+              key: monsterDef.key,
+              name: monsterDef.name,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              speed: monsterDef.speed,
+            });
             return new Monster({
               id: `summoned-${pos.x}-${pos.y}`,
               position: pos,
-              symbol: def.symbol,
-              color: def.color,
-              definitionKey: def.key,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              def: fullDef,
               maxHp: 50,
-              speed: def.speed,
+              speed: monsterDef.speed,
             });
           },
         } as any,
@@ -281,6 +310,7 @@ describe('SummonEffect', () => {
       const actor = createActor(25, 25);
       // Surround player with existing monsters
       const existingMonsters: Monster[] = [];
+      const blockerDef = createTestMonsterDef({ key: 'blocker', name: 'blocker' });
       for (let dx = -2; dx <= 2; dx++) {
         for (let dy = -2; dy <= 2; dy++) {
           if (dx === 0 && dy === 0) continue; // Skip player position
@@ -289,7 +319,7 @@ describe('SummonEffect', () => {
             position: { x: 25 + dx, y: 25 + dy },
             symbol: 'X',
             color: '#f00',
-            definitionKey: 'blocker',
+            def: blockerDef,
             maxHp: 100,
             speed: 110,
           }));
@@ -328,15 +358,22 @@ describe('SummonEffect', () => {
             depth: 5,
             flags: [],
           }],
-          createMonsterFromDef: (def: any, pos: Position) => {
+          createMonsterFromDef: (monsterDef: any, pos: Position) => {
+            const fullDef = createTestMonsterDef({
+              key: monsterDef.key,
+              name: monsterDef.name,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              speed: monsterDef.speed,
+            });
             return new Monster({
               id: `summoned-${pos.x}-${pos.y}`,
               position: pos,
-              symbol: def.symbol,
-              color: def.color,
-              definitionKey: def.key,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              def: fullDef,
               maxHp: 50,
-              speed: def.speed,
+              speed: monsterDef.speed,
             });
           },
         } as any,

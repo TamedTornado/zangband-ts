@@ -19,12 +19,10 @@ export class TameMonsterEffect extends PositionGPEffect {
       return this.noEffect('There is nothing there to tame.');
     }
 
-    const monsterInfo = context.getMonsterInfo?.(monster);
-    const monsterName = monsterInfo?.name ?? 'The monster';
-    const flags = monsterInfo?.flags ?? [];
+    const monsterName = monster.def.name;
 
-    // Check if monster can be tamed
-    if (!monster.canBeTamed(flags)) {
+    // Check if monster can be tamed (uses monster's def.flags)
+    if (!monster.canBeTamed()) {
       return this.success([`${monsterName} is unaffected.`]);
     }
 

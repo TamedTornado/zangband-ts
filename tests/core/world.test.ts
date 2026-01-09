@@ -5,6 +5,7 @@ import { GameWorld } from '@/core/world/GameWorld';
 import { Player } from '@/core/entities/Player';
 import { Monster } from '@/core/entities/Monster';
 import { Item } from '@/core/entities/Item';
+import { createTestMonsterDef } from './testHelpers';
 
 describe('Tile', () => {
   it('should have terrain key and properties', () => {
@@ -30,6 +31,7 @@ describe('Tile', () => {
 
   it('should hold an occupant (actor)', () => {
     const tile = new Tile('floor');
+    const def = createTestMonsterDef({ key: 'kobold', name: 'kobold' });
     const monster = new Monster({
       id: 'mon-1',
       position: { x: 0, y: 0 },
@@ -37,7 +39,7 @@ describe('Tile', () => {
       color: '#0f0',
       maxHp: 20,
       speed: 110,
-      definitionKey: 'kobold',
+      def,
     });
 
     expect(tile.occupant).toBeNull();

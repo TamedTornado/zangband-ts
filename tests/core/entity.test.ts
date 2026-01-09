@@ -4,6 +4,7 @@ import { Actor } from '@/core/entities/Actor';
 import { Item } from '@/core/entities/Item';
 import { Player } from '@/core/entities/Player';
 import { Monster } from '@/core/entities/Monster';
+import { createTestMonsterDef } from './testHelpers';
 
 describe('Entity', () => {
   it('should have id, position, symbol, color', () => {
@@ -739,6 +740,7 @@ describe('Player', () => {
 
 describe('Monster', () => {
   it('should extend Actor with monster definition reference', () => {
+    const def = createTestMonsterDef({ key: 'kobold', name: 'kobold' });
     const monster = new Monster({
       id: 'mon-1',
       position: { x: 5, y: 5 },
@@ -746,15 +748,17 @@ describe('Monster', () => {
       color: '#0f0',
       maxHp: 20,
       speed: 110,
-      definitionKey: 'kobold',
+      def,
     });
 
     expect(monster.symbol).toBe('k');
     expect(monster.definitionKey).toBe('kobold');
+    expect(monster.def.key).toBe('kobold');
     expect(monster.maxHp).toBe(20);
   });
 
   it('should track if monster is awake', () => {
+    const def = createTestMonsterDef({ key: 'kobold', name: 'kobold' });
     const monster = new Monster({
       id: 'mon-1',
       position: { x: 5, y: 5 },
@@ -762,7 +766,7 @@ describe('Monster', () => {
       color: '#0f0',
       maxHp: 20,
       speed: 110,
-      definitionKey: 'kobold',
+      def,
     });
 
     expect(monster.isAwake).toBe(false); // starts asleep

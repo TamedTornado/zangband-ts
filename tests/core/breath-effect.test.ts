@@ -7,6 +7,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { createTestMonsterDef } from './testHelpers';
 
 // Mock level with monsters
 function createMockLevel(monsters: Monster[] = []) {
@@ -35,13 +36,14 @@ function createActor(x: number, y: number): Actor {
 }
 
 // Helper to create monster at position
-function createMonster(x: number, y: number, hp = 50): Monster {
+function createMonster(x: number, y: number, hp = 50, flags: string[] = []): Monster {
+  const def = createTestMonsterDef({ key: 'test_monster', name: 'test monster', flags });
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
     symbol: 'r',
     color: '#fff',
-    definitionKey: 'giant_white_mouse',
+    def,
     maxHp: hp,
     speed: 110,
   });
@@ -343,20 +345,15 @@ describe('BreathEffect', () => {
         target: 'position',
       });
       const actor = createActor(0, 0);
-      const monster = createMonster(5, 0, 100);
+      // Create monster with fire immunity flag in its definition
+      const monster = createMonster(5, 0, 100, ['IM_FIRE']);
       const level = createMockLevel([monster]);
-
-      const getFireImmuneInfo = (_m: Monster): MonsterInfo => ({
-        name: 'fire elemental',
-        flags: ['IM_FIRE'],
-      });
 
       const context: GPEffectContext = {
         actor,
         level: level as any,
         rng: RNG,
         targetPosition: { x: 10, y: 0 },
-        getMonsterInfo: getFireImmuneInfo,
       };
 
       const result = breath.execute(context);

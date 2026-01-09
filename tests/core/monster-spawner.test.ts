@@ -22,6 +22,8 @@ const createTestMonster = (overrides: Partial<MonsterDef> = {}): MonsterDef => (
   attacks: [{ method: 'HIT', effect: 'HURT', damage: '1d4' }],
   flags: [],
   description: 'A test monster',
+  spellFrequency: 0,
+  spellFlags: [],
   ...overrides,
 });
 

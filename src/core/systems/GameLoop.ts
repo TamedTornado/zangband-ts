@@ -4,9 +4,11 @@ import type { Monster } from '../entities/Monster';
 import type { Level } from '../world/Level';
 import type { Position } from '../types';
 import { Scheduler } from './Scheduler';
-import { MonsterAI, AIAction, type MonsterAIContext } from './MonsterAI';
+import { MonsterAI, AIAction, type MonsterAIContext, type AIDecision } from './MonsterAI';
 import { Combat, type MonsterAttack } from './Combat';
 import { MonsterDataManager } from '../data/MonsterDataManager';
+import { MonsterSpellExecutor } from './MonsterSpellExecutor';
+import { getEffectManager } from './effects';
 import { ENERGY_PER_TURN } from '../constants';
 import type { MonsterDef } from '../data/monsters';
 
@@ -34,11 +36,15 @@ export class GameLoop {
   private monsterAI: MonsterAI;
   private combat: Combat;
   private monsterData: MonsterDataManager;
+  private spellExecutor: MonsterSpellExecutor;
+  private rng: typeof RNG;
 
   constructor(rng: typeof RNG, monsterData: MonsterDataManager) {
+    this.rng = rng;
     this.monsterAI = new MonsterAI(rng);
     this.combat = new Combat(rng);
     this.monsterData = monsterData;
+    this.spellExecutor = new MonsterSpellExecutor(getEffectManager());
   }
 
   /**
@@ -214,23 +220,47 @@ export class GameLoop {
       isStunned: false,
       isSleeping: false,
       flags: monsterDef.flags,
-      spells: [],
-      spellChance: 0,
+      spells: monsterDef.spellFlags ?? [],
+      spellChance: monsterDef.spellFrequency ?? 0,
       level,
     };
   }
 
   private executeMonsterAction(
     monster: Monster,
-    decision: { action: AIAction; targetPos?: Position },
+    decision: AIDecision,
     player: Player,
     level: Level,
     messages: GameMessage[]
   ): void {
+    const monsterDef = this.monsterData.getMonsterDef(monster.definitionKey);
+    const monsterName = monsterDef?.name ?? 'monster';
+
     switch (decision.action) {
       case AIAction.Attack: {
         const result = this.monsterAttack(monster, player);
         messages.push(...result.messages);
+        monster.spendEnergy(ENERGY_PER_TURN);
+        break;
+      }
+
+      case AIAction.CastSpell: {
+        if (decision.spellFailed) {
+          messages.push({
+            text: `The ${monsterName} tries to cast a spell, but fails.`,
+            type: 'info',
+          });
+        } else if (decision.spell) {
+          const result = this.spellExecutor.executeSpell(decision.spell, {
+            monster,
+            level,
+            player,
+            rng: this.rng,
+          });
+          for (const msg of result.messages) {
+            messages.push({ text: msg, type: 'danger' });
+          }
+        }
         monster.spendEnergy(ENERGY_PER_TURN);
         break;
       }

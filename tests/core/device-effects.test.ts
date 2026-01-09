@@ -16,6 +16,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import itemsData from '@/data/items/items.json';
 import type { ItemDef } from '@/core/data/items';
+import { createTestMonsterDef } from './testHelpers';
 
 // Load data before tests
 beforeEach(() => {
@@ -36,6 +37,7 @@ function createTestActor(hp = 100): Actor {
 
 // Helper to create a test monster
 function createTestMonster(hp = 50): Monster {
+  const def = createTestMonsterDef({ key: 'kobold', name: 'kobold' });
   return new Monster({
     id: 'test-monster',
     position: { x: 7, y: 5 },
@@ -43,7 +45,7 @@ function createTestMonster(hp = 50): Monster {
     color: '#0f0',
     maxHp: hp,
     speed: 110,
-    definitionKey: 'kobold',
+    def,
   });
 }
 

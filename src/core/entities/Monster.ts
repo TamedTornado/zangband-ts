@@ -1,17 +1,26 @@
 import { Actor, type ActorConfig } from './Actor';
+import type { MonsterDef } from '@/core/data/monsters';
+import type { Element } from '@/core/types';
+import type { RNG } from 'rot-js';
+import { getMonsterResistStatus, applyMonsterResistance } from '@/core/systems/Damage';
 
 export interface MonsterConfig extends ActorConfig {
-  definitionKey: string;
+  /** Monster definition reference - provides flags, spells, etc. */
+  def: MonsterDef;
 }
 
 export class Monster extends Actor {
+  /** Monster definition - provides flags, spells, attacks, etc. */
+  readonly def: MonsterDef;
+  /** @deprecated Use def.key instead */
   readonly definitionKey: string;
   private _isAwake: boolean = false;
   private _isTamed: boolean = false;
 
   constructor(config: MonsterConfig) {
     super(config);
-    this.definitionKey = config.definitionKey;
+    this.def = config.def;
+    this.definitionKey = config.def.key;
   }
 
   get isAwake(): boolean {
@@ -38,20 +47,15 @@ export class Monster extends Actor {
    * Check if this monster can be tamed.
    * UNIQUE monsters cannot be tamed.
    */
-  canBeTamed(flags: string[]): boolean {
-    if (flags.includes('UNIQUE')) {
-      return false;
-    }
-    return true;
+  canBeTamed(): boolean {
+    return !this.def.flags.includes('UNIQUE');
   }
 
   /**
    * Check if this monster can receive a status effect.
-   * Checks monster flags for immunity.
+   * Uses monster's definition flags for immunity checks.
    */
-  override canReceiveStatus(statusId: string, flags?: string[]): boolean {
-    if (!flags) return true;
-
+  override canReceiveStatus(statusId: string, _flags?: string[]): boolean {
     // Map status IDs to resistance flags
     const immunityMap: Record<string, string> = {
       confused: 'NO_CONF',
@@ -62,10 +66,24 @@ export class Monster extends Actor {
     };
 
     const immunityFlag = immunityMap[statusId];
-    if (immunityFlag && flags.includes(immunityFlag)) {
+    if (immunityFlag && this.def.flags.includes(immunityFlag)) {
       return false;
     }
 
     return true;
+  }
+
+  /**
+   * Apply resistance to elemental damage using monster's flags.
+   * Uses def.flags for immunity/resistance/vulnerability checks.
+   */
+  override resistDamage(
+    element: Element,
+    damage: number,
+    rng: typeof RNG
+  ): { damage: number; status: string } {
+    const status = getMonsterResistStatus(this.def.flags, element);
+    const finalDamage = applyMonsterResistance(damage, status, rng);
+    return { damage: finalDamage, status };
   }
 }

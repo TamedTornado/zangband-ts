@@ -2,7 +2,7 @@ import { Actor } from './Actor';
 import type { Item } from './Item';
 import type { Level } from '../world/Level';
 import type { ItemGeneration } from '../systems/ItemGeneration';
-import { type Position, type Direction, movePosition } from '../types';
+import { type Position, type Direction, type Element, movePosition } from '../types';
 import type { ClassDef } from '../data/classes';
 import {
   adjIntDev,
@@ -11,6 +11,8 @@ import {
   adjIntDis,
   adjStrDig,
 } from '../systems/StatTables';
+import { getPlayerResistLevel, applyPlayerResistance } from '../systems/Damage';
+import type { RNG } from 'rot-js';
 
 export interface Stats {
   str: number;
@@ -575,5 +577,30 @@ export class Player extends Actor {
         this.equip(item);
       }
     }
+  }
+
+  /**
+   * Apply resistance to elemental damage using player's equipment and statuses.
+   * Uses level-based resistance formula from Zangband.
+   */
+  override resistDamage(
+    element: Element,
+    damage: number,
+    _rng: typeof RNG
+  ): { damage: number; status: string } {
+    const level = getPlayerResistLevel(this, element);
+
+    if (level <= 0) {
+      return { damage: 0, status: 'immune' };
+    }
+
+    const finalDamage = applyPlayerResistance(damage, level);
+
+    // Determine status message
+    if (level < 9) {
+      return { damage: finalDamage, status: 'resists' };
+    }
+
+    return { damage: finalDamage, status: 'normal' };
   }
 }

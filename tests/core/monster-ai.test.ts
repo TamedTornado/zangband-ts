@@ -207,7 +207,7 @@ describe('MonsterAI', () => {
     it('should consider casting spell when in range and has spells', () => {
       const ctx = createContext({
         spells: ['BA_FIRE', 'BO_COLD'],
-        spellChance: 50,
+        spellChance: 2, // 1 in 2 = 50% chance
         hasLineOfSight: true,
         distanceToPlayer: 5,
       });
@@ -221,14 +221,14 @@ describe('MonsterAI', () => {
         }
       }
 
-      // Should cast sometimes given 50% chance
+      // Should cast sometimes given 1 in 2 (50%) chance
       expect(castCount).toBeGreaterThan(10);
     });
 
     it('should not cast spells when confused', () => {
       const ctx = createContext({
         spells: ['BA_FIRE'],
-        spellChance: 100,
+        spellChance: 1, // 1 in 1 = 100% chance
         isConfused: true,
       });
 
@@ -239,7 +239,7 @@ describe('MonsterAI', () => {
     it('should not cast spells when out of range', () => {
       const ctx = createContext({
         spells: ['BA_FIRE'],
-        spellChance: 100,
+        spellChance: 1, // 1 in 1 = 100% chance
         distanceToPlayer: 30,
       });
 
@@ -250,7 +250,7 @@ describe('MonsterAI', () => {
     it('should not cast spells without line of sight', () => {
       const ctx = createContext({
         spells: ['BA_FIRE'],
-        spellChance: 100,
+        spellChance: 1, // 1 in 1 = 100% chance
         hasLineOfSight: false,
       });
 
@@ -263,7 +263,7 @@ describe('MonsterAI', () => {
         monsterHp: 5, // Below 10% of 100 maxHp
         monsterMaxHp: 100,
         spells: ['HEAL', 'BA_FIRE'],
-        spellChance: 100,
+        spellChance: 1, // 1 in 1 = 100% chance
         flags: ['SMART'],
       });
 
@@ -409,7 +409,7 @@ describe('MonsterAI', () => {
         const ctx = createContext({
           flags: ['NEVER_MOVE'],
           spells: ['BA_FIRE'],
-          spellChance: 100,
+          spellChance: 1, // 1 in 1 = 100% chance
           distanceToPlayer: 5,
         });
 
@@ -423,7 +423,7 @@ describe('MonsterAI', () => {
         const ctx = createContext({
           flags: ['STUPID'],
           spells: ['BA_FIRE'],
-          spellChance: 100,
+          spellChance: 1, // 1 in 1 = 100% chance
         });
 
         // STUPID monsters (like jellies) never fail spells

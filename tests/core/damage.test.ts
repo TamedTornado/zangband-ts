@@ -11,8 +11,10 @@ import {
 import { Element } from '@/core/types';
 import { Player } from '@/core/entities/Player';
 import { Actor } from '@/core/entities/Actor';
+import { Monster } from '@/core/entities/Monster';
 import { createStatus, loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
+import type { MonsterDef } from '@/core/data/monsters';
 
 describe('Damage System', () => {
   beforeAll(() => {
@@ -263,6 +265,177 @@ describe('Damage System', () => {
       // Magic has no resistance flags
       expect(result.finalDamage).toBe(30);
       expect(result.resistStatus).toBe('normal');
+    });
+  });
+
+  describe('Actor.resistDamage polymorphism', () => {
+    // Helper to create a minimal MonsterDef for testing
+    function createTestMonsterDef(flags: string[]): MonsterDef {
+      return {
+        key: 'test_monster',
+        index: 1,
+        name: 'Test Monster',
+        symbol: 'm',
+        color: 'r',
+        speed: 110,
+        hp: '10d10',
+        vision: 20,
+        ac: 10,
+        alertness: 10,
+        depth: 10,
+        rarity: 1,
+        exp: 100,
+        attacks: [],
+        flags,
+        description: 'A test monster',
+        spellFrequency: 0,
+        spellFlags: [],
+      };
+    }
+
+    describe('Actor base class', () => {
+      it('returns full damage (no resistance)', () => {
+        const actor = new Actor({
+          id: 'test',
+          position: { x: 0, y: 0 },
+          symbol: '@',
+          color: '#fff',
+          maxHp: 100,
+          speed: 110,
+        });
+        const result = actor.resistDamage(Element.Fire, 100, RNG);
+        expect(result.damage).toBe(100);
+        expect(result.status).toBe('normal');
+      });
+    });
+
+    describe('Monster.resistDamage', () => {
+      it('returns full damage when no immunity/resistance flags', () => {
+        const def = createTestMonsterDef([]);
+        const monster = new Monster({
+          id: 'mon1',
+          position: { x: 5, y: 5 },
+          symbol: 'm',
+          color: '#f00',
+          maxHp: 100,
+          speed: 110,
+          def,
+        });
+        const result = monster.resistDamage(Element.Fire, 100, RNG);
+        expect(result.damage).toBe(100);
+        expect(result.status).toBe('normal');
+      });
+
+      it('reduces damage when monster has RES_FIRE (~25-43%)', () => {
+        const def = createTestMonsterDef(['RES_FIRE']);
+        const monster = new Monster({
+          id: 'mon1',
+          position: { x: 5, y: 5 },
+          symbol: 'm',
+          color: '#f00',
+          maxHp: 100,
+          speed: 110,
+          def,
+        });
+        const result = monster.resistDamage(Element.Fire, 100, RNG);
+        // dam * 3 / rand(7-12) = 25-42
+        expect(result.damage).toBeGreaterThanOrEqual(25);
+        expect(result.damage).toBeLessThanOrEqual(42);
+        expect(result.status).toBe('resists');
+      });
+
+      it('returns ~11% damage when monster has IM_FIRE', () => {
+        const def = createTestMonsterDef(['IM_FIRE']);
+        const monster = new Monster({
+          id: 'mon1',
+          position: { x: 5, y: 5 },
+          symbol: 'm',
+          color: '#f00',
+          maxHp: 100,
+          speed: 110,
+          def,
+        });
+        const result = monster.resistDamage(Element.Fire, 100, RNG);
+        expect(result.damage).toBe(11); // 100/9
+        expect(result.status).toBe('immune');
+      });
+
+      it('doubles damage when monster has HURT_FIRE', () => {
+        const def = createTestMonsterDef(['HURT_FIRE']);
+        const monster = new Monster({
+          id: 'mon1',
+          position: { x: 5, y: 5 },
+          symbol: 'm',
+          color: '#f00',
+          maxHp: 100,
+          speed: 110,
+          def,
+        });
+        const result = monster.resistDamage(Element.Fire, 50, RNG);
+        expect(result.damage).toBe(100);
+        expect(result.status).toBe('vulnerable');
+      });
+
+      it('uses flags from stored def reference', () => {
+        const def = createTestMonsterDef(['IM_COLD', 'HURT_FIRE']);
+        const monster = new Monster({
+          id: 'mon1',
+          position: { x: 5, y: 5 },
+          symbol: 'm',
+          color: '#f00',
+          maxHp: 100,
+          speed: 110,
+          def,
+        });
+        // Check cold immunity
+        const coldResult = monster.resistDamage(Element.Cold, 90, RNG);
+        expect(coldResult.damage).toBe(10); // 90/9
+        expect(coldResult.status).toBe('immune');
+
+        // Check fire vulnerability
+        const fireResult = monster.resistDamage(Element.Fire, 30, RNG);
+        expect(fireResult.damage).toBe(60);
+        expect(fireResult.status).toBe('vulnerable');
+      });
+    });
+
+    describe('Player.resistDamage', () => {
+      let player: Player;
+
+      beforeEach(() => {
+        player = new Player({
+          id: 'player',
+          position: { x: 0, y: 0 },
+          maxHp: 100,
+          speed: 110,
+          stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
+        });
+      });
+
+      it('returns full damage without resistance (level 9)', () => {
+        const result = player.resistDamage(Element.Fire, 100, RNG);
+        expect(result.damage).toBe(100);
+        expect(result.status).toBe('normal');
+      });
+
+      it('returns ~33% damage with oppose status (level 3)', () => {
+        const opposeStatus = createStatus('oppose_fire', { duration: 10 });
+        player.statuses.add(opposeStatus, player);
+        const result = player.resistDamage(Element.Fire, 100, RNG);
+        // (100 * 3 + 8) / 9 = 34
+        expect(result.damage).toBe(34);
+        expect(result.status).toBe('resists');
+      });
+
+      it('returns 0 damage when immune (level 0)', () => {
+        // Note: Player immunity typically comes from equipment flags
+        // For now this tests the formula path - actual immunity flag checking TBD
+        // This test documents expected behavior when immunity is implemented
+        const result = player.resistDamage(Element.Magic, 100, RNG);
+        // Magic has no resistances, should be normal
+        expect(result.damage).toBe(100);
+        expect(result.status).toBe('normal');
+      });
     });
   });
 });

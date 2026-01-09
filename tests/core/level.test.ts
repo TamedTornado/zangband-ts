@@ -4,15 +4,17 @@ import { Monster } from '@/core/entities/Monster';
 import { Item } from '@/core/entities/Item';
 import { Trap } from '@/core/entities/Trap';
 import type { TrapDef } from '@/core/data/traps';
+import { createTestMonsterDef } from './testHelpers';
 
 // Test fixtures
 const createTestMonster = (id: string, x: number, y: number): Monster => {
+  const def = createTestMonsterDef({ key: 'test_monster' });
   return new Monster({
     id,
     position: { x, y },
     symbol: 'm',
     color: 'w',
-    definitionKey: 'test_monster',
+    def,
     speed: 110,
     maxHp: 10,
   });

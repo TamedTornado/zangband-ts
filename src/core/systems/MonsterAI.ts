@@ -12,6 +12,7 @@
 import { RNG } from 'rot-js';
 import type { Position } from '../types';
 import type { Level } from '../world/Level';
+import { getMonsterSpell, type SpellCategory } from '../data/MonsterSpellRegistry';
 
 /** Maximum spell range */
 const MAX_RANGE = 18;
@@ -298,34 +299,34 @@ export class MonsterAI {
   }
 
   /**
-   * Try to cast a spell
+   * Try to cast a spell - uses spell categories for smarter selection
+   * Based on monster_spell_is_good() and similar from mspells1.c
    */
   private trySpellcast(ctx: MonsterAIContext): AIDecision | null {
     if (!this.canCastSpell(ctx)) {
       return null;
     }
 
-    // Roll against spell chance
-    if (this.rng.getUniform() * 100 >= ctx.spellChance) {
+    // Roll against spell chance (1 in X)
+    // spellChance is the frequency value (e.g., 6 for "1 in 6")
+    if (ctx.spellChance <= 0) {
+      return null;
+    }
+    if (this.rng.getUniformInt(1, ctx.spellChance) !== 1) {
       return null;
     }
 
-    // Smart monsters at low HP use desperate spells
-    let availableSpells = [...ctx.spells];
-    if (
-      ctx.flags.includes('SMART') &&
-      ctx.monsterHp < ctx.monsterMaxHp / 10
-    ) {
-      // Filter to "intelligent" spells (healing, teleport, etc.)
-      const intSpells = ['HEAL', 'TELE_SELF', 'BLINK', 'HASTE'];
-      const desperate = availableSpells.filter(s => intSpells.includes(s));
-      if (desperate.length > 0) {
-        availableSpells = desperate;
-      }
+    // Filter to LOS-requiring spells if we have LOS, or non-LOS spells otherwise
+    const availableSpells = this.filterAvailableSpells(ctx);
+    if (availableSpells.length === 0) {
+      return null;
     }
 
-    // Choose a random spell from available
-    const spell = availableSpells[this.rng.getUniformInt(0, availableSpells.length - 1)];
+    // Select spell based on situation
+    const spell = this.selectBestSpell(availableSpells, ctx);
+    if (!spell) {
+      return null;
+    }
 
     // Calculate spell failure rate (STUPID monsters never fail)
     let spellFailed = false;
@@ -339,6 +340,92 @@ export class MonsterAI {
       spell,
       spellFailed,
     };
+  }
+
+  /**
+   * Filter spells based on current context (LOS, range, etc.)
+   */
+  private filterAvailableSpells(ctx: MonsterAIContext): string[] {
+    return ctx.spells.filter(spellFlag => {
+      const spellDef = getMonsterSpell(spellFlag);
+      if (!spellDef) return false;
+
+      // LOS-requiring spells need line of sight
+      if (spellDef.requiresLOS && !ctx.hasLineOfSight) {
+        return false;
+      }
+
+      return true;
+    });
+  }
+
+  /**
+   * Select the best spell based on monster's situation
+   * Based on priority logic from C reference
+   */
+  private selectBestSpell(spells: string[], ctx: MonsterAIContext): string | null {
+    if (spells.length === 0) return null;
+
+    const hpPercent = (ctx.monsterHp * 100) / ctx.monsterMaxHp;
+    const isSmart = ctx.flags.includes('SMART');
+
+    // Priority order based on HP and situation
+
+    // Very low HP (< 25%): prioritize escape and healing
+    if (hpPercent < 25) {
+      const escapeOrHeal = this.filterByCategories(spells, ['escape', 'heal']);
+      if (escapeOrHeal.length > 0 && this.rng.getUniform() < 0.5) {
+        return this.pickRandom(escapeOrHeal);
+      }
+    }
+
+    // Low HP (< 50%) for smart monsters: consider healing
+    if (isSmart && hpPercent < 50) {
+      const heal = this.filterByCategories(spells, ['heal']);
+      if (heal.length > 0 && this.rng.getUniform() < 0.6) {
+        return this.pickRandom(heal);
+      }
+    }
+
+    // Very close to player (< 4): tactical spells
+    if (ctx.distanceToPlayer < 4) {
+      const tactical = this.filterByCategories(spells, ['escape', 'tactical']);
+      if (tactical.length > 0 && this.rng.getUniform() < 0.3) {
+        return this.pickRandom(tactical);
+      }
+    }
+
+    // Default: prefer attack spells
+    const attack = this.filterByCategories(spells, ['attack']);
+    if (attack.length > 0 && this.rng.getUniform() < 0.85) {
+      return this.pickRandom(attack);
+    }
+
+    // Fall back to annoy/summon
+    const annoyOrSummon = this.filterByCategories(spells, ['annoy', 'summon']);
+    if (annoyOrSummon.length > 0 && this.rng.getUniform() < 0.7) {
+      return this.pickRandom(annoyOrSummon);
+    }
+
+    // Just pick any spell
+    return this.pickRandom(spells);
+  }
+
+  /**
+   * Filter spells by their categories
+   */
+  private filterByCategories(spells: string[], categories: SpellCategory[]): string[] {
+    return spells.filter(spellFlag => {
+      const spellDef = getMonsterSpell(spellFlag);
+      return spellDef && categories.includes(spellDef.category);
+    });
+  }
+
+  /**
+   * Pick a random spell from the list
+   */
+  private pickRandom(spells: string[]): string {
+    return spells[this.rng.getUniformInt(0, spells.length - 1)];
   }
 
   /**

@@ -126,7 +126,7 @@ export class MonsterSpawner {
       position: pos,
       symbol: def.symbol,
       color: def.color,
-      definitionKey: def.key,
+      def,
       speed: def.speed,
       maxHp: hp,
     });

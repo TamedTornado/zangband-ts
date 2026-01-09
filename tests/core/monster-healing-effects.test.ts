@@ -9,6 +9,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { createTestMonsterDef } from './testHelpers';
 
 // Mock level with monsters
 function createMockLevel(monsters: Monster[] = [], width = 50, height = 50) {
@@ -48,12 +49,13 @@ function createActor(x: number, y: number): Actor {
 }
 
 function createMonster(x: number, y: number, _hp = 50, maxHp = 100): Monster {
+  const def = createTestMonsterDef({ key: 'orc', name: 'orc' });
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
     symbol: 'o',
     color: '#0f0',
-    definitionKey: 'orc',
+    def,
     maxHp,
     speed: 110,
   });
@@ -313,15 +315,22 @@ describe('CloneMonsterEffect', () => {
             depth: 5,
             flags: [],
           }),
-          createMonsterFromDef: (def: any, pos: Position) => {
+          createMonsterFromDef: (monsterDef: any, pos: Position) => {
+            const fullDef = createTestMonsterDef({
+              key: monsterDef.key,
+              name: monsterDef.name,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              speed: monsterDef.speed,
+            });
             return new Monster({
               id: `clone-${pos.x}-${pos.y}`,
               position: pos,
-              symbol: def.symbol,
-              color: def.color,
-              definitionKey: def.key,
+              symbol: monsterDef.symbol,
+              color: monsterDef.color,
+              def: fullDef,
               maxHp: 50,
-              speed: def.speed,
+              speed: monsterDef.speed,
             });
           },
         } as any,

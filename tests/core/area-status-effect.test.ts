@@ -7,6 +7,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { createTestMonsterDef } from './testHelpers';
 
 // Mock level with monsters
 function createMockLevel(monsters: Monster[] = []) {
@@ -39,13 +40,14 @@ function createActor(x: number, y: number): Actor {
 }
 
 // Helper to create monster at position
-function createMonster(x: number, y: number, hp = 50): Monster {
+function createMonster(x: number, y: number, hp = 50, flags: string[] = []): Monster {
+  const def = createTestMonsterDef({ key: 'orc', name: 'orc', flags });
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
     symbol: 'o',
     color: '#fff',
-    definitionKey: 'orc',
+    def,
     maxHp: hp,
     speed: 110,
   });
@@ -191,24 +193,16 @@ describe('AreaStatusEffect', () => {
         radius: 10,
       });
       const actor = createActor(50, 50);
-      const normalMonster = createMonster(52, 50);
-      const resistantMonster = createMonster(54, 50);
+      // Normal monster with no flags
+      const normalMonster = createMonster(52, 50, 50, []);
+      // Resistant monster with NO_SLEEP flag in its def
+      const resistantMonster = createMonster(54, 50, 50, ['NO_SLEEP']);
       const level = createMockLevel([normalMonster, resistantMonster]);
-
-      let callCount = 0;
-      const getMonsterInfo = (m: Monster): MonsterInfo => {
-        callCount++;
-        if (m === resistantMonster) {
-          return { name: 'golem', flags: ['NO_SLEEP'] };
-        }
-        return { name: 'orc', flags: [] };
-      };
 
       const context: GPEffectContext = {
         actor,
         level: level as any,
         rng: RNG,
-        getMonsterInfo,
       };
 
       effect.execute(context);

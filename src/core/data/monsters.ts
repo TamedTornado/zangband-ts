@@ -23,6 +23,10 @@ export interface MonsterDef {
   attacks: Attack[];
   flags: string[];
   description: string;
+  /** Spell frequency: 1 in X chance per turn (0 = no spells) */
+  spellFrequency: number;
+  /** Spell flags: BR_FIRE, BA_COLD, HEAL, S_UNDEAD, etc. */
+  spellFlags: string[];
 }
 
 export type MonsterRecord = Record<string, MonsterDef>;
@@ -44,6 +48,8 @@ interface RawMonster {
   attacks: Attack[];
   flags: string[];
   description: string;
+  spellFrequency: number;
+  spellFlags: string[];
 }
 
 function createEmptyRaw(index: number, name: string): RawMonster {
@@ -64,6 +70,8 @@ function createEmptyRaw(index: number, name: string): RawMonster {
     attacks: [],
     flags: [],
     description: '',
+    spellFrequency: 0,
+    spellFlags: [],
   };
 }
 
@@ -155,6 +163,27 @@ export function parseMonsters(text: string): MonsterRecord {
         }
         break;
       }
+      case 'S': {
+        if (current) {
+          // S: lines contain spell frequency and/or spell flags
+          // Format: "1_IN_6 | SPELL1 | SPELL2" or just "SPELL1 | SPELL2"
+          const parts = value
+            .split('|')
+            .map((p) => p.trim())
+            .filter((p) => p.length > 0);
+
+          for (const part of parts) {
+            if (part.startsWith('1_IN_')) {
+              // Parse frequency: 1_IN_6 means 1 in 6 chance
+              current.spellFrequency = parseInt(part.slice(5), 10);
+            } else {
+              // It's a spell flag
+              current.spellFlags.push(part);
+            }
+          }
+        }
+        break;
+      }
     }
   }
 
@@ -195,6 +224,8 @@ export function parseMonsters(text: string): MonsterRecord {
       attacks: entry.attacks,
       flags: entry.flags,
       description: entry.description,
+      spellFrequency: entry.spellFrequency,
+      spellFlags: entry.spellFlags,
     };
   }
 

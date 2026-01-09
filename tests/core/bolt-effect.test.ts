@@ -7,6 +7,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import { createTestMonsterDef } from './testHelpers';
 
 // Mock level with monsters
 function createMockLevel(monsters: Monster[] = []) {
@@ -40,13 +41,14 @@ function createActor(x: number, y: number): Actor {
 }
 
 // Helper to create monster at position
-function createMonster(x: number, y: number, hp = 50): Monster {
+function createMonster(x: number, y: number, hp = 50, flags: string[] = []): Monster {
+  const def = createTestMonsterDef({ key: 'test_monster', name: 'test monster', flags });
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
     symbol: 'r',
     color: '#fff',
-    definitionKey: 'giant_white_mouse',
+    def,
     maxHp: hp,
     speed: 110,
   });
@@ -329,21 +331,15 @@ describe('BoltEffect', () => {
         target: 'position',
       });
       const actor = createActor(0, 0);
-      const monster = createMonster(2, 0);
+      // Create monster with fire immunity flag in its definition
+      const monster = createMonster(2, 0, 50, ['IM_FIRE']);
       const level = createMockLevel([monster]);
-
-      // Monster with fire immunity
-      const getFireImmuneInfo = (_m: Monster): MonsterInfo => ({
-        name: 'fire elemental',
-        flags: ['IM_FIRE'],
-      });
 
       const context: GPEffectContext = {
         actor,
         level: level as any,
         rng: RNG,
         targetPosition: { x: 5, y: 0 },
-        getMonsterInfo: getFireImmuneInfo,
       };
 
       const result = bolt.execute(context);
@@ -361,21 +357,15 @@ describe('BoltEffect', () => {
         target: 'position',
       });
       const actor = createActor(0, 0);
-      const monster = createMonster(2, 0, 100);
+      // Create monster with fire vulnerability flag in its definition
+      const monster = createMonster(2, 0, 100, ['HURT_FIRE']);
       const level = createMockLevel([monster]);
-
-      // Monster vulnerable to fire
-      const getVulnerableInfo = (_m: Monster): MonsterInfo => ({
-        name: 'ice troll',
-        flags: ['HURT_FIRE'],
-      });
 
       const context: GPEffectContext = {
         actor,
         level: level as any,
         rng: RNG,
         targetPosition: { x: 5, y: 0 },
-        getMonsterInfo: getVulnerableInfo,
       };
 
       const result = bolt.execute(context);

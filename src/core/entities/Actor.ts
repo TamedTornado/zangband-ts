@@ -1,6 +1,8 @@
 import { Entity, type EntityConfig } from './Entity';
 import { StatusManager } from '@/core/systems/status';
 import { extractEnergy } from '@/core/systems/Energy';
+import type { Element } from '@/core/types';
+import type { RNG } from 'rot-js';
 
 export interface ActorConfig extends EntityConfig {
   maxHp: number;
@@ -77,5 +79,19 @@ export class Actor extends Entity {
    */
   canReceiveStatus(_statusId: string, _flags?: string[]): boolean {
     return true;
+  }
+
+  /**
+   * Apply resistance to elemental damage.
+   * Override in subclasses to implement player/monster-specific resistance formulas.
+   * @returns Object with final damage and resistance status
+   */
+  resistDamage(
+    _element: Element,
+    damage: number,
+    _rng: typeof RNG
+  ): { damage: number; status: string } {
+    // Base Actor has no resistances
+    return { damage, status: 'normal' };
   }
 }

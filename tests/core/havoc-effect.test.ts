@@ -8,6 +8,7 @@ import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, GPEffectDef, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
 import { getEffectManager } from '@/core/systems/effects/EffectManager';
+import { createTestMonsterDef } from './testHelpers';
 
 // Mock level
 function createMockLevel(monsters: Monster[] = [], width = 100, height = 100) {
@@ -50,12 +51,13 @@ function createActor(x: number, y: number): Actor {
 }
 
 function createMonster(x: number, y: number, hp = 100): Monster {
+  const def = createTestMonsterDef({ key: 'orc', name: 'orc' });
   return new Monster({
     id: `monster-${x}-${y}`,
     position: { x, y },
     symbol: 'o',
     color: '#0f0',
-    definitionKey: 'orc',
+    def,
     maxHp: hp,
     speed: 110,
   });
