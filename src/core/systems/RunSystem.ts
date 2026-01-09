@@ -137,9 +137,9 @@ export class RunSystem {
       const dir = CYCLE[(dirIndex + i + 8) % 8];
       const checkPos = movePosition(newPos, dir);
 
-      // Stop if we see a monster
+      // Stop if we see a living hostile monster
       const monster = level.getMonsterAt(checkPos);
-      if (monster) {
+      if (monster && !monster.isDead && !monster.isTamed) {
         return { canContinue: false, newDirection: prevDir, spottedMonster: monster };
       }
 

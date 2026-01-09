@@ -34,10 +34,12 @@ export class FOVSystem {
     return visible;
   }
 
-  /** Find first visible monster, or null if none */
+  /** Find first visible hostile monster, or null if none */
   getVisibleMonster(level: Level, origin: Position, radius: number): Monster | null {
     const visible = this.compute(level, origin, radius);
     for (const monster of level.getMonsters()) {
+      if (monster.isDead) continue;
+      if (monster.isTamed) continue; // Tamed monsters don't block running
       const key = `${monster.position.x},${monster.position.y}`;
       if (visible.has(key)) return monster;
     }
