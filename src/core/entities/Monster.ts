@@ -51,6 +51,12 @@ export class Monster extends Actor {
     this._sleepCounter = 0;
   }
 
+  /** Taking damage wakes the monster */
+  override takeDamage(amount: number): void {
+    super.takeDamage(amount);
+    this.wake();
+  }
+
   /** Reduce sleep counter by amount (gradual wake) */
   reduceSleep(amount: number): void {
     this._sleepCounter = Math.max(0, this._sleepCounter - amount);
