@@ -22,7 +22,7 @@ import { CastSpellState } from './CastSpellState';
 import { StudySpellState } from './StudySpellState';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
-import { ENERGY_PER_TURN, VISION_RADIUS, HP_REGEN_RATE } from '../../constants';
+import { ENERGY_PER_TURN, VISION_RADIUS, VIEW_RADIUS, HP_REGEN_RATE } from '../../constants';
 import { getGameStore } from '@/core/store/gameStore';
 
 export class PlayingState implements State {
@@ -205,6 +205,10 @@ export class PlayingState implements State {
       stepsRun++;
       store.incrementTurn();
       player.position = newPos;
+
+      // Mark tiles as explored during run (FOV normally only updates on React render)
+      fsm.fovSystem.computeAndMark(level, player.position, VIEW_RADIUS);
+
       fsm.completeTurn(ENERGY_PER_TURN);
 
       if (player.isDead) break;
