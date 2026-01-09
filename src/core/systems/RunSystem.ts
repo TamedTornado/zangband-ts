@@ -19,14 +19,16 @@ const DIAGONALS: Direction[] = [
   Direction.NorthEast, Direction.NorthWest, Direction.SouthEast, Direction.SouthWest,
 ];
 
+// In the scan loop, i > 0 (clockwise) sets breakLeft, i < 0 (counter-clockwise) sets breakRight
+// So "left" = clockwise direction, "right" = counter-clockwise direction
 function getLeft(d: Direction, offset: number = 1): Direction {
   const i = CYCLE.indexOf(d);
-  return CYCLE[(i - offset + 8) % 8];
+  return CYCLE[(i + offset) % 8]; // clockwise
 }
 
 function getRight(d: Direction, offset: number = 1): Direction {
   const i = CYCLE.indexOf(d);
-  return CYCLE[(i + offset) % 8];
+  return CYCLE[(i - offset + 8) % 8]; // counter-clockwise
 }
 
 export interface RunState {
@@ -186,15 +188,30 @@ export class RunSystem {
       }
     }
 
-    // Check for wall breaks (doorways)
+    // Check for wall breaks (doorways) - in open areas, stop if walls appear/disappear
     if (openArea) {
-      if (breakRight && !seeWall(newPos, getLeft(prevDir))) {
-        return { canContinue: false, newDirection: prevDir }; // Wall opened up on left
+      // Check if walls that existed have disappeared (doorway/opening)
+      const wallOnRight = seeWall(newPos, getRight(prevDir));
+      const wallOnLeft = seeWall(newPos, getLeft(prevDir));
+
+      // state.breakRight means we initially had a wall on the right
+      if (state.breakRight && !wallOnRight) {
+        return { canContinue: false, newDirection: prevDir };
       }
-      if (breakLeft && !seeWall(newPos, getRight(prevDir))) {
-        return { canContinue: false, newDirection: prevDir }; // Wall opened up on right
+      // state.breakLeft means we initially had a wall on the left
+      if (state.breakLeft && !wallOnLeft) {
+        return { canContinue: false, newDirection: prevDir };
       }
-      // Update state
+
+      // Check if walls appeared where there were none (entering corridor)
+      if (!state.breakRight && wallOnRight && state.breakLeft) {
+        return { canContinue: false, newDirection: prevDir };
+      }
+      if (!state.breakLeft && wallOnLeft && state.breakRight) {
+        return { canContinue: false, newDirection: prevDir };
+      }
+
+      // Update state with current wall presence
       state.breakLeft = breakLeft;
       state.breakRight = breakRight;
       return { canContinue: true, newDirection: prevDir };
