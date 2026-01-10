@@ -289,12 +289,12 @@ describe('DisarmEffect', () => {
       const trap = level.addTrap({ x: 12, y: 10 }, TRAP_DEF);
 
       // Mock RNG to always roll low (guaranteed success for high skill)
-      const mockRNG = { ...RNG, getUniformInt: vi.fn().mockReturnValue(5) };
+      vi.spyOn(RNG, 'getUniformInt').mockReturnValue(5);
 
       const context: GPEffectContext = {
         actor: player,
         level: level as any,
-        rng: mockRNG as typeof RNG,
+        rng: RNG,
         targetPosition: { x: 12, y: 10 },
       };
 
@@ -303,6 +303,8 @@ describe('DisarmEffect', () => {
       expect(result.success).toBe(true);
       expect(trap.isDisarmed).toBe(true);
       expect(result.messages.some(m => m.toLowerCase().includes('disarm'))).toBe(true);
+
+      vi.restoreAllMocks();
     });
 
     it('should fail with low disarm skill vs high difficulty when roll is high', () => {
@@ -319,12 +321,12 @@ describe('DisarmEffect', () => {
       const trap = level.addTrap({ x: 12, y: 10 }, HARD_TRAP_DEF);
 
       // Mock RNG to roll high (guaranteed failure)
-      const mockRNG = { ...RNG, getUniformInt: vi.fn().mockReturnValue(95) };
+      vi.spyOn(RNG, 'getUniformInt').mockReturnValue(95);
 
       const context: GPEffectContext = {
         actor: player,
         level: level as any,
-        rng: mockRNG as typeof RNG,
+        rng: RNG,
         targetPosition: { x: 12, y: 10 },
       };
 
@@ -334,6 +336,8 @@ describe('DisarmEffect', () => {
       expect(result.turnConsumed).toBe(true);
       expect(trap.isDisarmed).toBe(false);
       expect(result.messages.some(m => m.toLowerCase().includes('fail'))).toBe(true);
+
+      vi.restoreAllMocks();
     });
 
     it('should always have at least 2% success chance', () => {
@@ -347,12 +351,12 @@ describe('DisarmEffect', () => {
       const trap = level.addTrap({ x: 12, y: 10 }, HARD_TRAP_DEF);
 
       // Mock RNG to roll 1 (within 2% threshold)
-      const mockRNG = { ...RNG, getUniformInt: vi.fn().mockReturnValue(1) };
+      vi.spyOn(RNG, 'getUniformInt').mockReturnValue(1);
 
       const context: GPEffectContext = {
         actor: player,
         level: level as any,
-        rng: mockRNG as typeof RNG,
+        rng: RNG,
         targetPosition: { x: 12, y: 10 },
       };
 
@@ -361,6 +365,8 @@ describe('DisarmEffect', () => {
       // Even with low skill, roll of 1 should succeed due to 2% minimum
       expect(result.success).toBe(true);
       expect(trap.isDisarmed).toBe(true);
+
+      vi.restoreAllMocks();
     });
   });
 });

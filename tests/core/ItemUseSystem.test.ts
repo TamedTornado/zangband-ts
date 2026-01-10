@@ -12,42 +12,11 @@ import { Player } from '@/core/entities/Player';
 import { Item } from '@/core/entities/Item';
 import { Level } from '@/core/world/Level';
 import type { ItemDef } from '@/core/data/items';
+import type { ClassDef } from '@/core/data/classes';
+import classesData from '@/data/classes/classes.json';
 
-// High device class
-const mageClass = {
-  index: 0,
-  name: 'Mage',
-  stats: { str: -5, int: 3, wis: 0, dex: 1, con: -2, chr: 1 },
-  skills: { disarm: 30, device: 36, save: 30, stealth: 2, search: 16, searchFreq: 20, melee: 34, ranged: 20 },
-  xSkills: { disarm: 7, device: 13, save: 9, stealth: 0, search: 0, searchFreq: 0, melee: 15, ranged: 15 },
-  hitDie: 0,
-  expMod: 30,
-  petUpkeepDiv: 1,
-  heavySense: false,
-  spellStat: 'int' as const,
-  spellFirst: 1,
-  spellWeight: 300,
-  realms: [],
-  secondaryRealm: false,
-};
-
-// Low device class
-const warriorClass = {
-  index: 1,
-  name: 'Warrior',
-  stats: { str: 5, int: -2, wis: -2, dex: 2, con: 2, chr: -1 },
-  skills: { disarm: 25, device: 18, save: 18, stealth: 1, search: 14, searchFreq: 2, melee: 70, ranged: 55 },
-  xSkills: { disarm: 12, device: 7, save: 10, stealth: 0, search: 0, searchFreq: 0, melee: 45, ranged: 45 },
-  hitDie: 9,
-  expMod: 0,
-  petUpkeepDiv: 1,
-  heavySense: false,
-  spellStat: null,
-  spellFirst: null,
-  spellWeight: null,
-  realms: [],
-  secondaryRealm: false,
-};
+const mageClass = classesData.mage as ClassDef;
+const warriorClass = classesData.warrior as ClassDef;
 
 function createPlayer(classDef = mageClass, level = 1): Player {
   return new Player({
@@ -157,10 +126,7 @@ describe('useDevice skill check', () => {
   });
 
   it('warrior should fail more often than mage with same level item', () => {
-    const wand = createTestWand(10, 10); // Mid-level wand
-    const level = createTestLevel();
-
-    // Get the skill levels
+    // Get the skill levels (wand/level not needed - just comparing skills)
     const warrior = createPlayer(warriorClass, 5);
     const mage = createPlayer(mageClass, 5);
 
