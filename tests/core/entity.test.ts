@@ -741,6 +741,85 @@ describe('Player', () => {
 
     expect(player.knownSpells).toEqual([]);
   });
+
+  describe('gold', () => {
+    it('should start with 0 gold by default', () => {
+      const player = new Player({
+        id: 'player-1',
+        position: { x: 10, y: 10 },
+        maxHp: 100,
+        speed: 110,
+        stats: { str: 16, int: 12, wis: 10, dex: 14, con: 15, chr: 11 },
+      });
+
+      expect(player.gold).toBe(0);
+    });
+
+    it('should add gold correctly', () => {
+      const player = new Player({
+        id: 'player-1',
+        position: { x: 10, y: 10 },
+        maxHp: 100,
+        speed: 110,
+        stats: { str: 16, int: 12, wis: 10, dex: 14, con: 15, chr: 11 },
+      });
+
+      player.addGold(100);
+      expect(player.gold).toBe(100);
+
+      player.addGold(50);
+      expect(player.gold).toBe(150);
+    });
+
+    it('should spend gold and return true when sufficient', () => {
+      const player = new Player({
+        id: 'player-1',
+        position: { x: 10, y: 10 },
+        maxHp: 100,
+        speed: 110,
+        stats: { str: 16, int: 12, wis: 10, dex: 14, con: 15, chr: 11 },
+      });
+
+      player.addGold(100);
+      const result = player.spendGold(50);
+
+      expect(result).toBe(true);
+      expect(player.gold).toBe(50);
+    });
+
+    it('should fail to spend gold and return false when insufficient', () => {
+      const player = new Player({
+        id: 'player-1',
+        position: { x: 10, y: 10 },
+        maxHp: 100,
+        speed: 110,
+        stats: { str: 16, int: 12, wis: 10, dex: 14, con: 15, chr: 11 },
+      });
+
+      player.addGold(100);
+      const result = player.spendGold(200);
+
+      expect(result).toBe(false);
+      expect(player.gold).toBe(100); // unchanged
+    });
+
+    it('should not allow negative gold amounts', () => {
+      const player = new Player({
+        id: 'player-1',
+        position: { x: 10, y: 10 },
+        maxHp: 100,
+        speed: 110,
+        stats: { str: 16, int: 12, wis: 10, dex: 14, con: 15, chr: 11 },
+      });
+
+      player.addGold(-50); // should be ignored
+      expect(player.gold).toBe(0);
+
+      player.addGold(100);
+      player.spendGold(-50); // should be ignored
+      expect(player.gold).toBe(100);
+    });
+  });
 });
 
 describe('Monster', () => {

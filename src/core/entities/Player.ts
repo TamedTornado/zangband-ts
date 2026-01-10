@@ -120,6 +120,9 @@ export class Player extends Actor {
   // Intrinsic abilities (from equipment, mutations, etc.)
   private _hasTelepathy: boolean = false;
 
+  // Gold (currency)
+  private _gold: number = 0;
+
   constructor(config: PlayerConfig) {
     super({
       id: config.id,
@@ -555,6 +558,39 @@ export class Player extends Actor {
   recalculateMana(): void {
     this._maxMana = this.calculateMaxMana();
     this._currentMana = Math.min(this._currentMana, this._maxMana);
+  }
+
+  // Gold accessors and methods
+
+  /** Get current gold amount */
+  get gold(): number {
+    return this._gold;
+  }
+
+  /**
+   * Add gold to player's purse
+   * @param amount Amount to add (ignored if negative)
+   */
+  addGold(amount: number): void {
+    if (amount > 0) {
+      this._gold += amount;
+    }
+  }
+
+  /**
+   * Spend gold from player's purse
+   * @param amount Amount to spend (ignored if negative)
+   * @returns true if gold was spent, false if insufficient funds
+   */
+  spendGold(amount: number): boolean {
+    if (amount <= 0) {
+      return false;
+    }
+    if (this._gold >= amount) {
+      this._gold -= amount;
+      return true;
+    }
+    return false;
   }
 
   get inventory(): Item[] {

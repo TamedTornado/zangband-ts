@@ -38,6 +38,7 @@ export const Action = {
   // Other
   Rest: 'action:rest',
   RepeatLastCommand: 'action:repeat_last_command',
+  EnterStore: 'action:enter_store',
   // Targeting
   Look: 'action:look',
   Target: 'action:target',
@@ -130,7 +131,7 @@ const ACTION_BINDINGS: { key: string; modifiers: string[]; action: Action }[] = 
   { key: 'x', modifiers: [], action: Action.Look },
   { key: '*', modifiers: [], action: Action.Target },
   { key: 'Tab', modifiers: [], action: Action.CycleTarget },
-  { key: 'Enter', modifiers: [], action: Action.ConfirmTarget },
+  { key: 'Enter', modifiers: [], action: Action.EnterStore },  // In playing state: enter store; elsewhere: confirm
   { key: '5', modifiers: [], action: Action.ConfirmTarget },  // Numpad 5 = use last target
   { key: '.', modifiers: [], action: Action.ConfirmTarget },  // '.' = use last target
   { key: 'Escape', modifiers: [], action: Action.CancelTarget },
@@ -216,6 +217,7 @@ const ACTION_HANDLERS: Record<Action, (actions: GameActions) => void> = {
   [Action.ToggleCharacter]: (a) => a.toggleCharacter(),
   [Action.Rest]: (a) => a.promptRest(),
   [Action.RepeatLastCommand]: (a) => a.repeatLastCommand(),
+  [Action.EnterStore]: (a) => a.enterCurrentStore(),
   // Targeting
   [Action.Look]: (a) => a.look(),
   [Action.Target]: (a) => a.target(),
@@ -291,6 +293,20 @@ export function useKeyboard() {
         return;
       }
 
+      // Handle shopping mode - route a-z to letterSelect, Tab to toggle mode, Escape to exit
+      if (state.stateName === 'shopping') {
+        e.preventDefault();
+        if (e.key >= 'a' && e.key <= 'z' && !e.ctrlKey && !e.altKey) {
+          actions.letterSelect(e.key);
+        } else if (e.key === 'Tab' || e.key === 'b' || e.key === 's') {
+          // Toggle between buy/sell modes
+          actions.dispatch({ type: 'toggleStorePage' });
+        } else if (e.key === 'Escape') {
+          actions.dispatch({ type: 'exitStore' });
+        }
+        return;
+      }
+
       // Handle direction targeting - route direction keys
       if (state.stateName === 'directionTargeting') {
         e.preventDefault();
@@ -339,8 +355,14 @@ export function useKeyboard() {
         } else if (binding.action === Action.CycleTarget ||
                    binding.action === Action.ConfirmTarget ||
                    binding.action === Action.CancelTarget ||
+                   binding.action === Action.EnterStore ||  // Enter also confirms in targeting mode
                    binding.action === Action.Target) {  // '*' to enter cursor mode
-          ACTION_HANDLERS[binding.action](actions);
+          // EnterStore in targeting mode should act as confirm
+          if (binding.action === Action.EnterStore) {
+            actions.confirmTarget();
+          } else {
+            ACTION_HANDLERS[binding.action](actions);
+          }
         }
         return;
       }

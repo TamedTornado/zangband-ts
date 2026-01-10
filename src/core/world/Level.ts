@@ -18,7 +18,9 @@ import { Scheduler } from '../systems/Scheduler';
 import { DungeonGenerator } from '../systems/dungeon/DungeonGenerator';
 import { MonsterSpawner } from '../systems/MonsterSpawner';
 import { ItemSpawner } from '../systems/ItemSpawner';
+import { TownGenerator, type TownLayout, type StoreEntrance } from '../systems/town/TownGenerator';
 import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT } from '../constants';
+import townData from '@/data/towns/town.json';
 
 export interface LevelConfig {
   depth?: number;
@@ -305,10 +307,13 @@ export interface GeneratedLevelData {
   scheduler: Scheduler;
   upStairs: Position[];
   downStairs: Position[];
+  storeEntrances?: StoreEntrance[];
+  isTown?: boolean;
 }
 
 /**
  * Generate a new dungeon level with monsters and items.
+ * For depth 0, generates town instead.
  */
 export function generateLevel(
   depth: number,
@@ -316,6 +321,11 @@ export function generateLevel(
   monsterSpawner: MonsterSpawner,
   itemSpawner: ItemSpawner,
 ): GeneratedLevelData {
+  // Town generation for depth 0
+  if (depth === 0) {
+    return generateTownLevel(player);
+  }
+
   const generator = new DungeonGenerator(RNG);
   const dungeon = generator.generate({ width: DUNGEON_WIDTH, height: DUNGEON_HEIGHT, depth });
 
@@ -364,5 +374,34 @@ export function generateLevel(
     scheduler,
     upStairs: dungeon.upStairs,
     downStairs: dungeon.downStairs,
+  };
+}
+
+/**
+ * Generate the town level (depth 0).
+ * Town has no monsters, no random items, just stores and dungeon entrance.
+ */
+function generateTownLevel(player: Player): GeneratedLevelData {
+  const townGenerator = new TownGenerator();
+  const layout = (townData as { default: TownLayout }).default;
+  const town = townGenerator.generate(layout);
+
+  // Place player at town start position
+  player.position = { ...town.playerStart };
+
+  // Set level.player so player is in actors list
+  town.level.player = player;
+
+  // Initialize scheduler (player only in town - no monsters)
+  const scheduler = new Scheduler();
+  scheduler.add(player);
+
+  return {
+    level: town.level,
+    scheduler,
+    upStairs: [], // Town has no up stairs
+    downStairs: [layout.dungeonEntrance], // Dungeon entrance is the down stairs
+    storeEntrances: town.storeEntrances,
+    isTown: true,
   };
 }

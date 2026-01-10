@@ -11,6 +11,7 @@ import type { Scheduler } from '../systems/Scheduler';
 import type { Coord } from '../systems/dungeon/DungeonTypes';
 import type { GameMessage } from '../fsm/GameData';
 import type { CharacterCreationData } from '../data/characterCreation';
+import type { StoreEntrance } from '../systems/town/TownGenerator';
 
 /**
  * Prompt state for inline input (rest duration, counts, etc.)
@@ -31,6 +32,10 @@ export interface GameState {
   messages: GameMessage[];
   upStairs: Coord[];
   downStairs: Coord[];
+
+  // Town/store data
+  storeEntrances: StoreEntrance[];
+  isTown: boolean;
 
   // Death info
   killedBy: string | null;
@@ -88,6 +93,15 @@ export interface GameState {
   // Character creation state
   characterCreation: CharacterCreationData | null;
 
+  // Shopping state
+  shopping: {
+    storeKey: string;
+    mode: 'buy' | 'sell';
+    storeName: string;
+    ownerName: string;
+    stock: Array<{ name: string; price: number; quantity: number }>;
+  } | null;
+
   // Internal
   _messageId: number;
 }
@@ -129,11 +143,18 @@ export interface GameActions {
     depth: number;
     upStairs: Coord[];
     downStairs: Coord[];
+    storeEntrances?: StoreEntrance[];
+    isTown?: boolean;
   }) => void;
 
   // Character creation
   setCharacterCreation: (data: CharacterCreationData | null) => void;
   updateCharacterCreation: (partial: Partial<CharacterCreationData>) => void;
+
+  // Shopping
+  setShopping: (shopping: GameState['shopping']) => void;
+  updateShoppingMode: (mode: 'buy' | 'sell') => void;
+  updateShoppingStock: (stock: GameState['shopping'] extends null ? never : NonNullable<GameState['shopping']>['stock']) => void;
 
   // Reset for new game
   reset: () => void;
@@ -143,11 +164,13 @@ const initialState: GameState = {
   player: null,
   level: null,
   scheduler: null,
-  depth: 1,
+  depth: 0,
   turn: 0,
   messages: [],
   upStairs: [],
   downStairs: [],
+  storeEntrances: [],
+  isTown: false,
   killedBy: null,
   cursor: null,
   lastTargetMonsterId: null,
@@ -163,6 +186,7 @@ const initialState: GameState = {
   stateName: 'none',
   prompt: null,
   characterCreation: null,
+  shopping: null,
   _messageId: 0,
 };
 
@@ -233,6 +257,8 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
     depth: data.depth,
     upStairs: data.upStairs,
     downStairs: data.downStairs,
+    storeEntrances: data.storeEntrances ?? [],
+    isTown: data.isTown ?? false,
   }),
 
   setCharacterCreation: (characterCreation) => set({ characterCreation }),
@@ -241,6 +267,22 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
     const current = get().characterCreation;
     if (current) {
       set({ characterCreation: { ...current, ...partial } });
+    }
+  },
+
+  setShopping: (shopping) => set({ shopping }),
+
+  updateShoppingMode: (mode) => {
+    const current = get().shopping;
+    if (current) {
+      set({ shopping: { ...current, mode } });
+    }
+  },
+
+  updateShoppingStock: (stock) => {
+    const current = get().shopping;
+    if (current) {
+      set({ shopping: { ...current, stock } });
     }
   },
 

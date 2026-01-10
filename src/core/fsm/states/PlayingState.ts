@@ -20,6 +20,7 @@ import { EquipmentState } from './EquipmentState';
 import { CharacterState } from './CharacterState';
 import { CastSpellState } from './CastSpellState';
 import { StudySpellState } from './StudySpellState';
+import { ShoppingState } from './ShoppingState';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, VIEW_RADIUS, HP_REGEN_RATE } from '../../constants';
@@ -101,6 +102,9 @@ export class PlayingState implements State {
       case 'repeatLastCommand':
         this.handleRepeatLastCommand(fsm);
         return true;
+      case 'enterStore':
+        this.handleEnterStore(fsm, action.storeKey);
+        return true;
       default:
         return false;
     }
@@ -152,6 +156,9 @@ export class PlayingState implements State {
       } else if (itemsHere.length > 1) {
         fsm.addMessage(`You see ${itemsHere.length} items here.`, 'info');
       }
+
+      // Check for store entrance in town
+      this.checkStoreEntrance(fsm, newPos);
 
       fsm.completeTurn(ENERGY_PER_TURN);
       this.checkPlayerDeath(fsm);
@@ -407,5 +414,30 @@ export class PlayingState implements State {
 
     // Dispatch the original action
     fsm.dispatch({ type: lastCommand.actionType } as GameAction);
+  }
+
+  /**
+   * Check if player stepped on a store entrance and show message.
+   */
+  private checkStoreEntrance(fsm: GameFSM, pos: { x: number; y: number }): void {
+    const storeKey = fsm.storeManager.getStoreKeyAt(pos);
+    if (storeKey) {
+      const store = fsm.storeManager.getStore(storeKey);
+      if (store) {
+        fsm.addMessage(`You are standing at the entrance to ${store.definition.name}. (Enter to shop)`, 'info');
+      }
+    }
+  }
+
+  /**
+   * Handle entering a store (transition to ShoppingState).
+   */
+  private handleEnterStore(fsm: GameFSM, storeKey: string): void {
+    const store = fsm.storeManager.getStore(storeKey);
+    if (!store) {
+      fsm.addMessage('That store does not exist.', 'info');
+      return;
+    }
+    fsm.transition(new ShoppingState(storeKey));
   }
 }

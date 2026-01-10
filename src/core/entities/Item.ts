@@ -293,4 +293,63 @@ export class Item extends Entity {
 
     return true;
   }
+
+  /**
+   * Split off a portion of a stack into a new item.
+   *
+   * @param amount Number of items to split off
+   * @returns New Item with the split quantity, or undefined if invalid
+   */
+  split(amount: number): Item | undefined {
+    if (amount <= 0 || amount >= this.quantity) {
+      return undefined;
+    }
+
+    // Reduce our quantity
+    this.quantity -= amount;
+
+    // Create a copy with the split amount
+    const config: ItemConfig = {
+      id: `${this.id}-split-${Date.now()}`,
+      position: { ...this.position },
+      symbol: this.symbol,
+      color: this.color,
+      quantity: amount,
+    };
+    if (this.generated) {
+      config.generated = { ...this.generated };
+    }
+    const splitItem = new Item(config);
+
+    // Handle device charges for split items
+    if (this.generated && splitItem.generated) {
+      if (this.isWand) {
+        // Proportionally split wand charges
+        const totalCharges = this.generated.charges ?? 0;
+        const totalMax = this.generated.maxCharges ?? 0;
+        const splitRatio = amount / (this.quantity + amount);
+
+        const splitCharges = Math.floor(totalCharges * splitRatio);
+        const splitMax = Math.floor(totalMax * splitRatio);
+
+        splitItem.generated.charges = splitCharges;
+        splitItem.generated.maxCharges = splitMax;
+
+        // Adjust original
+        this.generated.charges = totalCharges - splitCharges;
+        this.generated.maxCharges = totalMax - splitMax;
+      } else if (this.isRod) {
+        // Proportionally split rod timeout
+        const totalTimeout = this.generated.timeout ?? 0;
+        const splitRatio = amount / (this.quantity + amount);
+
+        const splitTimeout = Math.floor(totalTimeout * splitRatio);
+        splitItem.generated.timeout = splitTimeout;
+        this.generated.timeout = totalTimeout - splitTimeout;
+      }
+      // Staffs: both halves keep same charge count (they only stack when identical)
+    }
+
+    return splitItem;
+  }
 }

@@ -36,6 +36,16 @@ interface GameState {
   directionTargeting: { prompt: string } | null;
   // Character creation
   characterCreation: CharacterCreationData | null;
+  // Town/store data
+  isTown: boolean;
+  // Shopping state
+  shopping: {
+    storeKey: string;
+    mode: 'buy' | 'sell';
+    storeName: string;
+    ownerName: string;
+    stock: Array<{ name: string; price: number; quantity: number }>;
+  } | null;
 }
 
 interface GameActions {
@@ -81,6 +91,9 @@ interface GameActions {
   repeatLastCommand: () => void;
   // Item display
   getItemDisplayName: (item: Item) => string;
+  // Store entry
+  enterCurrentStore: () => void;
+  exitStore: () => void;
   // Generic dispatch for any action
   dispatch: (action: GameAction) => void;
 }
@@ -111,6 +124,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const symbolTargeting = useGameStore(s => s.symbolTargeting);
   const directionTargeting = useGameStore(s => s.directionTargeting);
   const characterCreation = useGameStore(s => s.characterCreation);
+  const isTown = useGameStore(s => s.isTown);
+  const shopping = useGameStore(s => s.shopping);
   const setPrompt = useGameStore(s => s.setPrompt);
   const updatePromptValue = useGameStore(s => s.updatePromptValue);
   const addMessage = useGameStore(s => s.addMessage);
@@ -131,6 +146,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
     symbolTargeting,
     directionTargeting,
     characterCreation,
+    isTown,
+    shopping,
   };
 
   const actions = useMemo<GameActions>(() => ({
@@ -300,6 +317,22 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
     getItemDisplayName: (item: Item) => {
       return fsm.getItemDisplayName(item);
+    },
+
+    enterCurrentStore: () => {
+      // Check if player is on a store entrance
+      const store = useGameStore.getState();
+      const playerPos = store.player?.position;
+      if (!playerPos) return;
+
+      const storeKey = fsm.storeManager.getStoreKeyAt(playerPos);
+      if (storeKey) {
+        fsm.dispatch({ type: 'enterStore', storeKey });
+      }
+    },
+
+    exitStore: () => {
+      fsm.dispatch({ type: 'exitStore' });
     },
 
     dispatch: (action: GameAction) => {

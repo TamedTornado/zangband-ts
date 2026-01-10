@@ -28,6 +28,7 @@ import type { ArtifactDef } from '../data/artifacts';
 import type { MonsterDef } from '../data/monsters';
 import { DEBUG_MODE, applyDebugSetup } from '../debug/debugSetup';
 import { getGameStore } from '../store/gameStore';
+import { StoreManager } from '../systems/StoreManager';
 
 // Game data imports
 import itemsData from '@/data/items/items.json';
@@ -63,6 +64,7 @@ export class GameFSM {
   readonly itemGen = itemGen;
   readonly flavorSystem = new FlavorSystem(RNG);
   readonly effectManager = getEffectManager();
+  readonly storeManager = new StoreManager(RNG);
 
   constructor(initialState: State) {
     // Don't init game data here - let character creation handle it
@@ -166,11 +168,14 @@ export class GameFSM {
     // Set player in store
     store.setPlayer(player);
 
-    // Generate first level
-    this.goToLevel(1);
+    // Give starting gold
+    player.addGold(200);
+
+    // Generate town level (depth 0)
+    this.goToLevel(0);
 
     this.addMessage('Welcome to Zangband!', 'info');
-    this.addMessage(`You enter dungeon level ${store.depth}.`, 'info');
+    this.addMessage('You are standing in the town.', 'info');
   }
 
   /** Generate a new dungeon level and update store */
@@ -183,12 +188,19 @@ export class GameFSM {
     // Compute initial FOV to mark tiles as explored before first render
     this.fovSystem.computeAndMark(data.level, player.position, VIEW_RADIUS);
 
+    // Register store positions with StoreManager if this is town
+    if (data.storeEntrances) {
+      this.storeManager.registerStorePositions(data.storeEntrances);
+    }
+
     store.setLevelData({
       level: data.level,
       scheduler: data.scheduler,
       depth,
       upStairs: data.upStairs,
       downStairs: data.downStairs,
+      storeEntrances: data.storeEntrances ?? [],
+      isTown: data.isTown ?? false,
     });
   }
 

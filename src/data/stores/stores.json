@@ -1,0 +1,101 @@
+{
+  "general": {
+    "key": "general",
+    "name": "General Store",
+    "symbol": "1",
+    "color": "#c8a040",
+    "maxStock": 24,
+    "minKeep": 6,
+    "maxKeep": 18,
+    "turnover": 9,
+    "buysTypes": ["food", "light", "flask", "spike"],
+    "sellsTypes": ["food", "light", "flask", "spike", "digging"]
+  },
+  "armory": {
+    "key": "armory",
+    "name": "Armory",
+    "symbol": "2",
+    "color": "#808080",
+    "maxStock": 24,
+    "minKeep": 6,
+    "maxKeep": 18,
+    "turnover": 9,
+    "buysTypes": ["soft_armor", "hard_armor", "dragon_armor", "shield", "cloak", "helm", "crown", "gloves", "boots"],
+    "sellsTypes": ["soft_armor", "hard_armor", "dragon_armor", "shield", "cloak", "helm", "crown", "gloves", "boots"]
+  },
+  "weaponsmith": {
+    "key": "weaponsmith",
+    "name": "Weaponsmith",
+    "symbol": "3",
+    "color": "#ffffff",
+    "maxStock": 24,
+    "minKeep": 6,
+    "maxKeep": 18,
+    "turnover": 9,
+    "buysTypes": ["sword", "hafted", "polearm", "digging", "bow", "shot", "arrow", "bolt"],
+    "sellsTypes": ["sword", "hafted", "polearm", "digging", "bow", "shot", "arrow", "bolt"]
+  },
+  "temple": {
+    "key": "temple",
+    "name": "Temple",
+    "symbol": "4",
+    "color": "#00ff00",
+    "maxStock": 24,
+    "minKeep": 6,
+    "maxKeep": 18,
+    "turnover": 9,
+    "buysTypes": ["potion", "scroll", "hafted", "life_book", "nature_book"],
+    "sellsTypes": ["potion", "scroll", "hafted", "life_book", "nature_book"],
+    "flags": ["BLESSED_ONLY"]
+  },
+  "alchemy": {
+    "key": "alchemy",
+    "name": "Alchemy Shop",
+    "symbol": "5",
+    "color": "#0000ff",
+    "maxStock": 24,
+    "minKeep": 6,
+    "maxKeep": 18,
+    "turnover": 9,
+    "buysTypes": ["potion", "scroll"],
+    "sellsTypes": ["potion", "scroll"]
+  },
+  "magic": {
+    "key": "magic",
+    "name": "Magic Shop",
+    "symbol": "6",
+    "color": "#ff0000",
+    "maxStock": 24,
+    "minKeep": 6,
+    "maxKeep": 18,
+    "turnover": 9,
+    "buysTypes": ["wand", "staff", "rod", "ring", "amulet", "sorcery_book", "chaos_book", "arcane_book", "trump_book", "death_book"],
+    "sellsTypes": ["wand", "staff", "rod", "ring", "amulet", "sorcery_book", "chaos_book", "arcane_book", "trump_book", "death_book"]
+  },
+  "black_market": {
+    "key": "black_market",
+    "name": "Black Market",
+    "symbol": "7",
+    "color": "#404040",
+    "maxStock": 24,
+    "minKeep": 6,
+    "maxKeep": 18,
+    "turnover": 9,
+    "buysTypes": [],
+    "sellsTypes": [],
+    "flags": ["BUYS_ALL", "SELLS_ALL", "BLACK_MARKET"]
+  },
+  "home": {
+    "key": "home",
+    "name": "Your Home",
+    "symbol": "8",
+    "color": "#ffff00",
+    "maxStock": 24,
+    "minKeep": 0,
+    "maxKeep": 24,
+    "turnover": 0,
+    "buysTypes": [],
+    "sellsTypes": [],
+    "flags": ["HOME", "NO_PRICING"]
+  }
+}

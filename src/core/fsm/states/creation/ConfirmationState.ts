@@ -23,14 +23,17 @@ export class ConfirmationState implements State {
       const player = Player.fromCreation(creation, fsm.itemGen);
       store.setPlayer(player);
 
+      // Give starting gold
+      player.addGold(200);
+
       // Clear character creation data
       store.setCharacterCreation(null);
 
-      // Generate first level
-      fsm.goToLevel(1);
+      // Generate town level (depth 0)
+      fsm.goToLevel(0);
 
       fsm.addMessage('Welcome to Zangband!', 'info');
-      fsm.addMessage(`You enter dungeon level ${store.depth}.`, 'info');
+      fsm.addMessage('You are standing in the town.', 'info');
 
       fsm.transition(new PlayingState());
       return true;

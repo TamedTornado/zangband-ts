@@ -1192,3 +1192,136 @@ body {
   text-align: center;
   margin: 0;
 }
+
+/* ========================================
+   Store Modal
+   ======================================== */
+
+.store-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1a1a1a;
+  border: 2px solid #444;
+  border-radius: 6px;
+  min-width: 450px;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.store-header {
+  padding: 12px 16px;
+  background: #252525;
+  border-bottom: 1px solid #444;
+}
+
+.store-header h2 {
+  margin: 0 0 4px 0;
+  color: #fff;
+  font-size: 16px;
+}
+
+.store-owner {
+  color: #888;
+  font-size: 12px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.store-gold {
+  color: #ff0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.store-tabs {
+  display: flex;
+  background: #252525;
+  border-bottom: 1px solid #444;
+}
+
+.store-tab {
+  flex: 1;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  color: #888;
+  font-family: monospace;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.store-tab:hover {
+  background: #333;
+  color: #ccc;
+}
+
+.store-tab.active {
+  background: #1a1a1a;
+  color: #fff;
+  border-bottom: 2px solid #4a9eff;
+}
+
+.store-inventory {
+  padding: 12px 0;
+  overflow-y: auto;
+  flex: 1;
+  max-height: 400px;
+}
+
+.store-empty {
+  padding: 24px 16px;
+  color: #666;
+  text-align: center;
+  font-style: italic;
+}
+
+.store-item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.store-item {
+  display: flex;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.store-item:hover {
+  background: #333;
+}
+
+.item-letter {
+  color: #888;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.item-name {
+  flex: 1;
+  color: #ccc;
+}
+
+.item-price {
+  color: #ff0;
+  margin-left: 16px;
+}
+
+.store-footer {
+  padding: 10px 16px;
+  background: #252525;
+  border-top: 1px solid #444;
+}
+
+.store-help {
+  color: #666;
+  font-size: 11px;
+  text-align: center;
+}

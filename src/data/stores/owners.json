@@ -1,0 +1,76 @@
+{
+  "_comment": "Owner data extracted from Zangband tables.c. Format: purse = max gold owner will pay. greed affects pricing (100 = neutral, higher = greedier).",
+  "general": [
+    { "name": "Bilbo the Friendly", "race": "hobbit", "purse": 200, "greed": 108 },
+    { "name": "Raistlin the Chicken", "race": "human", "purse": 200, "greed": 108 },
+    { "name": "Sultan the Midget", "race": "gnome", "purse": 300, "greed": 107 },
+    { "name": "Lyar-el the Comely", "race": "elf", "purse": 300, "greed": 107 },
+    { "name": "Falilmawen the Friendly", "race": "hobbit", "purse": 300, "greed": 108 },
+    { "name": "Voirin the Cowardly", "race": "human", "purse": 500, "greed": 108 },
+    { "name": "Erashnak the Midget", "race": "beastman", "purse": 800, "greed": 107 },
+    { "name": "Grug the Comely", "race": "half_titan", "purse": 1000, "greed": 107 }
+  ],
+  "armory": [
+    { "name": "Kon-Dar the Ugly", "race": "half_orc", "purse": 5000, "greed": 115 },
+    { "name": "Darg-Low the Grim", "race": "human", "purse": 10000, "greed": 111 },
+    { "name": "Decado the Handsome", "race": "amberite", "purse": 25000, "greed": 112 },
+    { "name": "Wieland the Smith", "race": "dwarf", "purse": 30000, "greed": 112 },
+    { "name": "Elo Dragonscale", "race": "elf", "purse": 30000, "greed": 112 },
+    { "name": "Gruce the Huge", "race": "half_giant", "purse": 15000, "greed": 111 },
+    { "name": "Animus", "race": "golem", "purse": 25000, "greed": 112 },
+    { "name": "Malvus", "race": "half_titan", "purse": 30000, "greed": 112 }
+  ],
+  "weaponsmith": [
+    { "name": "Arnold the Beastly", "race": "barbarian", "purse": 5000, "greed": 115 },
+    { "name": "Arndal Beast-Slayer", "race": "half_elf", "purse": 10000, "greed": 110 },
+    { "name": "Eddie Beast-Master", "race": "half_orc", "purse": 25000, "greed": 115 },
+    { "name": "Oglign Dragon-Slayer", "race": "dwarf", "purse": 30000, "greed": 112 },
+    { "name": "Drew the Skilled", "race": "human", "purse": 10000, "greed": 115 },
+    { "name": "Orrax Dragonson", "race": "draconian", "purse": 15000, "greed": 110 },
+    { "name": "Fungus Giant-Slayer", "race": "dwarf", "purse": 30000, "greed": 112 },
+    { "name": "Aeon Flux", "race": "half_elf", "purse": 20000, "greed": 112 }
+  ],
+  "temple": [
+    { "name": "Ludwig the Humble", "race": "dwarf", "purse": 5000, "greed": 109 },
+    { "name": "Gunnar the Paladin", "race": "half_troll", "purse": 10000, "greed": 110 },
+    { "name": "Torin the Chosen", "race": "high_elf", "purse": 25000, "greed": 107 },
+    { "name": "Sarastro the Wise", "race": "human", "purse": 30000, "greed": 109 },
+    { "name": "Sir Parsival the Pure", "race": "high_elf", "purse": 25000, "greed": 107 },
+    { "name": "Asenath the Holy", "race": "human", "purse": 30000, "greed": 109 },
+    { "name": "Hashnik the Druid", "race": "hobbit", "purse": 25000, "greed": 107 },
+    { "name": "Atal the Wise", "race": "human", "purse": 30000, "greed": 109 }
+  ],
+  "alchemy": [
+    { "name": "Mauser the Chemist", "race": "half_elf", "purse": 10000, "greed": 111 },
+    { "name": "Wizzle the Chaotic", "race": "hobbit", "purse": 10000, "greed": 110 },
+    { "name": "Midas the Greedy", "race": "gnome", "purse": 15000, "greed": 116 },
+    { "name": "Ja-Far the Alchemist", "race": "elf", "purse": 15000, "greed": 111 },
+    { "name": "Kakalrakakal", "race": "klackon", "purse": 15000, "greed": 116 },
+    { "name": "Fanelath the Cautious", "race": "dwarf", "purse": 10000, "greed": 111 },
+    { "name": "Valindra the Proud", "race": "high_elf", "purse": 15000, "greed": 116 },
+    { "name": "Taen the Alchemist", "race": "human", "purse": 15000, "greed": 111 }
+  ],
+  "magic": [
+    { "name": "Lo Pan the Sorcerer", "race": "half_elf", "purse": 20000, "greed": 110 },
+    { "name": "Buggerby the Great", "race": "gnome", "purse": 20000, "greed": 113 },
+    { "name": "The Wizard of Yendor", "race": "human", "purse": 30000, "greed": 110 },
+    { "name": "Rjak the Necromancer", "race": "dark_elf", "purse": 30000, "greed": 110 },
+    { "name": "Kyria the Illusionist", "race": "human", "purse": 30000, "greed": 110 },
+    { "name": "Kaza the Noble", "race": "high_elf", "purse": 30000, "greed": 110 },
+    { "name": "Falebrimbor", "race": "high_elf", "purse": 30000, "greed": 110 },
+    { "name": "Achshe the Tentacled", "race": "mind_flayer", "purse": 20000, "greed": 113 }
+  ],
+  "black_market": [
+    { "name": "Gary Gygaz", "race": "half_troll", "purse": 20000, "greed": 150 },
+    { "name": "Histor the Goblin", "race": "half_orc", "purse": 20000, "greed": 150 },
+    { "name": "Quark the Ferengi", "race": "dwarf", "purse": 30000, "greed": 150 },
+    { "name": "Topi the Fair(?)", "race": "human", "purse": 30000, "greed": 150 },
+    { "name": "Vhassa the Dead", "race": "zombie", "purse": 20000, "greed": 150 },
+    { "name": "Kyn the Treacherous", "race": "vampire", "purse": 20000, "greed": 150 },
+    { "name": "Bubonicus", "race": "beastman", "purse": 30000, "greed": 150 },
+    { "name": "Corpselight", "race": "spectre", "purse": 30000, "greed": 150 }
+  ],
+  "home": [
+    { "name": "Your home", "race": "none", "purse": 0, "greed": 100 }
+  ]
+}

@@ -58,4 +58,10 @@ export type GameAction =
   | { type: 'setName'; name: string }
   | { type: 'confirmCharacter' }
   | { type: 'creationBack' }
-  | { type: 'creationNext' };
+  | { type: 'creationNext' }
+  // Store/shopping actions
+  | { type: 'enterStore'; storeKey: string }
+  | { type: 'exitStore' }
+  | { type: 'buyItem'; itemIndex: number; quantity?: number }
+  | { type: 'sellItem'; inventoryIndex: number; quantity?: number }
+  | { type: 'toggleStorePage' };

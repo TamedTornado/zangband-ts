@@ -1,0 +1,21 @@
+{
+  "_comment": "Town layout data. Stores are placed as buildings with entrances. Player starts in town and uses dungeon entrance to descend.",
+  "default": {
+    "key": "default",
+    "name": "The Town",
+    "width": 66,
+    "height": 22,
+    "stores": [
+      { "storeKey": "general", "x": 3, "y": 2, "width": 7, "height": 4 },
+      { "storeKey": "armory", "x": 12, "y": 2, "width": 7, "height": 4 },
+      { "storeKey": "weaponsmith", "x": 21, "y": 2, "width": 7, "height": 4 },
+      { "storeKey": "temple", "x": 30, "y": 2, "width": 7, "height": 4 },
+      { "storeKey": "alchemy", "x": 39, "y": 2, "width": 7, "height": 4 },
+      { "storeKey": "magic", "x": 48, "y": 2, "width": 7, "height": 4 },
+      { "storeKey": "black_market", "x": 57, "y": 2, "width": 7, "height": 4 },
+      { "storeKey": "home", "x": 3, "y": 16, "width": 7, "height": 4 }
+    ],
+    "dungeonEntrance": { "x": 33, "y": 11 },
+    "playerStart": { "x": 33, "y": 14 }
+  }
+}
