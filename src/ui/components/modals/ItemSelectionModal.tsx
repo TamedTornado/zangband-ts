@@ -16,7 +16,7 @@ export function ItemSelectionModal() {
   const { state, actions } = useGame();
   const { itemTargeting, player } = state;
 
-  if (!itemTargeting) return null;
+  if (!itemTargeting || !player) return null;
 
   // Build list of selectable items from valid indices
   const selectableItems: SelectableItem[] = itemTargeting.validItemIndices.map(index => ({

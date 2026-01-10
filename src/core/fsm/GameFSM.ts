@@ -65,7 +65,8 @@ export class GameFSM {
   readonly effectManager = getEffectManager();
 
   constructor(initialState: State) {
-    this.initGameData();
+    // Don't init game data here - let character creation handle it
+    // or call initGameData() explicitly for debug/restart scenarios
     this.transition(initialState);
   }
 
@@ -178,6 +179,9 @@ export class GameFSM {
     const player = store.player!;
 
     const data = generateLevel(depth, player, monsterSpawner, itemSpawner);
+
+    // Compute initial FOV to mark tiles as explored before first render
+    this.fovSystem.computeAndMark(data.level, player.position, VIEW_RADIUS);
 
     store.setLevelData({
       level: data.level,

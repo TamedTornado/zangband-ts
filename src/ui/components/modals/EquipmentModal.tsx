@@ -58,6 +58,9 @@ function formatItemWithStats(item: Item, baseName: string): string {
  */
 export function EquipmentModal() {
   const { state, actions } = useGame();
+
+  if (!state.player) return null;
+
   const equipment = state.player.getAllEquipment();
 
   return (
@@ -100,7 +103,7 @@ export function EquipmentModal() {
       <div className="equipment-summary">
         <div className="stat-row">
           <span className="stat-label">Total AC:</span>
-          <span className="stat-value">{state.player.totalAc}</span>
+          <span className="stat-value">{state.player!.totalAc}</span>
         </div>
       </div>
     </Modal>

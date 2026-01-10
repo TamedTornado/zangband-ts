@@ -3,6 +3,8 @@
  */
 
 import type { Direction } from '../types';
+import type { Sex } from '../data/characterCreation';
+import type { Stats } from '../entities/Player';
 
 export type GameAction =
   | { type: 'move'; dir: Direction }
@@ -43,4 +45,17 @@ export type GameAction =
   | { type: 'letterSelect'; letter: string }
   | { type: 'showList' }
   // Repeat last command
-  | { type: 'repeatLastCommand' };
+  | { type: 'repeatLastCommand' }
+  // Character creation actions
+  | { type: 'selectSex'; sex: Sex }
+  | { type: 'selectRace'; raceKey: string }
+  | { type: 'selectClass'; classKey: string }
+  | { type: 'selectRealm'; realm: string }
+  | { type: 'rollStats' }
+  | { type: 'setMinimum'; stat: keyof Stats; value: number }
+  | { type: 'autoroll' }
+  | { type: 'acceptStats' }
+  | { type: 'setName'; name: string }
+  | { type: 'confirmCharacter' }
+  | { type: 'creationBack' }
+  | { type: 'creationNext' };

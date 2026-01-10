@@ -18,6 +18,9 @@ interface IndexedItem {
  */
 export function InventoryModal() {
   const { state, actions } = useGame();
+
+  if (!state.player) return null;
+
   const inventory = state.player.inventory;
 
   // Build indexed items

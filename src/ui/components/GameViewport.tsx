@@ -67,10 +67,9 @@ export function GameViewport() {
   const cameraRef = useRef<Camera | null>(null);
   const fovSystem = useMemo(() => new FOVSystem(), []);
 
-  // Render when we have a display
-  if (display && gridWidth > 0 && gridHeight > 0) {
-    const { level, player } = state;
-
+  // Render when we have a display and game is initialized
+  const { level, player } = state;
+  if (display && gridWidth > 0 && gridHeight > 0 && player && level) {
     // Create or update camera
     if (!cameraRef.current) {
       cameraRef.current = new Camera(gridWidth, gridHeight, { mode: 'center' });

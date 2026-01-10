@@ -1,12 +1,14 @@
 import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { Direction } from '@/core/types';
 import { GameFSM } from '@/core/fsm/GameFSM';
-import { PlayingState } from '@/core/fsm/states/PlayingState';
+import { SexSelectionState } from '@/core/fsm/states/creation/SexSelectionState';
 import type { GameMessage } from '@/core/fsm/GameData';
 import type { Player } from '@/core/entities/Player';
 import type { Level } from '@/core/world/Level';
 import type { Item } from '@/core/entities/Item';
+import type { GameAction } from '@/core/fsm/Actions';
 import { useGameStore, type PromptState } from '@/core/store/gameStore';
+import type { CharacterCreationData } from '@/core/data/characterCreation';
 
 /**
  * Rest duration types - matches Zangband rest options
@@ -17,8 +19,8 @@ export type RestDuration =
   | { type: 'full' };
 
 interface GameState {
-  player: Player;
-  level: Level;
+  player: Player | null;
+  level: Level | null;
   depth: number;
   turn: number;
   messages: GameMessage[];
@@ -32,6 +34,8 @@ interface GameState {
   itemTargeting: { prompt: string; validItemIndices: number[] } | null;
   symbolTargeting: { prompt: string } | null;
   directionTargeting: { prompt: string } | null;
+  // Character creation
+  characterCreation: CharacterCreationData | null;
 }
 
 interface GameActions {
@@ -77,6 +81,8 @@ interface GameActions {
   repeatLastCommand: () => void;
   // Item display
   getItemDisplayName: (item: Item) => string;
+  // Generic dispatch for any action
+  dispatch: (action: GameAction) => void;
 }
 
 interface GameContextValue {
@@ -87,7 +93,7 @@ interface GameContextValue {
 const GameContext = createContext<GameContextValue | null>(null);
 
 // Create FSM instance (singleton for the app)
-const fsm = new GameFSM(new PlayingState());
+const fsm = new GameFSM(new SexSelectionState());
 
 export function GameProvider({ children }: { children: ReactNode }) {
   // Subscribe to store updates - Zustand handles this automatically
@@ -104,13 +110,14 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const itemTargeting = useGameStore(s => s.itemTargeting);
   const symbolTargeting = useGameStore(s => s.symbolTargeting);
   const directionTargeting = useGameStore(s => s.directionTargeting);
+  const characterCreation = useGameStore(s => s.characterCreation);
   const setPrompt = useGameStore(s => s.setPrompt);
   const updatePromptValue = useGameStore(s => s.updatePromptValue);
   const addMessage = useGameStore(s => s.addMessage);
 
   const state: GameState = {
-    player: player!,
-    level: level!,
+    player,
+    level,
     depth,
     turn,
     messages,
@@ -123,6 +130,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     itemTargeting,
     symbolTargeting,
     directionTargeting,
+    characterCreation,
   };
 
   const actions = useMemo<GameActions>(() => ({
@@ -292,6 +300,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
     getItemDisplayName: (item: Item) => {
       return fsm.getItemDisplayName(item);
+    },
+
+    dispatch: (action: GameAction) => {
+      fsm.dispatch(action);
     },
   }), [prompt, setPrompt, updatePromptValue, addMessage]);
 

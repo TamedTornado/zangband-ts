@@ -28,6 +28,8 @@ export function CharacterModal() {
   const [activeTab, setActiveTab] = useState<TabId>('info');
   const { player } = state;
 
+  if (!player) return null;
+
   return (
     <Modal
       title="Character"
@@ -58,7 +60,7 @@ export function CharacterModal() {
 }
 
 interface TabProps {
-  player: ReturnType<typeof useGame>['state']['player'];
+  player: NonNullable<ReturnType<typeof useGame>['state']['player']>;
   depth?: number;
   turn?: number;
 }

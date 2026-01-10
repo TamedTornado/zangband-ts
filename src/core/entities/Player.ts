@@ -5,6 +5,10 @@ import type { ItemGeneration } from '../systems/ItemGeneration';
 import { type Position, type Direction, type Element, movePosition } from '../types';
 import type { ClassDef } from '../data/classes';
 import type { RaceDef } from '../data/races';
+import type { CharacterCreationData } from '../data/characterCreation';
+import { calculateStartingHP } from '../systems/StatRoller';
+import racesData from '@/data/races/races.json';
+import classesData from '@/data/classes/classes.json';
 import {
   adjIntDev,
   adjWisSav,
@@ -138,6 +142,73 @@ export class Player extends Actor {
 
     // Initialize skills
     this._skills = this.calculateSkills();
+  }
+
+  /**
+   * Create a Player from character creation data
+   */
+  static fromCreation(creation: CharacterCreationData, itemGen: ItemGeneration): Player {
+    if (!creation.raceKey || !creation.classKey || !creation.finalStats || !creation.sex) {
+      throw new Error('Incomplete character creation data');
+    }
+
+    const raceDef = racesData[creation.raceKey as keyof typeof racesData] as RaceDef;
+    const classDef = classesData[creation.classKey as keyof typeof classesData] as ClassDef;
+    const startingHP = calculateStartingHP(raceDef, classDef);
+
+    const config: PlayerConfig = {
+      id: 'player',
+      position: { x: 0, y: 0 },
+      maxHp: startingHP,
+      speed: 110,
+      stats: creation.finalStats,
+      className: classDef.name,
+      classDef: classDef,
+    };
+    if (creation.primaryRealm) config.primaryRealm = creation.primaryRealm;
+    if (creation.secondaryRealm) config.secondaryRealm = creation.secondaryRealm;
+
+    const player = new Player(config);
+
+    player.setRace(raceDef);
+
+    // Starting equipment by class
+    const STARTING_EQUIPMENT: Record<string, string[]> = {
+      warrior: ['broad_sword', 'chain_mail'],
+      mage: ['dagger'],
+      priest: ['mace'],
+      rogue: ['dagger', 'soft_leather_armour'],
+      ranger: ['dagger'],
+      paladin: ['broad_sword'],
+      warrior_mage: ['short_sword'],
+      chaos_warrior: ['broad_sword', 'metal_scale_mail'],
+      monk: ['soft_leather_armour'],
+      mindcrafter: ['dagger', 'soft_leather_armour'],
+      high_mage: ['dagger'],
+    };
+
+    const classItems = STARTING_EQUIPMENT[creation.classKey] ?? [];
+    const commonItems = ['food_rations', 'wooden_torch'];
+
+    for (const itemKey of [...classItems, ...commonItems]) {
+      const item = itemGen.createItemByKey(itemKey);
+      if (item) {
+        player.addItem(item);
+        player.equip(item);
+      }
+    }
+
+    // Give spellbooks if class uses magic
+    if (creation.primaryRealm) {
+      const book = itemGen.createItemByKey(`${creation.primaryRealm}_book_1`);
+      if (book) player.addItem(book);
+    }
+    if (creation.secondaryRealm) {
+      const book = itemGen.createItemByKey(`${creation.secondaryRealm}_book_1`);
+      if (book) player.addItem(book);
+    }
+
+    return player;
   }
 
   // Class accessors

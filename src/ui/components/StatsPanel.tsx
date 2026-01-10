@@ -4,6 +4,8 @@ export function StatsPanel() {
   const { state } = useGame();
   const { player, turn } = state;
 
+  if (!player) return null;
+
   const hpPercent = Math.max(0, Math.min(100, (player.hp / player.maxHp) * 100));
   const mpPercent = player.maxMana > 0
     ? Math.max(0, Math.min(100, (player.currentMana / player.maxMana) * 100))

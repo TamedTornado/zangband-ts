@@ -10,6 +10,7 @@ import type { Level } from '../world/Level';
 import type { Scheduler } from '../systems/Scheduler';
 import type { Coord } from '../systems/dungeon/DungeonTypes';
 import type { GameMessage } from '../fsm/GameData';
+import type { CharacterCreationData } from '../data/characterCreation';
 
 /**
  * Prompt state for inline input (rest duration, counts, etc.)
@@ -84,6 +85,9 @@ export interface GameState {
   // UI prompt state
   prompt: PromptState | null;
 
+  // Character creation state
+  characterCreation: CharacterCreationData | null;
+
   // Internal
   _messageId: number;
 }
@@ -127,6 +131,10 @@ export interface GameActions {
     downStairs: Coord[];
   }) => void;
 
+  // Character creation
+  setCharacterCreation: (data: CharacterCreationData | null) => void;
+  updateCharacterCreation: (partial: Partial<CharacterCreationData>) => void;
+
   // Reset for new game
   reset: () => void;
 }
@@ -154,6 +162,7 @@ const initialState: GameState = {
   inventoryMode: 'browse',
   stateName: 'none',
   prompt: null,
+  characterCreation: null,
   _messageId: 0,
 };
 
@@ -225,6 +234,15 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
     upStairs: data.upStairs,
     downStairs: data.downStairs,
   }),
+
+  setCharacterCreation: (characterCreation) => set({ characterCreation }),
+
+  updateCharacterCreation: (partial) => {
+    const current = get().characterCreation;
+    if (current) {
+      set({ characterCreation: { ...current, ...partial } });
+    }
+  },
 
   reset: () => set({
     ...initialState,

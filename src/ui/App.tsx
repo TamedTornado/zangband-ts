@@ -9,7 +9,18 @@ import {
   ItemSelectionModal,
   SpellSelectionModal,
 } from './components/modals';
+import { CharacterCreationModal } from './components/modals/CharacterCreationModal';
 import { useKeyboard } from './hooks/useKeyboard';
+
+const CREATION_STATES = [
+  'sexSelection',
+  'raceSelection',
+  'classSelection',
+  'realmSelection',
+  'statRolling',
+  'nameEntry',
+  'confirmation',
+];
 
 function ModalContainer() {
   const { state } = useGame();
@@ -26,7 +37,14 @@ function ModalContainer() {
 }
 
 function GameLayout() {
+  const { state } = useGame();
   useKeyboard();
+
+  const isCreating = CREATION_STATES.includes(state.stateName);
+
+  if (isCreating) {
+    return <CharacterCreationModal />;
+  }
 
   return (
     <>
