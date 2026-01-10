@@ -102,6 +102,9 @@ export interface GameState {
     stock: Array<{ name: string; price: number; quantity: number }>;
   } | null;
 
+  // Previous character for quick start (persisted to localStorage)
+  previousCharacter: CharacterCreationData | null;
+
   // Internal
   _messageId: number;
 }
@@ -156,8 +159,24 @@ export interface GameActions {
   updateShoppingMode: (mode: 'browse' | 'buying' | 'selling' | 'examining') => void;
   updateShoppingStock: (stock: GameState['shopping'] extends null ? never : NonNullable<GameState['shopping']>['stock']) => void;
 
+  // Quick start
+  setPreviousCharacter: (data: CharacterCreationData | null) => void;
+
   // Reset for new game
   reset: () => void;
+}
+
+// Load previous character from localStorage if available
+function loadPreviousCharacter(): CharacterCreationData | null {
+  try {
+    const stored = localStorage.getItem('zangband_previousCharacter');
+    if (stored) {
+      return JSON.parse(stored) as CharacterCreationData;
+    }
+  } catch {
+    // Ignore parse errors
+  }
+  return null;
 }
 
 const initialState: GameState = {
@@ -187,6 +206,7 @@ const initialState: GameState = {
   prompt: null,
   characterCreation: null,
   shopping: null,
+  previousCharacter: loadPreviousCharacter(),
   _messageId: 0,
 };
 
@@ -286,8 +306,19 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
     }
   },
 
+  setPreviousCharacter: (data) => {
+    set({ previousCharacter: data });
+    // Persist to localStorage
+    if (data) {
+      localStorage.setItem('zangband_previousCharacter', JSON.stringify(data));
+    } else {
+      localStorage.removeItem('zangband_previousCharacter');
+    }
+  },
+
   reset: () => set({
     ...initialState,
+    previousCharacter: get().previousCharacter, // Preserve for quick start
     _messageId: get()._messageId, // Preserve message ID counter
   }),
 }));

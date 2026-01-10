@@ -19,6 +19,9 @@ export class ConfirmationState implements State {
       const creation = store.characterCreation;
       if (!creation) return false;
 
+      // Save for quick start before clearing
+      store.setPreviousCharacter({ ...creation });
+
       // Create player from character creation data
       const player = Player.fromCreation(creation, fsm.itemGen);
       store.setPlayer(player);

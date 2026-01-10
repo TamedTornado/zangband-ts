@@ -4,6 +4,8 @@ import type { GameFSM } from '../../GameFSM';
 import { getGameStore } from '@/core/store/gameStore';
 import { createInitialCreationData } from '@/core/data/characterCreation';
 import { RaceSelectionState } from './RaceSelectionState';
+import { PlayingState } from '../PlayingState';
+import { Player } from '@/core/entities/Player';
 
 export class SexSelectionState implements State {
   readonly name = 'sexSelection';
@@ -28,6 +30,31 @@ export class SexSelectionState implements State {
         fsm.transition(new RaceSelectionState());
         return true;
       }
+    }
+
+    if (action.type === 'quickStart') {
+      const store = getGameStore();
+      const prev = store.previousCharacter;
+      if (!prev) return false;
+
+      // Create player directly from previous character data
+      const player = Player.fromCreation(prev, fsm.itemGen);
+      store.setPlayer(player);
+
+      // Give starting gold
+      player.addGold(200);
+
+      // Clear character creation data
+      store.setCharacterCreation(null);
+
+      // Generate town level
+      fsm.goToLevel(0);
+
+      fsm.addMessage('Welcome back to Zangband!', 'info');
+      fsm.addMessage(`${prev.name} the ${prev.raceKey} ${prev.classKey} enters the town.`, 'info');
+
+      fsm.transition(new PlayingState());
+      return true;
     }
 
     return false;

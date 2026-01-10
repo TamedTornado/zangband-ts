@@ -59,6 +59,7 @@ export type GameAction =
   | { type: 'confirmCharacter' }
   | { type: 'creationBack' }
   | { type: 'creationNext' }
+  | { type: 'quickStart' }  // Reuse previous character parameters
   // Store/shopping actions
   | { type: 'enterStore'; storeKey: string }
   | { type: 'exitStore' }

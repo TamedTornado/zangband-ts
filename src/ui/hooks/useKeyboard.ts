@@ -265,6 +265,17 @@ export function useKeyboard() {
         return;
       }
 
+      // Handle character creation - 'q' for quick start
+      if (state.stateName === 'sexSelection') {
+        if (e.key === 'q' || e.key === 'Q') {
+          e.preventDefault();
+          actions.dispatch({ type: 'quickStart' });
+          return;
+        }
+        // Let other keys fall through for normal UI handling
+        return;
+      }
+
       // Look up bindings - try with modifiers first, then plain key
       const keyWithMods = getKeyWithModifiers(e);
       const bindings = KEY_BINDINGS[keyWithMods] ?? KEY_BINDINGS[e.key] ?? [];
