@@ -175,34 +175,64 @@ function InfoTab({ player, depth, turn }: TabProps) {
 }
 
 /**
- * Skills tab - displays all 10 character skills
+ * Likert skill rating - converts numeric skill to descriptive rating
+ * Matches Zangband's likert() function from files.c
+ */
+function getSkillRating(value: number, divisor: number): { text: string; color: string } {
+  if (divisor <= 0) divisor = 1;
+
+  if (value < 0) {
+    return { text: 'Very Bad', color: '#666' };
+  }
+
+  const ratio = Math.floor(value / divisor);
+
+  if (ratio <= 1) return { text: 'Bad', color: '#f00' };
+  if (ratio === 2) return { text: 'Poor', color: '#f66' };
+  if (ratio <= 4) return { text: 'Fair', color: '#f90' };
+  if (ratio === 5) return { text: 'Good', color: '#ff0' };
+  if (ratio === 6) return { text: 'Very Good', color: '#ff0' };
+  if (ratio <= 8) return { text: 'Excellent', color: '#ff0' };
+  if (ratio <= 13) return { text: 'Superb', color: '#0f0' };
+  if (ratio <= 17) return { text: 'Chaos Rank', color: '#00f' };
+
+  // Amber level - show numeric bonus
+  const amberLevel = Math.floor(((ratio - 17) * 5) / 2);
+  return { text: `Amber [${amberLevel}]`, color: '#f0f' };
+}
+
+/**
+ * Skills tab - displays all 10 character skills with likert ratings
  */
 function SkillsTab({ player }: TabProps) {
   const skills = player.skills;
 
-  const skillLabels: Array<{ key: keyof typeof skills; label: string; description: string }> = [
-    { key: 'melee', label: 'Melee', description: 'Hand-to-hand combat' },
-    { key: 'ranged', label: 'Ranged', description: 'Bow and crossbow' },
-    { key: 'throwing', label: 'Throwing', description: 'Thrown weapons' },
-    { key: 'saving', label: 'Saving Throw', description: 'Resist magic' },
-    { key: 'stealth', label: 'Stealth', description: 'Avoid detection' },
-    { key: 'perception', label: 'Perception', description: 'Sense hidden' },
-    { key: 'searching', label: 'Searching', description: 'Find traps/doors' },
-    { key: 'disarming', label: 'Disarming', description: 'Disarm traps' },
-    { key: 'device', label: 'Magic Device', description: 'Use wands/rods' },
-    { key: 'digging', label: 'Digging', description: 'Tunnel walls' },
+  // Skill definitions with divisors from Zangband files.c
+  const skillLabels: Array<{ key: keyof typeof skills; label: string; description: string; divisor: number }> = [
+    { key: 'melee', label: 'Fighting', description: 'Hand-to-hand combat', divisor: 10 },
+    { key: 'ranged', label: 'Bows/Throw', description: 'Bow and crossbow', divisor: 10 },
+    { key: 'saving', label: 'Saving Throw', description: 'Resist magic', divisor: 10 },
+    { key: 'stealth', label: 'Stealth', description: 'Avoid detection', divisor: 1 },
+    { key: 'perception', label: 'Perception', description: 'Sense hidden', divisor: 6 },
+    { key: 'searching', label: 'Searching', description: 'Find traps/doors', divisor: 6 },
+    { key: 'disarming', label: 'Disarming', description: 'Disarm traps', divisor: 8 },
+    { key: 'device', label: 'Magic Device', description: 'Use wands/rods', divisor: 6 },
+    { key: 'digging', label: 'Digging', description: 'Tunnel walls', divisor: 10 },
   ];
 
   return (
     <div className="char-skills">
       <h4>Skills</h4>
       <div className="skills-grid">
-        {skillLabels.map(({ key, label, description }) => (
-          <div key={key} className="skill-item">
-            <span className="skill-name" title={description}>{label}:</span>
-            <span className="skill-val">{skills[key]}</span>
-          </div>
-        ))}
+        {skillLabels.map(({ key, label, description, divisor }) => {
+          const rating = getSkillRating(skills[key], divisor);
+          return (
+            <div key={key} className="skill-item">
+              <span className="skill-name" title={description}>{label}:</span>
+              <span className="skill-val" style={{ color: rating.color }}>{rating.text}</span>
+            </div>
+          );
+        })}
       </div>
       <p className="skills-note">
         Skills improve as you level up, based on your class affinity.
