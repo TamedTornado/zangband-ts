@@ -71,9 +71,7 @@ export function StoreModal() {
                 onClick={() => actions.letterSelect(item.letter)}
               >
                 <span className="item-letter">{item.letter})</span>
-                <span className="item-name">
-                  {item.quantity > 1 ? `${item.quantity}x ` : ''}{item.name}
-                </span>
+                <span className="item-name">{item.name}</span>
                 {mode === 'buy' && (
                   <span className="item-price">{item.price} gp</span>
                 )}

@@ -10,6 +10,7 @@
 
 import { RNG } from 'rot-js';
 import type { Item } from '@/core/entities/Item';
+import { pluralizeName } from '@/core/data/tval';
 
 /**
  * Potion color adjectives (from Zangband flavor.c)
@@ -224,6 +225,7 @@ export class FlavorSystem {
     const base = item.generated.baseItem;
     const type = base.type;
     const sval = base.sval;
+    const rawName = base.name; // Raw name with ~ markers for pluralization
 
     // Artifacts always show their name
     if (item.generated.artifact?.name) {
@@ -246,8 +248,8 @@ export class FlavorSystem {
         name = this.getScrollFlavorName(sval);
       }
     } else {
-      // Show real name
-      name = item.name;
+      // Show real name - use raw name for proper pluralization
+      name = this.buildDisplayName(rawName, type, quantity);
     }
 
     // Add ego item suffix if identified
@@ -257,20 +259,42 @@ export class FlavorSystem {
 
     if (!article) return name;
 
-    // Handle pluralization for quantities > 1
+    // Add quantity or article prefix
     if (quantity > 1) {
-      let plural = name;
-      if (name.endsWith('s') || name.endsWith('h')) {
-        plural = `${name}es`;
-      } else {
-        plural = `${name}s`;
-      }
-      return `${quantity} ${plural}`;
+      return `${quantity} ${name}`;
     }
 
     // Get the appropriate article (a/an)
     const art = getArticle(name, quantity);
     return `${art} ${name}`;
+  }
+
+  /**
+   * Build the display name with proper pluralization
+   */
+  private buildDisplayName(rawName: string, type: string, quantity: number): string {
+    // Use pluralizeName to handle ~ markers
+    const baseName = pluralizeName(rawName, quantity);
+
+    // Add type prefix for consumables/devices
+    switch (type) {
+      case 'potion':
+        return quantity > 1 ? `Potions of ${baseName}` : `Potion of ${baseName}`;
+      case 'scroll':
+        return quantity > 1 ? `Scrolls of ${baseName}` : `Scroll of ${baseName}`;
+      case 'ring':
+        return quantity > 1 ? `Rings of ${baseName}` : `Ring of ${baseName}`;
+      case 'amulet':
+        return quantity > 1 ? `Amulets of ${baseName}` : `Amulet of ${baseName}`;
+      case 'wand':
+        return quantity > 1 ? `Wands of ${baseName}` : `Wand of ${baseName}`;
+      case 'staff':
+        return quantity > 1 ? `Staves of ${baseName}` : `Staff of ${baseName}`;
+      case 'rod':
+        return quantity > 1 ? `Rods of ${baseName}` : `Rod of ${baseName}`;
+      default:
+        return baseName;
+    }
   }
 
   /**

@@ -173,7 +173,6 @@ describe('StoreInventory', () => {
 
       // Generate initial stock
       const initialItems = storeInventory.generateInitialStock(storeDef);
-      const initialCount = initialItems.length;
 
       // Run maintenance
       const maintainedItems = storeInventory.maintainStock(storeDef, initialItems);
