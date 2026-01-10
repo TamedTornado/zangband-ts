@@ -5,12 +5,10 @@
  * Each store has an owner with greed affecting prices.
  */
 
-import type { RNG as ROT_RNG } from 'rot-js';
 import type { Item } from '../entities/Item';
 import type { StoreDef, StoreOwner } from '../data/stores';
 import { StoreFlag } from '../data/stores';
 import { PricingSystem } from './Pricing';
-import type { ItemGeneration } from './ItemGeneration';
 
 export class Store {
   private readonly _definition: StoreDef;
@@ -219,69 +217,5 @@ export class Store {
    */
   setOwner(owner: StoreOwner): void {
     this._owner = owner;
-  }
-
-  // Stock generation
-
-  /**
-   * Generate initial stock for this store.
-   * Items are selected from sellsTypes at appropriate levels.
-   */
-  generateStock(itemGen: ItemGeneration, rng: typeof ROT_RNG): void {
-    // Home doesn't generate stock
-    if (this.isHome) {
-      return;
-    }
-
-    // Determine how many items to generate (between minKeep and maxKeep)
-    const targetCount = this._definition.minKeep +
-      rng.getUniformInt(0, this._definition.maxKeep - this._definition.minKeep);
-
-    // Get valid item types for this store
-    const types = this.sellsAll
-      ? this.getBlackMarketTypes()
-      : this._definition.sellsTypes;
-
-    if (types.length === 0) {
-      return;
-    }
-
-    // Get item keys matching our types (low level items for town stores)
-    const maxLevel = this.isBlackMarket ? 30 : 10;
-    const validKeys = itemGen.getItemKeysByTypes(types, maxLevel);
-
-    if (validKeys.length === 0) {
-      return;
-    }
-
-    // Generate items until we reach target count or run out of tries
-    let attempts = 0;
-    const maxAttempts = targetCount * 3;
-
-    while (this._stock.length < targetCount && attempts < maxAttempts) {
-      attempts++;
-
-      // Pick a random item key
-      const key = validKeys[rng.getUniformInt(0, validKeys.length - 1)];
-      const item = itemGen.createItemByKey(key);
-
-      if (item) {
-        this.addToStock(item);
-      }
-    }
-  }
-
-  /**
-   * Get item types for black market (all common types)
-   */
-  private getBlackMarketTypes(): string[] {
-    return [
-      'food', 'light', 'flask', 'spike', 'digging',
-      'sword', 'hafted', 'polearm', 'bow', 'shot', 'arrow', 'bolt',
-      'soft_armor', 'hard_armor', 'shield', 'cloak', 'helm', 'crown', 'gloves', 'boots',
-      'ring', 'amulet',
-      'potion', 'scroll',
-      'wand', 'staff', 'rod',
-    ];
   }
 }

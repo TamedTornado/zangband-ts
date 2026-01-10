@@ -163,23 +163,6 @@ export class ItemGeneration {
   }
 
   /**
-   * Get all item keys that match any of the given types and are within level range.
-   * Used for store stock generation.
-   */
-  getItemKeysByTypes(types: string[], maxLevel: number = 10): string[] {
-    const keys: string[] = [];
-    for (const [key, item] of Object.entries(this.items)) {
-      if (types.includes(item.type) && item.depth <= maxLevel) {
-        // Skip items with no value (not for sale)
-        if (item.cost > 0) {
-          keys.push(key);
-        }
-      }
-    }
-    return keys;
-  }
-
-  /**
    * Get an ego item definition by key
    */
   getEgoItemDef(key: string): EgoItemDef | undefined {
