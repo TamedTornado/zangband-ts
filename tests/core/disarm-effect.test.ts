@@ -1,21 +1,43 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { RNG } from 'rot-js';
 import { DisarmEffect } from '@/core/systems/effects/DisarmEffect';
 import { Actor } from '@/core/entities/Actor';
+import { Player } from '@/core/entities/Player';
 import { Trap } from '@/core/entities/Trap';
 import type { GPEffectContext } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
+import type { TrapDef } from '@/core/data/traps';
 
-// Mock trap definition
-const TRAP_DEF = {
+// Mock trap definition with proper TrapDef fields
+const TRAP_DEF: TrapDef = {
   key: 'pit_trap',
+  index: 1,
   name: 'pit trap',
   symbol: '^',
   color: '#fff',
-  flags: ['HIDDEN'],
-  triggerChance: 100,
+  minDepth: 1,
+  rarity: 1,
+  effect: 'FALL',
   damage: '2d6',
-  effects: [],
+  saveType: 'DEX',
+  saveDifficulty: 5,
+  flags: ['HIDDEN'],
+};
+
+// Hard trap for testing skill checks
+const HARD_TRAP_DEF: TrapDef = {
+  key: 'poison_pit',
+  index: 2,
+  name: 'poison pit',
+  symbol: '^',
+  color: 'g',
+  minDepth: 5,
+  rarity: 2,
+  effect: 'POISON',
+  damage: '4d6',
+  saveType: 'DEX',
+  saveDifficulty: 10, // Higher difficulty
+  flags: ['HIDDEN'],
 };
 
 // Mock level with traps
@@ -37,12 +59,12 @@ function createMockLevel(width = 20, height = 20) {
     },
     getMonsterAt: () => undefined,
     getMonsters: () => [],
-    // Test helper
-    addTrap: (pos: Position): Trap => {
+    // Test helper - can pass custom trap definition
+    addTrap: (pos: Position, trapDef: TrapDef = TRAP_DEF): Trap => {
       const trap = new Trap({
         id: `trap-${trapIdCounter++}`,
         position: pos,
-        definition: TRAP_DEF as any,
+        definition: trapDef,
       });
       traps.push(trap);
       return trap;
@@ -201,6 +223,144 @@ describe('DisarmEffect', () => {
 
       expect(result.success).toBe(true);
       expect(result.messages.some(m => m.includes('already') || m.includes('no trap'))).toBe(true);
+    });
+  });
+
+  describe('skill-based disarming', () => {
+    // High disarm class
+    const rogueClass = {
+      index: 0,
+      name: 'Rogue',
+      stats: { str: 2, int: 1, wis: -2, dex: 3, con: 1, chr: 0 },
+      skills: { disarm: 45, device: 32, save: 28, stealth: 5, search: 32, searchFreq: 24, melee: 65, ranged: 66 },
+      xSkills: { disarm: 15, device: 10, save: 10, stealth: 0, search: 0, searchFreq: 0, melee: 25, ranged: 30 },
+      hitDie: 6,
+      expMod: 25,
+      petUpkeepDiv: 1,
+      heavySense: false,
+      spellStat: null,
+      spellFirst: null,
+      spellWeight: null,
+      realms: [],
+      secondaryRealm: false,
+    };
+
+    // Low disarm class
+    const warriorClass = {
+      index: 1,
+      name: 'Warrior',
+      stats: { str: 5, int: -2, wis: -2, dex: 2, con: 2, chr: -1 },
+      skills: { disarm: 25, device: 18, save: 18, stealth: 1, search: 14, searchFreq: 2, melee: 70, ranged: 55 },
+      xSkills: { disarm: 12, device: 7, save: 10, stealth: 0, search: 0, searchFreq: 0, melee: 45, ranged: 45 },
+      hitDie: 9,
+      expMod: 0,
+      petUpkeepDiv: 1,
+      heavySense: false,
+      spellStat: null,
+      spellFirst: null,
+      spellWeight: null,
+      realms: [],
+      secondaryRealm: false,
+    };
+
+    function createPlayer(x: number, y: number, classDef = rogueClass): Player {
+      return new Player({
+        id: `player-${x}-${y}`,
+        position: { x, y },
+        maxHp: 100,
+        speed: 110,
+        stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
+        classDef,
+        level: 1,
+      });
+    }
+
+    it('should succeed with high disarm skill vs low difficulty', () => {
+      const effect = new DisarmEffect({
+        type: 'disarm',
+        target: 'position',
+      });
+
+      // Rogue has high disarm skill
+      const player = createPlayer(10, 10, rogueClass);
+      const level = createMockLevel();
+
+      // Easy trap (saveDifficulty: 5)
+      const trap = level.addTrap({ x: 12, y: 10 }, TRAP_DEF);
+
+      // Mock RNG to always roll low (guaranteed success for high skill)
+      const mockRNG = { ...RNG, getUniformInt: vi.fn().mockReturnValue(5) };
+
+      const context: GPEffectContext = {
+        actor: player,
+        level: level as any,
+        rng: mockRNG as typeof RNG,
+        targetPosition: { x: 12, y: 10 },
+      };
+
+      const result = effect.execute(context);
+
+      expect(result.success).toBe(true);
+      expect(trap.isDisarmed).toBe(true);
+      expect(result.messages.some(m => m.toLowerCase().includes('disarm'))).toBe(true);
+    });
+
+    it('should fail with low disarm skill vs high difficulty when roll is high', () => {
+      const effect = new DisarmEffect({
+        type: 'disarm',
+        target: 'position',
+      });
+
+      // Warrior has lower disarm skill
+      const player = createPlayer(10, 10, warriorClass);
+      const level = createMockLevel();
+
+      // Hard trap (saveDifficulty: 10)
+      const trap = level.addTrap({ x: 12, y: 10 }, HARD_TRAP_DEF);
+
+      // Mock RNG to roll high (guaranteed failure)
+      const mockRNG = { ...RNG, getUniformInt: vi.fn().mockReturnValue(95) };
+
+      const context: GPEffectContext = {
+        actor: player,
+        level: level as any,
+        rng: mockRNG as typeof RNG,
+        targetPosition: { x: 12, y: 10 },
+      };
+
+      const result = effect.execute(context);
+
+      // Should still be success (turn consumed) but trap not disarmed
+      expect(result.turnConsumed).toBe(true);
+      expect(trap.isDisarmed).toBe(false);
+      expect(result.messages.some(m => m.toLowerCase().includes('fail'))).toBe(true);
+    });
+
+    it('should always have at least 2% success chance', () => {
+      const effect = new DisarmEffect({
+        type: 'disarm',
+        target: 'position',
+      });
+
+      const player = createPlayer(10, 10, warriorClass);
+      const level = createMockLevel();
+      const trap = level.addTrap({ x: 12, y: 10 }, HARD_TRAP_DEF);
+
+      // Mock RNG to roll 1 (within 2% threshold)
+      const mockRNG = { ...RNG, getUniformInt: vi.fn().mockReturnValue(1) };
+
+      const context: GPEffectContext = {
+        actor: player,
+        level: level as any,
+        rng: mockRNG as typeof RNG,
+        targetPosition: { x: 12, y: 10 },
+      };
+
+      const result = effect.execute(context);
+
+      // Even with low skill, roll of 1 should succeed due to 2% minimum
+      expect(result.success).toBe(true);
+      expect(trap.isDisarmed).toBe(true);
     });
   });
 });

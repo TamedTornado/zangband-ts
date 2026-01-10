@@ -60,8 +60,8 @@ export class GameLoop {
     const weaponDice = Combat.parseDice(player.weaponDamage);
     weaponDice.bonus += player.weaponToDam;
 
-    // Calculate hit chance
-    const hitChance = 50 + player.weaponToHit + Math.floor(player.stats.dex / 2);
+    // Calculate hit chance (Zangband formula: melee skill + weapon bonus)
+    const hitChance = player.skills.melee + player.weaponToHit;
 
     // Test hit
     const hit = this.combat.testHit(hitChance, monsterDef?.ac ?? 0, true);

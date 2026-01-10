@@ -484,6 +484,191 @@ describe('Player gainExperience and level up', () => {
   });
 });
 
+describe('Skill advancement', () => {
+  it('should increase skills when level increases', () => {
+    const player = new Player({
+      id: 'test',
+      position: { x: 0, y: 0 },
+      maxHp: 100,
+      speed: 110,
+      stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
+      level: 1,
+      classDef: {
+        index: 0,
+        name: 'Warrior',
+        stats: { str: 5, int: -2, wis: -2, dex: 2, con: 2, chr: -1 },
+        skills: { disarm: 25, device: 18, save: 18, stealth: 1, search: 14, searchFreq: 2, melee: 70, ranged: 55 },
+        xSkills: { disarm: 12, device: 7, save: 10, stealth: 0, search: 0, searchFreq: 0, melee: 45, ranged: 45 },
+        hitDie: 9,
+        expMod: 0,
+        petUpkeepDiv: 1,
+        heavySense: false,
+        spellStat: null,
+        spellFirst: null,
+        spellWeight: null,
+        realms: [],
+        secondaryRealm: false,
+      },
+    });
+    const meleeAtLevel1 = player.skills.melee;
+
+    player.level = 10;
+
+    // xSkills.melee = 45, so at level 10: 45 * 10 / 10 = 45 more skill
+    expect(player.skills.melee).toBeGreaterThan(meleeAtLevel1);
+  });
+
+  it('should have different skill growth rates per class', () => {
+    const warriorClass = {
+      index: 0,
+      name: 'Warrior',
+      stats: { str: 5, int: -2, wis: -2, dex: 2, con: 2, chr: -1 },
+      skills: { disarm: 25, device: 18, save: 18, stealth: 1, search: 14, searchFreq: 2, melee: 70, ranged: 55 },
+      xSkills: { disarm: 12, device: 7, save: 10, stealth: 0, search: 0, searchFreq: 0, melee: 45, ranged: 45 },
+      hitDie: 9,
+      expMod: 0,
+      petUpkeepDiv: 1,
+      heavySense: false,
+      spellStat: null,
+      spellFirst: null,
+      spellWeight: null,
+      realms: [],
+      secondaryRealm: false,
+    };
+
+    const mageClass = {
+      index: 1,
+      name: 'Mage',
+      stats: { str: -5, int: 3, wis: 0, dex: 1, con: -2, chr: 1 },
+      skills: { disarm: 30, device: 36, save: 30, stealth: 2, search: 16, searchFreq: 20, melee: 34, ranged: 20 },
+      xSkills: { disarm: 7, device: 13, save: 9, stealth: 0, search: 0, searchFreq: 0, melee: 15, ranged: 15 },
+      hitDie: 0,
+      expMod: 30,
+      petUpkeepDiv: 1,
+      heavySense: false,
+      spellStat: 'int' as const,
+      spellFirst: 1,
+      spellWeight: 300,
+      realms: [],
+      secondaryRealm: false,
+    };
+
+    const warrior = new Player({
+      id: 'warrior',
+      position: { x: 0, y: 0 },
+      maxHp: 100,
+      speed: 110,
+      stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
+      level: 10,
+      classDef: warriorClass,
+    });
+
+    const mage = new Player({
+      id: 'mage',
+      position: { x: 0, y: 0 },
+      maxHp: 100,
+      speed: 110,
+      stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
+      level: 10,
+      classDef: mageClass,
+    });
+
+    // Warriors should have higher melee skill
+    expect(warrior.skills.melee).toBeGreaterThan(mage.skills.melee);
+    // Mages should have higher device skill
+    expect(mage.skills.device).toBeGreaterThan(warrior.skills.device);
+  });
+
+  it('should recalculate skills when class changes', () => {
+    const warriorClass = {
+      index: 0,
+      name: 'Warrior',
+      stats: { str: 5, int: -2, wis: -2, dex: 2, con: 2, chr: -1 },
+      skills: { disarm: 25, device: 18, save: 18, stealth: 1, search: 14, searchFreq: 2, melee: 70, ranged: 55 },
+      xSkills: { disarm: 12, device: 7, save: 10, stealth: 0, search: 0, searchFreq: 0, melee: 45, ranged: 45 },
+      hitDie: 9,
+      expMod: 0,
+      petUpkeepDiv: 1,
+      heavySense: false,
+      spellStat: null,
+      spellFirst: null,
+      spellWeight: null,
+      realms: [],
+      secondaryRealm: false,
+    };
+
+    const mageClass = {
+      index: 1,
+      name: 'Mage',
+      stats: { str: -5, int: 3, wis: 0, dex: 1, con: -2, chr: 1 },
+      skills: { disarm: 30, device: 36, save: 30, stealth: 2, search: 16, searchFreq: 20, melee: 34, ranged: 20 },
+      xSkills: { disarm: 7, device: 13, save: 9, stealth: 0, search: 0, searchFreq: 0, melee: 15, ranged: 15 },
+      hitDie: 0,
+      expMod: 30,
+      petUpkeepDiv: 1,
+      heavySense: false,
+      spellStat: 'int' as const,
+      spellFirst: 1,
+      spellWeight: 300,
+      realms: [],
+      secondaryRealm: false,
+    };
+
+    const player = new Player({
+      id: 'test',
+      position: { x: 0, y: 0 },
+      maxHp: 100,
+      speed: 110,
+      stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
+      level: 5,
+      classDef: warriorClass,
+    });
+
+    const warriorMelee = player.skills.melee;
+
+    player.setClass(mageClass);
+
+    // Melee should be different after class change
+    expect(player.skills.melee).not.toBe(warriorMelee);
+    // Mage should have lower melee skill
+    expect(player.skills.melee).toBeLessThan(warriorMelee);
+  });
+
+  it('should calculate skill based on level with class affinity formula', () => {
+    const testClass = {
+      index: 0,
+      name: 'Test',
+      stats: { str: 0, int: 0, wis: 0, dex: 0, con: 0, chr: 0 },
+      skills: { disarm: 10, device: 10, save: 10, stealth: 10, search: 10, searchFreq: 10, melee: 50, ranged: 50 },
+      xSkills: { disarm: 10, device: 10, save: 10, stealth: 10, search: 10, searchFreq: 10, melee: 30, ranged: 30 },
+      hitDie: 5,
+      expMod: 0,
+      petUpkeepDiv: 1,
+      heavySense: false,
+      spellStat: null,
+      spellFirst: null,
+      spellWeight: null,
+      realms: [],
+      secondaryRealm: false,
+    };
+
+    const player = new Player({
+      id: 'test',
+      position: { x: 0, y: 0 },
+      maxHp: 100,
+      speed: 110,
+      stats: { str: 10, int: 10, wis: 10, dex: 10, con: 10, chr: 10 },
+      level: 20,
+      classDef: testClass,
+    });
+
+    // melee = baseSkills.melee + (xSkills.melee * level / 10)
+    // = 50 + (30 * 20 / 10) = 50 + 60 = 110
+    // Plus any stat adjustments and race bonuses (default race has 0)
+    expect(player.skills.melee).toBeGreaterThanOrEqual(110);
+  });
+});
+
 describe('Level up HP/mana handling', () => {
   it('does not restore mana on level up', () => {
     const player = new Player({

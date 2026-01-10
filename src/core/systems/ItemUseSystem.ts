@@ -122,8 +122,15 @@ export function useFood(item: Item, context: ItemUseContext): ItemUseResult {
   };
 }
 
+/** Minimum chance to activate a device (5%) */
+const MIN_DEVICE_CHANCE = 5;
+
+/** Multiplier for item depth in device check */
+const DEVICE_DEPTH_MULTIPLIER = 2;
+
 /**
  * Use a device (wand, rod, staff) - executes effects and uses charges
+ * Includes a skill check: success = roll < deviceSkill - itemDepth * 2
  */
 export function useDevice(item: Item, context: ItemUseContext): ItemUseResult {
   const { player, level, monsterDataManager, targetPosition, targetDirection } = context;
@@ -148,6 +155,23 @@ export function useDevice(item: Item, context: ItemUseContext): ItemUseResult {
         itemConsumed: false,
       };
     }
+  }
+
+  // Device skill check: success = roll < deviceSkill - itemDepth * 2
+  const deviceSkill = player.skills.device;
+  const itemDepth = item.generated?.baseItem.depth ?? 1;
+  const successChance = Math.max(MIN_DEVICE_CHANCE, deviceSkill - itemDepth * DEVICE_DEPTH_MULTIPLIER);
+
+  const roll = RNG.getUniformInt(0, 99);
+  if (roll >= successChance) {
+    // Failed to activate the device
+    const energyCost = calculateDeviceEnergyCost(deviceSkill);
+    return {
+      success: true, // Turn was consumed, just failed to activate
+      messages: ['You fail to use the device properly.'],
+      energyCost,
+      itemConsumed: false, // Don't consume charge on failure
+    };
   }
 
   const effects = item.generated?.baseItem.effects as GPEffectDef[] | undefined;

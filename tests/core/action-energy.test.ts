@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+import { RNG } from 'rot-js';
 import { Player } from '@/core/entities/Player';
 import { Level } from '@/core/world/Level';
 import { ItemGeneration } from '@/core/systems/ItemGeneration';
@@ -12,6 +13,24 @@ import artifactsData from '@/data/items/artifacts.json';
 import type { ItemDef } from '@/core/data/items';
 import type { EgoItemDef } from '@/core/data/ego-items';
 import type { ArtifactDef } from '@/core/data/artifacts';
+
+// High device skill class for deterministic device tests
+const mageClass = {
+  index: 0,
+  name: 'Mage',
+  stats: { str: -5, int: 3, wis: 0, dex: 1, con: -2, chr: 1 },
+  skills: { disarm: 30, device: 80, save: 30, stealth: 2, search: 16, searchFreq: 20, melee: 34, ranged: 20 },
+  xSkills: { disarm: 7, device: 13, save: 9, stealth: 0, search: 0, searchFreq: 0, melee: 15, ranged: 15 },
+  hitDie: 0,
+  expMod: 30,
+  petUpkeepDiv: 1,
+  heavySense: false,
+  spellStat: 'int' as const,
+  spellFirst: 1,
+  spellWeight: 300,
+  realms: [],
+  secondaryRealm: false,
+};
 
 /**
  * Tests for energy consumption when using items.
@@ -175,7 +194,8 @@ describe('Item Use Energy Costs', () => {
     });
 
     it('should use charge when wand is zapped', () => {
-      const player = createPlayer();
+      // Use high device skill to ensure skill check passes
+      const player = createPlayer({ classDef: mageClass, level: 10 });
       const level = createLevel();
       const wand = itemGen.createItemByKey('wand_of_light');
 
@@ -183,12 +203,15 @@ describe('Item Use Energy Costs', () => {
       const initialCharges = wand!.charges;
       expect(initialCharges).toBeGreaterThan(0);
 
+      // Seed RNG for deterministic result
+      RNG.setSeed(12345);
       useDevice(wand!, { player, level });
       expect(wand!.charges).toBe(initialCharges - 1);
     });
 
     it('should use charge when staff is used', () => {
-      const player = createPlayer();
+      // Use high device skill to ensure skill check passes
+      const player = createPlayer({ classDef: mageClass, level: 10 });
       const level = createLevel();
       const staff = itemGen.createItemByKey('staff_of_light');
 
@@ -196,6 +219,8 @@ describe('Item Use Energy Costs', () => {
       const initialCharges = staff!.charges;
       expect(initialCharges).toBeGreaterThan(0);
 
+      // Seed RNG for deterministic result
+      RNG.setSeed(12345);
       useDevice(staff!, { player, level });
       expect(staff!.charges).toBe(initialCharges - 1);
     });

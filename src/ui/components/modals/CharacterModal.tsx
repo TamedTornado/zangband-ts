@@ -6,10 +6,11 @@ import { useGame } from '../../context/GameContext';
  * Tab configuration - matches Zangband TCL/TK character-window.tcl
  * Priv(hook): HookInfo, HookFlags, HookMutations, HookVirtues, HookNotes
  */
-type TabId = 'info' | 'flags' | 'mutations' | 'virtues' | 'notes';
+type TabId = 'info' | 'skills' | 'flags' | 'mutations' | 'virtues' | 'notes';
 
 const TABS: Array<{ id: TabId; label: string }> = [
   { id: 'info', label: 'Info' },
+  { id: 'skills', label: 'Skills' },
   { id: 'flags', label: 'Flags' },
   { id: 'mutations', label: 'Mutations' },
   { id: 'virtues', label: 'Virtues' },
@@ -50,6 +51,7 @@ export function CharacterModal() {
 
       <div className="char-tab-content">
         {activeTab === 'info' && <InfoTab player={player} depth={state.depth} turn={state.turn} />}
+        {activeTab === 'skills' && <SkillsTab player={player} />}
         {activeTab === 'flags' && <FlagsTab player={player} />}
         {activeTab === 'mutations' && <MutationsTab />}
         {activeTab === 'virtues' && <VirtuesTab />}
@@ -168,6 +170,43 @@ function InfoTab({ player, depth, turn }: TabProps) {
           <span className="char-value">{turn ?? 0}</span>
         </div>
       </div>
+    </div>
+  );
+}
+
+/**
+ * Skills tab - displays all 10 character skills
+ */
+function SkillsTab({ player }: TabProps) {
+  const skills = player.skills;
+
+  const skillLabels: Array<{ key: keyof typeof skills; label: string; description: string }> = [
+    { key: 'melee', label: 'Melee', description: 'Hand-to-hand combat' },
+    { key: 'ranged', label: 'Ranged', description: 'Bow and crossbow' },
+    { key: 'throwing', label: 'Throwing', description: 'Thrown weapons' },
+    { key: 'saving', label: 'Saving Throw', description: 'Resist magic' },
+    { key: 'stealth', label: 'Stealth', description: 'Avoid detection' },
+    { key: 'perception', label: 'Perception', description: 'Sense hidden' },
+    { key: 'searching', label: 'Searching', description: 'Find traps/doors' },
+    { key: 'disarming', label: 'Disarming', description: 'Disarm traps' },
+    { key: 'device', label: 'Magic Device', description: 'Use wands/rods' },
+    { key: 'digging', label: 'Digging', description: 'Tunnel walls' },
+  ];
+
+  return (
+    <div className="char-skills">
+      <h4>Skills</h4>
+      <div className="skills-grid">
+        {skillLabels.map(({ key, label, description }) => (
+          <div key={key} className="skill-item">
+            <span className="skill-name" title={description}>{label}:</span>
+            <span className="skill-val">{skills[key]}</span>
+          </div>
+        ))}
+      </div>
+      <p className="skills-note">
+        Skills improve as you level up, based on your class affinity.
+      </p>
     </div>
   );
 }

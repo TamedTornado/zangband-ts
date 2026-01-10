@@ -260,6 +260,7 @@ export class Player extends Actor {
     this._classDef = classDef;
     this._className = classDef.name;
     this.recalculateMana();
+    this.recalculateSkills();
   }
 
   /**
@@ -275,6 +276,7 @@ export class Player extends Actor {
   setLevel(level: number): void {
     this._level = level;
     this.recalculateMana();
+    this.recalculateSkills();
   }
 
   // Experience accessors

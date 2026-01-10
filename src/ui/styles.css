@@ -416,6 +416,43 @@ body {
   color: #555;
 }
 
+/* Skills tab */
+.char-skills h4 {
+  color: #8cf;
+  margin: 0 0 8px 0;
+  font-size: 12px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 16px;
+  margin-bottom: 12px;
+}
+
+.skill-item {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.skill-name {
+  color: #888;
+  min-width: 100px;
+}
+
+.skill-val {
+  color: #0f0;
+  font-weight: bold;
+}
+
+.skills-note {
+  color: #666;
+  font-size: 11px;
+  font-style: italic;
+  margin: 8px 0 0 0;
+}
+
 /* Notes tab */
 .notes-input {
   width: 100%;
