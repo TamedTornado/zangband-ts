@@ -7,8 +7,10 @@
 
 import type { RNG as ROTRng } from 'rot-js';
 import { Store } from './Store';
+import { StoreInventory } from './StoreInventory';
 import type { StoreDef, StoreOwner } from '../data/stores';
 import type { Position } from '../types';
+import type { ItemGeneration } from './ItemGeneration';
 import storesData from '@/data/stores/stores.json';
 import ownersData from '@/data/stores/owners.json';
 
@@ -25,9 +27,43 @@ for (const [key, value] of Object.entries(rawOwners)) {
 export class StoreManager {
   private storeInstances: Map<string, Store> = new Map();
   private storePositions: Map<string, string> = new Map(); // "x,y" -> storeKey
+  private storeInventory: StoreInventory | null = null;
+  private rng: typeof ROTRng;
 
   constructor(rng: typeof ROTRng) {
+    this.rng = rng;
     this.initializeStores(rng);
+  }
+
+  /**
+   * Set the item generation system (must be called before generateAllStoreInventories)
+   */
+  setItemGeneration(itemGen: ItemGeneration): void {
+    this.storeInventory = new StoreInventory(itemGen, this.rng);
+  }
+
+  /**
+   * Generate inventory for all stores
+   * Call this after setItemGeneration to populate stores
+   */
+  generateAllStoreInventories(): void {
+    if (!this.storeInventory) {
+      console.warn('StoreManager: Cannot generate inventories without ItemGeneration');
+      return;
+    }
+
+    for (const [key, store] of this.storeInstances) {
+      const storeDef = stores[key];
+      if (!storeDef) continue;
+
+      // Generate initial stock
+      const items = this.storeInventory.generateInitialStock(storeDef);
+
+      // Add items to store
+      for (const item of items) {
+        store.addToStock(item);
+      }
+    }
   }
 
   private initializeStores(rng: typeof ROTRng): void {

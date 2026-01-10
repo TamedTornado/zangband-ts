@@ -5,6 +5,21 @@
  */
 
 /**
+ * Theme weights for item generation (from Zangband t_info.txt)
+ * Values are percentages (0-100) that affect item selection probability
+ */
+export interface StoreTheme {
+  /** Weight for treasure items (chests, figurines, rings, amulets, crowns) */
+  treasure: number;
+  /** Weight for combat items (weapons, armor, ammo) */
+  combat: number;
+  /** Weight for magic items (potions, scrolls, wands, staves, rods, books) */
+  magic: number;
+  /** Weight for tools (food, flasks, lights, spikes, digging) */
+  tools: number;
+}
+
+/**
  * Store definition - describes a type of store
  */
 export interface StoreDef {
@@ -30,6 +45,12 @@ export interface StoreDef {
   sellsTypes: string[];
   /** Special flags */
   flags?: string[];
+  /** Theme weights for item generation */
+  theme?: StoreTheme;
+  /** Minimum level for generated items */
+  levelMin?: number;
+  /** Maximum level for generated items */
+  levelMax?: number;
 }
 
 /**

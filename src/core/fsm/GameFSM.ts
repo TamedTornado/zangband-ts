@@ -67,6 +67,10 @@ export class GameFSM {
   readonly storeManager = new StoreManager(RNG);
 
   constructor(initialState: State) {
+    // Initialize store inventory generation
+    this.storeManager.setItemGeneration(this.itemGen);
+    this.storeManager.generateAllStoreInventories();
+
     // Don't init game data here - let character creation handle it
     // or call initGameData() explicitly for debug/restart scenarios
     this.transition(initialState);

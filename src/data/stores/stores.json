@@ -9,7 +9,10 @@
     "maxKeep": 18,
     "turnover": 9,
     "buysTypes": ["food", "light", "flask", "spike"],
-    "sellsTypes": ["food", "light", "flask", "spike", "digging"]
+    "sellsTypes": ["food", "light", "flask", "spike", "digging"],
+    "theme": { "treasure": 0, "combat": 50, "magic": 0, "tools": 50 },
+    "levelMin": 0,
+    "levelMax": 10
   },
   "armory": {
     "key": "armory",
@@ -21,7 +24,10 @@
     "maxKeep": 18,
     "turnover": 9,
     "buysTypes": ["soft_armor", "hard_armor", "dragon_armor", "shield", "cloak", "helm", "crown", "gloves", "boots"],
-    "sellsTypes": ["soft_armor", "hard_armor", "dragon_armor", "shield", "cloak", "helm", "crown", "gloves", "boots"]
+    "sellsTypes": ["soft_armor", "hard_armor", "dragon_armor", "shield", "cloak", "helm", "crown", "gloves", "boots"],
+    "theme": { "treasure": 0, "combat": 100, "magic": 0, "tools": 0 },
+    "levelMin": 5,
+    "levelMax": 30
   },
   "weaponsmith": {
     "key": "weaponsmith",
@@ -33,7 +39,10 @@
     "maxKeep": 18,
     "turnover": 9,
     "buysTypes": ["sword", "hafted", "polearm", "digging", "bow", "shot", "arrow", "bolt"],
-    "sellsTypes": ["sword", "hafted", "polearm", "digging", "bow", "shot", "arrow", "bolt"]
+    "sellsTypes": ["sword", "hafted", "polearm", "digging", "bow", "shot", "arrow", "bolt"],
+    "theme": { "treasure": 0, "combat": 100, "magic": 0, "tools": 0 },
+    "levelMin": 5,
+    "levelMax": 20
   },
   "temple": {
     "key": "temple",
@@ -46,7 +55,10 @@
     "turnover": 9,
     "buysTypes": ["potion", "scroll", "hafted", "life_book", "nature_book"],
     "sellsTypes": ["potion", "scroll", "hafted", "life_book", "nature_book"],
-    "flags": ["BLESSED_ONLY"]
+    "flags": ["BLESSED_ONLY"],
+    "theme": { "treasure": 33, "combat": 33, "magic": 34, "tools": 0 },
+    "levelMin": 5,
+    "levelMax": 20
   },
   "alchemy": {
     "key": "alchemy",
@@ -58,7 +70,10 @@
     "maxKeep": 18,
     "turnover": 9,
     "buysTypes": ["potion", "scroll"],
-    "sellsTypes": ["potion", "scroll"]
+    "sellsTypes": ["potion", "scroll"],
+    "theme": { "treasure": 0, "combat": 0, "magic": 100, "tools": 0 },
+    "levelMin": 5,
+    "levelMax": 30
   },
   "magic": {
     "key": "magic",
@@ -70,7 +85,10 @@
     "maxKeep": 18,
     "turnover": 9,
     "buysTypes": ["wand", "staff", "rod", "ring", "amulet", "sorcery_book", "chaos_book", "arcane_book", "trump_book", "death_book"],
-    "sellsTypes": ["wand", "staff", "rod", "ring", "amulet", "sorcery_book", "chaos_book", "arcane_book", "trump_book", "death_book"]
+    "sellsTypes": ["wand", "staff", "rod", "ring", "amulet", "sorcery_book", "chaos_book", "arcane_book", "trump_book", "death_book"],
+    "theme": { "treasure": 0, "combat": 0, "magic": 100, "tools": 0 },
+    "levelMin": 20,
+    "levelMax": 40
   },
   "black_market": {
     "key": "black_market",
@@ -83,7 +101,10 @@
     "turnover": 9,
     "buysTypes": [],
     "sellsTypes": [],
-    "flags": ["BUYS_ALL", "SELLS_ALL", "BLACK_MARKET"]
+    "flags": ["BUYS_ALL", "SELLS_ALL", "BLACK_MARKET"],
+    "theme": { "treasure": 25, "combat": 25, "magic": 25, "tools": 25 },
+    "levelMin": 20,
+    "levelMax": 50
   },
   "home": {
     "key": "home",
