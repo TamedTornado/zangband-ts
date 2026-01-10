@@ -9,6 +9,7 @@ import type { RNG as ROTRng } from 'rot-js';
 import { Store } from './Store';
 import type { StoreDef, StoreOwner } from '../data/stores';
 import type { Position } from '../types';
+import type { ItemGeneration } from './ItemGeneration';
 import storesData from '@/data/stores/stores.json';
 import ownersData from '@/data/stores/owners.json';
 
@@ -26,15 +27,17 @@ export class StoreManager {
   private storeInstances: Map<string, Store> = new Map();
   private storePositions: Map<string, string> = new Map(); // "x,y" -> storeKey
 
-  constructor(rng: typeof ROTRng) {
-    this.initializeStores(rng);
+  constructor(rng: typeof ROTRng, itemGen: ItemGeneration) {
+    this.initializeStores(rng, itemGen);
   }
 
-  private initializeStores(rng: typeof ROTRng): void {
+  private initializeStores(rng: typeof ROTRng, itemGen: ItemGeneration): void {
     // Create a store instance for each store definition
     for (const [key, storeDef] of Object.entries(stores)) {
       // Get owner list for this store type
       const ownerList = owners[key];
+      let store: Store;
+
       if (!ownerList || ownerList.length === 0) {
         // Use a default owner if none defined
         const defaultOwner: StoreOwner = {
@@ -43,14 +46,17 @@ export class StoreManager {
           purse: 5000,
           greed: 100,
         };
-        this.storeInstances.set(key, new Store(storeDef, defaultOwner));
-        continue;
+        store = new Store(storeDef, defaultOwner);
+      } else {
+        // Randomly select an owner
+        const ownerIndex = rng.getUniformInt(0, ownerList.length - 1);
+        const owner = ownerList[ownerIndex];
+        store = new Store(storeDef, owner);
       }
 
-      // Randomly select an owner
-      const ownerIndex = rng.getUniformInt(0, ownerList.length - 1);
-      const owner = ownerList[ownerIndex];
-      this.storeInstances.set(key, new Store(storeDef, owner));
+      // Generate initial stock
+      store.generateStock(itemGen, rng);
+      this.storeInstances.set(key, store);
     }
   }
 

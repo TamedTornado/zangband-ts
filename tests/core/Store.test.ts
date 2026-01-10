@@ -1,7 +1,15 @@
 import { describe, it, expect } from 'vitest';
+import { RNG } from 'rot-js';
 import { Store } from '@/core/systems/Store';
 import type { StoreDef, StoreOwner } from '@/core/data/stores';
 import { Item } from '@/core/entities/Item';
+import { ItemGeneration } from '@/core/systems/ItemGeneration';
+import itemsData from '@/data/items/items.json';
+import egoItemsData from '@/data/items/ego-items.json';
+import artifactsData from '@/data/items/artifacts.json';
+import type { ItemDef } from '@/core/data/items';
+import type { EgoItemDef } from '@/core/data/ego-items';
+import type { ArtifactDef } from '@/core/data/artifacts';
 
 // Test fixtures
 function createTestItem(overrides: Partial<{
@@ -252,6 +260,69 @@ describe('Store', () => {
 
       const normal = new Store(alchemyStoreDef, testOwner);
       expect(normal.isHome).toBe(false);
+    });
+  });
+
+  describe('generateStock', () => {
+    const itemGen = new ItemGeneration({
+      items: itemsData as unknown as Record<string, ItemDef>,
+      egoItems: egoItemsData as unknown as Record<string, EgoItemDef>,
+      artifacts: artifactsData as unknown as Record<string, ArtifactDef>,
+    });
+
+    it('generates stock items matching sellsTypes', () => {
+      RNG.setSeed(12345);
+      const store = new Store(alchemyStoreDef, testOwner);
+      store.generateStock(itemGen, RNG);
+
+      expect(store.stock.length).toBeGreaterThan(0);
+
+      // All items should be potions or scrolls
+      for (const item of store.stock) {
+        const type = item.generated?.baseItem.type;
+        expect(['potion', 'scroll']).toContain(type);
+      }
+    });
+
+    it('generates stock between minKeep and maxKeep count', () => {
+      RNG.setSeed(12345);
+      const store = new Store(alchemyStoreDef, testOwner);
+      store.generateStock(itemGen, RNG);
+
+      // Stock count should be between minKeep and maxKeep
+      expect(store.stock.length).toBeGreaterThanOrEqual(alchemyStoreDef.minKeep);
+      expect(store.stock.length).toBeLessThanOrEqual(alchemyStoreDef.maxKeep);
+    });
+
+    it('does not generate stock for home', () => {
+      RNG.setSeed(12345);
+      const store = new Store(homeDef, testOwner);
+      store.generateStock(itemGen, RNG);
+
+      expect(store.stock.length).toBe(0);
+    });
+
+    it('generates varied stock for black market', () => {
+      RNG.setSeed(12345);
+      const store = new Store(blackMarketDef, testOwner);
+      store.generateStock(itemGen, RNG);
+
+      expect(store.stock.length).toBeGreaterThan(0);
+      // Black market can sell anything, so we just check it has items
+    });
+
+    it('generates appropriate items for general store', () => {
+      RNG.setSeed(12345);
+      const store = new Store(generalStoreDef, testOwner);
+      store.generateStock(itemGen, RNG);
+
+      expect(store.stock.length).toBeGreaterThan(0);
+
+      // General store sells food, light, flask, spike, digging
+      for (const item of store.stock) {
+        const type = item.generated?.baseItem.type;
+        expect(['food', 'light', 'flask', 'spike', 'digging']).toContain(type);
+      }
     });
   });
 });

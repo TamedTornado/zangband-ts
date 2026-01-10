@@ -64,7 +64,7 @@ export class GameFSM {
   readonly itemGen = itemGen;
   readonly flavorSystem = new FlavorSystem(RNG);
   readonly effectManager = getEffectManager();
-  readonly storeManager = new StoreManager(RNG);
+  readonly storeManager = new StoreManager(RNG, itemGen);
 
   constructor(initialState: State) {
     // Don't init game data here - let character creation handle it
