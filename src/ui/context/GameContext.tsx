@@ -41,7 +41,7 @@ interface GameState {
   // Shopping state
   shopping: {
     storeKey: string;
-    mode: 'buy' | 'sell';
+    mode: 'browse' | 'buying' | 'selling' | 'examining';
     storeName: string;
     ownerName: string;
     stock: Array<{ name: string; price: number; quantity: number }>;

@@ -96,7 +96,7 @@ export interface GameState {
   // Shopping state
   shopping: {
     storeKey: string;
-    mode: 'buy' | 'sell';
+    mode: 'browse' | 'buying' | 'selling' | 'examining';
     storeName: string;
     ownerName: string;
     stock: Array<{ name: string; price: number; quantity: number }>;
@@ -153,7 +153,7 @@ export interface GameActions {
 
   // Shopping
   setShopping: (shopping: GameState['shopping']) => void;
-  updateShoppingMode: (mode: 'buy' | 'sell') => void;
+  updateShoppingMode: (mode: 'browse' | 'buying' | 'selling' | 'examining') => void;
   updateShoppingStock: (stock: GameState['shopping'] extends null ? never : NonNullable<GameState['shopping']>['stock']) => void;
 
   // Reset for new game

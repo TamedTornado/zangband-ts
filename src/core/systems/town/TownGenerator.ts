@@ -189,18 +189,12 @@ export class TownGenerator {
     store: StorePlacement,
     entrancePos: Position
   ): void {
-    // Draw rectangular building with walls, leaving entrance open
+    // Fill entire building with walls, leaving only entrance open
     for (let y = store.y; y < store.y + store.height; y++) {
       for (let x = store.x; x < store.x + store.width; x++) {
-        const isEdge =
-          x === store.x ||
-          x === store.x + store.width - 1 ||
-          y === store.y ||
-          y === store.y + store.height - 1;
-
         const isEntrance = x === entrancePos.x && y === entrancePos.y;
 
-        if (isEdge && !isEntrance) {
+        if (!isEntrance) {
           const tile = level.getTile({ x, y });
           if (tile) {
             tile.terrain = TOWN_WALL;

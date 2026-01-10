@@ -105,6 +105,19 @@ describe('TownGenerator', () => {
       expect(town.level.isWalkable({ x: store.x, y: store.y })).toBe(false);
     });
 
+    it('store interiors are solid (not walkable)', () => {
+      const generator = new TownGenerator();
+      const town = generator.generate(testLayout);
+
+      // General store is at x:3, y:2, width:7, height:4
+      // Interior tile at x:5, y:3 should be blocked
+      const store = testLayout.stores[0];
+      const interiorX = store.x + 2;
+      const interiorY = store.y + 1;
+
+      expect(town.level.isWalkable({ x: interiorX, y: interiorY })).toBe(false);
+    });
+
     it('places floor tiles in the town area', () => {
       const generator = new TownGenerator();
       const town = generator.generate(testLayout);

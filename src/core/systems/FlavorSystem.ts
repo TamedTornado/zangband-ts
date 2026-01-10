@@ -10,7 +10,41 @@
 
 import { RNG } from 'rot-js';
 import type { Item } from '@/core/entities/Item';
-import { pluralizeName } from '@/core/data/tval';
+
+/**
+ * Pluralize a name based on Zangband's ~ marker convention.
+ * The ~ in names like "& Set~ of Gauntlets" marks where 's' or 'es' goes.
+ * Rules from flavor.c:
+ * - If quantity is 1, just remove the ~
+ * - If quantity > 1 and char before ~ is 's' or 'h', add 'es'
+ * - Otherwise add 's'
+ */
+function pluralizeName(rawName: string, quantity: number): string {
+  // Remove leading "& " if present
+  let name = rawName.replace(/^& /, '');
+
+  if (quantity === 1) {
+    // Just remove tildes for singular
+    return name.replace(/~/g, '');
+  }
+
+  // For plural, replace each ~ with appropriate suffix
+  let result = '';
+  for (let i = 0; i < name.length; i++) {
+    if (name[i] === '~') {
+      // Look at previous character
+      const prev = i > 0 ? name[i - 1] : '';
+      if (prev === 's' || prev === 'h') {
+        result += 'es';
+      } else {
+        result += 's';
+      }
+    } else {
+      result += name[i];
+    }
+  }
+  return result;
+}
 
 /**
  * Potion color adjectives (from Zangband flavor.c)

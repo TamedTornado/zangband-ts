@@ -1,6 +1,5 @@
-import { Entity, type EntityConfig } from './Entity';
+import { Entity, type EntityConfig } from './Entity'
 import type { GeneratedItem } from '../systems/ItemGeneration';
-import { buildItemDisplayName } from '../data/tval';
 
 export interface ItemConfig extends EntityConfig {
   quantity?: number;
@@ -22,19 +21,40 @@ export class Item extends Entity {
     return this.generated?.baseItem.type ?? 'unknown';
   }
 
-  /** Display name computed from type and base name */
+  /**
+   * Raw base name for this item (singular form, no article).
+   * For full display name with quantity/article, use FlavorSystem.getItemDisplayName()
+   */
   get name(): string {
     if (!this.generated) return 'unknown item';
     const base = this.generated.baseItem;
+
     // Artifacts have their own names
     if (this.generated.artifact?.name) {
       return this.generated.artifact.name;
     }
-    // Build name from type + base name + ego
-    let name = buildItemDisplayName(base.name, base.type);
+
+    // Clean the raw name (remove & and ~ markers)
+    const cleanName = base.name.replace(/^& /, '').replace(/~/g, '');
+
+    // Add type prefix for certain item types
+    let name: string;
+    switch (base.type) {
+      case 'potion': name = `Potion of ${cleanName}`; break;
+      case 'scroll': name = `Scroll of ${cleanName}`; break;
+      case 'ring': name = `Ring of ${cleanName}`; break;
+      case 'amulet': name = `Amulet of ${cleanName}`; break;
+      case 'wand': name = `Wand of ${cleanName}`; break;
+      case 'staff': name = `Staff of ${cleanName}`; break;
+      case 'rod': name = `Rod of ${cleanName}`; break;
+      default: name = cleanName;
+    }
+
+    // Add ego item suffix
     if (this.generated.egoItem?.name) {
       name = `${name} ${this.generated.egoItem.name}`;
     }
+
     // Append charge/timeout info for devices when identified
     if (this.generated.identified !== false) {
       if (this.isWand || this.isStaff) {
@@ -51,7 +71,6 @@ export class Item extends Entity {
             name = `${name} (charging)`;
           }
         }
-        // When ready (timeout == 0), show nothing - Zangband behavior
       }
     }
     return name;

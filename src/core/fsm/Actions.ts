@@ -62,6 +62,7 @@ export type GameAction =
   // Store/shopping actions
   | { type: 'enterStore'; storeKey: string }
   | { type: 'exitStore' }
+  | { type: 'storeCommand'; command: 'purchase' | 'sell' | 'examine' }
   | { type: 'buyItem'; itemIndex: number; quantity?: number }
   | { type: 'sellItem'; inventoryIndex: number; quantity?: number }
   | { type: 'toggleStorePage' };

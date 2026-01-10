@@ -1,8 +1,11 @@
 /**
  * StoreModal - Store interface for buying/selling items
  *
- * Displays store inventory (buy mode) or player inventory (sell mode)
- * with prices and keyboard selection.
+ * Implements Zangband-style store flow:
+ * - browse: see store inventory, press commands (p/s/x)
+ * - buying: select item to purchase
+ * - selling: select item from inventory to sell
+ * - examining: select item to inspect
  */
 
 import { useGame } from '@/ui/context/GameContext';
@@ -19,20 +22,38 @@ export function StoreModal() {
 
   const { storeName, ownerName, mode, stock } = shopping;
 
-  // Build items to display based on mode
-  const displayItems = mode === 'buy'
-    ? stock.map((item, idx) => ({
+  // Determine what items to show based on mode
+  const showPlayerInventory = mode === 'selling';
+  const items = showPlayerInventory
+    ? player.inventory.map((item, idx) => ({
+        letter: LETTERS[idx] ?? '?',
+        name: actions.getItemDisplayName(item),
+        price: 0, // Sell prices shown in messages
+        quantity: item.quantity,
+      }))
+    : stock.map((item, idx) => ({
         letter: LETTERS[idx] ?? '?',
         name: item.name,
         price: item.price,
         quantity: item.quantity,
-      }))
-    : player.inventory.map((item, idx) => ({
-        letter: LETTERS[idx] ?? '?',
-        name: actions.getItemDisplayName(item),
-        price: 0, // TODO: Get sell price from store
-        quantity: item.quantity,
       }));
+
+  // Determine prompt text based on mode
+  const getPromptText = () => {
+    switch (mode) {
+      case 'buying':
+        return 'Which item are you interested in?';
+      case 'selling':
+        return 'Which item do you want to sell?';
+      case 'examining':
+        return 'Which item do you want to examine?';
+      default:
+        return null;
+    }
+  };
+
+  const promptText = getPromptText();
+  const isSelecting = mode !== 'browse';
 
   return (
     <div className="store-modal">
@@ -42,39 +63,31 @@ export function StoreModal() {
         <div className="store-gold">Gold: {player.gold}</div>
       </div>
 
-      <div className="store-tabs">
-        <button
-          className={`store-tab ${mode === 'buy' ? 'active' : ''}`}
-          onClick={() => actions.dispatch({ type: 'toggleStorePage' })}
-        >
-          Buy (b)
-        </button>
-        <button
-          className={`store-tab ${mode === 'sell' ? 'active' : ''}`}
-          onClick={() => actions.dispatch({ type: 'toggleStorePage' })}
-        >
-          Sell (s)
-        </button>
+      {/* Show inventory title */}
+      <div className="store-inventory-title">
+        {showPlayerInventory ? 'Your Inventory' : 'Store Inventory'}
       </div>
 
+      {/* Prompt when selecting */}
+      {promptText && (
+        <div className="store-prompt">{promptText}</div>
+      )}
+
       <div className="store-inventory">
-        {displayItems.length === 0 ? (
+        {items.length === 0 ? (
           <div className="store-empty">
-            {mode === 'buy' ? 'No items for sale.' : 'No items to sell.'}
+            {showPlayerInventory ? 'You have nothing to sell.' : 'No items for sale.'}
           </div>
         ) : (
           <ul className="store-item-list">
-            {displayItems.map((item, idx) => (
+            {items.map((item, idx) => (
               <li
                 key={idx}
-                className="store-item"
-                onClick={() => actions.letterSelect(item.letter)}
+                className={`store-item ${isSelecting ? 'selectable' : ''}`}
+                onClick={() => isSelecting && actions.letterSelect(item.letter)}
               >
-                <span className="item-letter">{item.letter})</span>
-                <span className="item-name">{item.name}</span>
-                {mode === 'buy' && (
-                  <span className="item-price">{item.price} gp</span>
-                )}
+                {item.letter}) {item.name}
+                {!showPlayerInventory && ` - ${item.price} gp`}
               </li>
             ))}
           </ul>
@@ -82,8 +95,12 @@ export function StoreModal() {
       </div>
 
       <div className="store-footer">
-        <div className="store-help">
-          Press a letter to {mode === 'buy' ? 'buy' : 'sell'}, Tab to switch modes, ESC to exit
+        <div className="store-commands">
+          {mode === 'browse' ? (
+            'p) Purchase   s) Sell   x) Examine   ESC) Exit'
+          ) : (
+            'ESC) Cancel'
+          )}
         </div>
       </div>
     </div>

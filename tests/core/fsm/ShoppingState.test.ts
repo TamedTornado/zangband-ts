@@ -130,14 +130,14 @@ describe('ShoppingState', () => {
       expect(state.storeKey).toBe('alchemy');
     });
 
-    it('defaults to buy mode', () => {
+    it('defaults to browse mode', () => {
       state = new ShoppingState('alchemy');
-      expect(state.mode).toBe('buy');
+      expect(state.mode).toBe('browse');
     });
   });
 
   describe('exitStore', () => {
-    it('returns to PlayingState when exitStore action received', () => {
+    it('returns to PlayingState when in browse mode', () => {
       state = new ShoppingState('alchemy');
       const mockPlayer = createMockPlayer();
       const fsm = createMockFSM(mockPlayer, store);
@@ -150,22 +150,64 @@ describe('ShoppingState', () => {
       const transitionedState = (fsm.transition as any).mock.calls[0][0];
       expect(transitionedState).toBeInstanceOf(PlayingState);
     });
-  });
 
-  describe('toggleStorePage', () => {
-    it('toggles between buy and sell modes', () => {
+    it('returns to browse mode when in buying mode', () => {
       state = new ShoppingState('alchemy');
+      const potion = createTestItem({ type: 'potion', cost: 50 });
+      store.addToStock(potion);
+
       const mockPlayer = createMockPlayer();
       const fsm = createMockFSM(mockPlayer, store);
       state.onEnter(fsm);
 
-      expect(state.mode).toBe('buy');
+      // Enter buying mode
+      state.handleAction(fsm, { type: 'storeCommand', command: 'purchase' });
+      expect(state.mode).toBe('buying');
 
-      state.handleAction(fsm, { type: 'toggleStorePage' });
-      expect(state.mode).toBe('sell');
+      // ESC should return to browse, not exit
+      state.handleAction(fsm, { type: 'exitStore' });
+      expect(state.mode).toBe('browse');
+      expect(fsm.transition).not.toHaveBeenCalled();
+    });
+  });
 
-      state.handleAction(fsm, { type: 'toggleStorePage' });
-      expect(state.mode).toBe('buy');
+  describe('storeCommand', () => {
+    it('purchase command enters buying mode', () => {
+      state = new ShoppingState('alchemy');
+      const potion = createTestItem({ type: 'potion', cost: 50 });
+      store.addToStock(potion);
+
+      const mockPlayer = createMockPlayer();
+      const fsm = createMockFSM(mockPlayer, store);
+      state.onEnter(fsm);
+
+      state.handleAction(fsm, { type: 'storeCommand', command: 'purchase' });
+      expect(state.mode).toBe('buying');
+    });
+
+    it('sell command enters selling mode', () => {
+      state = new ShoppingState('alchemy');
+      const potion = createTestItem({ type: 'potion', cost: 50 });
+
+      const mockPlayer = createMockPlayer({ items: [potion] });
+      const fsm = createMockFSM(mockPlayer, store);
+      state.onEnter(fsm);
+
+      state.handleAction(fsm, { type: 'storeCommand', command: 'sell' });
+      expect(state.mode).toBe('selling');
+    });
+
+    it('examine command enters examining mode', () => {
+      state = new ShoppingState('alchemy');
+      const potion = createTestItem({ type: 'potion', cost: 50 });
+      store.addToStock(potion);
+
+      const mockPlayer = createMockPlayer();
+      const fsm = createMockFSM(mockPlayer, store);
+      state.onEnter(fsm);
+
+      state.handleAction(fsm, { type: 'storeCommand', command: 'examine' });
+      expect(state.mode).toBe('examining');
     });
   });
 
@@ -210,7 +252,6 @@ describe('ShoppingState', () => {
       const mockPlayer = createMockPlayer({ gold: 100, items: [potion] });
       const fsm = createMockFSM(mockPlayer, store);
       state.onEnter(fsm);
-      state.handleAction(fsm, { type: 'toggleStorePage' }); // Switch to sell mode
 
       const handled = state.handleAction(fsm, { type: 'sellItem', inventoryIndex: 0 });
 
@@ -226,7 +267,6 @@ describe('ShoppingState', () => {
       const mockPlayer = createMockPlayer({ gold: 100, items: [sword] });
       const fsm = createMockFSM(mockPlayer, store);
       state.onEnter(fsm);
-      state.handleAction(fsm, { type: 'toggleStorePage' }); // Switch to sell mode
 
       state.handleAction(fsm, { type: 'sellItem', inventoryIndex: 0 });
 
@@ -236,7 +276,7 @@ describe('ShoppingState', () => {
   });
 
   describe('letterSelect', () => {
-    it('converts letter to item index for buying', () => {
+    it('in browse mode, shows help message', () => {
       state = new ShoppingState('alchemy');
       const potion = createTestItem({ type: 'potion', cost: 50 });
       store.addToStock(potion);
@@ -245,20 +285,41 @@ describe('ShoppingState', () => {
       const fsm = createMockFSM(mockPlayer, store);
       state.onEnter(fsm);
 
+      // In browse mode, letters should show help
+      state.handleAction(fsm, { type: 'letterSelect', letter: 'a' });
+
+      expect(mockPlayer.spendGold).not.toHaveBeenCalled();
+      expect(fsm.addMessage).toHaveBeenCalledWith(expect.stringContaining('Press p)'), 'info');
+    });
+
+    it('in buying mode, converts letter to item index for purchase', () => {
+      state = new ShoppingState('alchemy');
+      const potion = createTestItem({ type: 'potion', cost: 50 });
+      store.addToStock(potion);
+
+      const mockPlayer = createMockPlayer({ gold: 500 });
+      const fsm = createMockFSM(mockPlayer, store);
+      state.onEnter(fsm);
+
+      // Enter buying mode first
+      state.handleAction(fsm, { type: 'storeCommand', command: 'purchase' });
+
       // 'a' = index 0
       state.handleAction(fsm, { type: 'letterSelect', letter: 'a' });
 
       expect(mockPlayer.spendGold).toHaveBeenCalled();
     });
 
-    it('converts letter to inventory index for selling', () => {
+    it('in selling mode, converts letter to inventory index', () => {
       state = new ShoppingState('alchemy');
       const potion = createTestItem({ type: 'potion', cost: 100 });
 
       const mockPlayer = createMockPlayer({ gold: 100, items: [potion] });
       const fsm = createMockFSM(mockPlayer, store);
       state.onEnter(fsm);
-      state.handleAction(fsm, { type: 'toggleStorePage' }); // Switch to sell mode
+
+      // Enter selling mode first
+      state.handleAction(fsm, { type: 'storeCommand', command: 'sell' });
 
       // 'a' = index 0
       state.handleAction(fsm, { type: 'letterSelect', letter: 'a' });

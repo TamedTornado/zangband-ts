@@ -46,6 +46,11 @@ export const Action = {
   ConfirmTarget: 'action:confirm_target',
   CancelTarget: 'action:cancel_target',
   ShowList: 'action:show_list',
+  // Store commands
+  StorePurchase: 'action:store_purchase',
+  StoreSell: 'action:store_sell',
+  StoreExamine: 'action:store_examine',
+  ExitStore: 'action:exit_store',
 } as const;
 
 export type Action = (typeof Action)[keyof typeof Action];
@@ -80,11 +85,8 @@ const DIRECTION_KEYS: Record<string, Direction>[] = [
     '3': Direction.SouthEast,
   },
   // numpad navigation keys (Shift+numpad reports these instead of digits)
+  // Note: Arrow keys are NOT included here as they're already in the first set
   {
-    ArrowUp: Direction.North,     // Shift+Numpad8
-    ArrowDown: Direction.South,   // Shift+Numpad2
-    ArrowLeft: Direction.West,    // Shift+Numpad4
-    ArrowRight: Direction.East,   // Shift+Numpad6
     Home: Direction.NorthWest,    // Shift+Numpad7
     PageUp: Direction.NorthEast,  // Shift+Numpad9
     End: Direction.SouthWest,     // Shift+Numpad1
@@ -101,56 +103,61 @@ const AXIS_BINDINGS: { axis: Axis; modifiers: string[] }[] = [
 ];
 
 /**
- * Action bindings - non-directional inputs
+ * Action key bindings - maps actions to their trigger keys.
+ * Modifiers are encoded in the string (e.g., "shift+E").
+ * Multiple actions can share the same key - all are dispatched.
  */
-const ACTION_BINDINGS: { key: string; modifiers: string[]; action: Action }[] = [
+const ACTION_KEYS: Partial<Record<Action, string | string[]>> = {
   // Stairs
-  { key: '>', modifiers: [], action: Action.GoDownStairs },
-  { key: '<', modifiers: [], action: Action.GoUpStairs },
+  [Action.GoDownStairs]: '>',
+  [Action.GoUpStairs]: '<',
   // Items
-  { key: 'g', modifiers: [], action: Action.Pickup },
-  { key: 'w', modifiers: [], action: Action.Wield },
-  { key: 'd', modifiers: [], action: Action.Drop },
-  { key: 't', modifiers: [], action: Action.Takeoff },
-  { key: 'q', modifiers: [], action: Action.Quaff },
-  { key: 'r', modifiers: [], action: Action.Read },
-  { key: 'E', modifiers: ['shift'], action: Action.Eat },
-  { key: 'z', modifiers: [], action: Action.Zap },
-  { key: 'a', modifiers: [], action: Action.Zap }, // Alias: aim wand
+  [Action.Pickup]: 'g',
+  [Action.Wield]: 'w',
+  [Action.Drop]: 'd',
+  [Action.Takeoff]: 't',
+  [Action.Quaff]: 'q',
+  [Action.Read]: 'r',
+  [Action.Eat]: 'shift+E',
+  [Action.Zap]: ['z', 'a'],  // z = zap, a = aim (alias)
   // Magic
-  { key: 'm', modifiers: [], action: Action.Cast },
-  { key: 'G', modifiers: ['shift'], action: Action.Study },
+  [Action.Cast]: 'm',
+  [Action.Study]: 'shift+G',
   // Modals
-  { key: 'i', modifiers: [], action: Action.ToggleInventory },
-  { key: 'e', modifiers: [], action: Action.ToggleEquipment },
-  { key: 'C', modifiers: ['shift'], action: Action.ToggleCharacter },
+  [Action.ToggleInventory]: 'i',
+  [Action.ToggleEquipment]: 'e',
+  [Action.ToggleCharacter]: 'shift+C',
   // Other
-  { key: 'R', modifiers: ['shift'], action: Action.Rest },
-  { key: 'n', modifiers: [], action: Action.RepeatLastCommand },
+  [Action.Rest]: 'shift+R',
+  [Action.RepeatLastCommand]: 'n',
+  [Action.EnterStore]: 'Enter',
   // Targeting
-  { key: 'x', modifiers: [], action: Action.Look },
-  { key: '*', modifiers: [], action: Action.Target },
-  { key: 'Tab', modifiers: [], action: Action.CycleTarget },
-  { key: 'Enter', modifiers: [], action: Action.EnterStore },  // In playing state: enter store; elsewhere: confirm
-  { key: '5', modifiers: [], action: Action.ConfirmTarget },  // Numpad 5 = use last target
-  { key: '.', modifiers: [], action: Action.ConfirmTarget },  // '.' = use last target
-  { key: 'Escape', modifiers: [], action: Action.CancelTarget },
-  { key: '?', modifiers: [], action: Action.ShowList },
-];
+  [Action.Look]: 'x',
+  [Action.Target]: '*',
+  [Action.CycleTarget]: 'Tab',
+  [Action.ConfirmTarget]: ['5', '.'],  // Numpad 5 or period
+  [Action.CancelTarget]: 'Escape',
+  [Action.ShowList]: '?',
+  // Store commands (x overlaps with Look, Escape overlaps with CancelTarget)
+  [Action.StorePurchase]: 'p',
+  [Action.StoreSell]: 's',
+  [Action.StoreExamine]: 'x',
+  [Action.ExitStore]: 'Escape',
+};
 
 /**
- * Build lookup key from modifiers and key
+ * Build the complete key binding map.
+ * Returns an array of inputs per key to support overlapping bindings.
  */
-function buildLookupKey(modifiers: string[], key: string): string {
-  if (modifiers.length === 0) return key;
-  return [...modifiers, key].join('+');
-}
+function buildKeyBindings(): Record<string, ResolvedInput[]> {
+  const bindings: Record<string, ResolvedInput[]> = {};
 
-/**
- * Build the complete key binding map from axis and action bindings
- */
-function buildKeyBindings(): Record<string, ResolvedInput> {
-  const bindings: Record<string, ResolvedInput> = {};
+  function addBinding(lookupKey: string, input: ResolvedInput) {
+    if (!bindings[lookupKey]) {
+      bindings[lookupKey] = [];
+    }
+    bindings[lookupKey].push(input);
+  }
 
   // Compose axis bindings with direction keys
   for (const axisBinding of AXIS_BINDINGS) {
@@ -158,19 +165,20 @@ function buildKeyBindings(): Record<string, ResolvedInput> {
       for (const [key, direction] of Object.entries(directionSet)) {
         // For shifted single-char keys, the browser reports uppercase (k -> K)
         // Multi-char keys like ArrowUp stay as-is
-        const actualKey = axisBinding.modifiers.includes('shift') && key.length === 1
-          ? key.toUpperCase()
-          : key;
-        const lookupKey = buildLookupKey(axisBinding.modifiers, actualKey);
-        bindings[lookupKey] = { type: 'axis', axis: axisBinding.axis, direction };
+        const hasShift = axisBinding.modifiers.includes('shift');
+        const actualKey = hasShift && key.length === 1 ? key.toUpperCase() : key;
+        const lookupKey = hasShift ? `shift+${actualKey}` : actualKey;
+        addBinding(lookupKey, { type: 'axis', axis: axisBinding.axis, direction });
       }
     }
   }
 
-  // Add action bindings
-  for (const actionBinding of ACTION_BINDINGS) {
-    const lookupKey = buildLookupKey(actionBinding.modifiers, actionBinding.key);
-    bindings[lookupKey] = { type: 'action', action: actionBinding.action };
+  // Add action bindings from ACTION_KEYS
+  for (const [action, keys] of Object.entries(ACTION_KEYS)) {
+    const keyList = Array.isArray(keys) ? keys : [keys];
+    for (const key of keyList) {
+      addBinding(key, { type: 'action', action: action as Action });
+    }
   }
 
   return bindings;
@@ -225,6 +233,11 @@ const ACTION_HANDLERS: Record<Action, (actions: GameActions) => void> = {
   [Action.ConfirmTarget]: (a) => a.confirmTarget(),
   [Action.CancelTarget]: (a) => a.cancelTarget(),
   [Action.ShowList]: (a) => a.showList(),
+  // Store commands
+  [Action.StorePurchase]: (a) => a.dispatch({ type: 'storeCommand', command: 'purchase' }),
+  [Action.StoreSell]: (a) => a.dispatch({ type: 'storeCommand', command: 'sell' }),
+  [Action.StoreExamine]: (a) => a.dispatch({ type: 'storeCommand', command: 'examine' }),
+  [Action.ExitStore]: (a) => a.dispatch({ type: 'exitStore' }),
 };
 
 export function useKeyboard() {
@@ -252,9 +265,13 @@ export function useKeyboard() {
         return;
       }
 
-      // Look up binding - try with modifiers first, then plain key
+      // Look up bindings - try with modifiers first, then plain key
       const keyWithMods = getKeyWithModifiers(e);
-      const binding = KEY_BINDINGS[keyWithMods] ?? KEY_BINDINGS[e.key];
+      const bindings = KEY_BINDINGS[keyWithMods] ?? KEY_BINDINGS[e.key] ?? [];
+
+      // Helper to find first binding of a type
+      const findAxis = () => bindings.find((b): b is Extract<ResolvedInput, { type: 'axis' }> => b.type === 'axis');
+      const hasAction = (action: Action) => bindings.some(b => b.type === 'action' && b.action === action);
 
       // Handle item selection mode - route a-z to letterSelect, Escape to cancel
       if (state.stateName === 'itemSelection') {
@@ -293,35 +310,20 @@ export function useKeyboard() {
         return;
       }
 
-      // Handle shopping mode - route a-z to letterSelect, Tab to toggle mode, Escape to exit
-      if (state.stateName === 'shopping') {
-        e.preventDefault();
-        if (e.key >= 'a' && e.key <= 'z' && !e.ctrlKey && !e.altKey) {
-          actions.letterSelect(e.key);
-        } else if (e.key === 'Tab' || e.key === 'b' || e.key === 's') {
-          // Toggle between buy/sell modes
-          actions.dispatch({ type: 'toggleStorePage' });
-        } else if (e.key === 'Escape') {
-          actions.dispatch({ type: 'exitStore' });
-        }
-        return;
-      }
-
       // Handle direction targeting - route direction keys
       if (state.stateName === 'directionTargeting') {
         e.preventDefault();
-        if (binding?.type === 'axis') {
-          // Direction keys - dispatch the direction via moveCursor for now
-          // DirectionTargetingState will interpret this
-          actions.moveCursor(binding.direction);
+        const axis = findAxis();
+        if (axis) {
+          actions.moveCursor(axis.direction);
         } else if (e.key === 'Escape') {
           actions.cancelTarget();
         }
         return;
       }
 
-      // No binding - check for letter (a-z) to dispatch letterSelect
-      if (!binding) {
+      // No bindings - check for letter (a-z) to dispatch letterSelect
+      if (bindings.length === 0) {
         if (e.key.length === 1 && e.key >= 'a' && e.key <= 'z' && !e.ctrlKey && !e.altKey) {
           e.preventDefault();
           actions.letterSelect(e.key);
@@ -332,17 +334,14 @@ export function useKeyboard() {
       // Handle inventory/equipment/character FSM states
       if (state.stateName === 'inventory' || state.stateName === 'equipment' || state.stateName === 'character') {
         e.preventDefault();
-        // Allow toggle actions to close the view
-        if (binding.type === 'action') {
-          if (binding.action === Action.ToggleInventory && state.stateName === 'inventory') {
-            ACTION_HANDLERS[binding.action](actions);
-          } else if (binding.action === Action.ToggleEquipment && state.stateName === 'equipment') {
-            ACTION_HANDLERS[binding.action](actions);
-          } else if (binding.action === Action.ToggleCharacter && state.stateName === 'character') {
-            ACTION_HANDLERS[binding.action](actions);
-          } else if (binding.action === Action.CancelTarget) {
-            actions.cancelTarget();
-          }
+        if (hasAction(Action.ToggleInventory) && state.stateName === 'inventory') {
+          ACTION_HANDLERS[Action.ToggleInventory](actions);
+        } else if (hasAction(Action.ToggleEquipment) && state.stateName === 'equipment') {
+          ACTION_HANDLERS[Action.ToggleEquipment](actions);
+        } else if (hasAction(Action.ToggleCharacter) && state.stateName === 'character') {
+          ACTION_HANDLERS[Action.ToggleCharacter](actions);
+        } else if (hasAction(Action.CancelTarget)) {
+          actions.cancelTarget();
         }
         return;
       }
@@ -350,29 +349,35 @@ export function useKeyboard() {
       // Handle targeting mode - route movement to cursor, allow targeting actions
       if (state.stateName === 'targeting') {
         e.preventDefault();
-        if (binding.type === 'axis') {
-          actions.moveCursor(binding.direction);
-        } else if (binding.action === Action.CycleTarget ||
-                   binding.action === Action.ConfirmTarget ||
-                   binding.action === Action.CancelTarget ||
-                   binding.action === Action.EnterStore ||  // Enter also confirms in targeting mode
-                   binding.action === Action.Target) {  // '*' to enter cursor mode
-          // EnterStore in targeting mode should act as confirm
-          if (binding.action === Action.EnterStore) {
-            actions.confirmTarget();
-          } else {
-            ACTION_HANDLERS[binding.action](actions);
-          }
+        const axis = findAxis();
+        if (axis) {
+          actions.moveCursor(axis.direction);
+        } else if (hasAction(Action.CycleTarget)) {
+          ACTION_HANDLERS[Action.CycleTarget](actions);
+        } else if (hasAction(Action.ConfirmTarget) || hasAction(Action.EnterStore)) {
+          actions.confirmTarget();
+        } else if (hasAction(Action.CancelTarget)) {
+          actions.cancelTarget();
+        } else if (hasAction(Action.Target)) {
+          ACTION_HANDLERS[Action.Target](actions);
         }
         return;
       }
 
-      // Execute the binding
+      // Execute all bindings - states will handle what they care about
       e.preventDefault();
-      if (binding.type === 'axis') {
-        AXIS_HANDLERS[binding.axis](binding.direction, actions);
-      } else {
-        ACTION_HANDLERS[binding.action](actions);
+      for (const binding of bindings) {
+        if (binding.type === 'axis') {
+          AXIS_HANDLERS[binding.axis](binding.direction, actions);
+        } else {
+          ACTION_HANDLERS[binding.action](actions);
+        }
+      }
+
+      // Also dispatch letterSelect for letter keys (even if they have bindings)
+      // This allows states like shopping to handle letter selection
+      if (e.key.length === 1 && e.key >= 'a' && e.key <= 'z' && !e.ctrlKey && !e.altKey) {
+        actions.letterSelect(e.key);
       }
     }
 
