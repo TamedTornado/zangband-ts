@@ -33,6 +33,7 @@ export interface LevelConfig {
  * Interface for Level - used by effects and for test mocks
  */
 export interface ILevel {
+  readonly levelType: 'dungeon' | 'wilderness';
   readonly width: number;
   readonly height: number;
   readonly depth: number;
@@ -75,6 +76,7 @@ export interface ILevel {
 }
 
 export class Level implements ILevel {
+  readonly levelType = 'dungeon' as const;
   readonly width: number;
   readonly height: number;
   readonly depth: number;

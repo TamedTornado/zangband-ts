@@ -24,7 +24,7 @@ import { ShoppingState } from './ShoppingState';
 import { WildernessRestoreState } from './WildernessRestoreState';
 import { isWildernessLevel } from '../../world/WildernessLevel';
 import { Direction, movePosition } from '../../types';
-import { RunSystem } from '../../systems/RunSystem';
+import { RunSystem, type RunContext } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, VIEW_RADIUS, HP_REGEN_RATE } from '../../constants';
 import { getGameStore } from '@/core/store/gameStore';
 
@@ -201,157 +201,31 @@ export class PlayingState implements State {
       return;
     }
 
-    // Use wilderness-specific running or dungeon running
-    if (isWilderness) {
-      this.handleWildernessRun(fsm, dir);
-    } else {
-      this.handleDungeonRun(fsm, dir);
-    }
-  }
-
-  /**
-   * Handle running in wilderness - simpler open-area running.
-   * TODO: Could add road-following logic, stopping when new POIs come into view.
-   */
-  private handleWildernessRun(fsm: GameFSM, dir: Direction): void {
-    const store = getGameStore();
-    const player = store.player!;
-    const level = store.level! as import('../../world/WildernessLevel').WildernessLevel;
-
-    let stepsRun = 0;
-    let interruptReason = '';
-    const startHp = player.hp;
-    const MAX_RUN_STEPS = 100;
-
-    while (stepsRun < MAX_RUN_STEPS) {
-      const newPos = movePosition(player.position, dir);
-
-      if (!level.isWalkable(newPos)) {
-        if (stepsRun === 0) interruptReason = 'Something blocks your path.';
-        break;
-      }
-
-      if (level.getMonsterAt(newPos)) {
-        if (stepsRun === 0) interruptReason = 'Something blocks your path.';
-        break;
-      }
-
-      const tile = level.getTile(newPos);
-      if (tile?.terrain.flags.includes('DOOR')) break;
-
-      // Move
-      stepsRun++;
-      store.incrementTurn();
-      level.movePlayer(newPos.x, newPos.y);
-      store.setWildernessPosition(player.position.x, player.position.y);
-
-      // Mark tiles as explored during run
-      fsm.fovSystem.computeAndMark(level, player.position, VIEW_RADIUS);
-
-      fsm.completeTurn(ENERGY_PER_TURN);
-
-      if (player.isDead) break;
-
-      // Interruption checks
-      if (player.hp < startHp) {
-        interruptReason = 'You are being attacked!';
-        break;
-      }
-
-      const visibleMonster = fsm.fovSystem.getVisibleMonster(level, player.position, VISION_RADIUS);
-      if (visibleMonster) {
-        interruptReason = `You see a ${fsm.getMonsterName(visibleMonster)}.`;
-        break;
-      }
-
-      // Check for store entrance
-      const storeKey = fsm.storeManager.getStoreKeyAt(player.position);
-      if (storeKey) {
-        const storeInstance = fsm.storeManager.getStore(storeKey);
-        if (storeInstance) {
-          fsm.addMessage(`You arrive at ${storeInstance.definition.name}.`, 'info');
+    const ctx: RunContext = {
+      level,
+      player,
+      fovSystem: fsm.fovSystem,
+      storeManager: fsm.storeManager,
+      wildernessMap: store.wildernessMap,
+      visionRadius: VISION_RADIUS,
+      viewRadius: VIEW_RADIUS,
+      onMoved: () => {
+        store.incrementTurn();
+        if (isWilderness) {
+          store.setWildernessPosition(player.position.x, player.position.y);
         }
-        break;
-      }
-    }
+      },
+      onStepComplete: () => {
+        fsm.completeTurn(ENERGY_PER_TURN);
+      },
+      getMonsterName: (monster) => fsm.getMonsterName(monster),
+    };
 
-    if (interruptReason) {
-      fsm.addMessage(interruptReason, 'danger');
-    }
+    const result = RunSystem.run(ctx, dir);
 
-    this.checkPlayerDeath(fsm);
-  }
-
-  /**
-   * Handle running in dungeons - uses RunSystem for corridor following.
-   */
-  private handleDungeonRun(fsm: GameFSM, dir: Direction): void {
-    const store = getGameStore();
-    const player = store.player!;
-    const level = store.level!;
-
-    const runState = RunSystem.initRun(level, player.position, dir);
-    let runDir = runState.direction;
-    let stepsRun = 0;
-    let interruptReason = '';
-    const startHp = player.hp;
-    const MAX_RUN_STEPS = 100;
-
-    while (stepsRun < MAX_RUN_STEPS) {
-      const newPos = movePosition(player.position, runDir);
-
-      if (!level.isWalkable(newPos)) {
-        if (stepsRun === 0) interruptReason = 'Something blocks your path.';
-        break;
-      }
-
-      const tile = level.getTile(newPos);
-      if (tile?.terrain.flags.includes('DOOR')) break;
-
-      // Move
-      stepsRun++;
-      store.incrementTurn();
-      player.position = newPos;
-
-      // Mark tiles as explored during run (FOV normally only updates on React render)
-      fsm.fovSystem.computeAndMark(level, player.position, VIEW_RADIUS);
-
-      fsm.completeTurn(ENERGY_PER_TURN);
-
-      if (player.isDead) break;
-
-      // Interruption checks
-      if (player.hp < startHp) {
-        interruptReason = 'You are being attacked!';
-        break;
-      }
-
-      const visibleMonster = fsm.fovSystem.getVisibleMonster(level, player.position, VISION_RADIUS);
-      if (visibleMonster) {
-        interruptReason = `You see a ${fsm.getMonsterName(visibleMonster)}.`;
-        break;
-      }
-
-      const itemsHere = level.getItemsAt(newPos);
-      if (itemsHere.length > 0) {
-        const text = itemsHere.length === 1
-          ? `You see ${fsm.getItemDisplayName(itemsHere[0]!)} here.`
-          : `You see ${itemsHere.length} items here.`;
-        fsm.addMessage(text, 'info');
-        break;
-      }
-
-      // Run test
-      const result = RunSystem.testRun(level, newPos, runState);
-      if (result.spottedMonster) {
-        interruptReason = `You see a ${fsm.getMonsterName(result.spottedMonster)}.`;
-      }
-      if (!result.canContinue) break;
-      runDir = result.newDirection;
-    }
-
-    if (interruptReason) {
-      fsm.addMessage(interruptReason, 'danger');
+    // Add messages from run
+    for (const msg of result.messages) {
+      fsm.addMessage(msg.text, msg.type);
     }
 
     this.checkPlayerDeath(fsm);

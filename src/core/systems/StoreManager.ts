@@ -141,4 +141,25 @@ export class StoreManager {
   getStoreKeys(): string[] {
     return Array.from(this.storeInstances.keys());
   }
+
+  /**
+   * Get all store positions as "x,y" keys
+   */
+  getStorePositionKeys(): string[] {
+    return Array.from(this.storePositions.keys());
+  }
+
+  /**
+   * Find stores visible in the given set of visible tile keys.
+   * Returns array of { storeKey, posKey } for each visible store entrance.
+   */
+  getVisibleStores(visibleTiles: Set<string>): { storeKey: string; posKey: string }[] {
+    const result: { storeKey: string; posKey: string }[] = [];
+    for (const [posKey, storeKey] of this.storePositions) {
+      if (visibleTiles.has(posKey)) {
+        result.push({ storeKey, posKey });
+      }
+    }
+    return result;
+  }
 }

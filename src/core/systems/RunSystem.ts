@@ -1,6 +1,12 @@
 import { Direction, movePosition, type Position } from '../types';
 import type { ILevel } from '../world/Level';
 import type { Monster } from '../entities/Monster';
+import type { Actor } from '../entities/Actor';
+import type { StoreManager } from './StoreManager';
+import type { WildernessMap } from './wilderness/WildernessGenerator';
+import type { FOVSystem } from './FOV';
+import { isWildernessLevel, type WildernessLevel } from '../world/WildernessLevel';
+import { WILD_BLOCK_SIZE } from '../data/WildernessTypes';
 
 /**
  * Running algorithm ported from Zangband src/cmd1.c line 2708
@@ -46,7 +52,270 @@ export interface RunStepResult {
   spottedMonster?: Monster;
 }
 
+// =============================================================================
+// POI Tracking for Wilderness
+// =============================================================================
+
+export interface POI {
+  type: 'store' | 'dungeon' | 'town';
+  key: string;
+  name: string;
+  posKey: string;
+}
+
+function getVisiblePOIs(
+  visibleTiles: Set<string>,
+  storeManager: StoreManager,
+  wildernessMap: WildernessMap | null
+): POI[] {
+  const pois: POI[] = [];
+
+  // Check store entrances
+  const visibleStores = storeManager.getVisibleStores(visibleTiles);
+  for (const { storeKey, posKey } of visibleStores) {
+    const store = storeManager.getStore(storeKey);
+    if (store) {
+      pois.push({
+        type: 'store',
+        key: storeKey,
+        name: store.definition.name,
+        posKey,
+      });
+    }
+  }
+
+  // Check dungeon entrances from wilderness map
+  if (wildernessMap) {
+    for (const place of wildernessMap.places) {
+      if (place.type === 'dungeon') {
+        const dungeonX = place.x * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
+        const dungeonY = place.y * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
+        const posKey = `${dungeonX},${dungeonY}`;
+
+        if (visibleTiles.has(posKey)) {
+          pois.push({
+            type: 'dungeon',
+            key: place.key,
+            name: place.name,
+            posKey,
+          });
+        }
+      }
+    }
+  }
+
+  return pois;
+}
+
+function getPOISpotMessage(poi: POI): string {
+  switch (poi.type) {
+    case 'store':
+      return `You spot the entrance to ${poi.name}.`;
+    case 'dungeon':
+      return `You spot the entrance to ${poi.name}.`;
+    case 'town':
+      return `You spot ${poi.name} in the distance.`;
+    default:
+      return `You spot something interesting.`;
+  }
+}
+
+// =============================================================================
+// Run Result and Context
+// =============================================================================
+
+export interface RunResult {
+  stepsRun: number;
+  messages: { text: string; type: 'info' | 'danger' }[];
+  playerDied: boolean;
+}
+
+export interface RunContext {
+  level: ILevel;
+  player: Actor;
+  fovSystem: FOVSystem;
+  storeManager: StoreManager;
+  wildernessMap: WildernessMap | null;
+  visionRadius: number;
+  viewRadius: number;
+  onMoved: () => void; // Called after move, before FOV (incrementTurn, setWildernessPosition)
+  onStepComplete: () => void; // Called after FOV (completeTurn)
+  getMonsterName: (monster: Monster) => string;
+}
+
 export class RunSystem {
+  /**
+   * Execute a run in the given direction.
+   * Handles both dungeon (corridor-following) and wilderness (open-area) running.
+   */
+  static run(ctx: RunContext, dir: Direction): RunResult {
+    if (isWildernessLevel(ctx.level)) {
+      return this.runWilderness(ctx, dir, ctx.level);
+    } else {
+      return this.runDungeon(ctx, dir);
+    }
+  }
+
+  /**
+   * Wilderness running - open area with POI detection.
+   * Stops when stores or dungeon entrances come into view.
+   */
+  private static runWilderness(
+    ctx: RunContext,
+    dir: Direction,
+    level: WildernessLevel
+  ): RunResult {
+    const { player, fovSystem, storeManager, wildernessMap, visionRadius, viewRadius } = ctx;
+    const messages: { text: string; type: 'info' | 'danger' }[] = [];
+    let stepsRun = 0;
+    const startHp = player.hp;
+    const MAX_RUN_STEPS = 100;
+
+    // Track POIs we've already seen (including at start)
+    // Use viewRadius (not visionRadius) to match what we use during steps
+    const initialFov = fovSystem.compute(level, player.position, viewRadius);
+    const initialPOIs = getVisiblePOIs(initialFov, storeManager, wildernessMap);
+    const seenPOIs = new Set(initialPOIs.map(p => p.posKey));
+
+    while (stepsRun < MAX_RUN_STEPS) {
+      const newPos = movePosition(player.position, dir);
+
+      // Check for obstacles
+      if (!level.isWalkable(newPos)) {
+        if (stepsRun === 0) {
+          messages.push({ text: 'Something blocks your path.', type: 'danger' });
+        }
+        break;
+      }
+
+      if (level.getMonsterAt(newPos)) {
+        if (stepsRun === 0) {
+          messages.push({ text: 'Something blocks your path.', type: 'danger' });
+        }
+        break;
+      }
+
+      const tile = level.getTile(newPos);
+      if (tile?.terrain.flags.includes('DOOR')) break;
+
+      // Move
+      stepsRun++;
+      level.movePlayer(newPos.x, newPos.y);
+      ctx.onMoved();
+
+      // Compute FOV at new position
+      const visibleTiles = fovSystem.computeAndMark(level, player.position, viewRadius);
+
+      ctx.onStepComplete();
+
+      if (player.isDead) break;
+
+      // Check for damage (being attacked)
+      if (player.hp < startHp) {
+        messages.push({ text: 'You are being attacked!', type: 'danger' });
+        break;
+      }
+
+      // Check for visible monsters
+      const visibleMonster = fovSystem.getVisibleMonster(level, player.position, visionRadius);
+      if (visibleMonster) {
+        messages.push({ text: `You see a ${ctx.getMonsterName(visibleMonster)}.`, type: 'danger' });
+        break;
+      }
+
+      // Check for newly visible POIs
+      const visiblePOIs = getVisiblePOIs(visibleTiles, storeManager, wildernessMap);
+      let firstNewPOI: POI | null = null;
+      for (const poi of visiblePOIs) {
+        if (!seenPOIs.has(poi.posKey)) {
+          seenPOIs.add(poi.posKey);  // Add ALL new POIs to seen set
+          if (!firstNewPOI) {
+            firstNewPOI = poi;  // But only announce the first
+          }
+        }
+      }
+      if (firstNewPOI) {
+        messages.push({ text: getPOISpotMessage(firstNewPOI), type: 'info' });
+        break;
+      }
+    }
+
+    return { stepsRun, messages, playerDied: player.isDead };
+  }
+
+  /**
+   * Dungeon running - corridor following algorithm.
+   */
+  private static runDungeon(ctx: RunContext, dir: Direction): RunResult {
+    const { level, player, fovSystem, visionRadius, viewRadius } = ctx;
+    const messages: { text: string; type: 'info' | 'danger' }[] = [];
+    let stepsRun = 0;
+    const startHp = player.hp;
+    const MAX_RUN_STEPS = 100;
+
+    const runState = this.initRun(level, player.position, dir);
+    let runDir = runState.direction;
+
+    while (stepsRun < MAX_RUN_STEPS) {
+      const newPos = movePosition(player.position, runDir);
+
+      if (!level.isWalkable(newPos)) {
+        if (stepsRun === 0) {
+          messages.push({ text: 'Something blocks your path.', type: 'danger' });
+        }
+        break;
+      }
+
+      const tile = level.getTile(newPos);
+      if (tile?.terrain.flags.includes('DOOR')) break;
+
+      // Move
+      stepsRun++;
+      player.position = newPos;
+      ctx.onMoved();
+
+      // Mark tiles as explored
+      fovSystem.computeAndMark(level, player.position, viewRadius);
+
+      ctx.onStepComplete();
+
+      if (player.isDead) break;
+
+      // Check for damage
+      if (player.hp < startHp) {
+        messages.push({ text: 'You are being attacked!', type: 'danger' });
+        break;
+      }
+
+      // Check for visible monsters
+      const visibleMonster = fovSystem.getVisibleMonster(level, player.position, visionRadius);
+      if (visibleMonster) {
+        messages.push({ text: `You see a ${ctx.getMonsterName(visibleMonster)}.`, type: 'danger' });
+        break;
+      }
+
+      // Check for items
+      const itemsHere = level.getItemsAt(newPos);
+      if (itemsHere.length > 0) {
+        const text = itemsHere.length === 1
+          ? `You see an item here.`
+          : `You see ${itemsHere.length} items here.`;
+        messages.push({ text, type: 'info' });
+        break;
+      }
+
+      // Run corridor-following test
+      const result = this.testRun(level, newPos, runState);
+      if (result.spottedMonster) {
+        messages.push({ text: `You see a ${ctx.getMonsterName(result.spottedMonster)}.`, type: 'danger' });
+      }
+      if (!result.canContinue) break;
+      runDir = result.newDirection;
+    }
+
+    return { stepsRun, messages, playerDied: player.isDead };
+  }
+
   /**
    * Initialize run state for a new run
    */

@@ -35,10 +35,12 @@ import type { MonsterDataManager } from '../data/MonsterDataManager';
  * Type guard to check if a level is a WildernessLevel.
  */
 export function isWildernessLevel(level: ILevel): level is WildernessLevel {
-  return level instanceof WildernessLevel;
+  return level.levelType === 'wilderness';
 }
 
 export class WildernessLevel implements ILevel {
+  readonly levelType = 'wilderness' as const;
+
   /** Visible width in tiles (WILD_VIEW * WILD_BLOCK_SIZE = 144) */
   readonly width = WILD_VIEW * WILD_BLOCK_SIZE;
 

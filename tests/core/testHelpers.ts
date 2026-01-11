@@ -86,6 +86,7 @@ export function createMockLevel(
   const traps: import('@/core/entities/Trap').Trap[] = [];
 
   return {
+    levelType: 'dungeon' as const,
     width,
     height,
     depth,
