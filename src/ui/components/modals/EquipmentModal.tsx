@@ -22,14 +22,18 @@ const EQUIPMENT_SLOTS: Array<{ slot: EquipmentSlot; label: string; letter: strin
   { slot: 'boots', label: 'Feet', letter: 'l' },
 ];
 
+// Weapon types that should show damage dice
+const WEAPON_TYPES = ['sword', 'hafted', 'polearm', 'bow', 'crossbow', 'digging'];
+
 /**
  * Format item display string with stats
  */
 function formatItemWithStats(item: Item, baseName: string): string {
   let display = baseName;
 
-  // Add damage for weapons
-  if (item.damage && item.damage !== '0d0') {
+  // Add damage for weapons only (not lights, rings, etc.)
+  const isWeapon = WEAPON_TYPES.includes(item.type);
+  if (isWeapon && item.damage && item.damage !== '0d0') {
     display += ` (${item.damage})`;
     if (item.toHit !== 0 || item.toDam !== 0) {
       display += ` (${item.toHit >= 0 ? '+' : ''}${item.toHit},${item.toDam >= 0 ? '+' : ''}${item.toDam})`;
