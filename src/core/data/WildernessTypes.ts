@@ -43,7 +43,8 @@ export const NUM_TOWNS = 20;
 export const NUM_DUNGEON = 20;
 
 /** Size of wilderness map in blocks (256x256 = 4096x4096 tiles) */
-export const MAX_WILD = 256;
+// Original Zangband uses WILD_SIZE = 129
+export const MAX_WILD = 129;
 
 // =============================================================================
 // INFO FLAGS (from wild.h / defines.h)

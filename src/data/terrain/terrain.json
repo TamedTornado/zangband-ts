@@ -1107,5 +1107,15 @@
       "STORE"
     ],
     "storeKey": "home"
+  },
+  "road": {
+    "key": "road",
+    "index": 148,
+    "name": "road",
+    "symbol": ".",
+    "color": "Y",
+    "flags": [
+      "USE_TRANS"
+    ]
   }
 }

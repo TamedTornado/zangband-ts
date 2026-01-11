@@ -520,9 +520,11 @@ export class WildernessGenerator {
     for (let i = 0; i < this.places.length; i++) {
       const place1 = this.places[i];
 
-      // Find closest other place within ROAD_DIST
-      let closestDist = Infinity;
-      let closestPlace: WildPlace | null = null;
+      // Find closest other place, preferring those within ROAD_DIST
+      let closestDistInRange = Infinity;
+      let closestPlaceInRange: WildPlace | null = null;
+      let closestDistAny = Infinity;
+      let closestPlaceAny: WildPlace | null = null;
 
       for (let j = 0; j < this.places.length; j++) {
         if (i === j) continue;
@@ -530,14 +532,30 @@ export class WildernessGenerator {
         const place2 = this.places[j];
         const dist = Math.abs(place1.x - place2.x) + Math.abs(place1.y - place2.y);
 
-        if (dist < ROAD_DIST && dist < closestDist) {
-          closestDist = dist;
-          closestPlace = place2;
+        // Track closest within ROAD_DIST
+        if (dist < ROAD_DIST && dist < closestDistInRange) {
+          closestDistInRange = dist;
+          closestPlaceInRange = place2;
+        }
+
+        // Also track absolute closest (fallback for isolated places)
+        if (dist < closestDistAny) {
+          closestDistAny = dist;
+          closestPlaceAny = place2;
         }
       }
 
+      // Use in-range neighbor if found, otherwise fallback to nearest
+      const closestPlace = closestPlaceInRange ?? closestPlaceAny;
+
       if (closestPlace) {
-        this.roadLink(place1.x, place1.y, closestPlace.x, closestPlace.y);
+        // Connect from center of each place (not corner)
+        // Per C code road_connect(): "Dodgy hack = just output median place square"
+        const x1 = place1.x + Math.floor(place1.xsize / 2);
+        const y1 = place1.y + Math.floor(place1.ysize / 2);
+        const x2 = closestPlace.x + Math.floor(closestPlace.xsize / 2);
+        const y2 = closestPlace.y + Math.floor(closestPlace.ysize / 2);
+        this.roadLink(x1, y1, x2, y2);
       }
     }
   }

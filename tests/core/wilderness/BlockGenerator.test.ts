@@ -290,7 +290,7 @@ describe('WildBlockGenerator', () => {
   });
 
   describe('road overlay', () => {
-    it('should add road tiles when block has WILD_INFO_ROAD flag', () => {
+    it('should draw road when current block and neighbor have road flags', () => {
       const block: WildBlock = {
         wild: 1,
         place: 0,
@@ -299,21 +299,121 @@ describe('WildBlockGenerator', () => {
         monProb: 100,
       };
 
-      const tiles = generator.generateBlock(block, 0, 0, 42);
+      // Neighbor road info: current block (5) and east neighbor (6) have roads
+      // Block has road flag, so Mode B applies - checks all 8 directions
+      const neighborRoads = {
+        levels: [0, 0, 0, 0, 0, WILD_BLOCK_SIZE * 150, WILD_BLOCK_SIZE * 150, 0, 0, 0],
+        hasRoadFlag: true,
+      };
+
+      const tiles = generator.generateBlock(block, 0, 0, 42, neighborRoads);
 
       // Should have some road features
       let hasRoad = false;
       for (let y = 0; y < WILD_BLOCK_SIZE && !hasRoad; y++) {
         for (let x = 0; x < WILD_BLOCK_SIZE && !hasRoad; x++) {
-          // Check if it's a road feature (FEAT_FLOOR or similar)
           if (tiles[y][x].info & WILD_INFO_ROAD) {
             hasRoad = true;
           }
         }
       }
 
-      // Road flag should cause road overlay
       expect(hasRoad).toBe(true);
+    });
+
+    it('should not draw road when no neighbors have road flags', () => {
+      const block: WildBlock = {
+        wild: 1,
+        place: 0,
+        info: 0, // No road flag
+        monGen: 10,
+        monProb: 100,
+      };
+
+      // No neighbors have roads (all GROUND_LEVEL)
+      // Block has no road flag, so Mode A applies - only checks orthogonal
+      const neighborRoads = {
+        levels: [0, WILD_BLOCK_SIZE * 100, WILD_BLOCK_SIZE * 100, WILD_BLOCK_SIZE * 100,
+                 WILD_BLOCK_SIZE * 100, WILD_BLOCK_SIZE * 100, WILD_BLOCK_SIZE * 100,
+                 WILD_BLOCK_SIZE * 100, WILD_BLOCK_SIZE * 100, WILD_BLOCK_SIZE * 100],
+        hasRoadFlag: false,
+      };
+
+      const tiles = generator.generateBlock(block, 0, 0, 42, neighborRoads);
+
+      // Should NOT have road features
+      let hasRoad = false;
+      for (let y = 0; y < WILD_BLOCK_SIZE; y++) {
+        for (let x = 0; x < WILD_BLOCK_SIZE; x++) {
+          if (tiles[y][x].info & WILD_INFO_ROAD) {
+            hasRoad = true;
+          }
+        }
+      }
+
+      expect(hasRoad).toBe(false);
+    });
+
+    it('should draw road connecting north and south neighbors', () => {
+      const block: WildBlock = {
+        wild: 1,
+        place: 0,
+        info: WILD_INFO_ROAD,
+        monGen: 10,
+        monProb: 100,
+      };
+
+      // Road from north (8) to south (2) - should create vertical road
+      // Block has road flag, so Mode B applies
+      const neighborRoads = {
+        levels: [0, 0, WILD_BLOCK_SIZE * 150, 0, 0, WILD_BLOCK_SIZE * 150, 0, 0, WILD_BLOCK_SIZE * 150, 0],
+        hasRoadFlag: true,
+      };
+
+      const tiles = generator.generateBlock(block, 0, 0, 42, neighborRoads);
+
+      // Count road tiles in center column
+      let centerRoadCount = 0;
+      const centerX = WILD_BLOCK_SIZE / 2;
+      for (let y = 0; y < WILD_BLOCK_SIZE; y++) {
+        if (tiles[y][centerX].info & WILD_INFO_ROAD) {
+          centerRoadCount++;
+        }
+      }
+
+      // Should have road tiles roughly through center
+      expect(centerRoadCount).toBeGreaterThan(WILD_BLOCK_SIZE / 4);
+    });
+
+    it('should draw road connecting east and west neighbors', () => {
+      const block: WildBlock = {
+        wild: 1,
+        place: 0,
+        info: WILD_INFO_ROAD,
+        monGen: 10,
+        monProb: 100,
+      };
+
+      // Road from west (4) to east (6) - should create horizontal road
+      // Block has road flag, so Mode B applies
+      const neighborRoads = {
+        levels: [0, 0, 0, 0, WILD_BLOCK_SIZE * 150, WILD_BLOCK_SIZE * 150, WILD_BLOCK_SIZE * 150, 0, 0, 0],
+        hasRoadFlag: true,
+      };
+
+      const tiles = generator.generateBlock(block, 0, 0, 42, neighborRoads);
+
+      // Count road tiles in center row
+      let centerRoadCount = 0;
+      const centerY = WILD_BLOCK_SIZE / 2;
+      for (let x = 0; x < WILD_BLOCK_SIZE; x++) {
+        if (tiles[centerY][x].info & WILD_INFO_ROAD) {
+          centerRoadCount++;
+        }
+      }
+
+      // Should have road tiles roughly through center
+      expect(centerRoadCount).toBeGreaterThan(WILD_BLOCK_SIZE / 4);
     });
   });
 

@@ -34,9 +34,30 @@ export interface WildTile {
 }
 
 /**
+ * Road/track info for adjacent blocks.
+ * Used to draw roads that connect across block boundaries.
+ * Index corresponds to direction (1-9 keypad style, 5=center):
+ * 7 8 9
+ * 4 5 6
+ * 1 2 3
+ */
+export interface NeighborRoadInfo {
+  /** Road level for each direction (0=none, TRACK_LEVEL, or ROAD_LEVEL) */
+  levels: number[];
+  /** Whether this block itself has a road/track flag */
+  hasRoadFlag: boolean;
+}
+
+/** Road level constants (from wild.h) */
+export const ROAD_LEVEL = WILD_BLOCK_SIZE * 150;  // 2400
+export const TRACK_LEVEL = WILD_BLOCK_SIZE * 140; // 2240
+export const ROAD_BORDER = WILD_BLOCK_SIZE * 120; // 1920
+export const GROUND_LEVEL = WILD_BLOCK_SIZE * 100; // 1600
+
+/**
  * Feature constants (from terrain.json indices)
  */
-const FEAT_FLOOR = 1;
+const FEAT_ROAD = 148; // Yellow road terrain for visibility
 const FEAT_GRASS = 89;
 const FEAT_DIRT = 88;
 const FEAT_SHAL_WATER = 84;
@@ -81,9 +102,16 @@ export class WildBlockGenerator {
    * @param wildX Block X coordinate in wilderness
    * @param wildY Block Y coordinate in wilderness
    * @param wildSeed Base seed for deterministic generation
+   * @param neighborRoads Optional info about adjacent blocks' road flags
    * @returns 16x16 grid of tiles
    */
-  generateBlock(block: WildBlock, wildX: number, wildY: number, wildSeed: number): WildTile[][] {
+  generateBlock(
+    block: WildBlock,
+    wildX: number,
+    wildY: number,
+    wildSeed: number,
+    neighborRoads?: NeighborRoadInfo
+  ): WildTile[][] {
     // Seed RNG deterministically based on position
     const blockSeed = wildSeed + wildX * 1000 + wildY * 1000000;
     this.rng.setSeed(blockSeed);
@@ -117,7 +145,7 @@ export class WildBlockGenerator {
     }
 
     // Apply overlays based on block info flags
-    this.applyOverlays(tiles, block.info);
+    this.applyOverlays(tiles, block.info, neighborRoads);
 
     return tiles;
   }
@@ -475,10 +503,10 @@ export class WildBlockGenerator {
   /**
    * Apply overlay effects based on block info flags.
    */
-  private applyOverlays(tiles: WildTile[][], info: number): void {
-    // Apply road overlay
-    if (info & WILD_INFO_ROAD) {
-      this.applyRoadOverlay(tiles);
+  private applyOverlays(tiles: WildTile[][], info: number, neighborRoads?: NeighborRoadInfo): void {
+    // Apply road overlay - need neighbor info to connect roads properly
+    if (neighborRoads) {
+      this.applyRoadOverlay(tiles, neighborRoads);
     }
 
     // Apply water overlay
@@ -498,27 +526,171 @@ export class WildBlockGenerator {
   }
 
   /**
-   * Apply road overlay using plasma fractal.
+   * Apply road overlay by connecting to adjacent road blocks.
    *
    * Port of wild3.c:make_wild_road()
+   *
+   * CRITICAL: The C code has TWO distinct modes:
+   * - Mode A: Block WITHOUT road flag - only check orthogonal neighbors
+   * - Mode B: Block WITH road flag - check all 8 neighbors
+   *
+   * Mode A creates "corner turns" where roads pass through block boundaries.
+   * Mode B creates full road coverage for blocks that are part of a road.
    */
-  private applyRoadOverlay(tiles: WildTile[][]): void {
-    // Generate a simple road through the center
-    // Full implementation would consider adjacent blocks
+  private applyRoadOverlay(tiles: WildTile[][], neighborRoads: NeighborRoadInfo): void {
+    const levels = neighborRoads.levels;
+    const hasRoadFlag = neighborRoads.hasRoadFlag;
 
-    this.plasma.clear();
-    this.plasma.setCorners(WILD_BLOCK_SIZE * 64);
-    this.plasma.setCenter(WILD_BLOCK_SIZE * 192);
-    this.plasma.generate();
+    // Direction offsets (keypad style, matching C code):
+    // 7=NW, 8=N, 9=NE
+    // 4=W,  5=C, 6=E
+    // 1=SW, 2=S, 3=SE
+    const ddx = [0, -1, 0, 1, -1, 0, 1, -1, 0, 1];
+    const ddy = [0, 1, 1, 1, 0, 0, 0, -1, -1, -1];
 
+    // grad1: orthogonal neighbor road levels
+    // grad2: processed gradient for all 9 positions
+    const grad1: number[] = new Array(10).fill(0);
+    const grad2: number[] = new Array(10).fill(GROUND_LEVEL);
+    let any = false;
+
+    if (!hasRoadFlag) {
+      // MODE A: Block WITHOUT road flag
+      // Only check orthogonal directions (2=S, 4=W, 6=E, 8=N)
+      for (let i = 2; i <= 8; i += 2) {
+        grad1[i] = 0;
+        if (levels[i] > GROUND_LEVEL) {
+          // Neighbor has road/track
+          grad1[i] = levels[i];
+          any = true;
+        }
+      }
+
+      // Early return if no orthogonal neighbors have roads
+      if (!any) return;
+
+      // Set diagonals based on orthogonal neighbors
+      // A corner is only set if BOTH adjacent orthogonal neighbors have roads
+      any = true; // Will be set to false if any corner is found
+
+      // Upper left (index 7): set if BOTH North (8) and West (4) have roads
+      if (grad1[4] > GROUND_LEVEL && grad1[8] > GROUND_LEVEL) {
+        grad2[7] = Math.max(grad1[4], grad1[8]);
+        any = false;
+      }
+
+      // Upper right (index 9): set if BOTH North (8) and East (6) have roads
+      if (grad1[8] > GROUND_LEVEL && grad1[6] > GROUND_LEVEL) {
+        grad2[9] = Math.max(grad1[8], grad1[6]);
+        any = false;
+      }
+
+      // Lower right (index 3): set if BOTH East (6) and South (2) have roads
+      if (grad1[6] > GROUND_LEVEL && grad1[2] > GROUND_LEVEL) {
+        grad2[3] = Math.max(grad1[6], grad1[2]);
+        any = false;
+      }
+
+      // Lower left (index 1): set if BOTH South (2) and West (4) have roads
+      if (grad1[2] > GROUND_LEVEL && grad1[4] > GROUND_LEVEL) {
+        grad2[1] = Math.max(grad1[2], grad1[4]);
+        any = false;
+      }
+
+      // Early return if no valid corners (no turns created)
+      // In Mode A, orthogonal values (2,4,6,8) stay at GROUND_LEVEL
+      // Only corners get elevated values - road forms by interpolation between corners
+      if (any) return;
+    } else {
+      // MODE B: Block WITH road flag
+      // Check all 8 directions directly
+      for (let i = 1; i < 10; i++) {
+        if (levels[i] > GROUND_LEVEL) {
+          grad2[i] = levels[i];
+        }
+      }
+    }
+
+    // Set center to current block's road level
+    grad2[5] = levels[5];
+
+    // Clear temporary block using MAX_SHORT as sentinel
+    const MAX_SHORT = 65535;
+    const tempBlock: number[][] = [];
+    for (let y = 0; y <= WILD_BLOCK_SIZE; y++) {
+      tempBlock[y] = [];
+      for (let x = 0; x <= WILD_BLOCK_SIZE; x++) {
+        tempBlock[y][x] = MAX_SHORT;
+      }
+    }
+
+    // Set sides of block based on grad2[] (matching C code exactly)
+    for (let dir = 1; dir <= 9; dir++) {
+      const x1 = (1 + ddx[dir]) * Math.floor(WILD_BLOCK_SIZE / 2);
+      const y1 = (1 + ddy[dir]) * Math.floor(WILD_BLOCK_SIZE / 2);
+      tempBlock[y1][x1] = grad2[dir];
+    }
+
+    // Build the road "density map" using plasma-style smoothing
+    this.smoothBlock(tempBlock, MAX_SHORT);
+
+    // Apply road tiles where interpolated value exceeds ROAD_BORDER
     for (let y = 0; y < WILD_BLOCK_SIZE; y++) {
       for (let x = 0; x < WILD_BLOCK_SIZE; x++) {
-        const element = this.plasma.getValue(x, y);
-
-        // Road in center of fractal
-        if (element > WILD_BLOCK_SIZE * 140) {
-          tiles[y][x].feat = FEAT_FLOOR;
+        if (tempBlock[y][x] >= ROAD_BORDER) {
+          tiles[y][x].feat = FEAT_ROAD;
           tiles[y][x].info |= WILD_INFO_ROAD;
+        }
+      }
+    }
+  }
+
+  /**
+   * Smooth the temporary block using plasma-style interpolation.
+   * Port of wild3.c:smooth_block()
+   *
+   * Uses sentinel value to only fill cells that haven't been set yet.
+   */
+  private smoothBlock(tempBlock: number[][], sentinel: number): void {
+    let lstep = WILD_BLOCK_SIZE;
+    let hstep = WILD_BLOCK_SIZE;
+
+    while (hstep > 1) {
+      lstep = hstep;
+      hstep = Math.floor(hstep / 2);
+
+      // Pass 1: Fill vertical lines (columns at hstep intervals)
+      for (let i = hstep; i <= WILD_BLOCK_SIZE - hstep; i += lstep) {
+        for (let j = 0; j <= WILD_BLOCK_SIZE; j += lstep) {
+          if (tempBlock[j][i] === sentinel) {
+            const left = tempBlock[j][i - hstep];
+            const right = tempBlock[j][i + hstep];
+            tempBlock[j][i] = Math.floor((left + right) / 2);
+          }
+        }
+      }
+
+      // Pass 2: Fill horizontal lines (rows at hstep intervals)
+      for (let j = hstep; j <= WILD_BLOCK_SIZE - hstep; j += lstep) {
+        for (let i = 0; i <= WILD_BLOCK_SIZE; i += lstep) {
+          if (tempBlock[j][i] === sentinel) {
+            const up = tempBlock[j - hstep][i];
+            const down = tempBlock[j + hstep][i];
+            tempBlock[j][i] = Math.floor((up + down) / 2);
+          }
+        }
+      }
+
+      // Pass 3: Fill diagonal centers
+      for (let i = hstep; i <= WILD_BLOCK_SIZE - hstep; i += lstep) {
+        for (let j = hstep; j <= WILD_BLOCK_SIZE - hstep; j += lstep) {
+          if (tempBlock[j][i] === sentinel) {
+            const tl = tempBlock[j - hstep][i - hstep];
+            const tr = tempBlock[j - hstep][i + hstep];
+            const bl = tempBlock[j + hstep][i - hstep];
+            const br = tempBlock[j + hstep][i + hstep];
+            tempBlock[j][i] = Math.floor((tl + tr + bl + br) / 4);
+          }
         }
       }
     }

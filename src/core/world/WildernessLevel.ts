@@ -25,9 +25,23 @@ import type {
   GameEvent,
   GPActiveEffectTriggerResult,
 } from '../systems/activeEffects';
-import { WILD_BLOCK_SIZE, WILD_VIEW, type WildBlock, type WildGenData, type WildPlace } from '../data/WildernessTypes';
+import {
+  WILD_BLOCK_SIZE,
+  WILD_VIEW,
+  WILD_INFO_ROAD,
+  WILD_INFO_TRACK,
+  type WildBlock,
+  type WildGenData,
+  type WildPlace,
+} from '../data/WildernessTypes';
 import type { WildernessMap } from '../systems/wilderness/WildernessGenerator';
-import { WildBlockGenerator } from '../systems/wilderness/BlockGenerator';
+import {
+  WildBlockGenerator,
+  ROAD_LEVEL,
+  TRACK_LEVEL,
+  GROUND_LEVEL,
+  type NeighborRoadInfo,
+} from '../systems/wilderness/BlockGenerator';
 import { ZangbandTownGenerator, type GeneratedTownData } from '../systems/wilderness/TownGen';
 import type { MonsterDataManager } from '../data/MonsterDataManager';
 
@@ -376,7 +390,6 @@ export class WildernessLevel implements ILevel {
     if (this.blockCache.has(key)) {
       return;
     }
-
     // Get wilderness block data
     const block = this.wildernessMap.getBlock(blockX, blockY);
     if (!block) {
@@ -418,13 +431,17 @@ export class WildernessLevel implements ILevel {
   private generateWildernessTiles(block: { wild: number }, blockX: number, blockY: number): Tile[][] {
     const genData = this.blockGenerator.getGenData(block.wild);
 
+    // Compute neighbor road info for proper road rendering
+    const neighborRoads = this.computeNeighborRoadInfo(blockX, blockY);
+
     // Generate tiles for this block
     const generatedTiles = genData
       ? this.blockGenerator.generateBlock(
           block as any,
           blockX,
           blockY,
-          this.wildernessMap.seed
+          this.wildernessMap.seed,
+          neighborRoads
         )
       : null;
 
@@ -444,6 +461,49 @@ export class WildernessLevel implements ILevel {
       }
     }
     return tiles;
+  }
+
+  /**
+   * Compute road info for current block and its neighbors.
+   *
+   * Port of wild3.c:make_wild_road() neighbor checking.
+   * Returns road levels for each of the 8 directions plus center (5).
+   * Also returns whether the current block has a road/track flag.
+   */
+  private computeNeighborRoadInfo(blockX: number, blockY: number): NeighborRoadInfo {
+    const thisBlock = this.wildernessMap.getBlock(blockX, blockY);
+    const hasRoadFlag = !!(thisBlock && (thisBlock.info & (WILD_INFO_ROAD | WILD_INFO_TRACK)));
+
+    // Direction offsets (keypad style):
+    // 7=NW, 8=N, 9=NE
+    // 4=W,  5=C, 6=E
+    // 1=SW, 2=S, 3=SE
+    const ddx = [0, -1, 0, 1, -1, 0, 1, -1, 0, 1];
+    const ddy = [0, 1, 1, 1, 0, 0, 0, -1, -1, -1];
+
+    const levels: number[] = [0]; // Index 0 unused
+
+    for (let dir = 1; dir <= 9; dir++) {
+      const nx = blockX + ddx[dir];
+      const ny = blockY + ddy[dir];
+
+      const block = this.wildernessMap.getBlock(nx, ny);
+      if (!block) {
+        levels[dir] = GROUND_LEVEL;
+        continue;
+      }
+
+      // Check block's road/track flags
+      if (block.info & WILD_INFO_ROAD) {
+        levels[dir] = ROAD_LEVEL;
+      } else if (block.info & WILD_INFO_TRACK) {
+        levels[dir] = TRACK_LEVEL;
+      } else {
+        levels[dir] = GROUND_LEVEL;
+      }
+    }
+
+    return { levels, hasRoadFlag };
   }
 
   /**

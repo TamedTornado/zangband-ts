@@ -20,6 +20,7 @@ const COLOR_MAP: Record<string, string> = {
   W: '#fff',    // Light white
   v: '#f0f',    // Violet
   y: '#ff0',    // Yellow
+  Y: '#ff0',    // Yellow (uppercase alias)
   R: '#f88',    // Light red
   G: '#8f8',    // Light green
   B: '#88f',    // Light blue
