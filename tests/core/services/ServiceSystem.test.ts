@@ -279,27 +279,43 @@ describe('ServiceSystem', () => {
     });
 
     describe('identify_all', () => {
-      it('returns success with count of items', () => {
+      it('identifies unidentified items via generated.identified', () => {
         const player = createMockPlayer({ gold: 600 });
         const service = createServiceDef({
           type: ServiceType.IDENTIFY_ALL,
           baseCost: 500,
         });
 
-        // Mock inventory with unidentified items
-        const mockInventory = [
-          { identified: false },
-          { identified: true },
-          { identified: false },
-        ];
-        (player as any).inventory = { items: mockInventory };
+        // Mock inventory with items using correct structure
+        const item1 = { generated: { identified: false } };
+        const item2 = { generated: { identified: true } };
+        const item3 = { generated: { identified: false } };
+        (player as any).inventory = { items: [item1, item2, item3] };
 
         const result = ServiceSystem.executeService(player, service);
         expect(result.success).toBe(true);
-        // Should identify the 2 unidentified items
+        expect(result.message).toContain('2'); // Should identify 2 items
+        expect(item1.generated.identified).toBe(true);
+        expect(item2.generated.identified).toBe(true);
+        expect(item3.generated.identified).toBe(true);
       });
 
-      it('deducts flat cost regardless of count', () => {
+      it('reports already identified when all items identified', () => {
+        const player = createMockPlayer({ gold: 600 });
+        const service = createServiceDef({
+          type: ServiceType.IDENTIFY_ALL,
+          baseCost: 500,
+        });
+
+        const item1 = { generated: { identified: true } };
+        (player as any).inventory = { items: [item1] };
+
+        const result = ServiceSystem.executeService(player, service);
+        expect(result.success).toBe(true);
+        expect(result.message).toContain('already identified');
+      });
+
+      it('deducts cost even if nothing to identify', () => {
         const player = createMockPlayer({ gold: 600 });
         const service = createServiceDef({
           type: ServiceType.IDENTIFY_ALL,
@@ -307,8 +323,27 @@ describe('ServiceSystem', () => {
         });
         (player as any).inventory = { items: [] };
 
+        const initialGold = player.gold;
         ServiceSystem.executeService(player, service);
-        expect(player.gold).toBeLessThan(600);
+        expect(player.gold).toBeLessThan(initialGold);
+      });
+
+      it('skips items without generated property', () => {
+        const player = createMockPlayer({ gold: 600 });
+        const service = createServiceDef({
+          type: ServiceType.IDENTIFY_ALL,
+          baseCost: 500,
+        });
+
+        // Mix of items with and without generated
+        const item1 = { generated: { identified: false } };
+        const item2 = { name: 'gold pile' }; // No generated property
+        (player as any).inventory = { items: [item1, item2] };
+
+        const result = ServiceSystem.executeService(player, service);
+        expect(result.success).toBe(true);
+        expect(result.message).toContain('1'); // Only 1 item identified
+        expect(item1.generated.identified).toBe(true);
       });
     });
 

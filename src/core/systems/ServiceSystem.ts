@@ -345,8 +345,8 @@ export class ServiceSystem {
 
     if (inventory?.items) {
       for (const item of inventory.items) {
-        if (item && !item.identified) {
-          item.identified = true;
+        if (item?.generated && !item.generated.identified) {
+          item.generated.identified = true;
           identifiedCount++;
         }
       }
