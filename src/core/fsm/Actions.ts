@@ -66,4 +66,8 @@ export type GameAction =
   | { type: 'storeCommand'; command: 'purchase' | 'sell' | 'examine' }
   | { type: 'buyItem'; itemIndex: number; quantity?: number }
   | { type: 'sellItem'; inventoryIndex: number; quantity?: number }
-  | { type: 'toggleStorePage' };
+  | { type: 'toggleStorePage' }
+  // Wilderness actions
+  | { type: 'enterWilderness' }
+  | { type: 'exitWilderness' }
+  | { type: 'enterPlace'; placeKey: string };

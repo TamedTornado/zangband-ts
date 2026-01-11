@@ -21,6 +21,7 @@ import { CharacterState } from './CharacterState';
 import { CastSpellState } from './CastSpellState';
 import { StudySpellState } from './StudySpellState';
 import { ShoppingState } from './ShoppingState';
+import { WildernessState } from './WildernessState';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, VIEW_RADIUS, HP_REGEN_RATE } from '../../constants';
@@ -286,6 +287,13 @@ export class PlayingState implements State {
 
     if (!onUpStairs) {
       fsm.addMessage('There are no up stairs here.', 'info');
+      return;
+    }
+
+    // Exit to wilderness from town (depth 0)
+    if (depth === 0 && store.isTown && store.wildernessMap) {
+      fsm.addMessage('You leave the town and enter the wilderness.', 'info');
+      fsm.transition(new WildernessState());
       return;
     }
 

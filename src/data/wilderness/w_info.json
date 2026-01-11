@@ -1,0 +1,6499 @@
+[
+  {
+    "id": 1,
+    "comment": "mudflats",
+    "roughType": [
+      "SWAMP1",
+      "WASTE1"
+    ],
+    "data": [
+      10,
+      1,
+      11,
+      1,
+      84,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 10,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 2,
+    "comment": "mudflats + rock",
+    "roughType": [
+      "SWAMP1",
+      "WASTE1"
+    ],
+    "data": [
+      10,
+      1,
+      131,
+      1,
+      11,
+      1,
+      84,
+      0
+    ],
+    "mapFeature": 11,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 3,
+    "comment": "rock + dirt",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      131,
+      2,
+      88,
+      4,
+      129,
+      1,
+      8,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 4,
+    "comment": "desert",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      8,
+      2,
+      131,
+      1,
+      14,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 8,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 5,
+    "comment": "desert + scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      8,
+      1,
+      130,
+      1,
+      89,
+      10,
+      129,
+      0
+    ],
+    "mapFeature": 8,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 6,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      128,
+      2,
+      129,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 7,
+    "comment": "mudflats + sub.tree",
+    "roughType": [
+      "SWAMP1",
+      "WASTE1"
+    ],
+    "data": [
+      10,
+      1,
+      11,
+      1,
+      84,
+      3,
+      95,
+      0
+    ],
+    "mapFeature": 10,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 8,
+    "comment": "bayou",
+    "roughType": [
+      "SWAMP1",
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      10,
+      50,
+      96,
+      100,
+      84,
+      150,
+      95,
+      255
+    ],
+    "mapFeature": 95,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 9,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      131,
+      3,
+      133,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 10,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      8,
+      1,
+      131,
+      3,
+      133,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 11,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      128,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 12,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      128,
+      3,
+      129,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 13,
+    "comment": "bayou",
+    "roughType": [
+      "SWAMP1",
+      "FOREST1"
+    ],
+    "data": [
+      10,
+      50,
+      96,
+      100,
+      84,
+      150,
+      95,
+      255
+    ],
+    "mapFeature": 95,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 14,
+    "comment": "forest",
+    "roughType": [
+      "SWAMP1",
+      "FOREST2"
+    ],
+    "data": [
+      128,
+      20,
+      84,
+      150,
+      96,
+      254,
+      95,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 15,
+    "comment": "beach",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      8,
+      2,
+      128,
+      1,
+      14,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 8,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 16,
+    "comment": "beach",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      8,
+      2,
+      128,
+      1,
+      14,
+      5,
+      133,
+      0
+    ],
+    "mapFeature": 8,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 17,
+    "comment": "beach",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      8,
+      2,
+      128,
+      1,
+      14,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 8,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 18,
+    "comment": "scrub + grass",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      7,
+      128,
+      3,
+      129,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 19,
+    "comment": "bayou + swamp",
+    "roughType": [
+      "SWAMP1",
+      "FOREST1"
+    ],
+    "data": [
+      10,
+      50,
+      137,
+      100,
+      84,
+      150,
+      95,
+      255
+    ],
+    "mapFeature": 95,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 20,
+    "comment": "marsh",
+    "roughType": [
+      "SWAMP1",
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      137,
+      100,
+      84,
+      150,
+      95,
+      255
+    ],
+    "mapFeature": 137,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 21,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      96,
+      254,
+      137,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 22,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      96,
+      254,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 23,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 24,
+    "comment": "scrub + grass",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      89,
+      1,
+      130,
+      10,
+      128,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 25,
+    "comment": "swamp",
+    "roughType": [
+      "SWAMP2"
+    ],
+    "data": [
+      10,
+      50,
+      95,
+      100,
+      137,
+      200,
+      136,
+      255
+    ],
+    "mapFeature": 136,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 26,
+    "comment": "swamp",
+    "roughType": [
+      "SWAMP2"
+    ],
+    "data": [
+      10,
+      50,
+      89,
+      100,
+      137,
+      200,
+      136,
+      255
+    ],
+    "mapFeature": 136,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 27,
+    "comment": "marsh",
+    "roughType": [
+      "SWAMP1",
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      137,
+      100,
+      96,
+      150,
+      95,
+      255
+    ],
+    "mapFeature": 137,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 28,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 29,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 30,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      88,
+      1,
+      96,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 31,
+    "comment": "thick swamp",
+    "roughType": [
+      "SWAMP2"
+    ],
+    "data": [
+      130,
+      50,
+      10,
+      100,
+      136,
+      200,
+      137,
+      255
+    ],
+    "mapFeature": 136,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 32,
+    "comment": "swamp",
+    "roughType": [
+      "SWAMP2"
+    ],
+    "data": [
+      10,
+      50,
+      89,
+      100,
+      137,
+      200,
+      136,
+      255
+    ],
+    "mapFeature": 136,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 33,
+    "comment": "marsh",
+    "roughType": [
+      "SWAMP1",
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      137,
+      100,
+      96,
+      150,
+      95,
+      255
+    ],
+    "mapFeature": 137,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 34,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      88,
+      1,
+      137,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 35,
+    "comment": "dirt",
+    "roughType": [],
+    "data": [
+      88,
+      5,
+      128,
+      5,
+      89,
+      1,
+      14,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 36,
+    "comment": "farm  (Need new routine.)",
+    "roughType": [],
+    "data": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 4,
+    "chance": 100
+  },
+  {
+    "id": 37,
+    "comment": "pond",
+    "roughType": [],
+    "data": [
+      22,
+      84,
+      84,
+      83,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 84,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 3,
+    "chance": 1
+  },
+  {
+    "id": 38,
+    "comment": "pond",
+    "roughType": [],
+    "data": [
+      23,
+      84,
+      84,
+      83,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 84,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 3,
+    "chance": 1
+  },
+  {
+    "id": 39,
+    "comment": "pond",
+    "roughType": [],
+    "data": [
+      28,
+      84,
+      84,
+      83,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 84,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 3,
+    "chance": 1
+  },
+  {
+    "id": 40,
+    "comment": "pond",
+    "roughType": [],
+    "data": [
+      29,
+      84,
+      84,
+      83,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 84,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 3,
+    "chance": 1
+  },
+  {
+    "id": 41,
+    "comment": "mud hole",
+    "roughType": [],
+    "data": [
+      31,
+      10,
+      10,
+      84,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 10,
+    "bounds": {
+      "hgtmin": 0,
+      "hgtmax": 43,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 3,
+    "chance": 6
+  },
+  {
+    "id": 50,
+    "comment": "mudflats",
+    "roughType": [
+      "SWAMP1",
+      "WASTE1"
+    ],
+    "data": [
+      10,
+      1,
+      11,
+      1,
+      84,
+      2,
+      88,
+      0
+    ],
+    "mapFeature": 10,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 51,
+    "comment": "mudflats + rock",
+    "roughType": [
+      "SWAMP1",
+      "WASTE1"
+    ],
+    "data": [
+      10,
+      1,
+      131,
+      1,
+      11,
+      1,
+      84,
+      0
+    ],
+    "mapFeature": 11,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 52,
+    "comment": "salt pan",
+    "roughType": [
+      "SWAMP1",
+      "WASTE1"
+    ],
+    "data": [
+      9,
+      1,
+      11,
+      1,
+      8,
+      2,
+      88,
+      0
+    ],
+    "mapFeature": 9,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 53,
+    "comment": "desert",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      8,
+      2,
+      131,
+      1,
+      14,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 8,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 54,
+    "comment": "desert + scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      8,
+      1,
+      130,
+      1,
+      89,
+      10,
+      129,
+      0
+    ],
+    "mapFeature": 8,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 55,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      128,
+      2,
+      129,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 56,
+    "comment": "dirt",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      88,
+      5,
+      129,
+      5,
+      89,
+      1,
+      133,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 57,
+    "comment": "dirt",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      5,
+      129,
+      1,
+      133,
+      2,
+      89,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 58,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE1",
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      131,
+      3,
+      133,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 59,
+    "comment": "rocky desert",
+    "roughType": [
+      "WASTE1",
+      "MOUNT1"
+    ],
+    "data": [
+      14,
+      150,
+      131,
+      200,
+      8,
+      254,
+      129,
+      255
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 60,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      128,
+      1,
+      8,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 61,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      100,
+      1,
+      128,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 62,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      88,
+      1,
+      84,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 63,
+    "comment": "marsh",
+    "roughType": [
+      "SWAMP1",
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      137,
+      100,
+      130,
+      150,
+      95,
+      255
+    ],
+    "mapFeature": 137,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 64,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      88,
+      1,
+      84,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 65,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      100,
+      1,
+      128,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 66,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      100,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 67,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      100,
+      254,
+      131,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 68,
+    "comment": "long grass",
+    "roughType": [
+      "WASTE1",
+      "SWAMP1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      133,
+      1,
+      131,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 69,
+    "comment": "long grass",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      129,
+      1,
+      133,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 70,
+    "comment": "scrub",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      96,
+      1,
+      128,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 71,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 72,
+    "comment": "forest + pine forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      100,
+      100,
+      128,
+      150,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 73,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      131,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 74,
+    "comment": "marsh",
+    "roughType": [
+      "SWAMP1"
+    ],
+    "data": [
+      89,
+      50,
+      137,
+      100,
+      130,
+      150,
+      95,
+      255
+    ],
+    "mapFeature": 137,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 75,
+    "comment": "marsh",
+    "roughType": [
+      "SWAMP1",
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      137,
+      100,
+      130,
+      150,
+      96,
+      255
+    ],
+    "mapFeature": 137,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 76,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 77,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      96,
+      254,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 78,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      1,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 79,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      96,
+      1,
+      88,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 80,
+    "comment": "swamp",
+    "roughType": [
+      "SWAMP2"
+    ],
+    "data": [
+      10,
+      50,
+      89,
+      100,
+      137,
+      200,
+      136,
+      255
+    ],
+    "mapFeature": 136,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 81,
+    "comment": "bayou + swamp",
+    "roughType": [
+      "SWAMP1",
+      "FOREST1"
+    ],
+    "data": [
+      10,
+      50,
+      137,
+      100,
+      115,
+      150,
+      95,
+      255
+    ],
+    "mapFeature": 137,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 82,
+    "comment": "jungle",
+    "roughType": [
+      "FOREST2",
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      115,
+      100,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 115,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 83,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 84,
+    "comment": "grass + forest",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      2,
+      128,
+      1,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 128,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 85,
+    "comment": "farm  (Need new routine.)",
+    "roughType": [],
+    "data": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 4,
+    "chance": 100
+  },
+  {
+    "id": 86,
+    "comment": "pond",
+    "roughType": [],
+    "data": [
+      71,
+      84,
+      84,
+      83,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 84,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 3,
+    "chance": 1
+  },
+  {
+    "id": 87,
+    "comment": "pond",
+    "roughType": [],
+    "data": [
+      72,
+      84,
+      84,
+      83,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 84,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 3,
+    "chance": 1
+  },
+  {
+    "id": 88,
+    "comment": "pond",
+    "roughType": [],
+    "data": [
+      77,
+      84,
+      84,
+      83,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 84,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 3,
+    "chance": 1
+  },
+  {
+    "id": 89,
+    "comment": "pond",
+    "roughType": [],
+    "data": [
+      78,
+      84,
+      84,
+      83,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 84,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 3,
+    "chance": 1
+  },
+  {
+    "id": 90,
+    "comment": "jungle clearing",
+    "roughType": [],
+    "data": [
+      82,
+      89,
+      84,
+      83,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 43,
+      "hgtmax": 85,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 3,
+    "chance": 6
+  },
+  {
+    "id": 100,
+    "comment": "dirt",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      5,
+      129,
+      1,
+      133,
+      2,
+      89,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 101,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE1",
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      131,
+      3,
+      133,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 102,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE1",
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      8,
+      3,
+      133,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 133,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 103,
+    "comment": "desert + scrub",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      8,
+      1,
+      130,
+      1,
+      89,
+      10,
+      129,
+      0
+    ],
+    "mapFeature": 8,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 104,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      128,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 105,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 106,
+    "comment": "dirt",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      88,
+      5,
+      129,
+      1,
+      133,
+      2,
+      89,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 107,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      130,
+      3,
+      133,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 108,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      128,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 109,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      8,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 110,
+    "comment": "grass + forest",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      2,
+      128,
+      1,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 128,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 111,
+    "comment": "grass + pine forest",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      2,
+      128,
+      1,
+      100,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 128,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 112,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      88,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 113,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      133,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 114,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 115,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      96,
+      254,
+      100,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 116,
+    "comment": "snow covered forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      135,
+      100,
+      100,
+      150,
+      101,
+      254,
+      132,
+      255
+    ],
+    "mapFeature": 101,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 117,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      131,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 118,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 119,
+    "comment": "long grass",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      129,
+      1,
+      133,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 120,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      133,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 121,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      100,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 122,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      135,
+      50,
+      101,
+      100,
+      100,
+      254,
+      131,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 123,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      100,
+      254,
+      131,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 124,
+    "comment": "marsh",
+    "roughType": [
+      "SWAMP1",
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      137,
+      100,
+      130,
+      150,
+      96,
+      255
+    ],
+    "mapFeature": 137,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 125,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 126,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      100,
+      128,
+      150,
+      96,
+      250,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 127,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      100,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 128,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      96,
+      250,
+      100,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 129,
+    "comment": "farm  (Need new routine.)",
+    "roughType": [],
+    "data": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 4,
+    "chance": 100
+  },
+  {
+    "id": 130,
+    "comment": "marsh",
+    "roughType": [
+      "SWAMP2",
+      "FOREST2"
+    ],
+    "data": [
+      115,
+      50,
+      137,
+      100,
+      130,
+      150,
+      96,
+      255
+    ],
+    "mapFeature": 137,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 131,
+    "comment": "jungle",
+    "roughType": [
+      "FOREST2",
+      "FOREST1"
+    ],
+    "data": [
+      137,
+      50,
+      115,
+      100,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 115,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 132,
+    "comment": "jungle",
+    "roughType": [
+      "FOREST2",
+      "FOREST1"
+    ],
+    "data": [
+      128,
+      50,
+      115,
+      100,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 115,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 133,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 134,
+    "comment": "scrub",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      96,
+      1,
+      128,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 135,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      88,
+      1,
+      14,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 85,
+      "hgtmax": 128,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 150,
+    "comment": "volcanic region",
+    "roughType": [
+      "MOUNT2",
+      "WASTE2"
+    ],
+    "data": [
+      15,
+      100,
+      14,
+      150,
+      133,
+      250,
+      97,
+      255
+    ],
+    "mapFeature": 15,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 151,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE1",
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      97,
+      3,
+      133,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 152,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE1",
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      97,
+      3,
+      130,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 153,
+    "comment": "dirt",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      5,
+      129,
+      1,
+      130,
+      2,
+      89,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 154,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "MOUNT1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      14,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 155,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT2"
+    ],
+    "data": [
+      132,
+      100,
+      97,
+      200,
+      98,
+      220,
+      101,
+      255
+    ],
+    "mapFeature": 97,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 156,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      97,
+      3,
+      133,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 157,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      97,
+      3,
+      130,
+      1,
+      129,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 158,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      133,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 159,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      88,
+      2,
+      133,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 160,
+    "comment": "scrub + snow",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      135,
+      5,
+      101,
+      2,
+      134,
+      0
+    ],
+    "mapFeature": 134,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 161,
+    "comment": "snow",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      135,
+      1,
+      132,
+      5,
+      88,
+      2,
+      101,
+      0
+    ],
+    "mapFeature": 135,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 162,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      133,
+      2,
+      129,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 163,
+    "comment": "long grass",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      129,
+      1,
+      133,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 164,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      88,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 165,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      100,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 166,
+    "comment": "snow covered forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      135,
+      100,
+      100,
+      150,
+      101,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 101,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 167,
+    "comment": "snow covered forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      135,
+      100,
+      100,
+      150,
+      101,
+      254,
+      132,
+      255
+    ],
+    "mapFeature": 101,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 168,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      130,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 169,
+    "comment": "long grass",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      96,
+      1,
+      133,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 170,
+    "comment": "long grass",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      3,
+      96,
+      1,
+      133,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 171,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      100,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 172,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      131,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 173,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      88,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 174,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 175,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      96,
+      250,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 176,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      130,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 177,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      131,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 178,
+    "comment": "dirt",
+    "roughType": [],
+    "data": [
+      88,
+      5,
+      128,
+      5,
+      89,
+      1,
+      14,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 179,
+    "comment": "farm  (Need new routine.)",
+    "roughType": [],
+    "data": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 4,
+    "chance": 100
+  },
+  {
+    "id": 180,
+    "comment": "jungle",
+    "roughType": [
+      "FOREST2",
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      115,
+      100,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 115,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 181,
+    "comment": "jungle",
+    "roughType": [
+      "FOREST2",
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      50,
+      115,
+      100,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 115,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 182,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 183,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 184,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      88,
+      1,
+      96,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 185,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      88,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 128,
+      "hgtmax": 171,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 200,
+    "comment": "volcanic region",
+    "roughType": [
+      "MOUNT1",
+      "MOUNT2",
+      "WASTE1",
+      "WASTE2"
+    ],
+    "data": [
+      15,
+      100,
+      14,
+      150,
+      131,
+      250,
+      97,
+      255
+    ],
+    "mapFeature": 15,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 201,
+    "comment": "volcanic region",
+    "roughType": [
+      "MOUNT2",
+      "WASTE2"
+    ],
+    "data": [
+      15,
+      100,
+      14,
+      150,
+      133,
+      250,
+      97,
+      255
+    ],
+    "mapFeature": 15,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 202,
+    "comment": "badlands",
+    "roughType": [
+      "MOUNT2",
+      "WASTE2"
+    ],
+    "data": [
+      14,
+      100,
+      11,
+      150,
+      94,
+      200,
+      133,
+      255
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 203,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE1",
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      133,
+      3,
+      130,
+      1,
+      115,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 204,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      97,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 205,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT2"
+    ],
+    "data": [
+      132,
+      100,
+      97,
+      200,
+      98,
+      220,
+      101,
+      255
+    ],
+    "mapFeature": 97,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 206,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT2"
+    ],
+    "data": [
+      132,
+      50,
+      134,
+      100,
+      98,
+      200,
+      15,
+      255
+    ],
+    "mapFeature": 97,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 207,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      133,
+      3,
+      130,
+      1,
+      97,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 208,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      133,
+      3,
+      130,
+      1,
+      11,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 209,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      88,
+      1,
+      133,
+      3,
+      130,
+      1,
+      100,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 210,
+    "comment": "pine forest",
+    "roughType": [
+      "WASTE1",
+      "MOUNT1",
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      97,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 211,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT2",
+      "MOUNT1"
+    ],
+    "data": [
+      132,
+      50,
+      134,
+      100,
+      98,
+      200,
+      101,
+      255
+    ],
+    "mapFeature": 97,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 212,
+    "comment": "badlands",
+    "roughType": [
+      "MOUNT1",
+      "WASTE2"
+    ],
+    "data": [
+      14,
+      100,
+      11,
+      150,
+      94,
+      200,
+      133,
+      255
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 213,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      133,
+      3,
+      130,
+      1,
+      11,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 214,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      133,
+      2,
+      100,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 215,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      135,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 216,
+    "comment": "snow covered forest",
+    "roughType": [
+      "FOREST2",
+      "MOUNT1"
+    ],
+    "data": [
+      135,
+      100,
+      100,
+      150,
+      101,
+      254,
+      132,
+      255
+    ],
+    "mapFeature": 101,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 217,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT2"
+    ],
+    "data": [
+      132,
+      50,
+      134,
+      100,
+      98,
+      200,
+      101,
+      255
+    ],
+    "mapFeature": 97,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 218,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      11,
+      1,
+      130,
+      5,
+      133,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 219,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      129,
+      5,
+      133,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 220,
+    "comment": "grass",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 221,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      96,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 222,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      131,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 223,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      101,
+      50,
+      128,
+      100,
+      100,
+      254,
+      131,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 224,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      50,
+      128,
+      100,
+      96,
+      250,
+      130,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 225,
+    "comment": "forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      96,
+      250,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 226,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      89,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 227,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      135,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 228,
+    "comment": "dirt",
+    "roughType": [],
+    "data": [
+      88,
+      5,
+      128,
+      5,
+      89,
+      1,
+      14,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 229,
+    "comment": "farm  (Need new routine.)",
+    "roughType": [],
+    "data": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 4,
+    "chance": 100
+  },
+  {
+    "id": 230,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      96,
+      254,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 231,
+    "comment": "forest",
+    "roughType": [
+      "FOREST1",
+      "FOREST2"
+    ],
+    "data": [
+      100,
+      100,
+      128,
+      150,
+      96,
+      254,
+      115,
+      255
+    ],
+    "mapFeature": 96,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 232,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      131,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 233,
+    "comment": "snow covered forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      135,
+      100,
+      100,
+      150,
+      101,
+      254,
+      132,
+      255
+    ],
+    "mapFeature": 101,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 234,
+    "comment": "snow",
+    "roughType": [],
+    "data": [
+      135,
+      1,
+      132,
+      5,
+      88,
+      2,
+      101,
+      0
+    ],
+    "mapFeature": 135,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 235,
+    "comment": "dirt",
+    "roughType": [],
+    "data": [
+      88,
+      5,
+      128,
+      5,
+      89,
+      1,
+      135,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 236,
+    "comment": "Acid Pool",
+    "roughType": [],
+    "data": [
+      202,
+      94,
+      94,
+      93,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 94,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 3,
+    "chance": 6
+  },
+  {
+    "id": 237,
+    "comment": "Acid Pool",
+    "roughType": [],
+    "data": [
+      212,
+      94,
+      94,
+      93,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 94,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 3,
+    "chance": 6
+  },
+  {
+    "id": 238,
+    "comment": "Lava Pool",
+    "roughType": [],
+    "data": [
+      200,
+      86,
+      86,
+      85,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 86,
+    "bounds": {
+      "hgtmin": 171,
+      "hgtmax": 213,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 3,
+    "chance": 6
+  },
+  {
+    "id": 250,
+    "comment": "volcanic region",
+    "roughType": [
+      "MOUNT1",
+      "MOUNT2",
+      "WASTE1",
+      "WASTE2"
+    ],
+    "data": [
+      15,
+      100,
+      14,
+      150,
+      131,
+      250,
+      97,
+      255
+    ],
+    "mapFeature": 15,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 251,
+    "comment": "volcanic region",
+    "roughType": [
+      "MOUNT2",
+      "MOUNT1",
+      "WASTE2"
+    ],
+    "data": [
+      15,
+      100,
+      14,
+      150,
+      133,
+      250,
+      97,
+      255
+    ],
+    "mapFeature": 15,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 252,
+    "comment": "badlands",
+    "roughType": [
+      "MOUNT2",
+      "WASTE2"
+    ],
+    "data": [
+      14,
+      100,
+      11,
+      150,
+      94,
+      200,
+      133,
+      255
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 253,
+    "comment": "wasteland",
+    "roughType": [
+      "MOUNT1",
+      "WASTE2"
+    ],
+    "data": [
+      130,
+      1,
+      11,
+      5,
+      88,
+      2,
+      97,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 254,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT2"
+    ],
+    "data": [
+      132,
+      100,
+      97,
+      200,
+      98,
+      220,
+      101,
+      255
+    ],
+    "mapFeature": 97,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 255,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT2"
+    ],
+    "data": [
+      132,
+      50,
+      134,
+      100,
+      98,
+      200,
+      101,
+      255
+    ],
+    "mapFeature": 98,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 256,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT2"
+    ],
+    "data": [
+      132,
+      50,
+      134,
+      100,
+      98,
+      200,
+      15,
+      255
+    ],
+    "mapFeature": 97,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 257,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      133,
+      3,
+      130,
+      1,
+      97,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 258,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      133,
+      3,
+      130,
+      1,
+      11,
+      0
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 259,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      133,
+      2,
+      100,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 260,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      130,
+      50,
+      128,
+      100,
+      100,
+      254,
+      135,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 261,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT2"
+    ],
+    "data": [
+      132,
+      50,
+      134,
+      100,
+      98,
+      200,
+      101,
+      255
+    ],
+    "mapFeature": 98,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 43,
+      "popmax": 85,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 262,
+    "comment": "badlands",
+    "roughType": [
+      "MOUNT2",
+      "WASTE2"
+    ],
+    "data": [
+      14,
+      100,
+      11,
+      150,
+      94,
+      200,
+      130,
+      255
+    ],
+    "mapFeature": 14,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 263,
+    "comment": "wasteland",
+    "roughType": [
+      "WASTE2"
+    ],
+    "data": [
+      88,
+      1,
+      133,
+      3,
+      130,
+      1,
+      11,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 264,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      89,
+      5,
+      133,
+      2,
+      100,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 265,
+    "comment": "grass",
+    "roughType": [],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 266,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      100,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 267,
+    "comment": "mountains",
+    "roughType": [
+      "MOUNT1",
+      "MOUNT2"
+    ],
+    "data": [
+      132,
+      50,
+      134,
+      100,
+      98,
+      200,
+      101,
+      255
+    ],
+    "mapFeature": 98,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 268,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      11,
+      1,
+      130,
+      5,
+      133,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 269,
+    "comment": "scrub",
+    "roughType": [
+      "WASTE1",
+      "FOREST1"
+    ],
+    "data": [
+      130,
+      1,
+      129,
+      5,
+      133,
+      2,
+      96,
+      0
+    ],
+    "mapFeature": 130,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 270,
+    "comment": "grass",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 271,
+    "comment": "grass",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      96,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 272,
+    "comment": "snow covered forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      135,
+      100,
+      100,
+      150,
+      101,
+      254,
+      132,
+      255
+    ],
+    "mapFeature": 101,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 273,
+    "comment": "snow covered forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      135,
+      100,
+      100,
+      150,
+      101,
+      254,
+      132,
+      255
+    ],
+    "mapFeature": 101,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 128,
+      "popmax": 171,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 274,
+    "comment": "grass",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      100,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 275,
+    "comment": "grass",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      100,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 276,
+    "comment": "grass",
+    "roughType": [
+      "FOREST1"
+    ],
+    "data": [
+      89,
+      5,
+      128,
+      5,
+      100,
+      1,
+      130,
+      0
+    ],
+    "mapFeature": 89,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 277,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      128,
+      150,
+      100,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 278,
+    "comment": "snow",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      135,
+      1,
+      132,
+      5,
+      88,
+      2,
+      101,
+      0
+    ],
+    "mapFeature": 135,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 279,
+    "comment": "snow",
+    "roughType": [
+      "WASTE1"
+    ],
+    "data": [
+      135,
+      1,
+      132,
+      5,
+      88,
+      2,
+      101,
+      0
+    ],
+    "mapFeature": 135,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 171,
+      "popmax": 213,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 280,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      96,
+      150,
+      100,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 281,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      96,
+      150,
+      100,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 43,
+      "lawmax": 85
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 282,
+    "comment": "pine forest",
+    "roughType": [
+      "FOREST2"
+    ],
+    "data": [
+      89,
+      100,
+      101,
+      150,
+      100,
+      254,
+      130,
+      255
+    ],
+    "mapFeature": 100,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 283,
+    "comment": "tundra",
+    "roughType": [
+      "MOUNT1",
+      "FOREST1",
+      "WASTE1"
+    ],
+    "data": [
+      135,
+      100,
+      132,
+      150,
+      101,
+      220,
+      134,
+      255
+    ],
+    "mapFeature": 101,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 128,
+      "lawmax": 171
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 284,
+    "comment": "tundra",
+    "roughType": [
+      "MOUNT1",
+      "FOREST1",
+      "WASTE1"
+    ],
+    "data": [
+      135,
+      100,
+      132,
+      150,
+      101,
+      220,
+      134,
+      255
+    ],
+    "mapFeature": 101,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 171,
+      "lawmax": 213
+    },
+    "genRoutine": 1,
+    "chance": 100
+  },
+  {
+    "id": 285,
+    "comment": "dirt",
+    "roughType": [],
+    "data": [
+      88,
+      5,
+      135,
+      5,
+      132,
+      1,
+      14,
+      0
+    ],
+    "mapFeature": 88,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 213,
+      "popmax": 255,
+      "lawmin": 213,
+      "lawmax": 255
+    },
+    "genRoutine": 2,
+    "chance": 100
+  },
+  {
+    "id": 286,
+    "comment": "Acid Pool",
+    "roughType": [],
+    "data": [
+      262,
+      94,
+      94,
+      93,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 94,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 85,
+      "lawmax": 128
+    },
+    "genRoutine": 3,
+    "chance": 6
+  },
+  {
+    "id": 287,
+    "comment": "Acid Pool",
+    "roughType": [],
+    "data": [
+      252,
+      94,
+      94,
+      93,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 94,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 85,
+      "popmax": 128,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 3,
+    "chance": 6
+  },
+  {
+    "id": 288,
+    "comment": "Lava Pool",
+    "roughType": [],
+    "data": [
+      250,
+      86,
+      86,
+      85,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mapFeature": 86,
+    "bounds": {
+      "hgtmin": 213,
+      "hgtmax": 255,
+      "popmin": 0,
+      "popmax": 43,
+      "lawmin": 0,
+      "lawmax": 43
+    },
+    "genRoutine": 3,
+    "chance": 6
+  }
+]

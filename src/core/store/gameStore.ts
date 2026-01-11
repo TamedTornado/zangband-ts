@@ -12,6 +12,8 @@ import type { Coord } from '../systems/dungeon/DungeonTypes';
 import type { GameMessage } from '../fsm/GameData';
 import type { CharacterCreationData } from '../data/characterCreation';
 import type { StoreEntrance } from '../systems/town/TownGenerator';
+import type { WildernessMap } from '../systems/wilderness/WildernessGenerator';
+import type { WildPlace } from '../data/WildernessTypes';
 
 /**
  * Prompt state for inline input (rest duration, counts, etc.)
@@ -105,6 +107,13 @@ export interface GameState {
   // Previous character for quick start (persisted to localStorage)
   previousCharacter: CharacterCreationData | null;
 
+  // Wilderness state
+  wildernessX: number;
+  wildernessY: number;
+  isInWilderness: boolean;
+  wildernessMap: WildernessMap | null;
+  currentPlace: WildPlace | null;
+
   // Internal
   _messageId: number;
 }
@@ -162,6 +171,12 @@ export interface GameActions {
   // Quick start
   setPreviousCharacter: (data: CharacterCreationData | null) => void;
 
+  // Wilderness
+  setWildernessPosition: (x: number, y: number) => void;
+  setIsInWilderness: (isInWilderness: boolean) => void;
+  setWildernessMap: (map: WildernessMap | null) => void;
+  setCurrentPlace: (place: WildPlace | null) => void;
+
   // Reset for new game
   reset: () => void;
 }
@@ -207,6 +222,11 @@ const initialState: GameState = {
   characterCreation: null,
   shopping: null,
   previousCharacter: loadPreviousCharacter(),
+  wildernessX: 0,
+  wildernessY: 0,
+  isInWilderness: false,
+  wildernessMap: null,
+  currentPlace: null,
   _messageId: 0,
 };
 
@@ -315,6 +335,12 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
       localStorage.removeItem('zangband_previousCharacter');
     }
   },
+
+  // Wilderness setters
+  setWildernessPosition: (x, y) => set({ wildernessX: x, wildernessY: y }),
+  setIsInWilderness: (isInWilderness) => set({ isInWilderness }),
+  setWildernessMap: (wildernessMap) => set({ wildernessMap }),
+  setCurrentPlace: (currentPlace) => set({ currentPlace }),
 
   reset: () => set({
     ...initialState,
