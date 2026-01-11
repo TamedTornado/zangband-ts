@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Modal } from './Modal';
 import { useGame } from '../../context/GameContext';
+import racesData from '@/data/races/races.json';
 
 /**
  * Tab configuration - matches Zangband TCL/TK character-window.tcl
@@ -50,7 +51,7 @@ export function CharacterModal() {
       </div>
 
       <div className="char-tab-content">
-        {activeTab === 'info' && <InfoTab player={player} depth={state.depth} turn={state.turn} />}
+        {activeTab === 'info' && <InfoTab player={player} depth={state.depth} turn={state.turn} characterCreation={state.characterCreation} />}
         {activeTab === 'skills' && <SkillsTab player={player} />}
         {activeTab === 'flags' && <FlagsTab player={player} />}
         {activeTab === 'mutations' && <MutationsTab />}
@@ -65,24 +66,30 @@ interface TabProps {
   player: NonNullable<ReturnType<typeof useGame>['state']['player']>;
   depth?: number;
   turn?: number;
+  characterCreation?: ReturnType<typeof useGame>['state']['characterCreation'];
 }
 
 /**
  * Info tab - basic character info
  */
-function InfoTab({ player, depth, turn }: TabProps) {
+function InfoTab({ player, depth, turn, characterCreation }: TabProps) {
   const stats = player.stats;
+
+  // Get race display name from race data
+  const raceKey = characterCreation?.raceKey ?? 'human';
+  const raceData = racesData[raceKey as keyof typeof racesData];
+  const raceName = raceData?.name ?? 'Unknown';
 
   return (
     <div className="char-info">
       <div className="char-header">
         <div className="char-row">
           <span className="char-label">Name:</span>
-          <span className="char-value">Player</span>
+          <span className="char-value">{characterCreation?.name || 'Unknown'}</span>
         </div>
         <div className="char-row">
           <span className="char-label">Race:</span>
-          <span className="char-value">Human</span>
+          <span className="char-value">{raceName}</span>
         </div>
         <div className="char-row">
           <span className="char-label">Class:</span>

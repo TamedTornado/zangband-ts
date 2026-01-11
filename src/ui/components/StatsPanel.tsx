@@ -2,7 +2,7 @@ import { useGame } from '../context/GameContext';
 
 export function StatsPanel() {
   const { state } = useGame();
-  const { player, turn, depth } = state;
+  const { player, turn, depth, characterCreation } = state;
 
   if (!player) return null;
 
@@ -17,7 +17,7 @@ export function StatsPanel() {
 
   return (
     <div className="stats-panel">
-      <h3>Character</h3>
+      <h3>{characterCreation?.name || 'Character'}</h3>
 
       <div className="hp-bar">
         <div className="fill" style={{ width: `${hpPercent}%` }} />
