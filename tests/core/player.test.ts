@@ -744,3 +744,50 @@ describe('Level up HP/mana handling', () => {
     expect(player.currentMana).toBeLessThanOrEqual(player.maxMana);
   });
 });
+
+describe('Player.fromCreation', () => {
+  // Mock ItemGeneration that returns null for all items
+  const mockItemGen = {
+    createItemByKey: () => null,
+  } as unknown as import('@/core/systems/ItemGeneration').ItemGeneration;
+
+  function createTestCreationData(overrides: Partial<import('@/core/data/characterCreation').CharacterCreationData> = {}): import('@/core/data/characterCreation').CharacterCreationData {
+    return {
+      sex: 'male',
+      raceKey: 'half_elf',
+      classKey: 'warrior',
+      primaryRealm: null,
+      secondaryRealm: null,
+      baseStats: { str: 16, int: 10, wis: 10, dex: 14, con: 15, chr: 12 },
+      finalStats: { str: 15, int: 11, wis: 11, dex: 15, con: 14, chr: 13 },
+      name: 'Gandalf',
+      autorollerMinimums: { str: 8, int: 8, wis: 8, dex: 8, con: 8, chr: 8 },
+      rollCount: 1,
+      isAutorolling: false,
+      physicalAttributes: { age: 30, height: 72, weight: 180 },
+      isSelectingPrimaryRealm: false,
+      ...overrides,
+    };
+  }
+
+  it('stores character name from creation data', () => {
+    const creation = createTestCreationData({ name: 'Frodo Baggins' });
+    const player = Player.fromCreation(creation, mockItemGen);
+
+    expect(player.name).toBe('Frodo Baggins');
+  });
+
+  it('stores race key from creation data', () => {
+    const creation = createTestCreationData({ raceKey: 'hobbit' });
+    const player = Player.fromCreation(creation, mockItemGen);
+
+    expect(player.raceKey).toBe('hobbit');
+  });
+
+  it('stores race name from creation data', () => {
+    const creation = createTestCreationData({ raceKey: 'elf' });
+    const player = Player.fromCreation(creation, mockItemGen);
+
+    expect(player.raceName).toBe('Elf');
+  });
+});

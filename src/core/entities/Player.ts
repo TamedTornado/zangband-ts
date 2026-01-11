@@ -92,6 +92,8 @@ export interface PlayerConfig {
 
 export class Player extends Actor {
   readonly stats: Stats;
+  private _name: string = 'Unknown';
+  private _raceKey: string = 'human';
   private _className: string;
   private _classDef: ClassDef | undefined;
   private _inventory: Item[] = [];
@@ -173,6 +175,9 @@ export class Player extends Actor {
 
     const player = new Player(config);
 
+    // Set character identity
+    player._name = creation.name;
+    player._raceKey = creation.raceKey;
     player.setRace(raceDef);
 
     // Starting equipment by class
@@ -212,6 +217,19 @@ export class Player extends Actor {
     }
 
     return player;
+  }
+
+  // Character identity accessors
+  get name(): string {
+    return this._name;
+  }
+
+  get raceKey(): string {
+    return this._raceKey;
+  }
+
+  get raceName(): string {
+    return this._raceDef?.name ?? 'Unknown';
   }
 
   // Class accessors
