@@ -41,6 +41,9 @@ import { TameMonsterEffect } from './TameMonsterEffect';
 import { SummonEffect } from './SummonEffect';
 import { WonderEffect } from './WonderEffect';
 import { HavocEffect } from './HavocEffect';
+import { RemoveCurseEffect } from './RemoveCurseEffect';
+import { GlyphEffect } from './GlyphEffect';
+import { MappingEffect } from './MappingEffect';
 
 /**
  * Default effect registry
@@ -92,6 +95,11 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   wonder: WonderEffect,
   // Chaos effects
   havoc: HavocEffect,
+  // Curse/protection effects
+  removeCurse: RemoveCurseEffect,
+  glyph: GlyphEffect,
+  // Detection/utility effects
+  mapping: MappingEffect,
 };
 
 export class EffectManager {

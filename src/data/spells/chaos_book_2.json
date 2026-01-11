@@ -3,584 +3,176 @@
     "index": 8,
     "name": "Wonder",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 17,
-        "mana": 10,
-        "fail": 25,
-        "exp": 5
-      },
-      "priest": {
-        "level": 19,
-        "mana": 15,
-        "fail": 50,
-        "exp": 7
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 27,
-        "mana": 23,
-        "fail": 60,
-        "exp": 5
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 21,
-        "mana": 21,
-        "fail": 45,
-        "exp": 7
-      },
-      "chaos_warrior": {
-        "level": 19,
-        "mana": 18,
-        "fail": 45,
-        "exp": 7
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 15,
-        "mana": 9,
-        "fail": 20,
-        "exp": 5
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 17, "mana": 10, "fail": 25, "exp": 5 },
+      "priest": { "level": 19, "mana": 15, "fail": 50, "exp": 7 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 27, "mana": 23, "fail": 60, "exp": 5 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 21, "mana": 21, "fail": 45, "exp": 7 },
+      "chaos_warrior": { "level": 19, "mana": 18, "fail": 45, "exp": 7 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 15, "mana": 9, "fail": 20, "exp": 5 }
     },
-    "key": "wonder"
+    "key": "wonder",
+    "effects": [
+      { "type": "wonder" }
+    ],
+    "target": "position"
   },
   {
     "index": 9,
     "name": "Chaos Bolt",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 19,
-        "mana": 12,
-        "fail": 45,
-        "exp": 9
-      },
-      "priest": {
-        "level": 21,
-        "mana": 16,
-        "fail": 50,
-        "exp": 9
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 30,
-        "mana": 25,
-        "fail": 60,
-        "exp": 8
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 23,
-        "mana": 22,
-        "fail": 45,
-        "exp": 9
-      },
-      "chaos_warrior": {
-        "level": 22,
-        "mana": 21,
-        "fail": 45,
-        "exp": 9
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 17,
-        "mana": 10,
-        "fail": 35,
-        "exp": 9
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 19, "mana": 12, "fail": 45, "exp": 9 },
+      "priest": { "level": 21, "mana": 16, "fail": 50, "exp": 9 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 30, "mana": 25, "fail": 60, "exp": 8 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 23, "mana": 22, "fail": 45, "exp": 9 },
+      "chaos_warrior": { "level": 22, "mana": 21, "fail": 45, "exp": 9 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 17, "mana": 10, "fail": 35, "exp": 9 }
     },
-    "key": "chaos_bolt"
+    "key": "chaos_bolt",
+    "effects": [
+      { "type": "bolt", "damageType": "chaos", "damage": "10d8+level" }
+    ],
+    "target": "position"
   },
   {
     "index": 10,
     "name": "Sonic Boom",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 21,
-        "mana": 13,
-        "fail": 45,
-        "exp": 10
-      },
-      "priest": {
-        "level": 23,
-        "mana": 18,
-        "fail": 80,
-        "exp": 20
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 33,
-        "mana": 30,
-        "fail": 70,
-        "exp": 13
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 27,
-        "mana": 25,
-        "fail": 50,
-        "exp": 20
-      },
-      "chaos_warrior": {
-        "level": 25,
-        "mana": 25,
-        "fail": 50,
-        "exp": 20
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 19,
-        "mana": 11,
-        "fail": 35,
-        "exp": 10
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 21, "mana": 13, "fail": 45, "exp": 10 },
+      "priest": { "level": 23, "mana": 18, "fail": 80, "exp": 20 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 33, "mana": 30, "fail": 70, "exp": 13 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 27, "mana": 25, "fail": 50, "exp": 20 },
+      "chaos_warrior": { "level": 25, "mana": 25, "fail": 50, "exp": 20 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 19, "mana": 11, "fail": 35, "exp": 10 }
     },
-    "key": "sonic_boom"
+    "key": "sonic_boom",
+    "effects": [
+      { "type": "ball", "damageType": "sound", "damage": "45+level", "radius": 2, "centered": true }
+    ],
+    "target": "self"
   },
   {
     "index": 11,
     "name": "Doom Bolt",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 23,
-        "mana": 15,
-        "fail": 50,
-        "exp": 11
-      },
-      "priest": {
-        "level": 25,
-        "mana": 18,
-        "fail": 50,
-        "exp": 11
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 35,
-        "mana": 31,
-        "fail": 70,
-        "exp": 10
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 29,
-        "mana": 30,
-        "fail": 50,
-        "exp": 11
-      },
-      "chaos_warrior": {
-        "level": 28,
-        "mana": 27,
-        "fail": 50,
-        "exp": 11
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 21,
-        "mana": 12,
-        "fail": 40,
-        "exp": 11
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 23, "mana": 15, "fail": 50, "exp": 11 },
+      "priest": { "level": 25, "mana": 18, "fail": 50, "exp": 11 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 35, "mana": 31, "fail": 70, "exp": 10 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 29, "mana": 30, "fail": 50, "exp": 11 },
+      "chaos_warrior": { "level": 28, "mana": 27, "fail": 50, "exp": 11 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 21, "mana": 12, "fail": 40, "exp": 11 }
     },
-    "key": "doom_bolt"
+    "key": "doom_bolt",
+    "effects": [
+      { "type": "bolt", "damageType": "mana", "damage": "11d8+level" }
+    ],
+    "target": "position"
   },
   {
     "index": 12,
     "name": "Fire Ball",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 25,
-        "mana": 16,
-        "fail": 50,
-        "exp": 12
-      },
-      "priest": {
-        "level": 27,
-        "mana": 20,
-        "fail": 65,
-        "exp": 12
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 37,
-        "mana": 35,
-        "fail": 75,
-        "exp": 15
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 33,
-        "mana": 33,
-        "fail": 50,
-        "exp": 12
-      },
-      "chaos_warrior": {
-        "level": 30,
-        "mana": 30,
-        "fail": 50,
-        "exp": 12
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 22,
-        "mana": 13,
-        "fail": 40,
-        "exp": 12
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 25, "mana": 16, "fail": 50, "exp": 12 },
+      "priest": { "level": 27, "mana": 20, "fail": 65, "exp": 12 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 37, "mana": 35, "fail": 75, "exp": 15 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 33, "mana": 33, "fail": 50, "exp": 12 },
+      "chaos_warrior": { "level": 30, "mana": 30, "fail": 50, "exp": 12 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 22, "mana": 13, "fail": 40, "exp": 12 }
     },
-    "key": "fire_ball"
+    "key": "fire_ball",
+    "effects": [
+      { "type": "ball", "damageType": "fire", "damage": "55+level", "radius": 2 }
+    ],
+    "target": "position"
   },
   {
     "index": 13,
     "name": "Teleport Other",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 25,
-        "mana": 18,
-        "fail": 60,
-        "exp": 8
-      },
-      "priest": {
-        "level": 29,
-        "mana": 22,
-        "fail": 60,
-        "exp": 8
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 39,
-        "mana": 29,
-        "fail": 65,
-        "exp": 5
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 37,
-        "mana": 35,
-        "fail": 60,
-        "exp": 8
-      },
-      "chaos_warrior": {
-        "level": 33,
-        "mana": 36,
-        "fail": 60,
-        "exp": 8
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 23,
-        "mana": 15,
-        "fail": 50,
-        "exp": 8
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 25, "mana": 18, "fail": 60, "exp": 8 },
+      "priest": { "level": 29, "mana": 22, "fail": 60, "exp": 8 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 39, "mana": 29, "fail": 65, "exp": 5 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 37, "mana": 35, "fail": 60, "exp": 8 },
+      "chaos_warrior": { "level": 33, "mana": 36, "fail": 60, "exp": 8 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 23, "mana": 15, "fail": 50, "exp": 8 }
     },
-    "key": "teleport_other"
+    "key": "teleport_other",
+    "effects": [
+      { "type": "teleportOther", "distance": "level" }
+    ],
+    "target": "position"
   },
   {
     "index": 14,
     "name": "Word of Destruction",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 30,
-        "mana": 20,
-        "fail": 80,
-        "exp": 15
-      },
-      "priest": {
-        "level": 33,
-        "mana": 23,
-        "fail": 80,
-        "exp": 15
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 43,
-        "mana": 30,
-        "fail": 95,
-        "exp": 15
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 41,
-        "mana": 40,
-        "fail": 80,
-        "exp": 15
-      },
-      "chaos_warrior": {
-        "level": 36,
-        "mana": 39,
-        "fail": 80,
-        "exp": 15
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 27,
-        "mana": 17,
-        "fail": 70,
-        "exp": 15
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 30, "mana": 20, "fail": 80, "exp": 15 },
+      "priest": { "level": 33, "mana": 23, "fail": 80, "exp": 15 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 43, "mana": 30, "fail": 95, "exp": 15 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 41, "mana": 40, "fail": 80, "exp": 15 },
+      "chaos_warrior": { "level": 36, "mana": 39, "fail": 80, "exp": 15 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 27, "mana": 17, "fail": 70, "exp": 15 }
     },
-    "key": "word_of_destruction"
+    "key": "word_of_destruction",
+    "effects": [
+      { "type": "earthquake", "radius": 15 }
+    ],
+    "target": "self"
   },
   {
     "index": 15,
     "name": "Invoke Logrus",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 35,
-        "mana": 40,
-        "fail": 85,
-        "exp": 40
-      },
-      "priest": {
-        "level": 37,
-        "mana": 42,
-        "fail": 85,
-        "exp": 40
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 48,
-        "mana": 50,
-        "fail": 85,
-        "exp": 30
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 48,
-        "mana": 50,
-        "fail": 85,
-        "exp": 40
-      },
-      "chaos_warrior": {
-        "level": 40,
-        "mana": 67,
-        "fail": 85,
-        "exp": 40
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 30,
-        "mana": 35,
-        "fail": 75,
-        "exp": 40
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 35, "mana": 40, "fail": 85, "exp": 40 },
+      "priest": { "level": 37, "mana": 42, "fail": 85, "exp": 40 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 48, "mana": 50, "fail": 85, "exp": 30 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 48, "mana": 50, "fail": 85, "exp": 40 },
+      "chaos_warrior": { "level": 40, "mana": 67, "fail": 85, "exp": 40 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 30, "mana": 35, "fail": 75, "exp": 40 }
     },
-    "key": "invoke_logrus"
+    "key": "invoke_logrus",
+    "effects": [
+      { "type": "ball", "damageType": "chaos", "damage": "66+level", "radius": "level/5" }
+    ],
+    "target": "position"
   }
 ]
