@@ -16,6 +16,7 @@ import type { Position } from '@/core/types';
 import type { WildernessMap } from './WildernessGenerator';
 import type { WildGenData, WildPlace } from '@/core/data/WildernessTypes';
 import { WILD_BLOCK_SIZE } from '@/core/data/WildernessTypes';
+import type { MonsterDataManager } from '@/core/data/MonsterDataManager';
 import wInfoData from '@/data/wilderness/w_info.json';
 
 /**
@@ -34,6 +35,7 @@ export interface WildernessLevelData extends GeneratedLevelData {
  */
 export function generateWildernessLevel(
   player: Player,
+  monsterDataManager?: MonsterDataManager,
   seed?: number
 ): WildernessLevelData {
   // Use provided seed or generate one
@@ -47,7 +49,7 @@ export function generateWildernessLevel(
   const wildernessMap = generator.generate();
 
   // Create the wilderness level
-  const wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG);
+  const wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG, monsterDataManager);
 
   // Collect store entrances from all towns
   const storeEntrances: StoreEntrance[] = [];
@@ -133,10 +135,11 @@ export function restoreWildernessLevel(
   player: Player,
   wildernessMap: WildernessMap,
   wildernessX: number,
-  wildernessY: number
+  wildernessY: number,
+  monsterDataManager?: MonsterDataManager
 ): WildernessLevelData {
   const genData = wInfoData as WildGenData[];
-  const wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG);
+  const wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG, monsterDataManager);
 
   // Set player on level BEFORE initializeAt so it can set player.position
   wildernessLevel.player = player;

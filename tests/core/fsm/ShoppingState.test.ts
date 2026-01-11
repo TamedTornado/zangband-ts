@@ -14,7 +14,7 @@ import { getGameStore } from '@/core/store/gameStore';
 
 // Mock store definition
 const alchemyStoreDef: StoreDef = {
-  key: 'alchemy',
+  key: 'alchemy_shop',
   name: 'Alchemy Shop',
   symbol: '5',
   color: '#0000ff',
@@ -125,20 +125,20 @@ describe('ShoppingState', () => {
 
   describe('initialization', () => {
     it('enters with store key set', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       expect(state.name).toBe('shopping');
-      expect(state.storeKey).toBe('alchemy');
+      expect(state.storeKey).toBe('alchemy_shop');
     });
 
     it('defaults to browse mode', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       expect(state.mode).toBe('browse');
     });
   });
 
   describe('exitStore', () => {
     it('returns to PlayingState when in browse mode', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const mockPlayer = createMockPlayer();
       const fsm = createMockFSM(mockPlayer, store);
       state.onEnter(fsm);
@@ -152,7 +152,7 @@ describe('ShoppingState', () => {
     });
 
     it('returns to browse mode when in buying mode', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 50 });
       store.addToStock(potion);
 
@@ -173,7 +173,7 @@ describe('ShoppingState', () => {
 
   describe('storeCommand', () => {
     it('purchase command enters buying mode', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 50 });
       store.addToStock(potion);
 
@@ -186,7 +186,7 @@ describe('ShoppingState', () => {
     });
 
     it('sell command enters selling mode', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 50 });
 
       const mockPlayer = createMockPlayer({ items: [potion] });
@@ -198,7 +198,7 @@ describe('ShoppingState', () => {
     });
 
     it('examine command enters examining mode', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 50 });
       store.addToStock(potion);
 
@@ -213,7 +213,7 @@ describe('ShoppingState', () => {
 
   describe('buyItem', () => {
     it('buys item from store when player has enough gold', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 50 });
       store.addToStock(potion);
 
@@ -229,7 +229,7 @@ describe('ShoppingState', () => {
     });
 
     it('fails to buy when player lacks gold', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const expensivePotion = createTestItem({ type: 'potion', cost: 1000 });
       store.addToStock(expensivePotion);
 
@@ -246,7 +246,7 @@ describe('ShoppingState', () => {
 
   describe('sellItem', () => {
     it('sells item to store when store accepts the type', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 100 });
 
       const mockPlayer = createMockPlayer({ gold: 100, items: [potion] });
@@ -261,7 +261,7 @@ describe('ShoppingState', () => {
     });
 
     it('fails to sell when store does not accept item type', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const sword = createTestItem({ type: 'sword', key: 'long_sword', name: 'Long Sword', cost: 100 });
 
       const mockPlayer = createMockPlayer({ gold: 100, items: [sword] });
@@ -277,7 +277,7 @@ describe('ShoppingState', () => {
 
   describe('letterSelect', () => {
     it('in browse mode, shows help message', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 50 });
       store.addToStock(potion);
 
@@ -293,7 +293,7 @@ describe('ShoppingState', () => {
     });
 
     it('in buying mode, converts letter to item index for purchase', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 50 });
       store.addToStock(potion);
 
@@ -311,7 +311,7 @@ describe('ShoppingState', () => {
     });
 
     it('in selling mode, converts letter to inventory index', () => {
-      state = new ShoppingState('alchemy');
+      state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 100 });
 
       const mockPlayer = createMockPlayer({ gold: 100, items: [potion] });

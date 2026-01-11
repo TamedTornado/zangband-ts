@@ -122,10 +122,18 @@ export class MonsterDataManager {
    * 3. Filter by depth and flags
    * 4. Biased selection toward harder monsters
    *
-   * @param level - Current dungeon level
+   * Per Zangband's test_monster_wild():
+   * - In towns (isTown=true): only WILD_TOWN monsters can spawn
+   * - In wilderness (level=0, isTown=false): WILD_TOWN excluded
+   * - In dungeons (level>0): WILD_TOWN excluded
+   *
+   * @param level - Current dungeon/wilderness level (monGen for wilderness)
+   * @param options - Selection options
    * @returns The selected monster definition, or null if none available
    */
-  selectMonster(level: number): MonsterDef | null {
+  selectMonster(level: number, options?: { isTown?: boolean }): MonsterDef | null {
+    const isTown = options?.isTown ?? false;
+
     // Level boosting (out-of-depth monsters)
     let effectiveLevel = level;
 
@@ -167,9 +175,15 @@ export class MonsterDataManager {
         continue;
       }
 
-      // Skip WILD_TOWN monsters in the dungeon (they only spawn at depth 0)
-      if (monster.flags.includes('WILD_TOWN') && level > 0) {
-        continue;
+      const hasWildTown = monster.flags.includes('WILD_TOWN');
+
+      // Per Zangband test_monster_wild():
+      // In towns: ONLY WILD_TOWN monsters
+      if (isTown) {
+        if (!hasWildTown) continue;
+      } else {
+        // Not in town: exclude WILD_TOWN monsters
+        if (hasWildTown) continue;
       }
 
       total += entry.probability;

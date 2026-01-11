@@ -185,17 +185,25 @@ describe('MonsterDataManager', () => {
       }
     });
 
-    it('allows WILD_TOWN monsters at depth 0', () => {
-      // At depth 0 (town), WILD_TOWN monsters should be eligible
+    it('allows WILD_TOWN monsters when isTown is true', () => {
+      // In towns (isTown=true), WILD_TOWN monsters should be eligible
       let foundTownNpc = false;
       for (let i = 0; i < 100; i++) {
-        const monster = manager.selectMonster(0);
+        const monster = manager.selectMonster(0, { isTown: true });
         if (monster?.key === 'town_npc') {
           foundTownNpc = true;
           break;
         }
       }
       expect(foundTownNpc).toBe(true);
+    });
+
+    it('excludes WILD_TOWN monsters when isTown is false', () => {
+      // In wilderness (isTown=false), WILD_TOWN monsters should NOT be selected
+      for (let i = 0; i < 50; i++) {
+        const monster = manager.selectMonster(0, { isTown: false });
+        expect(monster?.key).not.toBe('town_npc');
+      }
     });
   });
 

@@ -14,7 +14,7 @@ import { RNG } from 'rot-js';
 import type { Position } from '../types';
 import { Tile, getTerrain, getTerrainByIndex } from './Tile';
 import type { Actor } from '../entities/Actor';
-import type { Monster } from '../entities/Monster';
+import { Monster } from '../entities/Monster';
 import type { Item } from '../entities/Item';
 import type { Trap } from '../entities/Trap';
 import type { ILevel } from './Level';
@@ -25,11 +25,11 @@ import type {
   GameEvent,
   GPActiveEffectTriggerResult,
 } from '../systems/activeEffects';
-import { WILD_BLOCK_SIZE, WILD_VIEW } from '../data/WildernessTypes';
+import { WILD_BLOCK_SIZE, WILD_VIEW, type WildBlock, type WildGenData, type WildPlace } from '../data/WildernessTypes';
 import type { WildernessMap } from '../systems/wilderness/WildernessGenerator';
 import { WildBlockGenerator } from '../systems/wilderness/BlockGenerator';
 import { ZangbandTownGenerator, type GeneratedTownData } from '../systems/wilderness/TownGen';
-import type { WildGenData, WildPlace } from '../data/WildernessTypes';
+import type { MonsterDataManager } from '../data/MonsterDataManager';
 
 /**
  * Type guard to check if a level is a WildernessLevel.
@@ -78,14 +78,26 @@ export class WildernessLevel implements ILevel {
   private traps: Trap[] = [];
   private activeEffects: GPActiveEffect[] = [];
 
+  /** Monster data manager for spawning */
+  private monsterDataManager: MonsterDataManager | null = null;
+
+  /** RNG for monster spawning */
+  private rng: typeof RNG;
+
+  /** Counter for monster IDs */
+  private monsterIdCounter = 0;
+
   constructor(
     wildernessMap: WildernessMap,
     genData: WildGenData[],
-    rng: typeof RNG
+    rng: typeof RNG,
+    monsterDataManager?: MonsterDataManager
   ) {
     this.wildernessMap = wildernessMap;
     this.blockGenerator = new WildBlockGenerator(rng, genData);
     this.townGenerator = new ZangbandTownGenerator(rng);
+    this.rng = rng;
+    this.monsterDataManager = monsterDataManager ?? null;
   }
 
   /** Get wilderness X coordinate (tile position in full wilderness) */
@@ -391,6 +403,11 @@ export class WildernessLevel implements ILevel {
     }
 
     this.blockCache.set(key, tiles);
+
+    // 4. Spawn monsters (including towns - WILD_TOWN monsters spawn there)
+    if (this.monsterDataManager) {
+      this.spawnBlockMonsters(block, blockX, blockY, tiles, !!townPlace);
+    }
   }
 
   /**
@@ -469,6 +486,93 @@ export class WildernessLevel implements ILevel {
   }
 
   /**
+   * Spawn monsters in a wilderness block.
+   *
+   * Per Zangband wild3.c add_monsters_block():
+   * - prob = daytime ? 32786 : 20000 (we stub to always daytime)
+   * - prob /= (monProb + 1)
+   * - For each walkable tile: if random(0, prob) == 0, spawn monster
+   * - Use monGen as monster level for selection
+   * - In towns, only WILD_TOWN monsters spawn (per test_monster_wild)
+   */
+  private spawnBlockMonsters(
+    block: WildBlock,
+    blockX: number,
+    blockY: number,
+    tiles: Tile[][],
+    isTown: boolean
+  ): void {
+    if (!this.monsterDataManager) return;
+
+    // Daytime probability (stub: always daytime)
+    const DAYTIME_PROB = 32786;
+
+    // Calculate spawn probability threshold
+    const monProb = block.monProb ?? 0;
+    const prob = Math.floor(DAYTIME_PROB / (monProb + 1));
+
+    // Monster difficulty level from block data
+    const monGen = block.monGen ?? 0;
+
+    // Iterate through all tiles in the block
+    for (let y = 0; y < WILD_BLOCK_SIZE; y++) {
+      for (let x = 0; x < WILD_BLOCK_SIZE; x++) {
+        const tile = tiles[y]?.[x];
+        if (!tile || !tile.isPassable) continue;
+
+        // Roll for spawn
+        if (this.rng.getUniformInt(0, prob - 1) !== 0) continue;
+
+        // Select a monster appropriate for this location
+        // In towns, only WILD_TOWN monsters; in wilderness, normal selection
+        const monsterDef = this.monsterDataManager.selectMonster(monGen, { isTown });
+        if (!monsterDef) continue;
+
+        // Calculate world position
+        const worldX = blockX * WILD_BLOCK_SIZE + x;
+        const worldY = blockY * WILD_BLOCK_SIZE + y;
+
+        // Don't spawn on player position
+        if (
+          this._player &&
+          this._player.position.x === worldX &&
+          this._player.position.y === worldY
+        ) {
+          continue;
+        }
+
+        // Check if position is already occupied
+        if (this.getMonsterAtWorld({ x: worldX, y: worldY })) continue;
+
+        // Roll HP
+        const hpMatch = monsterDef.hp.match(/^(\d+)d(\d+)$/);
+        let hp = 1;
+        if (hpMatch) {
+          const count = parseInt(hpMatch[1], 10);
+          const sides = parseInt(hpMatch[2], 10);
+          hp = 0;
+          for (let i = 0; i < count; i++) {
+            hp += this.rng.getUniformInt(1, sides);
+          }
+        }
+
+        // Create the monster
+        const monster = new Monster({
+          id: `wild_monster_${blockX}_${blockY}_${++this.monsterIdCounter}`,
+          position: { x: worldX, y: worldY },
+          symbol: monsterDef.symbol,
+          color: monsterDef.color,
+          def: monsterDef,
+          speed: monsterDef.speed,
+          maxHp: hp,
+        });
+
+        this.addMonster(monster);
+      }
+    }
+  }
+
+  /**
    * Remove blocks that are far from the current viewport.
    */
   private pruneDistantBlocks(): void {
@@ -494,47 +598,33 @@ export class WildernessLevel implements ILevel {
 
   // =========================================================================
   // ILevel implementation
+  // In WildernessLevel, all positions are WORLD coordinates (not screen).
+  // The player.position uses world coords, so level methods should too.
   // =========================================================================
 
   isInBounds(pos: Position): boolean {
-    return pos.x >= 0 && pos.x < this.width && pos.y >= 0 && pos.y < this.height;
+    // Check world bounds, not viewport bounds
+    return this.isInBoundsWorld(pos);
   }
 
   getTile(pos: Position): Tile | undefined {
-    if (!this.isInBounds(pos)) {
-      return undefined;
-    }
-
-    // Convert screen position to block + offset
-    const blockX = this.viewBlockX + Math.floor(pos.x / WILD_BLOCK_SIZE);
-    const blockY = this.viewBlockY + Math.floor(pos.y / WILD_BLOCK_SIZE);
-    const offsetX = pos.x % WILD_BLOCK_SIZE;
-    const offsetY = pos.y % WILD_BLOCK_SIZE;
-
-    const key = `${blockX},${blockY}`;
-    const block = this.blockCache.get(key);
-    if (!block) {
-      return undefined;
-    }
-
-    return block[offsetY]?.[offsetX];
+    // Get tile at world position
+    return this.getTileWorld(pos);
   }
 
   isWalkable(pos: Position): boolean {
-    const tile = this.getTile(pos);
-    return tile?.isPassable ?? false;
+    return this.isWalkableWorld(pos);
   }
 
   isTransparent(pos: Position): boolean {
-    const tile = this.getTile(pos);
-    return tile?.isTransparent ?? false;
+    return this.isTransparentWorld(pos);
   }
 
   isOccupied(pos: Position): boolean {
-    return this.getMonsterAt(pos) !== undefined;
+    return this.isOccupiedWorld(pos);
   }
 
-  // Actor methods
+  // Actor methods - all use world coordinates
   getActorAt(pos: Position): Actor | undefined {
     return this.actors.find(
       (a) => !a.isDead && a.position.x === pos.x && a.position.y === pos.y
@@ -557,10 +647,8 @@ export class WildernessLevel implements ILevel {
   }
 
   getMonsterAt(pos: Position): Monster | undefined {
-    const actor = this.actors.find(
-      (a) => a !== this._player && !a.isDead && a.position.x === pos.x && a.position.y === pos.y
-    );
-    return actor as Monster | undefined;
+    // Use world coordinates (same as getMonsterAtWorld)
+    return this.getMonsterAtWorld(pos);
   }
 
   getMonsterById(id: string): Monster | undefined {

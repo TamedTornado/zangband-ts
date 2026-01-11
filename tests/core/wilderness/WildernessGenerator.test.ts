@@ -156,6 +156,37 @@ describe('WildernessGenerator', () => {
       expect(dungeons.length).toBeGreaterThan(0);
     });
 
+    it('should place all towns fully within wilderness bounds', () => {
+      // Test with multiple seeds to catch edge cases
+      for (const seed of [12345, 99999, 1, 54321, 11111]) {
+        ROT.RNG.setSeed(seed);
+        const gen = new WildernessGenerator(ROT.RNG, wInfoData as WildGenData[], TEST_SIZE);
+        const result = gen.generate();
+
+        for (const place of result.places) {
+          if (place.type === 'town') {
+            // Town must fit within bounds: x + xsize <= size and y + ysize <= size
+            expect(
+              place.x + place.xsize,
+              `Town ${place.key} at (${place.x}, ${place.y}) with size ${place.xsize}x${place.ysize} extends past right edge (seed: ${seed})`
+            ).toBeLessThanOrEqual(TEST_SIZE);
+            expect(
+              place.y + place.ysize,
+              `Town ${place.key} at (${place.x}, ${place.y}) with size ${place.xsize}x${place.ysize} extends past bottom edge (seed: ${seed})`
+            ).toBeLessThanOrEqual(TEST_SIZE);
+            expect(
+              place.x,
+              `Town ${place.key} has negative x coordinate (seed: ${seed})`
+            ).toBeGreaterThanOrEqual(0);
+            expect(
+              place.y,
+              `Town ${place.key} has negative y coordinate (seed: ${seed})`
+            ).toBeGreaterThanOrEqual(0);
+          }
+        }
+      }
+    });
+
     it('should respect MIN_DIST_TOWN between towns', () => {
       const result = generator.generate();
 

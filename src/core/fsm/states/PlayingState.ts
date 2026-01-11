@@ -130,16 +130,10 @@ export class PlayingState implements State {
     const player = store.player!;
     const level = store.level!;
     const newPos = movePosition(player.position, dir);
-
-    // Wilderness uses world coordinates; dungeons use screen coordinates
     const isWilderness = isWildernessLevel(level);
 
-    // Get tile and monster using appropriate coordinate system
-    const targetMonster = isWilderness
-      ? level.getMonsterAtWorld(newPos)
-      : level.getMonsterAt(newPos);
-
     // Bump attack
+    const targetMonster = level.getMonsterAt(newPos);
     if (targetMonster) {
       store.incrementTurn();
       const result = fsm.gameLoop.playerAttack(player, targetMonster);
@@ -147,45 +141,33 @@ export class PlayingState implements State {
         fsm.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
       }
 
-      // Dead monster cleanup and XP handled by completeTurn
       fsm.completeTurn(ENERGY_PER_TURN);
       this.checkPlayerDeath(fsm);
       return;
     }
 
-    // Check walkability using appropriate coordinate system
-    const isWalkable = isWilderness
-      ? level.isWalkableWorld(newPos)
-      : level.isWalkable(newPos);
-    const isOccupied = isWilderness
-      ? level.isOccupiedWorld(newPos)
-      : level.isOccupied(newPos);
-
     // Normal movement
-    if (isWalkable && !isOccupied) {
+    if (level.isWalkable(newPos) && !level.isOccupied(newPos)) {
       store.incrementTurn();
 
       if (isWilderness) {
-        // Wilderness: player.position is world coordinates
+        // Wilderness: update viewport as player moves
         level.movePlayer(newPos.x, newPos.y);
-        // Update stored wilderness position for save/restore
         store.setWildernessPosition(player.position.x, player.position.y);
       } else {
-        // Dungeon: player.position is screen coordinates (no viewport scroll)
+        // Dungeon: just update position
         player.position = newPos;
       }
 
-      // Check for items using player's current position (world coords in wilderness)
-      const itemsHere = isWilderness
-        ? [] // TODO: wilderness items
-        : level.getItemsAt(player.position);
+      // Check for items
+      const itemsHere = level.getItemsAt(player.position);
       if (itemsHere.length === 1) {
         fsm.addMessage(`You see ${fsm.getItemDisplayName(itemsHere[0]!)} here.`, 'info');
       } else if (itemsHere.length > 1) {
         fsm.addMessage(`You see ${itemsHere.length} items here.`, 'info');
       }
 
-      // Check for store entrance - player.position is now world coords in wilderness
+      // Check for store entrance
       this.checkStoreEntrance(fsm, player.position);
 
       fsm.completeTurn(ENERGY_PER_TURN);
@@ -194,9 +176,7 @@ export class PlayingState implements State {
     }
 
     // Check for door
-    const tile = isWilderness
-      ? level.getTileWorld(newPos)
-      : level.getTile(newPos);
+    const tile = level.getTile(newPos);
     if (tile?.terrain.flags.includes('DOOR')) {
       store.incrementTurn();
       level.setTerrain(newPos, 'open_door');
@@ -213,12 +193,102 @@ export class PlayingState implements State {
     const store = getGameStore();
     const player = store.player!;
     const level = store.level!;
+    const isWilderness = isWildernessLevel(level);
 
     // Check for visible monsters first
     if (fsm.fovSystem.getVisibleMonster(level, player.position, VISION_RADIUS)) {
       fsm.addMessage('You cannot run with monsters nearby!', 'danger');
       return;
     }
+
+    // Use wilderness-specific running or dungeon running
+    if (isWilderness) {
+      this.handleWildernessRun(fsm, dir);
+    } else {
+      this.handleDungeonRun(fsm, dir);
+    }
+  }
+
+  /**
+   * Handle running in wilderness - simpler open-area running.
+   * TODO: Could add road-following logic, stopping when new POIs come into view.
+   */
+  private handleWildernessRun(fsm: GameFSM, dir: Direction): void {
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level! as import('../../world/WildernessLevel').WildernessLevel;
+
+    let stepsRun = 0;
+    let interruptReason = '';
+    const startHp = player.hp;
+    const MAX_RUN_STEPS = 100;
+
+    while (stepsRun < MAX_RUN_STEPS) {
+      const newPos = movePosition(player.position, dir);
+
+      if (!level.isWalkable(newPos)) {
+        if (stepsRun === 0) interruptReason = 'Something blocks your path.';
+        break;
+      }
+
+      if (level.getMonsterAt(newPos)) {
+        if (stepsRun === 0) interruptReason = 'Something blocks your path.';
+        break;
+      }
+
+      const tile = level.getTile(newPos);
+      if (tile?.terrain.flags.includes('DOOR')) break;
+
+      // Move
+      stepsRun++;
+      store.incrementTurn();
+      level.movePlayer(newPos.x, newPos.y);
+      store.setWildernessPosition(player.position.x, player.position.y);
+
+      // Mark tiles as explored during run
+      fsm.fovSystem.computeAndMark(level, player.position, VIEW_RADIUS);
+
+      fsm.completeTurn(ENERGY_PER_TURN);
+
+      if (player.isDead) break;
+
+      // Interruption checks
+      if (player.hp < startHp) {
+        interruptReason = 'You are being attacked!';
+        break;
+      }
+
+      const visibleMonster = fsm.fovSystem.getVisibleMonster(level, player.position, VISION_RADIUS);
+      if (visibleMonster) {
+        interruptReason = `You see a ${fsm.getMonsterName(visibleMonster)}.`;
+        break;
+      }
+
+      // Check for store entrance
+      const storeKey = fsm.storeManager.getStoreKeyAt(player.position);
+      if (storeKey) {
+        const storeInstance = fsm.storeManager.getStore(storeKey);
+        if (storeInstance) {
+          fsm.addMessage(`You arrive at ${storeInstance.definition.name}.`, 'info');
+        }
+        break;
+      }
+    }
+
+    if (interruptReason) {
+      fsm.addMessage(interruptReason, 'danger');
+    }
+
+    this.checkPlayerDeath(fsm);
+  }
+
+  /**
+   * Handle running in dungeons - uses RunSystem for corridor following.
+   */
+  private handleDungeonRun(fsm: GameFSM, dir: Direction): void {
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
 
     const runState = RunSystem.initRun(level, player.position, dir);
     let runDir = runState.direction;
@@ -294,20 +364,16 @@ export class PlayingState implements State {
     const depth = store.depth;
     const level = store.level!;
     const pos = player.position;
+    const isWilderness = isWildernessLevel(level);
 
     // Check if standing on down stairs
-    // In wilderness, check terrain using world coordinates
-    // In dungeon, check downStairs array
-    let onDownStairs = false;
-    if (isWildernessLevel(level)) {
-      const tile = level.getTileWorld(pos);
-      onDownStairs = tile?.terrain.key === 'down_staircase';
-      // Save position before entering dungeon (player.position is world coords)
-      if (onDownStairs) {
-        store.setWildernessPosition(pos.x, pos.y);
-      }
-    } else {
-      onDownStairs = downStairs.some(s => s.x === pos.x && s.y === pos.y);
+    const tile = level.getTile(pos);
+    let onDownStairs = tile?.terrain.key === 'down_staircase' ||
+                       downStairs.some(s => s.x === pos.x && s.y === pos.y);
+
+    // Save wilderness position before entering dungeon
+    if (isWilderness && onDownStairs) {
+      store.setWildernessPosition(pos.x, pos.y);
     }
 
     if (!onDownStairs) {

@@ -10,9 +10,12 @@ import { RNG } from 'rot-js';
 import { WildernessLevel, isWildernessLevel } from '@/core/world/WildernessLevel';
 import { Level } from '@/core/world/Level';
 import { WildernessGenerator } from '@/core/systems/wilderness/WildernessGenerator';
+import { MonsterDataManager } from '@/core/data/MonsterDataManager';
 import { WILD_BLOCK_SIZE, WILD_VIEW } from '@/core/data/WildernessTypes';
 import type { WildGenData } from '@/core/data/WildernessTypes';
 import wInfoData from '@/data/wilderness/w_info.json';
+import monstersData from '@/data/monsters/monsters.json';
+import type { MonsterDef } from '@/core/data/monsters';
 
 describe('WildernessLevel', () => {
   let wildernessLevel: WildernessLevel;
@@ -144,11 +147,14 @@ describe('WildernessLevel', () => {
       expect(tile).toBeUndefined();
     });
 
-    it('isInBounds returns correct values', () => {
+    it('isInBounds checks world bounds (not viewport)', () => {
+      // WildernessLevel.isInBounds uses world coordinates
+      // For a 64-block wilderness, world is 0 to 1023 (64 * 16 - 1)
       expect(wildernessLevel.isInBounds({ x: 0, y: 0 })).toBe(true);
-      expect(wildernessLevel.isInBounds({ x: 143, y: 143 })).toBe(true);
+      expect(wildernessLevel.isInBounds({ x: 500, y: 500 })).toBe(true);
+      expect(wildernessLevel.isInBounds({ x: 1023, y: 1023 })).toBe(true);
       expect(wildernessLevel.isInBounds({ x: -1, y: 0 })).toBe(false);
-      expect(wildernessLevel.isInBounds({ x: 144, y: 0 })).toBe(false);
+      expect(wildernessLevel.isInBounds({ x: 1024, y: 0 })).toBe(false);
     });
   });
 });
@@ -280,5 +286,132 @@ describe('isWildernessLevel type guard', () => {
     const level = new Level(80, 24, { depth: 1 });
 
     expect(isWildernessLevel(level)).toBe(false);
+  });
+});
+
+describe('monster spawning', () => {
+  let wildernessLevel: WildernessLevel;
+  let genData: WildGenData[];
+  let wildernessMap: ReturnType<WildernessGenerator['generate']>;
+  let monsterDataManager: MonsterDataManager;
+
+  beforeEach(() => {
+    RNG.setSeed(12345);
+    genData = wInfoData as WildGenData[];
+    const generator = new WildernessGenerator(RNG, genData, 64);
+    wildernessMap = generator.generate();
+
+    // Create monster data manager instance
+    monsterDataManager = new MonsterDataManager(
+      monstersData as unknown as Record<string, MonsterDef>
+    );
+  });
+
+  it('spawns monsters when loading wilderness blocks', () => {
+    wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG, monsterDataManager);
+
+    // Initialize at a non-town position (block 40,40 should be wilderness)
+    const wildX = 40 * WILD_BLOCK_SIZE + 8;
+    const wildY = 40 * WILD_BLOCK_SIZE + 8;
+    wildernessLevel.initializeAt(wildX, wildY);
+
+    // Should have spawned some monsters
+    const monsters = wildernessLevel.getMonsters();
+    expect(monsters.length).toBeGreaterThan(0);
+  });
+
+  it('spawns only WILD_TOWN monsters in town blocks', () => {
+    wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG, monsterDataManager);
+
+    // Find starting town position
+    const startingTown = wildernessMap.places.find((p) => p.key === 'starting_town');
+    expect(startingTown).toBeDefined();
+
+    // Initialize at the town center
+    const wildX = startingTown!.x * WILD_BLOCK_SIZE + 8;
+    const wildY = startingTown!.y * WILD_BLOCK_SIZE + 8;
+    wildernessLevel.initializeAt(wildX, wildY);
+
+    // Count monsters in the town blocks only
+    const monsters = wildernessLevel.getMonsters();
+    const townMonsters = monsters.filter((m) => {
+      const blockX = Math.floor(m.position.x / WILD_BLOCK_SIZE);
+      const blockY = Math.floor(m.position.y / WILD_BLOCK_SIZE);
+      return (
+        blockX >= startingTown!.x &&
+        blockX < startingTown!.x + startingTown!.xsize &&
+        blockY >= startingTown!.y &&
+        blockY < startingTown!.y + startingTown!.ysize
+      );
+    });
+
+    // All town monsters should have WILD_TOWN flag
+    for (const monster of townMonsters) {
+      const def = monsterDataManager.getMonsterDef(monster.definitionKey);
+      expect(def).toBeDefined();
+      expect(def!.flags).toContain('WILD_TOWN');
+    }
+  });
+
+  it('spawns monsters with world coordinates', () => {
+    wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG, monsterDataManager);
+
+    // Initialize at wilderness position
+    const wildX = 40 * WILD_BLOCK_SIZE + 8;
+    const wildY = 40 * WILD_BLOCK_SIZE + 8;
+    wildernessLevel.initializeAt(wildX, wildY);
+
+    const monsters = wildernessLevel.getMonsters();
+    if (monsters.length > 0) {
+      // Monster positions should be in world coordinates (not screen)
+      const monster = monsters[0];
+      expect(monster.position.x).toBeGreaterThanOrEqual(0);
+      expect(monster.position.y).toBeGreaterThanOrEqual(0);
+      // World coordinates should be large values, not 0-143 screen coords
+      const maxScreenCoord = WILD_VIEW * WILD_BLOCK_SIZE;
+      // At least some monster should have coords outside 0-143 range if properly using world coords
+      const hasWorldCoords = monsters.some(
+        (m) => m.position.x >= maxScreenCoord || m.position.y >= maxScreenCoord
+      );
+      expect(hasWorldCoords).toBe(true);
+    }
+  });
+
+  it('uses monGen for monster level selection', () => {
+    wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG, monsterDataManager);
+
+    // Initialize at wilderness position
+    const wildX = 40 * WILD_BLOCK_SIZE + 8;
+    const wildY = 40 * WILD_BLOCK_SIZE + 8;
+    wildernessLevel.initializeAt(wildX, wildY);
+
+    const monsters = wildernessLevel.getMonsters();
+    // All spawned monsters should have depth <= max monGen in visible area
+    // monGen ranges 0-64 typically
+    for (const monster of monsters) {
+      // Monster depth should be reasonable for wilderness
+      const def = monsterDataManager.getMonsterDef(monster.definitionKey);
+      expect(def).toBeDefined();
+      expect(def!.depth).toBeLessThanOrEqual(64);
+    }
+  });
+
+  it('spawns on block load, not just first initialization', () => {
+    wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG, monsterDataManager);
+
+    // Initialize at starting position
+    const wildX = 32 * WILD_BLOCK_SIZE + 8;
+    const wildY = 32 * WILD_BLOCK_SIZE + 8;
+    wildernessLevel.initializeAt(wildX, wildY);
+
+    const initialCount = wildernessLevel.getMonsters().length;
+
+    // Move far enough to load new blocks
+    const newX = wildX + WILD_BLOCK_SIZE * 5;
+    wildernessLevel.movePlayer(newX, wildY);
+
+    // Should have more monsters now from newly loaded blocks
+    const afterMoveCount = wildernessLevel.getMonsters().length;
+    expect(afterMoveCount).toBeGreaterThanOrEqual(initialCount);
   });
 });

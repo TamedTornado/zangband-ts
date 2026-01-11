@@ -1,6 +1,6 @@
 {
   "_comment": "Owner data extracted from Zangband tables.c. Format: purse = max gold owner will pay. greed affects pricing (100 = neutral, higher = greedier).",
-  "general": [
+  "general_store": [
     { "name": "Bilbo the Friendly", "race": "hobbit", "purse": 200, "greed": 108 },
     { "name": "Raistlin the Chicken", "race": "human", "purse": 200, "greed": 108 },
     { "name": "Sultan the Midget", "race": "gnome", "purse": 300, "greed": 107 },
@@ -20,7 +20,7 @@
     { "name": "Animus", "race": "golem", "purse": 25000, "greed": 112 },
     { "name": "Malvus", "race": "half_titan", "purse": 30000, "greed": 112 }
   ],
-  "weaponsmith": [
+  "weapon_smith": [
     { "name": "Arnold the Beastly", "race": "barbarian", "purse": 5000, "greed": 115 },
     { "name": "Arndal Beast-Slayer", "race": "half_elf", "purse": 10000, "greed": 110 },
     { "name": "Eddie Beast-Master", "race": "half_orc", "purse": 25000, "greed": 115 },
@@ -40,7 +40,7 @@
     { "name": "Hashnik the Druid", "race": "hobbit", "purse": 25000, "greed": 107 },
     { "name": "Atal the Wise", "race": "human", "purse": 30000, "greed": 109 }
   ],
-  "alchemy": [
+  "alchemy_shop": [
     { "name": "Mauser the Chemist", "race": "half_elf", "purse": 10000, "greed": 111 },
     { "name": "Wizzle the Chaotic", "race": "hobbit", "purse": 10000, "greed": 110 },
     { "name": "Midas the Greedy", "race": "gnome", "purse": 15000, "greed": 116 },
@@ -50,7 +50,7 @@
     { "name": "Valindra the Proud", "race": "high_elf", "purse": 15000, "greed": 116 },
     { "name": "Taen the Alchemist", "race": "human", "purse": 15000, "greed": 111 }
   ],
-  "magic": [
+  "magic_shop": [
     { "name": "Lo Pan the Sorcerer", "race": "half_elf", "purse": 20000, "greed": 110 },
     { "name": "Buggerby the Great", "race": "gnome", "purse": 20000, "greed": 113 },
     { "name": "The Wizard of Yendor", "race": "human", "purse": 30000, "greed": 110 },

@@ -8,12 +8,12 @@ const testLayout: TownLayout = {
   width: 66,
   height: 22,
   stores: [
-    { storeKey: 'general', x: 3, y: 2, width: 7, height: 4 },
+    { storeKey: 'general_store', x: 3, y: 2, width: 7, height: 4 },
     { storeKey: 'armory', x: 12, y: 2, width: 7, height: 4 },
-    { storeKey: 'weaponsmith', x: 21, y: 2, width: 7, height: 4 },
+    { storeKey: 'weapon_smith', x: 21, y: 2, width: 7, height: 4 },
     { storeKey: 'temple', x: 30, y: 2, width: 7, height: 4 },
-    { storeKey: 'alchemy', x: 39, y: 2, width: 7, height: 4 },
-    { storeKey: 'magic', x: 48, y: 2, width: 7, height: 4 },
+    { storeKey: 'alchemy_shop', x: 39, y: 2, width: 7, height: 4 },
+    { storeKey: 'magic_shop', x: 48, y: 2, width: 7, height: 4 },
     { storeKey: 'black_market', x: 57, y: 2, width: 7, height: 4 },
     { storeKey: 'home', x: 3, y: 16, width: 7, height: 4 },
   ],
@@ -43,7 +43,7 @@ describe('TownGenerator', () => {
       const town = generator.generate(testLayout);
 
       // Check that each store has an entrance
-      const storeKeys = ['general', 'armory', 'weaponsmith', 'temple', 'alchemy', 'magic', 'black_market', 'home'];
+      const storeKeys = ['general_store', 'armory', 'weapon_smith', 'temple', 'alchemy_shop', 'magic_shop', 'black_market', 'home'];
 
       for (const storeKey of storeKeys) {
         const entrances = town.storeEntrances.filter(e => e.storeKey === storeKey);
@@ -83,7 +83,7 @@ describe('TownGenerator', () => {
       const town = generator.generate(testLayout);
 
       // Store symbols are "1" through "8"
-      const generalEntrance = town.storeEntrances.find(e => e.storeKey === 'general');
+      const generalEntrance = town.storeEntrances.find(e => e.storeKey === 'general_store');
       expect(generalEntrance).toBeDefined();
 
       const tile = town.level.getTile(generalEntrance!.position);
@@ -134,11 +134,11 @@ describe('TownGenerator', () => {
       const town = generator.generate(testLayout);
 
       // Find general store entrance
-      const generalEntrance = town.storeEntrances.find(e => e.storeKey === 'general');
+      const generalEntrance = town.storeEntrances.find(e => e.storeKey === 'general_store');
       expect(generalEntrance).toBeDefined();
 
       // Lookup should return store key
-      expect(town.getStoreKeyAt(generalEntrance!.position)).toBe('general');
+      expect(town.getStoreKeyAt(generalEntrance!.position)).toBe('general_store');
 
       // Non-store position should return undefined
       expect(town.getStoreKeyAt(town.playerStart)).toBeUndefined();
@@ -152,7 +152,7 @@ describe('TownGenerator', () => {
 
       // General store: x:3, y:2, width:7, height:4
       // Bottom center should be: x: 3 + 3 = 6, y: 2 + 4 - 1 = 5
-      const generalEntrance = town.storeEntrances.find(e => e.storeKey === 'general');
+      const generalEntrance = town.storeEntrances.find(e => e.storeKey === 'general_store');
       expect(generalEntrance).toBeDefined();
       expect(generalEntrance!.position.x).toBe(6);  // 3 + floor(7/2)
       expect(generalEntrance!.position.y).toBe(5);  // 2 + 4 - 1

@@ -1,6 +1,6 @@
 {
-  "general": {
-    "key": "general",
+  "general_store": {
+    "key": "general_store",
     "name": "General Store",
     "symbol": "1",
     "color": "#c8a040",
@@ -29,8 +29,8 @@
     "levelMin": 5,
     "levelMax": 30
   },
-  "weaponsmith": {
-    "key": "weaponsmith",
+  "weapon_smith": {
+    "key": "weapon_smith",
     "name": "Weaponsmith",
     "symbol": "3",
     "color": "#ffffff",
@@ -60,8 +60,8 @@
     "levelMin": 5,
     "levelMax": 20
   },
-  "alchemy": {
-    "key": "alchemy",
+  "alchemy_shop": {
+    "key": "alchemy_shop",
     "name": "Alchemy Shop",
     "symbol": "5",
     "color": "#0000ff",
@@ -75,8 +75,8 @@
     "levelMin": 5,
     "levelMax": 30
   },
-  "magic": {
-    "key": "magic",
+  "magic_shop": {
+    "key": "magic_shop",
     "name": "Magic Shop",
     "symbol": "6",
     "color": "#ff0000",

@@ -39,15 +39,13 @@ export class WildernessRestoreState implements State {
       player,
       wildernessMap,
       this.wildernessX,
-      this.wildernessY
+      this.wildernessY,
+      fsm.monsterDataManager
     );
 
-    // Compute initial FOV using screen coordinates
+    // Compute initial FOV using world coordinates (level methods expect world coords)
     if (isWildernessLevel(data.level)) {
-      const screenPos = data.level.getPlayerScreenPosition();
-      if (screenPos) {
-        fsm.fovSystem.computeAndMark(data.level, screenPos, VIEW_RADIUS);
-      }
+      fsm.fovSystem.computeAndMark(data.level, player.position, VIEW_RADIUS);
     }
 
     // Register store positions with StoreManager

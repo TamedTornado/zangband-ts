@@ -13,6 +13,7 @@
 
 import {
   WILD_BLOCK_SIZE,
+  WILD_TOWN_SIZE,
   SEA_FRACTION,
   LAKE_NUM,
   RIVER_NUM,
@@ -382,12 +383,13 @@ export class WildernessGenerator {
 
     // Find the best location for the starting town
     // Should be high law, high population, above sea level
+    // Must leave room for town to fit within bounds
     let bestX = Math.floor(this.size / 2);
     let bestY = Math.floor(this.size / 2);
     let bestScore = -Infinity;
 
-    for (let y = 2; y < this.size - 2; y++) {
-      for (let x = 2; x < this.size - 2; x++) {
+    for (let y = 2; y < this.size - WILD_TOWN_SIZE; y++) {
+      for (let x = 2; x < this.size - WILD_TOWN_SIZE; x++) {
         if (this.hgtMap[y][x] < seaLevel) continue;
         if (this.blocks[y][x].info & WILD_INFO_WATER) continue;
 
@@ -409,8 +411,8 @@ export class WildernessGenerator {
       name: 'The Town',
       x: bestX,
       y: bestY,
-      xsize: 8,
-      ysize: 8,
+      xsize: WILD_TOWN_SIZE,
+      ysize: WILD_TOWN_SIZE,
       seed: Math.floor(this.rng.getUniform() * 1000000),
       data: 192, // Starting town pop = 64 + 128 per Zangband
       monstType: 1, // Villagers
@@ -432,11 +434,15 @@ export class WildernessGenerator {
     let attempts = 0;
     const maxAttempts = count * 50;
 
+    // Towns use WILD_TOWN_SIZE, dungeons are 1x1
+    const placeSize = type === 'town' ? WILD_TOWN_SIZE : 1;
+
     while (placed < count && attempts < maxAttempts) {
       attempts++;
 
-      const x = Math.floor(this.rng.getUniform() * (this.size - 4)) + 2;
-      const y = Math.floor(this.rng.getUniform() * (this.size - 4)) + 2;
+      // Leave room for place size within bounds
+      const x = Math.floor(this.rng.getUniform() * (this.size - placeSize - 2)) + 2;
+      const y = Math.floor(this.rng.getUniform() * (this.size - placeSize - 2)) + 2;
 
       // Must be above sea level
       if (this.hgtMap[y][x] < seaLevel) continue;
@@ -472,8 +478,8 @@ export class WildernessGenerator {
         name,
         x,
         y,
-        xsize: type === 'town' ? 8 : 1,
-        ysize: type === 'town' ? 8 : 1,
+        xsize: type === 'town' ? WILD_TOWN_SIZE : 1,
+        ysize: type === 'town' ? WILD_TOWN_SIZE : 1,
         seed: Math.floor(this.rng.getUniform() * 1000000),
         data: type === 'town' ? pop : 0,
         monstType: type === 'town' ? 1 + Math.floor(this.rng.getUniform() * 5) : 0,

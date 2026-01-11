@@ -269,6 +269,9 @@ export class GameFSM {
             this.addMessage(msg.text, msg.type as 'normal' | 'combat' | 'info' | 'danger');
           }
 
+          // Track killed uniques (Farmer Maggot, etc. - never respawn)
+          this.monsterDataManager.markUniqueKilled(monster.definitionKey);
+
           level.removeMonster(monster);
           scheduler.remove(monster);
         }

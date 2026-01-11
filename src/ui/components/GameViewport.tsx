@@ -81,7 +81,7 @@ export function GameViewport() {
     const camera = cameraRef.current;
 
     // For wilderness, player.position is in world coordinates
-    // We need screen coordinates for camera and FOV
+    // Camera needs screen coordinates, but FOV needs world coordinates
     const isWilderness = isWildernessLevel(level);
     const playerScreenPos = isWilderness
       ? level.getPlayerScreenPosition() ?? player.position
@@ -90,24 +90,33 @@ export function GameViewport() {
     camera.follow(playerScreenPos, level.width, level.height);
 
     // Compute visible tiles and mark as explored
-    const visibleTiles = fovSystem.computeAndMark(level, playerScreenPos, VIEW_RADIUS);
+    // Use world coordinates for FOV in wilderness (level methods expect world coords)
+    const fovOrigin = isWilderness ? player.position : playerScreenPos;
+    const visibleTiles = fovSystem.computeAndMark(level, fovOrigin, VIEW_RADIUS);
 
     display.clear();
 
     // Draw visible portion of level
     for (let screenY = 0; screenY < gridHeight; screenY++) {
       for (let screenX = 0; screenX < gridWidth; screenX++) {
-        const world = camera.screenToWorld({ x: screenX, y: screenY });
+        const cameraWorld = camera.screenToWorld({ x: screenX, y: screenY });
 
-        // Skip out of bounds
-        if (world.x >= level.width || world.y >= level.height || world.x < 0 || world.y < 0) {
+        // Skip out of bounds (camera bounds, not level bounds)
+        if (cameraWorld.x >= level.width || cameraWorld.y >= level.height || cameraWorld.x < 0 || cameraWorld.y < 0) {
           continue;
         }
 
-        const tile = level.getTile(world);
+        // For wilderness, convert camera-relative coords to world coords
+        // For dungeons, they're the same
+        const levelPos = isWilderness
+          ? level.screenToWilderness(cameraWorld.x, cameraWorld.y)
+          : cameraWorld;
+
+        const tile = level.getTile(levelPos);
         if (!tile) continue;
 
-        const posKey = `${world.x},${world.y}`;
+        // Use the same coords for visibility check as we used for getTile
+        const posKey = `${levelPos.x},${levelPos.y}`;
         const isVisible = visibleTiles.has(posKey);
         const isExplored = tile.explored;
 
@@ -116,7 +125,7 @@ export function GameViewport() {
           // Check for telepathy monsters even on unexplored tiles
           // TODO: Replace with proper VisionSystem.canSeeMonster() integration
           if (player.hasTelepathy) {
-            const monster = level.getMonsterAt(world);
+            const monster = level.getMonsterAt(levelPos);
             if (monster && !monster.isDead) {
               display.draw(screenX, screenY, monster.symbol, '#f0f', '#000');
               continue;
@@ -138,14 +147,14 @@ export function GameViewport() {
           tile.clearRememberedMonster();
 
           // Check for revealed traps at this position
-          const trap = level.getTrapAt(world);
+          const trap = level.getTrapAt(levelPos);
           if (trap && trap.isRevealed && trap.isActive) {
             symbol = trap.symbol;
             fg = parseColor(trap.color);
           }
 
           // Check for items at this position (items cover traps)
-          const items = level.getItemsAt(world);
+          const items = level.getItemsAt(levelPos);
           if (items.length > 0) {
             const topItem = items[items.length - 1];
             symbol = topItem.symbol;
@@ -153,7 +162,7 @@ export function GameViewport() {
           }
 
           // Check for monsters at this position (monsters on top)
-          const monster = level.getMonsterAt(world);
+          const monster = level.getMonsterAt(levelPos);
           if (monster && !monster.isDead) {
             symbol = monster.symbol;
             fg = parseColor(monster.color);
@@ -173,7 +182,7 @@ export function GameViewport() {
           // TODO: Replace with proper VisionSystem.canSeeMonster() integration
           // that handles EMPTY_MIND, WEIRD_MIND flags and infravision
           if (player.hasTelepathy) {
-            const monster = level.getMonsterAt(world);
+            const monster = level.getMonsterAt(levelPos);
             if (monster && !monster.isDead) {
               symbol = monster.symbol;
               // Show telepathic monsters in a distinct color (purple/violet)

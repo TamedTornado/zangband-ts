@@ -15,6 +15,9 @@ export const WILD_BLOCK_SIZE = 16;
 /** Number of blocks visible in each direction (9x9 = 144x144 tiles) */
 export const WILD_VIEW = 9;
 
+/** Town size in blocks (all fractal cities are 8x8 blocks = 128x128 tiles) */
+export const WILD_TOWN_SIZE = 8;
+
 /** 1/4 of the wilderness is sea */
 export const SEA_FRACTION = 4;
 
