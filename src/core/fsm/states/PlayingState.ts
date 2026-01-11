@@ -21,6 +21,7 @@ import { CharacterState } from './CharacterState';
 import { CastSpellState } from './CastSpellState';
 import { StudySpellState } from './StudySpellState';
 import { ShoppingState } from './ShoppingState';
+import { ServiceInteractionState } from './ServiceInteractionState';
 import { WildernessRestoreState } from './WildernessRestoreState';
 import { isWildernessLevel } from '../../world/WildernessLevel';
 import { Direction, movePosition } from '../../types';
@@ -107,7 +108,10 @@ export class PlayingState implements State {
         this.handleRepeatLastCommand(fsm);
         return true;
       case 'enterStore':
-        this.handleEnterStore(fsm, action.storeKey);
+        this.handleEnterStore(fsm);
+        return true;
+      case 'enterBuilding':
+        this.handleEnterStore(fsm); // Same as enterStore - looks up from player position
         return true;
       default:
         return false;
@@ -533,13 +537,28 @@ export class PlayingState implements State {
 
   /**
    * Handle entering a store (transition to ShoppingState).
+   * Looks up what store the player is standing on.
    */
-  private handleEnterStore(fsm: GameFSM, storeKey: string): void {
+  private handleEnterStore(fsm: GameFSM): void {
+    const player = getGameStore().player;
+    if (!player) return;
+
+    const storeKey = fsm.storeManager.getStoreKeyAt(player.position);
+    if (!storeKey) {
+      fsm.addMessage('There is no store entrance here.', 'info');
+      return;
+    }
+
     const store = fsm.storeManager.getStore(storeKey);
     if (!store) {
       fsm.addMessage('That store does not exist.', 'info');
       return;
     }
-    fsm.transition(new ShoppingState(storeKey));
+    // Check if this is a service building
+    if (store.isServiceBuilding) {
+      fsm.transition(new ServiceInteractionState(storeKey));
+    } else {
+      fsm.transition(new ShoppingState(storeKey));
+    }
   }
 }

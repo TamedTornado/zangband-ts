@@ -11,6 +11,7 @@ import {
 } from './components/modals';
 import { CharacterCreationModal } from './components/modals/CharacterCreationModal';
 import { StoreModal } from './components/modals/StoreModal';
+import { ServiceBuildingModal } from './components/modals/ServiceBuildingModal';
 import { useKeyboard } from './hooks/useKeyboard';
 
 const CREATION_STATES = [
@@ -34,6 +35,7 @@ function ModalContainer() {
       {state.stateName === 'itemSelection' && <ItemSelectionModal />}
       {(state.stateName === 'cast' || state.stateName === 'study') && <SpellSelectionModal />}
       {state.stateName === 'shopping' && <StoreModal />}
+      {state.stateName === 'serviceInteraction' && <ServiceBuildingModal />}
     </>
   );
 }

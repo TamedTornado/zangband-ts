@@ -6,7 +6,7 @@
  * 2. 12 wilderness dungeon types - Themed, level-capped dungeons
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
 import {
   DUNGEON_TYPES,
   MAIN_DUNGEON,

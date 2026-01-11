@@ -161,7 +161,7 @@ describe('ShoppingState', () => {
       state.onEnter(fsm);
 
       // Enter buying mode
-      state.handleAction(fsm, { type: 'storeCommand', command: 'purchase' });
+      state.handleAction(fsm, { type: 'storePurchase' });
       expect(state.mode).toBe('buying');
 
       // ESC should return to browse, not exit
@@ -171,7 +171,7 @@ describe('ShoppingState', () => {
     });
   });
 
-  describe('storeCommand', () => {
+  describe('store commands', () => {
     it('purchase command enters buying mode', () => {
       state = new ShoppingState('alchemy_shop');
       const potion = createTestItem({ type: 'potion', cost: 50 });
@@ -181,7 +181,7 @@ describe('ShoppingState', () => {
       const fsm = createMockFSM(mockPlayer, store);
       state.onEnter(fsm);
 
-      state.handleAction(fsm, { type: 'storeCommand', command: 'purchase' });
+      state.handleAction(fsm, { type: 'storePurchase' });
       expect(state.mode).toBe('buying');
     });
 
@@ -193,7 +193,7 @@ describe('ShoppingState', () => {
       const fsm = createMockFSM(mockPlayer, store);
       state.onEnter(fsm);
 
-      state.handleAction(fsm, { type: 'storeCommand', command: 'sell' });
+      state.handleAction(fsm, { type: 'storeSell' });
       expect(state.mode).toBe('selling');
     });
 
@@ -206,7 +206,7 @@ describe('ShoppingState', () => {
       const fsm = createMockFSM(mockPlayer, store);
       state.onEnter(fsm);
 
-      state.handleAction(fsm, { type: 'storeCommand', command: 'examine' });
+      state.handleAction(fsm, { type: 'storeExamine' });
       expect(state.mode).toBe('examining');
     });
   });
@@ -302,7 +302,7 @@ describe('ShoppingState', () => {
       state.onEnter(fsm);
 
       // Enter buying mode first
-      state.handleAction(fsm, { type: 'storeCommand', command: 'purchase' });
+      state.handleAction(fsm, { type: 'storePurchase' });
 
       // 'a' = index 0
       state.handleAction(fsm, { type: 'letterSelect', letter: 'a' });
@@ -319,7 +319,7 @@ describe('ShoppingState', () => {
       state.onEnter(fsm);
 
       // Enter selling mode first
-      state.handleAction(fsm, { type: 'storeCommand', command: 'sell' });
+      state.handleAction(fsm, { type: 'storeSell' });
 
       // 'a' = index 0
       state.handleAction(fsm, { type: 'letterSelect', letter: 'a' });

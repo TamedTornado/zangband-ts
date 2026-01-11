@@ -42,6 +42,9 @@ export const NUM_TOWNS = 20;
 /** Number of wilderness dungeons */
 export const NUM_DUNGEON = 20;
 
+/** Number of unique dungeon types (Darkwater, Lair, Temple, etc.) */
+export const NUM_DUNGEON_TYPES = 12;
+
 /** Size of wilderness map in blocks (256x256 = 4096x4096 tiles) */
 // Original Zangband uses WILD_SIZE = 129
 export const MAX_WILD = 129;
@@ -244,6 +247,15 @@ export interface WildPlace {
    * 6 = TOWN_MONST_ABANDONED
    */
   monstType: number;
+
+  /**
+   * Dungeon type ID for themed dungeons.
+   * Links to DungeonTypeDef in DungeonTypes.ts.
+   * - -1 = MAIN_DUNGEON (infinite dungeon at starting town)
+   * - 0-11 = Wilderness dungeon types (Darkwater, Lair, etc.)
+   * - undefined = Not a dungeon (towns, quests without dungeon)
+   */
+  dungeonTypeId?: number;
 }
 
 /**

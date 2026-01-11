@@ -1117,5 +1117,110 @@
     "flags": [
       "USE_TRANS"
     ]
+  },
+  "building_inn": {
+    "key": "building_inn",
+    "index": 149,
+    "name": "Inn",
+    "symbol": "I",
+    "color": "U",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "inn"
+  },
+  "building_healer": {
+    "key": "building_healer",
+    "index": 150,
+    "name": "Healer",
+    "symbol": "H",
+    "color": "G",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "healer"
+  },
+  "building_library": {
+    "key": "building_library",
+    "index": 151,
+    "name": "Library",
+    "symbol": "L",
+    "color": "B",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "library"
+  },
+  "building_recharge": {
+    "key": "building_recharge",
+    "index": 152,
+    "name": "Recharge Shop",
+    "symbol": "R",
+    "color": "v",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "recharge_shop"
+  },
+  "building_weaponsmith": {
+    "key": "building_weaponsmith",
+    "index": 153,
+    "name": "Weaponsmith",
+    "symbol": "W",
+    "color": "w",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "enchant_weapon"
+  },
+  "building_armorer": {
+    "key": "building_armorer",
+    "index": 154,
+    "name": "Armorer",
+    "symbol": "A",
+    "color": "s",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "enchant_armor"
+  },
+  "building_castle": {
+    "key": "building_castle",
+    "index": 155,
+    "name": "Castle",
+    "symbol": "C",
+    "color": "W",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "castle"
   }
 }

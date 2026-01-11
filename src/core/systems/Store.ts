@@ -7,6 +7,7 @@
 
 import type { Item } from '../entities/Item';
 import type { StoreDef, StoreOwner } from '../data/stores';
+import type { ServiceDef } from '../data/services';
 import { StoreFlag } from '../data/stores';
 import { PricingSystem } from './Pricing';
 
@@ -73,6 +74,21 @@ export class Store {
   /** Does this store have pricing disabled? */
   get noPricing(): boolean {
     return this.hasFlag(StoreFlag.NO_PRICING);
+  }
+
+  /** Is this a service building (provides services instead of inventory)? */
+  get isServiceBuilding(): boolean {
+    return this.hasFlag(StoreFlag.SERVICE_BUILDING);
+  }
+
+  /** Does this building offer services? */
+  get hasServices(): boolean {
+    return (this._definition.services?.length ?? 0) > 0;
+  }
+
+  /** Get available services (empty array for regular stores) */
+  get services(): ServiceDef[] {
+    return this._definition.services ?? [];
   }
 
   // Item type checks

@@ -27,9 +27,9 @@ export class WildernessInitState implements State {
     const player = store.player!;
 
     // Use fixed seed for debugging road generation (same as debug-roads.ts)
-    const DEBUG_SEED = 99999;
-    console.log('[WILDERNESS] Using seed:', DEBUG_SEED);
-    const data = generateWildernessLevel(player, fsm.monsterDataManager, DEBUG_SEED);
+    // const DEBUG_SEED = 99999;
+    // console.log('[WILDERNESS] Using seed:', DEBUG_SEED);
+    const data = generateWildernessLevel(player, fsm.monsterDataManager);
     console.log('[WILDERNESS] Level generated');
 
     // Compute initial FOV using world coordinates (level methods expect world coords)

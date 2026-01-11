@@ -104,6 +104,24 @@ export interface GameState {
     stock: Array<{ name: string; price: number; quantity: number }>;
   } | null;
 
+  // Service building state
+  serviceBuilding: {
+    buildingKey: string;
+    mode: 'browse' | 'item_select' | 'confirm';
+    buildingName: string;
+    services: Array<{
+      key: string;
+      name: string;
+      description: string;
+      cost: number;
+      available: boolean;
+      reason?: string;
+    }>;
+    selectedServiceKey?: string;
+    itemPrompt?: string;
+    validItemIndices?: number[];
+  } | null;
+
   // Previous character for quick start (persisted to localStorage)
   previousCharacter: CharacterCreationData | null;
 
@@ -169,6 +187,10 @@ export interface GameActions {
   updateShoppingMode: (mode: 'browse' | 'buying' | 'selling' | 'examining') => void;
   updateShoppingStock: (stock: GameState['shopping'] extends null ? never : NonNullable<GameState['shopping']>['stock']) => void;
 
+  // Service building
+  setServiceBuilding: (serviceBuilding: GameState['serviceBuilding']) => void;
+  updateServiceBuildingMode: (mode: 'browse' | 'item_select' | 'confirm') => void;
+
   // Quick start
   setPreviousCharacter: (data: CharacterCreationData | null) => void;
 
@@ -222,6 +244,7 @@ const initialState: GameState = {
   prompt: null,
   characterCreation: null,
   shopping: null,
+  serviceBuilding: null,
   previousCharacter: loadPreviousCharacter(),
   wildernessX: 0,
   wildernessY: 0,
@@ -325,6 +348,15 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
     const current = get().shopping;
     if (current) {
       set({ shopping: { ...current, stock } });
+    }
+  },
+
+  setServiceBuilding: (serviceBuilding) => set({ serviceBuilding }),
+
+  updateServiceBuildingMode: (mode) => {
+    const current = get().serviceBuilding;
+    if (current) {
+      set({ serviceBuilding: { ...current, mode } });
     }
   },
 

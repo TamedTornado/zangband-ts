@@ -32,7 +32,7 @@ export class WildernessState implements State {
         return this.handleMove(fsm, action.dir);
 
       case 'enterPlace':
-        return this.handleEnterPlace(fsm, action.placeKey);
+        return this.handleEnterPlace(fsm);
 
       case 'goDownStairs':
         return this.handleEnterDungeon(fsm);
@@ -67,8 +67,13 @@ export class WildernessState implements State {
     return result.success;
   }
 
-  private handleEnterPlace(fsm: GameFSM, placeKey: string): boolean {
-    return this.enterPlace(fsm, placeKey);
+  private handleEnterPlace(fsm: GameFSM): boolean {
+    const place = this.system.getPlaceAtCurrentPosition();
+    if (!place) {
+      fsm.addMessage('There is no place to enter here.', 'info');
+      return false;
+    }
+    return this.enterPlace(fsm, place.key);
   }
 
   private handleEnterDungeon(fsm: GameFSM): boolean {

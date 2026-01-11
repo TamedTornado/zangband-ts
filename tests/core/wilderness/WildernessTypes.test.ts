@@ -10,6 +10,7 @@ import {
   MIN_DIST_DUNGEON,
   NUM_TOWNS,
   NUM_DUNGEON,
+  NUM_DUNGEON_TYPES,
   // Info flags
   WILD_INFO_WATER,
   WILD_INFO_ROAD,
@@ -29,6 +30,7 @@ import {
   type WildBlock,
   type WildPlace,
 } from '@/core/data/WildernessTypes';
+import { DUNGEON_TYPES, MAIN_DUNGEON } from '@/core/data/DungeonTypes';
 
 describe('Wilderness Types and Constants', () => {
   describe('Generation constants (from wild.h)', () => {
@@ -75,6 +77,15 @@ describe('Wilderness Types and Constants', () => {
     it('should have correct NUM_DUNGEON', () => {
       // Number of wilderness dungeons
       expect(NUM_DUNGEON).toBe(20);
+    });
+
+    it('should have correct NUM_DUNGEON_TYPES', () => {
+      // Number of unique dungeon types (Darkwater, Lair, Temple, etc.)
+      expect(NUM_DUNGEON_TYPES).toBe(12);
+    });
+
+    it('NUM_DUNGEON_TYPES should match DUNGEON_TYPES length', () => {
+      expect(NUM_DUNGEON_TYPES).toBe(DUNGEON_TYPES.length);
     });
   });
 
@@ -324,6 +335,59 @@ describe('Wilderness Types and Constants', () => {
         monstType: 0,
       };
       expect(dungeon.type).toBe('dungeon');
+    });
+
+    it('should support optional dungeonTypeId field', () => {
+      // dungeonTypeId links to DungeonTypeDef for themed dungeons
+      const wildDungeon: WildPlace = {
+        key: 'darkwater_1',
+        type: 'dungeon',
+        name: 'Darkwater',
+        x: 40,
+        y: 50,
+        xsize: 1,
+        ysize: 1,
+        seed: 12345,
+        data: 0,
+        monstType: 0,
+        dungeonTypeId: 0, // Darkwater type
+      };
+      expect(wildDungeon.dungeonTypeId).toBe(0);
+    });
+
+    it('dungeonTypeId -1 should indicate MAIN_DUNGEON', () => {
+      // Starting town dungeon uses special MAIN_DUNGEON type
+      const mainDungeon: WildPlace = {
+        key: 'main_dungeon',
+        type: 'dungeon',
+        name: 'Dungeon',
+        x: 64,
+        y: 64,
+        xsize: 1,
+        ysize: 1,
+        seed: 99999,
+        data: 0,
+        monstType: 0,
+        dungeonTypeId: -1, // MAIN_DUNGEON
+      };
+      expect(mainDungeon.dungeonTypeId).toBe(MAIN_DUNGEON.id);
+    });
+
+    it('dungeonTypeId should be undefined when not set', () => {
+      // Places without dungeonTypeId are legacy or non-dungeon places
+      const town: WildPlace = {
+        key: 'some_town',
+        type: 'town',
+        name: 'Some Town',
+        x: 30,
+        y: 30,
+        xsize: 3,
+        ysize: 3,
+        seed: 55555,
+        data: 100,
+        monstType: 1,
+      };
+      expect(town.dungeonTypeId).toBeUndefined();
     });
 
     it('should support quest place', () => {

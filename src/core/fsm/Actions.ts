@@ -6,6 +6,71 @@ import type { Direction } from '../types';
 import type { Sex } from '../data/characterCreation';
 import type { Stats } from '../entities/Player';
 
+/**
+ * Action type constants - use these instead of string literals
+ */
+export const ActionType = {
+  Move: 'move',
+  Run: 'run',
+  GoDownStairs: 'goDownStairs',
+  GoUpStairs: 'goUpStairs',
+  Pickup: 'pickup',
+  TakeOff: 'takeOff',
+  Rest: 'rest',
+  Restart: 'restart',
+  Wield: 'wield',
+  Drop: 'drop',
+  Quaff: 'quaff',
+  Read: 'read',
+  Eat: 'eat',
+  Zap: 'zap',
+  Cast: 'cast',
+  Study: 'study',
+  ToggleInventory: 'toggleInventory',
+  ToggleEquipment: 'toggleEquipment',
+  ToggleCharacter: 'toggleCharacter',
+  Look: 'look',
+  Target: 'target',
+  MoveCursor: 'moveCursor',
+  CycleTarget: 'cycleTarget',
+  ConfirmTarget: 'confirmTarget',
+  CancelTarget: 'cancelTarget',
+  EnterTargetMode: 'enterTargetMode',
+  SelectTargetItem: 'selectTargetItem',
+  SelectTargetSymbol: 'selectTargetSymbol',
+  SelectTargetDirection: 'selectTargetDirection',
+  LetterSelect: 'letterSelect',
+  ShowList: 'showList',
+  RepeatLastCommand: 'repeatLastCommand',
+  SelectSex: 'selectSex',
+  SelectRace: 'selectRace',
+  SelectClass: 'selectClass',
+  SelectRealm: 'selectRealm',
+  RollStats: 'rollStats',
+  SetMinimum: 'setMinimum',
+  Autoroll: 'autoroll',
+  AcceptStats: 'acceptStats',
+  SetName: 'setName',
+  ConfirmCharacter: 'confirmCharacter',
+  CreationBack: 'creationBack',
+  CreationNext: 'creationNext',
+  QuickStart: 'quickStart',
+  EnterStore: 'enterStore',
+  ExitStore: 'exitStore',
+  StorePurchase: 'storePurchase',
+  StoreSell: 'storeSell',
+  StoreExamine: 'storeExamine',
+  BuyItem: 'buyItem',
+  SellItem: 'sellItem',
+  ToggleStorePage: 'toggleStorePage',
+  EnterWilderness: 'enterWilderness',
+  ExitWilderness: 'exitWilderness',
+  EnterPlace: 'enterPlace',
+  EnterBuilding: 'enterBuilding',
+  SelectServiceItem: 'selectServiceItem',
+  ExitBuilding: 'exitBuilding',
+} as const;
+
 export type GameAction =
   | { type: 'move'; dir: Direction }
   | { type: 'run'; dir: Direction }
@@ -61,13 +126,19 @@ export type GameAction =
   | { type: 'creationNext' }
   | { type: 'quickStart' }  // Reuse previous character parameters
   // Store/shopping actions
-  | { type: 'enterStore'; storeKey: string }
+  | { type: 'enterStore' }
   | { type: 'exitStore' }
-  | { type: 'storeCommand'; command: 'purchase' | 'sell' | 'examine' }
+  | { type: 'storePurchase' }
+  | { type: 'storeSell' }
+  | { type: 'storeExamine' }
   | { type: 'buyItem'; itemIndex: number; quantity?: number }
   | { type: 'sellItem'; inventoryIndex: number; quantity?: number }
   | { type: 'toggleStorePage' }
   // Wilderness actions
   | { type: 'enterWilderness' }
   | { type: 'exitWilderness' }
-  | { type: 'enterPlace'; placeKey: string };
+  | { type: 'enterPlace' }
+  // Service building actions
+  | { type: 'enterBuilding' }
+  | { type: 'selectServiceItem'; itemIndex: number }
+  | { type: 'exitBuilding' };

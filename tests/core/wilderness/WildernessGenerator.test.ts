@@ -3,13 +3,12 @@ import { WildernessGenerator } from '@/core/systems/wilderness/WildernessGenerat
 import {
   MIN_DIST_TOWN,
   MIN_DIST_DUNGEON,
-  NUM_DUNGEON,
   NUM_DUNGEON_TYPES,
   WILD_INFO_ROAD,
   WILD_INFO_TRACK,
   WILD_INFO_WATER,
 } from '@/core/data/WildernessTypes';
-import { DUNGEON_TYPES, getDungeonType, DF_ROAD, DF_TRACK, DF_NONE } from '@/core/data/DungeonTypes';
+import { DUNGEON_TYPES, getDungeonType, DF_ROAD, DF_TRACK } from '@/core/data/DungeonTypes';
 import wInfoData from '@/data/wilderness/w_info.json';
 import type { WildGenData } from '@/core/data/WildernessTypes';
 import * as ROT from 'rot-js';

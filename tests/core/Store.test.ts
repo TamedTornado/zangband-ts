@@ -253,5 +253,42 @@ describe('Store', () => {
       const normal = new Store(alchemyStoreDef, testOwner);
       expect(normal.isHome).toBe(false);
     });
+
+    it('identifies service building', () => {
+      const serviceBuilding: StoreDef = {
+        key: 'inn',
+        name: 'Inn',
+        symbol: 'I',
+        color: '#c8a040',
+        maxStock: 0,
+        minKeep: 0,
+        maxKeep: 0,
+        turnover: 0,
+        buysTypes: [],
+        sellsTypes: [],
+        flags: ['SERVICE_BUILDING'],
+        services: [
+          {
+            key: 'eat',
+            type: 'inn_eat',
+            name: 'Eat',
+            description: 'Fill your stomach',
+            baseCost: 10,
+            action: 'action:service_eat',
+          },
+        ],
+      };
+
+      const store = new Store(serviceBuilding, testOwner);
+      expect(store.isServiceBuilding).toBe(true);
+      expect(store.hasServices).toBe(true);
+      expect(store.services).toHaveLength(1);
+      expect(store.services[0].key).toBe('eat');
+
+      const normal = new Store(alchemyStoreDef, testOwner);
+      expect(normal.isServiceBuilding).toBe(false);
+      expect(normal.hasServices).toBe(false);
+      expect(normal.services).toHaveLength(0);
+    });
   });
 });

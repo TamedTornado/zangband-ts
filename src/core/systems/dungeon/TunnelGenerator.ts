@@ -196,7 +196,7 @@ export class TunnelGenerator {
 /** Place stairs in the dungeon */
 export function allocStairs(
   ctx: RoomBuilderContext,
-  stairType: 'up_stairs' | 'down_stairs'
+  stairType: 'up_staircase' | 'down_staircase'
 ): Coord | null {
   for (let attempt = 0; attempt < 5000; attempt++) {
     const x = ctx.randRange(1, ctx.width - 2);

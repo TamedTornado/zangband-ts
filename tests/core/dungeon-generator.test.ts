@@ -169,9 +169,9 @@ describe('DungeonGenerator', () => {
       expect(dungeon.upStairs.length).toBeGreaterThanOrEqual(1);
     });
 
-    it('should not place up stairs on level 1', () => {
+    it('should place up stairs on level 1 (to return to surface)', () => {
       const dungeon = generator.generate({ width: 80, height: 40, depth: 1 });
-      expect(dungeon.upStairs.length).toBe(0);
+      expect(dungeon.upStairs.length).toBeGreaterThanOrEqual(1);
     });
 
     it('should place stairs on floor tiles', () => {
@@ -179,7 +179,7 @@ describe('DungeonGenerator', () => {
 
       for (const pos of [...dungeon.upStairs, ...dungeon.downStairs]) {
         const feat = dungeon.tiles[pos.y][pos.x].feat;
-        expect(['up_stairs', 'down_stairs']).toContain(feat);
+        expect(['up_staircase', 'down_staircase']).toContain(feat);
       }
     });
   });

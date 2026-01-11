@@ -72,8 +72,10 @@ const FEAT_DOWN_STAIRS = 7;
 
 /**
  * Store entrance terrain indices (from terrain.json)
+ * Stores use indices 140-147, service buildings use 149-155
  */
 const STORE_TERRAIN: Record<string, number> = {
+  // Regular stores
   general_store: 140,
   armory: 141,
   weapon_smith: 142,
@@ -82,12 +84,22 @@ const STORE_TERRAIN: Record<string, number> = {
   magic_shop: 145,
   black_market: 146,
   home: 147,
+  // Service buildings (indices 149-155)
+  inn: 149,
+  healer: 150,
+  library: 151,
+  recharge_shop: 152,
+  enchant_weapon: 153,
+  enchant_armor: 154,
+  castle: 155,
 };
 
 /**
  * Store types for towns (in order of preference)
+ * Regular stores + service buildings
  */
 const STORE_TYPES = [
+  // Regular stores
   'general_store',
   'armory',
   'weapon_smith',
@@ -96,12 +108,20 @@ const STORE_TYPES = [
   'magic_shop',
   'black_market',
   'home',
+  // Service buildings
+  'inn',
+  'healer',
+  'castle',
   'library',
+  'recharge_shop',
+  'enchant_weapon',
+  'enchant_armor',
 ];
 
 /**
  * Required stores for starting town per wild_first_town[] in Zangband reference.
  * These must be placed in the starting town.
+ * Includes essential service buildings: Inn, Healer, Castle
  */
 const STARTING_TOWN_STORES = [
   'general_store',
@@ -110,6 +130,14 @@ const STARTING_TOWN_STORES = [
   'temple',
   'magic_shop',
   'black_market',
+  // Service buildings (all for testing)
+  'inn',
+  'healer',
+  'library',
+  'recharge_shop',
+  'enchant_weapon',
+  'enchant_armor',
+  'castle',
 ];
 
 /**

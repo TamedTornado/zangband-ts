@@ -1,0 +1,186 @@
+{
+  "inn": {
+    "key": "inn",
+    "name": "Inn",
+    "symbol": "I",
+    "color": "#c8a040",
+    "maxStock": 0,
+    "minKeep": 0,
+    "maxKeep": 0,
+    "turnover": 0,
+    "buysTypes": [],
+    "sellsTypes": [],
+    "flags": ["SERVICE_BUILDING"],
+    "services": [
+      {
+        "key": "eat",
+        "type": "inn_eat",
+        "name": "Eat",
+        "description": "Fill your stomach with food and drink",
+        "baseCost": 10,
+        "action": "action:service_eat"
+      },
+      {
+        "key": "rest",
+        "type": "inn_rest",
+        "name": "Rest",
+        "description": "Rest overnight to restore HP and MP",
+        "baseCost": 50,
+        "action": "action:service_rest",
+        "nightOnly": true
+      }
+    ]
+  },
+  "healer": {
+    "key": "healer",
+    "name": "Healer",
+    "symbol": "H",
+    "color": "#00ff00",
+    "maxStock": 0,
+    "minKeep": 0,
+    "maxKeep": 0,
+    "turnover": 0,
+    "buysTypes": [],
+    "sellsTypes": [],
+    "flags": ["SERVICE_BUILDING"],
+    "services": [
+      {
+        "key": "restore",
+        "type": "healer_restore",
+        "name": "Restore Stats",
+        "description": "Restore drained attributes to their natural values",
+        "baseCost": 200,
+        "action": "action:service_restore"
+      }
+    ]
+  },
+  "library": {
+    "key": "library",
+    "name": "Library",
+    "symbol": "L",
+    "color": "#0080ff",
+    "maxStock": 0,
+    "minKeep": 0,
+    "maxKeep": 0,
+    "turnover": 0,
+    "buysTypes": [],
+    "sellsTypes": [],
+    "flags": ["SERVICE_BUILDING"],
+    "services": [
+      {
+        "key": "research",
+        "type": "library_research",
+        "name": "Research Monster",
+        "description": "Learn about a type of monster",
+        "baseCost": 100,
+        "action": "action:service_research"
+      }
+    ]
+  },
+  "recharge_shop": {
+    "key": "recharge_shop",
+    "name": "Recharge Shop",
+    "symbol": "R",
+    "color": "#8080ff",
+    "maxStock": 0,
+    "minKeep": 0,
+    "maxKeep": 0,
+    "turnover": 0,
+    "buysTypes": [],
+    "sellsTypes": [],
+    "flags": ["SERVICE_BUILDING"],
+    "services": [
+      {
+        "key": "recharge",
+        "type": "recharge",
+        "name": "Recharge Item",
+        "description": "Restore charges to a wand, staff, or rod",
+        "baseCost": 50,
+        "action": "action:service_recharge",
+        "requiresItem": true,
+        "itemFilter": ["wand", "staff", "rod"]
+      },
+      {
+        "key": "identify",
+        "type": "identify_all",
+        "name": "Identify All",
+        "description": "Identify all unknown items in your inventory",
+        "baseCost": 500,
+        "action": "action:service_identify"
+      }
+    ]
+  },
+  "enchant_weapon": {
+    "key": "enchant_weapon",
+    "name": "Weaponsmith",
+    "symbol": "W",
+    "color": "#ffffff",
+    "maxStock": 0,
+    "minKeep": 0,
+    "maxKeep": 0,
+    "turnover": 0,
+    "buysTypes": [],
+    "sellsTypes": [],
+    "flags": ["SERVICE_BUILDING"],
+    "services": [
+      {
+        "key": "enchant",
+        "type": "enchant_weapon",
+        "name": "Enchant Weapon",
+        "description": "Magically enhance a weapon's accuracy and damage",
+        "baseCost": 400,
+        "action": "action:service_enchant",
+        "requiresItem": true,
+        "itemFilter": ["sword", "hafted", "polearm", "bow"]
+      }
+    ]
+  },
+  "enchant_armor": {
+    "key": "enchant_armor",
+    "name": "Armorer",
+    "symbol": "A",
+    "color": "#808080",
+    "maxStock": 0,
+    "minKeep": 0,
+    "maxKeep": 0,
+    "turnover": 0,
+    "buysTypes": [],
+    "sellsTypes": [],
+    "flags": ["SERVICE_BUILDING"],
+    "services": [
+      {
+        "key": "enchant",
+        "type": "enchant_armor",
+        "name": "Enchant Armor",
+        "description": "Magically enhance armor's protective value",
+        "baseCost": 400,
+        "action": "action:service_enchant",
+        "requiresItem": true,
+        "itemFilter": ["soft_armor", "hard_armor", "dragon_armor", "shield", "helm", "crown", "gloves", "boots", "cloak"]
+      }
+    ]
+  },
+  "castle": {
+    "key": "castle",
+    "name": "Castle",
+    "symbol": "C",
+    "color": "#c0c0c0",
+    "maxStock": 0,
+    "minKeep": 0,
+    "maxKeep": 0,
+    "turnover": 0,
+    "buysTypes": [],
+    "sellsTypes": [],
+    "flags": ["SERVICE_BUILDING"],
+    "services": [
+      {
+        "key": "quest",
+        "type": "quest_view",
+        "name": "Request Quest",
+        "description": "Ask about available quests",
+        "baseCost": 0,
+        "action": "action:service_quest"
+      }
+    ]
+  }
+}

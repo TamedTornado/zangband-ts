@@ -236,8 +236,8 @@ describe('ZangbandTownGenerator', () => {
       const result = generator.generateVanillaTown(place);
 
       expect(result.dungeonEntrance).toBeDefined();
-      expect(result.dungeonEntrance.x).toBeGreaterThanOrEqual(0);
-      expect(result.dungeonEntrance.y).toBeGreaterThanOrEqual(0);
+      expect(result.dungeonEntrance!.x).toBeGreaterThanOrEqual(0);
+      expect(result.dungeonEntrance!.y).toBeGreaterThanOrEqual(0);
     });
 
     it('should be deterministic with same seed', () => {
@@ -402,7 +402,7 @@ describe('ZangbandTownGenerator', () => {
       };
 
       const result = generator.generateDungeonEntrance(place);
-      const { x, y } = result.dungeonEntrance;
+      const { x, y } = result.dungeonEntrance!;
 
       // Should have down stairs at entrance
       expect(result.tiles[y][x].feat).toBe(7); // FEAT_DOWN_STAIRS
@@ -530,8 +530,11 @@ describe('ZangbandTownGenerator', () => {
 
       const result = generator.generate(place);
 
-      // Store terrain indices: 140-147 for the 8 store types
-      const storeTerrainIndices = new Set([140, 141, 142, 143, 144, 145, 146, 147]);
+      // Store terrain indices: 140-147 for stores, 149-155 for service buildings
+      const storeTerrainIndices = new Set([
+        140, 141, 142, 143, 144, 145, 146, 147, // Stores
+        149, 150, 151, 152, 153, 154, 155,      // Service buildings
+      ]);
 
       // Each store position should have a store terrain type (not just floor)
       for (const storePos of result.storePositions) {

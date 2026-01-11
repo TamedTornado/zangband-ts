@@ -349,9 +349,9 @@ export interface DungeonTypeConfigOptions {
   /** Floor terrain key */
   floorTerrain: string;
   /** Shallow liquid terrain key (if any) */
-  shallowLiquid?: string;
+  shallowLiquid?: string | undefined;
   /** Deep liquid terrain key (if any) */
-  deepLiquid?: string;
+  deepLiquid?: string | undefined;
   /** Minimum dungeon level for this type */
   minLevel: number;
   /** Maximum dungeon level for this type */

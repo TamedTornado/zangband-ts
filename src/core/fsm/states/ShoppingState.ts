@@ -67,8 +67,14 @@ export class ShoppingState implements State {
         }
         return true;
 
-      case 'storeCommand':
-        return this.handleStoreCommand(fsm, action.command);
+      case 'storePurchase':
+        return this.handleStoreCommand(fsm, 'purchase');
+
+      case 'storeSell':
+        return this.handleStoreCommand(fsm, 'sell');
+
+      case 'storeExamine':
+        return this.handleStoreCommand(fsm, 'examine');
 
       case 'buyItem':
         this.handleBuy(fsm, action.itemIndex, action.quantity);

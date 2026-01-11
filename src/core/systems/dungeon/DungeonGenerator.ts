@@ -89,16 +89,15 @@ export class DungeonGenerator {
 
     const numDown = this.randRange(3, 4);
     for (let i = 0; i < numDown; i++) {
-      const pos = allocStairs(ctx, 'down_stairs');
+      const pos = allocStairs(ctx, 'down_staircase');
       if (pos) downStairs.push(pos);
     }
 
-    if (this.depth > 1) {
-      const numUp = this.randRange(1, 2);
-      for (let i = 0; i < numUp; i++) {
-        const pos = allocStairs(ctx, 'up_stairs');
-        if (pos) upStairs.push(pos);
-      }
+    // Always place up stairs (even at depth 1 to return to surface)
+    const numUp = this.randRange(1, 2);
+    for (let i = 0; i < numUp; i++) {
+      const pos = allocStairs(ctx, 'up_staircase');
+      if (pos) upStairs.push(pos);
     }
 
     // Build rooms array

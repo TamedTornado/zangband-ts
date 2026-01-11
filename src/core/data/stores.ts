@@ -2,7 +2,12 @@
  * Store type definitions
  *
  * Loaded from src/data/stores/stores.json and owners.json
+ *
+ * Also used for service buildings (Inn, Healer, etc.) which have
+ * a services array instead of inventory-based trading.
  */
+
+import type { ServiceDef } from './services';
 
 /**
  * Theme weights for item generation (from Zangband t_info.txt)
@@ -51,6 +56,8 @@ export interface StoreDef {
   levelMin?: number;
   /** Maximum level for generated items */
   levelMax?: number;
+  /** Services offered by this building (for service buildings) */
+  services?: ServiceDef[];
 }
 
 /**
@@ -83,6 +90,8 @@ export const StoreFlag = {
   NO_PRICING: 'NO_PRICING',
   /** Only blessed items accepted */
   BLESSED_ONLY: 'BLESSED_ONLY',
+  /** Service building (offers services instead of inventory) */
+  SERVICE_BUILDING: 'SERVICE_BUILDING',
 } as const;
 
 export type StoreFlag = (typeof StoreFlag)[keyof typeof StoreFlag];

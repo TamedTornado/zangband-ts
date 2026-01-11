@@ -46,6 +46,23 @@ interface GameState {
     ownerName: string;
     stock: Array<{ name: string; price: number; quantity: number }>;
   } | null;
+  // Service building state
+  serviceBuilding: {
+    buildingKey: string;
+    mode: 'browse' | 'item_select' | 'confirm';
+    buildingName: string;
+    services: Array<{
+      key: string;
+      name: string;
+      description: string;
+      cost: number;
+      available: boolean;
+      reason?: string;
+    }>;
+    selectedServiceKey?: string;
+    itemPrompt?: string;
+    validItemIndices?: number[];
+  } | null;
 }
 
 interface GameActions {
@@ -126,6 +143,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const characterCreation = useGameStore(s => s.characterCreation);
   const isTown = useGameStore(s => s.isTown);
   const shopping = useGameStore(s => s.shopping);
+  const serviceBuilding = useGameStore(s => s.serviceBuilding);
   const setPrompt = useGameStore(s => s.setPrompt);
   const updatePromptValue = useGameStore(s => s.updatePromptValue);
   const addMessage = useGameStore(s => s.addMessage);
@@ -148,6 +166,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     characterCreation,
     isTown,
     shopping,
+    serviceBuilding,
   };
 
   const actions = useMemo<GameActions>(() => ({
@@ -320,17 +339,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     },
 
     enterCurrentStore: () => {
-      // Check if player is on a store entrance
-      // In wilderness, player.position is world coordinates
-      // In dungeon/town, player.position is screen coordinates (same thing)
-      const store = useGameStore.getState();
-      const playerPos = store.player?.position;
-      if (!playerPos) return;
-
-      const storeKey = fsm.storeManager.getStoreKeyAt(playerPos);
-      if (storeKey) {
-        fsm.dispatch({ type: 'enterStore', storeKey });
-      }
+      fsm.dispatch({ type: 'enterStore' });
     },
 
     exitStore: () => {

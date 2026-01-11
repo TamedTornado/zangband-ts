@@ -12,9 +12,15 @@ import type { StoreDef, StoreOwner } from '../data/stores';
 import type { Position } from '../types';
 import type { ItemGeneration } from './ItemGeneration';
 import storesData from '@/data/stores/stores.json';
+import buildingsData from '@/data/stores/buildings.json';
 import ownersData from '@/data/stores/owners.json';
 
-const stores = storesData as Record<string, StoreDef>;
+// Merge stores and buildings into a single record
+const stores: Record<string, StoreDef> = {
+  ...(storesData as Record<string, StoreDef>),
+  ...(buildingsData as Record<string, StoreDef>),
+};
+
 // Filter out _comment field from owners data
 const rawOwners = ownersData as Record<string, StoreOwner[] | string>;
 const owners: Record<string, StoreOwner[]> = {};
@@ -55,6 +61,9 @@ export class StoreManager {
     for (const [key, store] of this.storeInstances) {
       const storeDef = stores[key];
       if (!storeDef) continue;
+
+      // Skip service buildings - they don't have inventory
+      if (store.isServiceBuilding) continue;
 
       // Generate initial stock
       const items = this.storeInventory.generateInitialStock(storeDef);
