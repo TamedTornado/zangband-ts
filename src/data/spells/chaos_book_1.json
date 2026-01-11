@@ -1,0 +1,648 @@
+[
+  {
+    "index": 0,
+    "name": "Magic Missile",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 20,
+        "exp": 4
+      },
+      "priest": {
+        "level": 2,
+        "mana": 1,
+        "fail": 22,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 3,
+        "mana": 1,
+        "fail": 20,
+        "exp": 1
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 20,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 2,
+        "mana": 1,
+        "fail": 20,
+        "exp": 4
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 15,
+        "exp": 4
+      }
+    },
+    "key": "magic_missile",
+    "effects": [
+      {
+        "type": "bolt",
+        "element": "magic",
+        "dice": "3d4"
+      }
+    ],
+    "target": "position"
+  },
+  {
+    "index": 1,
+    "name": "Trap / Door Destruction",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 1,
+        "mana": 2,
+        "fail": 22,
+        "exp": 4
+      },
+      "priest": {
+        "level": 3,
+        "mana": 2,
+        "fail": 24,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 3,
+        "mana": 3,
+        "fail": 35,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 22,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 3,
+        "mana": 3,
+        "fail": 22,
+        "exp": 4
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 15,
+        "exp": 4
+      }
+    },
+    "key": "trap_door_destruction",
+    "effects": [
+      {
+        "type": "trapDoorDestruction"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 2,
+    "name": "Flash of Light",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 25,
+        "exp": 4
+      },
+      "priest": {
+        "level": 4,
+        "mana": 3,
+        "fail": 26,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 5,
+        "mana": 3,
+        "fail": 35,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 25,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 4,
+        "mana": 4,
+        "fail": 25,
+        "exp": 4
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 2,
+        "mana": 1,
+        "fail": 15,
+        "exp": 4
+      }
+    },
+    "key": "flash_of_light",
+    "effects": [
+      {
+        "type": "bolt",
+        "element": "fire",
+        "dice": "6d8"
+      }
+    ],
+    "target": "position"
+  },
+  {
+    "index": 3,
+    "name": "Touch of Confusion",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 30,
+        "exp": 1
+      },
+      "priest": {
+        "level": 5,
+        "mana": 4,
+        "fail": 30,
+        "exp": 6
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 7,
+        "mana": 5,
+        "fail": 45,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 30,
+        "exp": 6
+      },
+      "chaos_warrior": {
+        "level": 5,
+        "mana": 6,
+        "fail": 30,
+        "exp": 6
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 4,
+        "mana": 2,
+        "fail": 20,
+        "exp": 1
+      }
+    },
+    "key": "touch_of_confusion",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "confused",
+        "duration": "1d10"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 4,
+    "name": "Mana Burst",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 9,
+        "mana": 6,
+        "fail": 50,
+        "exp": 1
+      },
+      "priest": {
+        "level": 10,
+        "mana": 6,
+        "fail": 30,
+        "exp": 5
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 14,
+        "mana": 12,
+        "fail": 40,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 8,
+        "mana": 8,
+        "fail": 30,
+        "exp": 1
+      },
+      "chaos_warrior": {
+        "level": 7,
+        "mana": 9,
+        "fail": 30,
+        "exp": 1
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 6,
+        "mana": 4,
+        "fail": 40,
+        "exp": 1
+      }
+    },
+    "key": "mana_burst",
+    "effects": [
+      {
+        "type": "bolt",
+        "element": "lightning",
+        "dice": "5d8"
+      }
+    ],
+    "target": "position"
+  },
+  {
+    "index": 5,
+    "name": "Fire Bolt",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 13,
+        "mana": 9,
+        "fail": 45,
+        "exp": 6
+      },
+      "priest": {
+        "level": 11,
+        "mana": 6,
+        "fail": 50,
+        "exp": 5
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 20,
+        "mana": 16,
+        "fail": 50,
+        "exp": 6
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 11,
+        "mana": 11,
+        "fail": 45,
+        "exp": 5
+      },
+      "chaos_warrior": {
+        "level": 8,
+        "mana": 9,
+        "fail": 45,
+        "exp": 5
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 10,
+        "mana": 5,
+        "fail": 35,
+        "exp": 6
+      }
+    },
+    "key": "fire_bolt",
+    "effects": [
+      {
+        "type": "ball",
+        "element": "fire",
+        "damage": "4d8",
+        "radius": 2
+      }
+    ],
+    "target": "position"
+  },
+  {
+    "index": 6,
+    "name": "Fist of Force",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 14,
+        "mana": 9,
+        "fail": 45,
+        "exp": 6
+      },
+      "priest": {
+        "level": 16,
+        "mana": 11,
+        "fail": 50,
+        "exp": 6
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 25,
+        "mana": 21,
+        "fail": 60,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 17,
+        "mana": 15,
+        "fail": 45,
+        "exp": 6
+      },
+      "chaos_warrior": {
+        "level": 15,
+        "mana": 12,
+        "fail": 45,
+        "exp": 6
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 12,
+        "mana": 6,
+        "fail": 35,
+        "exp": 6
+      }
+    },
+    "key": "fist_of_force",
+    "effects": [
+      {
+        "type": "bolt",
+        "element": "plasma",
+        "dice": "5d8"
+      }
+    ],
+    "target": "position"
+  },
+  {
+    "index": 7,
+    "name": "Teleport Self",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 15,
+        "mana": 9,
+        "fail": 35,
+        "exp": 5
+      },
+      "priest": {
+        "level": 17,
+        "mana": 11,
+        "fail": 35,
+        "exp": 5
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 25,
+        "mana": 22,
+        "fail": 60,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 18,
+        "mana": 17,
+        "fail": 35,
+        "exp": 5
+      },
+      "chaos_warrior": {
+        "level": 16,
+        "mana": 15,
+        "fail": 35,
+        "exp": 5
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 14,
+        "mana": 7,
+        "fail": 25,
+        "exp": 5
+      }
+    },
+    "key": "teleport_self",
+    "effects": [
+      {
+        "type": "teleportSelf",
+        "range": 10
+      }
+    ],
+    "target": "self"
+  }
+]

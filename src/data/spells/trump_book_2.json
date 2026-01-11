@@ -1,0 +1,586 @@
+[
+  {
+    "index": 8,
+    "name": "Trump Reach",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 20,
+        "mana": 20,
+        "fail": 40,
+        "exp": 8
+      },
+      "priest": {
+        "level": 22,
+        "mana": 22,
+        "fail": 40,
+        "exp": 8
+      },
+      "rogue": {
+        "level": 25,
+        "mana": 22,
+        "fail": 40,
+        "exp": 8
+      },
+      "ranger": {
+        "level": 24,
+        "mana": 22,
+        "fail": 40,
+        "exp": 8
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 24,
+        "mana": 23,
+        "fail": 40,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 16,
+        "mana": 16,
+        "fail": 35,
+        "exp": 8
+      }
+    },
+    "key": "trump_reach"
+  },
+  {
+    "index": 9,
+    "name": "Trump Animal",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 24,
+        "mana": 22,
+        "fail": 30,
+        "exp": 8
+      },
+      "priest": {
+        "level": 26,
+        "mana": 24,
+        "fail": 30,
+        "exp": 8
+      },
+      "rogue": {
+        "level": 30,
+        "mana": 26,
+        "fail": 30,
+        "exp": 8
+      },
+      "ranger": {
+        "level": 28,
+        "mana": 25,
+        "fail": 30,
+        "exp": 8
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 28,
+        "mana": 25,
+        "fail": 30,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 20,
+        "mana": 20,
+        "fail": 25,
+        "exp": 8
+      }
+    },
+    "key": "trump_animal"
+  },
+  {
+    "index": 10,
+    "name": "Phantasmal Servant",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 28,
+        "mana": 24,
+        "fail": 30,
+        "exp": 8
+      },
+      "priest": {
+        "level": 30,
+        "mana": 25,
+        "fail": 30,
+        "exp": 8
+      },
+      "rogue": {
+        "level": 33,
+        "mana": 26,
+        "fail": 30,
+        "exp": 8
+      },
+      "ranger": {
+        "level": 33,
+        "mana": 26,
+        "fail": 30,
+        "exp": 8
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 31,
+        "mana": 26,
+        "fail": 30,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 25,
+        "mana": 22,
+        "fail": 25,
+        "exp": 8
+      }
+    },
+    "key": "phantasmal_servant"
+  },
+  {
+    "index": 11,
+    "name": "Trump Monster",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 30,
+        "mana": 25,
+        "fail": 35,
+        "exp": 9
+      },
+      "priest": {
+        "level": 32,
+        "mana": 30,
+        "fail": 35,
+        "exp": 9
+      },
+      "rogue": {
+        "level": 35,
+        "mana": 32,
+        "fail": 35,
+        "exp": 9
+      },
+      "ranger": {
+        "level": 36,
+        "mana": 32,
+        "fail": 35,
+        "exp": 9
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 33,
+        "mana": 30,
+        "fail": 35,
+        "exp": 9
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 28,
+        "mana": 24,
+        "fail": 30,
+        "exp": 9
+      }
+    },
+    "key": "trump_monster"
+  },
+  {
+    "index": 12,
+    "name": "Conjure Elemental",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 33,
+        "mana": 28,
+        "fail": 40,
+        "exp": 12
+      },
+      "priest": {
+        "level": 35,
+        "mana": 30,
+        "fail": 40,
+        "exp": 12
+      },
+      "rogue": {
+        "level": 40,
+        "mana": 35,
+        "fail": 40,
+        "exp": 12
+      },
+      "ranger": {
+        "level": 38,
+        "mana": 33,
+        "fail": 40,
+        "exp": 12
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 38,
+        "mana": 32,
+        "fail": 40,
+        "exp": 12
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 28,
+        "mana": 26,
+        "fail": 35,
+        "exp": 12
+      }
+    },
+    "key": "conjure_elemental"
+  },
+  {
+    "index": 13,
+    "name": "Teleport Level",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 35,
+        "mana": 30,
+        "fail": 35,
+        "exp": 10
+      },
+      "priest": {
+        "level": 38,
+        "mana": 35,
+        "fail": 35,
+        "exp": 10
+      },
+      "rogue": {
+        "level": 42,
+        "mana": 38,
+        "fail": 35,
+        "exp": 10
+      },
+      "ranger": {
+        "level": 42,
+        "mana": 38,
+        "fail": 35,
+        "exp": 10
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 40,
+        "mana": 38,
+        "fail": 35,
+        "exp": 10
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 30,
+        "mana": 28,
+        "fail": 30,
+        "exp": 10
+      }
+    },
+    "key": "teleport_level"
+  },
+  {
+    "index": 14,
+    "name": "Word of Recall",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 40,
+        "mana": 35,
+        "fail": 40,
+        "exp": 15
+      },
+      "priest": {
+        "level": 42,
+        "mana": 40,
+        "fail": 40,
+        "exp": 15
+      },
+      "rogue": {
+        "level": 46,
+        "mana": 44,
+        "fail": 40,
+        "exp": 15
+      },
+      "ranger": {
+        "level": 45,
+        "mana": 42,
+        "fail": 40,
+        "exp": 15
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 44,
+        "mana": 42,
+        "fail": 40,
+        "exp": 15
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 35,
+        "mana": 30,
+        "fail": 35,
+        "exp": 15
+      }
+    },
+    "key": "word_of_recall"
+  },
+  {
+    "index": 15,
+    "name": "Banish",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 42,
+        "mana": 40,
+        "fail": 35,
+        "exp": 12
+      },
+      "priest": {
+        "level": 45,
+        "mana": 45,
+        "fail": 35,
+        "exp": 12
+      },
+      "rogue": {
+        "level": 49,
+        "mana": 50,
+        "fail": 35,
+        "exp": 12
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 48,
+        "mana": 46,
+        "fail": 35,
+        "exp": 12
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 39,
+        "mana": 36,
+        "fail": 30,
+        "exp": 12
+      }
+    },
+    "key": "banish"
+  }
+]

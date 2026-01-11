@@ -1,0 +1,586 @@
+[
+  {
+    "index": 16,
+    "name": "Exorcism",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 26,
+        "mana": 30,
+        "fail": 50,
+        "exp": 75
+      },
+      "priest": {
+        "level": 15,
+        "mana": 14,
+        "fail": 50,
+        "exp": 50
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 25,
+        "mana": 22,
+        "fail": 50,
+        "exp": 75
+      },
+      "warrior_mage": {
+        "level": 28,
+        "mana": 28,
+        "fail": 50,
+        "exp": 75
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 26,
+        "mana": 26,
+        "fail": 50,
+        "exp": 75
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 20,
+        "mana": 20,
+        "fail": 40,
+        "exp": 75
+      }
+    },
+    "key": "exorcism"
+  },
+  {
+    "index": 17,
+    "name": "Dispel Curse",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 28,
+        "mana": 25,
+        "fail": 70,
+        "exp": 150
+      },
+      "priest": {
+        "level": 16,
+        "mana": 14,
+        "fail": 80,
+        "exp": 60
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 28,
+        "mana": 24,
+        "fail": 70,
+        "exp": 150
+      },
+      "warrior_mage": {
+        "level": 30,
+        "mana": 30,
+        "fail": 70,
+        "exp": 150
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 28,
+        "mana": 28,
+        "fail": 70,
+        "exp": 150
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 24,
+        "mana": 24,
+        "fail": 60,
+        "exp": 150
+      }
+    },
+    "key": "dispel_curse"
+  },
+  {
+    "index": 18,
+    "name": "Dispel Undead & Demons",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 33,
+        "mana": 33,
+        "fail": 60,
+        "exp": 75
+      },
+      "priest": {
+        "level": 17,
+        "mana": 14,
+        "fail": 55,
+        "exp": 70
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 30,
+        "mana": 25,
+        "fail": 60,
+        "exp": 75
+      },
+      "warrior_mage": {
+        "level": 34,
+        "mana": 34,
+        "fail": 60,
+        "exp": 75
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 32,
+        "mana": 32,
+        "fail": 60,
+        "exp": 75
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 30,
+        "mana": 30,
+        "fail": 50,
+        "exp": 75
+      }
+    },
+    "key": "dispel_undead_demons"
+  },
+  {
+    "index": 19,
+    "name": "Day of the Dove",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 35,
+        "mana": 35,
+        "fail": 60,
+        "exp": 75
+      },
+      "priest": {
+        "level": 24,
+        "mana": 20,
+        "fail": 55,
+        "exp": 70
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 33,
+        "mana": 30,
+        "fail": 60,
+        "exp": 75
+      },
+      "warrior_mage": {
+        "level": 36,
+        "mana": 36,
+        "fail": 60,
+        "exp": 75
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 36,
+        "mana": 35,
+        "fail": 60,
+        "exp": 75
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 31,
+        "mana": 30,
+        "fail": 50,
+        "exp": 75
+      }
+    },
+    "key": "day_of_the_dove"
+  },
+  {
+    "index": 20,
+    "name": "Dispel Evil",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 35,
+        "mana": 35,
+        "fail": 70,
+        "exp": 75
+      },
+      "priest": {
+        "level": 25,
+        "mana": 20,
+        "fail": 70,
+        "exp": 120
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 35,
+        "mana": 32,
+        "fail": 70,
+        "exp": 75
+      },
+      "warrior_mage": {
+        "level": 38,
+        "mana": 38,
+        "fail": 70,
+        "exp": 75
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 38,
+        "mana": 35,
+        "fail": 70,
+        "exp": 75
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 32,
+        "mana": 30,
+        "fail": 60,
+        "exp": 75
+      }
+    },
+    "key": "dispel_evil"
+  },
+  {
+    "index": 21,
+    "name": "Banish",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 35,
+        "mana": 55,
+        "fail": 80,
+        "exp": 115
+      },
+      "priest": {
+        "level": 25,
+        "mana": 25,
+        "fail": 80,
+        "exp": 250
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 35,
+        "mana": 55,
+        "fail": 80,
+        "exp": 115
+      },
+      "warrior_mage": {
+        "level": 42,
+        "mana": 55,
+        "fail": 80,
+        "exp": 115
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 40,
+        "mana": 60,
+        "fail": 80,
+        "exp": 115
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 33,
+        "mana": 40,
+        "fail": 60,
+        "exp": 115
+      }
+    },
+    "key": "banish"
+  },
+  {
+    "index": 22,
+    "name": "Holy Word",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 39,
+        "mana": 40,
+        "fail": 80,
+        "exp": 125
+      },
+      "priest": {
+        "level": 39,
+        "mana": 32,
+        "fail": 95,
+        "exp": 200
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 39,
+        "mana": 38,
+        "fail": 80,
+        "exp": 125
+      },
+      "warrior_mage": {
+        "level": 45,
+        "mana": 45,
+        "fail": 80,
+        "exp": 125
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 45,
+        "mana": 45,
+        "fail": 80,
+        "exp": 125
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 35,
+        "mana": 35,
+        "fail": 60,
+        "exp": 125
+      }
+    },
+    "key": "holy_word"
+  },
+  {
+    "index": 23,
+    "name": "Warding True",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 46,
+        "mana": 70,
+        "fail": 80,
+        "exp": 150
+      },
+      "priest": {
+        "level": 44,
+        "mana": 44,
+        "fail": 80,
+        "exp": 250
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 46,
+        "mana": 60,
+        "fail": 80,
+        "exp": 150
+      },
+      "warrior_mage": {
+        "level": 50,
+        "mana": 70,
+        "fail": 80,
+        "exp": 150
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 48,
+        "mana": 64,
+        "fail": 80,
+        "exp": 150
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 40,
+        "mana": 70,
+        "fail": 70,
+        "exp": 150
+      }
+    },
+    "key": "warding_true"
+  }
+]

@@ -1,0 +1,644 @@
+[
+  {
+    "index": 0,
+    "name": "Phase Door",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 25,
+        "exp": 3
+      },
+      "priest": {
+        "level": 1,
+        "mana": 1,
+        "fail": 25,
+        "exp": 3
+      },
+      "rogue": {
+        "level": 5,
+        "mana": 2,
+        "fail": 25,
+        "exp": 3
+      },
+      "ranger": {
+        "level": 3,
+        "mana": 1,
+        "fail": 25,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 25,
+        "exp": 3
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 20,
+        "exp": 3
+      }
+    },
+    "key": "phase_door",
+    "effects": [
+      {
+        "type": "teleportSelf",
+        "range": 10
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 1,
+    "name": "Mind Blast",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 25,
+        "exp": 4
+      },
+      "priest": {
+        "level": 4,
+        "mana": 4,
+        "fail": 25,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 7,
+        "mana": 5,
+        "fail": 25,
+        "exp": 4
+      },
+      "ranger": {
+        "level": 6,
+        "mana": 6,
+        "fail": 25,
+        "exp": 4
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 25,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 20,
+        "exp": 4
+      }
+    },
+    "key": "mind_blast",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "monsters"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 2,
+    "name": "Shuffle",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 37,
+        "exp": 8
+      },
+      "priest": {
+        "level": 6,
+        "mana": 5,
+        "fail": 37,
+        "exp": 8
+      },
+      "rogue": {
+        "level": 9,
+        "mana": 7,
+        "fail": 37,
+        "exp": 8
+      },
+      "ranger": {
+        "level": 9,
+        "mana": 7,
+        "fail": 37,
+        "exp": 8
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 7,
+        "mana": 7,
+        "fail": 37,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 32,
+        "exp": 8
+      }
+    },
+    "key": "shuffle",
+    "effects": [
+      {
+        "type": "teleportSelf",
+        "range": 25
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 3,
+    "name": "Reset Recall",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 6,
+        "mana": 6,
+        "fail": 40,
+        "exp": 8
+      },
+      "priest": {
+        "level": 7,
+        "mana": 7,
+        "fail": 40,
+        "exp": 8
+      },
+      "rogue": {
+        "level": 11,
+        "mana": 9,
+        "fail": 40,
+        "exp": 8
+      },
+      "ranger": {
+        "level": 10,
+        "mana": 8,
+        "fail": 40,
+        "exp": 8
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 8,
+        "mana": 7,
+        "fail": 40,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 35,
+        "exp": 8
+      }
+    },
+    "key": "reset_recall",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "heroism",
+        "duration": "25+1d25"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 4,
+    "name": "Teleport",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 7,
+        "mana": 7,
+        "fail": 20,
+        "exp": 4
+      },
+      "priest": {
+        "level": 9,
+        "mana": 9,
+        "fail": 20,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 13,
+        "mana": 11,
+        "fail": 20,
+        "exp": 4
+      },
+      "ranger": {
+        "level": 13,
+        "mana": 10,
+        "fail": 20,
+        "exp": 4
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 10,
+        "mana": 10,
+        "fail": 20,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 6,
+        "mana": 5,
+        "fail": 15,
+        "exp": 4
+      }
+    },
+    "key": "teleport",
+    "effects": [
+      {
+        "type": "teleportSelf",
+        "range": 100
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 5,
+    "name": "Dimension Door",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 9,
+        "mana": 9,
+        "fail": 30,
+        "exp": 6
+      },
+      "priest": {
+        "level": 11,
+        "mana": 11,
+        "fail": 30,
+        "exp": 6
+      },
+      "rogue": {
+        "level": 15,
+        "mana": 13,
+        "fail": 30,
+        "exp": 6
+      },
+      "ranger": {
+        "level": 17,
+        "mana": 15,
+        "fail": 30,
+        "exp": 6
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 12,
+        "mana": 12,
+        "fail": 30,
+        "exp": 6
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 7,
+        "mana": 7,
+        "fail": 25,
+        "exp": 6
+      }
+    },
+    "key": "dimension_door",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "monsters"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 6,
+    "name": "Trump Spying",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 14,
+        "mana": 12,
+        "fail": 30,
+        "exp": 6
+      },
+      "priest": {
+        "level": 17,
+        "mana": 14,
+        "fail": 30,
+        "exp": 6
+      },
+      "rogue": {
+        "level": 19,
+        "mana": 15,
+        "fail": 30,
+        "exp": 6
+      },
+      "ranger": {
+        "level": 20,
+        "mana": 17,
+        "fail": 30,
+        "exp": 6
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 18,
+        "mana": 15,
+        "fail": 30,
+        "exp": 6
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 10,
+        "mana": 10,
+        "fail": 25,
+        "exp": 6
+      }
+    },
+    "key": "trump_spying",
+    "effects": [
+      {
+        "type": "teleportOther",
+        "range": 100
+      }
+    ],
+    "target": "position"
+  },
+  {
+    "index": 7,
+    "name": "Teleport Away",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 17,
+        "mana": 15,
+        "fail": 30,
+        "exp": 5
+      },
+      "priest": {
+        "level": 19,
+        "mana": 17,
+        "fail": 30,
+        "exp": 5
+      },
+      "rogue": {
+        "level": 21,
+        "mana": 20,
+        "fail": 30,
+        "exp": 5
+      },
+      "ranger": {
+        "level": 22,
+        "mana": 20,
+        "fail": 30,
+        "exp": 5
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 20,
+        "mana": 18,
+        "fail": 30,
+        "exp": 5
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 14,
+        "mana": 12,
+        "fail": 25,
+        "exp": 5
+      }
+    },
+    "key": "teleport_away",
+    "effects": [
+      {
+        "type": "summon",
+        "summonType": "animal",
+        "count": 1
+      }
+    ],
+    "target": "self"
+  }
+]

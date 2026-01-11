@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { type SpellRecord } from '@/core/data/spells';
-import spellsJson from '@/data/spells/spells.json';
 import {
   isSpellBookType,
   getBookRealm,
@@ -16,7 +15,16 @@ import {
   canClassLearnSpell,
 } from '@/core/data/spellLoader';
 
-const spells = spellsJson as SpellRecord;
+// Build spells record from loader for structural tests
+const spells: SpellRecord = {
+  life: getRealmSpells('life'),
+  sorcery: getRealmSpells('sorcery'),
+  nature: getRealmSpells('nature'),
+  chaos: getRealmSpells('chaos'),
+  death: getRealmSpells('death'),
+  trump: getRealmSpells('trump'),
+  arcane: getRealmSpells('arcane'),
+};
 
 describe('spells data', () => {
   it('should have all 7 realms', () => {

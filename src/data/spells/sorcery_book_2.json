@@ -1,0 +1,586 @@
+[
+  {
+    "index": 8,
+    "name": "Magic Mapping",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 9,
+        "mana": 7,
+        "fail": 75,
+        "exp": 8
+      },
+      "priest": {
+        "level": 13,
+        "mana": 11,
+        "fail": 75,
+        "exp": 8
+      },
+      "rogue": {
+        "level": 25,
+        "mana": 14,
+        "fail": 80,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 20,
+        "mana": 19,
+        "fail": 85,
+        "exp": 4
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 10,
+        "mana": 9,
+        "fail": 75,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 7,
+        "mana": 5,
+        "fail": 65,
+        "exp": 8
+      }
+    },
+    "key": "magic_mapping"
+  },
+  {
+    "index": 9,
+    "name": "Identify",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 10,
+        "mana": 7,
+        "fail": 75,
+        "exp": 8
+      },
+      "priest": {
+        "level": 14,
+        "mana": 12,
+        "fail": 75,
+        "exp": 6
+      },
+      "rogue": {
+        "level": 27,
+        "mana": 15,
+        "fail": 80,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 23,
+        "mana": 25,
+        "fail": 90,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 11,
+        "mana": 10,
+        "fail": 75,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 7,
+        "mana": 5,
+        "fail": 65,
+        "exp": 8
+      }
+    },
+    "key": "identify"
+  },
+  {
+    "index": 10,
+    "name": "Slow Monster",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 11,
+        "mana": 7,
+        "fail": 75,
+        "exp": 7
+      },
+      "priest": {
+        "level": 15,
+        "mana": 13,
+        "fail": 75,
+        "exp": 7
+      },
+      "rogue": {
+        "level": 29,
+        "mana": 17,
+        "fail": 75,
+        "exp": 2
+      },
+      "ranger": {
+        "level": 25,
+        "mana": 25,
+        "fail": 60,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 12,
+        "mana": 11,
+        "fail": 75,
+        "exp": 7
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 9,
+        "mana": 5,
+        "fail": 65,
+        "exp": 7
+      }
+    },
+    "key": "slow_monster"
+  },
+  {
+    "index": 11,
+    "name": "Mass Sleep",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 13,
+        "mana": 7,
+        "fail": 50,
+        "exp": 6
+      },
+      "priest": {
+        "level": 16,
+        "mana": 14,
+        "fail": 50,
+        "exp": 6
+      },
+      "rogue": {
+        "level": 30,
+        "mana": 20,
+        "fail": 80,
+        "exp": 4
+      },
+      "ranger": {
+        "level": 27,
+        "mana": 25,
+        "fail": 85,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 13,
+        "mana": 12,
+        "fail": 50,
+        "exp": 6
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 9,
+        "mana": 5,
+        "fail": 40,
+        "exp": 6
+      }
+    },
+    "key": "mass_sleep"
+  },
+  {
+    "index": 12,
+    "name": "Teleport Away",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 18,
+        "mana": 12,
+        "fail": 60,
+        "exp": 8
+      },
+      "priest": {
+        "level": 22,
+        "mana": 15,
+        "fail": 60,
+        "exp": 8
+      },
+      "rogue": {
+        "level": 31,
+        "mana": 23,
+        "fail": 80,
+        "exp": 5
+      },
+      "ranger": {
+        "level": 31,
+        "mana": 27,
+        "fail": 70,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 20,
+        "mana": 15,
+        "fail": 60,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 13,
+        "mana": 8,
+        "fail": 50,
+        "exp": 8
+      }
+    },
+    "key": "teleport_away"
+  },
+  {
+    "index": 13,
+    "name": "Haste Self",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 22,
+        "mana": 12,
+        "fail": 60,
+        "exp": 8
+      },
+      "priest": {
+        "level": 27,
+        "mana": 17,
+        "fail": 65,
+        "exp": 10
+      },
+      "rogue": {
+        "level": 32,
+        "mana": 25,
+        "fail": 70,
+        "exp": 6
+      },
+      "ranger": {
+        "level": 34,
+        "mana": 35,
+        "fail": 70,
+        "exp": 4
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 27,
+        "mana": 18,
+        "fail": 60,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 17,
+        "mana": 10,
+        "fail": 50,
+        "exp": 8
+      }
+    },
+    "key": "haste_self"
+  },
+  {
+    "index": 14,
+    "name": "Detection True",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 28,
+        "mana": 20,
+        "fail": 70,
+        "exp": 15
+      },
+      "priest": {
+        "level": 30,
+        "mana": 22,
+        "fail": 70,
+        "exp": 15
+      },
+      "rogue": {
+        "level": 35,
+        "mana": 30,
+        "fail": 80,
+        "exp": 12
+      },
+      "ranger": {
+        "level": 38,
+        "mana": 37,
+        "fail": 70,
+        "exp": 8
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 33,
+        "mana": 25,
+        "fail": 70,
+        "exp": 15
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 24,
+        "mana": 15,
+        "fail": 60,
+        "exp": 15
+      }
+    },
+    "key": "detection_true"
+  },
+  {
+    "index": 15,
+    "name": "Identify True",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 33,
+        "mana": 30,
+        "fail": 75,
+        "exp": 20
+      },
+      "priest": {
+        "level": 36,
+        "mana": 33,
+        "fail": 75,
+        "exp": 20
+      },
+      "rogue": {
+        "level": 40,
+        "mana": 35,
+        "fail": 75,
+        "exp": 20
+      },
+      "ranger": {
+        "level": 42,
+        "mana": 40,
+        "fail": 90,
+        "exp": 10
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 40,
+        "mana": 40,
+        "fail": 75,
+        "exp": 20
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 28,
+        "mana": 20,
+        "fail": 65,
+        "exp": 20
+      }
+    },
+    "key": "identify_true"
+  }
+]

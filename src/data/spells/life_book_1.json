@@ -1,0 +1,648 @@
+[
+  {
+    "index": 0,
+    "name": "Detect Evil",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 30,
+        "exp": 4
+      },
+      "priest": {
+        "level": 1,
+        "mana": 1,
+        "fail": 10,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 1,
+        "mana": 1,
+        "fail": 30,
+        "exp": 4
+      },
+      "warrior_mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 30,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 1,
+        "mana": 1,
+        "fail": 30,
+        "exp": 4
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 20,
+        "exp": 4
+      }
+    },
+    "key": "detect_evil",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "evil"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 1,
+    "name": "Cure Light Wounds",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 3,
+        "mana": 2,
+        "fail": 35,
+        "exp": 4
+      },
+      "priest": {
+        "level": 1,
+        "mana": 2,
+        "fail": 15,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 2,
+        "mana": 2,
+        "fail": 35,
+        "exp": 4
+      },
+      "warrior_mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 35,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 2,
+        "mana": 2,
+        "fail": 35,
+        "exp": 4
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 25,
+        "exp": 4
+      }
+    },
+    "key": "cure_light_wounds",
+    "effects": [
+      {
+        "type": "heal",
+        "amount": "2d10"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 2,
+    "name": "Bless",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 4,
+        "mana": 3,
+        "fail": 35,
+        "exp": 4
+      },
+      "priest": {
+        "level": 1,
+        "mana": 2,
+        "fail": 20,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 3,
+        "mana": 3,
+        "fail": 35,
+        "exp": 4
+      },
+      "warrior_mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 35,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 3,
+        "mana": 3,
+        "fail": 35,
+        "exp": 4
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 25,
+        "exp": 4
+      }
+    },
+    "key": "bless",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "blessed",
+        "duration": "12+1d12"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 3,
+    "name": "Remove Fear",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 35,
+        "exp": 4
+      },
+      "priest": {
+        "level": 3,
+        "mana": 2,
+        "fail": 25,
+        "exp": 1
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 4,
+        "mana": 3,
+        "fail": 35,
+        "exp": 4
+      },
+      "warrior_mage": {
+        "level": 6,
+        "mana": 6,
+        "fail": 35,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 4,
+        "mana": 4,
+        "fail": 35,
+        "exp": 4
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 25,
+        "exp": 4
+      }
+    },
+    "key": "remove_fear",
+    "effects": [
+      {
+        "type": "cure",
+        "status": "afraid"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 4,
+    "name": "Call Light",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 7,
+        "mana": 7,
+        "fail": 35,
+        "exp": 4
+      },
+      "priest": {
+        "level": 3,
+        "mana": 3,
+        "fail": 27,
+        "exp": 2
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 5,
+        "mana": 4,
+        "fail": 35,
+        "exp": 4
+      },
+      "warrior_mage": {
+        "level": 8,
+        "mana": 8,
+        "fail": 35,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 5,
+        "mana": 5,
+        "fail": 35,
+        "exp": 4
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 25,
+        "exp": 4
+      }
+    },
+    "key": "call_light",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 2,
+        "damage": "2d8"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 5,
+    "name": "Detect Traps and Secret Doors",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 9,
+        "mana": 8,
+        "fail": 40,
+        "exp": 4
+      },
+      "priest": {
+        "level": 4,
+        "mana": 4,
+        "fail": 28,
+        "exp": 2
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 8,
+        "mana": 5,
+        "fail": 40,
+        "exp": 4
+      },
+      "warrior_mage": {
+        "level": 9,
+        "mana": 9,
+        "fail": 40,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 8,
+        "mana": 6,
+        "fail": 40,
+        "exp": 4
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 6,
+        "mana": 5,
+        "fail": 30,
+        "exp": 4
+      }
+    },
+    "key": "detect_traps_and_secret_doors",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "traps"
+      },
+      {
+        "type": "detect",
+        "detectType": "doors"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 6,
+    "name": "Cure Medium Wounds",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 12,
+        "mana": 12,
+        "fail": 40,
+        "exp": 3
+      },
+      "priest": {
+        "level": 5,
+        "mana": 4,
+        "fail": 32,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 11,
+        "mana": 9,
+        "fail": 40,
+        "exp": 3
+      },
+      "warrior_mage": {
+        "level": 14,
+        "mana": 14,
+        "fail": 40,
+        "exp": 3
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 11,
+        "mana": 10,
+        "fail": 40,
+        "exp": 3
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 9,
+        "mana": 9,
+        "fail": 30,
+        "exp": 3
+      }
+    },
+    "key": "cure_medium_wounds",
+    "effects": [
+      {
+        "type": "heal",
+        "amount": "4d10"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 7,
+    "name": "Satisfy Hunger",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 15,
+        "mana": 14,
+        "fail": 45,
+        "exp": 3
+      },
+      "priest": {
+        "level": 7,
+        "mana": 5,
+        "fail": 38,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 13,
+        "mana": 10,
+        "fail": 45,
+        "exp": 3
+      },
+      "warrior_mage": {
+        "level": 16,
+        "mana": 16,
+        "fail": 45,
+        "exp": 3
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 13,
+        "mana": 12,
+        "fail": 45,
+        "exp": 3
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 12,
+        "mana": 10,
+        "fail": 35,
+        "exp": 3
+      }
+    },
+    "key": "satisfy_hunger",
+    "effects": [
+      {
+        "type": "cure",
+        "status": "poisoned"
+      }
+    ],
+    "target": "self"
+  }
+]

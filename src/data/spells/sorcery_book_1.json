@@ -1,0 +1,649 @@
+[
+  {
+    "index": 0,
+    "name": "Detect Monsters",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 23,
+        "exp": 4
+      },
+      "priest": {
+        "level": 2,
+        "mana": 1,
+        "fail": 23,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 5,
+        "mana": 1,
+        "fail": 50,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 3,
+        "mana": 2,
+        "fail": 35,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 23,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 15,
+        "exp": 4
+      }
+    },
+    "key": "detect_monsters",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "monsters"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 1,
+    "name": "Phase Door",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 1,
+        "mana": 2,
+        "fail": 24,
+        "exp": 4
+      },
+      "priest": {
+        "level": 3,
+        "mana": 2,
+        "fail": 24,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 7,
+        "mana": 2,
+        "fail": 55,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 3,
+        "mana": 3,
+        "fail": 35,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 24,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 15,
+        "exp": 4
+      }
+    },
+    "key": "phase_door",
+    "effects": [
+      {
+        "type": "teleportSelf",
+        "range": 10
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 2,
+    "name": "Detect Doors and Traps",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 25,
+        "exp": 1
+      },
+      "priest": {
+        "level": 4,
+        "mana": 3,
+        "fail": 25,
+        "exp": 1
+      },
+      "rogue": {
+        "level": 8,
+        "mana": 3,
+        "fail": 65,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 5,
+        "mana": 4,
+        "fail": 40,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 25,
+        "exp": 1
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 15,
+        "exp": 1
+      }
+    },
+    "key": "detect_doors_and_traps",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "doors"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 3,
+    "name": "Light Area",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 30,
+        "exp": 1
+      },
+      "priest": {
+        "level": 5,
+        "mana": 4,
+        "fail": 30,
+        "exp": 1
+      },
+      "rogue": {
+        "level": 9,
+        "mana": 3,
+        "fail": 65,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 7,
+        "mana": 4,
+        "fail": 40,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 30,
+        "exp": 1
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 20,
+        "exp": 1
+      }
+    },
+    "key": "light_area",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 2,
+        "damage": "2d8"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 4,
+    "name": "Confuse Monster",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 30,
+        "exp": 1
+      },
+      "priest": {
+        "level": 6,
+        "mana": 5,
+        "fail": 30,
+        "exp": 1
+      },
+      "rogue": {
+        "level": 13,
+        "mana": 6,
+        "fail": 75,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 9,
+        "mana": 6,
+        "fail": 40,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 30,
+        "exp": 1
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 20,
+        "exp": 1
+      }
+    },
+    "key": "confuse_monster",
+    "effects": [
+      {
+        "type": "reduce",
+        "status": "confused",
+        "amount": 4
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 5,
+    "name": "Teleport",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 35,
+        "exp": 5
+      },
+      "priest": {
+        "level": 7,
+        "mana": 6,
+        "fail": 35,
+        "exp": 5
+      },
+      "rogue": {
+        "level": 15,
+        "mana": 7,
+        "fail": 75,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 11,
+        "mana": 8,
+        "fail": 45,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 6,
+        "mana": 6,
+        "fail": 35,
+        "exp": 5
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 4,
+        "mana": 3,
+        "fail": 25,
+        "exp": 5
+      }
+    },
+    "key": "teleport",
+    "effects": [
+      {
+        "type": "teleportSelf",
+        "range": 100
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 6,
+    "name": "Sleep Monster",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 6,
+        "mana": 5,
+        "fail": 30,
+        "exp": 4
+      },
+      "priest": {
+        "level": 9,
+        "mana": 7,
+        "fail": 30,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 17,
+        "mana": 9,
+        "fail": 75,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 13,
+        "mana": 8,
+        "fail": 40,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 7,
+        "mana": 7,
+        "fail": 30,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 5,
+        "mana": 4,
+        "fail": 20,
+        "exp": 4
+      }
+    },
+    "key": "sleep_monster",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "slow",
+        "duration": "1d10"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 7,
+    "name": "Recharging",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 7,
+        "mana": 7,
+        "fail": 75,
+        "exp": 9
+      },
+      "priest": {
+        "level": 11,
+        "mana": 10,
+        "fail": 75,
+        "exp": 9
+      },
+      "rogue": {
+        "level": 21,
+        "mana": 12,
+        "fail": 80,
+        "exp": 1
+      },
+      "ranger": {
+        "level": 17,
+        "mana": 17,
+        "fail": 90,
+        "exp": 4
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 8,
+        "mana": 8,
+        "fail": 75,
+        "exp": 9
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 65,
+        "exp": 9
+      }
+    },
+    "key": "recharging",
+    "effects": [
+      {
+        "type": "cure",
+        "status": "blind"
+      },
+      {
+        "type": "cure",
+        "status": "confused"
+      }
+    ],
+    "target": "self"
+  }
+]

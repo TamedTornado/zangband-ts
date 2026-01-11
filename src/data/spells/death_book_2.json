@@ -1,0 +1,586 @@
+[
+  {
+    "index": 8,
+    "name": "Orb of Entropy",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 12,
+        "mana": 12,
+        "fail": 40,
+        "exp": 5
+      },
+      "priest": {
+        "level": 14,
+        "mana": 14,
+        "fail": 40,
+        "exp": 5
+      },
+      "rogue": {
+        "level": 21,
+        "mana": 21,
+        "fail": 60,
+        "exp": 3
+      },
+      "ranger": {
+        "level": 24,
+        "mana": 24,
+        "fail": 55,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 17,
+        "mana": 17,
+        "fail": 40,
+        "exp": 5
+      },
+      "warrior_mage": {
+        "level": 14,
+        "mana": 14,
+        "fail": 40,
+        "exp": 5
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 16,
+        "mana": 16,
+        "fail": 40,
+        "exp": 5
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 10,
+        "mana": 10,
+        "fail": 30,
+        "exp": 5
+      }
+    },
+    "key": "orb_of_entropy"
+  },
+  {
+    "index": 9,
+    "name": "Nether Bolt",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 13,
+        "mana": 12,
+        "fail": 30,
+        "exp": 4
+      },
+      "priest": {
+        "level": 16,
+        "mana": 16,
+        "fail": 30,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 23,
+        "mana": 23,
+        "fail": 75,
+        "exp": 4
+      },
+      "ranger": {
+        "level": 26,
+        "mana": 26,
+        "fail": 50,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 19,
+        "mana": 19,
+        "fail": 30,
+        "exp": 4
+      },
+      "warrior_mage": {
+        "level": 16,
+        "mana": 16,
+        "fail": 30,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 19,
+        "mana": 19,
+        "fail": 30,
+        "exp": 4
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 11,
+        "mana": 10,
+        "fail": 20,
+        "exp": 4
+      }
+    },
+    "key": "nether_bolt"
+  },
+  {
+    "index": 10,
+    "name": "Terror",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 18,
+        "mana": 15,
+        "fail": 50,
+        "exp": 10
+      },
+      "priest": {
+        "level": 21,
+        "mana": 20,
+        "fail": 50,
+        "exp": 10
+      },
+      "rogue": {
+        "level": 27,
+        "mana": 25,
+        "fail": 75,
+        "exp": 4
+      },
+      "ranger": {
+        "level": 28,
+        "mana": 28,
+        "fail": 75,
+        "exp": 4
+      },
+      "paladin": {
+        "level": 23,
+        "mana": 23,
+        "fail": 50,
+        "exp": 10
+      },
+      "warrior_mage": {
+        "level": 21,
+        "mana": 21,
+        "fail": 50,
+        "exp": 10
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 22,
+        "mana": 22,
+        "fail": 50,
+        "exp": 10
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 14,
+        "mana": 12,
+        "fail": 40,
+        "exp": 10
+      }
+    },
+    "key": "terror"
+  },
+  {
+    "index": 11,
+    "name": "Vampiric Drain",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 23,
+        "mana": 20,
+        "fail": 60,
+        "exp": 16
+      },
+      "priest": {
+        "level": 25,
+        "mana": 24,
+        "fail": 60,
+        "exp": 16
+      },
+      "rogue": {
+        "level": 30,
+        "mana": 30,
+        "fail": 75,
+        "exp": 4
+      },
+      "ranger": {
+        "level": 30,
+        "mana": 30,
+        "fail": 80,
+        "exp": 5
+      },
+      "paladin": {
+        "level": 28,
+        "mana": 26,
+        "fail": 60,
+        "exp": 16
+      },
+      "warrior_mage": {
+        "level": 25,
+        "mana": 25,
+        "fail": 60,
+        "exp": 16
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 25,
+        "mana": 25,
+        "fail": 60,
+        "exp": 16
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 20,
+        "mana": 16,
+        "fail": 50,
+        "exp": 16
+      }
+    },
+    "key": "vampiric_drain"
+  },
+  {
+    "index": 12,
+    "name": "Poison Branding",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 30,
+        "mana": 75,
+        "fail": 50,
+        "exp": 30
+      },
+      "priest": {
+        "level": 33,
+        "mana": 75,
+        "fail": 90,
+        "exp": 30
+      },
+      "rogue": {
+        "level": 35,
+        "mana": 35,
+        "fail": 75,
+        "exp": 5
+      },
+      "ranger": {
+        "level": 40,
+        "mana": 80,
+        "fail": 95,
+        "exp": 20
+      },
+      "paladin": {
+        "level": 35,
+        "mana": 75,
+        "fail": 90,
+        "exp": 30
+      },
+      "warrior_mage": {
+        "level": 35,
+        "mana": 75,
+        "fail": 50,
+        "exp": 30
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 33,
+        "mana": 80,
+        "fail": 90,
+        "exp": 30
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 26,
+        "mana": 65,
+        "fail": 40,
+        "exp": 30
+      }
+    },
+    "key": "poison_branding"
+  },
+  {
+    "index": 13,
+    "name": "Dispel Good",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 33,
+        "mana": 35,
+        "fail": 60,
+        "exp": 16
+      },
+      "priest": {
+        "level": 35,
+        "mana": 35,
+        "fail": 60,
+        "exp": 16
+      },
+      "rogue": {
+        "level": 45,
+        "mana": 45,
+        "fail": 60,
+        "exp": 10
+      },
+      "ranger": {
+        "level": 45,
+        "mana": 40,
+        "fail": 60,
+        "exp": 9
+      },
+      "paladin": {
+        "level": 40,
+        "mana": 35,
+        "fail": 60,
+        "exp": 16
+      },
+      "warrior_mage": {
+        "level": 40,
+        "mana": 40,
+        "fail": 60,
+        "exp": 16
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 40,
+        "mana": 40,
+        "fail": 60,
+        "exp": 16
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 30,
+        "mana": 30,
+        "fail": 50,
+        "exp": 16
+      }
+    },
+    "key": "dispel_good"
+  },
+  {
+    "index": 14,
+    "name": "Genocide",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 37,
+        "mana": 25,
+        "fail": 95,
+        "exp": 25
+      },
+      "priest": {
+        "level": 40,
+        "mana": 30,
+        "fail": 95,
+        "exp": 100
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 45,
+        "mana": 35,
+        "fail": 95,
+        "exp": 100
+      },
+      "warrior_mage": {
+        "level": 44,
+        "mana": 45,
+        "fail": 95,
+        "exp": 25
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 45,
+        "mana": 45,
+        "fail": 95,
+        "exp": 100
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 33,
+        "mana": 30,
+        "fail": 85,
+        "exp": 25
+      }
+    },
+    "key": "genocide"
+  },
+  {
+    "index": 15,
+    "name": "Restore Life",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 45,
+        "mana": 50,
+        "fail": 95,
+        "exp": 150
+      },
+      "priest": {
+        "level": 50,
+        "mana": 52,
+        "fail": 95,
+        "exp": 150
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 50,
+        "mana": 52,
+        "fail": 95,
+        "exp": 150
+      },
+      "warrior_mage": {
+        "level": 48,
+        "mana": 55,
+        "fail": 95,
+        "exp": 150
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 50,
+        "mana": 60,
+        "fail": 95,
+        "exp": 150
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 40,
+        "mana": 40,
+        "fail": 85,
+        "exp": 150
+      }
+    },
+    "key": "restore_life"
+  }
+]

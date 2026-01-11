@@ -1,0 +1,586 @@
+[
+  {
+    "index": 24,
+    "name": "Beam of Gravity",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 20,
+        "mana": 20,
+        "fail": 66,
+        "exp": 8
+      },
+      "priest": {
+        "level": 25,
+        "mana": 25,
+        "fail": 66,
+        "exp": 8
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 33,
+        "mana": 33,
+        "fail": 66,
+        "exp": 8
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 24,
+        "mana": 20,
+        "fail": 66,
+        "exp": 8
+      },
+      "chaos_warrior": {
+        "level": 23,
+        "mana": 34,
+        "fail": 66,
+        "exp": 10
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 16,
+        "mana": 16,
+        "fail": 55,
+        "exp": 8
+      }
+    },
+    "key": "beam_of_gravity"
+  },
+  {
+    "index": 25,
+    "name": "Meteor Swarm",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 35,
+        "mana": 32,
+        "fail": 85,
+        "exp": 35
+      },
+      "priest": {
+        "level": 37,
+        "mana": 37,
+        "fail": 85,
+        "exp": 35
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 40,
+        "mana": 45,
+        "fail": 85,
+        "exp": 35
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 40,
+        "mana": 35,
+        "fail": 85,
+        "exp": 35
+      },
+      "chaos_warrior": {
+        "level": 35,
+        "mana": 52,
+        "fail": 85,
+        "exp": 35
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 32,
+        "mana": 30,
+        "fail": 75,
+        "exp": 35
+      }
+    },
+    "key": "meteor_swarm"
+  },
+  {
+    "index": 26,
+    "name": "Flame Strike",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 37,
+        "mana": 34,
+        "fail": 75,
+        "exp": 40
+      },
+      "priest": {
+        "level": 39,
+        "mana": 37,
+        "fail": 75,
+        "exp": 50
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 42,
+        "mana": 42,
+        "fail": 75,
+        "exp": 42
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 42,
+        "mana": 40,
+        "fail": 75,
+        "exp": 40
+      },
+      "chaos_warrior": {
+        "level": 37,
+        "mana": 55,
+        "fail": 75,
+        "exp": 40
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 34,
+        "mana": 32,
+        "fail": 65,
+        "exp": 40
+      }
+    },
+    "key": "flame_strike"
+  },
+  {
+    "index": 27,
+    "name": "Call Chaos",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 41,
+        "mana": 42,
+        "fail": 85,
+        "exp": 100
+      },
+      "priest": {
+        "level": 43,
+        "mana": 45,
+        "fail": 85,
+        "exp": 100
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 48,
+        "mana": 48,
+        "fail": 85,
+        "exp": 100
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 46,
+        "mana": 44,
+        "fail": 85,
+        "exp": 100
+      },
+      "chaos_warrior": {
+        "level": 41,
+        "mana": 63,
+        "fail": 85,
+        "exp": 100
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 36,
+        "mana": 36,
+        "fail": 75,
+        "exp": 100
+      }
+    },
+    "key": "call_chaos"
+  },
+  {
+    "index": 28,
+    "name": "Magic Rocket",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 43,
+        "mana": 44,
+        "fail": 80,
+        "exp": 150
+      },
+      "priest": {
+        "level": 45,
+        "mana": 47,
+        "fail": 90,
+        "exp": 150
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 50,
+        "mana": 50,
+        "fail": 90,
+        "exp": 150
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 48,
+        "mana": 48,
+        "fail": 80,
+        "exp": 150
+      },
+      "chaos_warrior": {
+        "level": 43,
+        "mana": 66,
+        "fail": 80,
+        "exp": 150
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 38,
+        "mana": 38,
+        "fail": 70,
+        "exp": 150
+      }
+    },
+    "key": "magic_rocket"
+  },
+  {
+    "index": 29,
+    "name": "Mana Storm",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 45,
+        "mana": 48,
+        "fail": 85,
+        "exp": 200
+      },
+      "priest": {
+        "level": 47,
+        "mana": 50,
+        "fail": 95,
+        "exp": 200
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 49,
+        "mana": 50,
+        "fail": 85,
+        "exp": 200
+      },
+      "chaos_warrior": {
+        "level": 45,
+        "mana": 72,
+        "fail": 85,
+        "exp": 200
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 40,
+        "mana": 45,
+        "fail": 75,
+        "exp": 200
+      }
+    },
+    "key": "mana_storm"
+  },
+  {
+    "index": 30,
+    "name": "Breathe Logrus",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 47,
+        "mana": 75,
+        "fail": 80,
+        "exp": 200
+      },
+      "priest": {
+        "level": 49,
+        "mana": 95,
+        "fail": 80,
+        "exp": 200
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 50,
+        "mana": 100,
+        "fail": 80,
+        "exp": 250
+      },
+      "chaos_warrior": {
+        "level": 48,
+        "mana": 150,
+        "fail": 80,
+        "exp": 220
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 43,
+        "mana": 55,
+        "fail": 70,
+        "exp": 200
+      }
+    },
+    "key": "breathe_logrus"
+  },
+  {
+    "index": 31,
+    "name": "Call the Void",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 49,
+        "mana": 100,
+        "fail": 85,
+        "exp": 250
+      },
+      "priest": {
+        "level": 50,
+        "mana": 100,
+        "fail": 95,
+        "exp": 250
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 50,
+        "mana": 100,
+        "fail": 85,
+        "exp": 250
+      },
+      "chaos_warrior": {
+        "level": 49,
+        "mana": 150,
+        "fail": 85,
+        "exp": 250
+      },
+      "monk": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 46,
+        "mana": 90,
+        "fail": 75,
+        "exp": 250
+      }
+    },
+    "key": "call_the_void"
+  }
+]

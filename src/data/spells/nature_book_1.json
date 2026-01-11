@@ -1,0 +1,649 @@
+[
+  {
+    "index": 0,
+    "name": "Detect Creatures",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 23,
+        "exp": 4
+      },
+      "priest": {
+        "level": 2,
+        "mana": 1,
+        "fail": 25,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 3,
+        "mana": 1,
+        "fail": 35,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 23,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 1,
+        "mana": 1,
+        "fail": 35,
+        "exp": 2
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 1,
+        "mana": 1,
+        "fail": 15,
+        "exp": 4
+      }
+    },
+    "key": "detect_creatures",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "monsters"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 1,
+    "name": "First Aid",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 25,
+        "exp": 3
+      },
+      "priest": {
+        "level": 5,
+        "mana": 3,
+        "fail": 25,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 4,
+        "mana": 3,
+        "fail": 40,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 25,
+        "exp": 3
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 3,
+        "mana": 3,
+        "fail": 40,
+        "exp": 2
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 2,
+        "mana": 1,
+        "fail": 15,
+        "exp": 3
+      }
+    },
+    "key": "first_aid",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 2,
+        "damage": "2d8"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 2,
+    "name": "Detect Doors and Traps",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 25,
+        "exp": 1
+      },
+      "priest": {
+        "level": 5,
+        "mana": 4,
+        "fail": 25,
+        "exp": 1
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 4,
+        "mana": 4,
+        "fail": 40,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 25,
+        "exp": 1
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 4,
+        "mana": 4,
+        "fail": 40,
+        "exp": 3
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 2,
+        "mana": 2,
+        "fail": 15,
+        "exp": 1
+      }
+    },
+    "key": "detect_doors_and_traps",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "doors"
+      },
+      {
+        "type": "detect",
+        "detectType": "traps"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 3,
+    "name": "Foraging",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 35,
+        "exp": 4
+      },
+      "priest": {
+        "level": 6,
+        "mana": 5,
+        "fail": 35,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 5,
+        "mana": 7,
+        "fail": 55,
+        "exp": 2
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 35,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 7,
+        "mana": 7,
+        "fail": 55,
+        "exp": 2
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 3,
+        "mana": 2,
+        "fail": 25,
+        "exp": 4
+      }
+    },
+    "key": "foraging",
+    "effects": [
+      {
+        "type": "heal",
+        "amount": "2d8"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 4,
+    "name": "Daylight",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 50,
+        "exp": 5
+      },
+      "priest": {
+        "level": 6,
+        "mana": 5,
+        "fail": 50,
+        "exp": 5
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 6,
+        "mana": 7,
+        "fail": 50,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 6,
+        "mana": 6,
+        "fail": 50,
+        "exp": 5
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 7,
+        "mana": 7,
+        "fail": 50,
+        "exp": 3
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 3,
+        "mana": 3,
+        "fail": 40,
+        "exp": 5
+      }
+    },
+    "key": "daylight",
+    "effects": [
+      {
+        "type": "lightArea",
+        "radius": 2,
+        "damage": "2d8"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 5,
+    "name": "Animal Taming",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 4,
+        "mana": 5,
+        "fail": 50,
+        "exp": 5
+      },
+      "priest": {
+        "level": 6,
+        "mana": 6,
+        "fail": 50,
+        "exp": 5
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 7,
+        "mana": 7,
+        "fail": 50,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 7,
+        "mana": 7,
+        "fail": 50,
+        "exp": 5
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 7,
+        "mana": 7,
+        "fail": 50,
+        "exp": 3
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 4,
+        "mana": 3,
+        "fail": 40,
+        "exp": 5
+      }
+    },
+    "key": "animal_taming",
+    "effects": [
+      {
+        "type": "detect",
+        "detectType": "monsters"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 6,
+    "name": "Resist Environment",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 50,
+        "exp": 5
+      },
+      "priest": {
+        "level": 7,
+        "mana": 7,
+        "fail": 50,
+        "exp": 5
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 8,
+        "mana": 7,
+        "fail": 50,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 8,
+        "mana": 8,
+        "fail": 50,
+        "exp": 5
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 8,
+        "mana": 8,
+        "fail": 50,
+        "exp": 3
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 4,
+        "mana": 4,
+        "fail": 40,
+        "exp": 5
+      }
+    },
+    "key": "resist_environment",
+    "effects": [
+      {
+        "type": "applyStatus",
+        "status": "resist_cold",
+        "duration": "20+1d20"
+      }
+    ],
+    "target": "self"
+  },
+  {
+    "index": 7,
+    "name": "Cure Wounds & Poison",
+    "classes": {
+      "warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "mage": {
+        "level": 5,
+        "mana": 5,
+        "fail": 35,
+        "exp": 4
+      },
+      "priest": {
+        "level": 7,
+        "mana": 7,
+        "fail": 35,
+        "exp": 4
+      },
+      "rogue": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "ranger": {
+        "level": 9,
+        "mana": 7,
+        "fail": 45,
+        "exp": 3
+      },
+      "paladin": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "warrior_mage": {
+        "level": 9,
+        "mana": 9,
+        "fail": 35,
+        "exp": 4
+      },
+      "chaos_warrior": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "monk": {
+        "level": 9,
+        "mana": 9,
+        "fail": 45,
+        "exp": 3
+      },
+      "mindcrafter": {
+        "level": 99,
+        "mana": 0,
+        "fail": 0,
+        "exp": 0
+      },
+      "high_mage": {
+        "level": 5,
+        "mana": 4,
+        "fail": 25,
+        "exp": 4
+      }
+    },
+    "key": "cure_wounds_poison",
+    "effects": [
+      {
+        "type": "heal",
+        "amount": "4d8"
+      }
+    ],
+    "target": "self"
+  }
+]
