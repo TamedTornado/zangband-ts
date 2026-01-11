@@ -3,584 +3,189 @@
     "index": 24,
     "name": "Heroism",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 9,
-        "mana": 9,
-        "fail": 50,
-        "exp": 40
-      },
-      "priest": {
-        "level": 5,
-        "mana": 5,
-        "fail": 50,
-        "exp": 80
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 9,
-        "mana": 9,
-        "fail": 50,
-        "exp": 40
-      },
-      "warrior_mage": {
-        "level": 10,
-        "mana": 10,
-        "fail": 50,
-        "exp": 40
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 10,
-        "mana": 10,
-        "fail": 50,
-        "exp": 40
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 5,
-        "mana": 5,
-        "fail": 40,
-        "exp": 40
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 9, "mana": 9, "fail": 50, "exp": 40 },
+      "priest": { "level": 5, "mana": 5, "fail": 50, "exp": 80 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 9, "mana": 9, "fail": 50, "exp": 40 },
+      "warrior_mage": { "level": 10, "mana": 10, "fail": 50, "exp": 40 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 10, "mana": 10, "fail": 50, "exp": 40 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 5, "mana": 5, "fail": 40, "exp": 40 }
     },
-    "key": "heroism"
+    "key": "heroism",
+    "effects": [
+      { "type": "applyStatus", "status": "hero", "duration": "1d25+25" },
+      { "type": "heal", "amount": 10 },
+      { "type": "cure", "status": "fear" }
+    ],
+    "target": "self"
   },
   {
     "index": 25,
     "name": "Prayer",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 25,
-        "mana": 25,
-        "fail": 50,
-        "exp": 50
-      },
-      "priest": {
-        "level": 15,
-        "mana": 14,
-        "fail": 50,
-        "exp": 100
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 25,
-        "mana": 20,
-        "fail": 50,
-        "exp": 50
-      },
-      "warrior_mage": {
-        "level": 28,
-        "mana": 28,
-        "fail": 50,
-        "exp": 50
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 25,
-        "mana": 25,
-        "fail": 50,
-        "exp": 50
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 20,
-        "mana": 20,
-        "fail": 40,
-        "exp": 50
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 25, "mana": 25, "fail": 50, "exp": 50 },
+      "priest": { "level": 15, "mana": 14, "fail": 50, "exp": 100 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 25, "mana": 20, "fail": 50, "exp": 50 },
+      "warrior_mage": { "level": 28, "mana": 28, "fail": 50, "exp": 50 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 25, "mana": 25, "fail": 50, "exp": 50 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 20, "mana": 20, "fail": 40, "exp": 50 }
     },
-    "key": "prayer"
+    "key": "prayer",
+    "effects": [
+      { "type": "applyStatus", "status": "blessed", "duration": "1d48+48" }
+    ],
+    "target": "self"
   },
   {
     "index": 26,
     "name": "Bless Weapon",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 35,
-        "mana": 85,
-        "fail": 80,
-        "exp": 115
-      },
-      "priest": {
-        "level": 30,
-        "mana": 50,
-        "fail": 80,
-        "exp": 130
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 35,
-        "mana": 65,
-        "fail": 80,
-        "exp": 115
-      },
-      "warrior_mage": {
-        "level": 38,
-        "mana": 85,
-        "fail": 80,
-        "exp": 115
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 40,
-        "mana": 65,
-        "fail": 80,
-        "exp": 115
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 30,
-        "mana": 70,
-        "fail": 60,
-        "exp": 115
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 35, "mana": 85, "fail": 80, "exp": 115 },
+      "priest": { "level": 30, "mana": 50, "fail": 80, "exp": 130 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 35, "mana": 65, "fail": 80, "exp": 115 },
+      "warrior_mage": { "level": 38, "mana": 85, "fail": 80, "exp": 115 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 40, "mana": 65, "fail": 80, "exp": 115 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 30, "mana": 70, "fail": 60, "exp": 115 }
     },
-    "key": "bless_weapon"
+    "key": "bless_weapon",
+    "effects": [
+      { "type": "blessWeapon" }
+    ],
+    "target": "self"
   },
   {
     "index": 27,
     "name": "Restoration",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 42,
-        "mana": 100,
-        "fail": 80,
-        "exp": 225
-      },
-      "priest": {
-        "level": 35,
-        "mana": 70,
-        "fail": 90,
-        "exp": 250
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 40,
-        "mana": 80,
-        "fail": 80,
-        "exp": 225
-      },
-      "warrior_mage": {
-        "level": 45,
-        "mana": 90,
-        "fail": 80,
-        "exp": 225
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 44,
-        "mana": 84,
-        "fail": 80,
-        "exp": 225
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 40,
-        "mana": 80,
-        "fail": 60,
-        "exp": 225
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 42, "mana": 100, "fail": 80, "exp": 225 },
+      "priest": { "level": 35, "mana": 70, "fail": 90, "exp": 250 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 40, "mana": 80, "fail": 80, "exp": 225 },
+      "warrior_mage": { "level": 45, "mana": 90, "fail": 80, "exp": 225 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 44, "mana": 84, "fail": 80, "exp": 225 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 40, "mana": 80, "fail": 60, "exp": 225 }
     },
-    "key": "restoration"
+    "key": "restoration",
+    "effects": [
+      { "type": "restoreStats" },
+      { "type": "restoreLevel" }
+    ],
+    "target": "self"
   },
   {
     "index": 28,
     "name": "Healing True",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 45,
-        "mana": 90,
-        "fail": 80,
-        "exp": 115
-      },
-      "priest": {
-        "level": 40,
-        "mana": 50,
-        "fail": 80,
-        "exp": 130
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 45,
-        "mana": 80,
-        "fail": 80,
-        "exp": 115
-      },
-      "warrior_mage": {
-        "level": 46,
-        "mana": 90,
-        "fail": 80,
-        "exp": 115
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 46,
-        "mana": 64,
-        "fail": 80,
-        "exp": 115
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 42,
-        "mana": 75,
-        "fail": 60,
-        "exp": 115
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 45, "mana": 90, "fail": 80, "exp": 115 },
+      "priest": { "level": 40, "mana": 50, "fail": 80, "exp": 130 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 45, "mana": 80, "fail": 80, "exp": 115 },
+      "warrior_mage": { "level": 46, "mana": 90, "fail": 80, "exp": 115 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 46, "mana": 64, "fail": 80, "exp": 115 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 42, "mana": 75, "fail": 60, "exp": 115 }
     },
-    "key": "healing_true"
+    "key": "healing_true",
+    "effects": [
+      { "type": "heal", "amount": 2000 },
+      { "type": "cure", "status": "stun" },
+      { "type": "cure", "status": "cut" },
+      { "type": "cure", "status": "poisoned" }
+    ],
+    "target": "self"
   },
   {
     "index": 29,
     "name": "Holy Vision",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 48,
-        "mana": 50,
-        "fail": 80,
-        "exp": 100
-      },
-      "priest": {
-        "level": 40,
-        "mana": 40,
-        "fail": 80,
-        "exp": 200
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 45,
-        "mana": 45,
-        "fail": 80,
-        "exp": 100
-      },
-      "warrior_mage": {
-        "level": 48,
-        "mana": 50,
-        "fail": 80,
-        "exp": 100
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 48,
-        "mana": 40,
-        "fail": 80,
-        "exp": 100
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 45,
-        "mana": 40,
-        "fail": 60,
-        "exp": 100
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 48, "mana": 50, "fail": 80, "exp": 100 },
+      "priest": { "level": 40, "mana": 40, "fail": 80, "exp": 200 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 45, "mana": 45, "fail": 80, "exp": 100 },
+      "warrior_mage": { "level": 48, "mana": 50, "fail": 80, "exp": 100 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 48, "mana": 40, "fail": 80, "exp": 100 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 45, "mana": 40, "fail": 60, "exp": 100 }
     },
-    "key": "holy_vision"
+    "key": "holy_vision",
+    "effects": [
+      { "type": "identify", "full": true }
+    ],
+    "target": "item"
   },
   {
     "index": 30,
     "name": "Divine Intervention",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 49,
-        "mana": 100,
-        "fail": 80,
-        "exp": 250
-      },
-      "priest": {
-        "level": 42,
-        "mana": 90,
-        "fail": 85,
-        "exp": 200
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 48,
-        "mana": 100,
-        "fail": 90,
-        "exp": 250
-      },
-      "warrior_mage": {
-        "level": 49,
-        "mana": 100,
-        "fail": 90,
-        "exp": 100
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 49,
-        "mana": 100,
-        "fail": 90,
-        "exp": 200
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 47,
-        "mana": 90,
-        "fail": 70,
-        "exp": 250
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 49, "mana": 100, "fail": 80, "exp": 250 },
+      "priest": { "level": 42, "mana": 90, "fail": 85, "exp": 200 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 48, "mana": 100, "fail": 90, "exp": 250 },
+      "warrior_mage": { "level": 49, "mana": 100, "fail": 90, "exp": 100 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 49, "mana": 100, "fail": 90, "exp": 200 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 47, "mana": 90, "fail": 70, "exp": 250 }
     },
-    "key": "divine_intervention"
+    "key": "divine_intervention",
+    "effects": [
+      { "type": "ball", "element": "holyFire", "damage": "level*4", "radius": 10, "centered": true },
+      { "type": "dispel", "monsterType": "undead", "damage": "level*4" },
+      { "type": "dispel", "monsterType": "demon", "damage": "level*4" },
+      { "type": "areaStatus", "status": "stun", "power": "level" },
+      { "type": "areaStatus", "status": "confuse", "power": "level" },
+      { "type": "areaStatus", "status": "fear", "power": "level" },
+      { "type": "heal", "amount": 100 },
+      { "type": "summon", "monsterType": "angel", "count": 1, "friendly": true }
+    ],
+    "target": "self"
   },
   {
     "index": 31,
     "name": "Holy Invulnerability",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 50,
-        "mana": 100,
-        "fail": 80,
-        "exp": 250
-      },
-      "priest": {
-        "level": 45,
-        "mana": 90,
-        "fail": 85,
-        "exp": 250
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 50,
-        "mana": 100,
-        "fail": 80,
-        "exp": 250
-      },
-      "warrior_mage": {
-        "level": 50,
-        "mana": 100,
-        "fail": 80,
-        "exp": 250
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 50,
-        "mana": 100,
-        "fail": 80,
-        "exp": 250
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 49,
-        "mana": 90,
-        "fail": 70,
-        "exp": 250
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 50, "mana": 100, "fail": 80, "exp": 250 },
+      "priest": { "level": 45, "mana": 90, "fail": 85, "exp": 250 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 50, "mana": 100, "fail": 80, "exp": 250 },
+      "warrior_mage": { "level": 50, "mana": 100, "fail": 80, "exp": 250 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 50, "mana": 100, "fail": 80, "exp": 250 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 49, "mana": 90, "fail": 70, "exp": 250 }
     },
-    "key": "holy_invulnerability"
+    "key": "holy_invulnerability",
+    "effects": [
+      { "type": "applyStatus", "status": "invulnerable", "duration": "1d7+7" }
+    ],
+    "target": "self"
   }
 ]

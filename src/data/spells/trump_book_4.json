@@ -3,584 +3,176 @@
     "index": 24,
     "name": "Trump Divination",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 30,
-        "mana": 30,
-        "fail": 30,
-        "exp": 50
-      },
-      "priest": {
-        "level": 32,
-        "mana": 30,
-        "fail": 30,
-        "exp": 50
-      },
-      "rogue": {
-        "level": 35,
-        "mana": 30,
-        "fail": 30,
-        "exp": 50
-      },
-      "ranger": {
-        "level": 35,
-        "mana": 33,
-        "fail": 30,
-        "exp": 50
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 33,
-        "mana": 30,
-        "fail": 30,
-        "exp": 50
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 25,
-        "mana": 25,
-        "fail": 25,
-        "exp": 50
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 30, "mana": 30, "fail": 30, "exp": 50 },
+      "priest": { "level": 32, "mana": 30, "fail": 30, "exp": 50 },
+      "rogue": { "level": 35, "mana": 30, "fail": 30, "exp": 50 },
+      "ranger": { "level": 35, "mana": 33, "fail": 30, "exp": 50 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 33, "mana": 30, "fail": 30, "exp": 50 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 25, "mana": 25, "fail": 25, "exp": 50 }
     },
-    "key": "trump_divination"
+    "key": "trump_divination",
+    "effects": [
+      { "type": "detect", "detectType": "all" }
+    ],
+    "target": "self"
   },
   {
     "index": 25,
     "name": "Trump Lore",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 35,
-        "mana": 50,
-        "fail": 45,
-        "exp": 100
-      },
-      "priest": {
-        "level": 38,
-        "mana": 55,
-        "fail": 45,
-        "exp": 100
-      },
-      "rogue": {
-        "level": 42,
-        "mana": 65,
-        "fail": 45,
-        "exp": 100
-      },
-      "ranger": {
-        "level": 40,
-        "mana": 65,
-        "fail": 45,
-        "exp": 100
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 40,
-        "mana": 60,
-        "fail": 45,
-        "exp": 100
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 32,
-        "mana": 45,
-        "fail": 40,
-        "exp": 100
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 35, "mana": 50, "fail": 45, "exp": 100 },
+      "priest": { "level": 38, "mana": 55, "fail": 45, "exp": 100 },
+      "rogue": { "level": 42, "mana": 65, "fail": 45, "exp": 100 },
+      "ranger": { "level": 40, "mana": 65, "fail": 45, "exp": 100 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 40, "mana": 60, "fail": 45, "exp": 100 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 32, "mana": 45, "fail": 40, "exp": 100 }
     },
-    "key": "trump_lore"
+    "key": "trump_lore",
+    "effects": [
+      { "type": "identify", "full": true }
+    ],
+    "target": "item"
   },
   {
     "index": 26,
     "name": "Trump Undead",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 36,
-        "mana": 80,
-        "fail": 40,
-        "exp": 150
-      },
-      "priest": {
-        "level": 40,
-        "mana": 85,
-        "fail": 40,
-        "exp": 150
-      },
-      "rogue": {
-        "level": 44,
-        "mana": 100,
-        "fail": 40,
-        "exp": 150
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 42,
-        "mana": 95,
-        "fail": 40,
-        "exp": 150
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 34,
-        "mana": 75,
-        "fail": 35,
-        "exp": 150
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 36, "mana": 80, "fail": 40, "exp": 150 },
+      "priest": { "level": 40, "mana": 85, "fail": 40, "exp": 150 },
+      "rogue": { "level": 44, "mana": 100, "fail": 40, "exp": 150 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 42, "mana": 95, "fail": 40, "exp": 150 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 34, "mana": 75, "fail": 35, "exp": 150 }
     },
-    "key": "trump_undead"
+    "key": "trump_undead",
+    "effects": [
+      { "type": "summon", "monsterType": "undead", "count": 1, "friendly": true }
+    ],
+    "target": "self"
   },
   {
     "index": 27,
     "name": "Trump Dragon",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 39,
-        "mana": 80,
-        "fail": 40,
-        "exp": 150
-      },
-      "priest": {
-        "level": 43,
-        "mana": 85,
-        "fail": 40,
-        "exp": 150
-      },
-      "rogue": {
-        "level": 46,
-        "mana": 100,
-        "fail": 40,
-        "exp": 150
-      },
-      "ranger": {
-        "level": 47,
-        "mana": 95,
-        "fail": 40,
-        "exp": 150
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 45,
-        "mana": 95,
-        "fail": 40,
-        "exp": 150
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 36,
-        "mana": 75,
-        "fail": 35,
-        "exp": 150
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 39, "mana": 80, "fail": 40, "exp": 150 },
+      "priest": { "level": 43, "mana": 85, "fail": 40, "exp": 150 },
+      "rogue": { "level": 46, "mana": 100, "fail": 40, "exp": 150 },
+      "ranger": { "level": 47, "mana": 95, "fail": 40, "exp": 150 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 45, "mana": 95, "fail": 40, "exp": 150 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 36, "mana": 75, "fail": 35, "exp": 150 }
     },
-    "key": "trump_dragon"
+    "key": "trump_dragon",
+    "effects": [
+      { "type": "summon", "monsterType": "dragon", "count": 1, "friendly": true }
+    ],
+    "target": "self"
   },
   {
     "index": 28,
     "name": "Mass Trump",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 42,
-        "mana": 100,
-        "fail": 40,
-        "exp": 200
-      },
-      "priest": {
-        "level": 46,
-        "mana": 110,
-        "fail": 40,
-        "exp": 200
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 50,
-        "mana": 120,
-        "fail": 40,
-        "exp": 200
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 46,
-        "mana": 120,
-        "fail": 40,
-        "exp": 200
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 38,
-        "mana": 90,
-        "fail": 35,
-        "exp": 200
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 42, "mana": 100, "fail": 40, "exp": 200 },
+      "priest": { "level": 46, "mana": 110, "fail": 40, "exp": 200 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 50, "mana": 120, "fail": 40, "exp": 200 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 46, "mana": 120, "fail": 40, "exp": 200 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 38, "mana": 90, "fail": 35, "exp": 200 }
     },
-    "key": "mass_trump"
+    "key": "mass_trump",
+    "effects": [
+      { "type": "summon", "monsterType": "random", "count": "2d4", "friendly": true }
+    ],
+    "target": "self"
   },
   {
     "index": 29,
     "name": "Trump Demon",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 47,
-        "mana": 100,
-        "fail": 40,
-        "exp": 150
-      },
-      "priest": {
-        "level": 48,
-        "mana": 115,
-        "fail": 40,
-        "exp": 150
-      },
-      "rogue": {
-        "level": 49,
-        "mana": 125,
-        "fail": 40,
-        "exp": 150
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 48,
-        "mana": 125,
-        "fail": 40,
-        "exp": 150
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 42,
-        "mana": 90,
-        "fail": 35,
-        "exp": 150
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 47, "mana": 100, "fail": 40, "exp": 150 },
+      "priest": { "level": 48, "mana": 115, "fail": 40, "exp": 150 },
+      "rogue": { "level": 49, "mana": 125, "fail": 40, "exp": 150 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 48, "mana": 125, "fail": 40, "exp": 150 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 42, "mana": 90, "fail": 35, "exp": 150 }
     },
-    "key": "trump_demon"
+    "key": "trump_demon",
+    "effects": [
+      { "type": "summon", "monsterType": "demon", "count": 1, "friendly": true }
+    ],
+    "target": "self"
   },
   {
     "index": 30,
     "name": "Trump Ancient Dragon",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 48,
-        "mana": 100,
-        "fail": 40,
-        "exp": 200
-      },
-      "priest": {
-        "level": 49,
-        "mana": 120,
-        "fail": 40,
-        "exp": 200
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 49,
-        "mana": 130,
-        "fail": 40,
-        "exp": 200
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 44,
-        "mana": 90,
-        "fail": 35,
-        "exp": 200
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 48, "mana": 100, "fail": 40, "exp": 200 },
+      "priest": { "level": 49, "mana": 120, "fail": 40, "exp": 200 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 49, "mana": 130, "fail": 40, "exp": 200 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 44, "mana": 90, "fail": 35, "exp": 200 }
     },
-    "key": "trump_ancient_dragon"
+    "key": "trump_ancient_dragon",
+    "effects": [
+      { "type": "summon", "monsterType": "ancientDragon", "count": 1, "friendly": true }
+    ],
+    "target": "self"
   },
   {
     "index": 31,
     "name": "Trump Greater Undead",
     "classes": {
-      "warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mage": {
-        "level": 49,
-        "mana": 100,
-        "fail": 40,
-        "exp": 220
-      },
-      "priest": {
-        "level": 50,
-        "mana": 125,
-        "fail": 40,
-        "exp": 220
-      },
-      "rogue": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "ranger": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "paladin": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "warrior_mage": {
-        "level": 50,
-        "mana": 135,
-        "fail": 40,
-        "exp": 220
-      },
-      "chaos_warrior": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "monk": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "mindcrafter": {
-        "level": 99,
-        "mana": 0,
-        "fail": 0,
-        "exp": 0
-      },
-      "high_mage": {
-        "level": 46,
-        "mana": 90,
-        "fail": 35,
-        "exp": 220
-      }
+      "warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mage": { "level": 49, "mana": 100, "fail": 40, "exp": 220 },
+      "priest": { "level": 50, "mana": 125, "fail": 40, "exp": 220 },
+      "rogue": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "ranger": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "paladin": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "warrior_mage": { "level": 50, "mana": 135, "fail": 40, "exp": 220 },
+      "chaos_warrior": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "monk": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "mindcrafter": { "level": 99, "mana": 0, "fail": 0, "exp": 0 },
+      "high_mage": { "level": 46, "mana": 90, "fail": 35, "exp": 220 }
     },
-    "key": "trump_greater_undead"
+    "key": "trump_greater_undead",
+    "effects": [
+      { "type": "summon", "monsterType": "greaterUndead", "count": 1, "friendly": true }
+    ],
+    "target": "self"
   }
 ]
