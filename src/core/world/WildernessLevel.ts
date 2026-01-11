@@ -28,7 +28,8 @@ import type {
 import { WILD_BLOCK_SIZE, WILD_VIEW } from '../data/WildernessTypes';
 import type { WildernessMap } from '../systems/wilderness/WildernessGenerator';
 import { WildBlockGenerator } from '../systems/wilderness/BlockGenerator';
-import type { WildGenData } from '../data/WildernessTypes';
+import { ZangbandTownGenerator, type GeneratedTownData } from '../systems/wilderness/TownGen';
+import type { WildGenData, WildPlace } from '../data/WildernessTypes';
 
 /**
  * Type guard to check if a level is a WildernessLevel.
@@ -49,6 +50,12 @@ export class WildernessLevel implements ILevel {
 
   /** Block generator for creating terrain */
   private blockGenerator: WildBlockGenerator;
+
+  /** Town generator for town blocks */
+  private townGenerator: ZangbandTownGenerator;
+
+  /** Cache of generated towns: key = place.key */
+  private townCache: Map<string, GeneratedTownData> = new Map();
 
   /** Wilderness map data (blocks, places, etc.) */
   private wildernessMap: WildernessMap;
@@ -78,6 +85,7 @@ export class WildernessLevel implements ILevel {
   ) {
     this.wildernessMap = wildernessMap;
     this.blockGenerator = new WildBlockGenerator(rng, genData);
+    this.townGenerator = new ZangbandTownGenerator(rng);
   }
 
   /** Get wilderness X coordinate (tile position in full wilderness) */
@@ -111,10 +119,16 @@ export class WildernessLevel implements ILevel {
   /**
    * Initialize the wilderness at a specific position.
    * This sets up the viewport and loads initial blocks.
+   * Player.position is set to world coordinates.
    */
   initializeAt(wildX: number, wildY: number): void {
     this._wildernessX = wildX;
     this._wildernessY = wildY;
+
+    // Set player position to world coordinates
+    if (this._player) {
+      this._player.position = { x: wildX, y: wildY };
+    }
 
     // Center viewport on player's block
     const playerBlockX = Math.floor(wildX / WILD_BLOCK_SIZE);
@@ -159,9 +173,13 @@ export class WildernessLevel implements ILevel {
 
   /**
    * Get the player's position in screen coordinates.
+   * Converts from world coordinates (player.position) to screen coordinates.
    */
   getPlayerScreenPosition(): Position | null {
-    return this.wildernessToScreen(this._wildernessX, this._wildernessY);
+    if (!this._player) {
+      return this.wildernessToScreen(this._wildernessX, this._wildernessY);
+    }
+    return this.wildernessToScreen(this._player.position.x, this._player.position.y);
   }
 
   /**
@@ -211,6 +229,90 @@ export class WildernessLevel implements ILevel {
   }
 
   /**
+   * Move the player to a new world position.
+   * Updates player.position and handles viewport shifting.
+   * Returns true if the viewport shifted.
+   */
+  movePlayer(worldX: number, worldY: number): boolean {
+    if (this._player) {
+      this._player.position = { x: worldX, y: worldY };
+    }
+    return this.setPlayerWildernessPosition(worldX, worldY);
+  }
+
+  // =========================================================================
+  // World coordinate methods
+  // These operate on world (wilderness) coordinates, not screen coordinates.
+  // =========================================================================
+
+  /**
+   * Check if a world position is within wilderness bounds.
+   */
+  isInBoundsWorld(pos: Position): boolean {
+    const maxTile = this.wildernessMap.size * WILD_BLOCK_SIZE;
+    return pos.x >= 0 && pos.x < maxTile && pos.y >= 0 && pos.y < maxTile;
+  }
+
+  /**
+   * Get tile at a world position.
+   * Ensures the block is loaded if in viewport range.
+   */
+  getTileWorld(pos: Position): Tile | undefined {
+    if (!this.isInBoundsWorld(pos)) {
+      return undefined;
+    }
+
+    const blockX = Math.floor(pos.x / WILD_BLOCK_SIZE);
+    const blockY = Math.floor(pos.y / WILD_BLOCK_SIZE);
+    const offsetX = pos.x % WILD_BLOCK_SIZE;
+    const offsetY = pos.y % WILD_BLOCK_SIZE;
+
+    // Ensure block is loaded
+    this.ensureBlockLoaded(blockX, blockY);
+
+    const key = `${blockX},${blockY}`;
+    const block = this.blockCache.get(key);
+    if (!block) {
+      return undefined;
+    }
+
+    return block[offsetY]?.[offsetX];
+  }
+
+  /**
+   * Check if a world position is walkable.
+   */
+  isWalkableWorld(pos: Position): boolean {
+    const tile = this.getTileWorld(pos);
+    return tile?.isPassable ?? false;
+  }
+
+  /**
+   * Check if a world position is transparent (for FOV).
+   */
+  isTransparentWorld(pos: Position): boolean {
+    const tile = this.getTileWorld(pos);
+    return tile?.isTransparent ?? false;
+  }
+
+  /**
+   * Check if a world position is occupied by a monster.
+   */
+  isOccupiedWorld(pos: Position): boolean {
+    return this.getMonsterAtWorld(pos) !== undefined;
+  }
+
+  /**
+   * Get monster at a world position.
+   */
+  getMonsterAtWorld(pos: Position): Monster | undefined {
+    const actor = this.actors.find(
+      (a) => a !== this._player && !a.isDead && a.position.x === pos.x && a.position.y === pos.y
+    );
+    return actor as Monster | undefined;
+  }
+
+  /**
    * Load all blocks currently in the viewport.
    */
   private loadVisibleBlocks(): void {
@@ -227,7 +329,33 @@ export class WildernessLevel implements ILevel {
   }
 
   /**
+   * Check if a block is within any town's bounds.
+   * Towns can span multiple blocks (xsize x ysize).
+   */
+  private getTownAtBlock(blockX: number, blockY: number): WildPlace | undefined {
+    for (const place of this.wildernessMap.places) {
+      if (place.type !== 'town') continue;
+      // Check if blockX, blockY is within place bounds
+      if (
+        blockX >= place.x &&
+        blockX < place.x + place.xsize &&
+        blockY >= place.y &&
+        blockY < place.y + place.ysize
+      ) {
+        return place;
+      }
+    }
+    return undefined;
+  }
+
+
+  /**
    * Ensure a specific block is loaded.
+   *
+   * Per Zangband reference (gen_block in wild3.c):
+   * 1. ALWAYS generate wilderness terrain first
+   * 2. Overlay town if present (only solid tiles)
+   * 3. Add dungeon entrances
    */
   private ensureBlockLoaded(blockX: number, blockY: number): void {
     const key = `${blockX},${blockY}`;
@@ -235,43 +363,27 @@ export class WildernessLevel implements ILevel {
       return;
     }
 
-    // Generate the block
+    // Get wilderness block data
     const block = this.wildernessMap.getBlock(blockX, blockY);
     if (!block) {
       return; // Out of bounds
     }
 
-    const genData = this.blockGenerator.getGenData(block.wild);
-    if (!genData) {
-      return;
+    // 1. ALWAYS generate wilderness terrain first
+    const tiles = this.generateWildernessTiles(block, blockX, blockY);
+
+    // 2. Overlay town if present (not replace)
+    const townPlace = this.getTownAtBlock(blockX, blockY);
+    if (townPlace) {
+      this.overlayTownTiles(tiles, townPlace, blockX, blockY);
     }
 
-    // Generate tiles for this block
-    const generatedTiles = this.blockGenerator.generateBlock(
-      block,
-      blockX,
-      blockY,
-      this.wildernessMap.seed
-    );
-
-    // Convert to Tile objects using terrain index lookup
-    const tiles: Tile[][] = [];
-    for (let y = 0; y < WILD_BLOCK_SIZE; y++) {
-      tiles[y] = [];
-      for (let x = 0; x < WILD_BLOCK_SIZE; x++) {
-        const feat = generatedTiles[y][x].feat;
-        const terrain = getTerrainByIndex(feat);
-        tiles[y][x] = new Tile(terrain.key);
-      }
-    }
-
-    // Place dungeon entrances (FEAT_MORE / down_staircase) at dungeon locations
+    // 3. Place dungeon entrances at dungeon locations
     if (block.place > 0) {
       const place = this.wildernessMap.places.find(
         (p) => p.x === blockX && p.y === blockY && p.type === 'dungeon'
       );
       if (place) {
-        // Place down stairs at center of block
         const centerX = Math.floor(WILD_BLOCK_SIZE / 2);
         const centerY = Math.floor(WILD_BLOCK_SIZE / 2);
         tiles[centerY][centerX] = new Tile('down_staircase');
@@ -279,6 +391,81 @@ export class WildernessLevel implements ILevel {
     }
 
     this.blockCache.set(key, tiles);
+  }
+
+  /**
+   * Generate wilderness terrain tiles for a block.
+   */
+  private generateWildernessTiles(block: { wild: number }, blockX: number, blockY: number): Tile[][] {
+    const genData = this.blockGenerator.getGenData(block.wild);
+
+    // Generate tiles for this block
+    const generatedTiles = genData
+      ? this.blockGenerator.generateBlock(
+          block as any,
+          blockX,
+          blockY,
+          this.wildernessMap.seed
+        )
+      : null;
+
+    // Convert to Tile objects
+    const tiles: Tile[][] = [];
+    for (let y = 0; y < WILD_BLOCK_SIZE; y++) {
+      tiles[y] = [];
+      for (let x = 0; x < WILD_BLOCK_SIZE; x++) {
+        if (generatedTiles) {
+          const feat = generatedTiles[y][x].feat;
+          const terrain = getTerrainByIndex(feat);
+          tiles[y][x] = new Tile(terrain.key);
+        } else {
+          // Fallback to grass
+          tiles[y][x] = new Tile('grass');
+        }
+      }
+    }
+    return tiles;
+  }
+
+  /**
+   * Overlay town tiles onto wilderness tiles.
+   * Per Zangband wild3.c:107: Only overlays tiles where feat != FEAT_NONE (0).
+   * FEAT_NONE = 0 = transparent, wilderness shows through.
+   */
+  private overlayTownTiles(
+    tiles: Tile[][],
+    place: WildPlace,
+    blockX: number,
+    blockY: number
+  ): void {
+    // Generate or get cached town data
+    let townData = this.townCache.get(place.key);
+    if (!townData) {
+      townData = this.townGenerator.generate(place);
+      this.townCache.set(place.key, townData);
+    }
+
+    // Calculate offset within town
+    const offsetX = (blockX - place.x) * WILD_BLOCK_SIZE;
+    const offsetY = (blockY - place.y) * WILD_BLOCK_SIZE;
+
+    // FEAT_NONE (0) = transparent, per Zangband defines.h:1131
+    const FEAT_NONE = 0;
+
+    // Overlay non-transparent tiles
+    for (let y = 0; y < WILD_BLOCK_SIZE; y++) {
+      for (let x = 0; x < WILD_BLOCK_SIZE; x++) {
+        const townTile = townData.tiles[offsetY + y]?.[offsetX + x];
+        if (townTile) {
+          const feat = townTile.feat;
+          // Only overlay if feat != FEAT_NONE (per wild3.c overlay_place)
+          if (feat !== FEAT_NONE) {
+            const terrain = getTerrainByIndex(feat);
+            tiles[y][x] = new Tile(terrain.key);
+          }
+        }
+      }
+    }
   }
 
   /**

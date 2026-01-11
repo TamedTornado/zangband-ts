@@ -7,7 +7,7 @@
 import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
-import { PlayingState } from './PlayingState';
+import { WildernessInitState } from './WildernessInitState';
 import { getGameStore } from '@/core/store/gameStore';
 
 export class DeadState implements State {
@@ -28,7 +28,7 @@ export class DeadState implements State {
   handleAction(fsm: GameFSM, action: GameAction): boolean {
     if (action.type === 'restart') {
       fsm.initGameData();
-      fsm.transition(new PlayingState());
+      fsm.transition(new WildernessInitState());
       return true;
     }
     // Block all other actions

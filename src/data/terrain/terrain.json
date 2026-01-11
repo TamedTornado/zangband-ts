@@ -987,5 +987,125 @@
       "USE_TRANS",
       "MARK"
     ]
+  },
+  "store_general": {
+    "key": "store_general",
+    "index": 140,
+    "name": "General Store",
+    "symbol": "1",
+    "color": "U",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "general_store"
+  },
+  "store_armory": {
+    "key": "store_armory",
+    "index": 141,
+    "name": "Armory",
+    "symbol": "2",
+    "color": "s",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "armory"
+  },
+  "store_weapon": {
+    "key": "store_weapon",
+    "index": 142,
+    "name": "Weapon Smiths",
+    "symbol": "3",
+    "color": "s",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "weapon_smith"
+  },
+  "store_temple": {
+    "key": "store_temple",
+    "index": 143,
+    "name": "Temple",
+    "symbol": "4",
+    "color": "g",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "temple"
+  },
+  "store_alchemy": {
+    "key": "store_alchemy",
+    "index": 144,
+    "name": "Alchemy Shop",
+    "symbol": "5",
+    "color": "b",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "alchemy_shop"
+  },
+  "store_magic": {
+    "key": "store_magic",
+    "index": 145,
+    "name": "Magic Shop",
+    "symbol": "6",
+    "color": "r",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "magic_shop"
+  },
+  "store_black_market": {
+    "key": "store_black_market",
+    "index": 146,
+    "name": "Black Market",
+    "symbol": "7",
+    "color": "D",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "black_market"
+  },
+  "store_home": {
+    "key": "store_home",
+    "index": 147,
+    "name": "Your Home",
+    "symbol": "8",
+    "color": "y",
+    "flags": [
+      "USE_TRANS",
+      "ICKY",
+      "PERM",
+      "MARK",
+      "STORE"
+    ],
+    "storeKey": "home"
   }
 }

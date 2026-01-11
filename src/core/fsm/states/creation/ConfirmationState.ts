@@ -3,7 +3,7 @@ import type { GameAction } from '../../Actions';
 import type { GameFSM } from '../../GameFSM';
 import { getGameStore } from '@/core/store/gameStore';
 import { Player } from '@/core/entities/Player';
-import { PlayingState } from '../PlayingState';
+import { WildernessInitState } from '../WildernessInitState';
 import { NameEntryState } from './NameEntryState';
 
 export class ConfirmationState implements State {
@@ -32,13 +32,8 @@ export class ConfirmationState implements State {
       // Clear character creation data
       store.setCharacterCreation(null);
 
-      // Generate town level (depth 0)
-      fsm.goToLevel(0);
-
-      fsm.addMessage('Welcome to Zangband!', 'info');
-      fsm.addMessage('You are standing in the town.', 'info');
-
-      fsm.transition(new PlayingState());
+      // Transition to wilderness initialization
+      fsm.transition(new WildernessInitState());
       return true;
     }
 

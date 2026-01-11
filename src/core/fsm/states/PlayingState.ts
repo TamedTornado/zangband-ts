@@ -21,6 +21,7 @@ import { CharacterState } from './CharacterState';
 import { CastSpellState } from './CastSpellState';
 import { StudySpellState } from './StudySpellState';
 import { ShoppingState } from './ShoppingState';
+import { WildernessRestoreState } from './WildernessRestoreState';
 import { isWildernessLevel } from '../../world/WildernessLevel';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
@@ -130,8 +131,15 @@ export class PlayingState implements State {
     const level = store.level!;
     const newPos = movePosition(player.position, dir);
 
+    // Wilderness uses world coordinates; dungeons use screen coordinates
+    const isWilderness = isWildernessLevel(level);
+
+    // Get tile and monster using appropriate coordinate system
+    const targetMonster = isWilderness
+      ? level.getMonsterAtWorld(newPos)
+      : level.getMonsterAt(newPos);
+
     // Bump attack
-    const targetMonster = level.getMonsterAt(newPos);
     if (targetMonster) {
       store.incrementTurn();
       const result = fsm.gameLoop.playerAttack(player, targetMonster);
@@ -145,37 +153,39 @@ export class PlayingState implements State {
       return;
     }
 
+    // Check walkability using appropriate coordinate system
+    const isWalkable = isWilderness
+      ? level.isWalkableWorld(newPos)
+      : level.isWalkable(newPos);
+    const isOccupied = isWilderness
+      ? level.isOccupiedWorld(newPos)
+      : level.isOccupied(newPos);
+
     // Normal movement
-    if (level.isWalkable(newPos) && !level.isOccupied(newPos)) {
+    if (isWalkable && !isOccupied) {
       store.incrementTurn();
-      player.position = newPos;
 
-      // Handle wilderness viewport updates
-      if (isWildernessLevel(level)) {
-        const wildPos = level.screenToWilderness(newPos.x, newPos.y);
-        const viewportShifted = level.setPlayerWildernessPosition(wildPos.x, wildPos.y);
-
-        // If viewport shifted, update player's screen position
-        if (viewportShifted) {
-          const newScreenPos = level.getPlayerScreenPosition();
-          if (newScreenPos) {
-            player.position = newScreenPos;
-          }
-        }
-
-        // Update stored wilderness position
-        store.setWildernessPosition(level.wildernessX, level.wildernessY);
+      if (isWilderness) {
+        // Wilderness: player.position is world coordinates
+        level.movePlayer(newPos.x, newPos.y);
+        // Update stored wilderness position for save/restore
+        store.setWildernessPosition(player.position.x, player.position.y);
+      } else {
+        // Dungeon: player.position is screen coordinates (no viewport scroll)
+        player.position = newPos;
       }
 
-      // Check for items (before completing turn so message appears first)
-      const itemsHere = level.getItemsAt(player.position);
+      // Check for items using player's current position (world coords in wilderness)
+      const itemsHere = isWilderness
+        ? [] // TODO: wilderness items
+        : level.getItemsAt(player.position);
       if (itemsHere.length === 1) {
         fsm.addMessage(`You see ${fsm.getItemDisplayName(itemsHere[0]!)} here.`, 'info');
       } else if (itemsHere.length > 1) {
         fsm.addMessage(`You see ${itemsHere.length} items here.`, 'info');
       }
 
-      // Check for store entrance in town
+      // Check for store entrance - player.position is now world coords in wilderness
       this.checkStoreEntrance(fsm, player.position);
 
       fsm.completeTurn(ENERGY_PER_TURN);
@@ -184,7 +194,9 @@ export class PlayingState implements State {
     }
 
     // Check for door
-    const tile = level.getTile(newPos);
+    const tile = isWilderness
+      ? level.getTileWorld(newPos)
+      : level.getTile(newPos);
     if (tile?.terrain.flags.includes('DOOR')) {
       store.incrementTurn();
       level.setTerrain(newPos, 'open_door');
@@ -284,11 +296,16 @@ export class PlayingState implements State {
     const pos = player.position;
 
     // Check if standing on down stairs
-    // In wilderness, check terrain; in dungeon, check downStairs array
+    // In wilderness, check terrain using world coordinates
+    // In dungeon, check downStairs array
     let onDownStairs = false;
-    if (store.isInWilderness) {
-      const tile = level.getTile(pos);
+    if (isWildernessLevel(level)) {
+      const tile = level.getTileWorld(pos);
       onDownStairs = tile?.terrain.key === 'down_staircase';
+      // Save position before entering dungeon (player.position is world coords)
+      if (onDownStairs) {
+        store.setWildernessPosition(pos.x, pos.y);
+      }
     } else {
       onDownStairs = downStairs.some(s => s.x === pos.x && s.y === pos.y);
     }
@@ -296,11 +313,6 @@ export class PlayingState implements State {
     if (!onDownStairs) {
       fsm.addMessage('There are no down stairs here.', 'info');
       return;
-    }
-
-    // If in wilderness, save position before entering dungeon
-    if (isWildernessLevel(level)) {
-      store.setWildernessPosition(level.wildernessX, level.wildernessY);
     }
 
     const newDepth = depth + 1;
@@ -341,8 +353,7 @@ export class PlayingState implements State {
     if (depth === 1 && store.wildernessMap) {
       const wildernessX = store.wildernessX;
       const wildernessY = store.wildernessY;
-      fsm.goToWilderness(wildernessX, wildernessY);
-      fsm.addMessage('You leave the dungeon and return to the wilderness.', 'info');
+      fsm.transition(new WildernessRestoreState(wildernessX, wildernessY));
       return;
     }
 
@@ -476,13 +487,15 @@ export class PlayingState implements State {
 
   /**
    * Check if player stepped on a store entrance and show message.
+   * In wilderness, pos is already world coordinates.
+   * In dungeon/town, pos is screen coordinates (same thing since no scroll).
    */
   private checkStoreEntrance(fsm: GameFSM, pos: { x: number; y: number }): void {
     const storeKey = fsm.storeManager.getStoreKeyAt(pos);
     if (storeKey) {
-      const store = fsm.storeManager.getStore(storeKey);
-      if (store) {
-        fsm.addMessage(`You are standing at the entrance to ${store.definition.name}. (Enter to shop)`, 'info');
+      const storeInstance = fsm.storeManager.getStore(storeKey);
+      if (storeInstance) {
+        fsm.addMessage(`You are standing at the entrance to ${storeInstance.definition.name}. (Enter to shop)`, 'info');
       }
     }
   }

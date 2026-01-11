@@ -231,21 +231,30 @@ describe('WildernessGenerator', () => {
       expect(startingTown).toBeDefined();
 
       if (startingTown) {
-        // Check if there's a road adjacent to the starting town
+        // Check if there's a road adjacent to the town perimeter
+        // Town is 8x8 blocks, so check around all edges
         let hasRoadConnection = false;
-        const neighbors = [
-          [startingTown.x - 1, startingTown.y],
-          [startingTown.x + 1, startingTown.y],
-          [startingTown.x, startingTown.y - 1],
-          [startingTown.x, startingTown.y + 1],
-        ];
+        const { x, y, xsize, ysize } = startingTown;
 
-        for (const [nx, ny] of neighbors) {
-          if (nx >= 0 && nx < TEST_SIZE && ny >= 0 && ny < TEST_SIZE) {
-            if (result.blocks[ny][nx].info & WILD_INFO_ROAD) {
-              hasRoadConnection = true;
-              break;
-            }
+        // Check all edges of the town
+        for (let i = 0; i < xsize && !hasRoadConnection; i++) {
+          // Top edge (y - 1)
+          if (y > 0 && result.blocks[y - 1][x + i]?.info & WILD_INFO_ROAD) {
+            hasRoadConnection = true;
+          }
+          // Bottom edge (y + ysize)
+          if (y + ysize < TEST_SIZE && result.blocks[y + ysize][x + i]?.info & WILD_INFO_ROAD) {
+            hasRoadConnection = true;
+          }
+        }
+        for (let j = 0; j < ysize && !hasRoadConnection; j++) {
+          // Left edge (x - 1)
+          if (x > 0 && result.blocks[y + j][x - 1]?.info & WILD_INFO_ROAD) {
+            hasRoadConnection = true;
+          }
+          // Right edge (x + xsize)
+          if (x + xsize < TEST_SIZE && result.blocks[y + j][x + xsize]?.info & WILD_INFO_ROAD) {
+            hasRoadConnection = true;
           }
         }
 

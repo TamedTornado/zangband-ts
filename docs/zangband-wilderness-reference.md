@@ -361,63 +361,144 @@ static void create_terrain(void)
 
 ## Town Generation
 
+Towns are stored in a "region" - a separate tile grid that gets overlaid on wilderness.
+The region is allocated with all zeros (C_MAKE wipes memory), so all tiles start as
+FEAT_NONE (0). Only walls, buildings, and floors are explicitly drawn.
+
+**IMPORTANT**: There are TWO town generation modes controlled by the `vanilla_town` birth option:
+- `vanilla_town=TRUE`: Uses `van_town_gen()` (TOWN_OLD) - single rectangular 66x22 town
+  with explicit floor fill (no wilderness inside)
+- `vanilla_town=FALSE` (wilderness mode): Uses `draw_city()` (TOWN_FRACT) - multiple
+  fractal-shaped towns where wilderness may show through between buildings
+
+### Key Data Structures
+
+```c
+// temp_block is 16x16 - one cell per BUILDING SLOT (not per tile!)
+// Each cell represents an 8x8 tile area where a building can be placed
+u16b *temp_block[WILD_BLOCK_SIZE + 1];  // 17x17 for edge handling
+
+// Cell states after find_walls()/fill_town_driver():
+#define CITY_OUTSIDE  0       // Outside city boundary
+#define CITY_WALL     1       // Boundary wall location
+#define CITY_INSIDE   2       // Interior (building slot)
+
+// Building position tracking (filled by fill_town_driver)
+static byte build_x[256];     // X coords of building slots
+static byte build_y[256];     // Y coords of building slots
+static byte build_pop[256];   // Population value for each slot
+static byte build_count;      // Number of building slots
+```
+
+### Town Dimensions
+
+- `pl_ptr->xsize = pl_ptr->ysize = 8` (blocks)
+- Region size = 8 * 16 = 128x128 tiles
+- temp_block = 16x16 cells, each cell = 8x8 tiles
+
 ### Town Creation: `create_city()` (`wild2.c:597-873`)
 
 ```c
 static bool create_city(int x, int y, int town_num)
 {
-    // 1. Calculate population from wilderness values
+    // 1. Calculate population
+    // Starting town (town_num==1) uses fixed pop = 192
     pop = ((wild[y][x].trans.pop_map + wild[y][x].trans.law_map) /
            rand_range(4, 32)) + 128;
+    if (town_num == 1) pop = 64 + 128;  // = 192
 
-    // 2. Generate town name based on population
+    // 2. Generate town name, store seed
     select_town_name(pl_ptr->name, pop);
-
-    // 3. Store seed for reproducible layout
     pl_ptr->seed = randint0(0x10000000);
+    pl_ptr->data = pop;  // Save for draw_city
 
-    // 4. Generate city shape using plasma fractal
-    Rand_value = pl_ptr->seed;  // Set RNG for reproducibility
+    // 3. Generate plasma fractal in temp_block[16][16]
+    Rand_value = pl_ptr->seed;
     clear_temp_block();
-    set_temp_corner_val(WILD_BLOCK_SIZE * 64);
-    set_temp_mid(WILD_BLOCK_SIZE * pop);  // Higher pop = bigger city
+    set_temp_corner_val(WILD_BLOCK_SIZE * 64);   // = 1024
+    set_temp_mid(WILD_BLOCK_SIZE * pop);         // = 16 * pop
     frac_block();
 
-    // 5. Find walls (boundary between inside/outside)
-    find_walls();
+    // 4. Convert plasma values to city shape
+    find_walls();       // Mark CITY_OUTSIDE, CITY_WALL
+    count = fill_town_driver();  // Flood fill interior, count building slots
+    if (count < 7) return FALSE;
+    remove_islands();   // Remove disconnected wall segments
 
-    // 6. Fill town interior, counting building squares
-    count = fill_town_driver();
-    if (count < 7) return FALSE;  // Too small
+    // 5. Find gate positions (N/S/E/W extremes of city shape)
+    // Stored in pl_ptr->gates_x[4], gates_y[4]
 
-    // 7. Remove islands (ensure connectivity)
-    remove_islands();
-
-    // 8. Find 4 gate positions (N, S, E, W extremes)
-    // Gates stored in pl_ptr->gates_x/y[]
-
-    // 9. Select buildings based on pop/magic/law
-    while (count):
-        building = select_building(pop, magic, law, build, build_tot);
-        build[building]++;
-        build_list[build_num++] = building;
-
-    // 10. Allocate and initialize stores
-    C_MAKE(pl_ptr->store, build_num, store_type);
-    for each building:
-        if store: store_init()
-        else if general: general_init()
-        else: build_init()
+    // 6. Select buildings for each slot
+    // Uses build_pop[] (from plasma), magic, law to weight building types
 }
+```
+
+### City Shape Algorithm
+
+**find_walls()** (`wild2.c:477-528`):
+```c
+// 1. Threshold: values < WILD_BLOCK_SIZE * 128 (2048) become CITY_OUTSIDE
+for each cell in temp_block:
+    if (temp_block[j][i] < WILD_BLOCK_SIZE * 128)
+        temp_block[j][i] = CITY_OUTSIDE;
+
+// 2. Mark boundaries: any inside cell adjacent to CITY_OUTSIDE becomes CITY_WALL
+for each cell not CITY_OUTSIDE:
+    if any neighbor is CITY_OUTSIDE or out-of-bounds:
+        temp_block[j][i] = CITY_WALL;
+```
+
+**fill_town_driver()** (`wild2.c:533-545`):
+```c
+// Flood fill from center, marking CITY_INSIDE and recording building positions
+fill_town(WILD_BLOCK_SIZE / 2, WILD_BLOCK_SIZE / 2);  // Start at (8,8)
+
+// Recursive fill_town() marks each cell as CITY_INSIDE,
+// records position in build_x/y, saves plasma value in build_pop
 ```
 
 ### Town Drawing: `draw_city()` (`wild2.c:1146-1259`)
 
-- Uses `pl_ptr->seed` to reproduce same layout
-- Recreates plasma fractal for city shape
-- Draws walls along city boundary
-- Places buildings in random order within city
-- Stores door locations for each building
+```c
+void draw_city(place_type *pl_ptr)
+{
+    // 1. Allocate region (128x128 tiles, all zeros = FEAT_NONE)
+    create_region(pl_ptr, 8 * WILD_BLOCK_SIZE, 8 * WILD_BLOCK_SIZE, REGION_OVER);
+
+    // 2. Regenerate city shape (same seed = same result)
+    Rand_value = pl_ptr->seed;
+    // ... plasma, find_walls, fill_town_driver, remove_islands ...
+
+    // 3. Draw walls at boundaries (NOT filling entire cells!)
+    for each CITY_WALL cell at (i, j):
+        x = i * 8;  y = j * 8;  // Convert to tile coords
+
+        // Draw connecting wall segments (2 tiles wide)
+        if neighbor above is CITY_WALL:
+            generate_fill(x+3, y, x+4, y+4, FEAT_PERM_SOLID);
+        // etc for left, right, down
+
+        // Draw gates at gate positions
+        draw_gates(i, j, pl_ptr);
+
+    // 4. Draw buildings at ALL CITY_INSIDE positions
+    // Every interior cell gets a building, which fills it with floor
+    for each building slot:
+        draw_building(build_x[i], build_y[i], building_type, pl_ptr);
+}
+```
+
+**Floor coverage in fractal towns (TOWN_FRACT)**:
+- C code: Buildings are small wall rectangles (~5x5) with a door
+- C code: `draw_store()` does NOT fill floor around buildings
+- C code: Space between buildings remains FEAT_NONE (transparent)
+- **TypeScript port**: We fill all CITY_INSIDE cells with floor before drawing
+  walls/buildings to prevent wilderness showing through inside town walls
+
+**Floor coverage in vanilla town (TOWN_OLD)**:
+- `van_town_gen()` explicitly fills interior with FEAT_FLOOR (lines 2943-2950)
+- Then builds stores on top
+- No wilderness shows through - entire interior is floor
 
 ### Building Selection: `select_building()` (`wild2.c:315-414`)
 
@@ -555,6 +636,39 @@ static void gen_block(int x, int y)
     add_monsters_block(x, y);
 }
 ```
+
+### Town/Place Overlay: `overlay_place()` (`wild3.c:70-170`)
+
+Town tiles are overlaid on top of wilderness terrain. Transparency is achieved using `FEAT_NONE`:
+
+```c
+#define FEAT_NONE  0x00  // defines.h:1131
+
+static void overlay_place(int x, int y, u16b w_place, blk_ptr block_ptr)
+{
+    // Find block offset within place region
+    x1 = (x - place[w_place].x) * WILD_BLOCK_SIZE;
+    y1 = (y - place[w_place].y) * WILD_BLOCK_SIZE;
+
+    // Copy 16x16 block from the place region
+    for (j = 0; j < WILD_BLOCK_SIZE; j++) {
+        for (i = 0; i < WILD_BLOCK_SIZE; i++) {
+            c_ptr = access_region(x1 + i, y1 + j, pl_ptr->region);
+
+            // Only copy terrain if there is something there.
+            // FEAT_NONE (0) = transparent, wilderness shows through
+            if (c_ptr->feat != FEAT_NONE) {
+                block_ptr[j][i].feat = c_ptr->feat;
+            }
+
+            // Also instantiate fields (doors, buildings, traps, quests)
+            // ...
+        }
+    }
+}
+```
+
+**Key insight**: Town tiles with `feat == 0` (FEAT_NONE) are transparent - the underlying wilderness terrain shows through. This allows plasma-shaped town boundaries where only the interior is filled.
 
 ### Terrain Generation Routines (`wild3.c:931-1200`)
 

@@ -17,6 +17,164 @@ describe('ZangbandTownGenerator', () => {
     });
   });
 
+  // ==========================================================================
+  // NEW TESTS: Define correct behavior per Zangband reference
+  // ==========================================================================
+
+  describe('starting town (per Zangband reference)', () => {
+    const startingTown: WildPlace = {
+      key: 'starting_town',
+      type: 'town',
+      name: 'The Town',
+      x: 32,
+      y: 32,
+      xsize: 3,
+      ysize: 3,
+      seed: 42,
+      data: 200, // high population
+      monstType: 1,
+    };
+
+    it('uses fractal generation like all other towns', () => {
+      // Starting town should NOT have special code path - uses same fractal
+      // generation as other towns, just with required building list
+      const result = generator.generate(startingTown);
+
+      // Should have plasma-shaped boundary, not rectangular sealed box
+      // Count passable tiles on edges - should have exits
+      let passableEdgeTiles = 0;
+      for (let x = 0; x < result.width; x++) {
+        // Top edge
+        if (result.tiles[0]?.[x]?.feat !== 60) passableEdgeTiles++;
+        // Bottom edge
+        if (result.tiles[result.height - 1]?.[x]?.feat !== 60) passableEdgeTiles++;
+      }
+      for (let y = 1; y < result.height - 1; y++) {
+        // Left edge
+        if (result.tiles[y]?.[0]?.feat !== 60) passableEdgeTiles++;
+        // Right edge
+        if (result.tiles[y]?.[result.width - 1]?.feat !== 60) passableEdgeTiles++;
+      }
+
+      // Town should have exits - not all edge tiles should be walls
+      expect(passableEdgeTiles).toBeGreaterThan(0);
+    });
+
+    it('has walkable exits to wilderness (not sealed)', () => {
+      const result = generator.generate(startingTown);
+
+      // Check each edge for at least one passable tile
+      const FEAT_FLOOR = 1;
+      const FEAT_GRASS = 89;
+      const passable = [FEAT_FLOOR, FEAT_GRASS, 0]; // 0 = transparent
+
+      const hasNorthExit = result.tiles[0]?.some(tile =>
+        passable.includes(tile?.feat)
+      );
+      const hasSouthExit = result.tiles[result.height - 1]?.some(tile =>
+        passable.includes(tile?.feat)
+      );
+      const hasWestExit = result.tiles.some(row =>
+        passable.includes(row?.[0]?.feat)
+      );
+      const hasEastExit = result.tiles.some(row =>
+        passable.includes(row?.[result.width - 1]?.feat)
+      );
+
+      // At least some edges should have exits (Zangband has 4 gates)
+      const exitCount = [hasNorthExit, hasSouthExit, hasWestExit, hasEastExit]
+        .filter(Boolean).length;
+      expect(exitCount).toBeGreaterThanOrEqual(1);
+    });
+
+    it('has all required stores for starting town', () => {
+      const result = generator.generate(startingTown);
+
+      // Starting town must have these stores per wild_first_town[]
+      const requiredStores = [
+        'general_store',
+        'home',
+        'temple',
+        'magic_shop',
+      ];
+
+      const storeKeys = result.storePositions.map(s => s.storeKey);
+      for (const required of requiredStores) {
+        expect(storeKeys).toContain(required);
+      }
+    });
+
+    it('has down stairs to dungeon', () => {
+      const result = generator.generate(startingTown);
+
+      expect(result.dungeonEntrance).toBeDefined();
+      const { x, y } = result.dungeonEntrance;
+
+      // Entrance should be at a floor tile (not wall)
+      expect(result.tiles[y][x].feat).toBe(7); // FEAT_DOWN_STAIRS
+    });
+  });
+
+  describe('fractal city boundary (per Zangband reference)', () => {
+    const cityPlace: WildPlace = {
+      key: 'test_city',
+      type: 'town',
+      name: 'Test City',
+      x: 32,
+      y: 32,
+      xsize: 3,
+      ysize: 3,
+      seed: 42,
+      data: 180,
+      monstType: 1,
+    };
+
+    it('has walls only at boundary, not filling entire area', () => {
+      const result = generator.generate(cityPlace);
+
+      // Count wall tiles vs total tiles
+      let wallCount = 0;
+      let totalCount = 0;
+
+      for (let y = 0; y < result.height; y++) {
+        for (let x = 0; x < result.width; x++) {
+          totalCount++;
+          if (result.tiles[y][x].feat === 60) { // FEAT_PERM_EXTRA
+            wallCount++;
+          }
+        }
+      }
+
+      // Walls should be a small fraction (boundary only), not majority
+      const wallRatio = wallCount / totalCount;
+      expect(wallRatio).toBeLessThan(0.5); // Less than 50% walls
+    });
+
+    it('has transparent tiles outside city shape', () => {
+      const result = generator.generate(cityPlace);
+
+      // Town should have some "transparent" tiles (feat=0 or special value)
+      // that let wilderness show through when overlaid
+      let hasTransparent = false;
+
+      for (let y = 0; y < result.height && !hasTransparent; y++) {
+        for (let x = 0; x < result.width && !hasTransparent; x++) {
+          // Transparent = feat 0 or grass (89) at edges
+          if (result.tiles[y][x].feat === 0) {
+            hasTransparent = true;
+          }
+        }
+      }
+
+      // If no feat=0, check that edges aren't all walls
+      if (!hasTransparent) {
+        // At minimum, not all edge tiles should be walls
+        const edgeWalls = result.tiles[0].filter(t => t.feat === 60).length;
+        expect(edgeWalls).toBeLessThan(result.width);
+      }
+    });
+  });
+
   describe('generateVanillaTown', () => {
     it('should generate a town with floor tiles', () => {
       const place: WildPlace = {
@@ -131,6 +289,9 @@ describe('ZangbandTownGenerator', () => {
   });
 
   describe('generateFractalCity', () => {
+    // Per Zangband: all fractal cities are 8x8 blocks = 128x128 tiles
+    const TOWN_SIZE = 8 * WILD_BLOCK_SIZE; // 128
+
     it('should generate a fractal city with varied layout', () => {
       const place: WildPlace = {
         key: 'test_city',
@@ -138,8 +299,8 @@ describe('ZangbandTownGenerator', () => {
         name: 'Test City',
         x: 32,
         y: 32,
-        xsize: 2,
-        ysize: 2,
+        xsize: 8, // Zangband always uses 8x8
+        ysize: 8,
         seed: 42,
         data: 200, // high population
         monstType: 0,
@@ -149,8 +310,8 @@ describe('ZangbandTownGenerator', () => {
 
       expect(result).toBeDefined();
       expect(result.tiles).toBeDefined();
-      expect(result.width).toBe(place.xsize * WILD_BLOCK_SIZE);
-      expect(result.height).toBe(place.ysize * WILD_BLOCK_SIZE);
+      expect(result.width).toBe(TOWN_SIZE);
+      expect(result.height).toBe(TOWN_SIZE);
     });
 
     it('should have buildings placed', () => {
@@ -160,8 +321,8 @@ describe('ZangbandTownGenerator', () => {
         name: 'Test City',
         x: 32,
         y: 32,
-        xsize: 2,
-        ysize: 2,
+        xsize: 8,
+        ysize: 8,
         seed: 42,
         data: 200,
         monstType: 0,
@@ -190,8 +351,8 @@ describe('ZangbandTownGenerator', () => {
         name: 'Test City',
         x: 32,
         y: 32,
-        xsize: 2,
-        ysize: 2,
+        xsize: 8,
+        ysize: 8,
         seed: 42,
         data: 200,
         monstType: 0,
@@ -248,7 +409,9 @@ describe('ZangbandTownGenerator', () => {
   });
 
   describe('getTownType', () => {
-    it('should return TOWN_OLD for starting town', () => {
+    it('should return TOWN_FRACT for starting town (all towns use fractal)', () => {
+      // Per Zangband reference: ALL towns use fractal city generation
+      // Starting town just has specific required buildings (DATA, not special code)
       const place: WildPlace = {
         key: 'starting_town',
         type: 'town',
@@ -263,7 +426,7 @@ describe('ZangbandTownGenerator', () => {
       };
 
       const townType = generator.getTownType(place);
-      expect(townType).toBe(TownType.TOWN_OLD);
+      expect(townType).toBe(TownType.TOWN_FRACT);
     });
 
     it('should return TOWN_FRACT for other towns', () => {
@@ -293,10 +456,10 @@ describe('ZangbandTownGenerator', () => {
         name: 'Starting Town',
         x: 32,
         y: 32,
-        xsize: 4,
-        ysize: 3,
+        xsize: 8, // Zangband always uses 8x8
+        ysize: 8,
         seed: 42,
-        data: 128,
+        data: 192, // Starting town pop = 64 + 128 per Zangband
         monstType: 0,
       };
 
@@ -347,6 +510,32 @@ describe('ZangbandTownGenerator', () => {
       for (const storePos of result.storePositions) {
         expect(storePos.storeKey).toBeDefined();
         expect(storePos.storeKey.length).toBeGreaterThan(0);
+      }
+    });
+
+    it('should use store terrain types (numbered characters) for store doors', () => {
+      const place: WildPlace = {
+        key: 'starting_town',
+        type: 'town',
+        name: 'Starting Town',
+        x: 32,
+        y: 32,
+        xsize: 8,
+        ysize: 8,
+        seed: 42,
+        data: 192,
+        monstType: 0,
+      };
+
+      const result = generator.generate(place);
+
+      // Store terrain indices: 140-147 for the 8 store types
+      const storeTerrainIndices = new Set([140, 141, 142, 143, 144, 145, 146, 147]);
+
+      // Each store position should have a store terrain type (not just floor)
+      for (const storePos of result.storePositions) {
+        const tile = result.tiles[storePos.y][storePos.x];
+        expect(storeTerrainIndices.has(tile.feat)).toBe(true);
       }
     });
   });

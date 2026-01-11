@@ -401,16 +401,18 @@ export class WildernessGenerator {
     }
 
     // Create starting town
+    // Per Zangband: all fractal cities are 8x8 blocks (128x128 tiles)
+    // Starting town uses pop = 192 (64 + 128)
     this.addPlace({
       key: 'starting_town',
       type: 'town',
       name: 'The Town',
       x: bestX,
       y: bestY,
-      xsize: 3,
-      ysize: 2,
+      xsize: 8,
+      ysize: 8,
       seed: Math.floor(this.rng.getUniform() * 1000000),
-      data: 200, // High population
+      data: 192, // Starting town pop = 64 + 128 per Zangband
       monstType: 1, // Villagers
     });
 
@@ -460,16 +462,20 @@ export class WildernessGenerator {
       const key = `${type}_${placed + 1}`;
       const name = type === 'town' ? `Town ${placed + 2}` : `Dungeon ${placed + 1}`;
 
+      // Per Zangband: all fractal cities are 8x8 blocks
+      // Population affects city shape (higher = larger area within 8x8)
+      const pop = 100 + Math.floor(this.rng.getUniform() * 128);
+
       this.addPlace({
         key,
         type,
         name,
         x,
         y,
-        xsize: type === 'town' ? 2 + Math.floor(this.rng.getUniform() * 2) : 1,
-        ysize: type === 'town' ? 2 + Math.floor(this.rng.getUniform() * 1) : 1,
+        xsize: type === 'town' ? 8 : 1,
+        ysize: type === 'town' ? 8 : 1,
         seed: Math.floor(this.rng.getUniform() * 1000000),
-        data: type === 'town' ? 100 + Math.floor(this.rng.getUniform() * 100) : 0,
+        data: type === 'town' ? pop : 0,
         monstType: type === 'town' ? 1 + Math.floor(this.rng.getUniform() * 5) : 0,
       });
 

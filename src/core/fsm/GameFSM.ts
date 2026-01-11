@@ -11,7 +11,6 @@ import type { GameAction } from './Actions';
 import type { GameMessage } from './GameData';
 import { Player } from '../entities/Player';
 import { generateLevel } from '../world/Level';
-import { restoreWildernessLevel } from '../systems/wilderness';
 import { FOVSystem } from '../systems/FOV';
 import { ItemGeneration } from '../systems/ItemGeneration';
 import { MonsterSpawner } from '../systems/MonsterSpawner';
@@ -176,11 +175,7 @@ export class GameFSM {
     // Give starting gold
     player.addGold(200);
 
-    // Generate town level (depth 0)
-    this.goToLevel(0);
-
-    this.addMessage('Welcome to Zangband!', 'info');
-    this.addMessage('You are standing in the town.', 'info');
+    // Note: Wilderness generation is handled by WildernessInitState
   }
 
   /** Generate a new dungeon level and update store */
@@ -207,37 +202,6 @@ export class GameFSM {
       storeEntrances: data.storeEntrances ?? [],
       isTown: data.isTown ?? false,
     });
-  }
-
-  /** Return to wilderness at specified position */
-  goToWilderness(wildernessX: number, wildernessY: number): void {
-    const store = getGameStore();
-    const player = store.player!;
-    const wildernessMap = store.wildernessMap;
-
-    if (!wildernessMap) {
-      this.addMessage('No wilderness map available!', 'danger');
-      return;
-    }
-
-    const data = restoreWildernessLevel(player, wildernessMap, wildernessX, wildernessY);
-
-    // Compute initial FOV
-    this.fovSystem.computeAndMark(data.level, player.position, VIEW_RADIUS);
-
-    store.setLevelData({
-      level: data.level,
-      scheduler: data.scheduler,
-      depth: 0,
-      upStairs: data.upStairs,
-      downStairs: data.downStairs,
-      storeEntrances: [],
-      isTown: false,
-      isWilderness: true,
-    });
-
-    // Store wilderness map for future use
-    store.setWildernessMap(data.wildernessMap);
   }
 
   /** Get monster name from definition */

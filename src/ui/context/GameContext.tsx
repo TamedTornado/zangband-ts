@@ -321,6 +321,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
     enterCurrentStore: () => {
       // Check if player is on a store entrance
+      // In wilderness, player.position is world coordinates
+      // In dungeon/town, player.position is screen coordinates (same thing)
       const store = useGameStore.getState();
       const playerPos = store.player?.position;
       if (!playerPos) return;

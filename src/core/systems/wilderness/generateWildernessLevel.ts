@@ -8,9 +8,10 @@
 import { RNG } from 'rot-js';
 import { WildernessLevel } from '@/core/world/WildernessLevel';
 import { WildernessGenerator } from './WildernessGenerator';
+import { ZangbandTownGenerator } from './TownGen';
 import { Scheduler } from '@/core/systems/Scheduler';
 import type { Player } from '@/core/entities/Player';
-import type { GeneratedLevelData } from '@/core/world/Level';
+import type { GeneratedLevelData, StoreEntrance } from '@/core/world/Level';
 import type { Position } from '@/core/types';
 import type { WildernessMap } from './WildernessGenerator';
 import type { WildGenData, WildPlace } from '@/core/data/WildernessTypes';
@@ -48,25 +49,50 @@ export function generateWildernessLevel(
   // Create the wilderness level
   const wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG);
 
-  // Get starting position (center of starting town in tile coordinates)
-  const startBlock = wildernessMap.getStartingPosition();
-  const startTileX = startBlock.x * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
-  const startTileY = startBlock.y * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
+  // Collect store entrances from all towns
+  const storeEntrances: StoreEntrance[] = [];
+  const townGenerator = new ZangbandTownGenerator(RNG);
 
-  // Initialize the level at starting position
-  wildernessLevel.initializeAt(startTileX, startTileY);
+  // Track starting position for player placement
+  let startTileX: number | undefined;
+  let startTileY: number | undefined;
 
-  // Get player's screen position
-  const screenPos = wildernessLevel.getPlayerScreenPosition();
-  if (screenPos) {
-    player.position = { x: screenPos.x, y: screenPos.y };
-  } else {
-    // Fallback to center of viewport
-    player.position = { x: Math.floor(wildernessLevel.width / 2), y: Math.floor(wildernessLevel.height / 2) };
+  // Generate all towns and collect their store entrances
+  for (const place of wildernessMap.places) {
+    if (place.type === 'town') {
+      const townData = townGenerator.generate(place);
+
+      // Convert town's store positions to wilderness tile coordinates
+      for (const store of townData.storePositions) {
+        const worldX = place.x * WILD_BLOCK_SIZE + store.x;
+        const worldY = place.y * WILD_BLOCK_SIZE + store.y;
+        storeEntrances.push({
+          storeKey: store.storeKey,
+          position: { x: worldX, y: worldY },
+        });
+      }
+
+      // If this is the starting town, get player start position
+      if (place.key === 'starting_town') {
+        startTileX = place.x * WILD_BLOCK_SIZE + townData.playerStart.x;
+        startTileY = place.y * WILD_BLOCK_SIZE + townData.playerStart.y;
+      }
+    }
   }
 
-  // Set player on level
+  if (startTileX === undefined || startTileY === undefined) {
+    // Fallback: center of wilderness
+    const startBlock = wildernessMap.getStartingPosition();
+    startTileX = startBlock.x * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
+    startTileY = startBlock.y * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
+  }
+
+  // Set player on level BEFORE initializeAt so it can set player.position
   wildernessLevel.player = player;
+
+  // Initialize the level at starting position
+  // This sets player.position to world coordinates (startTileX, startTileY)
+  wildernessLevel.initializeAt(startTileX, startTileY);
 
   // Create scheduler with player
   const scheduler = new Scheduler();
@@ -91,6 +117,7 @@ export function generateWildernessLevel(
     scheduler,
     upStairs: [], // Wilderness has no up stairs
     downStairs: dungeonEntrances.map((e) => e.position), // Dungeon entrances are "down stairs"
+    storeEntrances,
     isWilderness: true,
     wildernessMap,
     dungeonEntrances,
@@ -111,23 +138,22 @@ export function restoreWildernessLevel(
   const genData = wInfoData as WildGenData[];
   const wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG);
 
-  // Initialize at the saved position
-  wildernessLevel.initializeAt(wildernessX, wildernessY);
-
-  // Get player's screen position
-  const screenPos = wildernessLevel.getPlayerScreenPosition();
-  if (screenPos) {
-    player.position = { x: screenPos.x, y: screenPos.y };
-  }
-
-  // Set player on level
+  // Set player on level BEFORE initializeAt so it can set player.position
   wildernessLevel.player = player;
+
+  // Initialize at the saved position
+  // This sets player.position to world coordinates (wildernessX, wildernessY)
+  wildernessLevel.initializeAt(wildernessX, wildernessY);
 
   // Create scheduler with player
   const scheduler = new Scheduler();
   scheduler.add(player);
 
-  // Find dungeon entrances
+  // Collect store entrances from all towns
+  const storeEntrances: StoreEntrance[] = [];
+  const townGenerator = new ZangbandTownGenerator(RNG);
+
+  // Find dungeon entrances and collect stores
   const dungeonEntrances: Array<{ place: WildPlace; position: Position }> = [];
   for (const place of wildernessMap.places) {
     if (place.type === 'dungeon') {
@@ -137,6 +163,16 @@ export function restoreWildernessLevel(
         place,
         position: { x: entranceX, y: entranceY },
       });
+    } else if (place.type === 'town') {
+      const townData = townGenerator.generate(place);
+      for (const store of townData.storePositions) {
+        const worldX = place.x * WILD_BLOCK_SIZE + store.x;
+        const worldY = place.y * WILD_BLOCK_SIZE + store.y;
+        storeEntrances.push({
+          storeKey: store.storeKey,
+          position: { x: worldX, y: worldY },
+        });
+      }
     }
   }
 
@@ -145,6 +181,7 @@ export function restoreWildernessLevel(
     scheduler,
     upStairs: [],
     downStairs: dungeonEntrances.map((e) => e.position),
+    storeEntrances,
     isWilderness: true,
     wildernessMap,
     dungeonEntrances,

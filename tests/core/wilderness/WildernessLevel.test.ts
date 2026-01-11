@@ -153,6 +153,118 @@ describe('WildernessLevel', () => {
   });
 });
 
+describe('world coordinate system', () => {
+  let wildernessLevel: WildernessLevel;
+  let genData: WildGenData[];
+
+  beforeEach(() => {
+    RNG.setSeed(12345);
+    genData = wInfoData as WildGenData[];
+    const generator = new WildernessGenerator(RNG, genData, 64);
+    const wildernessMap = generator.generate();
+    wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG);
+  });
+
+  describe('player.position uses world coordinates', () => {
+    it('player.position equals world position after initialization', () => {
+      const worldX = 32 * WILD_BLOCK_SIZE + 8;
+      const worldY = 32 * WILD_BLOCK_SIZE + 8;
+
+      // Create a mock player
+      const mockPlayer = {
+        id: 'player',
+        position: { x: 0, y: 0 },
+        isDead: false,
+      } as any;
+
+      wildernessLevel.player = mockPlayer;
+      wildernessLevel.initializeAt(worldX, worldY);
+
+      // Player position should be world coordinates, not screen
+      expect(mockPlayer.position.x).toBe(worldX);
+      expect(mockPlayer.position.y).toBe(worldY);
+    });
+
+    it('getPlayerScreenPosition converts world to screen', () => {
+      const worldX = 32 * WILD_BLOCK_SIZE + 8;
+      const worldY = 32 * WILD_BLOCK_SIZE + 8;
+
+      const mockPlayer = {
+        id: 'player',
+        position: { x: worldX, y: worldY },
+        isDead: false,
+      } as any;
+
+      wildernessLevel.player = mockPlayer;
+      wildernessLevel.initializeAt(worldX, worldY);
+
+      const screenPos = wildernessLevel.getPlayerScreenPosition();
+      expect(screenPos).not.toBeNull();
+      // Screen position should be within viewport bounds
+      expect(screenPos!.x).toBeGreaterThanOrEqual(0);
+      expect(screenPos!.x).toBeLessThan(WILD_VIEW * WILD_BLOCK_SIZE);
+      expect(screenPos!.y).toBeGreaterThanOrEqual(0);
+      expect(screenPos!.y).toBeLessThan(WILD_VIEW * WILD_BLOCK_SIZE);
+    });
+  });
+
+  describe('tile access uses world coordinates', () => {
+    beforeEach(() => {
+      wildernessLevel.initializeAt(32 * WILD_BLOCK_SIZE + 8, 32 * WILD_BLOCK_SIZE + 8);
+    });
+
+    it('getTileWorld returns tile at world position', () => {
+      const worldX = 32 * WILD_BLOCK_SIZE + 8;
+      const worldY = 32 * WILD_BLOCK_SIZE + 8;
+
+      const tile = wildernessLevel.getTileWorld({ x: worldX, y: worldY });
+      expect(tile).toBeDefined();
+      expect(tile?.terrain).toBeDefined();
+    });
+
+    it('isWalkableWorld checks world position', () => {
+      const worldX = 32 * WILD_BLOCK_SIZE + 8;
+      const worldY = 32 * WILD_BLOCK_SIZE + 8;
+
+      // Should return a boolean (tile exists and is walkable or not)
+      const result = wildernessLevel.isWalkableWorld({ x: worldX, y: worldY });
+      expect(typeof result).toBe('boolean');
+    });
+
+    it('isInBoundsWorld checks world position against wilderness size', () => {
+      const worldX = 32 * WILD_BLOCK_SIZE + 8;
+      const worldY = 32 * WILD_BLOCK_SIZE + 8;
+
+      expect(wildernessLevel.isInBoundsWorld({ x: worldX, y: worldY })).toBe(true);
+      expect(wildernessLevel.isInBoundsWorld({ x: -1, y: 0 })).toBe(false);
+      expect(wildernessLevel.isInBoundsWorld({ x: 64 * WILD_BLOCK_SIZE + 1, y: 0 })).toBe(false);
+    });
+  });
+
+  describe('movement updates world position', () => {
+    it('movePlayer updates player.position in world coords and returns viewport shift', () => {
+      const worldX = 32 * WILD_BLOCK_SIZE + 8;
+      const worldY = 32 * WILD_BLOCK_SIZE + 8;
+
+      const mockPlayer = {
+        id: 'player',
+        position: { x: worldX, y: worldY },
+        isDead: false,
+      } as any;
+
+      wildernessLevel.player = mockPlayer;
+      wildernessLevel.initializeAt(worldX, worldY);
+
+      // Move player one tile east
+      const shifted = wildernessLevel.movePlayer(worldX + 1, worldY);
+
+      expect(mockPlayer.position.x).toBe(worldX + 1);
+      expect(mockPlayer.position.y).toBe(worldY);
+      expect(typeof shifted).toBe('boolean');
+    });
+  });
+});
+
 describe('isWildernessLevel type guard', () => {
   it('returns true for WildernessLevel', () => {
     RNG.setSeed(12345);

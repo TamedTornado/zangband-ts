@@ -65,13 +65,27 @@ export interface GeneratedTownData {
 /**
  * Feature constants (from terrain.json indices)
  */
+const FEAT_NONE = 0; // Transparent - wilderness shows through (per wild3.c:107)
 const FEAT_FLOOR = 1;
-const FEAT_GRASS = 89;
 const FEAT_PERM_EXTRA = 60; // permanent wall
 const FEAT_DOWN_STAIRS = 7;
 
 /**
- * Store types for vanilla town
+ * Store entrance terrain indices (from terrain.json)
+ */
+const STORE_TERRAIN: Record<string, number> = {
+  general_store: 140,
+  armory: 141,
+  weapon_smith: 142,
+  temple: 143,
+  alchemy_shop: 144,
+  magic_shop: 145,
+  black_market: 146,
+  home: 147,
+};
+
+/**
+ * Store types for towns (in order of preference)
  */
 const STORE_TYPES = [
   'general_store',
@@ -83,6 +97,19 @@ const STORE_TYPES = [
   'black_market',
   'home',
   'library',
+];
+
+/**
+ * Required stores for starting town per wild_first_town[] in Zangband reference.
+ * These must be placed in the starting town.
+ */
+const STARTING_TOWN_STORES = [
+  'general_store',
+  'home',
+  'armory',       // BUILD_WARHALL0
+  'temple',
+  'magic_shop',
+  'black_market',
 ];
 
 /**
@@ -120,18 +147,16 @@ export class ZangbandTownGenerator {
 
   /**
    * Determine the town type for a place.
+   *
+   * Per Zangband reference: ALL towns use fractal city generation.
+   * Starting town just has specific required buildings (DATA, not special code).
    */
   getTownType(place: WildPlace): TownType {
     if (place.type === 'dungeon') {
       return TownType.TOWN_DUNGEON;
     }
 
-    // Starting town uses vanilla layout
-    if (place.key === 'starting_town') {
-      return TownType.TOWN_OLD;
-    }
-
-    // Other towns use fractal city
+    // All towns use fractal city generation per Zangband reference
     return TownType.TOWN_FRACT;
   }
 
@@ -282,9 +307,10 @@ export class ZangbandTownGenerator {
         break;
     }
 
-    // Place door (floor tile at entrance)
+    // Place door (store terrain at entrance)
+    const storeFeat = STORE_TERRAIN[storeKey] ?? FEAT_FLOOR;
     if (doorY >= 0 && doorY < tiles.length && doorX >= 0 && doorX < tiles[0].length) {
-      tiles[doorY][doorX] = { feat: FEAT_FLOOR, info: 0 };
+      tiles[doorY][doorX] = { feat: storeFeat, info: 0 };
     }
 
     return { storeKey, x: doorX, y: doorY };
@@ -332,96 +358,223 @@ export class ZangbandTownGenerator {
    *
    * Port of wild2.c:draw_city()
    *
-   * Uses plasma fractal to determine building placement.
+   * temp_block is 16x16 BUILDING SLOTS (not tiles!)
+   * Each slot represents an 8x8 tile area.
+   * Town is always 8x8 blocks = 128x128 tiles (per Zangband).
    */
   generateFractalCity(place: WildPlace): GeneratedTownData {
-    const width = place.xsize * WILD_BLOCK_SIZE;
-    const height = place.ysize * WILD_BLOCK_SIZE;
+    // Town is always 8x8 blocks = 128x128 tiles
+    const TOWN_BLOCKS = 8;
+    const width = TOWN_BLOCKS * WILD_BLOCK_SIZE;
+    const height = TOWN_BLOCKS * WILD_BLOCK_SIZE;
 
-    // Initialize tiles with grass
+    // Initialize tiles with FEAT_NONE (transparent - wilderness shows through)
     const tiles: TownTile[][] = [];
     for (let y = 0; y < height; y++) {
       tiles[y] = [];
       for (let x = 0; x < width; x++) {
-        tiles[y][x] = { feat: FEAT_GRASS, info: 0 };
+        tiles[y][x] = { feat: FEAT_NONE, info: 0 };
       }
     }
 
     // Seed RNG with place seed
     this.rng.setSeed(place.seed);
 
-    // Generate plasma fractal for city layout
+    // Generate plasma fractal in temp_block[16][16]
+    // Each cell is a building SLOT (8x8 tiles)
     this.plasma.clear();
-    this.plasma.setCorners(WILD_BLOCK_SIZE * 64);
-    this.plasma.setCenter(WILD_BLOCK_SIZE * place.data); // Use population for density
-
+    this.plasma.setCorners(WILD_BLOCK_SIZE * 64); // = 1024
+    this.plasma.setCenter(WILD_BLOCK_SIZE * place.data); // = 16 * pop
     this.plasma.generate();
 
-    // Determine building positions using a grid approach
-    // Each building takes 8x8 pixels, so we can fit (width/8) x (height/8) grid cells
-    const gridW = Math.floor(width / 8);
-    const gridH = Math.floor(height / 8);
+    // Cell states (like Zangband's CITY_OUTSIDE, CITY_WALL, CITY_INSIDE)
+    const CITY_OUTSIDE = 0;
+    const CITY_WALL = 1;
+    const CITY_INSIDE = 2;
 
-    const buildPositions: { x: number; y: number }[] = [];
+    // Step 1: Convert plasma to city shape (find_walls)
+    // Threshold: values < WILD_BLOCK_SIZE * 128 (2048) become CITY_OUTSIDE
+    const tempBlock: number[][] = [];
+    const threshold = WILD_BLOCK_SIZE * 128;
 
-    // Use plasma to decide which grid cells get buildings
-    for (let gy = 1; gy < gridH - 1; gy++) {
-      for (let gx = 1; gx < gridW - 1; gx++) {
-        // Map grid position to plasma coordinates
-        const px = Math.min(gx, WILD_BLOCK_SIZE - 1);
-        const py = Math.min(gy, WILD_BLOCK_SIZE - 1);
-        const element = this.plasma.getValue(px, py);
+    for (let j = 0; j < WILD_BLOCK_SIZE; j++) {
+      tempBlock[j] = [];
+      for (let i = 0; i < WILD_BLOCK_SIZE; i++) {
+        const val = this.plasma.getValue(i, j);
+        tempBlock[j][i] = val < threshold ? CITY_OUTSIDE : val;
+      }
+    }
 
-        // Use both high plasma values and random chance
-        if (element > WILD_BLOCK_SIZE * 100 || this.randint0(4) === 0) {
-          buildPositions.push({ x: gx, y: gy });
+    // Step 2: Mark walls (any inside cell adjacent to outside or edge)
+    for (let j = 0; j < WILD_BLOCK_SIZE; j++) {
+      for (let i = 0; i < WILD_BLOCK_SIZE; i++) {
+        if (tempBlock[j][i] !== CITY_OUTSIDE) {
+          // Check all 8 neighbors
+          let isWall = false;
+          for (let dj = -1; dj <= 1 && !isWall; dj++) {
+            for (let di = -1; di <= 1 && !isWall; di++) {
+              const ni = i + di;
+              const nj = j + dj;
+              if (ni < 0 || ni >= WILD_BLOCK_SIZE || nj < 0 || nj >= WILD_BLOCK_SIZE) {
+                isWall = true; // Edge = wall
+              } else if (tempBlock[nj][ni] === CITY_OUTSIDE) {
+                isWall = true;
+              }
+            }
+          }
+          if (isWall) {
+            tempBlock[j][i] = CITY_WALL;
+          }
         }
       }
     }
 
-    // Ensure at least one building if we got none
-    if (buildPositions.length === 0) {
-      const cx = Math.floor(gridW / 2);
-      const cy = Math.floor(gridH / 2);
-      buildPositions.push({ x: cx, y: cy });
+    // Step 3: Flood fill from center to find building positions
+    const buildPositions: { x: number; y: number; pop: number }[] = [];
+    const centerI = Math.floor(WILD_BLOCK_SIZE / 2);
+    const centerJ = Math.floor(WILD_BLOCK_SIZE / 2);
+
+    // Check center is inside city
+    if (tempBlock[centerJ][centerI] !== CITY_OUTSIDE && tempBlock[centerJ][centerI] !== CITY_WALL) {
+      const stack: { i: number; j: number }[] = [{ i: centerI, j: centerJ }];
+
+      while (stack.length > 0) {
+        const { i, j } = stack.pop()!;
+        if (i < 0 || i >= WILD_BLOCK_SIZE || j < 0 || j >= WILD_BLOCK_SIZE) continue;
+        if (tempBlock[j][i] === CITY_OUTSIDE || tempBlock[j][i] === CITY_WALL || tempBlock[j][i] === CITY_INSIDE) continue;
+
+        // Save population value before marking
+        const popVal = Math.floor(tempBlock[j][i] / WILD_BLOCK_SIZE);
+        tempBlock[j][i] = CITY_INSIDE;
+        buildPositions.push({ x: i, y: j, pop: popVal });
+
+        // Add all 8 neighbors
+        for (let dj = -1; dj <= 1; dj++) {
+          for (let di = -1; di <= 1; di++) {
+            if (di !== 0 || dj !== 0) {
+              stack.push({ i: i + di, j: j + dj });
+            }
+          }
+        }
+      }
     }
 
-    // Draw buildings at selected positions
+    // Step 4: Remove islands (wall cells not adjacent to CITY_INSIDE)
+    for (let j = 0; j < WILD_BLOCK_SIZE; j++) {
+      for (let i = 0; i < WILD_BLOCK_SIZE; i++) {
+        if (tempBlock[j][i] === CITY_WALL) {
+          let hasInside = false;
+          for (let dj = -1; dj <= 1 && !hasInside; dj++) {
+            for (let di = -1; di <= 1 && !hasInside; di++) {
+              const ni = i + di;
+              const nj = j + dj;
+              if (ni >= 0 && ni < WILD_BLOCK_SIZE && nj >= 0 && nj < WILD_BLOCK_SIZE) {
+                if (tempBlock[nj][ni] === CITY_INSIDE) hasInside = true;
+              }
+            }
+          }
+          if (!hasInside) tempBlock[j][i] = CITY_OUTSIDE;
+        }
+      }
+    }
+
+    // Step 5: Fill interior with floor (all CITY_INSIDE cells)
+    // This prevents wilderness from showing through inside the town walls.
+    for (let j = 0; j < WILD_BLOCK_SIZE; j++) {
+      for (let i = 0; i < WILD_BLOCK_SIZE; i++) {
+        if (tempBlock[j][i] === CITY_INSIDE) {
+          const x = i * 8;
+          const y = j * 8;
+          this.fillRect(tiles, x, y, x + 7, y + 7, FEAT_FLOOR);
+        }
+      }
+    }
+
+    // Step 6: Draw walls as connecting LINES (not filling entire cells)
+    for (let j = 0; j < WILD_BLOCK_SIZE; j++) {
+      for (let i = 0; i < WILD_BLOCK_SIZE; i++) {
+        if (tempBlock[j][i] === CITY_WALL) {
+          const x = i * 8;
+          const y = j * 8;
+
+          // Wall goes up (neighbor above is CITY_WALL)
+          if (j > 0 && tempBlock[j - 1][i] === CITY_WALL) {
+            this.fillRect(tiles, x + 3, y, x + 4, y + 4, FEAT_PERM_EXTRA);
+          }
+          // Wall goes left
+          if (i > 0 && tempBlock[j][i - 1] === CITY_WALL) {
+            this.fillRect(tiles, x, y + 3, x + 4, y + 4, FEAT_PERM_EXTRA);
+          }
+          // Wall goes right
+          if (i < WILD_BLOCK_SIZE - 1 && tempBlock[j][i + 1] === CITY_WALL) {
+            this.fillRect(tiles, x + 3, y + 3, x + 7, y + 4, FEAT_PERM_EXTRA);
+          }
+          // Wall goes down
+          if (j < WILD_BLOCK_SIZE - 1 && tempBlock[j + 1][i] === CITY_WALL) {
+            this.fillRect(tiles, x + 3, y + 3, x + 4, y + 7, FEAT_PERM_EXTRA);
+          }
+        }
+      }
+    }
+
+    // Step 7: Find gate positions (extremes of city shape)
+    const gates = this.findGatePositions(tempBlock);
+
+    // Step 8: Draw gates (floor openings at gate positions)
+    for (const gate of gates) {
+      const gx = gate.x * 8 + 4;
+      const gy = gate.y * 8 + 4;
+      // Make a 3x3 floor opening for the gate
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          if (gy + dy >= 0 && gy + dy < height && gx + dx >= 0 && gx + dx < width) {
+            tiles[gy + dy][gx + dx] = { feat: FEAT_FLOOR, info: 0 };
+          }
+        }
+      }
+    }
+
+    // Step 9: Draw buildings and assign stores
+    const storesToPlace = place.key === 'starting_town'
+      ? STARTING_TOWN_STORES
+      : STORE_TYPES;
+
     const storePositions: StorePosition[] = [];
     let storeIndex = 0;
+
+    // Shuffle building positions for variety
+    for (let i = buildPositions.length - 1; i > 0; i--) {
+      const j = this.randint0(i + 1);
+      [buildPositions[i], buildPositions[j]] = [buildPositions[j], buildPositions[i]];
+    }
 
     for (const pos of buildPositions) {
       const bx = pos.x * 8;
       const by = pos.y * 8;
 
-      if (bx + 7 < width && by + 7 < height) {
-        // Draw a simple building
-        for (let dy = 1; dy < 6; dy++) {
-          for (let dx = 1; dx < 6; dx++) {
+      // Draw building (5x5 walls centered in 8x8 cell)
+      for (let dy = 1; dy < 6; dy++) {
+        for (let dx = 1; dx < 6; dx++) {
+          if (by + dy < height && bx + dx < width) {
             tiles[by + dy][bx + dx] = { feat: FEAT_PERM_EXTRA, info: 0 };
           }
         }
+      }
 
-        // Add entrance and assign store
-        if (storeIndex < STORE_TYPES.length) {
-          tiles[by + 5][bx + 3] = { feat: FEAT_FLOOR, info: 0 };
+      // Add entrance and assign store
+      if (storeIndex < storesToPlace.length) {
+        const doorX = bx + 3;
+        const doorY = by + 5;
+        const storeKey = storesToPlace[storeIndex];
+        const storeFeat = STORE_TERRAIN[storeKey] ?? FEAT_FLOOR;
+        if (doorY < height && doorX < width) {
+          tiles[doorY][doorX] = { feat: storeFeat, info: 0 };
           storePositions.push({
-            storeKey: STORE_TYPES[storeIndex],
-            x: bx + 3,
-            y: by + 5,
+            storeKey,
+            x: doorX,
+            y: doorY,
           });
           storeIndex++;
-        }
-
-        // Draw floor around building
-        for (let dy = 0; dy < 8; dy++) {
-          for (let dx = 0; dx < 8; dx++) {
-            const tx = bx + dx;
-            const ty = by + dy;
-            if (tiles[ty][tx].feat === FEAT_GRASS) {
-              tiles[ty][tx] = { feat: FEAT_FLOOR, info: 0 };
-            }
-          }
         }
       }
     }
@@ -440,6 +593,51 @@ export class ZangbandTownGenerator {
       dungeonEntrance,
       playerStart,
     };
+  }
+
+  /**
+   * Find gate positions at N/S/E/W extremes of city shape.
+   */
+  private findGatePositions(tempBlock: number[][]): { x: number; y: number }[] {
+    const CITY_WALL = 1;
+    const gates: { x: number; y: number }[] = [];
+
+    let maxI = -1, minI = WILD_BLOCK_SIZE, maxJ = -1, minJ = WILD_BLOCK_SIZE;
+    let rightGate = { x: 0, y: 0 };
+    let leftGate = { x: 0, y: 0 };
+    let bottomGate = { x: 0, y: 0 };
+    let topGate = { x: 0, y: 0 };
+
+    for (let j = 0; j < WILD_BLOCK_SIZE; j++) {
+      for (let i = 0; i < WILD_BLOCK_SIZE; i++) {
+        if (tempBlock[j][i] === CITY_WALL) {
+          if (i > maxI) { maxI = i; rightGate = { x: i, y: j }; }
+          if (i < minI) { minI = i; leftGate = { x: i, y: j }; }
+          if (j > maxJ) { maxJ = j; bottomGate = { x: i, y: j }; }
+          if (j < minJ) { minJ = j; topGate = { x: i, y: j }; }
+        }
+      }
+    }
+
+    if (maxI >= 0) gates.push(rightGate);
+    if (minI < WILD_BLOCK_SIZE) gates.push(leftGate);
+    if (maxJ >= 0) gates.push(bottomGate);
+    if (minJ < WILD_BLOCK_SIZE) gates.push(topGate);
+
+    return gates;
+  }
+
+  /**
+   * Fill a rectangle with a feature.
+   */
+  private fillRect(tiles: TownTile[][], x1: number, y1: number, x2: number, y2: number, feat: number): void {
+    for (let y = y1; y <= y2; y++) {
+      for (let x = x1; x <= x2; x++) {
+        if (y >= 0 && y < tiles.length && x >= 0 && x < tiles[0].length) {
+          tiles[y][x] = { feat, info: 0 };
+        }
+      }
+    }
   }
 
   /**
@@ -477,17 +675,18 @@ export class ZangbandTownGenerator {
 
   /**
    * Generate a dungeon entrance point.
+   * Most tiles are FEAT_NONE (transparent), with a small clearing at center.
    */
   generateDungeonEntrance(place: WildPlace): GeneratedTownData {
     const width = place.xsize * WILD_BLOCK_SIZE;
     const height = place.ysize * WILD_BLOCK_SIZE;
 
-    // Initialize tiles with grass
+    // Initialize tiles with FEAT_NONE (transparent - wilderness shows through)
     const tiles: TownTile[][] = [];
     for (let y = 0; y < height; y++) {
       tiles[y] = [];
       for (let x = 0; x < width; x++) {
-        tiles[y][x] = { feat: FEAT_GRASS, info: 0 };
+        tiles[y][x] = { feat: FEAT_NONE, info: 0 };
       }
     }
 

@@ -4,7 +4,7 @@ import type { GameFSM } from '../../GameFSM';
 import { getGameStore } from '@/core/store/gameStore';
 import { createInitialCreationData } from '@/core/data/characterCreation';
 import { RaceSelectionState } from './RaceSelectionState';
-import { PlayingState } from '../PlayingState';
+import { WildernessInitState } from '../WildernessInitState';
 import { Player } from '@/core/entities/Player';
 
 export class SexSelectionState implements State {
@@ -47,13 +47,11 @@ export class SexSelectionState implements State {
       // Clear character creation data
       store.setCharacterCreation(null);
 
-      // Generate town level
-      fsm.goToLevel(0);
-
-      fsm.addMessage('Welcome back to Zangband!', 'info');
-      fsm.addMessage(`${prev.name} the ${prev.raceKey} ${prev.classKey} enters the town.`, 'info');
-
-      fsm.transition(new PlayingState());
+      // Transition to wilderness with custom messages
+      fsm.transition(new WildernessInitState([
+        'Welcome back to Zangband!',
+        `${prev.name} the ${prev.raceKey} ${prev.classKey} enters the wilderness.`,
+      ]));
       return true;
     }
 

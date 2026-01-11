@@ -4,6 +4,7 @@ import { useGame } from '../context/GameContext';
 import { Camera } from '@/core/systems/Camera';
 import { FOVSystem } from '@/core/systems/FOV';
 import { VIEW_RADIUS } from '@/core/constants';
+import { isWildernessLevel } from '@/core/world/WildernessLevel';
 
 // Map single-character color codes to hex colors
 const COLOR_MAP: Record<string, string> = {
@@ -78,10 +79,18 @@ export function GameViewport() {
     }
 
     const camera = cameraRef.current;
-    camera.follow(player.position, level.width, level.height);
+
+    // For wilderness, player.position is in world coordinates
+    // We need screen coordinates for camera and FOV
+    const isWilderness = isWildernessLevel(level);
+    const playerScreenPos = isWilderness
+      ? level.getPlayerScreenPosition() ?? player.position
+      : player.position;
+
+    camera.follow(playerScreenPos, level.width, level.height);
 
     // Compute visible tiles and mark as explored
-    const visibleTiles = fovSystem.computeAndMark(level, player.position, VIEW_RADIUS);
+    const visibleTiles = fovSystem.computeAndMark(level, playerScreenPos, VIEW_RADIUS);
 
     display.clear();
 
@@ -178,7 +187,7 @@ export function GameViewport() {
     }
 
     // Draw player at screen position (always on top)
-    const playerScreen = camera.worldToScreen(player.position);
+    const playerScreen = camera.worldToScreen(playerScreenPos);
     display.draw(playerScreen.x, playerScreen.y, '@', '#fff', '#000');
 
     // Draw targeting cursor if active
@@ -191,8 +200,8 @@ export function GameViewport() {
         const tile = level.getTile(state.cursor);
         let symbol = tile?.terrain.symbol ?? ' ';
 
-        // Check if player is at cursor
-        if (state.cursor.x === player.position.x && state.cursor.y === player.position.y) {
+        // Check if player is at cursor (use screen coordinates)
+        if (state.cursor.x === playerScreenPos.x && state.cursor.y === playerScreenPos.y) {
           symbol = '@';
         } else {
           // Check for monster

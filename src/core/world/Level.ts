@@ -19,6 +19,9 @@ import { DungeonGenerator } from '../systems/dungeon/DungeonGenerator';
 import { MonsterSpawner } from '../systems/MonsterSpawner';
 import { ItemSpawner } from '../systems/ItemSpawner';
 import { TownGenerator, type TownLayout, type StoreEntrance } from '../systems/town/TownGenerator';
+
+// Re-export StoreEntrance for use by other modules
+export type { StoreEntrance };
 import { DUNGEON_WIDTH, DUNGEON_HEIGHT, BASE_MONSTER_COUNT } from '../constants';
 import townData from '@/data/towns/town.json';
 
