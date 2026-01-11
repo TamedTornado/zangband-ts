@@ -15,7 +15,7 @@ import type { GeneratedLevelData, StoreEntrance } from '@/core/world/Level';
 import type { Position } from '@/core/types';
 import type { WildernessMap } from './WildernessGenerator';
 import type { WildGenData, WildPlace } from '@/core/data/WildernessTypes';
-import { WILD_BLOCK_SIZE } from '@/core/data/WildernessTypes';
+import { WILD_BLOCK_SIZE, MAX_WILD } from '@/core/data/WildernessTypes';
 import type { MonsterDataManager } from '@/core/data/MonsterDataManager';
 import wInfoData from '@/data/wilderness/w_info.json';
 
@@ -45,7 +45,7 @@ export function generateWildernessLevel(
 
   // Generate the wilderness map
   const genData = wInfoData as WildGenData[];
-  const generator = new WildernessGenerator(RNG, genData, 64); // 64x64 blocks
+  const generator = new WildernessGenerator(RNG, genData, MAX_WILD);
   const wildernessMap = generator.generate();
 
   // Create the wilderness level

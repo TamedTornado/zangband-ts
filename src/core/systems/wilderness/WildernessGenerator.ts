@@ -22,6 +22,7 @@ import {
   MIN_DIST_DUNGEON,
   NUM_TOWNS,
   NUM_DUNGEON,
+  MAX_WILD,
   WILD_INFO_WATER,
   WILD_INFO_ROAD,
   WILD_INFO_TRACK,
@@ -101,7 +102,7 @@ export class WildernessGenerator {
   constructor(
     rng: typeof ROT.RNG,
     genData: WildGenData[],
-    size: number = 64
+    size: number = MAX_WILD
   ) {
     this.rng = rng;
     this.size = size;

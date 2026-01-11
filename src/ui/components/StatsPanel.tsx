@@ -2,7 +2,7 @@ import { useGame } from '../context/GameContext';
 
 export function StatsPanel() {
   const { state } = useGame();
-  const { player, turn } = state;
+  const { player, turn, depth } = state;
 
   if (!player) return null;
 
@@ -78,7 +78,7 @@ export function StatsPanel() {
         </div>
         <div className="stat-row">
           <span className="stat-label">Depth</span>
-          <span className="stat-value">Town</span>
+          <span className="stat-value">{depth === 0 ? 'Town' : `${depth * 50}ft`}</span>
         </div>
       </div>
     </div>
