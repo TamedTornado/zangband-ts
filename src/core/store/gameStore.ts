@@ -6,7 +6,7 @@
 
 import { create } from 'zustand';
 import type { Player } from '../entities/Player';
-import type { Level } from '../world/Level';
+import type { ILevel } from '../world/Level';
 import type { Scheduler } from '../systems/Scheduler';
 import type { Coord } from '../systems/dungeon/DungeonTypes';
 import type { GameMessage } from '../fsm/GameData';
@@ -27,7 +27,7 @@ export interface PromptState {
 export interface GameState {
   // Core game data
   player: Player | null;
-  level: Level | null;
+  level: ILevel | null;
   scheduler: Scheduler | null;
   depth: number;
   turn: number;
@@ -129,7 +129,7 @@ export interface GameActions {
   // State setters (for FSM to use)
   setStateName: (name: string) => void;
   setPlayer: (player: Player) => void;
-  setLevel: (level: Level) => void;
+  setLevel: (level: ILevel) => void;
   setScheduler: (scheduler: Scheduler) => void;
   setDepth: (depth: number) => void;
   setTurn: (turn: number) => void;
@@ -150,13 +150,14 @@ export interface GameActions {
 
   // Batch update for level generation
   setLevelData: (data: {
-    level: Level;
+    level: ILevel;
     scheduler: Scheduler;
     depth: number;
     upStairs: Coord[];
     downStairs: Coord[];
     storeEntrances?: StoreEntrance[];
     isTown?: boolean;
+    isWilderness?: boolean;
   }) => void;
 
   // Character creation
@@ -299,6 +300,7 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
     downStairs: data.downStairs,
     storeEntrances: data.storeEntrances ?? [],
     isTown: data.isTown ?? false,
+    isInWilderness: data.isWilderness ?? false,
   }),
 
   setCharacterCreation: (characterCreation) => set({ characterCreation }),

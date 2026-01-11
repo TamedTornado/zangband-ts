@@ -1,10 +1,10 @@
 import { FOV } from 'rot-js';
 import type { Position } from '../types';
-import type { Level } from '../world/Level';
+import type { ILevel } from '../world/Level';
 import type { Monster } from '../entities/Monster';
 
 export class FOVSystem {
-  compute(level: Level, origin: Position, radius: number): Set<string> {
+  compute(level: ILevel, origin: Position, radius: number): Set<string> {
     const visible = new Set<string>();
 
     const fov = new FOV.PreciseShadowcasting((x, y) => {
@@ -20,7 +20,7 @@ export class FOVSystem {
     return visible;
   }
 
-  computeAndMark(level: Level, origin: Position, radius: number): Set<string> {
+  computeAndMark(level: ILevel, origin: Position, radius: number): Set<string> {
     const visible = this.compute(level, origin, radius);
 
     for (const key of visible) {
@@ -35,7 +35,7 @@ export class FOVSystem {
   }
 
   /** Find first visible hostile monster, or null if none */
-  getVisibleMonster(level: Level, origin: Position, radius: number): Monster | null {
+  getVisibleMonster(level: ILevel, origin: Position, radius: number): Monster | null {
     const visible = this.compute(level, origin, radius);
     for (const monster of level.getMonsters()) {
       if (monster.isDead) continue;
@@ -47,7 +47,7 @@ export class FOVSystem {
   }
 
   /** Get all visible monsters (returns monster IDs) */
-  getVisibleMonsterIds(level: Level, origin: Position, radius: number): Set<string> {
+  getVisibleMonsterIds(level: ILevel, origin: Position, radius: number): Set<string> {
     const visible = this.compute(level, origin, radius);
     const monsterIds = new Set<string>();
     for (const monster of level.getMonsters()) {

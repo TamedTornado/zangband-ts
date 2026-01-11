@@ -5,6 +5,12 @@ import terrainData from '../../data/terrain/terrain.json';
 
 const TERRAIN: Record<string, TerrainDef> = terrainData;
 
+// Build index-to-terrain lookup map for feature ID based access
+const TERRAIN_BY_INDEX: Map<number, TerrainDef> = new Map();
+for (const terrain of Object.values(TERRAIN)) {
+  TERRAIN_BY_INDEX.set(terrain.index, terrain);
+}
+
 // Aliases for terrain keys - maps FeatureType names to actual terrain keys
 const TERRAIN_ALIASES: Record<string, string> = {
   // Basic terrain
@@ -42,6 +48,19 @@ function resolveTerrain(key: string): TerrainDef {
 
 export function getTerrain(key: string): TerrainDef {
   return resolveTerrain(key);
+}
+
+/**
+ * Get terrain by its numeric index (Zangband feature ID).
+ * Falls back to open_floor if index not found.
+ */
+export function getTerrainByIndex(index: number): TerrainDef {
+  const terrain = TERRAIN_BY_INDEX.get(index);
+  if (!terrain) {
+    // Fall back to grass-like terrain for unknown wilderness features
+    return TERRAIN_BY_INDEX.get(89) ?? resolveTerrain('open_floor');
+  }
+  return terrain;
 }
 
 /** Remembered monster appearance for detection spells */

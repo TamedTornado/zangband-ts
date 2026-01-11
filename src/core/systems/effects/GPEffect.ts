@@ -9,7 +9,7 @@ import type { RNG } from 'rot-js';
 import type { Actor } from '@/core/entities/Actor';
 import type { Item } from '@/core/entities/Item';
 import type { Monster } from '@/core/entities/Monster';
-import type { Level } from '@/core/world/Level';
+import type { ILevel } from '@/core/world/Level';
 import type { Position, Direction } from '@/core/types';
 import type { MonsterDataManager } from '@/core/data/MonsterDataManager';
 
@@ -68,7 +68,7 @@ export interface GPEffectContext {
   /** The actor using the effect */
   actor: Actor;
   /** Current level for area effects */
-  level: Level;
+  level: ILevel;
   /** RNG for dice rolls */
   rng: typeof RNG;
 

@@ -35,9 +35,13 @@ export interface ILevel {
   readonly depth: number;
   player: Actor | null;
 
+  // Bounds checking
+  isInBounds(pos: Position): boolean;
+
   // Actor queries
   getActorAt(pos: Position): Actor | undefined;
   getMonsterAt(pos: Position): Monster | undefined;
+  getMonsterById(id: string): Monster | undefined;
   getMonsters(): Monster[];
   getMonstersInRadius(center: Position, radius: number): Monster[];
 
@@ -47,9 +51,24 @@ export interface ILevel {
   isTransparent(pos: Position): boolean;
   isOccupied(pos: Position): boolean;
 
+  // Terrain modification
+  setTerrain(pos: Position, terrain: string): void;
+
   // Monster management
   addMonster(monster: Monster): void;
   removeMonster(monster: Monster): void;
+
+  // Item management
+  addItem(item: Item): void;
+  removeItem(item: Item): void;
+  getItemsAt(pos: Position): Item[];
+  getAllItems(): Item[];
+
+  // Trap management
+  getTrapAt(pos: Position): Trap | undefined;
+  getTraps(): Trap[];
+  addTrap(trap: Trap): void;
+  removeTrap(trap: Trap): void;
 }
 
 export class Level implements ILevel {
@@ -303,12 +322,13 @@ export class Level implements ILevel {
 }
 
 export interface GeneratedLevelData {
-  level: Level;
+  level: ILevel;
   scheduler: Scheduler;
   upStairs: Position[];
   downStairs: Position[];
   storeEntrances?: StoreEntrance[];
   isTown?: boolean;
+  isWilderness?: boolean;
 }
 
 /**

@@ -10,7 +10,7 @@
 import type { RNG } from 'rot-js';
 import type { Position } from '@/core/types';
 import type { Actor } from '@/core/entities/Actor';
-import type { Level } from '@/core/world/Level';
+import type { ILevel } from '@/core/world/Level';
 import type { GPEffectDef } from '@/core/systems/effects';
 
 /**
@@ -25,7 +25,7 @@ export interface GPActiveEffectDef {
  * Context passed to active effects during tick/trigger
  */
 export interface GPActiveEffectContext {
-  level: Level;
+  level: ILevel;
   rng: typeof RNG;
 }
 

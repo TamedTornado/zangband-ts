@@ -29,7 +29,7 @@
 import type { RNG } from 'rot-js';
 import type { Monster } from '@/core/entities/Monster';
 import type { Player } from '@/core/entities/Player';
-import type { Level } from '@/core/world/Level';
+import type { ILevel } from '@/core/world/Level';
 import type { GPEffectResult, GPEffectDef, GPEffectContext } from '@/core/systems/effects/GPEffect';
 import type { EffectManager } from '@/core/systems/effects/EffectManager';
 import { getMonsterSpell, type DamageFormula, type MonsterSpellDef } from '@/core/data/MonsterSpellRegistry';
@@ -42,7 +42,7 @@ export interface MonsterSpellContext {
   /** The monster casting the spell */
   monster: Monster;
   /** The dungeon level */
-  level: Level;
+  level: ILevel;
   /** The player being targeted */
   player: Player;
   /** Random number generator */

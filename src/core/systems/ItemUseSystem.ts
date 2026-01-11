@@ -13,7 +13,7 @@
 import { RNG } from 'rot-js';
 import type { Player } from '../entities/Player';
 import type { Item } from '../entities/Item';
-import type { Level } from '../world/Level';
+import type { ILevel } from '../world/Level';
 import type { MonsterDataManager } from '../data/MonsterDataManager';
 import { getEffectManager, type GPEffectContext, type GPEffectDef } from './effects';
 import { calculateDeviceEnergyCost } from './Energy';
@@ -21,7 +21,7 @@ import { ENERGY_PER_TURN } from '../constants';
 
 export interface ItemUseContext {
   player: Player;
-  level: Level;
+  level: ILevel;
   monsterDataManager?: MonsterDataManager;
   targetPosition?: { x: number; y: number };
   // For scrolls that target items, symbols, or directions

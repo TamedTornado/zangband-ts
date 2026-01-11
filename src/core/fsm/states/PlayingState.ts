@@ -21,7 +21,7 @@ import { CharacterState } from './CharacterState';
 import { CastSpellState } from './CastSpellState';
 import { StudySpellState } from './StudySpellState';
 import { ShoppingState } from './ShoppingState';
-import { WildernessState } from './WildernessState';
+import { isWildernessLevel } from '../../world/WildernessLevel';
 import { Direction, movePosition } from '../../types';
 import { RunSystem } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, VIEW_RADIUS, HP_REGEN_RATE } from '../../constants';
@@ -150,8 +150,25 @@ export class PlayingState implements State {
       store.incrementTurn();
       player.position = newPos;
 
+      // Handle wilderness viewport updates
+      if (isWildernessLevel(level)) {
+        const wildPos = level.screenToWilderness(newPos.x, newPos.y);
+        const viewportShifted = level.setPlayerWildernessPosition(wildPos.x, wildPos.y);
+
+        // If viewport shifted, update player's screen position
+        if (viewportShifted) {
+          const newScreenPos = level.getPlayerScreenPosition();
+          if (newScreenPos) {
+            player.position = newScreenPos;
+          }
+        }
+
+        // Update stored wilderness position
+        store.setWildernessPosition(level.wildernessX, level.wildernessY);
+      }
+
       // Check for items (before completing turn so message appears first)
-      const itemsHere = level.getItemsAt(newPos);
+      const itemsHere = level.getItemsAt(player.position);
       if (itemsHere.length === 1) {
         fsm.addMessage(`You see ${fsm.getItemDisplayName(itemsHere[0]!)} here.`, 'info');
       } else if (itemsHere.length > 1) {
@@ -159,7 +176,7 @@ export class PlayingState implements State {
       }
 
       // Check for store entrance in town
-      this.checkStoreEntrance(fsm, newPos);
+      this.checkStoreEntrance(fsm, player.position);
 
       fsm.completeTurn(ENERGY_PER_TURN);
       this.checkPlayerDeath(fsm);
@@ -263,18 +280,38 @@ export class PlayingState implements State {
     const player = store.player!;
     const downStairs = store.downStairs;
     const depth = store.depth;
+    const level = store.level!;
     const pos = player.position;
-    const onDownStairs = downStairs.some(s => s.x === pos.x && s.y === pos.y);
+
+    // Check if standing on down stairs
+    // In wilderness, check terrain; in dungeon, check downStairs array
+    let onDownStairs = false;
+    if (store.isInWilderness) {
+      const tile = level.getTile(pos);
+      onDownStairs = tile?.terrain.key === 'down_staircase';
+    } else {
+      onDownStairs = downStairs.some(s => s.x === pos.x && s.y === pos.y);
+    }
 
     if (!onDownStairs) {
       fsm.addMessage('There are no down stairs here.', 'info');
       return;
     }
 
+    // If in wilderness, save position before entering dungeon
+    if (isWildernessLevel(level)) {
+      store.setWildernessPosition(level.wildernessX, level.wildernessY);
+    }
+
     const newDepth = depth + 1;
     store.setDepth(newDepth);
     fsm.goToLevel(newDepth);
-    fsm.addMessage(`You descend to dungeon level ${newDepth}.`, 'info');
+
+    if (store.isInWilderness) {
+      fsm.addMessage('You enter the dungeon.', 'info');
+    } else {
+      fsm.addMessage(`You descend to dungeon level ${newDepth}.`, 'info');
+    }
   }
 
   private handleUpStairs(fsm: GameFSM): void {
@@ -282,23 +319,36 @@ export class PlayingState implements State {
     const player = store.player!;
     const upStairs = store.upStairs;
     const depth = store.depth;
+    const level = store.level!;
     const pos = player.position;
-    const onUpStairs = upStairs.some(s => s.x === pos.x && s.y === pos.y);
+
+    // Check if standing on up stairs
+    // In wilderness (depth 0), there are no up stairs
+    let onUpStairs = false;
+    if (!store.isInWilderness) {
+      // In dungeon, check terrain for up_staircase
+      const tile = level.getTile(pos);
+      onUpStairs = tile?.terrain.key === 'up_staircase' ||
+                   upStairs.some(s => s.x === pos.x && s.y === pos.y);
+    }
 
     if (!onUpStairs) {
       fsm.addMessage('There are no up stairs here.', 'info');
       return;
     }
 
-    // Exit to wilderness from town (depth 0)
-    if (depth === 0 && store.isTown && store.wildernessMap) {
-      fsm.addMessage('You leave the town and enter the wilderness.', 'info');
-      fsm.transition(new WildernessState());
+    // At depth 1, return to wilderness
+    if (depth === 1 && store.wildernessMap) {
+      const wildernessX = store.wildernessX;
+      const wildernessY = store.wildernessY;
+      fsm.goToWilderness(wildernessX, wildernessY);
+      fsm.addMessage('You leave the dungeon and return to the wilderness.', 'info');
       return;
     }
 
-    if (depth <= 1) {
-      fsm.addMessage('You cannot leave the dungeon!', 'danger');
+    // At depth 0 (town), can't go up
+    if (depth <= 0) {
+      fsm.addMessage('There is nothing above!', 'info');
       return;
     }
 

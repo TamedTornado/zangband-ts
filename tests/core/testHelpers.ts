@@ -82,12 +82,17 @@ export function createMockLevel(
 ): ILevel {
   const { width = 50, height = 50, depth = 1, walls = [] } = options;
   const wallSet = new Set(walls.map((p) => `${p.x},${p.y}`));
+  const items: import('@/core/entities/Item').Item[] = [];
+  const traps: import('@/core/entities/Trap').Trap[] = [];
 
   return {
     width,
     height,
     depth,
     player,
+    isInBounds: (pos: Position) => {
+      return pos.x >= 0 && pos.x < width && pos.y >= 0 && pos.y < height;
+    },
     getActorAt: (pos: Position) => {
       if (player && !player.isDead && player.position.x === pos.x && player.position.y === pos.y) {
         return player;
@@ -96,6 +101,9 @@ export function createMockLevel(
     },
     getMonsterAt: (pos: Position) => {
       return monsters.find((m) => !m.isDead && m.position.x === pos.x && m.position.y === pos.y);
+    },
+    getMonsterById: (id: string) => {
+      return monsters.find((m) => m.id === id);
     },
     getMonsters: () => monsters.filter((m) => !m.isDead),
     getMonstersInRadius: (center: Position, radius: number) => {
@@ -123,12 +131,37 @@ export function createMockLevel(
     isOccupied: (pos: Position) => {
       return monsters.some((m) => !m.isDead && m.position.x === pos.x && m.position.y === pos.y);
     },
+    setTerrain: () => {
+      // No-op in mock
+    },
     addMonster: (monster: Monster) => {
       monsters.push(monster);
     },
     removeMonster: (monster: Monster) => {
       const idx = monsters.indexOf(monster);
       if (idx !== -1) monsters.splice(idx, 1);
+    },
+    addItem: (item: import('@/core/entities/Item').Item) => {
+      items.push(item);
+    },
+    removeItem: (item: import('@/core/entities/Item').Item) => {
+      const idx = items.indexOf(item);
+      if (idx !== -1) items.splice(idx, 1);
+    },
+    getItemsAt: (pos: Position) => {
+      return items.filter((i) => i.position.x === pos.x && i.position.y === pos.y);
+    },
+    getAllItems: () => [...items],
+    getTrapAt: (pos: Position) => {
+      return traps.find((t) => t.position.x === pos.x && t.position.y === pos.y);
+    },
+    getTraps: () => [...traps],
+    addTrap: (trap: import('@/core/entities/Trap').Trap) => {
+      traps.push(trap);
+    },
+    removeTrap: (trap: import('@/core/entities/Trap').Trap) => {
+      const idx = traps.indexOf(trap);
+      if (idx !== -1) traps.splice(idx, 1);
     },
   };
 }

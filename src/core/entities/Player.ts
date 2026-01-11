@@ -1,6 +1,6 @@
 import { Actor } from './Actor';
 import type { Item } from './Item';
-import type { Level } from '../world/Level';
+import type { ILevel } from '../world/Level';
 import type { ItemGeneration } from '../systems/ItemGeneration';
 import { type Position, type Direction, type Element, movePosition } from '../types';
 import type { ClassDef } from '../data/classes';
@@ -765,7 +765,7 @@ export class Player extends Actor {
     return this._equipment.weapon?.toDam ?? 0;
   }
 
-  tryMove(direction: Direction, level: Level): boolean {
+  tryMove(direction: Direction, level: ILevel): boolean {
     const newPos = movePosition(this.position, direction);
     if (!level.isWalkable(newPos)) {
       return false;

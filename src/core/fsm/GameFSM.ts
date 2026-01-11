@@ -11,6 +11,7 @@ import type { GameAction } from './Actions';
 import type { GameMessage } from './GameData';
 import { Player } from '../entities/Player';
 import { generateLevel } from '../world/Level';
+import { restoreWildernessLevel } from '../systems/wilderness';
 import { FOVSystem } from '../systems/FOV';
 import { ItemGeneration } from '../systems/ItemGeneration';
 import { MonsterSpawner } from '../systems/MonsterSpawner';
@@ -206,6 +207,37 @@ export class GameFSM {
       storeEntrances: data.storeEntrances ?? [],
       isTown: data.isTown ?? false,
     });
+  }
+
+  /** Return to wilderness at specified position */
+  goToWilderness(wildernessX: number, wildernessY: number): void {
+    const store = getGameStore();
+    const player = store.player!;
+    const wildernessMap = store.wildernessMap;
+
+    if (!wildernessMap) {
+      this.addMessage('No wilderness map available!', 'danger');
+      return;
+    }
+
+    const data = restoreWildernessLevel(player, wildernessMap, wildernessX, wildernessY);
+
+    // Compute initial FOV
+    this.fovSystem.computeAndMark(data.level, player.position, VIEW_RADIUS);
+
+    store.setLevelData({
+      level: data.level,
+      scheduler: data.scheduler,
+      depth: 0,
+      upStairs: data.upStairs,
+      downStairs: data.downStairs,
+      storeEntrances: [],
+      isTown: false,
+      isWilderness: true,
+    });
+
+    // Store wilderness map for future use
+    store.setWildernessMap(data.wildernessMap);
   }
 
   /** Get monster name from definition */

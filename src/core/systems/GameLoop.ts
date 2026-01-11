@@ -1,7 +1,7 @@
 import { RNG } from 'rot-js';
 import type { Player } from '../entities/Player';
 import type { Monster } from '../entities/Monster';
-import type { Level } from '../world/Level';
+import type { ILevel } from '../world/Level';
 import type { Position } from '../types';
 import { Scheduler } from './Scheduler';
 import { MonsterAI, AIAction, type MonsterAIContext, type AIDecision } from './MonsterAI';
@@ -150,7 +150,7 @@ export class GameLoop {
    */
   processMonsterTurns(
     player: Player,
-    level: Level,
+    level: ILevel,
     scheduler: Scheduler
   ): TurnResult {
     const messages: GameMessage[] = [];
@@ -213,7 +213,7 @@ export class GameLoop {
     monster: Monster,
     monsterDef: MonsterDef,
     player: Player,
-    level: Level
+    level: ILevel
   ): MonsterAIContext {
     const distance = this.distance(monster.position, player.position);
     const los = hasLineOfSight(monster.position, player.position, level);
@@ -259,7 +259,7 @@ export class GameLoop {
     monster: Monster,
     decision: AIDecision,
     player: Player,
-    level: Level,
+    level: ILevel,
     messages: GameMessage[]
   ): void {
     const monsterDef = this.monsterData.getMonsterDef(monster.definitionKey);

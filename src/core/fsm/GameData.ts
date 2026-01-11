@@ -5,7 +5,7 @@
  */
 
 import type { Player } from '../entities/Player';
-import type { Level } from '../world/Level';
+import type { ILevel } from '../world/Level';
 import type { Scheduler } from '../systems/Scheduler';
 import type { Coord } from '../systems/dungeon/DungeonTypes';
 
@@ -18,7 +18,7 @@ export interface GameMessage {
 
 export interface GameData {
   player: Player;
-  level: Level;
+  level: ILevel;
   scheduler: Scheduler;
   depth: number;
   turn: number;

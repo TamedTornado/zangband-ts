@@ -1,12 +1,12 @@
 import type { Player } from '../entities/Player';
-import type { Level } from './Level';
+import type { ILevel } from './Level';
 
 export class GameWorld {
   private _player: Player;
-  private _currentLevel: Level;
+  private _currentLevel: ILevel;
   private _turn: number = 0;
 
-  constructor(player: Player, initialLevel: Level) {
+  constructor(player: Player, initialLevel: ILevel) {
     this._player = player;
     this._currentLevel = initialLevel;
     // Set level.player so the player is in the level's actors list
@@ -18,7 +18,7 @@ export class GameWorld {
     return this._player;
   }
 
-  get currentLevel(): Level {
+  get currentLevel(): ILevel {
     return this._currentLevel;
   }
 
@@ -30,7 +30,7 @@ export class GameWorld {
     this._turn++;
   }
 
-  changeLevel(level: Level): void {
+  changeLevel(level: ILevel): void {
     this._currentLevel = level;
     // Ensure the new level has the player reference
     this._currentLevel.player = this._player;

@@ -11,7 +11,7 @@
 
 import { RNG } from 'rot-js';
 import type { Position } from '../types';
-import type { Level } from '../world/Level';
+import type { ILevel } from '../world/Level';
 import { getMonsterSpell, type SpellCategory } from '../data/MonsterSpellRegistry';
 
 /** Maximum spell range */
@@ -86,7 +86,7 @@ export interface MonsterAIContext {
   spellChance: number;
 
   // Level/environment
-  level: Level;
+  level: ILevel;
 
   // Breeding context
   currentReproCount?: number;

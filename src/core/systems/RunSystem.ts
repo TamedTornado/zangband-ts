@@ -1,5 +1,5 @@
 import { Direction, movePosition, type Position } from '../types';
-import type { Level } from '../world/Level';
+import type { ILevel } from '../world/Level';
 import type { Monster } from '../entities/Monster';
 
 /**
@@ -50,7 +50,7 @@ export class RunSystem {
   /**
    * Initialize run state for a new run
    */
-  static initRun(level: Level, startPos: Position, dir: Direction): RunState {
+  static initRun(level: ILevel, startPos: Position, dir: Direction): RunState {
     const seeWall = (pos: Position, d: Direction): boolean => {
       return !level.isWalkable(movePosition(pos, d));
     };
@@ -117,7 +117,7 @@ export class RunSystem {
   /**
    * Test if running should continue after moving to newPos
    */
-  static testRun(level: Level, newPos: Position, state: RunState): RunStepResult {
+  static testRun(level: ILevel, newPos: Position, state: RunState): RunStepResult {
     const { openArea, oldDirection } = state;
     let { breakLeft, breakRight } = state;
 

@@ -12,6 +12,9 @@
 /** Each wilderness block is 16x16 tiles */
 export const WILD_BLOCK_SIZE = 16;
 
+/** Number of blocks visible in each direction (9x9 = 144x144 tiles) */
+export const WILD_VIEW = 9;
+
 /** 1/4 of the wilderness is sea */
 export const SEA_FRACTION = 4;
 

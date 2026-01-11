@@ -8,7 +8,7 @@
 
 import { RNG } from 'rot-js';
 import { Item } from '@/core/entities/Item';
-import type { Level } from '@/core/world/Level';
+import type { ILevel } from '@/core/world/Level';
 import type { Position } from '@/core/types';
 import type { ItemGeneration, GeneratedItem } from './ItemGeneration';
 
@@ -30,7 +30,7 @@ export class ItemSpawner {
   /**
    * Spawn a specific item by key at a position
    */
-  spawnItem(level: Level, pos: Position, itemKey: string): Item | null {
+  spawnItem(level: ILevel, pos: Position, itemKey: string): Item | null {
     const itemDef = this.itemGen.getItemDef(itemKey);
     if (!itemDef) return null;
 
@@ -59,7 +59,7 @@ export class ItemSpawner {
   /**
    * Spawn a random depth-appropriate item at a position
    */
-  spawnRandomItem(level: Level, pos: Position, depth: number, deltaLevel: number = 0): Item | null {
+  spawnRandomItem(level: ILevel, pos: Position, depth: number, deltaLevel: number = 0): Item | null {
     // Check position is valid
     if (!level.isWalkable(pos)) {
       return null;
@@ -77,7 +77,7 @@ export class ItemSpawner {
   /**
    * Spawn multiple items throughout the level
    */
-  spawnItemsForLevel(level: Level, depth: number, count: number): number {
+  spawnItemsForLevel(level: ILevel, depth: number, count: number): number {
     let spawned = 0;
     let attempts = 0;
     const maxAttempts = count * 100;
@@ -101,7 +101,7 @@ export class ItemSpawner {
   /**
    * Find a random walkable position
    */
-  private findRandomFloorPosition(level: Level): Position | null {
+  private findRandomFloorPosition(level: ILevel): Position | null {
     const maxAttempts = 1000;
 
     for (let i = 0; i < maxAttempts; i++) {

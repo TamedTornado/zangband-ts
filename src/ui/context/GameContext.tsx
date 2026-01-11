@@ -4,7 +4,7 @@ import { GameFSM } from '@/core/fsm/GameFSM';
 import { SexSelectionState } from '@/core/fsm/states/creation/SexSelectionState';
 import type { GameMessage } from '@/core/fsm/GameData';
 import type { Player } from '@/core/entities/Player';
-import type { Level } from '@/core/world/Level';
+import type { ILevel } from '@/core/world/Level';
 import type { Item } from '@/core/entities/Item';
 import type { GameAction } from '@/core/fsm/Actions';
 import { useGameStore, type PromptState } from '@/core/store/gameStore';
@@ -20,7 +20,7 @@ export type RestDuration =
 
 interface GameState {
   player: Player | null;
-  level: Level | null;
+  level: ILevel | null;
   depth: number;
   turn: number;
   messages: GameMessage[];

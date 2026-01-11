@@ -8,7 +8,7 @@
 
 import { RNG } from 'rot-js';
 import { Monster } from '@/core/entities/Monster';
-import type { Level } from '@/core/world/Level';
+import type { ILevel } from '@/core/world/Level';
 import type { Position } from '@/core/types';
 import type { MonsterDataManager } from '@/core/data/MonsterDataManager';
 import type { MonsterDef } from '@/core/data/monsters';
@@ -47,7 +47,7 @@ export class MonsterSpawner {
   /**
    * Spawn a specific monster at a position
    */
-  spawnMonster(level: Level, pos: Position, monsterKey: string): Monster | null {
+  spawnMonster(level: ILevel, pos: Position, monsterKey: string): Monster | null {
     const def = this.dataManager.getMonsterDef(monsterKey);
     if (!def) return null;
 
@@ -65,7 +65,7 @@ export class MonsterSpawner {
   /**
    * Spawn a random depth-appropriate monster at a position
    */
-  spawnRandomMonster(level: Level, pos: Position, depth: number): Monster | null {
+  spawnRandomMonster(level: ILevel, pos: Position, depth: number): Monster | null {
     const def = this.dataManager.selectMonster(depth);
     if (!def) return null;
 
@@ -75,7 +75,7 @@ export class MonsterSpawner {
   /**
    * Spawn multiple monsters throughout the level
    */
-  spawnMonstersForLevel(level: Level, depth: number, count: number): number {
+  spawnMonstersForLevel(level: ILevel, depth: number, count: number): number {
     let spawned = 0;
     let attempts = 0;
     const maxAttempts = count * 100;
@@ -99,7 +99,7 @@ export class MonsterSpawner {
   /**
    * Find a random walkable, unoccupied position
    */
-  private findRandomFloorPosition(level: Level): Position | null {
+  private findRandomFloorPosition(level: ILevel): Position | null {
     const maxAttempts = 1000;
 
     for (let i = 0; i < maxAttempts; i++) {
