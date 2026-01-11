@@ -22,6 +22,7 @@ import {
   MIN_DIST_DUNGEON,
   NUM_TOWNS,
   NUM_DUNGEON,
+  NUM_DUNGEON_TYPES,
   MAX_WILD,
   WILD_INFO_WATER,
   WILD_INFO_ROAD,
@@ -32,6 +33,7 @@ import {
   type WildPlace,
   type WildGenData,
 } from '@/core/data/WildernessTypes';
+import { DUNGEON_TYPES, type DungeonTypeDef } from '@/core/data/DungeonTypes';
 import { PlasmaFractal } from './PlasmaFractal';
 import { WildDecisionTree } from './DecisionTree';
 import type * as ROT from 'rot-js';
@@ -406,6 +408,7 @@ export class WildernessGenerator {
     // Create starting town
     // Per Zangband: all fractal cities are 8x8 blocks (128x128 tiles)
     // Starting town uses pop = 192 (64 + 128)
+    // dungeonTypeId: -1 indicates the MAIN_DUNGEON is attached to this town
     this.addPlace({
       key: 'starting_town',
       type: 'town',
@@ -417,13 +420,141 @@ export class WildernessGenerator {
       seed: Math.floor(this.rng.getUniform() * 1000000),
       data: 192, // Starting town pop = 64 + 128 per Zangband
       monstType: 1, // Villagers
+      dungeonTypeId: -1, // MAIN_DUNGEON attached to starting town
     });
 
     // Add more towns
     this.placeMultiple('town', NUM_TOWNS - 1, MIN_DIST_TOWN);
 
-    // Add dungeons
-    this.placeMultiple('dungeon', NUM_DUNGEON, MIN_DIST_DUNGEON);
+    // Add dungeons with typed placement
+    this.placeDungeons();
+  }
+
+  /**
+   * Place wilderness dungeons with typed assignment and terrain scoring.
+   *
+   * Per Zangband:
+   * - First 12 dungeons are guaranteed to be one of each type (0-11)
+   * - Remaining 8 are random repeats
+   * - Scoring matches dungeons to terrain based on height/population preferences
+   */
+  private placeDungeons(): void {
+    const seaLevel = 256 / SEA_FRACTION;
+
+    // Track which types have been placed
+    const typesPlaced = new Set<number>();
+
+    // Place dungeons
+    for (let i = 0; i < NUM_DUNGEON; i++) {
+      // Determine which dungeon type to place
+      let dungeonType: DungeonTypeDef;
+
+      if (i < NUM_DUNGEON_TYPES) {
+        // First 12: one of each type (in order or shuffled)
+        dungeonType = DUNGEON_TYPES[i];
+      } else {
+        // Remaining: random type
+        const typeIndex = Math.floor(this.rng.getUniform() * NUM_DUNGEON_TYPES);
+        dungeonType = DUNGEON_TYPES[typeIndex];
+      }
+
+      // Find best location for this dungeon type using scoring
+      const location = this.findBestDungeonLocation(dungeonType, seaLevel);
+
+      if (location) {
+        const key = `dungeon_${i + 1}`;
+        const name = `${dungeonType.name}`;
+
+        this.addPlace({
+          key,
+          type: 'dungeon',
+          name,
+          x: location.x,
+          y: location.y,
+          xsize: 1,
+          ysize: 1,
+          seed: Math.floor(this.rng.getUniform() * 1000000),
+          data: 0,
+          monstType: 0,
+          dungeonTypeId: dungeonType.id,
+        });
+
+        typesPlaced.add(dungeonType.id);
+      }
+    }
+  }
+
+  /**
+   * Find the best location for a dungeon type based on terrain scoring.
+   *
+   * Port of Zangband's place_dungeon() scoring algorithm.
+   */
+  private findBestDungeonLocation(
+    dungeonType: DungeonTypeDef,
+    seaLevel: number
+  ): { x: number; y: number } | null {
+    // Collect candidate locations with scores
+    const candidates: Array<{ x: number; y: number; score: number }> = [];
+
+    const maxAttempts = 200;
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      const x = Math.floor(this.rng.getUniform() * (this.size - 3)) + 2;
+      const y = Math.floor(this.rng.getUniform() * (this.size - 3)) + 2;
+
+      // Must be above sea level
+      if (this.hgtMap[y][x] < seaLevel) continue;
+
+      // Must not be in water
+      if (this.blocks[y][x].info & WILD_INFO_WATER) continue;
+
+      // Check minimum distance to existing dungeons
+      let tooClose = false;
+      for (const place of this.places) {
+        if (place.type === 'dungeon') {
+          const dist = Math.abs(place.x - x) + Math.abs(place.y - y);
+          if (dist < MIN_DIST_DUNGEON) {
+            tooClose = true;
+            break;
+          }
+        }
+      }
+      if (tooClose) continue;
+
+      // Score this location based on terrain match
+      const score = this.scoreDungeonLocation(x, y, dungeonType);
+      candidates.push({ x, y, score });
+    }
+
+    if (candidates.length === 0) {
+      return null;
+    }
+
+    // Sort by score (highest first) and pick from top candidates with some randomness
+    candidates.sort((a, b) => b.score - a.score);
+
+    // Pick from top 3 candidates (or fewer if not available)
+    const topCount = Math.min(3, candidates.length);
+    const pick = Math.floor(this.rng.getUniform() * topCount);
+
+    return { x: candidates[pick].x, y: candidates[pick].y };
+  }
+
+  /**
+   * Score a location for a dungeon type based on terrain preferences.
+   *
+   * Higher score = better match.
+   */
+  private scoreDungeonLocation(x: number, y: number, dungeonType: DungeonTypeDef): number {
+    const hgt = this.hgtMap[y][x];
+    const pop = this.popMap[y][x];
+
+    // Score is inverse of distance from preferences
+    // heightPref and popPref are 0-255, as are hgt and pop
+    const hgtDiff = Math.abs(hgt - dungeonType.heightPref);
+    const popDiff = Math.abs(pop - dungeonType.popPref);
+
+    // Score ranges from 0 (worst match) to 510 (perfect match)
+    return (255 - hgtDiff) + (255 - popDiff);
   }
 
   /**
@@ -511,16 +642,49 @@ export class WildernessGenerator {
   }
 
   /**
+   * Check if a place should be connected to the road network.
+   * Towns are always connected. Dungeons depend on their road flags.
+   */
+  private shouldConnectToRoad(place: WildPlace): boolean {
+    // Towns are always connected
+    if (place.type === 'town') {
+      return true;
+    }
+
+    // Dungeons depend on their road flags
+    if (place.type === 'dungeon' && place.dungeonTypeId !== undefined) {
+      const dungeonType = DUNGEON_TYPES[place.dungeonTypeId];
+      if (dungeonType) {
+        // Connect if dungeon has DF_ROAD or DF_TRACK flags
+        return dungeonType.roadFlags !== 0;
+      }
+    }
+
+    // Default: connect quests and unknown types
+    return true;
+  }
+
+  /**
    * Create roads connecting places.
    *
    * Port of wild1.c:create_roads()
+   *
+   * Only connects places that have appropriate road flags:
+   * - Towns are always connected
+   * - Dungeons with DF_ROAD or DF_TRACK are connected
+   * - Dungeons with DF_NONE (like Lair) are not connected
    */
   private createRoads(): void {
     // Connect each place to nearest neighbors
     for (let i = 0; i < this.places.length; i++) {
       const place1 = this.places[i];
 
-      // Find closest other place, preferring those within ROAD_DIST
+      // Skip places that shouldn't be connected to roads
+      if (!this.shouldConnectToRoad(place1)) {
+        continue;
+      }
+
+      // Find closest other place that should also be connected
       let closestDistInRange = Infinity;
       let closestPlaceInRange: WildPlace | null = null;
       let closestDistAny = Infinity;
@@ -530,6 +694,12 @@ export class WildernessGenerator {
         if (i === j) continue;
 
         const place2 = this.places[j];
+
+        // Skip places that shouldn't be connected to roads
+        if (!this.shouldConnectToRoad(place2)) {
+          continue;
+        }
+
         const dist = Math.abs(place1.x - place2.x) + Math.abs(place1.y - place2.y);
 
         // Track closest within ROAD_DIST

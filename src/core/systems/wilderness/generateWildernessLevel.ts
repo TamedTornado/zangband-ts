@@ -48,20 +48,6 @@ export function generateWildernessLevel(
   const generator = new WildernessGenerator(RNG, genData, MAX_WILD);
   const wildernessMap = generator.generate();
 
-  // Debug: count road-flagged blocks
-  let roadCount = 0;
-  let trackCount = 0;
-  for (let y = 0; y < MAX_WILD; y++) {
-    for (let x = 0; x < MAX_WILD; x++) {
-      const block = wildernessMap.getBlock(x, y);
-      if (block) {
-        if (block.info & 0x02) roadCount++;
-        if (block.info & 0x04) trackCount++;
-      }
-    }
-  }
-  console.log(`[WILDERNESS] Generated map with ${roadCount} road blocks, ${trackCount} track blocks`);
-
   // Create the wilderness level
   const wildernessLevel = new WildernessLevel(wildernessMap, genData, RNG, monsterDataManager);
 

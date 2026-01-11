@@ -33,6 +33,7 @@ describe('ZangbandTownGenerator', () => {
       seed: 42,
       data: 200, // high population
       monstType: 1,
+      dungeonTypeId: -1, // MAIN_DUNGEON
     };
 
     it('uses fractal generation like all other towns', () => {
@@ -107,8 +108,8 @@ describe('ZangbandTownGenerator', () => {
     it('has down stairs to dungeon', () => {
       const result = generator.generate(startingTown);
 
-      expect(result.dungeonEntrance).toBeDefined();
-      const { x, y } = result.dungeonEntrance;
+      expect(result.dungeonEntrance).not.toBeNull();
+      const { x, y } = result.dungeonEntrance!;
 
       // Entrance should be at a floor tile (not wall)
       expect(result.tiles[y][x].feat).toBe(7); // FEAT_DOWN_STAIRS

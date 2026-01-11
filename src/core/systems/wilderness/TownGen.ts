@@ -56,8 +56,8 @@ export interface GeneratedTownData {
   height: number;
   /** Store entrance positions */
   storePositions: StorePosition[];
-  /** Dungeon entrance position */
-  dungeonEntrance: { x: number; y: number };
+  /** Dungeon entrance position (null if town has no dungeon) */
+  dungeonEntrance: { x: number; y: number } | null;
   /** Player starting position */
   playerStart: { x: number; y: number };
 }
@@ -579,8 +579,10 @@ export class ZangbandTownGenerator {
       }
     }
 
-    // Place dungeon entrance
-    const dungeonEntrance = this.placeCityDungeonEntrance(tiles, width, height);
+    // Only place dungeon entrance in towns that have a dungeon (starting_town)
+    const dungeonEntrance = place.dungeonTypeId !== undefined
+      ? this.placeCityDungeonEntrance(tiles, width, height)
+      : null;
 
     // Player starts near center
     const playerStart = { x: Math.floor(width / 2), y: Math.floor(height / 2) };

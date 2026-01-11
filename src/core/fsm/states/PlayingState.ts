@@ -27,6 +27,8 @@ import { Direction, movePosition } from '../../types';
 import { RunSystem, type RunContext } from '../../systems/RunSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, VIEW_RADIUS, HP_REGEN_RATE } from '../../constants';
 import { getGameStore } from '@/core/store/gameStore';
+import { getDungeonType } from '@/core/data/DungeonTypes';
+import { WILD_BLOCK_SIZE } from '@/core/data/WildernessTypes';
 
 export class PlayingState implements State {
   readonly name = 'playing';
@@ -169,6 +171,9 @@ export class PlayingState implements State {
 
       // Check for store entrance
       this.checkStoreEntrance(fsm, player.position);
+
+      // Check for staircase
+      this.checkStaircase(fsm, player.position, level);
 
       fsm.completeTurn(ENERGY_PER_TURN);
       this.checkPlayerDeath(fsm);
@@ -436,6 +441,92 @@ export class PlayingState implements State {
       const storeInstance = fsm.storeManager.getStore(storeKey);
       if (storeInstance) {
         fsm.addMessage(`You are standing at the entrance to ${storeInstance.definition.name}. (Enter to shop)`, 'info');
+      }
+    }
+  }
+
+  /**
+   * Check if player stepped on a staircase and show message with dungeon name.
+   */
+  private checkStaircase(fsm: GameFSM, pos: { x: number; y: number }, level: import('../../world/Level').ILevel): void {
+    const tile = level.getTile(pos);
+    if (!tile) return;
+
+    const isDownStair = tile.terrain.key === 'down_staircase';
+    const isUpStair = tile.terrain.key === 'up_staircase';
+
+    if (!isDownStair && !isUpStair) return;
+
+    const store = getGameStore();
+    const isInWilderness = isWildernessLevel(level);
+
+    if (isDownStair) {
+      // Only look up dungeon name when on the surface (wilderness/town)
+      if (isInWilderness && store.wildernessMap) {
+        const wildernessMap = store.wildernessMap;
+        let dungeonName: string | null = null;
+        let foundPlace: string | null = null;
+
+        // Look up what place we're in or at
+        const blockX = Math.floor(pos.x / WILD_BLOCK_SIZE);
+        const blockY = Math.floor(pos.y / WILD_BLOCK_SIZE);
+
+        // Check all places to see if this position is in one
+        for (const place of wildernessMap.places) {
+          // Check if the position is within this place's bounds
+          if (
+            blockX >= place.x &&
+            blockX < place.x + place.xsize &&
+            blockY >= place.y &&
+            blockY < place.y + place.ysize
+          ) {
+            foundPlace = place.key;
+            if (place.dungeonTypeId !== undefined) {
+              const dungeonType = getDungeonType(place.dungeonTypeId);
+              if (dungeonType) {
+                dungeonName = dungeonType.name;
+              } else {
+                console.error(`[checkStaircase] Unknown dungeonTypeId ${place.dungeonTypeId} for place ${place.key}`);
+              }
+            }
+            break;
+          }
+
+          // Also check if we're at a dungeon entrance (exact position)
+          if (place.type === 'dungeon') {
+            const entranceX = place.x * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
+            const entranceY = place.y * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
+            if (pos.x === entranceX && pos.y === entranceY) {
+              foundPlace = place.key;
+              if (place.dungeonTypeId !== undefined) {
+                const dungeonType = getDungeonType(place.dungeonTypeId);
+                if (dungeonType) {
+                  dungeonName = dungeonType.name;
+                } else {
+                  console.error(`[checkStaircase] Unknown dungeonTypeId ${place.dungeonTypeId} for place ${place.key}`);
+                }
+              }
+              break;
+            }
+          }
+        }
+
+        if (dungeonName === null) {
+          console.error(`[checkStaircase] Failed to find dungeon at pos (${pos.x}, ${pos.y}), block (${blockX}, ${blockY}), foundPlace=${foundPlace}`);
+          dungeonName = 'somewhere';
+        }
+
+        fsm.addMessage(`You see the entrance to ${dungeonName} here. (> to descend)`, 'info');
+      } else {
+        // Inside a dungeon - just show generic message
+        fsm.addMessage(`You see a staircase leading down here. (> to descend)`, 'info');
+      }
+    } else if (isUpStair) {
+      if (isInWilderness) {
+        console.error(`Up staircase found in wilderness at (${pos.x}, ${pos.y}) - this should not happen`);
+      } else {
+        // Inside a dungeon
+        fsm.addMessage(`You see a staircase leading up here. (< to ascend)`, 'info');
       }
     }
   }

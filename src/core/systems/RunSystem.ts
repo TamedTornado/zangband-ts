@@ -7,6 +7,7 @@ import type { WildernessMap } from './wilderness/WildernessGenerator';
 import type { FOVSystem } from './FOV';
 import { isWildernessLevel, type WildernessLevel } from '../world/WildernessLevel';
 import { WILD_BLOCK_SIZE } from '../data/WildernessTypes';
+import { getDungeonType } from '../data/DungeonTypes';
 
 /**
  * Running algorithm ported from Zangband src/cmd1.c line 2708
@@ -57,7 +58,7 @@ export interface RunStepResult {
 // =============================================================================
 
 export interface POI {
-  type: 'store' | 'dungeon' | 'town';
+  type: 'store' | 'dungeon' | 'town' | 'stair';
   key: string;
   name: string;
   posKey: string;
@@ -66,7 +67,8 @@ export interface POI {
 function getVisiblePOIs(
   visibleTiles: Set<string>,
   storeManager: StoreManager,
-  wildernessMap: WildernessMap | null
+  wildernessMap: WildernessMap | null,
+  level: ILevel
 ): POI[] {
   const pois: POI[] = [];
 
@@ -104,6 +106,70 @@ function getVisiblePOIs(
     }
   }
 
+  // Check for stairs in visible tiles
+  for (const posKey of visibleTiles) {
+    const [xStr, yStr] = posKey.split(',');
+    const x = parseInt(xStr, 10);
+    const y = parseInt(yStr, 10);
+    const tile = level.getTile({ x, y });
+
+    if (tile) {
+      if (tile.terrain.key === 'down_staircase') {
+        // Look up the dungeon name for this stair
+        let dungeonName = 'somewhere';
+        if (wildernessMap) {
+          const blockX = Math.floor(x / WILD_BLOCK_SIZE);
+          const blockY = Math.floor(y / WILD_BLOCK_SIZE);
+
+          // Check if we're in a place with a dungeon
+          for (const place of wildernessMap.places) {
+            // Check if within this place's bounds
+            if (
+              blockX >= place.x &&
+              blockX < place.x + place.xsize &&
+              blockY >= place.y &&
+              blockY < place.y + place.ysize &&
+              place.dungeonTypeId !== undefined
+            ) {
+              const dungeonType = getDungeonType(place.dungeonTypeId);
+              if (dungeonType) {
+                dungeonName = dungeonType.name;
+              }
+              break;
+            }
+
+            // Check if at a dungeon entrance
+            if (place.type === 'dungeon') {
+              const entranceX = place.x * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
+              const entranceY = place.y * WILD_BLOCK_SIZE + Math.floor(WILD_BLOCK_SIZE / 2);
+              if (x === entranceX && y === entranceY && place.dungeonTypeId !== undefined) {
+                const dungeonType = getDungeonType(place.dungeonTypeId);
+                if (dungeonType) {
+                  dungeonName = dungeonType.name;
+                }
+                break;
+              }
+            }
+          }
+        }
+
+        pois.push({
+          type: 'stair',
+          key: `down_stair_${posKey}`,
+          name: `the entrance to ${dungeonName}`,
+          posKey,
+        });
+      } else if (tile.terrain.key === 'up_staircase') {
+        pois.push({
+          type: 'stair',
+          key: `up_stair_${posKey}`,
+          name: 'an up staircase',
+          posKey,
+        });
+      }
+    }
+  }
+
   return pois;
 }
 
@@ -115,6 +181,8 @@ function getPOISpotMessage(poi: POI): string {
       return `You spot the entrance to ${poi.name}.`;
     case 'town':
       return `You spot ${poi.name} in the distance.`;
+    case 'stair':
+      return `You spot ${poi.name}.`;
     default:
       return `You spot something interesting.`;
   }
@@ -174,7 +242,7 @@ export class RunSystem {
     // Track POIs we've already seen (including at start)
     // Use viewRadius (not visionRadius) to match what we use during steps
     const initialFov = fovSystem.compute(level, player.position, viewRadius);
-    const initialPOIs = getVisiblePOIs(initialFov, storeManager, wildernessMap);
+    const initialPOIs = getVisiblePOIs(initialFov, storeManager, wildernessMap, level);
     const seenPOIs = new Set(initialPOIs.map(p => p.posKey));
 
     while (stepsRun < MAX_RUN_STEPS) {
@@ -224,7 +292,7 @@ export class RunSystem {
       }
 
       // Check for newly visible POIs
-      const visiblePOIs = getVisiblePOIs(visibleTiles, storeManager, wildernessMap);
+      const visiblePOIs = getVisiblePOIs(visibleTiles, storeManager, wildernessMap, level);
       let firstNewPOI: POI | null = null;
       for (const poi of visiblePOIs) {
         if (!seenPOIs.has(poi.posKey)) {
