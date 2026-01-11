@@ -94,11 +94,11 @@
         "key": "recharge",
         "type": "recharge",
         "name": "Recharge Item",
-        "description": "Restore charges to a wand, staff, or rod",
+        "description": "Restore charges to a wand or staff",
         "baseCost": 50,
         "action": "action:service_recharge",
         "requiresItem": true,
-        "itemFilter": ["wand", "staff", "rod"]
+        "itemFilter": ["wand", "staff"]
       },
       {
         "key": "identify",

@@ -285,7 +285,6 @@ export class ServiceSystem {
     cost: number,
     context: ServiceContext
   ): ServiceResult {
-    // TODO: Implement item recharging when item system supports it
     if (context.selectedItemIndex === undefined) {
       return {
         success: false,
@@ -294,11 +293,45 @@ export class ServiceSystem {
       };
     }
 
+    const inventory = player.inventory;
+    const item = inventory[context.selectedItemIndex];
+    if (!item) {
+      return {
+        success: false,
+        message: 'Invalid item.',
+        goldSpent: 0,
+      };
+    }
+
+    // Check if item can be recharged (rods recharge automatically over time)
+    if (!item.isWand && !item.isStaff) {
+      return {
+        success: false,
+        message: 'That item cannot be recharged.',
+        goldSpent: 0,
+      };
+    }
+
+    // For wands/staffs, add charges
+    const currentCharges = item.charges;
+    const maxCharges = item.maxCharges || 10;
+
+    if (currentCharges >= maxCharges) {
+      return {
+        success: false,
+        message: 'That item is already fully charged.',
+        goldSpent: 0,
+      };
+    }
+
+    // Recharge to max
+    const chargesToAdd = maxCharges - currentCharges;
+    item.recharge(chargesToAdd);
     player.spendGold(cost);
 
     return {
       success: true,
-      message: 'Your item has been recharged!',
+      message: `Your ${item.name} now has ${item.charges} charges!`,
       goldSpent: cost,
     };
   }
