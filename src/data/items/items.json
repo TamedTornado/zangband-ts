@@ -5204,6 +5204,14 @@
     "flags": [
       "EASY_KNOW"
     ],
+    "effects": [
+      {
+        "type": "enchantWeapon",
+        "target": "item",
+        "numHit": 1,
+        "numDam": 0
+      }
+    ],
     "type": "scroll"
   },
   "enchant_weapon_deadliness": {
@@ -5232,6 +5240,14 @@
     "flags": [
       "EASY_KNOW"
     ],
+    "effects": [
+      {
+        "type": "enchantWeapon",
+        "target": "item",
+        "numHit": 0,
+        "numDam": 1
+      }
+    ],
     "type": "scroll"
   },
   "scroll_of_enchant_armor": {
@@ -5259,6 +5275,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "enchantArmor",
+        "target": "item",
+        "numAc": 1
+      }
     ],
     "type": "scroll"
   },
@@ -6404,6 +6427,14 @@
     "flags": [
       "EASY_KNOW"
     ],
+    "effects": [
+      {
+        "type": "enchantWeapon",
+        "target": "item",
+        "numHit": "1d5",
+        "numDam": "1d5"
+      }
+    ],
     "type": "scroll"
   },
   "curse_weapon": {
@@ -6467,6 +6498,13 @@
     "toAc": 0,
     "flags": [
       "EASY_KNOW"
+    ],
+    "effects": [
+      {
+        "type": "enchantArmor",
+        "target": "item",
+        "numAc": "1d6+1"
+      }
     ],
     "type": "scroll"
   },

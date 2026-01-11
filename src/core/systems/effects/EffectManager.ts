@@ -16,6 +16,7 @@ import { CureEffect } from './CureEffect';
 import { ReduceEffect } from './ReduceEffect';
 import { TeleportSelfEffect } from './TeleportSelfEffect';
 import { IdentifyEffect } from './IdentifyEffect';
+import { EnchantWeaponEffect, EnchantArmorEffect } from './EnchantEffect';
 import { GenocideEffect } from './GenocideEffect';
 import { LightAreaEffect } from './LightAreaEffect';
 import { DetectEffect } from './DetectEffect';
@@ -57,6 +58,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   detect: DetectEffect,
   // Item targeted
   identify: IdentifyEffect,
+  enchantWeapon: EnchantWeaponEffect,
+  enchantArmor: EnchantArmorEffect,
   // Symbol targeted
   genocide: GenocideEffect,
   // Position targeted

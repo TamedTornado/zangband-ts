@@ -5,10 +5,13 @@
  * instead of inventory-based trading.
  */
 
+import { RNG } from 'rot-js';
 import { PricingSystem } from './Pricing';
 import { ServiceType } from '@/core/data/services';
 import type { ServiceDef } from '@/core/data/services';
 import type { Player } from '@/core/entities/Player';
+import type { Item } from '@/core/entities/Item';
+import { ENCHANT_MAX_HIT, ENCHANT_MAX_DAM, ENCHANT_MAX_AC } from '@/core/constants';
 
 /**
  * Context for service execution
@@ -372,7 +375,6 @@ export class ServiceSystem {
     cost: number,
     context: ServiceContext
   ): ServiceResult {
-    // TODO: Implement weapon enchanting when item system supports it
     if (context.selectedItemIndex === undefined) {
       return {
         success: false,
@@ -381,22 +383,63 @@ export class ServiceSystem {
       };
     }
 
-    player.spendGold(cost);
+    const inventory = (player as any).inventory;
+    const item: Item | undefined = inventory?.items?.[context.selectedItemIndex];
 
-    // Random chance of failure (about 20%)
-    if (Math.random() < 0.2) {
+    if (!item || !item.generated) {
       return {
         success: false,
-        message: 'The enchantment failed!',
-        goldSpent: cost,
+        message: 'Invalid item.',
+        goldSpent: 0,
       };
     }
 
+    // Service caps based on player level (Zangband style)
+    const maxHit = Math.min(Math.floor(player.level / 5), ENCHANT_MAX_HIT);
+    const maxDam = Math.min(Math.floor(player.level / 3), ENCHANT_MAX_DAM);
+
+    // Check if already at cap
+    if (item.generated.toHit >= maxHit && item.generated.toDam >= maxDam) {
+      return {
+        success: false,
+        message: 'Your weapon cannot be enchanted further at your current level.',
+        goldSpent: 0,
+      };
+    }
+
+    player.spendGold(cost);
+
+    // Service enchants both to-hit AND to-dam (no failure, ENCH_FORCE)
+    let hitGain = 0;
+    let damGain = 0;
+
+    if (item.generated.toHit < maxHit) {
+      hitGain = this.getEnchantIncrement(item.generated.toHit);
+      hitGain = Math.min(hitGain, maxHit - item.generated.toHit);
+      item.generated.toHit += hitGain;
+    }
+
+    if (item.generated.toDam < maxDam) {
+      damGain = this.getEnchantIncrement(item.generated.toDam);
+      damGain = Math.min(damGain, maxDam - item.generated.toDam);
+      item.generated.toDam += damGain;
+    }
+
+    const parts: string[] = [];
+    if (hitGain > 0) parts.push(`+${hitGain} to hit`);
+    if (damGain > 0) parts.push(`+${damGain} to damage`);
+
     return {
       success: true,
-      message: 'Your weapon glows with magical energy!',
+      message: `Your ${item.name} glows brightly! (${parts.join(', ')})`,
       goldSpent: cost,
     };
+  }
+
+  private static getEnchantIncrement(currentBonus: number): number {
+    if (currentBonus >= 8) return 1;
+    if (currentBonus >= 5) return RNG.getUniformInt(1, 2);
+    return RNG.getUniformInt(1, 3);
   }
 
   private static executeEnchantArmor(
@@ -404,7 +447,6 @@ export class ServiceSystem {
     cost: number,
     context: ServiceContext
   ): ServiceResult {
-    // TODO: Implement armor enchanting when item system supports it
     if (context.selectedItemIndex === undefined) {
       return {
         success: false,
@@ -413,20 +455,39 @@ export class ServiceSystem {
       };
     }
 
-    player.spendGold(cost);
+    const inventory = (player as any).inventory;
+    const item: Item | undefined = inventory?.items?.[context.selectedItemIndex];
 
-    // Random chance of failure (about 20%)
-    if (Math.random() < 0.2) {
+    if (!item || !item.generated) {
       return {
         success: false,
-        message: 'The enchantment failed!',
-        goldSpent: cost,
+        message: 'Invalid item.',
+        goldSpent: 0,
       };
     }
 
+    // Service caps based on player level (Zangband style)
+    const maxAc = Math.min(Math.floor(player.level / 5), ENCHANT_MAX_AC);
+
+    // Check if already at cap
+    if (item.generated.toAc >= maxAc) {
+      return {
+        success: false,
+        message: 'Your armor cannot be enchanted further at your current level.',
+        goldSpent: 0,
+      };
+    }
+
+    player.spendGold(cost);
+
+    // Service enchants to-ac (no failure, ENCH_FORCE)
+    let acGain = this.getEnchantIncrement(item.generated.toAc);
+    acGain = Math.min(acGain, maxAc - item.generated.toAc);
+    item.generated.toAc += acGain;
+
     return {
       success: true,
-      message: 'Your armor shimmers with protective magic!',
+      message: `Your ${item.name} glows brightly! (+${acGain} to AC)`,
       goldSpent: cost,
     };
   }

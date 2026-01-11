@@ -25,3 +25,8 @@ export const HP_REGEN_RATE = 10; // Regen 1 HP every N turns
 
 // Inventory
 export const MAX_INVENTORY_SLOTS = 23;
+
+// Enchantment limits
+export const ENCHANT_MAX_HIT = 15;   // Max to-hit enchantment
+export const ENCHANT_MAX_DAM = 25;   // Max to-damage enchantment
+export const ENCHANT_MAX_AC = 15;    // Max to-AC enchantment

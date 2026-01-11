@@ -36,6 +36,7 @@ export { TeleportSelfEffect } from './TeleportSelfEffect';
 
 // Concrete effects - Item targeted
 export { IdentifyEffect } from './IdentifyEffect';
+export { EnchantWeaponEffect, EnchantArmorEffect } from './EnchantEffect';
 
 // Concrete effects - Symbol targeted
 export { GenocideEffect } from './GenocideEffect';
