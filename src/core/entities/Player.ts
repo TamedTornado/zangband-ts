@@ -19,6 +19,7 @@ import {
 import { getPlayerResistLevel, applyPlayerResistance } from '../systems/Damage';
 import type { RNG } from 'rot-js';
 import tables from '@/data/meta/tables.json';
+import type { MutationSystem } from '../systems/MutationSystem';
 
 export interface Stats {
   str: number;
@@ -145,6 +146,7 @@ export class Player extends Actor {
 
   // Mutations (permanent modifications from chaos exposure, polymorph, etc.)
   private _mutations: Set<string> = new Set();
+  private _mutationSystem: MutationSystem | null = null;
 
   // Gold (currency)
   private _gold: number = 0;
@@ -279,16 +281,19 @@ export class Player extends Actor {
   }
 
   /**
-   * Get current stats (base stats minus any drain)
+   * Get current stats (base stats minus drain plus mutation modifiers)
    */
   get currentStats(): Stats {
+    // Get mutation modifiers if system is available
+    const mutMods = this._mutationSystem?.getStatModifiers(this) ?? {};
+
     return {
-      str: Math.max(3, this.stats.str - this._drainedStats.str),
-      int: Math.max(3, this.stats.int - this._drainedStats.int),
-      wis: Math.max(3, this.stats.wis - this._drainedStats.wis),
-      dex: Math.max(3, this.stats.dex - this._drainedStats.dex),
-      con: Math.max(3, this.stats.con - this._drainedStats.con),
-      chr: Math.max(3, this.stats.chr - this._drainedStats.chr),
+      str: Math.max(3, this.stats.str - this._drainedStats.str + (mutMods.str ?? 0)),
+      int: Math.max(3, this.stats.int - this._drainedStats.int + (mutMods.int ?? 0)),
+      wis: Math.max(3, this.stats.wis - this._drainedStats.wis + (mutMods.wis ?? 0)),
+      dex: Math.max(3, this.stats.dex - this._drainedStats.dex + (mutMods.dex ?? 0)),
+      con: Math.max(3, this.stats.con - this._drainedStats.con + (mutMods.con ?? 0)),
+      chr: Math.max(3, this.stats.chr - this._drainedStats.chr + (mutMods.chr ?? 0)),
     };
   }
 
@@ -763,6 +768,21 @@ export class Player extends Actor {
     this._mutations.delete(key);
   }
 
+  /** Set the mutation system reference for stat calculations */
+  setMutationSystem(system: MutationSystem): void {
+    this._mutationSystem = system;
+  }
+
+  /** Get mutation system reference */
+  get mutationSystem(): MutationSystem | null {
+    return this._mutationSystem;
+  }
+
+  /** Check if player has a mutation flag (fearless, regen, telepathy, etc.) */
+  hasMutationFlag(flag: string): boolean {
+    return this._mutationSystem?.hasFlag(this, flag) ?? false;
+  }
+
   /** Current food level (0-15000) */
   get food(): number {
     return this._food;
@@ -979,7 +999,7 @@ export class Player extends Actor {
     return item;
   }
 
-  /** Calculate total AC from equipment */
+  /** Calculate total AC from equipment and mutations */
   get totalAc(): number {
     let ac = 0;
     for (const item of Object.values(this._equipment)) {
@@ -987,7 +1007,16 @@ export class Player extends Actor {
         ac += item.baseAc + item.toAc;
       }
     }
-    return ac;
+    // Add mutation AC bonus
+    const mutAc = this._mutationSystem?.getAcModifier(this) ?? 0;
+    return ac + mutAc;
+  }
+
+  /** Override speed to include mutation modifiers */
+  override get speed(): number {
+    const baseSpeed = super.speed; // Includes status modifiers
+    const mutSpeed = this._mutationSystem?.getSpeedModifier(this) ?? 0;
+    return baseSpeed + mutSpeed;
   }
 
   /** Get the weapon's damage dice string */

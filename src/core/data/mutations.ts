@@ -111,6 +111,30 @@ export interface MutationTickResult {
 }
 
 /**
+ * Result from checking if a mutation can be activated
+ */
+export interface CanActivateResult {
+  canActivate: boolean;
+  reason?: string;
+}
+
+/**
+ * Result from trying to activate a mutation
+ */
+export interface ActivateMutationResult {
+  /** Whether activation was attempted (requirements met) */
+  activated: boolean;
+  /** Whether the stat check succeeded */
+  succeeded?: boolean;
+  /** The effect to execute (if activation succeeded) */
+  effect?: GPEffectDef;
+  /** Message if activation was not attempted */
+  reason?: string;
+  /** Message if stat check failed */
+  failMessage?: string;
+}
+
+/**
  * Type guards for mutation categories
  */
 export function isActivatable(def: MutationDef): def is ActivatableMutationDef {

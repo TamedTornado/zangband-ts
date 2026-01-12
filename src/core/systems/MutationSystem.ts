@@ -19,6 +19,8 @@ import type {
   GainMutationResult,
   LoseMutationResult,
   MutationTickResult,
+  CanActivateResult,
+  ActivateMutationResult,
 } from '@/core/data/mutations';
 import { isActivatable, isRandom, isPassive } from '@/core/data/mutations';
 
@@ -251,5 +253,92 @@ export class MutationSystem {
     }
 
     return { messages, effectsTriggered };
+  }
+
+  /**
+   * Check if a mutation can be activated
+   * Returns whether activation is possible and reason if not
+   */
+  canActivateMutation(player: Player, key: string): CanActivateResult {
+    // Check if player has the mutation
+    if (!player.hasMutation(key)) {
+      return { canActivate: false, reason: 'You do not have this mutation.' };
+    }
+
+    // Get the definition
+    const def = this.defs[key];
+    if (!def) {
+      return { canActivate: false, reason: 'Unknown mutation.' };
+    }
+
+    // Check if it's activatable
+    if (!isActivatable(def)) {
+      return { canActivate: false, reason: 'This mutation is not activatable.' };
+    }
+
+    // Check level requirement
+    if (player.level < def.level) {
+      return {
+        canActivate: false,
+        reason: `You need to be level ${def.level} to use this ability.`,
+      };
+    }
+
+    // Check mana cost
+    if (player.currentMana < def.cost) {
+      return {
+        canActivate: false,
+        reason: `Not enough mana. You need ${def.cost} mana but have ${player.currentMana}.`,
+      };
+    }
+
+    return { canActivate: true };
+  }
+
+  /**
+   * Try to activate a mutation
+   * Performs validation, deducts mana, and checks stat roll
+   * Returns the effect to execute if successful
+   */
+  tryActivateMutation(player: Player, key: string, rng: typeof RNG): ActivateMutationResult {
+    // First check if activation is possible
+    const canActivate = this.canActivateMutation(player, key);
+    if (!canActivate.canActivate) {
+      return { activated: false, reason: canActivate.reason ?? 'Cannot activate mutation.' };
+    }
+
+    const def = this.defs[key] as ActivatableMutationDef;
+
+    // Deduct mana cost
+    player.spendMana(def.cost);
+
+    // Perform stat check
+    // Formula from Zangband: difficulty - 3 * stat_adj - level/2
+    // If random roll > this threshold, success
+    const statKey = def.stat as keyof Stats;
+    const statValue = player.currentStats[statKey];
+    // stat_adj is typically (stat - 10) / 2 for D&D-like systems
+    // In Zangband it's more complex, but we simplify to: stat/3
+    const statAdj = Math.floor(statValue / 3);
+    const threshold = def.difficulty - 3 * statAdj - Math.floor(player.level / 2);
+
+    // Roll d100, if roll > threshold, success
+    const roll = rng.getUniformInt(1, 100);
+    const succeeded = roll > threshold;
+
+    if (!succeeded) {
+      return {
+        activated: true,
+        succeeded: false,
+        failMessage: 'You failed to concentrate hard enough!',
+      };
+    }
+
+    // Return the effect for the caller to execute
+    return {
+      activated: true,
+      succeeded: true,
+      effect: def.effect,
+    };
   }
 }
