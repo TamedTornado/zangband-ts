@@ -51,6 +51,7 @@ import { RestoreLevelEffect } from './RestoreLevelEffect';
 import { FetchEffect } from './FetchEffect';
 import { RechargeEffect } from './RechargeEffect';
 import { BeamEffect } from './BeamEffect';
+import { RestoreStatsEffect } from './RestoreStatsEffect';
 
 /**
  * Default effect registry
@@ -121,6 +122,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   recharge: RechargeEffect,
   // Beam effects (pierce through targets)
   beam: BeamEffect,
+  // Restore all stats at once
+  restoreStats: RestoreStatsEffect,
 };
 
 export class EffectManager {

@@ -125,6 +125,9 @@ export class Player extends Actor {
   // Gold (currency)
   private _gold: number = 0;
 
+  // Stat drain tracking (how much each stat has been reduced)
+  private _drainedStats: Stats = { str: 0, int: 0, wis: 0, dex: 0, con: 0, chr: 0 };
+
   constructor(config: PlayerConfig) {
     super({
       id: config.id,
@@ -246,6 +249,60 @@ export class Player extends Actor {
    */
   get skills(): Skills {
     return this._skills;
+  }
+
+  /**
+   * Get current stats (base stats minus any drain)
+   */
+  get currentStats(): Stats {
+    return {
+      str: Math.max(3, this.stats.str - this._drainedStats.str),
+      int: Math.max(3, this.stats.int - this._drainedStats.int),
+      wis: Math.max(3, this.stats.wis - this._drainedStats.wis),
+      dex: Math.max(3, this.stats.dex - this._drainedStats.dex),
+      con: Math.max(3, this.stats.con - this._drainedStats.con),
+      chr: Math.max(3, this.stats.chr - this._drainedStats.chr),
+    };
+  }
+
+  /**
+   * Drain a stat by the specified amount
+   */
+  drainStat(stat: keyof Stats, amount: number): void {
+    this._drainedStats[stat] = Math.min(
+      this.stats[stat] - 3, // Can't drain below 3
+      this._drainedStats[stat] + amount
+    );
+  }
+
+  /**
+   * Restore a specific drained stat
+   * @returns true if stat was actually restored
+   */
+  restoreStat(stat: keyof Stats): boolean {
+    if (this._drainedStats[stat] > 0) {
+      this._drainedStats[stat] = 0;
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Restore all drained stats
+   * @returns array of stat names that were restored
+   */
+  restoreAllStats(): (keyof Stats)[] {
+    const restored: (keyof Stats)[] = [];
+    const statKeys: (keyof Stats)[] = ['str', 'int', 'wis', 'dex', 'con', 'chr'];
+
+    for (const stat of statKeys) {
+      if (this._drainedStats[stat] > 0) {
+        this._drainedStats[stat] = 0;
+        restored.push(stat);
+      }
+    }
+
+    return restored;
   }
 
   /**
