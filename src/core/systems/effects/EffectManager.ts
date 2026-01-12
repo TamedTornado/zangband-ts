@@ -96,6 +96,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   deathRay: DeathRayEffect,
   // Word of Death (dispel living monsters)
   wordOfDeath: WordOfDeathEffect,
+  // Death Dealing (same as wordOfDeath - dispel living)
+  deathDealing: WordOfDeathEffect,
   // Omnicide (kill all non-unique monsters on level)
   omnicide: OmnicideEffect,
   // Banish Evil (teleport evil monsters away)
