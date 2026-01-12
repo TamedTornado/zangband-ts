@@ -49,6 +49,7 @@ import { TeleportLevelEffect } from './TeleportLevelEffect';
 import { WizLiteEffect } from './WizLiteEffect';
 import { RestoreLevelEffect } from './RestoreLevelEffect';
 import { FetchEffect } from './FetchEffect';
+import { RechargeEffect } from './RechargeEffect';
 
 /**
  * Default effect registry
@@ -115,6 +116,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   restoreLevel: RestoreLevelEffect,
   // Telekinesis
   fetch: FetchEffect,
+  // Device recharging
+  recharge: RechargeEffect,
 };
 
 export class EffectManager {
