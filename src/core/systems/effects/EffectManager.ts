@@ -60,6 +60,7 @@ import { DeathRayEffect } from './DeathRayEffect';
 import { WordOfDeathEffect } from './WordOfDeathEffect';
 import { OmnicideEffect } from './OmnicideEffect';
 import { BanishEvilEffect } from './BanishEvilEffect';
+import { PhlogistonEffect } from './PhlogistonEffect';
 
 /**
  * Default effect registry
@@ -91,6 +92,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   omnicide: OmnicideEffect,
   // Banish Evil (teleport evil monsters away)
   banishEvil: BanishEvilEffect,
+  // Phlogiston (refuel torch/lantern)
+  phlogiston: PhlogistonEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
