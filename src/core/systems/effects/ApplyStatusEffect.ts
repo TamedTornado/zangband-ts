@@ -6,12 +6,14 @@
  *
  * Example: { type: "applyStatus", status: "heroism", duration: "25+1d25" }
  * Example: { type: "applyStatus", status: "slow", duration: 20 }
+ * Example: { type: "applyStatus", status: "confused", duration: 10, allowSave: true, saveDifficulty: 20 }
  */
 
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectContext, GPEffectResult } from './GPEffect';
 import { createStatus } from '@/core/systems/status';
 import { rollDiceExpression } from './diceUtils';
+import { ActorType } from '@/core/entities/Actor';
 import type { Monster } from '@/core/entities/Monster';
 
 export class ApplyStatusEffect extends SelfGPEffect {
@@ -26,17 +28,32 @@ export class ApplyStatusEffect extends SelfGPEffect {
 
     // Get flags for resistance check (monsters have flags via getMonsterInfo)
     let flags: string[] = [];
-    if (context.getMonsterInfo && 'definitionKey' in target) {
+    const isMonster = target.actorType === ActorType.Monster;
+    if (isMonster && context.getMonsterInfo) {
       const monsterInfo = context.getMonsterInfo(target as Monster);
       flags = monsterInfo.flags;
     }
 
     // Check if target can receive this status
     if (!target.canReceiveStatus(statusId, flags)) {
-      const name = context.getMonsterInfo && 'definitionKey' in target
+      const name = isMonster && context.getMonsterInfo
         ? context.getMonsterInfo(target as Monster).name
         : 'target';
       return this.success([`The ${name} is unaffected.`]);
+    }
+
+    // Check saving throw (delegated to actor - Player uses skills, Monster uses level)
+    const allowSave = this.getBoolean('allowSave', false);
+    if (allowSave) {
+      const saveDifficulty = this.getNumber('saveDifficulty', 0);
+
+      if (target.attemptSave(saveDifficulty, context.rng)) {
+        if (isMonster && context.getMonsterInfo) {
+          const name = context.getMonsterInfo(target as Monster).name;
+          return this.success([`${name} resists!`]);
+        }
+        return this.success(['You resist the effect!']);
+      }
     }
 
     const params: Record<string, number> = {};

@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest';
+import { createTestActor } from './testHelpers';
 import { MagicSystem, type SpellEffect } from '@/core/systems/Magic';
 import { Actor } from '@/core/entities/Actor';
 
 function createActor(id: string, hp: number = 100): Actor {
-  return new Actor({
+  return createTestActor({
     id,
     position: { x: 5, y: 5 },
     symbol: '@',

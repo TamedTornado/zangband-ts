@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest';
+import { createTestActor } from './testHelpers';
 import { Scheduler } from '@/core/systems/Scheduler';
 import { Actor } from '@/core/entities/Actor';
 
 function createActor(id: string, speed: number): Actor {
-  return new Actor({
+  return createTestActor({
     id,
     position: { x: 0, y: 0 },
     symbol: 'a',

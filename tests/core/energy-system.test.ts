@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { Actor } from '@/core/entities/Actor';
+import { createTestActor } from './testHelpers';
 import { Player } from '@/core/entities/Player';
 import { extractEnergy, calculateDeviceEnergyCost } from '@/core/systems/Energy';
 import { ENERGY_PER_TURN } from '@/core/constants';
@@ -73,7 +73,7 @@ describe('Energy System', () => {
 
   describe('Actor energy gain', () => {
     it('should gain energy based on extract_energy table, not raw speed', () => {
-      const actor = new Actor({
+      const actor = createTestActor({
         id: 'test',
         position: { x: 0, y: 0 },
         symbol: 'a',
@@ -93,7 +93,7 @@ describe('Energy System', () => {
     });
 
     it('should gain 20 energy per tick when hasted (+10 speed)', () => {
-      const actor = new Actor({
+      const actor = createTestActor({
         id: 'test',
         position: { x: 0, y: 0 },
         symbol: 'a',
@@ -109,7 +109,7 @@ describe('Energy System', () => {
 
     it('should gain 5 energy per tick when slowed (-10 speed)', () => {
       // -10 speed (100) = half speed = 5 energy/tick
-      const actor = new Actor({
+      const actor = createTestActor({
         id: 'test',
         position: { x: 0, y: 0 },
         symbol: 'a',
@@ -126,7 +126,7 @@ describe('Energy System', () => {
     it('should gain 20 energy per tick at speed 120 (simulating haste)', () => {
       // Creating actor with hasted speed directly
       // (Status system integration tested separately)
-      const actor = new Actor({
+      const actor = createTestActor({
         id: 'test',
         position: { x: 0, y: 0 },
         symbol: 'a',
@@ -143,7 +143,7 @@ describe('Energy System', () => {
 
     it('should gain 5 energy per tick at speed 100 (simulating slow)', () => {
       // Creating actor with slowed speed directly
-      const actor = new Actor({
+      const actor = createTestActor({
         id: 'test',
         position: { x: 0, y: 0 },
         symbol: 'a',
@@ -161,7 +161,7 @@ describe('Energy System', () => {
 
   describe('Action timing with speed', () => {
     it('normal speed actor needs 10 ticks to act after spending energy', () => {
-      const actor = new Actor({
+      const actor = createTestActor({
         id: 'test',
         position: { x: 0, y: 0 },
         symbol: 'a',
@@ -185,7 +185,7 @@ describe('Energy System', () => {
     });
 
     it('hasted actor needs only 5 ticks to act after spending energy', () => {
-      const actor = new Actor({
+      const actor = createTestActor({
         id: 'test',
         position: { x: 0, y: 0 },
         symbol: 'a',
@@ -209,7 +209,7 @@ describe('Energy System', () => {
     });
 
     it('slowed actor needs 20 ticks to act after spending energy', () => {
-      const actor = new Actor({
+      const actor = createTestActor({
         id: 'test',
         position: { x: 0, y: 0 },
         symbol: 'a',
@@ -235,7 +235,7 @@ describe('Energy System', () => {
     });
 
     it('hasted actor acts twice as often as normal', () => {
-      const normal = new Actor({
+      const normal = createTestActor({
         id: 'normal',
         position: { x: 0, y: 0 },
         symbol: 'a',
@@ -244,7 +244,7 @@ describe('Energy System', () => {
         speed: 110,
       });
 
-      const hasted = new Actor({
+      const hasted = createTestActor({
         id: 'hasted',
         position: { x: 0, y: 0 },
         symbol: 'a',

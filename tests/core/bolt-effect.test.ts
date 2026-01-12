@@ -6,11 +6,11 @@ import { Monster } from '@/core/entities/Monster';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
-import { createTestMonsterDef, createMockLevel } from './testHelpers';
+import { createTestMonsterDef, createMockLevel, createTestActor } from './testHelpers';
 
 // Helper to create actor at position
 function createActor(x: number, y: number): Actor {
-  return new Actor({
+  return createTestActor({
     id: `actor-${x}-${y}`,
     position: { x, y },
     symbol: '@',

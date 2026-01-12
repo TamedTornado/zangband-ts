@@ -1,4 +1,4 @@
-import { Actor } from './Actor';
+import { Actor, ActorType } from './Actor';
 import type { Item } from './Item';
 import type { ILevel } from '../world/Level';
 import type { ItemGeneration } from '../systems/ItemGeneration';
@@ -113,6 +113,7 @@ export interface PlayerConfig {
 }
 
 export class Player extends Actor {
+  readonly actorType = ActorType.Player;
   readonly stats: Stats;
   private _name: string = 'Unknown';
   private _raceKey: string = 'human';
@@ -1079,5 +1080,15 @@ export class Player extends Actor {
     }
 
     return { damage: finalDamage, status: 'normal' };
+  }
+
+  /**
+   * Attempt a saving throw using player's saving skill.
+   * Formula: roll 1-100, save if roll < skills.saving - power
+   */
+  override attemptSave(power: number, rng: typeof RNG): boolean {
+    const savingScore = this.skills.saving - power;
+    const roll = rng.getUniformInt(1, 100);
+    return roll < savingScore;
   }
 }

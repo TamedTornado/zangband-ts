@@ -1,4 +1,4 @@
-import { Actor, type ActorConfig } from './Actor';
+import { Actor, ActorType, type ActorConfig } from './Actor';
 import type { MonsterDef } from '@/core/data/monsters';
 import type { Element, Position } from '@/core/types';
 import { RNG } from 'rot-js';
@@ -10,6 +10,7 @@ export interface MonsterConfig extends ActorConfig {
 }
 
 export class Monster extends Actor {
+  readonly actorType = ActorType.Monster;
   /** Monster definition - provides flags, spells, attacks, etc. */
   readonly def: MonsterDef;
   /** @deprecated Use def.key instead */
@@ -158,5 +159,21 @@ export class Monster extends Actor {
     const status = getMonsterResistStatus(this.def.flags, element);
     const finalDamage = applyMonsterResistance(damage, status, rng);
     return { damage: finalDamage, status };
+  }
+
+  /**
+   * Attempt a saving throw using monster's level (depth).
+   * UNIQUE monsters always save. Others: depth > rand(1, power * 3)
+   */
+  override attemptSave(power: number, rng: typeof RNG): boolean {
+    // UNIQUE monsters always resist
+    if (this.def.flags.includes('UNIQUE')) {
+      return true;
+    }
+
+    // Level-based save: depth > rand(1, power * 3)
+    const effectivePower = Math.max(1, power);
+    const roll = rng.getUniformInt(1, effectivePower * 3);
+    return this.def.depth > roll;
   }
 }

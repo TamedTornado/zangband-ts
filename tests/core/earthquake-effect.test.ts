@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+import { createTestActor } from './testHelpers';
 import { RNG } from 'rot-js';
 import { EarthquakeEffect } from '@/core/systems/effects/EarthquakeEffect';
 import { Actor } from '@/core/entities/Actor';
@@ -87,7 +88,7 @@ function createMockMonster(x: number, y: number, startHp = 50) {
 
 // Helper to create actor at position
 function createActor(x: number, y: number): Actor {
-  return new Actor({
+  return createTestActor({
     id: `actor-${x}-${y}`,
     position: { x, y },
     symbol: '@',

@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+import { createTestActor } from './testHelpers';
 import { RNG } from 'rot-js';
 import { PolymorphEffect } from '@/core/systems/effects/PolymorphEffect';
 import { Actor } from '@/core/entities/Actor';
@@ -54,7 +55,7 @@ function createMockLevel() {
 
 // Helper to create actor at position
 function createActor(x: number, y: number): Actor {
-  return new Actor({
+  return createTestActor({
     id: `actor-${x}-${y}`,
     position: { x, y },
     symbol: '@',

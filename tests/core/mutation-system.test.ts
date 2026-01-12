@@ -303,8 +303,8 @@ describe('MutationSystem', () => {
       system.gainMutation(player, 'hyper_str', RNG);
       const def = system.getDef('hyper_str');
 
-      if (def?.category === 'passive' && def.modifiers?.str) {
-        expect(player.currentStats.str).toBe(baseStat + def.modifiers.str);
+      if (def?.category === 'passive' && def.modifiers?.['str']) {
+        expect(player.currentStats.str).toBe(baseStat + def.modifiers['str']);
       }
     });
 

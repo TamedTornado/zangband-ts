@@ -7,7 +7,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
-import { createTestMonsterDef } from './testHelpers';
+import { createTestMonsterDef, createTestActor } from './testHelpers';
 
 // Mock level with monsters and walkable tiles
 function createMockLevel(monsters: Monster[] = [], width = 100, height = 100) {
@@ -37,7 +37,7 @@ function createMockLevel(monsters: Monster[] = [], width = 100, height = 100) {
 
 // Helper to create actor at position
 function createActor(x: number, y: number): Actor {
-  return new Actor({
+  return createTestActor({
     id: `actor-${x}-${y}`,
     position: { x, y },
     symbol: '@',

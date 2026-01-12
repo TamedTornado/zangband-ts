@@ -8,7 +8,7 @@
 
 import { describe, it, expect, beforeEach } from 'vitest';
 import { RNG } from 'rot-js';
-import { Actor } from '@/core/entities/Actor';
+import type { Actor } from '@/core/entities/Actor';
 import { Monster } from '@/core/entities/Monster';
 import { Level } from '@/core/world/Level';
 import { getEffectManager, type GPEffectDef, type GPEffectContext } from '@/core/systems/effects';
@@ -16,7 +16,7 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import itemsData from '@/data/items/items.json';
 import type { ItemDef } from '@/core/data/items';
-import { createTestMonsterDef } from './testHelpers';
+import { createTestMonsterDef, createTestActor } from './testHelpers';
 
 // Load data before tests
 beforeEach(() => {
@@ -24,8 +24,8 @@ beforeEach(() => {
 });
 
 // Helper to create a test actor
-function createTestActor(hp = 100): Actor {
-  return new Actor({
+function makeTestActor(hp = 100): Actor {
+  return createTestActor({
     id: 'test-actor',
     position: { x: 5, y: 5 },
     symbol: '@',
@@ -79,7 +79,7 @@ function getItem(key: string): ItemDef {
 
 describe('Device effects - bolt type', () => {
   it('executes bolt effect without throwing "Unknown effect type"', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -102,7 +102,7 @@ describe('Device effects - bolt type', () => {
     expect(item.effects!.length).toBeGreaterThan(0);
     expect(item.effects![0].type).toBe('bolt');
 
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -118,7 +118,7 @@ describe('Device effects - bolt type', () => {
     expect(item).toBeDefined();
     expect(item.effects).toBeDefined();
 
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -131,7 +131,7 @@ describe('Device effects - bolt type', () => {
 
 describe('Device effects - drainLife type', () => {
   it('executes drainLife effect without throwing "Unknown effect type"', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -152,7 +152,7 @@ describe('Device effects - drainLife type', () => {
     expect(item.effects).toBeDefined();
     expect(item.effects![0].type).toBe('drainLife');
 
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -165,7 +165,7 @@ describe('Device effects - drainLife type', () => {
 
 describe('Device effects - ball type', () => {
   it('executes ball effect without throwing "Unknown effect type"', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -185,7 +185,7 @@ describe('Device effects - ball type', () => {
     expect(item).toBeDefined();
     expect(item.effects).toBeDefined();
 
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -198,7 +198,7 @@ describe('Device effects - ball type', () => {
 
 describe('Device effects - teleportOther type', () => {
   it('executes teleportOther effect without throwing', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -275,7 +275,7 @@ describe('Device effects regression - legacy executor bug', () => {
   ]);
 
   it('devices with bolt effects are executable', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -296,7 +296,7 @@ describe('Device effects regression - legacy executor bug', () => {
   });
 
   it('devices with ball effects are executable', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -317,7 +317,7 @@ describe('Device effects regression - legacy executor bug', () => {
   });
 
   it('devices with drainLife effects are executable', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);
@@ -338,7 +338,7 @@ describe('Device effects regression - legacy executor bug', () => {
   });
 
   it('all devices with implemented effect types are executable', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const level = createTestLevel();
     const monster = createTestMonster();
     level.addMonster(monster);

@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+import { createTestActor } from './testHelpers';
 import { RNG } from 'rot-js';
-import { Actor } from '@/core/entities/Actor';
+import type { Actor } from '@/core/entities/Actor';
 import { Level } from '@/core/world/Level';
 import { rollDiceExpression, getEffectManager, type GPEffectDef, type GPEffectContext } from '@/core/systems/effects';
 import { loadStatusDefs } from '@/core/systems/status';
@@ -14,8 +15,8 @@ beforeEach(() => {
 });
 
 // Helper to create a test actor
-function createTestActor(hp = 100): Actor {
-  return new Actor({
+function makeTestActor(hp = 100): Actor {
+  return createTestActor({
     id: 'test-actor',
     position: { x: 0, y: 0 },
     symbol: '@',
@@ -84,7 +85,7 @@ describe('rollDiceExpression', () => {
 
 describe('GPEffect - heal', () => {
   it('heals fixed amount', () => {
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
     actor.takeDamage(50);
     expect(actor.hp).toBe(50);
 
@@ -96,7 +97,7 @@ describe('GPEffect - heal', () => {
   });
 
   it('heals dice amount', () => {
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
     actor.takeDamage(50);
 
     // 2d1 = 2
@@ -107,7 +108,7 @@ describe('GPEffect - heal', () => {
   });
 
   it('does not overheal', () => {
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
     actor.takeDamage(10);
     expect(actor.hp).toBe(90);
 
@@ -120,7 +121,7 @@ describe('GPEffect - heal', () => {
 
 describe('GPEffect - applyStatus', () => {
   it('applies duration status', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     const effects: GPEffectDef[] = [
       { type: 'applyStatus', status: 'haste', duration: '10' },
@@ -132,7 +133,7 @@ describe('GPEffect - applyStatus', () => {
   });
 
   it('applies status with dice duration', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // 10+1d1 = 11
     const effects: GPEffectDef[] = [
@@ -144,7 +145,7 @@ describe('GPEffect - applyStatus', () => {
   });
 
   it('applies poison with duration and damage', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     const effects: GPEffectDef[] = [
       { type: 'applyStatus', status: 'poisoned', duration: '5', damage: 3 },
@@ -155,7 +156,7 @@ describe('GPEffect - applyStatus', () => {
   });
 
   it('applies multiple statuses', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     const effects: GPEffectDef[] = [
       { type: 'applyStatus', status: 'haste', duration: '10' },
@@ -170,7 +171,7 @@ describe('GPEffect - applyStatus', () => {
 
 describe('GPEffect - cure', () => {
   it('cures existing status', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // First apply blind
     executeEffects(
@@ -186,7 +187,7 @@ describe('GPEffect - cure', () => {
   });
 
   it('does nothing if status not present', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     expect(actor.statuses.has('blind')).toBe(false);
 
     const result = executeEffects([{ type: 'cure', status: 'blind' }], actor);
@@ -198,7 +199,7 @@ describe('GPEffect - cure', () => {
 
 describe('GPEffect - reduce', () => {
   it('reduces cut intensity', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // Apply a cut with intensity 100
     executeEffects(
@@ -217,7 +218,7 @@ describe('GPEffect - reduce', () => {
   });
 
   it('removes status when reduced to zero', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // Apply a cut with intensity 50
     executeEffects(
@@ -238,7 +239,7 @@ describe('GPEffect - reduce', () => {
 
 describe('GPEffect - combined', () => {
   it('executes heal + cure combo (Cure Serious Wounds)', () => {
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
     actor.takeDamage(50);
 
     // Apply blind and confused
@@ -264,7 +265,7 @@ describe('GPEffect - combined', () => {
   });
 
   it('executes status + cure combo (Heroism)', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // Apply afraid first
     executeEffects(
@@ -287,7 +288,7 @@ describe('GPEffect - combined', () => {
 
 describe('GPEffect - unknown type', () => {
   it('throws error for unknown effect type', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     const effects: GPEffectDef[] = [{ type: 'unknown_effect' }];
 
@@ -352,7 +353,7 @@ describe('Item effects', () => {
 
 describe('Integration: item effects on actor', () => {
   it('Cure Light Wounds heals and reduces cut', () => {
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
     actor.takeDamage(30);
 
     // Apply a cut
@@ -369,7 +370,7 @@ describe('Integration: item effects on actor', () => {
   });
 
   it('Speed potion applies haste', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     expect(actor.statuses.has('haste')).toBe(false);
 
     const item = getItem('potion_of_speed');
@@ -380,7 +381,7 @@ describe('Integration: item effects on actor', () => {
   });
 
   it('Neutralize Poison cures poison', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // Apply poison
     executeEffects(
@@ -397,7 +398,7 @@ describe('Integration: item effects on actor', () => {
   });
 
   it('Slowness potion applies slow', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     expect(actor.speed).toBe(110);
 
     const item = getItem('potion_of_slowness');
@@ -408,7 +409,7 @@ describe('Integration: item effects on actor', () => {
   });
 
   it('Elvish Waybread heals and cures poison', () => {
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
     actor.takeDamage(50);
 
     // Apply poison

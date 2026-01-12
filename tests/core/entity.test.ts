@@ -1,10 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { Entity } from '@/core/entities/Entity';
-import { Actor } from '@/core/entities/Actor';
 import { Item } from '@/core/entities/Item';
 import { Player } from '@/core/entities/Player';
 import { Monster } from '@/core/entities/Monster';
-import { createTestMonsterDef } from './testHelpers';
+import { createTestMonsterDef, createTestActor } from './testHelpers';
 
 describe('Entity', () => {
   it('should have id, position, symbol, color', () => {
@@ -49,7 +48,7 @@ describe('Entity', () => {
 
 describe('Actor', () => {
   it('should extend Entity with hp and energy', () => {
-    const actor = new Actor({
+    const actor = createTestActor({
       id: 'actor-1',
       position: { x: 0, y: 0 },
       symbol: 'k',
@@ -67,7 +66,7 @@ describe('Actor', () => {
   });
 
   it('should track hp changes', () => {
-    const actor = new Actor({
+    const actor = createTestActor({
       id: 'actor-1',
       position: { x: 0, y: 0 },
       symbol: 'k',
@@ -87,7 +86,7 @@ describe('Actor', () => {
   });
 
   it('should report isDead when hp <= 0', () => {
-    const actor = new Actor({
+    const actor = createTestActor({
       id: 'actor-1',
       position: { x: 0, y: 0 },
       symbol: 'k',
@@ -102,7 +101,7 @@ describe('Actor', () => {
   });
 
   it('should gain energy based on speed using extract_energy table', () => {
-    const actor = new Actor({
+    const actor = createTestActor({
       id: 'actor-1',
       position: { x: 0, y: 0 },
       symbol: 'k',
@@ -122,7 +121,7 @@ describe('Actor', () => {
   });
 
   it('should spend energy on actions', () => {
-    const actor = new Actor({
+    const actor = createTestActor({
       id: 'actor-1',
       position: { x: 0, y: 0 },
       symbol: 'k',
@@ -143,7 +142,7 @@ describe('Actor', () => {
   });
 
   it('should report canAct when energy >= 100', () => {
-    const actor = new Actor({
+    const actor = createTestActor({
       id: 'actor-1',
       position: { x: 0, y: 0 },
       symbol: 'k',

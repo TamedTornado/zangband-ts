@@ -8,7 +8,7 @@ import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, GPEffectDef, MonsterInfo } from '@/core/systems/effects/GPEffect';
 import type { Position } from '@/core/types';
 import { getEffectManager } from '@/core/systems/effects/EffectManager';
-import { createTestMonsterDef } from './testHelpers';
+import { createTestMonsterDef, createTestActor } from './testHelpers';
 
 // Mock level
 function createMockLevel(monsters: Monster[] = [], width = 100, height = 100) {
@@ -40,7 +40,7 @@ function createMockLevel(monsters: Monster[] = [], width = 100, height = 100) {
 }
 
 function createActor(x: number, y: number): Actor {
-  return new Actor({
+  return createTestActor({
     id: `actor-${x}-${y}`,
     position: { x, y },
     symbol: '@',

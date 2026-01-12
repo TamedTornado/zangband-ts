@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, beforeAll } from 'vitest';
+import { createTestActor } from './testHelpers';
 import { RNG } from 'rot-js';
 import {
   getPlayerResistLevel,
@@ -205,7 +206,7 @@ describe('Damage System', () => {
     let monster: Actor;
 
     beforeEach(() => {
-      monster = new Actor({
+      monster = createTestActor({
         id: 'monster',
         position: { x: 5, y: 5 },
         symbol: 'k',
@@ -295,7 +296,7 @@ describe('Damage System', () => {
 
     describe('Actor base class', () => {
       it('returns full damage (no resistance)', () => {
-        const actor = new Actor({
+        const actor = createTestActor({
           id: 'test',
           position: { x: 0, y: 0 },
           symbol: '@',

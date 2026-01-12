@@ -7,10 +7,10 @@ import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, GPEffectDef } from '@/core/systems/effects/GPEffect';
 import { getEffectManager } from '@/core/systems/effects/EffectManager';
-import { createTestMonsterDef, createMockLevel } from './testHelpers';
+import { createTestMonsterDef, createMockLevel, createTestActor } from './testHelpers';
 
 function createActor(x: number, y: number): Actor {
-  return new Actor({
+  return createTestActor({
     id: `actor-${x}-${y}`,
     position: { x, y },
     symbol: '@',

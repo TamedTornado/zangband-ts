@@ -69,4 +69,10 @@ export abstract class BaseGPEffect implements GPEffect {
     const value = this.def[key];
     return typeof value === 'number' ? value : defaultValue;
   }
+
+  /** Helper: get a boolean param from def */
+  protected getBoolean(key: string, defaultValue: boolean = false): boolean {
+    const value = this.def[key];
+    return typeof value === 'boolean' ? value : defaultValue;
+  }
 }

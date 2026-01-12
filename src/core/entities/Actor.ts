@@ -9,7 +9,14 @@ export interface ActorConfig extends EntityConfig {
   speed: number;
 }
 
-export class Actor extends Entity {
+export const ActorType = {
+  Player: 'player',
+  Monster: 'monster',
+} as const;
+export type ActorType = (typeof ActorType)[keyof typeof ActorType];
+
+export abstract class Actor extends Entity {
+  abstract readonly actorType: ActorType;
   readonly baseMaxHp: number;
   private _hp: number;
   readonly baseSpeed: number;
@@ -93,5 +100,17 @@ export class Actor extends Entity {
   ): { damage: number; status: string } {
     // Base Actor has no resistances
     return { damage, status: 'normal' };
+  }
+
+  /**
+   * Attempt a saving throw against an effect.
+   * Override in subclasses to implement player/monster-specific save formulas.
+   * @param power The power/difficulty of the effect to save against
+   * @param rng Random number generator
+   * @returns true if save succeeds (effect is resisted)
+   */
+  attemptSave(_power: number, _rng: typeof RNG): boolean {
+    // Base Actor has no saving throw
+    return false;
   }
 }

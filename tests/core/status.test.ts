@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+import { createTestActor } from './testHelpers';
 import { RNG } from 'rot-js';
-import { Actor } from '@/core/entities/Actor';
+import type { Actor } from '@/core/entities/Actor';
 import {
   loadStatusDefs,
   getStatusDef,
@@ -23,8 +24,8 @@ beforeEach(() => {
 });
 
 // Helper to create a test actor
-function createTestActor(hp = 100): Actor {
-  return new Actor({
+function makeTestActor(hp = 100): Actor {
+  return createTestActor({
     id: 'test-actor',
     position: { x: 0, y: 0 },
     symbol: '@',
@@ -63,10 +64,10 @@ describe('DurationStatus', () => {
     const status = createDurationStatus('heroism', 10);
     expect(status.duration).toBe(10);
 
-    status.tick(createTestActor(), RNG);
+    status.tick(makeTestActor(), RNG);
     expect(status.duration).toBe(9);
 
-    status.tick(createTestActor(), RNG);
+    status.tick(makeTestActor(), RNG);
     expect(status.duration).toBe(8);
   });
 
@@ -74,10 +75,10 @@ describe('DurationStatus', () => {
     const status = createDurationStatus('heroism', 2);
     expect(status.isExpired()).toBe(false);
 
-    status.tick(createTestActor(), RNG);
+    status.tick(makeTestActor(), RNG);
     expect(status.isExpired()).toBe(false);
 
-    status.tick(createTestActor(), RNG);
+    status.tick(makeTestActor(), RNG);
     expect(status.isExpired()).toBe(true);
   });
 
@@ -107,7 +108,7 @@ describe('DurationStatus', () => {
 
   it('calls onApply and onExpire', () => {
     const status = createDurationStatus('heroism', 1);
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // onApply returns empty for base DurationStatus
     const applyMessages = status.onApply(actor);
@@ -139,7 +140,7 @@ describe('CutStatus', () => {
 
   it('deals damage based on severity', () => {
     const cut = createCutStatus(100); // "nasty cut" level = 6 damage
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
 
     cut.tick(actor, RNG);
     expect(actor.hp).toBeLessThan(100);
@@ -147,7 +148,7 @@ describe('CutStatus', () => {
 
   it('heals naturally over time', () => {
     const cut = createCutStatus(5);
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // After 5 ticks, should be expired
     for (let i = 0; i < 5; i++) {
@@ -158,7 +159,7 @@ describe('CutStatus', () => {
 
   it('expires when intensity reaches 0', () => {
     const cut = createCutStatus(1);
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     expect(cut.isExpired()).toBe(false);
     cut.tick(actor, RNG);
@@ -167,7 +168,7 @@ describe('CutStatus', () => {
 
   it('returns severity message on apply', () => {
     const cut = createCutStatus(200);
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     const messages = cut.onApply(actor);
     expect(messages.some(m => m.includes('severe cut'))).toBe(true);
@@ -194,7 +195,7 @@ describe('StunStatus', () => {
 
   it('recovers naturally over time', () => {
     const stun = createStunStatus(3);
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     for (let i = 0; i < 3; i++) {
       stun.tick(actor, RNG);
@@ -232,7 +233,7 @@ describe('PoisonStatus', () => {
 
   it('deals damage each tick', () => {
     const poison = createPoisonStatus(5, 10);
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
 
     poison.tick(actor, RNG);
     expect(actor.hp).toBe(90);
@@ -243,7 +244,7 @@ describe('PoisonStatus', () => {
 
   it('expires after duration', () => {
     const poison = createPoisonStatus(3, 5);
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     expect(poison.isExpired()).toBe(false);
 
@@ -256,7 +257,7 @@ describe('PoisonStatus', () => {
 
   it('returns damage message', () => {
     const poison = createPoisonStatus(5, 7);
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     const result = poison.tick(actor, RNG);
     expect(result.messages).toContain('You take 7 poison damage.');
@@ -266,7 +267,7 @@ describe('PoisonStatus', () => {
 describe('StatusManager', () => {
   it('adds status and returns apply message', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
     const status = createDurationStatus('heroism', 10);
 
     const messages = manager.add(status, actor);
@@ -276,7 +277,7 @@ describe('StatusManager', () => {
 
   it('merges same status type', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createDurationStatus('heroism', 5), actor);
     const messages = manager.add(createDurationStatus('heroism', 10), actor);
@@ -287,7 +288,7 @@ describe('StatusManager', () => {
 
   it('allows multiple poison stacks', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createPoisonStatus(5, 3), actor);
     manager.add(createPoisonStatus(3, 2), actor);
@@ -297,7 +298,7 @@ describe('StatusManager', () => {
 
   it('removes expired statuses on tick', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createDurationStatus('heroism', 2), actor);
     expect(manager.has('heroism')).toBe(true);
@@ -310,7 +311,7 @@ describe('StatusManager', () => {
 
   it('returns expire message when status ends', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createDurationStatus('heroism', 1), actor);
     const messages = manager.tick(actor, RNG);
@@ -320,7 +321,7 @@ describe('StatusManager', () => {
 
   it('calculates stat modifiers', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     expect(manager.getModifier('speed')).toBe(0);
 
@@ -333,7 +334,7 @@ describe('StatusManager', () => {
 
   it('clears specific status', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createDurationStatus('heroism', 10), actor);
     manager.add(createDurationStatus('haste', 10), actor);
@@ -346,7 +347,7 @@ describe('StatusManager', () => {
 
   it('clears all statuses', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createDurationStatus('heroism', 10), actor);
     manager.add(createDurationStatus('haste', 10), actor);
@@ -358,7 +359,7 @@ describe('StatusManager', () => {
 
   it('calls onApply when adding new status', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // CutStatus returns severity message on apply
     const cut = createCutStatus(200);
@@ -371,7 +372,7 @@ describe('StatusManager', () => {
 
   it('calls onExpire when status ends', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createDurationStatus('heroism', 1), actor);
     const messages = manager.tick(actor, RNG);
@@ -383,7 +384,7 @@ describe('StatusManager', () => {
 describe('StatusManager reduce/cure', () => {
   it('reduces single accumulating status', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createCutStatus(100), actor);
     manager.reduce('cut', 30, actor);
@@ -394,7 +395,7 @@ describe('StatusManager reduce/cure', () => {
 
   it('fully consumes and removes status when reduced to zero', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createCutStatus(50), actor);
     const messages = manager.reduce('cut', 100, actor);
@@ -405,7 +406,7 @@ describe('StatusManager reduce/cure', () => {
 
   it('reduces across multiple poison stacks', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     // 3 stacks of 10 duration each
     manager.add(createPoisonStatus(10, 5), actor);
@@ -422,7 +423,7 @@ describe('StatusManager reduce/cure', () => {
 
   it('cure removes all stacks', () => {
     const manager = new StatusManager();
-    const actor = createTestActor();
+    const actor = makeTestActor();
 
     manager.add(createPoisonStatus(10, 5), actor);
     manager.add(createPoisonStatus(10, 5), actor);
@@ -463,12 +464,12 @@ describe('createStatus factory', () => {
 
 describe('Actor with StatusManager', () => {
   it('has statusManager', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     expect(actor.statuses).toBeInstanceOf(StatusManager);
   });
 
   it('applies speed modifier from statuses', () => {
-    const actor = createTestActor();
+    const actor = makeTestActor();
     expect(actor.speed).toBe(110);
 
     actor.statuses.add(createDurationStatus('haste', 10), actor);
@@ -476,7 +477,7 @@ describe('Actor with StatusManager', () => {
   });
 
   it('applies maxHp modifier from statuses', () => {
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
     expect(actor.maxHp).toBe(100);
 
     actor.statuses.add(createDurationStatus('heroism', 10), actor);
@@ -484,7 +485,7 @@ describe('Actor with StatusManager', () => {
   });
 
   it('stacks multiple modifiers', () => {
-    const actor = createTestActor(100);
+    const actor = makeTestActor(100);
     actor.statuses.add(createDurationStatus('heroism', 10), actor);
     actor.statuses.add(createDurationStatus('berserk', 10), actor);
 

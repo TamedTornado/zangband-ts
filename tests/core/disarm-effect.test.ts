@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { createTestActor } from './testHelpers';
 import { RNG } from 'rot-js';
 import { DisarmEffect } from '@/core/systems/effects/DisarmEffect';
 import { Actor } from '@/core/entities/Actor';
@@ -76,7 +77,7 @@ function createMockLevel(width = 20, height = 20) {
 
 // Helper to create actor at position
 function createActor(x: number, y: number): Actor {
-  return new Actor({
+  return createTestActor({
     id: `actor-${x}-${y}`,
     position: { x, y },
     symbol: '@',

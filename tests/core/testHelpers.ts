@@ -4,10 +4,27 @@
 
 import type { MonsterDef } from '@/core/data/monsters';
 import type { ItemDef } from '@/core/data/items';
-import type { Actor } from '@/core/entities/Actor';
+import type { Actor, ActorConfig } from '@/core/entities/Actor';
 import { Monster } from '@/core/entities/Monster';
 import type { ILevel } from '@/core/world/Level';
 import type { Position } from '@/core/types';
+
+/**
+ * Create a simple Actor for testing (returns a Monster with minimal def).
+ * This is a drop-in replacement for `new Actor({...})` in tests.
+ */
+export function createTestActor(config: ActorConfig): Monster {
+  const def = createTestMonsterDef({
+    key: config.id,
+    name: 'Test Actor',
+    speed: config.speed,
+    alertness: 0, // No RNG call in constructor (preserves test determinism)
+  });
+  return new Monster({
+    ...config,
+    def,
+  });
+}
 
 /**
  * Create a minimal ItemDef for testing.
