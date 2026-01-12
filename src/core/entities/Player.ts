@@ -158,6 +158,9 @@ export class Player extends Actor {
   // Food/hunger level (starts full)
   private _food: number = FoodLevel.FULL - 1;
 
+  // Search mode state (Zangband C: p_ptr->state.searching)
+  private _isSearching: boolean = false;
+
   constructor(config: PlayerConfig) {
     super({
       id: config.id,
@@ -1013,11 +1016,23 @@ export class Player extends Actor {
     return ac + mutAc;
   }
 
-  /** Override speed to include mutation modifiers */
+  /** Override speed to include mutation modifiers and search mode penalty */
   override get speed(): number {
     const baseSpeed = super.speed; // Includes status modifiers
     const mutSpeed = this._mutationSystem?.getSpeedModifier(this) ?? 0;
-    return baseSpeed + mutSpeed;
+    // Search mode slows player by 10 (Zangband C: xtra1.c:2801)
+    const searchPenalty = this._isSearching ? 10 : 0;
+    return baseSpeed + mutSpeed - searchPenalty;
+  }
+
+  /** Whether player is in search mode (continuous searching) */
+  get isSearching(): boolean {
+    return this._isSearching;
+  }
+
+  /** Toggle search mode on/off (Zangband C: do_cmd_toggle_search) */
+  toggleSearchMode(): void {
+    this._isSearching = !this._isSearching;
   }
 
   /** Get the weapon's damage dice string */

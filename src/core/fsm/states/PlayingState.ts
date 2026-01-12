@@ -26,7 +26,10 @@ import { WildernessRestoreState } from './WildernessRestoreState';
 import { isWildernessLevel } from '../../world/WildernessLevel';
 import { Direction, movePosition } from '../../types';
 import { RunSystem, type RunContext } from '../../systems/RunSystem';
+import { triggerTrap, type TrapTriggerContext } from '../../systems/TrapTrigger';
+import { shouldTriggerPassiveSearch, search } from '../../systems/SearchSystem';
 import { ENERGY_PER_TURN, VISION_RADIUS, VIEW_RADIUS, HP_REGEN_RATE } from '../../constants';
+import { RNG } from 'rot-js';
 import { getGameStore } from '@/core/store/gameStore';
 import { getDungeonType } from '@/core/data/DungeonTypes';
 import { WILD_BLOCK_SIZE } from '@/core/data/WildernessTypes';
@@ -113,6 +116,12 @@ export class PlayingState implements State {
       case 'enterBuilding':
         this.handleEnterStore(fsm); // Same as enterStore - looks up from player position
         return true;
+      case 'search':
+        this.handleSearch(fsm);
+        return true;
+      case 'toggleSearchMode':
+        this.handleToggleSearchMode(fsm);
+        return true;
       default:
         return false;
     }
@@ -129,6 +138,47 @@ export class PlayingState implements State {
     if (player.isDead) {
       fsm.transition(new DeadState());
     }
+  }
+
+  /**
+   * Handle manual search action ('s' key).
+   * Searches 3x3 area around player, costs one turn.
+   */
+  private handleSearch(fsm: GameFSM): void {
+    const store = getGameStore();
+    const player = store.player!;
+    const level = store.level!;
+
+    store.incrementTurn();
+    const result = search(player, level, RNG);
+
+    if (result.trapsFound === 0) {
+      fsm.addMessage('You search the area...', 'info');
+    }
+    for (const msg of result.messages) {
+      fsm.addMessage(msg.text, msg.type);
+    }
+
+    fsm.completeTurn(ENERGY_PER_TURN);
+  }
+
+  /**
+   * Handle toggle search mode action ('S' key).
+   * Toggles continuous searching, which searches every turn but slows movement.
+   */
+  private handleToggleSearchMode(fsm: GameFSM): void {
+    const store = getGameStore();
+    const player = store.player!;
+
+    player.toggleSearchMode();
+
+    if (player.isSearching) {
+      fsm.addMessage('You begin searching carefully.', 'info');
+    } else {
+      fsm.addMessage('You stop searching.', 'info');
+    }
+    // No turn cost to toggle search mode
+    fsm.notify();
   }
 
   private handleMove(fsm: GameFSM, dir: Direction): void {
@@ -163,6 +213,45 @@ export class PlayingState implements State {
       } else {
         // Dungeon: just update position
         player.position = newPos;
+      }
+
+      // Check for traps (dungeon only)
+      if (!isWilderness) {
+        const trap = level.getTrapAt(player.position);
+        if (trap && trap.isActive) {
+          const trapContext: TrapTriggerContext = { player, level, rng: RNG };
+          const trapResult = triggerTrap(trapContext, trap);
+          for (const msg of trapResult.messages) {
+            fsm.addMessage(msg.text, msg.type);
+          }
+          // Handle trap door (fall to next level)
+          if (trapResult.fellThroughFloor) {
+            this.handleTrapDoorFall(fsm);
+            return;
+          }
+          // Handle aggravation (wake all monsters)
+          if (trapResult.aggravated) {
+            for (const monster of level.getMonsters()) {
+              monster.wake();
+            }
+          }
+          // Handle summoning (spawn monsters near player)
+          if (trapResult.summonCount && trapResult.summonCount > 0) {
+            // Summoning is handled by caller with access to monster spawner
+            fsm.addMessage(`${trapResult.summonCount} monsters appear!`, 'danger');
+          }
+        }
+      }
+
+      // Passive search (check for hidden traps)
+      // Triggers if: in search mode (guaranteed) OR passive search skill check passes
+      const shouldSearch = player.isSearching ||
+        shouldTriggerPassiveSearch(player.skills.searching, RNG);
+      if (shouldSearch) {
+        const searchResult = search(player, level, RNG);
+        for (const msg of searchResult.messages) {
+          fsm.addMessage(msg.text, msg.type);
+        }
       }
 
       // Check for items
@@ -237,6 +326,12 @@ export class PlayingState implements State {
       fsm.addMessage(msg.text, msg.type);
     }
 
+    // Handle trap door fall
+    if (result.trapTriggered?.fellThroughFloor) {
+      this.handleTrapDoorFall(fsm);
+      return;
+    }
+
     this.checkPlayerDeath(fsm);
   }
 
@@ -273,6 +368,22 @@ export class PlayingState implements State {
     } else {
       fsm.addMessage(`You descend to dungeon level ${newDepth}.`, 'info');
     }
+  }
+
+  /**
+   * Handle falling through a trap door to the next level.
+   */
+  private handleTrapDoorFall(fsm: GameFSM): void {
+    const store = getGameStore();
+    const depth = store.depth;
+
+    const newDepth = depth + 1;
+    store.setDepth(newDepth);
+    fsm.goToLevel(newDepth);
+
+    fsm.addMessage(`You fall through the trap door to dungeon level ${newDepth}!`, 'danger');
+    fsm.completeTurn(ENERGY_PER_TURN);
+    this.checkPlayerDeath(fsm);
   }
 
   private handleUpStairs(fsm: GameFSM): void {

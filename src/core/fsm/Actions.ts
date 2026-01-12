@@ -69,6 +69,8 @@ export const ActionType = {
   EnterBuilding: 'enterBuilding',
   SelectServiceItem: 'selectServiceItem',
   ExitBuilding: 'exitBuilding',
+  Search: 'search',
+  ToggleSearchMode: 'toggleSearchMode',
 } as const;
 
 export type GameAction =
@@ -141,4 +143,7 @@ export type GameAction =
   // Service building actions
   | { type: 'enterBuilding' }
   | { type: 'selectServiceItem'; itemIndex: number }
-  | { type: 'exitBuilding' };
+  | { type: 'exitBuilding' }
+  // Search actions
+  | { type: 'search' }           // Manual single search ('s')
+  | { type: 'toggleSearchMode' }; // Toggle continuous search ('S')

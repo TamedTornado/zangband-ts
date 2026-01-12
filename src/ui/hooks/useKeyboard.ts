@@ -108,6 +108,9 @@ const ACTION_KEYS: Partial<Record<ActionTypeValue, string | string[]>> = {
   [ActionType.ExitStore]: 'Escape',
   // Service building
   [ActionType.ExitBuilding]: 'Escape',
+  // Search (s overlaps with StoreSell, states handle appropriately)
+  [ActionType.Search]: 's',
+  [ActionType.ToggleSearchMode]: 'shift+S',
 };
 
 /**

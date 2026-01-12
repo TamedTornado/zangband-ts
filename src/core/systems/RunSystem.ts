@@ -1,10 +1,13 @@
+import { RNG } from 'rot-js';
 import { Direction, movePosition, type Position } from '../types';
 import type { ILevel } from '../world/Level';
 import type { Monster } from '../entities/Monster';
 import type { Actor } from '../entities/Actor';
+import type { Player } from '../entities/Player';
 import type { StoreManager } from './StoreManager';
 import type { WildernessMap } from './wilderness/WildernessGenerator';
 import type { FOVSystem } from './FOV';
+import { triggerTrap, type TrapTriggerContext, type TrapTriggerResult } from './TrapTrigger';
 import { isWildernessLevel, type WildernessLevel } from '../world/WildernessLevel';
 import { WILD_BLOCK_SIZE } from '../data/WildernessTypes';
 import { getDungeonType } from '../data/DungeonTypes';
@@ -196,6 +199,7 @@ export interface RunResult {
   stepsRun: number;
   messages: { text: string; type: 'info' | 'danger' }[];
   playerDied: boolean;
+  trapTriggered?: TrapTriggerResult;
 }
 
 export interface RunContext {
@@ -341,6 +345,33 @@ export class RunSystem {
       stepsRun++;
       player.position = newPos;
       ctx.onMoved();
+
+      // Check for traps
+      const trap = level.getTrapAt(player.position);
+      if (trap && trap.isActive) {
+        const trapContext: TrapTriggerContext = {
+          player: player as Player,
+          level,
+          rng: RNG,
+        };
+        const trapResult = triggerTrap(trapContext, trap);
+        for (const msg of trapResult.messages) {
+          messages.push({ text: msg.text, type: msg.type === 'danger' ? 'danger' : 'info' });
+        }
+        // Handle aggravation
+        if (trapResult.aggravated) {
+          for (const monster of level.getMonsters()) {
+            monster.wake();
+          }
+        }
+        // Stop running on trap trigger
+        return {
+          stepsRun,
+          messages,
+          playerDied: player.isDead,
+          trapTriggered: trapResult,
+        };
+      }
 
       // Mark tiles as explored
       fovSystem.computeAndMark(level, player.position, viewRadius);

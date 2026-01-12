@@ -18,6 +18,7 @@ import { Scheduler } from '../systems/Scheduler';
 import { DungeonGenerator } from '../systems/dungeon/DungeonGenerator';
 import { MonsterSpawner } from '../systems/MonsterSpawner';
 import { ItemSpawner } from '../systems/ItemSpawner';
+import { TrapSpawner } from '../systems/TrapSpawner';
 import { TownGenerator, type TownLayout, type StoreEntrance } from '../systems/town/TownGenerator';
 
 // Re-export StoreEntrance for use by other modules
@@ -345,6 +346,7 @@ export function generateLevel(
   player: Player,
   monsterSpawner: MonsterSpawner,
   itemSpawner: ItemSpawner,
+  trapSpawner: TrapSpawner,
 ): GeneratedLevelData {
   // Town generation for depth 0
   if (depth === 0) {
@@ -388,6 +390,11 @@ export function generateLevel(
   // Spawn monsters and items
   monsterSpawner.spawnMonstersForLevel(level, depth, BASE_MONSTER_COUNT + depth);
   itemSpawner.spawnItemsForLevel(level, depth, 5 + depth);
+
+  // Spawn traps (Zangband C formula: k = depth/3 clamped to [2,10], count = randint1(k))
+  const k = Math.max(2, Math.min(10, Math.floor(depth / 3)));
+  const trapCount = RNG.getUniformInt(1, k);
+  trapSpawner.spawnTrapsForLevel(level, depth, trapCount);
 
   // Add monsters to scheduler
   for (const monster of level.getMonsters()) {

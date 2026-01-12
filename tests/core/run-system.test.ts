@@ -66,6 +66,8 @@ function createMockLevel(options: {
       return monsters.get(`${pos.x},${pos.y}`) || null;
     },
     getItemsAt: () => [],
+    getTrapAt: () => undefined,
+    getMonsters: () => [],
     movePlayer: vi.fn(),
     isOccupied: () => false,
     player: null,

@@ -15,6 +15,8 @@ import { FOVSystem } from '../systems/FOV';
 import { ItemGeneration } from '../systems/ItemGeneration';
 import { MonsterSpawner } from '../systems/MonsterSpawner';
 import { ItemSpawner } from '../systems/ItemSpawner';
+import { TrapSpawner } from '../systems/TrapSpawner';
+import { TrapDataManager, type TrapDef } from '../data/traps';
 import { GameLoop } from '../systems/GameLoop';
 import { FlavorSystem } from '../systems/FlavorSystem';
 import { TickSystem } from '../systems/TickSystem';
@@ -35,6 +37,7 @@ import itemsData from '@/data/items/items.json';
 import egoItemsData from '@/data/items/ego-items.json';
 import artifactsData from '@/data/items/artifacts.json';
 import monstersData from '@/data/monsters/monsters.json';
+import trapsData from '@/data/traps/traps.json';
 
 // Initialize shared systems (singleton-like, reused across games)
 const itemGen = new ItemGeneration({
@@ -45,6 +48,8 @@ const itemGen = new ItemGeneration({
 const monsterDataManager = new MonsterDataManager(monstersData as unknown as Record<string, MonsterDef>);
 const monsterSpawner = new MonsterSpawner(monsterDataManager, RNG);
 const itemSpawner = new ItemSpawner(itemGen, RNG);
+const trapDataManager = new TrapDataManager(trapsData as unknown as Record<string, TrapDef>, RNG);
+const trapSpawner = new TrapSpawner(trapDataManager, RNG);
 
 // Initialize effect manager with shared resources
 getEffectManager().setMonsterDataManager(monsterDataManager);
@@ -183,7 +188,7 @@ export class GameFSM {
     const store = getGameStore();
     const player = store.player!;
 
-    const data = generateLevel(depth, player, monsterSpawner, itemSpawner);
+    const data = generateLevel(depth, player, monsterSpawner, itemSpawner, trapSpawner);
 
     // Compute initial FOV to mark tiles as explored before first render
     this.fovSystem.computeAndMark(data.level, player.position, VIEW_RADIUS);
