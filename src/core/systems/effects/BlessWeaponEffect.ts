@@ -42,13 +42,18 @@ export class BlessWeaponEffect extends ItemTargetGPEffect {
     const messages: string[] = [];
     const data: BlessWeaponData = { itemId: item.id };
 
-    const generated = item.generated;
+    const generated = item.generated as any; // Cast to any for legacy property access
     const name = item.name || 'weapon';
+    const flags = generated?.flags ?? [];
 
-    // Check if cursed
-    if (generated?.cursed) {
+    // Check if cursed (support both flags array and legacy boolean)
+    const isCursed = flags.includes('CURSED') || generated?.cursed;
+    const isPermaCursed = flags.includes('PERMA_CURSE') || generated?.permaCurse;
+    const isHeavyCursed = flags.includes('HEAVY_CURSE') || generated?.heavyCurse;
+
+    if (isCursed) {
       // Heavy curse has 33% chance to disrupt, perma-curse always disrupts
-      if (generated.permaCurse || (generated.heavyCurse && rng.getUniformInt(1, 100) < 33)) {
+      if (isPermaCursed || (isHeavyCursed && rng.getUniformInt(1, 100) < 33)) {
         messages.push(`The black aura on the ${name} disrupts the blessing!`);
         data.curseDisrupted = true;
         data.uncursed = false;
@@ -63,11 +68,16 @@ export class BlessWeaponEffect extends ItemTargetGPEffect {
       // Successfully remove curse
       messages.push(`A malignant aura leaves the ${name}.`);
       data.uncursed = true;
-      // Note: actual item modification would be handled by the game state manager
+      // Remove curse flags and legacy properties
+      if (generated) {
+        generated.flags = flags.filter((f: string) => !['CURSED', 'HEAVY_CURSE'].includes(f));
+        generated.cursed = false;
+        generated.heavyCurse = false;
+      }
     }
 
-    // Check if already blessed
-    if (generated?.blessed) {
+    // Check if already blessed (support both flags array and legacy boolean)
+    if (flags.includes('BLESSED') || generated?.blessed) {
       messages.push(`The ${name} was blessed already.`);
       data.alreadyBlessed = true;
       return {
@@ -79,11 +89,19 @@ export class BlessWeaponEffect extends ItemTargetGPEffect {
     }
 
     // Try to bless the weapon
-    // Non-artifacts (no artifact flag) or 1/3 chance for artifacts
-    const isArtifact = generated?.artifact;
+    // Non-artifacts or 1/3 chance for artifacts
+    const isArtifact = !!generated?.artifact;
     if (!isArtifact || rng.getUniformInt(1, 3) === 1) {
       messages.push(`The ${name} shines!`);
       data.blessed = true;
+      // Add blessed flag and legacy property
+      if (generated) {
+        if (!generated.flags) generated.flags = [];
+        if (!generated.flags.includes('BLESSED')) {
+          generated.flags.push('BLESSED');
+        }
+        generated.blessed = true;
+      }
       return {
         success: true,
         messages,
@@ -98,11 +116,11 @@ export class BlessWeaponEffect extends ItemTargetGPEffect {
 
     let toHitLoss = 0;
     let toDamLoss = 0;
-    let toACLoss = 0;
+    let toAcLoss = 0;
 
     const currentToHit = generated?.toHit ?? 0;
     const currentToDam = generated?.toDam ?? 0;
-    const currentToAC = generated?.toAC ?? 0;
+    const currentToAc = generated?.toAc ?? 0;
 
     // Disenchant tohit
     if (currentToHit > 0) {
@@ -120,22 +138,28 @@ export class BlessWeaponEffect extends ItemTargetGPEffect {
       }
     }
 
-    // Disenchant toac
-    if (currentToAC > 0) {
-      toACLoss++;
-      if (currentToAC > 5 && rng.getUniformInt(0, 99) < 33) {
-        toACLoss++;
+    // Disenchant toAc
+    if (currentToAc > 0) {
+      toAcLoss++;
+      if (currentToAc > 5 && rng.getUniformInt(0, 99) < 33) {
+        toAcLoss++;
       }
     }
 
-    if (toHitLoss > 0 || toDamLoss > 0 || toACLoss > 0) {
+    if (toHitLoss > 0 || toDamLoss > 0 || toAcLoss > 0) {
       messages.push('There is a static feeling in the air...');
       messages.push(`The ${name} was disenchanted!`);
       data.disenchanted = {
         toHit: toHitLoss,
         toDam: toDamLoss,
-        toAC: toACLoss,
+        toAC: toAcLoss,
       };
+      // Actually apply the disenchantment
+      if (generated) {
+        generated.toHit = Math.max(0, currentToHit - toHitLoss);
+        generated.toDam = Math.max(0, currentToDam - toDamLoss);
+        generated.toAc = Math.max(0, currentToAc - toAcLoss);
+      }
     }
 
     return {

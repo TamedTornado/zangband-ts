@@ -11,7 +11,6 @@
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
 import type { Player } from '@/core/entities/Player';
-import type { Item } from '@/core/entities/Item';
 
 // Light source sval values
 const SVAL_TORCH = 0;

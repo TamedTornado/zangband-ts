@@ -114,12 +114,12 @@ export class PolymorphSelfEffect extends SelfGPEffect {
       }
 
       // Additional stat damage
-      data.statChanges.str = (data.statChanges.str ?? 0) - rng.getUniformInt(6, 12);
-      data.statChanges.int = (data.statChanges.int ?? 0) - rng.getUniformInt(6, 12);
-      data.statChanges.wis = (data.statChanges.wis ?? 0) - rng.getUniformInt(6, 12);
-      data.statChanges.dex = (data.statChanges.dex ?? 0) - rng.getUniformInt(6, 12);
-      data.statChanges.con = (data.statChanges.con ?? 0) - rng.getUniformInt(6, 12);
-      data.statChanges.chr = (data.statChanges.chr ?? 0) - rng.getUniformInt(6, 12);
+      data.statChanges['str'] = (data.statChanges['str'] ?? 0) - rng.getUniformInt(6, 12);
+      data.statChanges['int'] = (data.statChanges['int'] ?? 0) - rng.getUniformInt(6, 12);
+      data.statChanges['wis'] = (data.statChanges['wis'] ?? 0) - rng.getUniformInt(6, 12);
+      data.statChanges['dex'] = (data.statChanges['dex'] ?? 0) - rng.getUniformInt(6, 12);
+      data.statChanges['con'] = (data.statChanges['con'] ?? 0) - rng.getUniformInt(6, 12);
+      data.statChanges['chr'] = (data.statChanges['chr'] ?? 0) - rng.getUniformInt(6, 12);
 
       // May cause damage (1/6 chance)
       if (rng.getUniformInt(1, 6) === 1) {

@@ -250,7 +250,7 @@ describe('OmnicideEffect', () => {
       const result = effect.execute(context);
 
       // Should report mana absorbed (one per kill)
-      expect(result.manaGained).toBe(3);
+      expect(result.data?.['manaGained']).toBe(3);
     });
   });
 

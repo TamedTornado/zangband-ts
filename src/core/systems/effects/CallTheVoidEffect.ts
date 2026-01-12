@@ -51,7 +51,7 @@ export class CallTheVoidEffect extends SelfGPEffect {
   }
 
   execute(context: GPEffectContext): GPEffectResult {
-    const { actor, level, rng } = context;
+    const { actor, level } = context;
     const messages: string[] = [];
     const playerLevel = (actor as any).level ?? 1;
 

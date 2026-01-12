@@ -36,7 +36,6 @@
 
 import { PositionGPEffect } from './PositionGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
-import type { Monster } from '@/core/entities/Monster';
 
 export interface InvokeSpiritsEffectDef extends GPEffectDef {
   type: 'invokeSpirits';
@@ -48,7 +47,7 @@ export class InvokeSpiritsEffect extends PositionGPEffect {
   }
 
   execute(context: GPEffectContext): GPEffectResult {
-    const { actor, rng, createEffect } = context;
+    const { actor, rng } = context;
     const messages: string[] = [];
     const playerLevel = (actor as any).level ?? 1;
 
@@ -74,7 +73,7 @@ export class InvokeSpiritsEffect extends PositionGPEffect {
       success: true,
       messages,
       turnConsumed: true,
-      damageDealt: result.damageDealt,
+      ...(result.damageDealt !== undefined && { damageDealt: result.damageDealt }),
       data: {
         dieRoll,
         outcome: result.outcome,
@@ -415,10 +414,10 @@ export class InvokeSpiritsEffect extends PositionGPEffect {
     if (effect.canExecute(context)) {
       const result = effect.execute(context);
       messages.push(...result.messages);
-      return {
-        outcome,
-        damageDealt: result.damageDealt,
-      };
+      if (result.damageDealt !== undefined) {
+        return { outcome, damageDealt: result.damageDealt };
+      }
+      return { outcome };
     }
 
     return { outcome };

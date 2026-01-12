@@ -13,7 +13,7 @@
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
 import type { Position } from '@/core/types';
-import { Element as ElementConst, ELEMENT_NAMES } from '@/core/types';
+import { Element as ElementConst } from '@/core/types';
 import type { Actor } from '@/core/entities/Actor';
 import type { Monster } from '@/core/entities/Monster';
 import type { ILevel } from '@/core/world/Level';

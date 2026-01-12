@@ -131,6 +131,9 @@ export interface GPEffectResult {
 
   /** Request FSM to perform a level transition */
   levelTransition?: LevelTransitionRequest;
+
+  /** Additional effect-specific data */
+  data?: Record<string, any>;
 }
 
 /**

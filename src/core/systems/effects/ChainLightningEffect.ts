@@ -12,7 +12,7 @@
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
 import type { Position } from '@/core/types';
-import { Element as ElementConst, ELEMENT_NAMES } from '@/core/types';
+import { Element as ElementConst } from '@/core/types';
 import type { Actor } from '@/core/entities/Actor';
 import type { Monster } from '@/core/entities/Monster';
 import type { ILevel } from '@/core/world/Level';
@@ -78,7 +78,7 @@ export class ChainLightningEffect extends SelfGPEffect {
         const targetName = isPlayer ? 'you' : (hitActor as Monster).def?.name ?? 'creature';
 
         // Apply resistance
-        const { damage: finalDamage, status } = hitActor.resistDamage(ElementConst.Electricity, damage, rng);
+        const { damage: finalDamage, status } = hitActor.resistDamage(ElementConst.Lightning, damage, rng);
 
         // Apply damage
         hitActor.takeDamage(finalDamage);
@@ -89,7 +89,6 @@ export class ChainLightningEffect extends SelfGPEffect {
 
         // Build message
         if (finalDamage > 0) {
-          const elementName = ELEMENT_NAMES[ElementConst.Electricity];
           if (status === 'resists') {
             messages.push(isPlayer ? `You resist. (${finalDamage} damage)` : `The ${targetName} resists. (${finalDamage} damage)`);
           } else if (status === 'immune') {

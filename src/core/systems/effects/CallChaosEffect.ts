@@ -25,7 +25,7 @@ export interface CallChaosEffectDef extends GPEffectDef {
 
 // 30 chaos hurt types - map C GF_ types to our elements
 const CHAOS_ELEMENTS: Element[] = [
-  ElementConst.Electricity, // GF_ELEC
+  ElementConst.Lightning, // GF_ELEC
   ElementConst.Poison, // GF_POIS
   ElementConst.Acid, // GF_ACID
   ElementConst.Cold, // GF_COLD
@@ -36,7 +36,7 @@ const CHAOS_ELEMENTS: Element[] = [
   ElementConst.Light, // GF_HOLY_FIRE
   ElementConst.Cold, // GF_WATER
   ElementConst.Light, // GF_LITE
-  ElementConst.Darkness, // GF_DARK
+  ElementConst.Dark, // GF_DARK
   ElementConst.Magic, // GF_FORCE
   ElementConst.Magic, // GF_INERTIA
   ElementConst.Magic, // GF_MANA

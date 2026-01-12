@@ -51,7 +51,7 @@ export class OmnicideEffect extends SelfGPEffect {
         success: true,
         messages: ['The world grows quiet for a moment...'],
         turnConsumed: true,
-        manaGained: 0,
+        data: { manaGained: 0 },
       };
     }
 
@@ -92,7 +92,7 @@ export class OmnicideEffect extends SelfGPEffect {
       messages,
       turnConsumed: true,
       damageDealt: killed, // Number killed (not damage per se)
-      manaGained: manaAbsorbed,
+      data: { manaGained: manaAbsorbed },
     };
   }
 }

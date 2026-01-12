@@ -65,15 +65,9 @@ export class DestroyAreaEffect extends SelfGPEffect {
         // Kill monsters (not just damage - outright kill non-uniques)
         const monster = level.getMonsterAt?.(pos) as Monster | undefined;
         if (monster && !monster.isDead) {
-          // Check if unique (don't kill uniques, teleport them instead)
+          // Check if unique (don't kill uniques)
           const isUnique = monster.def?.flags?.includes('UNIQUE');
-          if (isUnique) {
-            // Teleport unique away
-            if (level.teleportMonster) {
-              level.teleportMonster(monster, this.radius * 2);
-              messages.push(`${monster.def?.name ?? 'A creature'} is teleported away!`);
-            }
-          } else {
+          if (!isUnique) {
             // Kill non-unique monsters outright
             monster.takeDamage(monster.hp + 100);
             monstersKilled++;
@@ -81,14 +75,10 @@ export class DestroyAreaEffect extends SelfGPEffect {
         }
 
         // Delete objects at this position
-        if (level.removeItemsAt) {
-          const removed = level.removeItemsAt(pos);
-          objectsDestroyed += removed;
-        }
-
-        // Remove light from tile
-        if (level.setTileLit) {
-          level.setTileLit(pos, false);
+        const itemsAtPos = level.getItemsAt(pos);
+        for (const item of itemsAtPos) {
+          level.removeItem(item);
+          objectsDestroyed++;
         }
 
         // Destroy terrain - convert to floor or rubble
