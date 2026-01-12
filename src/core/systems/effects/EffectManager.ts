@@ -53,6 +53,7 @@ import { RechargeEffect } from './RechargeEffect';
 import { BeamEffect } from './BeamEffect';
 import { RestoreStatsEffect } from './RestoreStatsEffect';
 import { SatisfyHungerEffect } from './SatisfyHungerEffect';
+import { TeleportEffect } from './TeleportEffect';
 
 /**
  * Default effect registry
@@ -127,6 +128,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   restoreStats: RestoreStatsEffect,
   // Satisfy hunger (fill stomach)
   satisfyHunger: SatisfyHungerEffect,
+  // Teleport self with formula-based distance
+  teleport: TeleportEffect,
 };
 
 export class EffectManager {
