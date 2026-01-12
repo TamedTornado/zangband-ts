@@ -97,12 +97,22 @@ export function useScroll(item: Item, context: ItemUseContext): ItemUseResult {
 }
 
 /**
- * Use food - executes effects
+ * Use food - adds food value to player and executes any effects
  */
 export function useFood(item: Item, context: ItemUseContext): ItemUseResult {
   const { player, level } = context;
   const messages: string[] = [];
 
+  // Add food value (pval) to player
+  const foodValue = item.generated?.baseItem.pval ?? 0;
+  if (foodValue > 0) {
+    const foodMessage = player.setFood(player.food + foodValue);
+    if (foodMessage) {
+      messages.push(foodMessage);
+    }
+  }
+
+  // Execute any special effects (poison, cure, etc.)
   const effects = item.generated?.baseItem.effects as GPEffectDef[] | undefined;
   if (effects && effects.length > 0) {
     const effectContext: GPEffectContext = {

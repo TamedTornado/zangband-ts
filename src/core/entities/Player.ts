@@ -29,6 +29,27 @@ export interface Stats {
   chr: number;
 }
 
+/** Food/hunger thresholds from Zangband */
+export const FoodLevel = {
+  MAX: 15000,    // Gorged/Bloated
+  FULL: 10000,   // Full
+  ALERT: 2000,   // Hungry
+  WEAK: 1000,    // Weak
+  FAINT: 500,    // Fainting
+  STARVE: 100,   // Starving
+} as const;
+
+/** Hunger status levels */
+export const HungerStatus = {
+  Gorged: 'gorged',
+  Full: 'full',
+  Normal: 'normal',
+  Hungry: 'hungry',
+  Weak: 'weak',
+  Faint: 'faint',
+} as const;
+export type HungerStatus = (typeof HungerStatus)[keyof typeof HungerStatus];
+
 /**
  * Player skills - derived from class, race, level, and stats.
  * These affect various game mechanics like combat and magic device use.
@@ -127,6 +148,9 @@ export class Player extends Actor {
 
   // Stat drain tracking (how much each stat has been reduced)
   private _drainedStats: Stats = { str: 0, int: 0, wis: 0, dex: 0, con: 0, chr: 0 };
+
+  // Food/hunger level (starts full)
+  private _food: number = FoodLevel.FULL - 1;
 
   constructor(config: PlayerConfig) {
     super({
@@ -712,6 +736,77 @@ export class Player extends Actor {
       return true;
     }
     return false;
+  }
+
+  /** Current food level (0-15000) */
+  get food(): number {
+    return this._food;
+  }
+
+  /** Current hunger status */
+  get hungerStatus(): HungerStatus {
+    if (this._food >= FoodLevel.MAX) return HungerStatus.Gorged;
+    if (this._food >= FoodLevel.FULL) return HungerStatus.Full;
+    if (this._food >= FoodLevel.ALERT) return HungerStatus.Normal;
+    if (this._food >= FoodLevel.WEAK) return HungerStatus.Hungry;
+    if (this._food >= FoodLevel.FAINT) return HungerStatus.Weak;
+    return HungerStatus.Faint;
+  }
+
+  /**
+   * Set food level directly
+   * @returns message describing the food state change, or null if no change
+   */
+  setFood(value: number): string | null {
+    const oldStatus = this.hungerStatus;
+    // Clamp to valid range
+    this._food = Math.max(0, Math.min(20000, value));
+    const newStatus = this.hungerStatus;
+
+    if (newStatus === oldStatus) {
+      return null;
+    }
+
+    // Return appropriate message based on state transition
+    const statusOrder: HungerStatus[] = [
+      HungerStatus.Faint,
+      HungerStatus.Weak,
+      HungerStatus.Hungry,
+      HungerStatus.Normal,
+      HungerStatus.Full,
+      HungerStatus.Gorged,
+    ];
+    const oldIndex = statusOrder.indexOf(oldStatus);
+    const newIndex = statusOrder.indexOf(newStatus);
+
+    if (newIndex > oldIndex) {
+      // Getting more fed
+      switch (newStatus) {
+        case HungerStatus.Weak: return 'You are still weak.';
+        case HungerStatus.Hungry: return 'You are still hungry.';
+        case HungerStatus.Normal: return 'You are no longer hungry.';
+        case HungerStatus.Full: return 'You are full!';
+        case HungerStatus.Gorged: return 'You have gorged yourself!';
+        default: return null;
+      }
+    } else {
+      // Getting hungrier
+      switch (newStatus) {
+        case HungerStatus.Faint: return 'You are getting faint from hunger!';
+        case HungerStatus.Weak: return 'You are getting weak from hunger!';
+        case HungerStatus.Hungry: return 'You are getting hungry.';
+        case HungerStatus.Normal: return 'You are no longer full.';
+        case HungerStatus.Full: return 'You are no longer gorged.';
+        default: return null;
+      }
+    }
+  }
+
+  /**
+   * Reduce food by amount (called each turn)
+   */
+  consumeFood(amount: number): string | null {
+    return this.setFood(this._food - amount);
   }
 
   get inventory(): Item[] {

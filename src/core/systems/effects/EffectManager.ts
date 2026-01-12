@@ -52,6 +52,7 @@ import { FetchEffect } from './FetchEffect';
 import { RechargeEffect } from './RechargeEffect';
 import { BeamEffect } from './BeamEffect';
 import { RestoreStatsEffect } from './RestoreStatsEffect';
+import { SatisfyHungerEffect } from './SatisfyHungerEffect';
 
 /**
  * Default effect registry
@@ -124,6 +125,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   beam: BeamEffect,
   // Restore all stats at once
   restoreStats: RestoreStatsEffect,
+  // Satisfy hunger (fill stomach)
+  satisfyHunger: SatisfyHungerEffect,
 };
 
 export class EffectManager {
