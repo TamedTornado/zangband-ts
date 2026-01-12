@@ -79,6 +79,7 @@ import { AlchemyEffect } from './AlchemyEffect';
 import { BlessWeaponEffect } from './BlessWeaponEffect';
 import { ChainLightningEffect } from './ChainLightningEffect';
 import { PolymorphSelfEffect } from './PolymorphSelfEffect';
+import { MeteorSwarmEffect } from './MeteorSwarmEffect';
 
 /**
  * Default effect registry
@@ -148,6 +149,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   chainLightning: ChainLightningEffect,
   // Polymorph Self (random transformation)
   polymorphSelf: PolymorphSelfEffect,
+  // Meteor Swarm (multiple fire balls around player)
+  meteorSwarm: MeteorSwarmEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
