@@ -59,6 +59,7 @@ import { MassGenocideEffect } from './MassGenocideEffect';
 import { DeathRayEffect } from './DeathRayEffect';
 import { WordOfDeathEffect } from './WordOfDeathEffect';
 import { OmnicideEffect } from './OmnicideEffect';
+import { BanishEvilEffect } from './BanishEvilEffect';
 
 /**
  * Default effect registry
@@ -88,6 +89,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   wordOfDeath: WordOfDeathEffect,
   // Omnicide (kill all non-unique monsters on level)
   omnicide: OmnicideEffect,
+  // Banish Evil (teleport evil monsters away)
+  banishEvil: BanishEvilEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
