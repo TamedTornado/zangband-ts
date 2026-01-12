@@ -54,6 +54,7 @@ import { BeamEffect } from './BeamEffect';
 import { RestoreStatsEffect } from './RestoreStatsEffect';
 import { SatisfyHungerEffect } from './SatisfyHungerEffect';
 import { TeleportEffect } from './TeleportEffect';
+import { DimensionDoorEffect } from './DimensionDoorEffect';
 
 /**
  * Default effect registry
@@ -130,6 +131,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   satisfyHunger: SatisfyHungerEffect,
   // Teleport self with formula-based distance
   teleport: TeleportEffect,
+  // Dimension door - controlled teleport to chosen position
+  dimensionDoor: DimensionDoorEffect,
 };
 
 export class EffectManager {
