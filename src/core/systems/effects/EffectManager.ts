@@ -65,6 +65,7 @@ import { CharmMonstersEffect } from './CharmMonstersEffect';
 import { CharmAnimalsEffect } from './CharmAnimalsEffect';
 import { StasisEffect } from './StasisEffect';
 import { MassTeleportEffect } from './MassTeleportEffect';
+import { SelfKnowledgeEffect } from './SelfKnowledgeEffect';
 
 /**
  * Default effect registry
@@ -106,6 +107,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   stasis: StasisEffect,
   // Mass Teleport (teleport all monsters away)
   massTeleport: MassTeleportEffect,
+  // Self Knowledge (display player information)
+  selfKnowledge: SelfKnowledgeEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
