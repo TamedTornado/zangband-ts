@@ -155,6 +155,7 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   earthquake: EarthquakeEffect,
   // Transformation effects
   polymorph: PolymorphEffect,
+  polymorphMonster: PolymorphEffect, // alias for spell data
   // Special effects
   recall: RecallEffect,
   // Cursed monster effects
