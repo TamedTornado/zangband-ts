@@ -70,6 +70,7 @@ import { WhirlwindAttackEffect } from './WhirlwindAttackEffect';
 import { AlterRealityEffect } from './AlterRealityEffect';
 import { LivingTrumpEffect } from './LivingTrumpEffect';
 import { EsoteriaEffect } from './EsoteriaEffect';
+import { GlyphAreaEffect } from './GlyphAreaEffect';
 
 /**
  * Default effect registry
@@ -123,6 +124,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   livingTrump: LivingTrumpEffect,
   // Esoteria (death realm identify with level-based full identify chance)
   esoteria: EsoteriaEffect,
+  // Glyph Area (Warding True - place glyphs in 3x3 area)
+  glyphArea: GlyphAreaEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
