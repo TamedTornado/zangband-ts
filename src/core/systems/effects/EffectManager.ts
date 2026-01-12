@@ -80,6 +80,7 @@ import { BlessWeaponEffect } from './BlessWeaponEffect';
 import { ChainLightningEffect } from './ChainLightningEffect';
 import { PolymorphSelfEffect } from './PolymorphSelfEffect';
 import { MeteorSwarmEffect } from './MeteorSwarmEffect';
+import { CallChaosEffect } from './CallChaosEffect';
 
 /**
  * Default effect registry
@@ -151,6 +152,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   polymorphSelf: PolymorphSelfEffect,
   // Meteor Swarm (multiple fire balls around player)
   meteorSwarm: MeteorSwarmEffect,
+  // Call Chaos (random chaotic destruction)
+  callChaos: CallChaosEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
