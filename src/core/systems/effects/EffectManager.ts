@@ -71,6 +71,7 @@ import { AlterRealityEffect } from './AlterRealityEffect';
 import { LivingTrumpEffect } from './LivingTrumpEffect';
 import { EsoteriaEffect } from './EsoteriaEffect';
 import { GlyphAreaEffect } from './GlyphAreaEffect';
+import { ExplosiveRuneEffect } from './ExplosiveRuneEffect';
 
 /**
  * Default effect registry
@@ -126,6 +127,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   esoteria: EsoteriaEffect,
   // Glyph Area (Warding True - place glyphs in 3x3 area)
   glyphArea: GlyphAreaEffect,
+  // Explosive Rune (place exploding trap)
+  explosiveRune: ExplosiveRuneEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
