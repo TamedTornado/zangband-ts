@@ -62,6 +62,7 @@ import { OmnicideEffect } from './OmnicideEffect';
 import { BanishEvilEffect } from './BanishEvilEffect';
 import { PhlogistonEffect } from './PhlogistonEffect';
 import { CharmMonstersEffect } from './CharmMonstersEffect';
+import { CharmAnimalsEffect } from './CharmAnimalsEffect';
 
 /**
  * Default effect registry
@@ -97,6 +98,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   phlogiston: PhlogistonEffect,
   // Charm Monsters (charm all in sight)
   charmMonsters: CharmMonstersEffect,
+  // Charm Animals (charm animals in sight)
+  charmAnimals: CharmAnimalsEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
