@@ -81,6 +81,7 @@ import { ChainLightningEffect } from './ChainLightningEffect';
 import { PolymorphSelfEffect } from './PolymorphSelfEffect';
 import { MeteorSwarmEffect } from './MeteorSwarmEffect';
 import { CallChaosEffect } from './CallChaosEffect';
+import { CallTheVoidEffect } from './CallTheVoidEffect';
 
 /**
  * Default effect registry
@@ -154,6 +155,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   meteorSwarm: MeteorSwarmEffect,
   // Call Chaos (random chaotic destruction)
   callChaos: CallChaosEffect,
+  // Call the Void (massive void destruction)
+  callTheVoid: CallTheVoidEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
