@@ -44,6 +44,7 @@ import { HavocEffect } from './HavocEffect';
 import { RemoveCurseEffect } from './RemoveCurseEffect';
 import { GlyphEffect } from './GlyphEffect';
 import { MappingEffect } from './MappingEffect';
+import { BrandWeaponEffect } from './BrandWeaponEffect';
 
 /**
  * Default effect registry
@@ -100,6 +101,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   glyph: GlyphEffect,
   // Detection/utility effects
   mapping: MappingEffect,
+  // Weapon branding effects
+  brandWeapon: BrandWeaponEffect,
 };
 
 export class EffectManager {
