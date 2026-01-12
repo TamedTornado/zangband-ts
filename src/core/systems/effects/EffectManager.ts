@@ -78,6 +78,7 @@ import { CreateWallsEffect } from './CreateWallsEffect';
 import { AlchemyEffect } from './AlchemyEffect';
 import { BlessWeaponEffect } from './BlessWeaponEffect';
 import { ChainLightningEffect } from './ChainLightningEffect';
+import { PolymorphSelfEffect } from './PolymorphSelfEffect';
 
 /**
  * Default effect registry
@@ -145,6 +146,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   blessWeapon: BlessWeaponEffect,
   // Chain Lightning (beams in all 8 directions)
   chainLightning: ChainLightningEffect,
+  // Polymorph Self (random transformation)
+  polymorphSelf: PolymorphSelfEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
