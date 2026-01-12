@@ -67,6 +67,7 @@ import { StasisEffect } from './StasisEffect';
 import { MassTeleportEffect } from './MassTeleportEffect';
 import { SelfKnowledgeEffect } from './SelfKnowledgeEffect';
 import { WhirlwindAttackEffect } from './WhirlwindAttackEffect';
+import { AlterRealityEffect } from './AlterRealityEffect';
 
 /**
  * Default effect registry
@@ -112,6 +113,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   selfKnowledge: SelfKnowledgeEffect,
   // Whirlwind Attack (attack all adjacent monsters)
   whirlwindAttack: WhirlwindAttackEffect,
+  // Alter Reality (regenerate dungeon level)
+  alterReality: AlterRealityEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
