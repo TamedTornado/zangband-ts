@@ -82,6 +82,7 @@ import { PolymorphSelfEffect } from './PolymorphSelfEffect';
 import { MeteorSwarmEffect } from './MeteorSwarmEffect';
 import { CallChaosEffect } from './CallChaosEffect';
 import { CallTheVoidEffect } from './CallTheVoidEffect';
+import { InvokeSpiritsEffect } from './InvokeSpiritsEffect';
 
 /**
  * Default effect registry
@@ -157,6 +158,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   callChaos: CallChaosEffect,
   // Call the Void (massive void destruction)
   callTheVoid: CallTheVoidEffect,
+  // Invoke Spirits (random death realm spell)
+  invokeSpirits: InvokeSpiritsEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
