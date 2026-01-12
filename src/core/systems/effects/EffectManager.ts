@@ -50,6 +50,7 @@ import { WizLiteEffect } from './WizLiteEffect';
 import { RestoreLevelEffect } from './RestoreLevelEffect';
 import { FetchEffect } from './FetchEffect';
 import { RechargeEffect } from './RechargeEffect';
+import { BeamEffect } from './BeamEffect';
 
 /**
  * Default effect registry
@@ -118,6 +119,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   fetch: FetchEffect,
   // Device recharging
   recharge: RechargeEffect,
+  // Beam effects (pierce through targets)
+  beam: BeamEffect,
 };
 
 export class EffectManager {
