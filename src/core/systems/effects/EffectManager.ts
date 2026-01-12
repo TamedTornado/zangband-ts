@@ -76,6 +76,7 @@ import { CreateDoorEffect } from './CreateDoorEffect';
 import { CreateStairsEffect } from './CreateStairsEffect';
 import { CreateWallsEffect } from './CreateWallsEffect';
 import { AlchemyEffect } from './AlchemyEffect';
+import { BlessWeaponEffect } from './BlessWeaponEffect';
 
 /**
  * Default effect registry
@@ -139,6 +140,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   createWalls: CreateWallsEffect,
   // Alchemy (convert item to gold)
   alchemy: AlchemyEffect,
+  // Bless weapon (remove curse, add blessed flag)
+  blessWeapon: BlessWeaponEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
