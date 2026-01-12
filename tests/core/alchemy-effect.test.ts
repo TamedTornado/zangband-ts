@@ -6,7 +6,7 @@ import { Item } from '@/core/entities/Item';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext } from '@/core/systems/effects/GPEffect';
-import { createMockLevel } from './testHelpers';
+import { createMockLevel, createTestItemDef } from './testHelpers';
 
 function createTestPlayer(x: number, y: number): Player {
   return new Player({
@@ -25,12 +25,12 @@ function createTestItem(): Item {
     symbol: '/',
     color: 'w',
     generated: {
-      baseItem: {
-        key: 'longsword',
-        name: 'Longsword',
-        type: 'weapon',
-        cost: 300,
-      },
+      baseItem: createTestItemDef({ key: 'longsword', name: 'Longsword', type: 'weapon', cost: 300 }),
+      toHit: 0,
+      toDam: 0,
+      toAc: 0,
+      pval: 0,
+      flags: [],
       identified: true,
     },
   });
@@ -113,8 +113,8 @@ describe('AlchemyEffect', () => {
 
       const result = effect.execute(context);
 
-      expect(result.data?.goldGained).toBeDefined();
-      expect(result.data?.goldGained).toBeGreaterThan(0);
+      expect(result.data?.['goldGained']).toBeDefined();
+      expect(result.data?.['goldGained']).toBeGreaterThan(0);
     });
 
     it('marks item for destruction in result data', () => {
@@ -132,8 +132,8 @@ describe('AlchemyEffect', () => {
 
       const result = effect.execute(context);
 
-      expect(result.data?.destroyItem).toBe(true);
-      expect(result.data?.itemId).toBe(item.id);
+      expect(result.data?.['destroyItem']).toBe(true);
+      expect(result.data?.['itemId']).toBe(item.id);
     });
   });
 });

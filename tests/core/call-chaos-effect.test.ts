@@ -5,7 +5,7 @@ import { Player } from '@/core/entities/Player';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext } from '@/core/systems/effects/GPEffect';
-import { createMockLevel, createTestMonster } from './testHelpers';
+import { createMockLevel } from './testHelpers';
 
 function createTestPlayer(x: number, y: number, level: number = 10): Player {
   const player = new Player({
@@ -82,8 +82,8 @@ describe('CallChaosEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.element) {
-          elements.add(result.data.element);
+        if (result.data?.['element']) {
+          elements.add(result.data['element']);
         }
       }
 
@@ -109,9 +109,9 @@ describe('CallChaosEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.mode === 'allDirections') {
+        if (result.data?.['mode'] === 'allDirections') {
           foundAllDirections = true;
-          expect(result.data?.directionCount).toBe(8);
+          expect(result.data?.['directionCount']).toBe(8);
           break;
         }
       }
@@ -138,9 +138,9 @@ describe('CallChaosEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.mode === 'centeredBall') {
+        if (result.data?.['mode'] === 'centeredBall') {
           foundCenteredBall = true;
-          expect(result.data?.radius).toBe(8);
+          expect(result.data?.['radius']).toBe(8);
           break;
         }
       }
@@ -167,7 +167,7 @@ describe('CallChaosEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.mode === 'targeted') {
+        if (result.data?.['mode'] === 'targeted') {
           foundTargeted = true;
           break;
         }
@@ -195,7 +195,7 @@ describe('CallChaosEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.useBeams === true) {
+        if (result.data?.['useBeams'] === true) {
           foundBeam = true;
           break;
         }

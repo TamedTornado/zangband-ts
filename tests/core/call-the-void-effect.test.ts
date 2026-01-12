@@ -5,7 +5,7 @@ import { Player } from '@/core/entities/Player';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext } from '@/core/systems/effects/GPEffect';
-import { createMockLevel, createTestMonster } from './testHelpers';
+import { createMockLevel } from './testHelpers';
 
 function createTestPlayer(x: number, y: number, level: number = 10): Player {
   const player = new Player({
@@ -79,9 +79,9 @@ describe('CallTheVoidEffect', () => {
         const result = effect.execute(context);
 
         // Should succeed without backfire
-        expect(result.data?.backfired).toBeFalsy();
+        expect(result.data?.['backfired']).toBeFalsy();
         // Should have 3 waves
-        expect(result.data?.waves).toBe(3);
+        expect(result.data?.['waves']).toBe(3);
       });
 
       it('fires balls in 8 directions per wave', () => {
@@ -98,7 +98,7 @@ describe('CallTheVoidEffect', () => {
         const result = effect.execute(context);
 
         // Should have 24 balls total (8 * 3 waves)
-        expect(result.data?.ballCount).toBe(24);
+        expect(result.data?.['ballCount']).toBe(24);
       });
     });
 
@@ -126,10 +126,10 @@ describe('CallTheVoidEffect', () => {
         const result = effect.execute(context);
 
         // Should backfire
-        expect(result.data?.backfired).toBe(true);
+        expect(result.data?.['backfired']).toBe(true);
         // Player should take significant damage
-        expect(result.data?.selfDamage).toBeGreaterThanOrEqual(100);
-        expect(result.data?.selfDamage).toBeLessThanOrEqual(250);
+        expect(result.data?.['selfDamage']).toBeGreaterThanOrEqual(100);
+        expect(result.data?.['selfDamage']).toBeLessThanOrEqual(250);
       });
 
       it('displays warning message', () => {
@@ -190,7 +190,7 @@ describe('CallTheVoidEffect', () => {
 
         // Should have created and executed destroyArea effect
         expect(destroyAreaCreated).toBe(true);
-        expect(result.data?.destroyRadius).toBe(30);
+        expect(result.data?.['destroyRadius']).toBe(30);
       });
     });
   });

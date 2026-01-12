@@ -123,12 +123,13 @@ describe('SelfKnowledgeEffect', () => {
       expect(allMessages.includes('speed')).toBe(true);
     });
 
-    it('reports active statuses', () => {
+    it('reports active statuses', async () => {
       const effect = new SelfKnowledgeEffect({ type: 'selfKnowledge' });
       const player = createTestPlayer(25, 25);
 
       // Apply a status using the proper status system (using DurationStatus directly)
-      const { DurationStatus } = require('@/core/systems/status/DurationStatus');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const { DurationStatus } = await import('@/core/systems/status/DurationStatus');
       const blessedDef = {
         type: 'duration',
         name: 'Blessed',
@@ -169,7 +170,7 @@ describe('SelfKnowledgeEffect', () => {
 
       // Should return data object with knowledge info
       expect(result.data).toBeDefined();
-      expect(result.data?.type).toBe('selfKnowledge');
+      expect(result.data?.['type']).toBe('selfKnowledge');
     });
   });
 });

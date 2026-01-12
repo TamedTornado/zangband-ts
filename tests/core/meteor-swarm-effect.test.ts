@@ -77,9 +77,9 @@ describe('MeteorSwarmEffect', () => {
 
       const result = effect.execute(context);
 
-      expect(result.data?.meteorCount).toBeDefined();
-      expect(result.data?.meteorCount).toBeGreaterThanOrEqual(10);
-      expect(result.data?.meteorCount).toBeLessThanOrEqual(20);
+      expect(result.data?.['meteorCount']).toBeDefined();
+      expect(result.data?.['meteorCount']).toBeGreaterThanOrEqual(10);
+      expect(result.data?.['meteorCount']).toBeLessThanOrEqual(20);
     });
 
     it('meteors land near player', () => {
@@ -96,7 +96,7 @@ describe('MeteorSwarmEffect', () => {
       const result = effect.execute(context);
 
       // All meteor impacts should be within 6 squares of player
-      for (const impact of result.data?.impacts ?? []) {
+      for (const impact of (result.data?.['impacts'] as Array<{x: number, y: number}>) ?? []) {
         const dx = Math.abs(impact.x - player.position.x);
         const dy = Math.abs(impact.y - player.position.y);
         const distance = Math.max(dx, dy); // Chebyshev distance
@@ -131,14 +131,14 @@ describe('MeteorSwarmEffect', () => {
       const result50 = effect.execute(context50);
 
       // Damage at level 50 should be higher
-      expect(result50.data?.baseDamage).toBeGreaterThan(result20.data?.baseDamage);
+      expect(result50.data?.['baseDamage']).toBeGreaterThan(result20.data?.['baseDamage']);
     });
 
     it('hits monsters in impact area', () => {
       const effect = new MeteorSwarmEffect({ type: 'meteorSwarm' });
       const player = createTestPlayer(25, 25, 30);
       // Place monster near player
-      const monster = createTestMonster('kobold', 27, 25);
+      const monster = createTestMonster({ id: 'kobold', position: { x: 27, y: 25 } });
       const level = createMockLevel([monster], player);
 
       const context: GPEffectContext = {
@@ -150,7 +150,7 @@ describe('MeteorSwarmEffect', () => {
       const result = effect.execute(context);
 
       // With multiple meteors, some should hit the area near the monster
-      expect(result.data?.totalHits).toBeGreaterThanOrEqual(0);
+      expect(result.data?.['totalHits']).toBeGreaterThanOrEqual(0);
     });
   });
 });

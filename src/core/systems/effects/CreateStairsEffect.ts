@@ -18,7 +18,11 @@ export interface CreateStairsEffectDef {
 
 export class CreateStairsEffect extends SelfGPEffect {
   execute(context: GPEffectContext): GPEffectResult {
-    const { actor } = context;
+    const { actor, level } = context;
+    if (!actor || !level) {
+      return { success: false, messages: ['No valid target.'], turnConsumed: false };
+    }
+
     const messages: string[] = [];
 
     // Position where stairs will be created (player's position)
@@ -27,9 +31,14 @@ export class CreateStairsEffect extends SelfGPEffect {
       y: actor.position.y,
     };
 
-    // TODO: When terrain modification is implemented, actually create stairs
-    // The direction (up/down) depends on current dungeon depth
-    // For now, just return messages and position
+    // Only works in dungeons, not wilderness
+    if (level.levelType !== 'dungeon') {
+      messages.push('You cannot create stairs here.');
+      return { success: false, messages, turnConsumed: false };
+    }
+
+    // Create up stairs to escape the dungeon
+    level.setTerrain(position, 'up_staircase');
 
     messages.push('A staircase grows beneath your feet.');
 

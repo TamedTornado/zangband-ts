@@ -82,9 +82,9 @@ describe('PolymorphSelfEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.raceChanged) {
+        if (result.data?.['raceChanged']) {
           raceChanged = true;
-          expect(result.data?.newRace).toBeDefined();
+          expect(result.data?.['newRace']).toBeDefined();
           break;
         }
       }
@@ -128,7 +128,7 @@ describe('PolymorphSelfEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.raceChanged) lowLevelChanges++;
+        if (result.data?.['raceChanged']) lowLevelChanges++;
       }
 
       // Count changes at high level
@@ -145,7 +145,7 @@ describe('PolymorphSelfEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.raceChanged) highLevelChanges++;
+        if (result.data?.['raceChanged']) highLevelChanges++;
       }
 
       // High level should generally have more changes

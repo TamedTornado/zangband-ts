@@ -73,8 +73,8 @@ describe('LivingTrumpEffect', () => {
 
       const result = effect.execute(context);
 
-      expect(result.data?.type).toBe('livingTrump');
-      expect(result.data?.mutation).toBeDefined();
+      expect(result.data?.['type']).toBe('livingTrump');
+      expect(result.data?.['mutation']).toBeDefined();
     });
 
     it('can grant teleport control (1/8 chance)', () => {
@@ -94,7 +94,7 @@ describe('LivingTrumpEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.mutation === 'teleportControl') {
+        if (result.data?.['mutation'] === 'teleportControl') {
           foundControl = true;
           break;
         }
@@ -120,7 +120,7 @@ describe('LivingTrumpEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.mutation === 'randomTeleport') {
+        if (result.data?.['mutation'] === 'randomTeleport') {
           foundRandom = true;
           break;
         }

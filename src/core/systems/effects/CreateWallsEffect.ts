@@ -30,7 +30,11 @@ const ADJACENT = [
 
 export class CreateWallsEffect extends SelfGPEffect {
   execute(context: GPEffectContext): GPEffectResult {
-    const { actor } = context;
+    const { actor, level } = context;
+    if (!actor || !level) {
+      return { success: false, messages: ['No valid target.'], turnConsumed: false };
+    }
+
     const messages: string[] = [];
 
     // Calculate positions for 8 adjacent tiles
@@ -39,8 +43,12 @@ export class CreateWallsEffect extends SelfGPEffect {
       y: actor.position.y + dy,
     }));
 
-    // TODO: When terrain modification is implemented, actually create walls
-    // For now, just return messages and positions
+    // Create walls on adjacent tiles
+    for (const pos of positions) {
+      if (level.isInBounds(pos)) {
+        level.setTerrain(pos, 'granite_wall_48');
+      }
+    }
 
     messages.push('Walls of stone rise around you!');
 

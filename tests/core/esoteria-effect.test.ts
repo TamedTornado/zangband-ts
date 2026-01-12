@@ -3,6 +3,7 @@ import { RNG } from 'rot-js';
 import { EsoteriaEffect } from '@/core/systems/effects/EsoteriaEffect';
 import { Player } from '@/core/entities/Player';
 import { Item } from '@/core/entities/Item';
+import { createTestItemDef } from './testHelpers';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext } from '@/core/systems/effects/GPEffect';
@@ -30,12 +31,17 @@ function createUnidentifiedItem(): Item {
     symbol: '/',
     color: 'w',
     generated: {
-      baseItem: {
+      baseItem: createTestItemDef({
         key: 'longsword',
         name: 'Longsword',
         type: 'weapon',
-      },
+      }),
       identified: false,
+      toHit: 0,
+      toDam: 0,
+      toAc: 0,
+      pval: 0,
+      flags: [],
     },
   });
 }
@@ -90,7 +96,6 @@ describe('EsoteriaEffect', () => {
     it('reports regular identify at low levels', () => {
       const effect = new EsoteriaEffect({ type: 'esoteria', target: 'item' });
       const player = createTestPlayer(25, 25, 5); // Low level
-      const item = createUnidentifiedItem();
       const level = createMockLevel([], player);
 
       // Find a seed where low level gets regular identify
@@ -107,7 +112,7 @@ describe('EsoteriaEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (!result.data?.fullyIdentified) {
+        if (!result.data?.['fullyIdentified']) {
           foundRegular = true;
           break;
         }
@@ -135,7 +140,7 @@ describe('EsoteriaEffect', () => {
         };
 
         const result = effect.execute(context);
-        if (result.data?.fullyIdentified) {
+        if (result.data?.['fullyIdentified']) {
           foundFull = true;
           break;
         }

@@ -6,7 +6,8 @@ import { Item } from '@/core/entities/Item';
 import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext } from '@/core/systems/effects/GPEffect';
-import { createMockLevel } from './testHelpers';
+import type { ArtifactDef } from '@/core/data/artifacts';
+import { createMockLevel, createTestItemDef } from './testHelpers';
 
 function createTestPlayer(x: number, y: number): Player {
   return new Player({
@@ -18,6 +19,25 @@ function createTestPlayer(x: number, y: number): Player {
   });
 }
 
+const TEST_ARTIFACT: ArtifactDef = {
+  key: 'test_artifact',
+  index: 1,
+  name: 'Test Artifact',
+  type: 'weapon',
+  sval: 1,
+  depth: 10,
+  rarity: 1,
+  weight: 100,
+  cost: 10000,
+  pval: 0,
+  toHit: 10,
+  toDam: 10,
+  toAc: 0,
+  baseAc: 0,
+  damage: '2d6',
+  flags: [],
+};
+
 function createTestWeapon(options: {
   cursed?: boolean;
   heavyCurse?: boolean;
@@ -28,28 +48,36 @@ function createTestWeapon(options: {
   toDam?: number;
   toAC?: number;
 } = {}): Item {
+  // Build flags array based on options
+  const flags: string[] = [];
+  if (options.cursed) flags.push('CURSED');
+  if (options.heavyCurse) flags.push('HEAVY_CURSE');
+  if (options.permaCurse) flags.push('PERMA_CURSE');
+  if (options.blessed) flags.push('BLESSED');
+
+  // Use 'as any' for legacy boolean properties that the effect code expects
+  const generated = {
+    baseItem: createTestItemDef({ key: 'longsword', name: 'Longsword', type: 'weapon', cost: 300 }),
+    identified: true,
+    artifact: options.artifact ? TEST_ARTIFACT : undefined,
+    toHit: options.toHit ?? 0,
+    toDam: options.toDam ?? 0,
+    toAc: options.toAC ?? 0,
+    pval: 0,
+    flags,
+    // Legacy boolean properties for backward compatibility
+    cursed: options.cursed,
+    heavyCurse: options.heavyCurse,
+    permaCurse: options.permaCurse,
+    blessed: options.blessed,
+  } as any;
+
   return new Item({
     id: 'test-weapon',
     position: { x: 0, y: 0 },
     symbol: '/',
     color: 'w',
-    generated: {
-      baseItem: {
-        key: 'longsword',
-        name: 'Longsword',
-        type: 'weapon',
-        cost: 300,
-      },
-      identified: true,
-      cursed: options.cursed,
-      heavyCurse: options.heavyCurse,
-      permaCurse: options.permaCurse,
-      blessed: options.blessed,
-      artifact: options.artifact,
-      toHit: options.toHit ?? 0,
-      toDam: options.toDam ?? 0,
-      toAC: options.toAC ?? 0,
-    },
+    generated,
   });
 }
 
@@ -112,7 +140,7 @@ describe('BlessWeaponEffect', () => {
         const result = effect.execute(context);
 
         expect(result.success).toBe(true);
-        expect(result.data?.uncursed).toBe(true);
+        expect(result.data?.['uncursed']).toBe(true);
         expect(result.messages.some(m => m.includes('malignant aura'))).toBe(true);
       });
 
@@ -132,8 +160,8 @@ describe('BlessWeaponEffect', () => {
         const result = effect.execute(context);
 
         expect(result.success).toBe(true); // Spell succeeds but curse remains
-        expect(result.data?.uncursed).toBe(false);
-        expect(result.data?.curseDisrupted).toBe(true);
+        expect(result.data?.['uncursed']).toBe(false);
+        expect(result.data?.['curseDisrupted']).toBe(true);
         expect(result.messages.some(m => m.includes('disrupts'))).toBe(true);
       });
 
@@ -155,7 +183,7 @@ describe('BlessWeaponEffect', () => {
             targetItem: newWeapon,
           };
           const result = effect.execute(context);
-          if (result.data?.curseDisrupted) {
+          if (result.data?.['curseDisrupted']) {
             disruptions++;
           } else {
             successes++;
@@ -185,7 +213,7 @@ describe('BlessWeaponEffect', () => {
         const result = effect.execute(context);
 
         expect(result.success).toBe(true);
-        expect(result.data?.alreadyBlessed).toBe(true);
+        expect(result.data?.['alreadyBlessed']).toBe(true);
         expect(result.messages.some(m => m.includes('already'))).toBe(true);
       });
     });
@@ -207,7 +235,7 @@ describe('BlessWeaponEffect', () => {
         const result = effect.execute(context);
 
         expect(result.success).toBe(true);
-        expect(result.data?.blessed).toBe(true);
+        expect(result.data?.['blessed']).toBe(true);
         expect(result.messages.some(m => m.includes('shine'))).toBe(true);
       });
     });
@@ -231,9 +259,9 @@ describe('BlessWeaponEffect', () => {
             targetItem: weapon,
           };
           const result = effect.execute(context);
-          if (result.data?.blessed) {
+          if (result.data?.['blessed']) {
             blessed++;
-          } else if (result.data?.artifactResisted) {
+          } else if (result.data?.['artifactResisted']) {
             resisted++;
           }
         }
@@ -260,10 +288,10 @@ describe('BlessWeaponEffect', () => {
 
         const result = effect.execute(context);
 
-        if (result.data?.artifactResisted) {
+        if (result.data?.['artifactResisted']) {
           expect(result.messages.some(m => m.includes('resists'))).toBe(true);
           // Should have some disenchantment
-          expect(result.data?.disenchanted).toBeDefined();
+          expect(result.data?.['disenchanted']).toBeDefined();
         }
       });
     });

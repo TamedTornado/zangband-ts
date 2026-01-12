@@ -30,7 +30,11 @@ const ADJACENT = [
 
 export class CreateDoorEffect extends SelfGPEffect {
   execute(context: GPEffectContext): GPEffectResult {
-    const { actor } = context;
+    const { actor, level } = context;
+    if (!actor || !level) {
+      return { success: false, messages: ['No valid target.'], turnConsumed: false };
+    }
+
     const messages: string[] = [];
 
     // Calculate positions for 8 adjacent tiles
@@ -39,8 +43,12 @@ export class CreateDoorEffect extends SelfGPEffect {
       y: actor.position.y + dy,
     }));
 
-    // TODO: When terrain modification is implemented, actually create doors
-    // For now, just return messages and positions
+    // Create doors on adjacent floor tiles
+    for (const pos of positions) {
+      if (level.isInBounds(pos)) {
+        level.setTerrain(pos, 'door');
+      }
+    }
 
     messages.push('Doors appear around you!');
 

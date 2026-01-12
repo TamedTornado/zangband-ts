@@ -78,8 +78,8 @@ describe('ChainLightningEffect', () => {
       const result = effect.execute(context);
 
       // Should have beam data for 8 directions
-      expect(result.data?.beams).toBeDefined();
-      expect(result.data?.beams.length).toBe(8);
+      expect(result.data?.['beams']).toBeDefined();
+      expect(result.data?.['beams'].length).toBe(8);
     });
 
     it('uses electric element for all beams', () => {
@@ -96,7 +96,7 @@ describe('ChainLightningEffect', () => {
       const result = effect.execute(context);
 
       // All beams should be electric element
-      for (const beam of result.data?.beams ?? []) {
+      for (const beam of result.data?.['beams'] ?? []) {
         expect(beam.element).toBe('electricity');
       }
     });
@@ -116,7 +116,7 @@ describe('ChainLightningEffect', () => {
 
       // At level 50: (5 + 50/10)d8 = 10d8 = 8-80 damage
       // Each beam should have damage in reasonable range
-      for (const beam of result.data?.beams ?? []) {
+      for (const beam of result.data?.['beams'] ?? []) {
         expect(beam.damage).toBeGreaterThanOrEqual(8);
         expect(beam.damage).toBeLessThanOrEqual(80);
       }
@@ -126,9 +126,9 @@ describe('ChainLightningEffect', () => {
       const effect = new ChainLightningEffect({ type: 'chainLightning' });
       const player = createTestPlayer(25, 25);
       // Place monsters in several directions
-      const monster1 = createTestMonster('kobold', 26, 25); // East
-      const monster2 = createTestMonster('kobold', 25, 26); // South
-      const monster3 = createTestMonster('kobold', 24, 24); // Northwest
+      const monster1 = createTestMonster({ position: { x: 26, y: 25 } }); // East
+      const monster2 = createTestMonster({ position: { x: 25, y: 26 } }); // South
+      const monster3 = createTestMonster({ position: { x: 24, y: 24 } }); // Northwest
       const level = createMockLevel([monster1, monster2, monster3], player);
 
       const context: GPEffectContext = {
@@ -140,7 +140,7 @@ describe('ChainLightningEffect', () => {
       const result = effect.execute(context);
 
       // Should have some monster hits recorded
-      expect(result.data?.totalHits).toBeGreaterThan(0);
+      expect(result.data?.['totalHits']).toBeGreaterThan(0);
     });
 
     it('beams have correct directions', () => {
@@ -157,7 +157,7 @@ describe('ChainLightningEffect', () => {
       const result = effect.execute(context);
 
       // Should have beams in all 8 directions
-      const directions = result.data?.beams.map((b: any) => `${b.dx},${b.dy}`);
+      const directions = result.data?.['beams'].map((b: any) => `${b.dx},${b.dy}`);
       expect(directions).toContain('1,0');   // East
       expect(directions).toContain('-1,0');  // West
       expect(directions).toContain('0,1');   // South

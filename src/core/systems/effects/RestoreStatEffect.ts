@@ -6,6 +6,7 @@
 
 import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
+import type { Player, Stats } from '@/core/entities/Player';
 
 export type StatName = 'str' | 'int' | 'wis' | 'dex' | 'con' | 'chr' | 'all';
 
@@ -39,17 +40,41 @@ export class RestoreStatEffect extends SelfGPEffect {
     }
 
     const messages: string[] = [];
+    const player = actor as Player;
 
-    // For now, stats aren't drainable in the current implementation
-    // This effect would restore drained stats back to their base values
-    // When stat draining is implemented, this will be functional
+    // Check if player has stat restoration methods
+    if (!('restoreStat' in player)) {
+      messages.push('You feel your stats returning to normal.');
+      return { success: true, messages, turnConsumed: true };
+    }
+
+    let anyRestored = false;
 
     if (this.stats.includes('all')) {
-      messages.push('You feel your stats returning to normal.');
+      // Restore all stats
+      const restored = player.restoreAllStats();
+      if (restored.length > 0) {
+        anyRestored = true;
+        messages.push('You feel your stats returning to normal.');
+      } else {
+        messages.push('Your stats are already normal.');
+      }
     } else {
+      // Restore specific stats
+      const validStats: (keyof Stats)[] = ['str', 'int', 'wis', 'dex', 'con', 'chr'];
       for (const stat of this.stats) {
-        const statName = STAT_NAMES[stat] ?? stat;
-        messages.push(`You feel your ${statName} returning.`);
+        if (stat === 'all') continue;
+        if (!validStats.includes(stat as keyof Stats)) continue;
+        const wasRestored = player.restoreStat(stat as keyof Stats);
+        if (wasRestored) {
+          anyRestored = true;
+          const statName = STAT_NAMES[stat] ?? stat;
+          messages.push(`You feel your ${statName} returning.`);
+        }
+      }
+
+      if (!anyRestored) {
+        messages.push('Your stats are already normal.');
       }
     }
 

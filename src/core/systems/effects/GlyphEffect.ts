@@ -9,9 +9,15 @@ import { SelfGPEffect } from './SelfGPEffect';
 import type { GPEffectContext, GPEffectResult } from './GPEffect';
 
 export class GlyphEffect extends SelfGPEffect {
-  execute(_context: GPEffectContext): GPEffectResult {
-    // TODO: Implement actual glyph placement when terrain modification is supported
-    // For now, just show a message
+  execute(context: GPEffectContext): GPEffectResult {
+    const { actor, level } = context;
+    if (!actor || !level) {
+      return { success: false, messages: ['No valid target.'], turnConsumed: false };
+    }
+
+    // Place glyph of warding at player's position
+    level.setTerrain(actor.position, 'glyph_of_warding');
+
     return this.success(['You inscribe a glyph of warding beneath you.']);
   }
 }

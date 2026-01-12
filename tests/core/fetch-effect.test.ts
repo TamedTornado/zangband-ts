@@ -38,6 +38,7 @@ function createTestItem(x: number, y: number, weight: number = 50): Item {
         cost: 100,
         allocation: [],
         baseAc: 0,
+        damage: '1d4',
         toHit: 0,
         toDam: 0,
         toAc: 0,

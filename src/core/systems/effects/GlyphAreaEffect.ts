@@ -37,7 +37,11 @@ const DIRECTIONS = [
 
 export class GlyphAreaEffect extends SelfGPEffect {
   execute(context: GPEffectContext): GPEffectResult {
-    const { actor } = context;
+    const { actor, level } = context;
+    if (!actor || !level) {
+      return { success: false, messages: ['No valid target.'], turnConsumed: false };
+    }
+
     const messages: string[] = [];
 
     // Calculate positions for all 9 glyphs (player tile + 8 adjacent)
@@ -46,8 +50,12 @@ export class GlyphAreaEffect extends SelfGPEffect {
       y: actor.position.y + dy,
     }));
 
-    // TODO: When terrain modification is implemented, actually place glyphs
-    // For now, just return messages and positions
+    // Place glyphs on all 9 tiles
+    for (const pos of glyphPositions) {
+      if (level.isInBounds(pos)) {
+        level.setTerrain(pos, 'glyph_of_warding');
+      }
+    }
 
     messages.push('You inscribe a glyph of warding beneath you.');
     messages.push('Glyphs of warding surround you!');

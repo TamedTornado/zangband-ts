@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, beforeAll, vi } from 'vitest';
 import { RNG } from 'rot-js';
 import { InvokeSpiritsEffect } from '@/core/systems/effects/InvokeSpiritsEffect';
 import { Player } from '@/core/entities/Player';
-import { loadStatusDefs, statusDefs } from '@/core/systems/status';
+import { loadStatusDefs } from '@/core/systems/status';
 import statusesData from '@/data/statuses.json';
 import type { GPEffectContext, GPEffectDef, GPEffect } from '@/core/systems/effects/GPEffect';
 import { createMockLevel, createTestMonster } from './testHelpers';
@@ -49,7 +49,7 @@ describe('InvokeSpiritsEffect', () => {
         level: level as any,
         rng: RNG,
         targetPosition: { x: 30, y: 25 },
-        createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
+        createEffect: (_def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
       };
 
       expect(effect.canExecute(context)).toBe(true);
@@ -81,7 +81,7 @@ describe('InvokeSpiritsEffect', () => {
         level: level as any,
         rng: RNG,
         targetPosition: { x: 30, y: 25 },
-        createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
+        createEffect: (_def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
       };
 
       const result = effect.execute(context);
@@ -99,14 +99,14 @@ describe('InvokeSpiritsEffect', () => {
         level: level as any,
         rng: RNG,
         targetPosition: { x: 30, y: 25 },
-        createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
+        createEffect: (_def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
       };
 
       const result = effect.execute(context);
 
       // Die roll should be between 1 and 100 + level/5
-      expect(result.data?.dieRoll).toBeDefined();
-      expect(result.data?.dieRoll).toBeGreaterThanOrEqual(1);
+      expect(result.data?.['dieRoll']).toBeDefined();
+      expect(result.data?.['dieRoll']).toBeGreaterThanOrEqual(1);
     });
 
     describe('low rolls (bad effects on player)', () => {
@@ -125,12 +125,12 @@ describe('InvokeSpiritsEffect', () => {
           level: level as any,
           rng: mockRng as any,
           targetPosition: { x: 30, y: 25 },
-          createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: ['summoned'], turnConsumed: true }),
+          createEffect: (_def: GPEffectDef) => createMockEffect({ success: true, messages: ['summoned'], turnConsumed: true }),
         };
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('summonUndead');
+        expect(result.data?.['outcome']).toBe('summonUndead');
         expect(result.messages.some(m => m.includes('Mouldering forms rise'))).toBe(true);
       });
 
@@ -148,12 +148,12 @@ describe('InvokeSpiritsEffect', () => {
           level: level as any,
           rng: mockRng as any,
           targetPosition: { x: 30, y: 25 },
-          createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
+          createEffect: (_def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
         };
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('fear');
+        expect(result.data?.['outcome']).toBe('fear');
         expect(result.messages.some(m => m.includes('unnamable evil'))).toBe(true);
       });
 
@@ -171,12 +171,12 @@ describe('InvokeSpiritsEffect', () => {
           level: level as any,
           rng: mockRng as any,
           targetPosition: { x: 30, y: 25 },
-          createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
+          createEffect: (_def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
         };
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('confusion');
+        expect(result.data?.['outcome']).toBe('confusion');
         expect(result.messages.some(m => m.includes('gibbering spectral voices'))).toBe(true);
       });
 
@@ -194,7 +194,7 @@ describe('InvokeSpiritsEffect', () => {
           level: level as any,
           rng: mockRng as any,
           targetPosition: { x: 30, y: 25 },
-          createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
+          createEffect: (_def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
         };
 
         const result = effect.execute(context);
@@ -227,7 +227,7 @@ describe('InvokeSpiritsEffect', () => {
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('polymorph');
+        expect(result.data?.['outcome']).toBe('polymorph');
         expect(createdEffectType).toBe('polymorph');
       });
 
@@ -254,7 +254,7 @@ describe('InvokeSpiritsEffect', () => {
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('missileBolt');
+        expect(result.data?.['outcome']).toBe('missileBolt');
         expect(createdEffectType).toBe('bolt');
       });
 
@@ -281,9 +281,9 @@ describe('InvokeSpiritsEffect', () => {
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('poisonBall');
+        expect(result.data?.['outcome']).toBe('poisonBall');
         expect(createdEffectDef?.type).toBe('ball');
-        expect((createdEffectDef as any)?.element).toBe('poison');
+        expect((createdEffectDef as any)?.['element']).toBe('poison');
       });
     });
 
@@ -303,7 +303,7 @@ describe('InvokeSpiritsEffect', () => {
           level: level as any,
           rng: mockRng as any,
           targetPosition: { x: 30, y: 25 },
-          createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
+          createEffect: (_def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
         };
 
         const result = effect.execute(context);
@@ -335,7 +335,7 @@ describe('InvokeSpiritsEffect', () => {
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('earthquake');
+        expect(result.data?.['outcome']).toBe('earthquake');
         expect(createdEffectType).toBe('earthquake');
       });
 
@@ -363,7 +363,7 @@ describe('InvokeSpiritsEffect', () => {
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('dispel');
+        expect(result.data?.['outcome']).toBe('dispel');
         expect(createdEffectType).toBe('dispel');
       });
 
@@ -386,15 +386,15 @@ describe('InvokeSpiritsEffect', () => {
           level: level as any,
           rng: mockRng as any,
           targetPosition: { x: 30, y: 25 },
-          createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
+          createEffect: (_def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
         };
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('genocide');
+        expect(result.data?.['outcome']).toBe('genocide');
         // Should pick 'o' as most numerous and kill both
-        expect(result.data?.symbol).toBe('o');
-        expect(result.data?.killed).toBe(2);
+        expect(result.data?.['symbol']).toBe('o');
+        expect(result.data?.['killed']).toBe(2);
         expect(monster1.isDead).toBe(true);
         expect(monster2.isDead).toBe(true);
         expect(monster3.isDead).toBe(false); // Different symbol
@@ -424,7 +424,7 @@ describe('InvokeSpiritsEffect', () => {
 
         const result = effect.execute(context);
 
-        expect(result.data?.outcome).toBe('ultimate');
+        expect(result.data?.['outcome']).toBe('ultimate');
         // Should dispel, slow, sleep, and heal
         expect(createdTypes).toContain('dispel');
         expect(createdTypes).toContain('areaStatus');

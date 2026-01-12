@@ -3,10 +3,40 @@
  */
 
 import type { MonsterDef } from '@/core/data/monsters';
+import type { ItemDef } from '@/core/data/items';
 import type { Actor } from '@/core/entities/Actor';
 import { Monster } from '@/core/entities/Monster';
 import type { ILevel } from '@/core/world/Level';
 import type { Position } from '@/core/types';
+
+/**
+ * Create a minimal ItemDef for testing.
+ * Provides sensible defaults that can be overridden.
+ */
+export function createTestItemDef(overrides: Partial<ItemDef> = {}): ItemDef {
+  return {
+    key: 'test_item',
+    index: 1,
+    name: 'Test Item',
+    symbol: '/',
+    color: 'w',
+    type: 'weapon',
+    sval: 1,
+    pval: 0,
+    depth: 1,
+    rarity: 1,
+    weight: 100,
+    cost: 100,
+    allocation: [],
+    baseAc: 0,
+    damage: '1d4',
+    toHit: 0,
+    toDam: 0,
+    toAc: 0,
+    flags: [],
+    ...overrides,
+  };
+}
 
 /**
  * Create a minimal MonsterDef for testing.

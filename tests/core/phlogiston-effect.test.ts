@@ -49,6 +49,11 @@ function createLightItem(def: any, currentFuel: number): Item {
     generated: {
       baseItem: def,
       timeout: currentFuel,
+      toHit: 0,
+      toDam: 0,
+      toAc: 0,
+      pval: 0,
+      flags: [],
     },
   });
   return item;
@@ -116,7 +121,7 @@ describe('PhlogistonEffect', () => {
 
       expect(result.success).toBe(true);
       // Should add half of max fuel (2000) = 1000 + 2000 = 3000
-      expect(torch.generated.timeout).toBe(3000);
+      expect(torch.generated!.timeout).toBe(3000);
       expect(result.messages.some(m => m.includes('phlogiston') || m.includes('add'))).toBe(true);
     });
 
@@ -137,7 +142,7 @@ describe('PhlogistonEffect', () => {
 
       expect(result.success).toBe(true);
       // Would be 3500 + 2000 = 5500, but capped at 4000
-      expect(torch.generated.timeout).toBe(4000);
+      expect(torch.generated!.timeout).toBe(4000);
       expect(result.messages.some(m => m.includes('full'))).toBe(true);
     });
 
@@ -179,7 +184,7 @@ describe('PhlogistonEffect', () => {
 
       expect(result.success).toBe(true);
       // Should add half of max fuel (3750) = 2000 + 3750 = 5750
-      expect(lantern.generated.timeout).toBe(5750);
+      expect(lantern.generated!.timeout).toBe(5750);
     });
 
     it('caps lantern fuel at maximum', () => {
@@ -199,7 +204,7 @@ describe('PhlogistonEffect', () => {
 
       expect(result.success).toBe(true);
       // Would be 6000 + 3750 = 9750, but capped at 7500
-      expect(lantern.generated.timeout).toBe(7500);
+      expect(lantern.generated!.timeout).toBe(7500);
     });
   });
 

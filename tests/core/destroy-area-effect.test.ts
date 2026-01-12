@@ -76,7 +76,7 @@ describe('DestroyAreaEffect', () => {
       const result = effect.execute(context);
 
       expect(monster.isDead).toBe(true);
-      expect(result.data?.monstersKilled).toBe(1);
+      expect(result.data?.['monstersKilled']).toBe(1);
     });
 
     it('does not kill monsters outside radius', () => {
@@ -131,7 +131,7 @@ describe('DestroyAreaEffect', () => {
       const originalGetTile = level.getTile.bind(level);
       (level as any).getTile = (pos: { x: number; y: number }) => {
         if (pos.x === 26 && pos.y === 25) {
-          return { terrain: { id: 'wall', flags: ['WALL', 'BLOCK'] } };
+          return { terrain: { id: 'wall', flags: ['WALL', 'BLOCK'] } } as unknown as ReturnType<typeof originalGetTile>;
         }
         return originalGetTile(pos);
       };
@@ -152,7 +152,7 @@ describe('DestroyAreaEffect', () => {
       effect.execute(context);
 
       expect(terrainSet).not.toBeNull();
-      expect(terrainSet?.terrain).toBe('floor');
+      expect(terrainSet!.terrain).toBe('floor');
     });
 
     it('uses default radius of 15 when not specified', () => {

@@ -115,7 +115,6 @@ describe('DimensionDoorEffect', () => {
       // Level 10: range = 10 + 2 = 12
       const effect = new DimensionDoorEffect({ type: 'dimensionDoor', range: 'level+2', target: 'position' });
       const player = createTestPlayer(25, 25, 10);
-      const originalPos = { ...player.position };
       const level = createMockLevel([], player);
       const targetPos = { x: 45, y: 25 }; // Distance 20, beyond range 12
 
@@ -129,14 +128,13 @@ describe('DimensionDoorEffect', () => {
       const result = effect.execute(context);
 
       expect(result.messages.some(m => m.includes('fail'))).toBe(true);
-      // Should have teleported randomly instead
-      expect(player.position.x !== originalPos.x || player.position.y !== originalPos.y).toBe(true);
+      // Should have teleported randomly instead (position changed from original 25,25)
+      expect(player.position.x !== 25 || player.position.y !== 25).toBe(true);
     });
 
     it('fails when target is occupied by monster', () => {
       const effect = new DimensionDoorEffect({ type: 'dimensionDoor', range: 'level+2', target: 'position' });
       const player = createTestPlayer(25, 25, 20);
-      const originalPos = { ...player.position };
       const targetPos = { x: 27, y: 25 };
 
       // Create level with monster at target
@@ -157,14 +155,13 @@ describe('DimensionDoorEffect', () => {
       const result = effect.execute(context);
 
       expect(result.messages.some(m => m.includes('fail'))).toBe(true);
-      // Should have teleported randomly
-      expect(player.position.x !== originalPos.x || player.position.y !== originalPos.y).toBe(true);
+      // Should have teleported randomly (position changed from original 25,25)
+      expect(player.position.x !== 25 || player.position.y !== 25).toBe(true);
     });
 
     it('fails when target is a wall', () => {
       const effect = new DimensionDoorEffect({ type: 'dimensionDoor', range: 'level+2', target: 'position' });
       const player = createTestPlayer(25, 25, 20);
-      const originalPos = { ...player.position };
       const targetPos = { x: 27, y: 25 };
 
       // Create level where target is a wall

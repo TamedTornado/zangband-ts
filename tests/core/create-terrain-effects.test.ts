@@ -75,8 +75,8 @@ describe('CreateDoorEffect', () => {
 
       const result = effect.execute(context);
 
-      expect(result.data?.positions).toBeDefined();
-      expect(result.data?.positions.length).toBe(8);
+      expect(result.data?.['positions']).toBeDefined();
+      expect(result.data?.['positions'].length).toBe(8);
     });
   });
 });
@@ -137,9 +137,9 @@ describe('CreateStairsEffect', () => {
 
       const result = effect.execute(context);
 
-      expect(result.data?.position).toBeDefined();
-      expect(result.data?.position.x).toBe(25);
-      expect(result.data?.position.y).toBe(25);
+      expect(result.data?.['position']).toBeDefined();
+      expect(result.data?.['position'].x).toBe(25);
+      expect(result.data?.['position'].y).toBe(25);
     });
   });
 });
@@ -200,8 +200,8 @@ describe('CreateWallsEffect', () => {
 
       const result = effect.execute(context);
 
-      expect(result.data?.positions).toBeDefined();
-      expect(result.data?.positions.length).toBe(8);
+      expect(result.data?.['positions']).toBeDefined();
+      expect(result.data?.['positions'].length).toBe(8);
     });
   });
 });

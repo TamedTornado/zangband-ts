@@ -59,8 +59,8 @@ describe('AlterRealityEffect', () => {
       expect(result.turnConsumed).toBe(true);
       expect(result.messages.some(m => m.includes('world changes'))).toBe(true);
       // Should signal level regeneration
-      expect(result.data?.type).toBe('alterReality');
-      expect(result.data?.regenerateLevel).toBe(true);
+      expect(result.data?.['type']).toBe('alterReality');
+      expect(result.data?.['regenerateLevel']).toBe(true);
     });
   });
 
@@ -81,7 +81,7 @@ describe('AlterRealityEffect', () => {
       expect(result.success).toBe(true);
       expect(result.messages.some(m => m.includes('moment'))).toBe(true);
       // Should NOT signal level regeneration
-      expect(result.data?.regenerateLevel).toBeFalsy();
+      expect(result.data?.['regenerateLevel']).toBeFalsy();
     });
   });
 });

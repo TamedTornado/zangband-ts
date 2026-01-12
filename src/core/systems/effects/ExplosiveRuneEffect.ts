@@ -24,7 +24,11 @@ interface ExplosiveRuneData {
 
 export class ExplosiveRuneEffect extends SelfGPEffect {
   execute(context: GPEffectContext): GPEffectResult {
-    const { actor } = context;
+    const { actor, level } = context;
+    if (!actor || !level) {
+      return { success: false, messages: ['No valid target.'], turnConsumed: false };
+    }
+
     const messages: string[] = [];
 
     // Position where rune is placed (player's current position)
@@ -33,8 +37,8 @@ export class ExplosiveRuneEffect extends SelfGPEffect {
       y: actor.position.y,
     };
 
-    // TODO: When terrain/trap modification is implemented, actually place the rune
-    // For now, just return messages and position
+    // Place explosive rune terrain
+    level.setTerrain(runePosition, 'explosive_rune');
 
     messages.push('You carefully inscribe an explosive rune.');
 
