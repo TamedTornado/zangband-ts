@@ -52,6 +52,7 @@ export function createTestMonster(
     flags: string[];
     name: string;
     definitionKey: string;
+    level: number;
   }> = {}
 ): Monster {
   // Build def from overrides if not provided directly
@@ -59,6 +60,7 @@ export function createTestMonster(
     key: overrides.definitionKey ?? 'test_monster',
     name: overrides.name ?? 'Test Monster',
     flags: overrides.flags ?? [],
+    depth: overrides.level ?? 10, // Use level as depth (monster level)
   });
 
   return new Monster({
