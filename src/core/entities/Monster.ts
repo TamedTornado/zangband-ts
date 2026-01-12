@@ -70,6 +70,13 @@ export class Monster extends Actor {
     }
   }
 
+  /** Put the monster into stasis (very deep sleep with fixed duration) */
+  stasis(duration: number = 500): void {
+    if (!this.def.flags.includes('NO_SLEEP')) {
+      this._sleepCounter = duration;
+    }
+  }
+
   get isTamed(): boolean {
     return this._isTamed;
   }

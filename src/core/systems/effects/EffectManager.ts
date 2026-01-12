@@ -63,6 +63,7 @@ import { BanishEvilEffect } from './BanishEvilEffect';
 import { PhlogistonEffect } from './PhlogistonEffect';
 import { CharmMonstersEffect } from './CharmMonstersEffect';
 import { CharmAnimalsEffect } from './CharmAnimalsEffect';
+import { StasisEffect } from './StasisEffect';
 
 /**
  * Default effect registry
@@ -100,6 +101,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   charmMonsters: CharmMonstersEffect,
   // Charm Animals (charm animals in sight)
   charmAnimals: CharmAnimalsEffect,
+  // Stasis (put all monsters in sight into deep sleep)
+  stasis: StasisEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
