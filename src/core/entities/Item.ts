@@ -106,6 +106,11 @@ export class Item extends Entity {
     return this.generated?.baseItem.baseAc ?? 0;
   }
 
+  /** Get the item's weight */
+  get weight(): number {
+    return this.generated?.baseItem.weight ?? 0;
+  }
+
   /** Check if item has a specific flag */
   hasFlag(flag: string): boolean {
     return this.generated?.flags.includes(flag) ?? false;

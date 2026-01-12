@@ -48,6 +48,7 @@ import { BrandWeaponEffect } from './BrandWeaponEffect';
 import { TeleportLevelEffect } from './TeleportLevelEffect';
 import { WizLiteEffect } from './WizLiteEffect';
 import { RestoreLevelEffect } from './RestoreLevelEffect';
+import { FetchEffect } from './FetchEffect';
 
 /**
  * Default effect registry
@@ -112,6 +113,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   wizLite: WizLiteEffect,
   // Experience restoration
   restoreLevel: RestoreLevelEffect,
+  // Telekinesis
+  fetch: FetchEffect,
 };
 
 export class EffectManager {
