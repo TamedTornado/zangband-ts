@@ -136,9 +136,40 @@ export class PolymorphSelfEffect extends SelfGPEffect {
       }
     }
 
-    // TODO: Implement mutation gain/loss when mutation system is ready
-    // While power > rand(15) and 1/3: gain_mutation
-    // While power > rand(20) and 1/10: lose_mutation
+    // Mutation gain/loss using MutationSystem
+    const mutationSystem = player.mutationSystem;
+    if (mutationSystem) {
+      // Gain mutations: while power > rand(15) and 1/3 chance
+      while (power > rng.getUniformInt(0, 14) && rng.getUniformInt(1, 3) === 1) {
+        const result = mutationSystem.gainMutation(player, undefined, rng);
+        if (result.gained && result.message) {
+          messages.push(result.message);
+          if (result.cancelled && result.cancelled.length > 0) {
+            // Get lose messages for cancelled mutations
+            for (const cancelledKey of result.cancelled) {
+              const cancelledDef = mutationSystem.getDef(cancelledKey);
+              if (cancelledDef?.loseMessage) {
+                messages.push(cancelledDef.loseMessage);
+              }
+            }
+          }
+        } else {
+          // No more mutations available to gain
+          break;
+        }
+      }
+
+      // Lose mutations: while power > rand(20) and 1/10 chance
+      while (power > rng.getUniformInt(0, 19) && rng.getUniformInt(1, 10) === 1) {
+        const result = mutationSystem.loseMutation(player, undefined, rng);
+        if (result.lost && result.message) {
+          messages.push(result.message);
+        } else {
+          // No more mutations to lose
+          break;
+        }
+      }
+    }
 
     return {
       success: true,

@@ -53,7 +53,7 @@ export function CharacterModal() {
         {activeTab === 'info' && <InfoTab player={player} depth={state.depth} turn={state.turn} />}
         {activeTab === 'skills' && <SkillsTab player={player} />}
         {activeTab === 'flags' && <FlagsTab player={player} />}
-        {activeTab === 'mutations' && <MutationsTab />}
+        {activeTab === 'mutations' && <MutationsTab player={player} />}
         {activeTab === 'virtues' && <VirtuesTab />}
         {activeTab === 'notes' && <NotesTab />}
       </div>
@@ -286,10 +286,75 @@ function FlagsTab({ player: _player }: TabProps) {
 /**
  * Mutations tab - character mutations (Zangband feature)
  */
-function MutationsTab() {
+function MutationsTab({ player }: Pick<TabProps, 'player'>) {
+  const mutations = player.mutations;
+  const mutationSystem = player.mutationSystem;
+
+  if (mutations.length === 0) {
+    return (
+      <div className="char-mutations">
+        <p className="empty-text">You have no mutations.</p>
+      </div>
+    );
+  }
+
+  // Group mutations by category
+  const activatable: Array<{ key: string; name: string; description: string }> = [];
+  const random: Array<{ key: string; description: string }> = [];
+  const passive: Array<{ key: string; description: string }> = [];
+
+  for (const key of mutations) {
+    const def = mutationSystem?.getDef(key);
+    if (!def) continue;
+
+    if (def.category === 'activatable') {
+      activatable.push({
+        key,
+        name: (def as any).activeName ?? key,
+        description: def.description,
+      });
+    } else if (def.category === 'random') {
+      random.push({ key, description: def.description });
+    } else if (def.category === 'passive') {
+      passive.push({ key, description: def.description });
+    }
+  }
+
   return (
     <div className="char-mutations">
-      <p className="empty-text">You have no mutations.</p>
+      {activatable.length > 0 && (
+        <div className="mutation-section">
+          <h4>Activatable Powers</h4>
+          {activatable.map(m => (
+            <div key={m.key} className="mutation-item">
+              <span className="mutation-name">{m.name}:</span>
+              <span className="mutation-desc">{m.description}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {random.length > 0 && (
+        <div className="mutation-section">
+          <h4>Random Effects</h4>
+          {random.map(m => (
+            <div key={m.key} className="mutation-item">
+              <span className="mutation-desc">{m.description}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {passive.length > 0 && (
+        <div className="mutation-section">
+          <h4>Passive Abilities</h4>
+          {passive.map(m => (
+            <div key={m.key} className="mutation-item">
+              <span className="mutation-desc">{m.description}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

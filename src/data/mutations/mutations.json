@@ -33,7 +33,19 @@
     "cost": 12,
     "stat": "chr",
     "difficulty": 18,
-    "effect": { "type": "charm", "target": "direction" }
+    "effect": { "type": "tameMonster", "target": "direction" }
+  },
+  "telekines": {
+    "category": "activatable",
+    "description": "You are telekinetic.",
+    "gainMessage": "You gain the ability to move objects telekinetically.",
+    "loseMessage": "You lose the ability to move objects telekinetically.",
+    "activeName": "Telekinesis",
+    "level": 9,
+    "cost": 9,
+    "stat": "wis",
+    "difficulty": 14,
+    "effect": { "type": "fetch", "weight": "level * 10" }
   },
   "vteleport": {
     "category": "activatable",
@@ -47,6 +59,66 @@
     "difficulty": 15,
     "effect": { "type": "teleport", "range": "10 + level * 4" }
   },
+  "mind_blst": {
+    "category": "activatable",
+    "description": "You can Mind Blast your enemies.",
+    "gainMessage": "You gain the power of Mind Blast.",
+    "loseMessage": "You lose the power of Mind Blast.",
+    "activeName": "Mind blast",
+    "level": 5,
+    "cost": 3,
+    "stat": "wis",
+    "difficulty": 15,
+    "effect": { "type": "bolt", "element": "psi", "damage": "3 + (level - 1) / 5", "target": "direction" }
+  },
+  "radiation": {
+    "category": "activatable",
+    "description": "You can emit hard radiation at will.",
+    "gainMessage": "You start emitting hard radiation.",
+    "loseMessage": "You stop emitting hard radiation.",
+    "activeName": "Emit radiation",
+    "level": 15,
+    "cost": 15,
+    "stat": "con",
+    "difficulty": 14,
+    "effect": { "type": "ball", "element": "nuke", "radius": 2, "damage": "level * 2" }
+  },
+  "vampirism": {
+    "category": "activatable",
+    "description": "You can drain life from a foe like a vampire.",
+    "gainMessage": "You become vampiric.",
+    "loseMessage": "You are no longer vampiric.",
+    "activeName": "Vampiric drain",
+    "level": 10,
+    "cost": 10,
+    "stat": "con",
+    "difficulty": 9,
+    "effect": { "type": "drainLife", "damage": "level * 2", "target": "direction" }
+  },
+  "smell_met": {
+    "category": "activatable",
+    "description": "You can smell nearby precious metal.",
+    "gainMessage": "You smell a metallic odor.",
+    "loseMessage": "You no longer smell a metallic odor.",
+    "activeName": "Smell metal",
+    "level": 3,
+    "cost": 2,
+    "stat": "int",
+    "difficulty": 12,
+    "effect": { "type": "detect", "detectType": "treasure" }
+  },
+  "smell_mon": {
+    "category": "activatable",
+    "description": "You can smell nearby monsters.",
+    "gainMessage": "You smell filthy monsters.",
+    "loseMessage": "You no longer smell filthy monsters.",
+    "activeName": "Smell monsters",
+    "level": 5,
+    "cost": 4,
+    "stat": "int",
+    "difficulty": 15,
+    "effect": { "type": "detect", "detectType": "monsters" }
+  },
   "blink": {
     "category": "activatable",
     "description": "You can teleport yourself short distances.",
@@ -59,17 +131,65 @@
     "difficulty": 12,
     "effect": { "type": "teleport", "range": 10 }
   },
-  "vampirism": {
+  "eat_rock": {
     "category": "activatable",
-    "description": "You can drain life from a foe like a vampire.",
-    "gainMessage": "You become vampiric.",
-    "loseMessage": "You are no longer vampiric.",
-    "activeName": "Vampiric drain",
-    "level": 10,
-    "cost": 10,
+    "description": "You can consume solid rock.",
+    "gainMessage": "The walls look delicious.",
+    "loseMessage": "The walls look unappetizing.",
+    "activeName": "Eat rock",
+    "level": 8,
+    "cost": 12,
     "stat": "con",
-    "difficulty": 9,
-    "effect": { "type": "drainLife", "damage": "level * 2" }
+    "difficulty": 18,
+    "effect": { "type": "stoneToMud", "target": "direction", "satisfyHunger": true }
+  },
+  "swap_pos": {
+    "category": "activatable",
+    "description": "You can switch locations with another being.",
+    "gainMessage": "You feel like walking a mile in someone else's shoes.",
+    "loseMessage": "You feel like staying in your own shoes.",
+    "activeName": "Swap position",
+    "level": 15,
+    "cost": 12,
+    "stat": "dex",
+    "difficulty": 16,
+    "effect": { "type": "swapPos", "target": "direction" }
+  },
+  "shriek": {
+    "category": "activatable",
+    "description": "You can emit a horrible shriek.",
+    "gainMessage": "Your vocal cords get much tougher.",
+    "loseMessage": "Your vocal cords get much weaker.",
+    "activeName": "Shriek",
+    "level": 20,
+    "cost": 14,
+    "stat": "con",
+    "difficulty": 16,
+    "effect": { "type": "areaStatus", "status": "aggravate", "radius": 20 }
+  },
+  "illumine": {
+    "category": "activatable",
+    "description": "You can emit bright light.",
+    "gainMessage": "You can light up rooms with your presence.",
+    "loseMessage": "You can no longer light up rooms with your presence.",
+    "activeName": "Illuminate area",
+    "level": 3,
+    "cost": 2,
+    "stat": "int",
+    "difficulty": 10,
+    "effect": { "type": "lightArea" }
+  },
+  "det_curse": {
+    "category": "activatable",
+    "description": "You can feel the danger of evil magic.",
+    "gainMessage": "You can feel evil magics.",
+    "loseMessage": "You can no longer feel evil magics.",
+    "activeName": "Detect curses",
+    "level": 7,
+    "cost": 14,
+    "stat": "wis",
+    "difficulty": 14,
+    "effect": { "type": "detect", "detectType": "cursed" }
   },
   "berserk": {
     "category": "activatable",
@@ -81,7 +201,139 @@
     "cost": 8,
     "stat": "str",
     "difficulty": 14,
-    "effect": { "type": "status", "status": "berserk", "duration": "25 + d25" }
+    "effect": { "type": "applyStatus", "status": "berserk", "duration": "25 + d25" }
+  },
+  "polymorph": {
+    "category": "activatable",
+    "description": "You can polymorph yourself at will.",
+    "gainMessage": "Your body seems mutable.",
+    "loseMessage": "Your body seems stable.",
+    "activeName": "Polymorph",
+    "level": 18,
+    "cost": 20,
+    "stat": "con",
+    "difficulty": 18,
+    "effect": { "type": "polymorphSelf" }
+  },
+  "midas_tch": {
+    "category": "activatable",
+    "description": "You can turn ordinary items to gold.",
+    "gainMessage": "You gain the Midas touch.",
+    "loseMessage": "You lose the Midas touch.",
+    "activeName": "Midas touch",
+    "level": 10,
+    "cost": 5,
+    "stat": "int",
+    "difficulty": 12,
+    "effect": { "type": "alchemy", "target": "item" }
+  },
+  "grow_mold": {
+    "category": "activatable",
+    "description": "You can cause mold to grow near you.",
+    "gainMessage": "You feel a sudden affinity for mold.",
+    "loseMessage": "You feel a sudden dislike for mold.",
+    "activeName": "Grow mold",
+    "level": 1,
+    "cost": 6,
+    "stat": "con",
+    "difficulty": 14,
+    "effect": { "type": "summon", "summonType": "mold", "count": 8 }
+  },
+  "resist": {
+    "category": "activatable",
+    "description": "You can harden yourself to the ravages of the elements.",
+    "gainMessage": "You feel like you can protect yourself.",
+    "loseMessage": "You feel like you might be vulnerable.",
+    "activeName": "Resist elements",
+    "level": 10,
+    "cost": 12,
+    "stat": "con",
+    "difficulty": 12,
+    "effect": { "type": "applyStatus", "status": "oppose_elements", "duration": "20 + d20" }
+  },
+  "earthquake": {
+    "category": "activatable",
+    "description": "You can bring down the dungeon around your ears.",
+    "gainMessage": "You gain the ability to wreck the dungeon.",
+    "loseMessage": "You lose the ability to wreck the dungeon.",
+    "activeName": "Earthquake",
+    "level": 12,
+    "cost": 12,
+    "stat": "str",
+    "difficulty": 16,
+    "effect": { "type": "earthquake", "radius": 10 }
+  },
+  "eat_magic": {
+    "category": "activatable",
+    "description": "You can consume magic energy for your own use.",
+    "gainMessage": "Your magic items look delicious.",
+    "loseMessage": "Your magic items no longer look delicious.",
+    "activeName": "Eat magic",
+    "level": 17,
+    "cost": 1,
+    "stat": "wis",
+    "difficulty": 15,
+    "effect": { "type": "recharge", "target": "item", "drain": true }
+  },
+  "weigh_mag": {
+    "category": "activatable",
+    "description": "You can feel the strength of the magics affecting you.",
+    "gainMessage": "You feel you can better understand the magic around you.",
+    "loseMessage": "You no longer sense magic.",
+    "activeName": "Weigh magic",
+    "level": 6,
+    "cost": 6,
+    "stat": "int",
+    "difficulty": 10,
+    "effect": { "type": "selfKnowledge" }
+  },
+  "sterility": {
+    "category": "activatable",
+    "description": "You can cause mass impotence.",
+    "gainMessage": "You can give everything around you a headache.",
+    "loseMessage": "You hear a massed sigh of relief.",
+    "activeName": "Sterilize",
+    "level": 12,
+    "cost": 23,
+    "stat": "chr",
+    "difficulty": 15,
+    "effect": { "type": "areaStatus", "status": "sterile", "radius": 20 }
+  },
+  "panic_hit": {
+    "category": "activatable",
+    "description": "You can run for your life after hitting something.",
+    "gainMessage": "You suddenly understand how thieves feel.",
+    "loseMessage": "You no longer feel jumpy.",
+    "activeName": "Panic hit",
+    "level": 10,
+    "cost": 12,
+    "stat": "dex",
+    "difficulty": 14,
+    "effect": { "type": "panicHit", "target": "direction" }
+  },
+  "dazzle": {
+    "category": "activatable",
+    "description": "You can emit confusing, blinding radiation.",
+    "gainMessage": "You gain the ability to emit dazzling lights.",
+    "loseMessage": "You lose the ability to emit dazzling lights.",
+    "activeName": "Dazzle",
+    "level": 7,
+    "cost": 15,
+    "stat": "chr",
+    "difficulty": 8,
+    "effect": { "type": "areaStatus", "status": "stun_confuse", "radius": 5 }
+  },
+  "laser_eye": {
+    "category": "activatable",
+    "description": "Your eyes can fire laser beams.",
+    "gainMessage": "Your eyes burn for a moment.",
+    "loseMessage": "Your eyes burn for a moment, then feel soothed.",
+    "activeName": "Laser eye",
+    "level": 7,
+    "cost": 10,
+    "stat": "wis",
+    "difficulty": 9,
+    "effect": { "type": "beam", "element": "light", "damage": "level * 2", "target": "direction" }
   },
   "recall": {
     "category": "activatable",
@@ -93,7 +345,51 @@
     "cost": 50,
     "stat": "int",
     "difficulty": 16,
-    "effect": { "type": "teleportLevel", "target": "recall" }
+    "effect": { "type": "recall" }
+  },
+  "banish": {
+    "category": "activatable",
+    "description": "You can send evil creatures directly to Hell.",
+    "gainMessage": "You feel a holy wrath fill you.",
+    "loseMessage": "You no longer feel a holy wrath.",
+    "activeName": "Banish evil",
+    "level": 25,
+    "cost": 25,
+    "stat": "wis",
+    "difficulty": 18,
+    "effect": { "type": "banishEvil", "power": 100 }
+  },
+  "cold_touch": {
+    "category": "activatable",
+    "description": "You can freeze things with a touch.",
+    "gainMessage": "Your hands get very cold.",
+    "loseMessage": "Your hands warm up.",
+    "activeName": "Cold touch",
+    "level": 2,
+    "cost": 2,
+    "stat": "con",
+    "difficulty": 11,
+    "effect": { "type": "bolt", "element": "cold", "damage": "level * 2", "target": "direction" }
+  },
+  "launcher": {
+    "category": "activatable",
+    "description": "You can hurl objects with great force.",
+    "gainMessage": "Your throwing arm feels much stronger.",
+    "loseMessage": "Your throwing arm feels much weaker.",
+    "activeName": "Throw object",
+    "level": 10,
+    "cost": 15,
+    "stat": "str",
+    "difficulty": 6,
+    "effect": { "type": "throw", "multiplier": "2 + level / 10", "target": "item" }
+  },
+  "bers_rage": {
+    "category": "random",
+    "description": "You are subject to berserker fits.",
+    "gainMessage": "You become subject to fits of berserk rage!",
+    "loseMessage": "You are no longer subject to fits of berserk rage!",
+    "chance": 30,
+    "randomEffect": "berserk"
   },
   "cowardice": {
     "category": "random",
@@ -112,6 +408,14 @@
     "chance": 50,
     "randomEffect": "teleport"
   },
+  "alcohol": {
+    "category": "random",
+    "description": "Your body produces alcohol.",
+    "gainMessage": "Your body starts producing alcohol!",
+    "loseMessage": "Your body stops producing alcohol!",
+    "chance": 64,
+    "randomEffect": "confusion"
+  },
   "hallu": {
     "category": "random",
     "description": "You have a hallucinatory insanity.",
@@ -127,6 +431,16 @@
     "loseMessage": "You are no longer subject to uncontrollable flatulence.",
     "chance": 30,
     "randomEffect": "poison_ball"
+  },
+  "scor_tail": {
+    "category": "random",
+    "description": "You have a scorpion tail (poison, 3d7).",
+    "gainMessage": "You grow a scorpion tail!",
+    "loseMessage": "You lose your scorpion tail!",
+    "chance": 0,
+    "randomEffect": "none",
+    "extraAttack": { "damage": { "dice": 3, "sides": 7, "bonus": 0 }, "element": "poison" },
+    "modifiers": { "chr": -3 }
   },
   "horns": {
     "category": "random",
@@ -147,6 +461,46 @@
     "randomEffect": "none",
     "extraAttack": { "damage": { "dice": 2, "sides": 4, "bonus": 0 } }
   },
+  "att_demon": {
+    "category": "random",
+    "description": "You attract demons.",
+    "gainMessage": "You start attracting demons.",
+    "loseMessage": "You stop attracting demons.",
+    "chance": 66,
+    "randomEffect": "summon_demon"
+  },
+  "prod_mana": {
+    "category": "random",
+    "description": "You are producing magical energy uncontrollably.",
+    "gainMessage": "You start producing magical energy uncontrollably.",
+    "loseMessage": "You stop producing magical energy uncontrollably.",
+    "chance": 90,
+    "randomEffect": "mana_burst"
+  },
+  "speed_flux": {
+    "category": "random",
+    "description": "You move faster or slower randomly.",
+    "gainMessage": "You become manic-depressive.",
+    "loseMessage": "You are no longer manic-depressive.",
+    "chance": 60,
+    "randomEffect": "speed_change"
+  },
+  "banish_all": {
+    "category": "random",
+    "description": "You sometimes cause nearby creatures to vanish.",
+    "gainMessage": "You feel a terrifying power lurking behind you.",
+    "loseMessage": "You no longer feel a terrifying power lurking behind you.",
+    "chance": 90,
+    "randomEffect": "mass_banish"
+  },
+  "eat_light": {
+    "category": "random",
+    "description": "You sometimes feed off of the light around you.",
+    "gainMessage": "You feel a strange kinship with Ungoliant.",
+    "loseMessage": "You feel the world's a brighter place.",
+    "chance": 30,
+    "randomEffect": "consume_light"
+  },
   "trunk": {
     "category": "random",
     "description": "You have an elephantine trunk (dam 1d4).",
@@ -155,7 +509,34 @@
     "chance": 0,
     "opposites": ["beak"],
     "randomEffect": "none",
-    "extraAttack": { "damage": { "dice": 1, "sides": 4, "bonus": 0 } }
+    "extraAttack": { "damage": { "dice": 1, "sides": 4, "bonus": 0 } },
+    "modifiers": { "chr": -1 }
+  },
+  "att_animal": {
+    "category": "random",
+    "description": "You attract animals.",
+    "gainMessage": "You start attracting animals.",
+    "loseMessage": "You stop attracting animals.",
+    "chance": 70,
+    "randomEffect": "summon_animal"
+  },
+  "tentacles": {
+    "category": "random",
+    "description": "You have evil looking tentacles (dam 2d5).",
+    "gainMessage": "Evil-looking tentacles sprout from your sides.",
+    "loseMessage": "Your tentacles vanish from your sides.",
+    "chance": 0,
+    "randomEffect": "none",
+    "extraAttack": { "damage": { "dice": 2, "sides": 5, "bonus": 0 } },
+    "modifiers": { "dex": 1, "chr": -2 }
+  },
+  "raw_chaos": {
+    "category": "random",
+    "description": "You occasionally are surrounded with raw chaos.",
+    "gainMessage": "You feel the universe is less stable around you.",
+    "loseMessage": "You feel the universe is more stable around you.",
+    "chance": 80,
+    "randomEffect": "chaos_burst"
   },
   "normality": {
     "category": "random",
@@ -164,6 +545,112 @@
     "loseMessage": "You feel normally strange.",
     "chance": 50,
     "randomEffect": "lose_mutation"
+  },
+  "wraith": {
+    "category": "random",
+    "description": "You fade in and out of physical reality.",
+    "gainMessage": "You start to fade in and out of the physical world.",
+    "loseMessage": "You are firmly in the physical world.",
+    "chance": 30,
+    "randomEffect": "wraith_form",
+    "modifiers": { "con": -3 }
+  },
+  "poly_wound": {
+    "category": "random",
+    "description": "Your health is subject to chaotic forces.",
+    "gainMessage": "You feel forces of chaos entering your old scars.",
+    "loseMessage": "You feel forces of chaos departing your old scars.",
+    "chance": 30,
+    "randomEffect": "poly_wounds"
+  },
+  "wasting": {
+    "category": "random",
+    "description": "You have a horrible wasting disease.",
+    "gainMessage": "You suddenly contract a horrible wasting disease.",
+    "loseMessage": "You are cured of the horrible wasting disease!",
+    "chance": 30,
+    "randomEffect": "stat_drain"
+  },
+  "att_dragon": {
+    "category": "random",
+    "description": "You attract dragons.",
+    "gainMessage": "You start attracting dragons.",
+    "loseMessage": "You stop attracting dragons.",
+    "chance": 30,
+    "randomEffect": "summon_dragon"
+  },
+  "weird_mind": {
+    "category": "random",
+    "description": "Your mind randomly expands and contracts.",
+    "gainMessage": "Your thoughts suddenly take off in strange directions.",
+    "loseMessage": "Your thoughts return to boring paths.",
+    "chance": 30,
+    "randomEffect": "weird_mind"
+  },
+  "nausea": {
+    "category": "random",
+    "description": "You have a seriously upset stomach.",
+    "gainMessage": "Your stomach starts to roil nauseously.",
+    "loseMessage": "Your stomach stops roiling.",
+    "chance": 90,
+    "randomEffect": "vomit"
+  },
+  "chaos_gift": {
+    "category": "random",
+    "description": "Chaos deities give you gifts.",
+    "gainMessage": "You attract the notice of a chaos deity!",
+    "loseMessage": "You lose the attention of the chaos deities.",
+    "chance": 0,
+    "randomEffect": "chaos_patron"
+  },
+  "walk_shad": {
+    "category": "random",
+    "description": "You occasionally stumble into other shadows.",
+    "gainMessage": "You feel like reality is as thin as paper.",
+    "loseMessage": "You feel like you're trapped in reality.",
+    "chance": 120,
+    "randomEffect": "shadow_walk"
+  },
+  "warning": {
+    "category": "random",
+    "description": "You receive warnings about your foes.",
+    "gainMessage": "You suddenly feel paranoid.",
+    "loseMessage": "You no longer feel paranoid.",
+    "chance": 10,
+    "randomEffect": "monster_warning"
+  },
+  "invuln": {
+    "category": "random",
+    "description": "You occasionally feel invincible.",
+    "gainMessage": "You are blessed with fits of invulnerability.",
+    "loseMessage": "You are no longer blessed with fits of invulnerability.",
+    "chance": 50,
+    "randomEffect": "invulnerability",
+    "modifiers": { "wis": -2 }
+  },
+  "sp_to_hp": {
+    "category": "random",
+    "description": "Your blood sometimes rushes to your muscles.",
+    "gainMessage": "You are subject to fits of magical healing.",
+    "loseMessage": "You are no longer subject to fits of magical healing.",
+    "chance": 20,
+    "randomEffect": "sp_to_hp"
+  },
+  "hp_to_sp": {
+    "category": "random",
+    "description": "Your blood sometimes rushes to your head.",
+    "gainMessage": "You are subject to fits of painful clarity.",
+    "loseMessage": "You are no longer subject to fits of painful clarity.",
+    "chance": 40,
+    "randomEffect": "hp_to_sp"
+  },
+  "disarm": {
+    "category": "random",
+    "description": "You occasionally stumble and drop things.",
+    "gainMessage": "Your feet grow to four times their former size.",
+    "loseMessage": "Your feet shrink to their former size.",
+    "chance": 100,
+    "randomEffect": "drop_weapon"
   },
   "hyper_str": {
     "category": "passive",
@@ -204,6 +691,79 @@
     "loseMessage": "You become ordinarily resilient again.",
     "modifiers": { "con": 4 }
   },
+  "xtra_fat": {
+    "category": "passive",
+    "description": "You are extremely fat (+2 CON, -2 speed).",
+    "gainMessage": "You become sickeningly fat!",
+    "loseMessage": "You benefit from a miracle diet!",
+    "modifiers": { "con": 2 },
+    "speedMod": -2
+  },
+  "albino": {
+    "category": "passive",
+    "description": "You are albino (-4 CON).",
+    "gainMessage": "You turn into an albino! You feel frail...",
+    "loseMessage": "You are no longer an albino!",
+    "modifiers": { "con": -4 }
+  },
+  "flesh_rot": {
+    "category": "passive",
+    "description": "Your flesh is rotting (-2 CON, -1 CHR).",
+    "gainMessage": "Your flesh begins to rot!",
+    "loseMessage": "Your flesh stops rotting.",
+    "opposites": ["regen", "iron_skin"],
+    "modifiers": { "con": -2, "chr": -1 }
+  },
+  "silly_voi": {
+    "category": "passive",
+    "description": "Your voice is a silly squeak (-4 CHR).",
+    "gainMessage": "Your voice turns into a ridiculous squeak!",
+    "loseMessage": "Your voice returns to normal.",
+    "modifiers": { "chr": -4 }
+  },
+  "blank_fac": {
+    "category": "passive",
+    "description": "Your face is featureless (-1 CHR).",
+    "gainMessage": "Your face becomes completely featureless!",
+    "loseMessage": "Your facial features return.",
+    "modifiers": { "chr": -1 }
+  },
+  "ill_norm": {
+    "category": "passive",
+    "description": "Your appearance is masked with illusion.",
+    "gainMessage": "You start projecting a reassuring image.",
+    "loseMessage": "You stop projecting a reassuring image.",
+    "flags": ["illusion_normal"]
+  },
+  "xtra_eyes": {
+    "category": "passive",
+    "description": "You have an extra pair of eyes (+15 search).",
+    "gainMessage": "You grow an extra pair of eyes!",
+    "loseMessage": "Your extra eyes vanish!",
+    "searchMod": 15,
+    "modifiers": { "chr": -1 }
+  },
+  "magic_res": {
+    "category": "passive",
+    "description": "You are resistant to magic.",
+    "gainMessage": "You become resistant to magic.",
+    "loseMessage": "You become susceptible to magic again.",
+    "flags": ["magic_resistance"]
+  },
+  "xtra_nois": {
+    "category": "passive",
+    "description": "You make a lot of strange noise (-3 stealth).",
+    "gainMessage": "You start making strange noise!",
+    "loseMessage": "You stop making strange noise!",
+    "stealthMod": -3
+  },
+  "infravis": {
+    "category": "passive",
+    "description": "You have remarkable infravision (+3).",
+    "gainMessage": "Your infravision is improved.",
+    "loseMessage": "Your infravision is degraded.",
+    "infravisionMod": 3
+  },
   "xtra_legs": {
     "category": "passive",
     "description": "You have an extra pair of legs (+3 speed, -1 DEX).",
@@ -220,14 +780,30 @@
     "speedMod": -3,
     "modifiers": { "con": 1 }
   },
-  "iron_skin": {
+  "elec_touc": {
     "category": "passive",
-    "description": "Your skin is made of steel (-3 DEX, +25 AC).",
-    "gainMessage": "Your skin turns to steel!",
-    "loseMessage": "Your skin reverts to flesh.",
-    "opposites": ["scales", "wart_skin", "flesh_rot"],
-    "modifiers": { "dex": -3 },
-    "acMod": 25
+    "description": "Electricity is running through your veins.",
+    "gainMessage": "Electricity starts running through you!",
+    "loseMessage": "Electricity stops running through you.",
+    "modifiers": { "con": -1 },
+    "flags": ["elec_aura"]
+  },
+  "fire_body": {
+    "category": "passive",
+    "description": "Your body is enveloped in flames.",
+    "gainMessage": "Your body is enveloped in flames!",
+    "loseMessage": "Your body is no longer enveloped in flames.",
+    "modifiers": { "dex": -1 },
+    "flags": ["fire_aura", "light"]
+  },
+  "wart_skin": {
+    "category": "passive",
+    "description": "Your skin is covered with warts (-2 CHR, +5 AC).",
+    "gainMessage": "Warts appear everywhere on you!",
+    "loseMessage": "Your warts disappear.",
+    "opposites": ["iron_skin"],
+    "modifiers": { "chr": -2 },
+    "acMod": 5
   },
   "scales": {
     "category": "passive",
@@ -238,14 +814,22 @@
     "modifiers": { "chr": -1 },
     "acMod": 10
   },
-  "wart_skin": {
+  "iron_skin": {
     "category": "passive",
-    "description": "Your skin is covered with warts (-2 CHR, +5 AC).",
-    "gainMessage": "Warts appear everywhere on you!",
-    "loseMessage": "Your warts disappear.",
-    "opposites": ["iron_skin"],
-    "modifiers": { "chr": -2 },
-    "acMod": 5
+    "description": "Your skin is made of steel (-3 DEX, +25 AC).",
+    "gainMessage": "Your skin turns to steel!",
+    "loseMessage": "Your skin reverts to flesh.",
+    "opposites": ["scales", "wart_skin", "flesh_rot"],
+    "modifiers": { "dex": -3 },
+    "acMod": 25
+  },
+  "wings": {
+    "category": "passive",
+    "description": "You have wings (-1 CON, +3 CHR).",
+    "gainMessage": "You grow a pair of wings.",
+    "loseMessage": "Your wings fall off.",
+    "modifiers": { "con": -1, "chr": 3 },
+    "flags": ["levitation"]
   },
   "fearless": {
     "category": "passive",
@@ -262,14 +846,6 @@
     "loseMessage": "You stop regenerating.",
     "opposites": ["flesh_rot"],
     "flags": ["regen"]
-  },
-  "flesh_rot": {
-    "category": "passive",
-    "description": "Your flesh is rotting (-2 CON, -1 CHR).",
-    "gainMessage": "Your flesh begins to rot!",
-    "loseMessage": "Your flesh stops rotting.",
-    "opposites": ["regen", "iron_skin"],
-    "modifiers": { "con": -2, "chr": -1 }
   },
   "esp": {
     "category": "passive",
@@ -295,12 +871,33 @@
     "opposites": ["limber"],
     "modifiers": { "dex": -3 }
   },
-  "wings": {
+  "bad_luck": {
     "category": "passive",
-    "description": "You have wings (-1 CON, +3 CHR).",
-    "gainMessage": "You grow a pair of wings.",
-    "loseMessage": "Your wings fall off.",
-    "modifiers": { "con": -1, "chr": 3 },
-    "flags": ["levitation"]
+    "description": "There is a black aura surrounding you.",
+    "gainMessage": "There is a malignant black aura surrounding you...",
+    "loseMessage": "Your black aura swirls and fades.",
+    "flags": ["bad_luck"]
+  },
+  "vuln_elem": {
+    "category": "passive",
+    "description": "You are susceptible to damage from the elements.",
+    "gainMessage": "You feel strangely exposed.",
+    "loseMessage": "You feel less exposed.",
+    "flags": ["vuln_elem"]
+  },
+  "motion": {
+    "category": "passive",
+    "description": "Your movements are precise and forceful (+1 stealth).",
+    "gainMessage": "You move with new assurance.",
+    "loseMessage": "You move with less assurance.",
+    "stealthMod": 1,
+    "flags": ["free_action"]
+  },
+  "good_luck": {
+    "category": "passive",
+    "description": "There is a white aura surrounding you.",
+    "gainMessage": "There is a benevolent white aura surrounding you...",
+    "loseMessage": "Your white aura shimmers and fades.",
+    "flags": ["good_luck"]
   }
 }
