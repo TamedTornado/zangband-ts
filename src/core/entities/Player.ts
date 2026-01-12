@@ -360,6 +360,52 @@ export class Player extends Actor {
   }
 
   /**
+   * Drain experience (from level drain attacks, etc.)
+   * This lowers current experience but not max experience.
+   */
+  drainExperience(amount: number): void {
+    this._experience = Math.max(0, this._experience - amount);
+    // Recalculate level based on new experience
+    this.recalculateLevel();
+  }
+
+  /**
+   * Restore experience to max (from Restore Life Level spell)
+   * Returns true if experience was restored, false if already at max.
+   */
+  restoreLevel(): boolean {
+    if (this._experience >= this._maxExperience) {
+      return false;
+    }
+    this._experience = this._maxExperience;
+    this.recalculateLevel();
+    return true;
+  }
+
+  /**
+   * Recalculate level based on current experience.
+   * Used after experience drain or restoration.
+   */
+  private recalculateLevel(): void {
+    // Start from level 1 and work up
+    let newLevel = 1;
+    while (newLevel < 50) {
+      const baseExp = (tables as { experience: number[] }).experience[newLevel - 1] ?? Infinity;
+      const expNeeded = Math.floor((baseExp * this.expFactor) / 100);
+      if (this._experience < expNeeded) break;
+      newLevel++;
+    }
+    this._level = newLevel;
+    // Recalculate mana max
+    this._maxMana = this.calculateMaxMana();
+    if (this._currentMana > this._maxMana) {
+      this._currentMana = this._maxMana;
+    }
+    // Recalculate skills
+    this.recalculateSkills();
+  }
+
+  /**
    * Set primary magic realm
    */
   setPrimaryRealm(realm: string): void {

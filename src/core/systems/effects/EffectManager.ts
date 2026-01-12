@@ -47,6 +47,7 @@ import { MappingEffect } from './MappingEffect';
 import { BrandWeaponEffect } from './BrandWeaponEffect';
 import { TeleportLevelEffect } from './TeleportLevelEffect';
 import { WizLiteEffect } from './WizLiteEffect';
+import { RestoreLevelEffect } from './RestoreLevelEffect';
 
 /**
  * Default effect registry
@@ -109,6 +110,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   teleportLevel: TeleportLevelEffect,
   // Enlightenment effects
   wizLite: WizLiteEffect,
+  // Experience restoration
+  restoreLevel: RestoreLevelEffect,
 };
 
 export class EffectManager {
