@@ -35,15 +35,6 @@ export function useROTDisplay(options: UseROTDisplayOptions = {}) {
     asciiCellSize.current = { width: canvas.width, height: canvas.height };
   }
 
-  // Get current cell size based on mode
-  const getCellSize = useCallback(() => {
-    if (useTiles && tileManager) {
-      const size = tileManager.getTileSize();
-      return { width: size.width, height: size.height };
-    }
-    return asciiCellSize.current!;
-  }, [useTiles, tileManager]);
-
   // Container ref
   const containerRef = useRef<HTMLDivElement>(null!);
 
@@ -65,43 +56,22 @@ export function useROTDisplay(options: UseROTDisplayOptions = {}) {
 
   const state = useSyncExternalStore(subscribe, getSnapshot);
 
-  // Create display function
-  const createDisplay = useCallback(
-    (gridWidth: number, gridHeight: number): ROT.Display => {
-      if (useTiles && tileManager && tileImage) {
-        const tileMap = tileManager.buildRotTileMap();
-        const { width: tileWidth, height: tileHeight } = tileManager.getTileSize();
-        return new ROT.Display({
-          width: gridWidth,
-          height: gridHeight,
-          layout: 'tile',
-          tileWidth,
-          tileHeight,
-          tileSet: tileImage,
-          tileMap: tileMap as Record<string, [number, number]>,
-        });
-      }
-      return new ROT.Display({ width: gridWidth, height: gridHeight, fontSize, fontFamily });
-    },
-    [useTiles, tileManager, tileImage, fontSize, fontFamily]
-  );
-
   // Rebuild display when mode changes
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    // If mode hasn't changed, nothing to do
-    if (stateRef.current.useTiles === useTiles && stateRef.current.display) {
+    // Determine if we can actually use tiles (need manager and image)
+    const effectiveUseTiles = !!(useTiles && tileManager && tileImage);
+
+    // If effective mode hasn't changed, nothing to do
+    if (stateRef.current.useTiles === effectiveUseTiles && stateRef.current.display) {
       return;
     }
 
-    // Need tile image for tile mode
-    if (useTiles && (!tileManager || !tileImage)) {
-      return;
-    }
-
-    const cellSize = getCellSize();
+    const cellSize = effectiveUseTiles
+      ? { width: tileManager!.getTileSize().width, height: tileManager!.getTileSize().height }
+      : asciiCellSize.current!;
     const rect = container.getBoundingClientRect();
     const gridWidth = Math.floor(rect.width / cellSize.width);
     const gridHeight = Math.floor(rect.height / cellSize.height);
@@ -111,13 +81,23 @@ export function useROTDisplay(options: UseROTDisplayOptions = {}) {
     // Remove old display
     stateRef.current.display?.getContainer()?.remove();
 
-    // Create new display
-    const display = createDisplay(gridWidth, gridHeight);
+    // Create new display (ASCII if tiles not ready)
+    const display = effectiveUseTiles
+      ? new ROT.Display({
+          width: gridWidth,
+          height: gridHeight,
+          layout: 'tile',
+          tileWidth: tileManager!.getTileSize().width,
+          tileHeight: tileManager!.getTileSize().height,
+          tileSet: tileImage!,
+          tileMap: tileManager!.buildRotTileMap() as Record<string, [number, number]>,
+        })
+      : new ROT.Display({ width: gridWidth, height: gridHeight, fontSize, fontFamily });
     container.appendChild(display.getContainer()!);
 
-    stateRef.current = { display, gridWidth, gridHeight, useTiles };
+    stateRef.current = { display, gridWidth, gridHeight, useTiles: effectiveUseTiles };
     listenersRef.current.forEach((l) => l());
-  }, [useTiles, tileManager, tileImage, createDisplay, getCellSize]);
+  }, [useTiles, tileManager, tileImage, fontSize, fontFamily]);
 
   // Handle resize
   useResizeObserver<HTMLDivElement>({
@@ -126,10 +106,12 @@ export function useROTDisplay(options: UseROTDisplayOptions = {}) {
       const container = containerRef.current;
       if (!container) return;
 
-      // Need tile image for tile mode
-      if (useTiles && (!tileManager || !tileImage)) return;
+      // Determine if we can actually use tiles
+      const effectiveUseTiles = !!(useTiles && tileManager && tileImage);
 
-      const cellSize = getCellSize();
+      const cellSize = effectiveUseTiles
+        ? { width: tileManager!.getTileSize().width, height: tileManager!.getTileSize().height }
+        : asciiCellSize.current!;
       const gridWidth = Math.floor(width / cellSize.width);
       const gridHeight = Math.floor(height / cellSize.height);
 
@@ -137,18 +119,28 @@ export function useROTDisplay(options: UseROTDisplayOptions = {}) {
       if (
         gridWidth === stateRef.current.gridWidth &&
         gridHeight === stateRef.current.gridHeight &&
-        useTiles === stateRef.current.useTiles
+        effectiveUseTiles === stateRef.current.useTiles
       )
         return;
 
       // Remove old display
       stateRef.current.display?.getContainer()?.remove();
 
-      // Create new display
-      const display = createDisplay(gridWidth, gridHeight);
+      // Create new display (ASCII if tiles not ready)
+      const display = effectiveUseTiles
+        ? new ROT.Display({
+            width: gridWidth,
+            height: gridHeight,
+            layout: 'tile',
+            tileWidth: tileManager!.getTileSize().width,
+            tileHeight: tileManager!.getTileSize().height,
+            tileSet: tileImage!,
+            tileMap: tileManager!.buildRotTileMap() as Record<string, [number, number]>,
+          })
+        : new ROT.Display({ width: gridWidth, height: gridHeight, fontSize, fontFamily });
       container.appendChild(display.getContainer()!);
 
-      stateRef.current = { display, gridWidth, gridHeight, useTiles };
+      stateRef.current = { display, gridWidth, gridHeight, useTiles: effectiveUseTiles };
       listenersRef.current.forEach((l) => l());
     },
   });

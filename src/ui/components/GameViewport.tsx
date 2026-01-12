@@ -69,7 +69,7 @@ export function GameViewport() {
   const { useTiles: tilesEnabled } = useSettingsStore();
   const { tileManager, tileImage } = useTiles();
 
-  const { ref, display, gridWidth, gridHeight } = useROTDisplay({
+  const { ref, display, gridWidth, gridHeight, useTiles: actualTilesMode } = useROTDisplay({
     fontSize: 16,
     useTiles: tilesEnabled,
     tileManager,
@@ -108,17 +108,18 @@ export function GameViewport() {
     display.clear();
 
     // Helper to draw a cell - handles both ASCII and tile modes
+    // In tile mode, tileKeys is an array for layering (terrain on bottom, entities on top)
     const drawCell = (
       sx: number,
       sy: number,
       symbol: string,
       fg: string,
       bg: string,
-      tileKey?: string
+      tileKeys?: string[]
     ) => {
-      if (tilesEnabled && tileKey && tileManager) {
-        // In tile mode, draw with tile key (fg/bg ignored but required by signature)
-        display.draw(sx, sy, tileKey, null, null);
+      if (actualTilesMode && tileKeys && tileKeys.length > 0 && tileManager) {
+        // In tile mode, draw layered tiles (rot.js supports string[] for layering)
+        display.draw(sx, sy, tileKeys, null, null);
       } else {
         // ASCII mode
         display.draw(sx, sy, symbol, fg, bg);
@@ -152,25 +153,28 @@ export function GameViewport() {
         // Handle unexplored tiles - but telepathy can still see monsters
         if (!isExplored) {
           // Check for telepathy monsters even on unexplored tiles
-          // TODO: Replace with proper VisionSystem.canSeeMonster() integration
           if (player.hasTelepathy) {
             const monster = level.getMonsterAt(levelPos);
             if (monster && !monster.isDead) {
               const monsterTileKey = tileManager ? tileManager.getTileKey('monster', monster.def.index) : `m:${monster.def.index}`;
-              drawCell(screenX, screenY, monster.symbol, '#f0f', '#000', monsterTileKey);
+              // Layer: floor + monster (for telepathy on unexplored)
+              drawCell(screenX, screenY, monster.symbol, '#f0f', '#000', ['f:1', monsterTileKey]);
               continue;
             }
           }
-          drawCell(screenX, screenY, ' ', '#000', '#000', ' ');
+          drawCell(screenX, screenY, ' ', '#000', '#000', [' ']);
           continue;
         }
 
-        // Get terrain display
+        // Get terrain display - this is always the base layer
         const terrain = tile.terrain;
         let symbol = terrain.symbol;
         let fg = parseColor(terrain.color);
         const bg = '#000';
-        let tileKey = tileManager ? tileManager.getTileKey('feature', terrain.index) : `f:${terrain.index}`;
+        const terrainTileKey = tileManager ? tileManager.getTileKey('feature', terrain.index) : `f:${terrain.index}`;
+
+        // Build tile layers: terrain is always base
+        const tileLayers: string[] = [terrainTileKey];
 
         if (isVisible) {
           // Full visibility - show traps, items, and monsters
@@ -182,26 +186,28 @@ export function GameViewport() {
           if (trap && trap.isRevealed && trap.isActive) {
             symbol = trap.symbol;
             fg = parseColor(trap.color);
-            // Traps don't have tile mappings, fall back to terrain tile
+            // Traps don't have tile mappings yet, terrain remains as tile
           }
 
-          // Check for items at this position (items cover traps)
+          // Check for items at this position (items layer on top of terrain)
           const items = level.getItemsAt(levelPos);
           if (items.length > 0) {
             const topItem = items[items.length - 1];
             symbol = topItem.symbol;
             fg = parseColor(topItem.color);
-            if (topItem.generated?.baseItem.index !== undefined) {
-              tileKey = tileManager ? tileManager.getTileKey('item', topItem.generated.baseItem.index) : `i:${topItem.generated.baseItem.index}`;
+            if (topItem.generated?.baseItem.index !== undefined && tileManager) {
+              tileLayers.push(tileManager.getTileKey('item', topItem.generated.baseItem.index));
             }
           }
 
-          // Check for monsters at this position (monsters on top)
+          // Check for monsters at this position (monsters layer on top)
           const monster = level.getMonsterAt(levelPos);
           if (monster && !monster.isDead) {
             symbol = monster.symbol;
             fg = parseColor(monster.color);
-            tileKey = tileManager ? tileManager.getTileKey('monster', monster.def.index) : `m:${monster.def.index}`;
+            if (tileManager) {
+              tileLayers.push(tileManager.getTileKey('monster', monster.def.index));
+            }
           }
         } else {
           // Explored but not visible - dim terrain only
@@ -212,36 +218,40 @@ export function GameViewport() {
           if (remembered) {
             symbol = remembered.symbol;
             fg = parseColor(remembered.color);
-            // Use remembered monster's tile key if available
-            if (remembered.defIndex !== undefined) {
-              tileKey = tileManager ? tileManager.getTileKey('monster', remembered.defIndex) : `m:${remembered.defIndex}`;
+            if (remembered.defIndex !== undefined && tileManager) {
+              tileLayers.push(tileManager.getTileKey('monster', remembered.defIndex));
             }
           }
 
           // Telepathy shows monsters even when not visible
-          // TODO: Replace with proper VisionSystem.canSeeMonster() integration
-          // that handles EMPTY_MIND, WEIRD_MIND flags and infravision
           if (player.hasTelepathy) {
             const monster = level.getMonsterAt(levelPos);
             if (monster && !monster.isDead) {
               symbol = monster.symbol;
-              // Show telepathic monsters in a distinct color (purple/violet)
               fg = '#f0f';
-              tileKey = tileManager ? tileManager.getTileKey('monster', monster.def.index) : `m:${monster.def.index}`;
+              if (tileManager) {
+                tileLayers.push(tileManager.getTileKey('monster', monster.def.index));
+              }
             }
           }
         }
 
-        drawCell(screenX, screenY, symbol, fg, bg, tileKey);
+        drawCell(screenX, screenY, symbol, fg, bg, tileLayers);
       }
     }
 
-    // Draw player at screen position (always on top)
+    // Draw player at screen position (always on top, layered over terrain)
     const playerScreen = camera.worldToScreen(playerScreenPos);
-    drawCell(playerScreen.x, playerScreen.y, '@', '#fff', '#000', '@');
+    // For wilderness, player.position is world coords; for dungeons, same as playerScreenPos
+    const playerWorldPos = isWilderness ? player.position : playerScreenPos;
+    const playerTile = level.getTile(playerWorldPos);
+    const playerTerrainKey = playerTile && tileManager
+      ? tileManager.getTileKey('feature', playerTile.terrain.index)
+      : 'f:1';
+    drawCell(playerScreen.x, playerScreen.y, '@', '#fff', '#000', [playerTerrainKey, '@']);
 
-    // Draw targeting cursor if active
-    if (state.cursor) {
+    // Draw targeting cursor if active (ASCII mode only - tile mode can't show highlight)
+    if (state.cursor && !actualTilesMode) {
       const cursorScreen = camera.worldToScreen(state.cursor);
       // Only draw if on screen
       if (cursorScreen.x >= 0 && cursorScreen.x < gridWidth &&
@@ -267,12 +277,11 @@ export function GameViewport() {
           }
         }
 
-        // Draw with bright magenta background to highlight cursor position
-        // Note: In tile mode, cursor highlighting doesn't work well with tiles,
-        // so we fall back to ASCII for the cursor
+        // Draw cursor with magenta background for visibility
         display.draw(cursorScreen.x, cursorScreen.y, symbol, '#fff', '#f0f');
       }
     }
+    // TODO: Add cursor overlay support for tile mode (requires canvas layering)
   }
 
   return <div ref={ref} style={{ width: '100%', height: '100%', overflow: 'hidden' }} />;
