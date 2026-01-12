@@ -1,0 +1,12 @@
+{
+  "tilesets": {
+    "adam-bolt-16x16": {
+      "name": "Adam Bolt 16x16",
+      "file": "adam-bolt-16x16.png",
+      "tileWidth": 16,
+      "tileHeight": 16,
+      "mappings": "adam-bolt-mappings.json"
+    }
+  },
+  "default": "adam-bolt-16x16"
+}

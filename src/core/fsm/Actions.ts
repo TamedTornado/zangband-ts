@@ -71,6 +71,7 @@ export const ActionType = {
   ExitBuilding: 'exitBuilding',
   Search: 'search',
   ToggleSearchMode: 'toggleSearchMode',
+  ToggleTiles: 'toggleTiles',
 } as const;
 
 export type GameAction =
@@ -146,4 +147,6 @@ export type GameAction =
   | { type: 'exitBuilding' }
   // Search actions
   | { type: 'search' }           // Manual single search ('s')
-  | { type: 'toggleSearchMode' }; // Toggle continuous search ('S')
+  | { type: 'toggleSearchMode' } // Toggle continuous search ('S')
+  // Display toggle
+  | { type: 'toggleTiles' };     // Toggle tile/ASCII display ('%')

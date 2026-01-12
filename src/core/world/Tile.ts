@@ -67,6 +67,7 @@ export function getTerrainByIndex(index: number): TerrainDef {
 export interface RememberedMonster {
   symbol: string;
   color: string;
+  defIndex?: number;
 }
 
 export class Tile {
@@ -143,8 +144,10 @@ export class Tile {
   }
 
   /** Set remembered monster appearance (from detection spell) */
-  rememberMonster(symbol: string, color: string): void {
-    this._rememberedMonster = { symbol, color };
+  rememberMonster(symbol: string, color: string, defIndex?: number): void {
+    this._rememberedMonster = defIndex !== undefined
+      ? { symbol, color, defIndex }
+      : { symbol, color };
   }
 
   /** Clear remembered monster (when tile becomes visible again) */

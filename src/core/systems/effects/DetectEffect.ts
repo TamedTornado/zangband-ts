@@ -116,7 +116,7 @@ export class DetectEffect extends SelfGPEffect {
             const tile = level.getTile(monster.position);
             if (tile) {
               tile.explored = true;
-              tile.rememberMonster(monster.symbol, monster.color);
+              tile.rememberMonster(monster.symbol, monster.color, monster.def.index);
             }
             found++;
           }
@@ -281,7 +281,7 @@ export class DetectEffect extends SelfGPEffect {
       const tile = level.getTile(monster.position);
       if (tile) {
         tile.explored = true;
-        tile.rememberMonster(monster.symbol, monster.color);
+        tile.rememberMonster(monster.symbol, monster.color, monster.def?.index);
       }
       found++;
     }

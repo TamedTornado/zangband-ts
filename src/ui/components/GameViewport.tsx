@@ -1,6 +1,8 @@
 import { useRef, useMemo } from 'react';
 import { useROTDisplay } from '../hooks/useROTDisplay';
 import { useGame } from '../context/GameContext';
+import { useTiles } from '../hooks/useTiles';
+import { useSettingsStore } from '@/core/store/settingsStore';
 import { Camera } from '@/core/systems/Camera';
 import { FOVSystem } from '@/core/systems/FOV';
 import { VIEW_RADIUS } from '@/core/constants';
@@ -64,7 +66,15 @@ function dimColor(hexColor: string): string {
 }
 
 export function GameViewport() {
-  const { ref, display, gridWidth, gridHeight } = useROTDisplay({ fontSize: 16 });
+  const { useTiles: tilesEnabled } = useSettingsStore();
+  const { tileManager, tileImage } = useTiles();
+
+  const { ref, display, gridWidth, gridHeight } = useROTDisplay({
+    fontSize: 16,
+    useTiles: tilesEnabled,
+    tileManager,
+    tileImage,
+  });
   const { state } = useGame();
   const cameraRef = useRef<Camera | null>(null);
   const fovSystem = useMemo(() => new FOVSystem(), []);
@@ -97,6 +107,24 @@ export function GameViewport() {
 
     display.clear();
 
+    // Helper to draw a cell - handles both ASCII and tile modes
+    const drawCell = (
+      sx: number,
+      sy: number,
+      symbol: string,
+      fg: string,
+      bg: string,
+      tileKey?: string
+    ) => {
+      if (tilesEnabled && tileKey && tileManager) {
+        // In tile mode, draw with tile key (fg/bg ignored but required by signature)
+        display.draw(sx, sy, tileKey, null, null);
+      } else {
+        // ASCII mode
+        display.draw(sx, sy, symbol, fg, bg);
+      }
+    };
+
     // Draw visible portion of level
     for (let screenY = 0; screenY < gridHeight; screenY++) {
       for (let screenX = 0; screenX < gridWidth; screenX++) {
@@ -128,11 +156,12 @@ export function GameViewport() {
           if (player.hasTelepathy) {
             const monster = level.getMonsterAt(levelPos);
             if (monster && !monster.isDead) {
-              display.draw(screenX, screenY, monster.symbol, '#f0f', '#000');
+              const monsterTileKey = tileManager ? tileManager.getTileKey('monster', monster.def.index) : `m:${monster.def.index}`;
+              drawCell(screenX, screenY, monster.symbol, '#f0f', '#000', monsterTileKey);
               continue;
             }
           }
-          display.draw(screenX, screenY, ' ', '#000', '#000');
+          drawCell(screenX, screenY, ' ', '#000', '#000', ' ');
           continue;
         }
 
@@ -141,6 +170,7 @@ export function GameViewport() {
         let symbol = terrain.symbol;
         let fg = parseColor(terrain.color);
         const bg = '#000';
+        let tileKey = tileManager ? tileManager.getTileKey('feature', terrain.index) : `f:${terrain.index}`;
 
         if (isVisible) {
           // Full visibility - show traps, items, and monsters
@@ -152,6 +182,7 @@ export function GameViewport() {
           if (trap && trap.isRevealed && trap.isActive) {
             symbol = trap.symbol;
             fg = parseColor(trap.color);
+            // Traps don't have tile mappings, fall back to terrain tile
           }
 
           // Check for items at this position (items cover traps)
@@ -160,6 +191,9 @@ export function GameViewport() {
             const topItem = items[items.length - 1];
             symbol = topItem.symbol;
             fg = parseColor(topItem.color);
+            if (topItem.generated?.baseItem.index !== undefined) {
+              tileKey = tileManager ? tileManager.getTileKey('item', topItem.generated.baseItem.index) : `i:${topItem.generated.baseItem.index}`;
+            }
           }
 
           // Check for monsters at this position (monsters on top)
@@ -167,6 +201,7 @@ export function GameViewport() {
           if (monster && !monster.isDead) {
             symbol = monster.symbol;
             fg = parseColor(monster.color);
+            tileKey = tileManager ? tileManager.getTileKey('monster', monster.def.index) : `m:${monster.def.index}`;
           }
         } else {
           // Explored but not visible - dim terrain only
@@ -177,6 +212,10 @@ export function GameViewport() {
           if (remembered) {
             symbol = remembered.symbol;
             fg = parseColor(remembered.color);
+            // Use remembered monster's tile key if available
+            if (remembered.defIndex !== undefined) {
+              tileKey = tileManager ? tileManager.getTileKey('monster', remembered.defIndex) : `m:${remembered.defIndex}`;
+            }
           }
 
           // Telepathy shows monsters even when not visible
@@ -188,17 +227,18 @@ export function GameViewport() {
               symbol = monster.symbol;
               // Show telepathic monsters in a distinct color (purple/violet)
               fg = '#f0f';
+              tileKey = tileManager ? tileManager.getTileKey('monster', monster.def.index) : `m:${monster.def.index}`;
             }
           }
         }
 
-        display.draw(screenX, screenY, symbol, fg, bg);
+        drawCell(screenX, screenY, symbol, fg, bg, tileKey);
       }
     }
 
     // Draw player at screen position (always on top)
     const playerScreen = camera.worldToScreen(playerScreenPos);
-    display.draw(playerScreen.x, playerScreen.y, '@', '#fff', '#000');
+    drawCell(playerScreen.x, playerScreen.y, '@', '#fff', '#000', '@');
 
     // Draw targeting cursor if active
     if (state.cursor) {
@@ -228,6 +268,8 @@ export function GameViewport() {
         }
 
         // Draw with bright magenta background to highlight cursor position
+        // Note: In tile mode, cursor highlighting doesn't work well with tiles,
+        // so we fall back to ASCII for the cursor
         display.draw(cursorScreen.x, cursorScreen.y, symbol, '#fff', '#f0f');
       }
     }

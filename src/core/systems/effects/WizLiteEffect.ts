@@ -35,7 +35,7 @@ export class WizLiteEffect extends SelfGPEffect {
       if (monster.isDead) continue;
       const tile = level.getTile(monster.position);
       if (tile) {
-        tile.rememberMonster(monster.symbol, monster.color);
+        tile.rememberMonster(monster.symbol, monster.color, monster.def.index);
       }
       monsterCount++;
     }

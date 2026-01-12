@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Direction } from '@/core/types';
 import { ActionType } from '@/core/fsm/Actions';
 import { useGame } from '../context/GameContext';
+import { useSettingsStore } from '@/core/store/settingsStore';
 
 // DO NOT PUT STATE-SPECIFIC LOGIC IN HERE. THINK TWICE ABOUT MAKING THIS ANY MORE COMPLICATED.
 
@@ -111,6 +112,8 @@ const ACTION_KEYS: Partial<Record<ActionTypeValue, string | string[]>> = {
   // Search (s overlaps with StoreSell, states handle appropriately)
   [ActionType.Search]: 's',
   [ActionType.ToggleSearchMode]: 'shift+S',
+  // Display
+  [ActionType.ToggleTiles]: '%',  // Shift+5
 };
 
 /**
@@ -176,6 +179,7 @@ const AXIS_HANDLERS: Record<Axis, (dir: Direction, actions: GameActions) => void
 
 export function useKeyboard() {
   const { state, actions } = useGame();
+  const toggleTiles = useSettingsStore((s) => s.toggleTiles);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -209,6 +213,9 @@ export function useKeyboard() {
       for (const binding of bindings) {
         if (binding.type === 'axis') {
           AXIS_HANDLERS[binding.axis](binding.direction, actions);
+        } else if (binding.action === ActionType.ToggleTiles) {
+          // Handle tile toggle directly (UI-only action)
+          toggleTiles();
         } else {
           // Dispatch the action type directly - no handler map needed
           actions.dispatch({ type: binding.action } as any);
@@ -228,5 +235,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [actions, state.prompt]);
+  }, [actions, state.prompt, toggleTiles]);
 }
