@@ -66,6 +66,7 @@ import { CharmAnimalsEffect } from './CharmAnimalsEffect';
 import { StasisEffect } from './StasisEffect';
 import { MassTeleportEffect } from './MassTeleportEffect';
 import { SelfKnowledgeEffect } from './SelfKnowledgeEffect';
+import { WhirlwindAttackEffect } from './WhirlwindAttackEffect';
 
 /**
  * Default effect registry
@@ -109,6 +110,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   massTeleport: MassTeleportEffect,
   // Self Knowledge (display player information)
   selfKnowledge: SelfKnowledgeEffect,
+  // Whirlwind Attack (attack all adjacent monsters)
+  whirlwindAttack: WhirlwindAttackEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
