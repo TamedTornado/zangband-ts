@@ -106,9 +106,9 @@
     },
     "key": "enchant_weapon",
     "effects": [
-      { "type": "enchant", "slot": "weapon", "toHit": "1d4", "toDam": "1d4" }
+      { "type": "enchantWeapon", "numHit": "1d4", "numDam": "1d4", "target": "item" }
     ],
-    "target": "self"
+    "target": "item"
   },
   {
     "index": 29,
@@ -128,9 +128,9 @@
     },
     "key": "enchant_armour",
     "effects": [
-      { "type": "enchant", "slot": "armor", "toAC": "1d3+2" }
+      { "type": "enchantArmor", "numAc": "1d3+2", "target": "item" }
     ],
-    "target": "self"
+    "target": "item"
   },
   {
     "index": 30,
