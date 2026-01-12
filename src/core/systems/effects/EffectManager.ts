@@ -75,6 +75,7 @@ import { ExplosiveRuneEffect } from './ExplosiveRuneEffect';
 import { CreateDoorEffect } from './CreateDoorEffect';
 import { CreateStairsEffect } from './CreateStairsEffect';
 import { CreateWallsEffect } from './CreateWallsEffect';
+import { AlchemyEffect } from './AlchemyEffect';
 
 /**
  * Default effect registry
@@ -136,6 +137,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   createDoor: CreateDoorEffect,
   createStairs: CreateStairsEffect,
   createWalls: CreateWallsEffect,
+  // Alchemy (convert item to gold)
+  alchemy: AlchemyEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
