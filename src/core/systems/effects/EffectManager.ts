@@ -45,6 +45,7 @@ import { RemoveCurseEffect } from './RemoveCurseEffect';
 import { GlyphEffect } from './GlyphEffect';
 import { MappingEffect } from './MappingEffect';
 import { BrandWeaponEffect } from './BrandWeaponEffect';
+import { TeleportLevelEffect } from './TeleportLevelEffect';
 
 /**
  * Default effect registry
@@ -103,6 +104,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   mapping: MappingEffect,
   // Weapon branding effects
   brandWeapon: BrandWeaponEffect,
+  // Level transition effects
+  teleportLevel: TeleportLevelEffect,
 };
 
 export class EffectManager {

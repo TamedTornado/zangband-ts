@@ -10,6 +10,7 @@ import type { State } from '../State';
 import type { GameAction } from '../Actions';
 import type { GameFSM } from '../GameFSM';
 import { PlayingState } from './PlayingState';
+import { LevelTransitionState } from './LevelTransitionState';
 import { getSpellByKey, getSpellRequirement } from '../../data/spellLoader';
 import type { SpellDef, ClassSpellReq } from '../../data/spells';
 import { executeGPEffects, type GPEffectContext } from '../../systems/effects';
@@ -299,24 +300,31 @@ export class CastSpellState implements State {
       for (const msg of result.messages) {
         fsm.addMessage(msg, 'info');
       }
+
+      // Spend energy for casting
+      fsm.completeTurn();
+
+      // Save for repeat command
+      const lastCommand: { actionType: string; itemId: string; spellKey: string; targetPosition?: { x: number; y: number } } = {
+        actionType: 'cast',
+        itemId: '',
+        spellKey: `${entry.realm}:${entry.spellKey}`,
+      };
+      if (targetPosition) {
+        lastCommand.targetPosition = targetPosition;
+      }
+      store.setLastCommand(lastCommand);
+      store.setIsRepeating(false);
+
+      // Check for level transition request from effects
+      if (result.levelTransition) {
+        fsm.transition(new LevelTransitionState(result.levelTransition));
+        return;
+      }
     } else {
       fsm.addMessage('Nothing happens.', 'info');
+      fsm.completeTurn();
     }
-
-    // Spend energy for casting
-    fsm.completeTurn();
-
-    // Save for repeat command
-    const lastCommand: { actionType: string; itemId: string; spellKey: string; targetPosition?: { x: number; y: number } } = {
-      actionType: 'cast',
-      itemId: '',
-      spellKey: `${entry.realm}:${entry.spellKey}`,
-    };
-    if (targetPosition) {
-      lastCommand.targetPosition = targetPosition;
-    }
-    store.setLastCommand(lastCommand);
-    store.setIsRepeating(false);
 
     fsm.transition(new PlayingState());
   }

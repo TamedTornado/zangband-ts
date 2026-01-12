@@ -96,6 +96,21 @@ export interface GPEffectContext {
 }
 
 /**
+ * Level transition request from effects
+ * FSM handles the actual mechanics (depth limits, wilderness, etc.)
+ */
+export interface LevelTransitionRequest {
+  /**
+   * Direction of transition:
+   * - 'up': Go up one level (shallower)
+   * - 'down': Go down one level (deeper)
+   * - 'random': 50% up or down (for teleport level)
+   * - 'recall': Toggle between town and dungeon (for word of recall)
+   */
+  direction: 'up' | 'down' | 'random' | 'recall';
+}
+
+/**
  * Result of effect execution
  */
 export interface GPEffectResult {
@@ -113,6 +128,9 @@ export interface GPEffectResult {
   statusesCured?: string[];
   statusesReduced?: string[];
   itemsAffected?: string[];
+
+  /** Request FSM to perform a level transition */
+  levelTransition?: LevelTransitionRequest;
 }
 
 /**
