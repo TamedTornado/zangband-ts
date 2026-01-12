@@ -68,6 +68,7 @@ import { MassTeleportEffect } from './MassTeleportEffect';
 import { SelfKnowledgeEffect } from './SelfKnowledgeEffect';
 import { WhirlwindAttackEffect } from './WhirlwindAttackEffect';
 import { AlterRealityEffect } from './AlterRealityEffect';
+import { LivingTrumpEffect } from './LivingTrumpEffect';
 
 /**
  * Default effect registry
@@ -115,6 +116,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   whirlwindAttack: WhirlwindAttackEffect,
   // Alter Reality (regenerate dungeon level)
   alterReality: AlterRealityEffect,
+  // Living Trump (grant trump mutation)
+  livingTrump: LivingTrumpEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
