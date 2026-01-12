@@ -143,6 +143,9 @@ export class Player extends Actor {
   // Intrinsic abilities (from equipment, mutations, etc.)
   private _hasTelepathy: boolean = false;
 
+  // Mutations (permanent modifications from chaos exposure, polymorph, etc.)
+  private _mutations: Set<string> = new Set();
+
   // Gold (currency)
   private _gold: number = 0;
 
@@ -736,6 +739,28 @@ export class Player extends Actor {
       return true;
     }
     return false;
+  }
+
+  // Mutation accessors and methods
+
+  /** Get all mutation keys */
+  get mutations(): string[] {
+    return [...this._mutations];
+  }
+
+  /** Check if player has a specific mutation */
+  hasMutation(key: string): boolean {
+    return this._mutations.has(key);
+  }
+
+  /** Add a mutation (internal - use MutationSystem.gainMutation) */
+  addMutation(key: string): void {
+    this._mutations.add(key);
+  }
+
+  /** Remove a mutation (internal - use MutationSystem.loseMutation) */
+  removeMutation(key: string): void {
+    this._mutations.delete(key);
   }
 
   /** Current food level (0-15000) */

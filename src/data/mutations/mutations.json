@@ -1,0 +1,306 @@
+{
+  "spit_acid": {
+    "category": "activatable",
+    "description": "You can spit acid (dam lvl).",
+    "gainMessage": "You gain the ability to spit acid.",
+    "loseMessage": "You lose the ability to spit acid.",
+    "activeName": "Spit acid",
+    "level": 9,
+    "cost": 9,
+    "stat": "dex",
+    "difficulty": 15,
+    "effect": { "type": "ball", "element": "acid", "radius": 1, "damage": "level" }
+  },
+  "br_fire": {
+    "category": "activatable",
+    "description": "You can breathe fire (dam lvl * 2).",
+    "gainMessage": "You gain the ability to breathe fire.",
+    "loseMessage": "You lose the ability to breathe fire.",
+    "activeName": "Breathe fire",
+    "level": 20,
+    "cost": 20,
+    "stat": "con",
+    "difficulty": 18,
+    "effect": { "type": "breath", "element": "fire", "damage": "level*2" }
+  },
+  "hypn_gaze": {
+    "category": "activatable",
+    "description": "Your gaze is hypnotic.",
+    "gainMessage": "Your eyes look mesmerizing...",
+    "loseMessage": "Your eyes look uninteresting.",
+    "activeName": "Hypnotic gaze",
+    "level": 12,
+    "cost": 12,
+    "stat": "chr",
+    "difficulty": 18,
+    "effect": { "type": "charm", "target": "direction" }
+  },
+  "vteleport": {
+    "category": "activatable",
+    "description": "You can teleport at will.",
+    "gainMessage": "You gain the power of teleportation.",
+    "loseMessage": "You lose the power of teleportation.",
+    "activeName": "Teleport",
+    "level": 7,
+    "cost": 7,
+    "stat": "wis",
+    "difficulty": 15,
+    "effect": { "type": "teleport", "range": "10 + level * 4" }
+  },
+  "blink": {
+    "category": "activatable",
+    "description": "You can teleport yourself short distances.",
+    "gainMessage": "You gain the power of minor teleportation.",
+    "loseMessage": "You lose the power of minor teleportation.",
+    "activeName": "Blink",
+    "level": 3,
+    "cost": 3,
+    "stat": "wis",
+    "difficulty": 12,
+    "effect": { "type": "teleport", "range": 10 }
+  },
+  "vampirism": {
+    "category": "activatable",
+    "description": "You can drain life from a foe like a vampire.",
+    "gainMessage": "You become vampiric.",
+    "loseMessage": "You are no longer vampiric.",
+    "activeName": "Vampiric drain",
+    "level": 10,
+    "cost": 10,
+    "stat": "con",
+    "difficulty": 9,
+    "effect": { "type": "drainLife", "damage": "level * 2" }
+  },
+  "berserk": {
+    "category": "activatable",
+    "description": "You can drive yourself into a berserk frenzy.",
+    "gainMessage": "You feel a controlled rage.",
+    "loseMessage": "You no longer feel a controlled rage.",
+    "activeName": "Berserk",
+    "level": 8,
+    "cost": 8,
+    "stat": "str",
+    "difficulty": 14,
+    "effect": { "type": "status", "status": "berserk", "duration": "25 + d25" }
+  },
+  "recall": {
+    "category": "activatable",
+    "description": "You can travel between the town and the dungeon.",
+    "gainMessage": "You feel briefly homesick, but it passes.",
+    "loseMessage": "You feel briefly homesick.",
+    "activeName": "Recall",
+    "level": 17,
+    "cost": 50,
+    "stat": "int",
+    "difficulty": 16,
+    "effect": { "type": "teleportLevel", "target": "recall" }
+  },
+  "cowardice": {
+    "category": "random",
+    "description": "You are subject to cowardice.",
+    "gainMessage": "You become an incredible coward!",
+    "loseMessage": "You are no longer an incredible coward!",
+    "chance": 30,
+    "opposites": ["fearless"],
+    "randomEffect": "fear"
+  },
+  "rteleport": {
+    "category": "random",
+    "description": "You are teleporting randomly.",
+    "gainMessage": "Your position seems very uncertain...",
+    "loseMessage": "Your position seems more certain.",
+    "chance": 50,
+    "randomEffect": "teleport"
+  },
+  "hallu": {
+    "category": "random",
+    "description": "You have a hallucinatory insanity.",
+    "gainMessage": "You are afflicted by a hallucinatory insanity!",
+    "loseMessage": "You are no longer insane!",
+    "chance": 64,
+    "randomEffect": "hallucination"
+  },
+  "flatulent": {
+    "category": "random",
+    "description": "You are subject to uncontrollable flatulence.",
+    "gainMessage": "You become subject to uncontrollable flatulence.",
+    "loseMessage": "You are no longer subject to uncontrollable flatulence.",
+    "chance": 30,
+    "randomEffect": "poison_ball"
+  },
+  "horns": {
+    "category": "random",
+    "description": "You have horns (dam. 2d6).",
+    "gainMessage": "Horns pop out of your forehead!",
+    "loseMessage": "Your horns shrink and disappear.",
+    "chance": 0,
+    "randomEffect": "none",
+    "extraAttack": { "damage": { "dice": 2, "sides": 6, "bonus": 0 } }
+  },
+  "beak": {
+    "category": "random",
+    "description": "You have a beak (dam. 2d4).",
+    "gainMessage": "Your mouth turns into a sharp, powerful beak!",
+    "loseMessage": "Your beak turns into a mouth.",
+    "chance": 0,
+    "opposites": ["trunk"],
+    "randomEffect": "none",
+    "extraAttack": { "damage": { "dice": 2, "sides": 4, "bonus": 0 } }
+  },
+  "trunk": {
+    "category": "random",
+    "description": "You have an elephantine trunk (dam 1d4).",
+    "gainMessage": "Your nose grows into an elephant-like trunk.",
+    "loseMessage": "Your trunk shrinks back into a nose.",
+    "chance": 0,
+    "opposites": ["beak"],
+    "randomEffect": "none",
+    "extraAttack": { "damage": { "dice": 1, "sides": 4, "bonus": 0 } }
+  },
+  "normality": {
+    "category": "random",
+    "description": "You may be mutated, but you're recovering.",
+    "gainMessage": "You feel strangely normal.",
+    "loseMessage": "You feel normally strange.",
+    "chance": 50,
+    "randomEffect": "lose_mutation"
+  },
+  "hyper_str": {
+    "category": "passive",
+    "description": "You are superhumanly strong (+4 STR, -1 INT, -1 WIS).",
+    "gainMessage": "You turn into a superhuman he-man!",
+    "loseMessage": "Your muscles revert to normal.",
+    "opposites": ["puny"],
+    "modifiers": { "str": 4, "int": -1, "wis": -1 }
+  },
+  "puny": {
+    "category": "passive",
+    "description": "You are puny (-4 STR, +2 DEX).",
+    "gainMessage": "Your muscles wither away!",
+    "loseMessage": "You no longer feel so weak.",
+    "opposites": ["hyper_str"],
+    "modifiers": { "str": -4, "dex": 2 }
+  },
+  "hyper_int": {
+    "category": "passive",
+    "description": "Your brain is a living computer (+4 INT, +4 WIS).",
+    "gainMessage": "Your brain evolves into a living computer!",
+    "loseMessage": "Your brain is no longer a living computer.",
+    "opposites": ["moronic"],
+    "modifiers": { "int": 4, "wis": 4 }
+  },
+  "moronic": {
+    "category": "passive",
+    "description": "You are moronic (-4 INT, -4 WIS).",
+    "gainMessage": "Your brain turns to mush!",
+    "loseMessage": "You are no longer moronic.",
+    "opposites": ["hyper_int"],
+    "modifiers": { "int": -4, "wis": -4 }
+  },
+  "resilient": {
+    "category": "passive",
+    "description": "You are very resilient (+4 CON).",
+    "gainMessage": "You become extraordinarily resilient.",
+    "loseMessage": "You become ordinarily resilient again.",
+    "modifiers": { "con": 4 }
+  },
+  "xtra_legs": {
+    "category": "passive",
+    "description": "You have an extra pair of legs (+3 speed, -1 DEX).",
+    "gainMessage": "You grow an extra pair of legs!",
+    "loseMessage": "Your extra pair of legs disappear.",
+    "speedMod": 3,
+    "modifiers": { "dex": -1 }
+  },
+  "short_leg": {
+    "category": "passive",
+    "description": "Your legs are short stubs (-3 speed, +1 CON).",
+    "gainMessage": "Your legs turn into short stubs!",
+    "loseMessage": "Your legs return to normal.",
+    "speedMod": -3,
+    "modifiers": { "con": 1 }
+  },
+  "iron_skin": {
+    "category": "passive",
+    "description": "Your skin is made of steel (-3 DEX, +25 AC).",
+    "gainMessage": "Your skin turns to steel!",
+    "loseMessage": "Your skin reverts to flesh.",
+    "opposites": ["scales", "wart_skin", "flesh_rot"],
+    "modifiers": { "dex": -3 },
+    "acMod": 25
+  },
+  "scales": {
+    "category": "passive",
+    "description": "Your skin has turned into scales (-1 CHR, +10 AC).",
+    "gainMessage": "Scales grow over your body!",
+    "loseMessage": "Your scales fall away.",
+    "opposites": ["iron_skin"],
+    "modifiers": { "chr": -1 },
+    "acMod": 10
+  },
+  "wart_skin": {
+    "category": "passive",
+    "description": "Your skin is covered with warts (-2 CHR, +5 AC).",
+    "gainMessage": "Warts appear everywhere on you!",
+    "loseMessage": "Your warts disappear.",
+    "opposites": ["iron_skin"],
+    "modifiers": { "chr": -2 },
+    "acMod": 5
+  },
+  "fearless": {
+    "category": "passive",
+    "description": "You are completely fearless.",
+    "gainMessage": "You become completely fearless.",
+    "loseMessage": "You begin to feel fear again.",
+    "opposites": ["cowardice"],
+    "flags": ["fearless"]
+  },
+  "regen": {
+    "category": "passive",
+    "description": "You are regenerating.",
+    "gainMessage": "You start regenerating.",
+    "loseMessage": "You stop regenerating.",
+    "opposites": ["flesh_rot"],
+    "flags": ["regen"]
+  },
+  "flesh_rot": {
+    "category": "passive",
+    "description": "Your flesh is rotting (-2 CON, -1 CHR).",
+    "gainMessage": "Your flesh begins to rot!",
+    "loseMessage": "Your flesh stops rotting.",
+    "opposites": ["regen", "iron_skin"],
+    "modifiers": { "con": -2, "chr": -1 }
+  },
+  "esp": {
+    "category": "passive",
+    "description": "You have ESP (-1 CON).",
+    "gainMessage": "You develop telepathic abilities!",
+    "loseMessage": "You lose your telepathic abilities.",
+    "modifiers": { "con": -1 },
+    "flags": ["telepathy"]
+  },
+  "limber": {
+    "category": "passive",
+    "description": "Your body is very limber (+3 DEX, -1 STR).",
+    "gainMessage": "Your body becomes very limber.",
+    "loseMessage": "Your body is no longer limber.",
+    "opposites": ["arthritis"],
+    "modifiers": { "dex": 3, "str": -1 }
+  },
+  "arthritis": {
+    "category": "passive",
+    "description": "Your joints ache constantly (-3 DEX).",
+    "gainMessage": "Your joints suddenly hurt.",
+    "loseMessage": "Your joints stop hurting.",
+    "opposites": ["limber"],
+    "modifiers": { "dex": -3 }
+  },
+  "wings": {
+    "category": "passive",
+    "description": "You have wings (-1 CON, +3 CHR).",
+    "gainMessage": "You grow a pair of wings.",
+    "loseMessage": "Your wings fall off.",
+    "modifiers": { "con": -1, "chr": 3 },
+    "flags": ["levitation"]
+  }
+}
