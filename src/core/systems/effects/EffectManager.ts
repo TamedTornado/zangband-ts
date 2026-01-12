@@ -55,6 +55,7 @@ import { RestoreStatsEffect } from './RestoreStatsEffect';
 import { SatisfyHungerEffect } from './SatisfyHungerEffect';
 import { TeleportEffect } from './TeleportEffect';
 import { DimensionDoorEffect } from './DimensionDoorEffect';
+import { MassGenocideEffect } from './MassGenocideEffect';
 
 /**
  * Default effect registry
@@ -76,6 +77,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   enchantArmor: EnchantArmorEffect,
   // Symbol targeted
   genocide: GenocideEffect,
+  // Mass genocide (kills all nearby non-unique monsters)
+  massGenocide: MassGenocideEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
