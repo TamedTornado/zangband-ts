@@ -77,6 +77,7 @@ import { CreateStairsEffect } from './CreateStairsEffect';
 import { CreateWallsEffect } from './CreateWallsEffect';
 import { AlchemyEffect } from './AlchemyEffect';
 import { BlessWeaponEffect } from './BlessWeaponEffect';
+import { ChainLightningEffect } from './ChainLightningEffect';
 
 /**
  * Default effect registry
@@ -142,6 +143,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   alchemy: AlchemyEffect,
   // Bless weapon (remove curse, add blessed flag)
   blessWeapon: BlessWeaponEffect,
+  // Chain Lightning (beams in all 8 directions)
+  chainLightning: ChainLightningEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
