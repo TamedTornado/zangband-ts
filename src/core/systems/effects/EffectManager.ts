@@ -46,6 +46,7 @@ import { GlyphEffect } from './GlyphEffect';
 import { MappingEffect } from './MappingEffect';
 import { BrandWeaponEffect } from './BrandWeaponEffect';
 import { TeleportLevelEffect } from './TeleportLevelEffect';
+import { WizLiteEffect } from './WizLiteEffect';
 
 /**
  * Default effect registry
@@ -106,6 +107,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   brandWeapon: BrandWeaponEffect,
   // Level transition effects
   teleportLevel: TeleportLevelEffect,
+  // Enlightenment effects
+  wizLite: WizLiteEffect,
 };
 
 export class EffectManager {

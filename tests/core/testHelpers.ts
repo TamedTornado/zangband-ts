@@ -75,6 +75,17 @@ export function createTestMonster(
 /**
  * Create a mock level implementing ILevel for testing.
  */
+/**
+ * Mock tile with explored state and monster memory
+ */
+interface MockTile {
+  terrain: { flags: string[] };
+  explored: boolean;
+  rememberedMonster?: { symbol: string; color: string };
+  rememberMonster: (symbol: string, color: string) => void;
+  items?: import('@/core/entities/Item').Item[];
+}
+
 export function createMockLevel(
   monsters: Monster[] = [],
   player: Actor | null = null,
@@ -84,6 +95,24 @@ export function createMockLevel(
   const wallSet = new Set(walls.map((p) => `${p.x},${p.y}`));
   const items: import('@/core/entities/Item').Item[] = [];
   const traps: import('@/core/entities/Trap').Trap[] = [];
+
+  // Create tile grid for exploration tracking
+  const tiles: Map<string, MockTile> = new Map();
+  const getTileKey = (pos: Position) => `${pos.x},${pos.y}`;
+  const getOrCreateTile = (pos: Position): MockTile => {
+    const key = getTileKey(pos);
+    if (!tiles.has(key)) {
+      const tile: MockTile = {
+        terrain: { flags: wallSet.has(key) ? ['WALL'] : [] },
+        explored: false,
+        rememberMonster(symbol: string, color: string) {
+          this.rememberedMonster = { symbol, color };
+        },
+      };
+      tiles.set(key, tile);
+    }
+    return tiles.get(key)!;
+  };
 
   return {
     levelType: 'dungeon' as const,
@@ -116,10 +145,7 @@ export function createMockLevel(
       });
     },
     getTile: (pos: Position) => {
-      if (wallSet.has(`${pos.x},${pos.y}`)) {
-        return { terrain: { flags: ['WALL'] } } as unknown as ReturnType<ILevel['getTile']>;
-      }
-      return { terrain: { flags: [] } } as unknown as ReturnType<ILevel['getTile']>;
+      return getOrCreateTile(pos) as unknown as ReturnType<ILevel['getTile']>;
     },
     isWalkable: (pos: Position) => {
       if (pos.x < 0 || pos.x >= width || pos.y < 0 || pos.y >= height) return false;

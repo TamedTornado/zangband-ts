@@ -79,7 +79,7 @@ export class LevelTransitionState implements State {
 
     // At depth 0 (town/wilderness), can't go up
     if (depth <= 0) {
-      fsm.addMessage('You sense no levels above you.', 'info');
+      fsm.addMessage('The teleport fails.', 'info');
       fsm.transition(new PlayingState());
       return;
     }
@@ -107,6 +107,8 @@ export class LevelTransitionState implements State {
       store.setWildernessPosition(player.position.x, player.position.y);
     }
 
+
+    //TODO: Handle max depth!
     // Go down one level
     const newDepth = depth + 1;
     this.goToDepth(fsm, newDepth, 'down');
