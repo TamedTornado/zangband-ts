@@ -58,6 +58,7 @@ import { DimensionDoorEffect } from './DimensionDoorEffect';
 import { MassGenocideEffect } from './MassGenocideEffect';
 import { DeathRayEffect } from './DeathRayEffect';
 import { WordOfDeathEffect } from './WordOfDeathEffect';
+import { OmnicideEffect } from './OmnicideEffect';
 
 /**
  * Default effect registry
@@ -85,6 +86,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   deathRay: DeathRayEffect,
   // Word of Death (dispel living monsters)
   wordOfDeath: WordOfDeathEffect,
+  // Omnicide (kill all non-unique monsters on level)
+  omnicide: OmnicideEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
