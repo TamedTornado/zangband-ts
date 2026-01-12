@@ -152,11 +152,10 @@ export class CallTheVoidEffect extends SelfGPEffect {
    * Backfire execution - spell cast too close to wall
    */
   private executeBackfire(context: GPEffectContext, messages: string[], playerLevel: number): GPEffectResult {
-    const { actor, rng } = context;
+    const { actor, rng, createEffect } = context;
 
     messages.push('You cast the spell too close to a wall!');
     messages.push('There is a loud explosion!');
-    messages.push('The dungeon collapses around you!');
 
     // Calculate self damage (100-250)
     const selfDamage = rng.getUniformInt(100, 250);
@@ -170,6 +169,17 @@ export class CallTheVoidEffect extends SelfGPEffect {
       messages.push('You die from a suicidal Call the Void...');
     }
 
+    // Execute destroy area effect
+    const destroyRadius = 20 + playerLevel;
+    if (createEffect) {
+      const destroyEffect = createEffect({
+        type: 'destroyArea',
+        radius: destroyRadius,
+      });
+      const destroyResult = destroyEffect.execute(context);
+      messages.push(...destroyResult.messages);
+    }
+
     return {
       success: true,
       messages,
@@ -177,8 +187,7 @@ export class CallTheVoidEffect extends SelfGPEffect {
       damageDealt: selfDamage,
       data: {
         backfired: true,
-        destroyArea: true,
-        destroyRadius: 20 + playerLevel,
+        destroyRadius,
         selfDamage,
       },
     };

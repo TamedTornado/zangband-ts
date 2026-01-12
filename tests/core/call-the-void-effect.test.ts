@@ -157,7 +157,7 @@ describe('CallTheVoidEffect', () => {
 
       it('destroys area around player', () => {
         const effect = new CallTheVoidEffect({ type: 'callTheVoid' });
-        const player = createTestPlayer(25, 25);
+        const player = createTestPlayer(25, 25, 10);
         const level = createMockLevel([], player);
         const originalGetTile = level.getTile.bind(level);
         (level as any).getTile = (pos: { x: number; y: number }) => {
@@ -167,16 +167,30 @@ describe('CallTheVoidEffect', () => {
           return originalGetTile(pos);
         };
 
+        // Track if destroyArea effect was created
+        let destroyAreaCreated = false;
         const context: GPEffectContext = {
           actor: player,
           level: level as any,
           rng: RNG,
+          createEffect: (def: any) => {
+            if (def.type === 'destroyArea') {
+              destroyAreaCreated = true;
+              // Expected radius: 20 + playerLevel (10) = 30
+              expect(def.radius).toBe(30);
+            }
+            return {
+              canExecute: () => true,
+              execute: () => ({ success: true, messages: ['Area destroyed'], turnConsumed: true }),
+            } as any;
+          },
         };
 
         const result = effect.execute(context);
 
-        // Should mark area for destruction
-        expect(result.data?.destroyArea).toBe(true);
+        // Should have created and executed destroyArea effect
+        expect(destroyAreaCreated).toBe(true);
+        expect(result.data?.destroyRadius).toBe(30);
       });
     });
   });

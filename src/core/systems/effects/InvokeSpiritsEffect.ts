@@ -291,13 +291,12 @@ export class InvokeSpiritsEffect extends PositionGPEffect {
       }, 'earthquake');
     }
 
-    // Destroy area radius 15 (return data for game state to handle)
+    // Destroy area radius 15
     if (die < 106) {
-      messages.push('The dungeon crumbles around you!');
-      return {
-        outcome: 'destroyArea',
-        extraData: { destroyRadius: 15 },
-      };
+      return this.executeCreatedEffect(context, messages, {
+        type: 'destroyArea',
+        radius: 15,
+      }, 'destroyArea');
     }
 
     // Genocide (return data for game state to handle - requires symbol input)

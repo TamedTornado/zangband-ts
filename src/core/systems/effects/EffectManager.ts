@@ -83,6 +83,7 @@ import { MeteorSwarmEffect } from './MeteorSwarmEffect';
 import { CallChaosEffect } from './CallChaosEffect';
 import { CallTheVoidEffect } from './CallTheVoidEffect';
 import { InvokeSpiritsEffect } from './InvokeSpiritsEffect';
+import { DestroyAreaEffect } from './DestroyAreaEffect';
 
 /**
  * Default effect registry
@@ -160,6 +161,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   callTheVoid: CallTheVoidEffect,
   // Invoke Spirits (random death realm spell)
   invokeSpirits: InvokeSpiritsEffect,
+  // Destroy Area (massive terrain destruction, kills monsters)
+  destroyArea: DestroyAreaEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
