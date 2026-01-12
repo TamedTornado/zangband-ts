@@ -26,8 +26,8 @@
  * - < 96: Fire ball radius 3
  * - < 101: Drain life 100+level
  * - < 104: Earthquake
- * - < 106: Destroy area (returns data for game to handle)
- * - < 108: Genocide (returns data for game to handle)
+ * - < 106: Destroy area
+ * - < 108: Genocide (spirits pick most numerous monster type)
  * - < 110: Dispel monsters 120
  * - >= 110: Ultimate combo (dispel 150, slow, sleep, heal 300)
  *
@@ -36,6 +36,7 @@
 
 import { PositionGPEffect } from './PositionGPEffect';
 import type { GPEffectDef, GPEffectContext, GPEffectResult } from './GPEffect';
+import type { Monster } from '@/core/entities/Monster';
 
 export interface InvokeSpiritsEffectDef extends GPEffectDef {
   type: 'invokeSpirits';
@@ -88,7 +89,7 @@ export class InvokeSpiritsEffect extends PositionGPEffect {
     context: GPEffectContext,
     messages: string[]
   ): { outcome: string; damageDealt?: number; extraData?: Record<string, any> } {
-    const { actor, rng, createEffect } = context;
+    const { actor, level, rng, createEffect } = context;
 
     // Very bad: Summon hostile undead
     if (die < 8) {
@@ -299,13 +300,52 @@ export class InvokeSpiritsEffect extends PositionGPEffect {
       }, 'destroyArea');
     }
 
-    // Genocide (return data for game state to handle - requires symbol input)
+    // Genocide - spirits pick the most numerous monster type
     if (die < 108) {
       messages.push('The spirits grant you the power of death!');
-      return {
-        outcome: 'genocide',
-        extraData: { requiresSymbol: true },
-      };
+
+      // Find the most numerous monster symbol on the level
+      const monsters = level.getMonsters().filter(m => !m.isDead);
+      if (monsters.length === 0) {
+        messages.push('But there are no creatures to destroy.');
+        return { outcome: 'genocide' };
+      }
+
+      // Count monsters by symbol
+      const symbolCounts = new Map<string, number>();
+      for (const monster of monsters) {
+        // Skip uniques - genocide doesn't affect them
+        if (monster.def?.flags?.includes('UNIQUE')) continue;
+        const count = symbolCounts.get(monster.symbol) || 0;
+        symbolCounts.set(monster.symbol, count + 1);
+      }
+
+      if (symbolCounts.size === 0) {
+        messages.push('But there are no suitable creatures to destroy.');
+        return { outcome: 'genocide' };
+      }
+
+      // Find the most common symbol
+      let maxSymbol = '';
+      let maxCount = 0;
+      for (const [symbol, count] of symbolCounts) {
+        if (count > maxCount) {
+          maxCount = count;
+          maxSymbol = symbol;
+        }
+      }
+
+      // Execute genocide on that symbol
+      let killed = 0;
+      for (const monster of monsters) {
+        if (monster.symbol === maxSymbol && !monster.def?.flags?.includes('UNIQUE')) {
+          monster.takeDamage(monster.hp + 1);
+          killed++;
+        }
+      }
+
+      messages.push(`The spirits choose '${maxSymbol}' - ${killed} creature${killed !== 1 ? 's' : ''} destroyed!`);
+      return { outcome: 'genocide', extraData: { symbol: maxSymbol, killed } };
     }
 
     // Dispel monsters 120

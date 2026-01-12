@@ -367,6 +367,39 @@ describe('InvokeSpiritsEffect', () => {
         expect(createdEffectType).toBe('dispel');
       });
 
+      it('fires genocide on high roll (die 106-107)', () => {
+        const effect = new InvokeSpiritsEffect({ type: 'invokeSpirits' });
+        const player = createTestPlayer(25, 25, 50);
+        // Create multiple monsters of same type
+        const monster1 = createTestMonster({ id: 'm1', position: { x: 27, y: 25 }, maxHp: 50, symbol: 'o' });
+        const monster2 = createTestMonster({ id: 'm2', position: { x: 28, y: 25 }, maxHp: 50, symbol: 'o' });
+        const monster3 = createTestMonster({ id: 'm3', position: { x: 29, y: 25 }, maxHp: 50, symbol: 'k' });
+        const level = createMockLevel([monster1, monster2, monster3], player);
+
+        // Die = 97 + 10 = 107
+        const mockRng = {
+          getUniformInt: vi.fn().mockReturnValue(97),
+        };
+
+        const context: GPEffectContext = {
+          actor: player,
+          level: level as any,
+          rng: mockRng as any,
+          targetPosition: { x: 30, y: 25 },
+          createEffect: (def: GPEffectDef) => createMockEffect({ success: true, messages: [], turnConsumed: true }),
+        };
+
+        const result = effect.execute(context);
+
+        expect(result.data?.outcome).toBe('genocide');
+        // Should pick 'o' as most numerous and kill both
+        expect(result.data?.symbol).toBe('o');
+        expect(result.data?.killed).toBe(2);
+        expect(monster1.isDead).toBe(true);
+        expect(monster2.isDead).toBe(true);
+        expect(monster3.isDead).toBe(false); // Different symbol
+      });
+
       it('fires ultimate combo on extremely high roll (die >= 110)', () => {
         const effect = new InvokeSpiritsEffect({ type: 'invokeSpirits' });
         const player = createTestPlayer(25, 25, 50);
