@@ -57,6 +57,7 @@ import { TeleportEffect } from './TeleportEffect';
 import { DimensionDoorEffect } from './DimensionDoorEffect';
 import { MassGenocideEffect } from './MassGenocideEffect';
 import { DeathRayEffect } from './DeathRayEffect';
+import { WordOfDeathEffect } from './WordOfDeathEffect';
 
 /**
  * Default effect registry
@@ -82,6 +83,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   massGenocide: MassGenocideEffect,
   // Death ray (instant death bolt with special resistance)
   deathRay: DeathRayEffect,
+  // Word of Death (dispel living monsters)
+  wordOfDeath: WordOfDeathEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
