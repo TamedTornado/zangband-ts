@@ -80,8 +80,13 @@ export function GameViewport() {
   const fovSystem = useMemo(() => new FOVSystem(), []);
 
   // Render when we have a display and game is initialized
+  // Also check that tile mode state matches what we requested to avoid drawing ASCII to tile display
   const { level, player } = state;
-  if (display && gridWidth > 0 && gridHeight > 0 && player && level) {
+  const tilesReady = !!(tileManager && tileImage);
+  const expectedTileMode = tilesEnabled && tilesReady;
+  const modeMatches = actualTilesMode === expectedTileMode;
+
+  if (display && gridWidth > 0 && gridHeight > 0 && player && level && modeMatches) {
     // Create or update camera
     if (!cameraRef.current) {
       cameraRef.current = new Camera(gridWidth, gridHeight, { mode: 'center' });

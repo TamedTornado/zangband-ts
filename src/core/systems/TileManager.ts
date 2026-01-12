@@ -169,6 +169,20 @@ export class TileManager {
       tileMap[' '] = [nothingPixel.x, nothingPixel.y];
     }
 
+    // Add ASCII fallbacks for any characters that might be drawn directly
+    // Map common ASCII symbols to appropriate tiles
+    const toCoord = (coord: TileCoord | undefined): [number, number] => {
+      const pixel = this.getPixelCoords(coord ?? { col: 0, row: 0 });
+      return [pixel.x, pixel.y];
+    };
+
+    tileMap['.'] = toCoord(this.mappings.features['1']); // floor
+    tileMap['#'] = toCoord(this.mappings.features['56'] ?? this.mappings.features['1']); // granite wall
+    tileMap['+'] = toCoord(this.mappings.features['32']); // closed door
+    tileMap["'"] = toCoord(this.mappings.features['4']); // open door
+    tileMap['<'] = toCoord(this.mappings.features['6']); // up stairs
+    tileMap['>'] = toCoord(this.mappings.features['7']); // down stairs
+
     return tileMap;
   }
 }
