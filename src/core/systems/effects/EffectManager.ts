@@ -69,6 +69,7 @@ import { SelfKnowledgeEffect } from './SelfKnowledgeEffect';
 import { WhirlwindAttackEffect } from './WhirlwindAttackEffect';
 import { AlterRealityEffect } from './AlterRealityEffect';
 import { LivingTrumpEffect } from './LivingTrumpEffect';
+import { EsoteriaEffect } from './EsoteriaEffect';
 
 /**
  * Default effect registry
@@ -120,6 +121,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   alterReality: AlterRealityEffect,
   // Living Trump (grant trump mutation)
   livingTrump: LivingTrumpEffect,
+  // Esoteria (death realm identify with level-based full identify chance)
+  esoteria: EsoteriaEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
