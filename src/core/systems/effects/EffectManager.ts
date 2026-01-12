@@ -56,6 +56,7 @@ import { SatisfyHungerEffect } from './SatisfyHungerEffect';
 import { TeleportEffect } from './TeleportEffect';
 import { DimensionDoorEffect } from './DimensionDoorEffect';
 import { MassGenocideEffect } from './MassGenocideEffect';
+import { DeathRayEffect } from './DeathRayEffect';
 
 /**
  * Default effect registry
@@ -79,6 +80,8 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   genocide: GenocideEffect,
   // Mass genocide (kills all nearby non-unique monsters)
   massGenocide: MassGenocideEffect,
+  // Death ray (instant death bolt with special resistance)
+  deathRay: DeathRayEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
