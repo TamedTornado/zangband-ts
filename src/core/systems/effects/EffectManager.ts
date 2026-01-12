@@ -72,6 +72,9 @@ import { LivingTrumpEffect } from './LivingTrumpEffect';
 import { EsoteriaEffect } from './EsoteriaEffect';
 import { GlyphAreaEffect } from './GlyphAreaEffect';
 import { ExplosiveRuneEffect } from './ExplosiveRuneEffect';
+import { CreateDoorEffect } from './CreateDoorEffect';
+import { CreateStairsEffect } from './CreateStairsEffect';
+import { CreateWallsEffect } from './CreateWallsEffect';
 
 /**
  * Default effect registry
@@ -129,6 +132,10 @@ const defaultRegistry: Record<string, GPEffectConstructor> = {
   glyphArea: GlyphAreaEffect,
   // Explosive Rune (place exploding trap)
   explosiveRune: ExplosiveRuneEffect,
+  // Terrain creation effects
+  createDoor: CreateDoorEffect,
+  createStairs: CreateStairsEffect,
+  createWalls: CreateWallsEffect,
   // Position targeted
   bolt: BoltEffect,
   ball: BallEffect,
