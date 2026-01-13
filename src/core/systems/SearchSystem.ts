@@ -16,6 +16,7 @@ import type { ILevel } from '@/core/world/Level';
 export interface SearchResult {
   searched: boolean;
   trapsFound: number;
+  secretDoorsFound: number;
   messages: Array<{ text: string; type: 'info' | 'normal' }>;
 }
 
@@ -71,6 +72,7 @@ function getEffectivePerception(player: Player): number {
 export function search(player: Player, level: ILevel, rng: typeof RNG): SearchResult {
   const messages: SearchResult['messages'] = [];
   let trapsFound = 0;
+  let secretDoorsFound = 0;
   const chance = getEffectivePerception(player);
 
   // Check 3x3 grid around player (Zangband C: cmd1.c:517-519)
@@ -92,10 +94,18 @@ export function search(player: Player, level: ILevel, rng: typeof RNG): SearchRe
         messages.push({ text: 'You have found a trap.', type: 'info' });
       }
 
-      // TODO: Check for secret doors when #48 is implemented (cmd1.c:555-566)
+      // Check for secret door (cmd1.c:555-566)
+      const tile = level.getTile(pos);
+      if (tile?.terrain.flags?.includes('SECRET')) {
+        // Convert secret door to closed door
+        level.setTerrain(pos, 'door');
+        secretDoorsFound++;
+        messages.push({ text: 'You have found a secret door.', type: 'info' });
+      }
+
       // TODO: Check for trapped chests when implemented (cmd1.c:568-589)
     }
   }
 
-  return { searched: true, trapsFound, messages };
+  return { searched: true, trapsFound, secretDoorsFound, messages };
 }

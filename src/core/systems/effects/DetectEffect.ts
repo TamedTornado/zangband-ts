@@ -52,6 +52,7 @@ interface DetectData {
 
 interface LevelInterface {
   getTile: (pos: { x: number; y: number }) => any;
+  setTerrain?: (pos: { x: number; y: number }, terrain: string) => void;
   width: number;
   height: number;
   getMonsters: () => Monster[];
@@ -205,7 +206,15 @@ export class DetectEffect extends SelfGPEffect {
           for (let x = 0; x < level.width; x++) {
             if (!this.inRange({ x, y }, playerPos)) continue;
             const tile = level.getTile({ x, y });
-            if (tile?.terrain?.flags?.includes('DOOR')) {
+
+            // Check for secret doors and reveal them (Zangband C: spells2.c door_tester)
+            if (tile?.terrain?.flags?.includes('SECRET')) {
+              level.setTerrain?.({ x, y }, 'door');
+              tile.explored = true;
+              found++;
+            }
+            // Check for regular doors
+            else if (tile?.terrain?.flags?.includes('DOOR')) {
               tile.explored = true;
               found++;
             }

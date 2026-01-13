@@ -183,6 +183,21 @@
       "MARK"
     ]
   },
+  "secret_door": {
+    "key": "secret_door",
+    "index": 47,
+    "name": "granite wall",
+    "symbol": "#",
+    "color": "w",
+    "flags": [
+      "BLOCK",
+      "SECRET",
+      "USE_TRANS",
+      "ICKY",
+      "OBJECT",
+      "MARK"
+    ]
+  },
   "pillar_33": {
     "key": "pillar_33",
     "index": 33,

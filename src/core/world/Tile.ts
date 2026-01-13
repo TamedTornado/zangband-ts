@@ -27,7 +27,6 @@ const TERRAIN_ALIASES: Record<string, string> = {
   wall_solid: 'permanent_wall_60',
   up_stairs: 'up_staircase',
   down_stairs: 'down_staircase',
-  secret_door: 'door',
   closed_door: 'door',
   rubble: 'pile_of_rubble',
   magma: 'magma_vein_50',
